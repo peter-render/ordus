@@ -1,0 +1,176 @@
+inherited frmMaterialpris: TfrmMaterialpris
+  Left = 328
+  Top = 387
+  Caption = 'Materialpris'
+  ClientHeight = 367
+  ClientWidth = 592
+  ExplicitWidth = 598
+  ExplicitHeight = 396
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 473
+    Height = 367
+    ExplicitWidth = 386
+    ExplicitHeight = 367
+    inherited Bevel2: TBevel
+      Left = 8
+      Top = 324
+      ExplicitLeft = 8
+      ExplicitTop = 324
+    end
+    object Label1: TLabel [2]
+      Left = 36
+      Top = 239
+      Width = 29
+      Height = 13
+      Caption = 'Fr o m'
+    end
+    object Label2: TLabel [3]
+      Left = 36
+      Top = 264
+      Width = 53
+      Height = 13
+      Caption = 'Materialpris'
+    end
+    object Label3: TLabel [4]
+      Left = 36
+      Top = 289
+      Width = 42
+      Height = 13
+      Caption = 'Laserpris'
+    end
+    inherited dbGrid: TwwDBGrid
+      Top = 19
+      Width = 441
+      Selected.Strings = (
+        'Id'#9'10'#9'Id'#9'F'#9
+        'YtbehandlingId'#9'10'#9'YtbehandlingId'#9'F'#9
+        'Fom'#9'34'#9'Fom'#9#9
+        'Pris'#9'10'#9'Pris'#9#9
+        'Laserpris'#9'10'#9'Laserpris'#9#9)
+      ExplicitTop = 19
+      ExplicitWidth = 441
+    end
+    object DBEditN1: TDBEditN
+      Left = 96
+      Top = 259
+      Width = 121
+      Height = 21
+      Color = clWhite
+      DataField = 'Pris'
+      DataSource = DataSource1
+      TabOrder = 1
+      ColorOnFocus = clWhite
+      ColorOnNotFocus = clWhite
+      FontColorOnFocus = clRed
+      FontColorOnNotFocus = clBlack
+      FontColorOnOverWrite = clBlue
+      EditKeyByTab = #9
+      FirstCharUpper = False
+      FirstCharUpList = ' ('
+      WidthOnFocus = 0
+      TextHint = True
+    end
+    object DBEditN2: TDBEditN
+      Left = 96
+      Top = 287
+      Width = 121
+      Height = 21
+      Color = clWhite
+      DataField = 'Laserpris'
+      DataSource = DataSource1
+      TabOrder = 2
+      ColorOnFocus = clWhite
+      ColorOnNotFocus = clWhite
+      FontColorOnFocus = clRed
+      FontColorOnNotFocus = clBlack
+      FontColorOnOverWrite = clBlue
+      EditKeyByTab = #9
+      FirstCharUpper = False
+      FirstCharUpList = ' ('
+      WidthOnFocus = 0
+      TextHint = True
+    end
+    object dbedit1: TwwDBDateTimePicker
+      Left = 96
+      Top = 231
+      Width = 121
+      Height = 21
+      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+      CalendarAttributes.Font.Color = clWindowText
+      CalendarAttributes.Font.Height = -11
+      CalendarAttributes.Font.Name = 'MS Sans Serif'
+      CalendarAttributes.Font.Style = []
+      DataField = 'Fom'
+      DataSource = DataSource1
+      Epoch = 1950
+      ShowButton = True
+      TabOrder = 3
+      UnboundDataType = wwDTEdtDate
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 473
+    Height = 367
+    ExplicitLeft = 386
+    ExplicitHeight = 367
+    inherited DBNav: TDBNavigator
+      Hints.Strings = ()
+    end
+  end
+  inherited DataSource1: TDataSource
+    Left = 36
+    Top = 32
+  end
+  inherited FDQuery1: TFDQuery
+    Active = True
+    MasterSource = frmYtbehandling.DataSource1
+    MasterFields = 'Id'
+    SQL.Strings = (
+      'Select '
+      'Id, '
+      'YtbehandlingId,Fom,Pris,Laserpris '
+      'from YtbehandlingPris '
+      'where YtbehandlingID = :Id '
+      'order by Fom desc'
+      '')
+    Left = 92
+    Top = 104
+    ParamData = <
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = 1
+      end>
+    object FDQuery1Id: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQuery1YtbehandlingId: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'YtbehandlingId'
+      Origin = 'YtbehandlingId'
+    end
+    object FDQuery1Fom: TSQLTimeStampField
+      DisplayWidth = 34
+      FieldName = 'Fom'
+      Origin = 'Fom'
+      Required = True
+    end
+    object FDQuery1Pris: TCurrencyField
+      DisplayWidth = 10
+      FieldName = 'Pris'
+      Origin = 'Pris'
+    end
+    object FDQuery1Laserpris: TCurrencyField
+      DisplayWidth = 10
+      FieldName = 'Laserpris'
+      Origin = 'Laserpris'
+    end
+  end
+end

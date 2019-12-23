@@ -1,0 +1,338 @@
+object frmDagar: TfrmDagar
+  Left = 0
+  Top = 0
+  Caption = 'Dagar'
+  ClientHeight = 600
+  ClientWidth = 728
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 592
+    Top = 0
+    Width = 136
+    Height = 600
+    Align = alRight
+    TabOrder = 0
+    object Button2: TButton
+      Left = 16
+      Top = 21
+      Width = 101
+      Height = 25
+      Caption = 'St'#228'ng'
+      TabOrder = 0
+      OnClick = Button2Click
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 592
+    Height = 600
+    Align = alClient
+    TabOrder = 1
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 590
+      Height = 64
+      Align = alTop
+      TabOrder = 0
+      object edtDatumFom: TwwDBDateTimePicker
+        Left = 84
+        Top = 24
+        Width = 121
+        Height = 21
+        CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+        CalendarAttributes.Font.Color = clWindowText
+        CalendarAttributes.Font.Height = -11
+        CalendarAttributes.Font.Name = 'Tahoma'
+        CalendarAttributes.Font.Style = []
+        Date = 42640.000000000000000000
+        Epoch = 1950
+        Enabled = False
+        ShowButton = True
+        TabOrder = 0
+      end
+      object wwDBDateTimePicker2: TwwDBDateTimePicker
+        Left = 228
+        Top = 24
+        Width = 121
+        Height = 21
+        CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+        CalendarAttributes.Font.Color = clWindowText
+        CalendarAttributes.Font.Height = -11
+        CalendarAttributes.Font.Name = 'Tahoma'
+        CalendarAttributes.Font.Style = []
+        Epoch = 1950
+        Enabled = False
+        ShowButton = True
+        TabOrder = 1
+      end
+      object Button1: TButton
+        Left = 380
+        Top = 22
+        Width = 129
+        Height = 25
+        Caption = 'Generera'
+        Enabled = False
+        TabOrder = 2
+        OnClick = Button1Click
+      end
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 65
+      Width = 590
+      Height = 534
+      Align = alClient
+      BorderWidth = 5
+      TabOrder = 1
+      object wwDBGrid1: TwwDBGrid
+        Left = 6
+        Top = 6
+        Width = 578
+        Height = 522
+        ControlType.Strings = (
+          'Helg;CheckBox;True;False'
+          'Arbetsdag;CheckBox;True;False')
+        Selected.Strings = (
+          'VeckodagKort'#9'3'#9'D'
+          'Datum'#9'10'#9'Datum'
+          'Arbetsdag'#9'8'#9'Arbetsdag'
+          'Beskrivning'#9'40'#9'Helg'
+          'Vecka'#9'5'#9'Vecka'
+          'AntalResurser'#9'6'#9'Antal resurser'#9'F')
+        IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
+        TitleColor = clBtnFace
+        FixedCols = 0
+        ShowHorzScrollBar = True
+        Align = alClient
+        DataSource = DataSource1
+        TabOrder = 0
+        TitleAlignment = taLeftJustify
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Tahoma'
+        TitleFont.Style = []
+        TitleLines = 1
+        TitleButtons = False
+        OnCalcCellColors = wwDBGrid1CalcCellColors
+      end
+    end
+  end
+  object RQ: TRESTRequest
+    Client = RC
+    Params = <
+      item
+        Kind = pkURLSEGMENT
+        name = 'Datum'
+        Options = [poAutoCreated]
+      end>
+    Resource = 'dagar/v1/?datum={Datum}'
+    Response = RS
+    Left = 660
+    Top = 376
+  end
+  object RS: TRESTResponse
+    RootElement = 'veckodag'
+    Left = 660
+    Top = 444
+  end
+  object spDagarInsert: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'Ordus.dbo.DagarInsert'
+    Left = 656
+    Top = 240
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@Datum'
+        DataType = ftDate
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@Helg'
+        DataType = ftBoolean
+        ParamType = ptInput
+      end
+      item
+        Position = 4
+        Name = '@Beskrivning'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        Position = 5
+        Name = '@Vecka'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 6
+        Name = '@Veckodag'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 7
+        Name = '@Arbetsdag'
+        DataType = ftBoolean
+        ParamType = ptInput
+      end
+      item
+        Position = 8
+        Name = '@ApiContent'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 1000
+      end>
+  end
+  object RC: TRESTClient
+    Accept = 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'
+    Params = <>
+    HandleRedirects = True
+    Left = 656
+    Top = 312
+  end
+  object FDTable1: TFDTable
+    OnCalcFields = FDTable1CalcFields
+    IndexFieldNames = 'Id'
+    Connection = dm.FDConnection1
+    UpdateOptions.UpdateTableName = 'Dagar'
+    TableName = 'Dagar'
+    Left = 364
+    Top = 304
+    object FDTable1VeckodagKort: TStringField
+      DisplayLabel = 'D'
+      DisplayWidth = 3
+      FieldKind = fkCalculated
+      FieldName = 'VeckodagKort'
+      Calculated = True
+    end
+    object FDTable1Datum: TDateField
+      Alignment = taCenter
+      DisplayWidth = 10
+      FieldName = 'Datum'
+      Origin = 'Datum'
+      ReadOnly = True
+    end
+    object FDTable1Arbetsdag: TBooleanField
+      DisplayWidth = 8
+      FieldName = 'Arbetsdag'
+      Origin = 'Arbetsdag'
+    end
+    object FDTable1Beskrivning: TStringField
+      DisplayLabel = 'Helg'
+      DisplayWidth = 40
+      FieldName = 'Beskrivning'
+      Origin = 'Beskrivning'
+      ReadOnly = True
+      Size = 50
+    end
+    object FDTable1Vecka: TIntegerField
+      Alignment = taCenter
+      DisplayWidth = 5
+      FieldName = 'Vecka'
+      Origin = 'Vecka'
+      ReadOnly = True
+    end
+    object FDTable1AntalResurser: TByteField
+      Alignment = taCenter
+      DisplayLabel = 'Antal resurser'
+      DisplayWidth = 6
+      FieldName = 'AntalResurser'
+      Origin = 'AntalResurser'
+      OnChange = FDTable1AntalResurserChange
+    end
+    object FDTable1Veckodagnamn: TStringField
+      DisplayWidth = 12
+      FieldName = 'Veckodagnamn'
+      Origin = 'Veckodagnamn'
+      Visible = False
+      Size = 10
+    end
+    object FDTable1Helg: TBooleanField
+      DisplayWidth = 5
+      FieldName = 'Helg'
+      Origin = 'Helg'
+      Visible = False
+    end
+    object FDTable1Veckodag: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'Veckodag'
+      Origin = 'Veckodag'
+      Visible = False
+    end
+    object FDTable1APIContent: TStringField
+      DisplayWidth = 1000
+      FieldName = 'APIContent'
+      Origin = 'APIContent'
+      Visible = False
+      Size = 1000
+    end
+    object FDTable1Id: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = FDTable1
+    Left = 424
+    Top = 304
+  end
+  object spDagarUpdateraResursPerVecka: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'DagarUpdateraResursPerVecka'
+    Left = 400
+    Top = 200
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@Datum'
+        DataType = ftTimeStamp
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@vecka'
+        DataType = ftSmallint
+        ParamType = ptInput
+      end
+      item
+        Position = 4
+        Name = '@AntalResurser'
+        DataType = ftSmallint
+        ParamType = ptInput
+      end>
+  end
+end

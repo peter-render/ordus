@@ -1,0 +1,736 @@
+<?xml version="1.0"?>
+<MappingSchema Language="CS" CollectionMapping="Original" NamespacePrefix="">
+  <Class Name="Buyer" LongName="Buyer" MappedClassColName="BuyerCol" MappedClassName="Buyer">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="BuyerCode" DefaultValue="" MappedIsValidMember="m_IsValidBuyerCode" MappedSetValidName="SetValidBuyerCode" MappedIsValidName="IsValidBuyerCode" MappedIsNilMember="m_IsNilBuyerCode" MappedSetNilName="SetNilBuyerCode" MappedIsNilName="IsNilBuyerCode" MappedMemberName="m_BuyerCode" MappedDisplayName="BuyerCode" MappedSetterName="BuyerCode" MappedGetterName="BuyerCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BuyerName" DefaultValue="" MappedIsValidMember="m_IsValidBuyerName" MappedSetValidName="SetValidBuyerName" MappedIsValidName="IsValidBuyerName" MappedIsNilMember="m_IsNilBuyerName" MappedSetNilName="SetNilBuyerName" MappedIsNilName="IsNilBuyerName" MappedMemberName="m_BuyerName" MappedDisplayName="BuyerName" MappedSetterName="BuyerName" MappedGetterName="BuyerName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BuyerVATRegistrationNumber" DefaultValue="" MappedIsValidMember="m_IsValidBuyerVATRegistrationNumber" MappedSetValidName="SetValidBuyerVATRegistrationNumber" MappedIsValidName="IsValidBuyerVATRegistrationNumber" MappedIsNilMember="m_IsNilBuyerVATRegistrationNumber" MappedSetNilName="SetNilBuyerVATRegistrationNumber" MappedIsNilName="IsNilBuyerVATRegistrationNumber" MappedMemberName="m_BuyerVATRegistrationNumber" MappedDisplayName="BuyerVATRegistrationNumber" MappedSetterName="BuyerVATRegistrationNumber" MappedGetterName="BuyerVATRegistrationNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BuyerReference" DefaultValue="" MappedIsValidMember="m_IsValidBuyerReference" MappedSetValidName="SetValidBuyerReference" MappedIsValidName="IsValidBuyerReference" MappedIsNilMember="m_IsNilBuyerReference" MappedSetNilName="SetNilBuyerReference" MappedIsNilName="IsNilBuyerReference" MappedMemberName="m_BuyerReference" MappedDisplayName="BuyerReference" MappedSetterName="BuyerReference" MappedGetterName="BuyerReference" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BuyerReferencePhone" DefaultValue="" MappedIsValidMember="m_IsValidBuyerReferencePhone" MappedSetValidName="SetValidBuyerReferencePhone" MappedIsValidName="IsValidBuyerReferencePhone" MappedIsNilMember="m_IsNilBuyerReferencePhone" MappedSetNilName="SetNilBuyerReferencePhone" MappedIsNilName="IsNilBuyerReferencePhone" MappedMemberName="m_BuyerReferencePhone" MappedDisplayName="BuyerReferencePhone" MappedSetterName="BuyerReferencePhone" MappedGetterName="BuyerReferencePhone" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BuyerReferenceFax" DefaultValue="" MappedIsValidMember="m_IsValidBuyerReferenceFax" MappedSetValidName="SetValidBuyerReferenceFax" MappedIsValidName="IsValidBuyerReferenceFax" MappedIsNilMember="m_IsNilBuyerReferenceFax" MappedSetNilName="SetNilBuyerReferenceFax" MappedIsNilName="IsNilBuyerReferenceFax" MappedMemberName="m_BuyerReferenceFax" MappedDisplayName="BuyerReferenceFax" MappedSetterName="BuyerReferenceFax" MappedGetterName="BuyerReferenceFax" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BuyerReferenceEmail" DefaultValue="" MappedIsValidMember="m_IsValidBuyerReferenceEmail" MappedSetValidName="SetValidBuyerReferenceEmail" MappedIsValidName="IsValidBuyerReferenceEmail" MappedIsNilMember="m_IsNilBuyerReferenceEmail" MappedSetNilName="SetNilBuyerReferenceEmail" MappedIsNilName="IsNilBuyerReferenceEmail" MappedMemberName="m_BuyerReferenceEmail" MappedDisplayName="BuyerReferenceEmail" MappedSetterName="BuyerReferenceEmail" MappedGetterName="BuyerReferenceEmail" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InvoiceAddress" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceAddress" MappedSetValidName="SetValidInvoiceAddress" MappedIsValidName="IsValidInvoiceAddress" MappedIsNilMember="m_IsNilInvoiceAddress" MappedSetNilName="SetNilInvoiceAddress" MappedIsNilName="IsNilInvoiceAddress" MappedMemberName="m_InvoiceAddress" MappedDisplayName="InvoiceAddress" MappedSetterName="InvoiceAddress" MappedGetterName="InvoiceAddress">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="DeliveryAddress" DefaultValue="" MappedIsValidMember="m_IsValidDeliveryAddress" MappedSetValidName="SetValidDeliveryAddress" MappedIsValidName="IsValidDeliveryAddress" MappedIsNilMember="m_IsNilDeliveryAddress" MappedSetNilName="SetNilDeliveryAddress" MappedIsNilName="IsNilDeliveryAddress" MappedMemberName="m_DeliveryAddress" MappedDisplayName="DeliveryAddress" MappedSetterName="DeliveryAddress" MappedGetterName="DeliveryAddress">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="DeliveryAddress" LongName="DeliveryAddress" MappedClassColName="DeliveryAddressCol" MappedClassName="DeliveryAddress">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="DeliveryAddressName" DefaultValue="" MappedIsValidMember="m_IsValidDeliveryAddressName" MappedSetValidName="SetValidDeliveryAddressName" MappedIsValidName="IsValidDeliveryAddressName" MappedIsNilMember="m_IsNilDeliveryAddressName" MappedSetNilName="SetNilDeliveryAddressName" MappedIsNilName="IsNilDeliveryAddressName" MappedMemberName="m_DeliveryAddressName" MappedDisplayName="DeliveryAddressName" MappedSetterName="DeliveryAddressName" MappedGetterName="DeliveryAddressName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="DeliveryAddressStreetBox1" DefaultValue="" MappedIsValidMember="m_IsValidDeliveryAddressStreetBox1" MappedSetValidName="SetValidDeliveryAddressStreetBox1" MappedIsValidName="IsValidDeliveryAddressStreetBox1" MappedIsNilMember="m_IsNilDeliveryAddressStreetBox1" MappedSetNilName="SetNilDeliveryAddressStreetBox1" MappedIsNilName="IsNilDeliveryAddressStreetBox1" MappedMemberName="m_DeliveryAddressStreetBox1" MappedDisplayName="DeliveryAddressStreetBox1" MappedSetterName="DeliveryAddressStreetBox1" MappedGetterName="DeliveryAddressStreetBox1" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="DeliveryAddressStreetBox2" DefaultValue="" MappedIsValidMember="m_IsValidDeliveryAddressStreetBox2" MappedSetValidName="SetValidDeliveryAddressStreetBox2" MappedIsValidName="IsValidDeliveryAddressStreetBox2" MappedIsNilMember="m_IsNilDeliveryAddressStreetBox2" MappedSetNilName="SetNilDeliveryAddressStreetBox2" MappedIsNilName="IsNilDeliveryAddressStreetBox2" MappedMemberName="m_DeliveryAddressStreetBox2" MappedDisplayName="DeliveryAddressStreetBox2" MappedSetterName="DeliveryAddressStreetBox2" MappedGetterName="DeliveryAddressStreetBox2" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="DeliveryAddressZipCity1" DefaultValue="" MappedIsValidMember="m_IsValidDeliveryAddressZipCity1" MappedSetValidName="SetValidDeliveryAddressZipCity1" MappedIsValidName="IsValidDeliveryAddressZipCity1" MappedIsNilMember="m_IsNilDeliveryAddressZipCity1" MappedSetNilName="SetNilDeliveryAddressZipCity1" MappedIsNilName="IsNilDeliveryAddressZipCity1" MappedMemberName="m_DeliveryAddressZipCity1" MappedDisplayName="DeliveryAddressZipCity1" MappedSetterName="DeliveryAddressZipCity1" MappedGetterName="DeliveryAddressZipCity1" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="DeliveryAddressZipCity2" DefaultValue="" MappedIsValidMember="m_IsValidDeliveryAddressZipCity2" MappedSetValidName="SetValidDeliveryAddressZipCity2" MappedIsValidName="IsValidDeliveryAddressZipCity2" MappedIsNilMember="m_IsNilDeliveryAddressZipCity2" MappedSetNilName="SetNilDeliveryAddressZipCity2" MappedIsNilName="IsNilDeliveryAddressZipCity2" MappedMemberName="m_DeliveryAddressZipCity2" MappedDisplayName="DeliveryAddressZipCity2" MappedSetterName="DeliveryAddressZipCity2" MappedGetterName="DeliveryAddressZipCity2" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="DeliveryAddressCountry" DefaultValue="" MappedIsValidMember="m_IsValidDeliveryAddressCountry" MappedSetValidName="SetValidDeliveryAddressCountry" MappedIsValidName="IsValidDeliveryAddressCountry" MappedIsNilMember="m_IsNilDeliveryAddressCountry" MappedSetNilName="SetNilDeliveryAddressCountry" MappedIsNilName="IsNilDeliveryAddressCountry" MappedMemberName="m_DeliveryAddressCountry" MappedDisplayName="DeliveryAddressCountry" MappedSetterName="DeliveryAddressCountry" MappedGetterName="DeliveryAddressCountry" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="Factoring" LongName="Factoring" MappedClassColName="FactoringCol" MappedClassName="Factoring">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="FactoringSetting" DefaultValue="" MappedIsValidMember="m_IsValidFactoringSetting" MappedSetValidName="SetValidFactoringSetting" MappedIsValidName="IsValidFactoringSetting" MappedIsNilMember="m_IsNilFactoringSetting" MappedSetNilName="SetNilFactoringSetting" MappedIsNilName="IsNilFactoringSetting" MappedMemberName="m_FactoringSetting" MappedDisplayName="FactoringSetting" MappedSetterName="FactoringSetting" MappedGetterName="FactoringSetting" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="FactoringBankName" DefaultValue="" MappedIsValidMember="m_IsValidFactoringBankName" MappedSetValidName="SetValidFactoringBankName" MappedIsValidName="IsValidFactoringBankName" MappedIsNilMember="m_IsNilFactoringBankName" MappedSetNilName="SetNilFactoringBankName" MappedIsNilName="IsNilFactoringBankName" MappedMemberName="m_FactoringBankName" MappedDisplayName="FactoringBankName" MappedSetterName="FactoringBankName" MappedGetterName="FactoringBankName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="FactoringAccountNumber" DefaultValue="" MappedIsValidMember="m_IsValidFactoringAccountNumber" MappedSetValidName="SetValidFactoringAccountNumber" MappedIsValidName="IsValidFactoringAccountNumber" MappedIsNilMember="m_IsNilFactoringAccountNumber" MappedSetNilName="SetNilFactoringAccountNumber" MappedIsNilName="IsNilFactoringAccountNumber" MappedMemberName="m_FactoringAccountNumber" MappedDisplayName="FactoringAccountNumber" MappedSetterName="FactoringAccountNumber" MappedGetterName="FactoringAccountNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="FactoringSwiftAddress" DefaultValue="" MappedIsValidMember="m_IsValidFactoringSwiftAddress" MappedSetValidName="SetValidFactoringSwiftAddress" MappedIsValidName="IsValidFactoringSwiftAddress" MappedIsNilMember="m_IsNilFactoringSwiftAddress" MappedSetNilName="SetNilFactoringSwiftAddress" MappedIsNilName="IsNilFactoringSwiftAddress" MappedMemberName="m_FactoringSwiftAddress" MappedDisplayName="FactoringSwiftAddress" MappedSetterName="FactoringSwiftAddress" MappedGetterName="FactoringSwiftAddress" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="FactoringBankGiroNumber" DefaultValue="" MappedIsValidMember="m_IsValidFactoringBankGiroNumber" MappedSetValidName="SetValidFactoringBankGiroNumber" MappedIsValidName="IsValidFactoringBankGiroNumber" MappedIsNilMember="m_IsNilFactoringBankGiroNumber" MappedSetNilName="SetNilFactoringBankGiroNumber" MappedIsNilName="IsNilFactoringBankGiroNumber" MappedMemberName="m_FactoringBankGiroNumber" MappedDisplayName="FactoringBankGiroNumber" MappedSetterName="FactoringBankGiroNumber" MappedGetterName="FactoringBankGiroNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="FactoringPlusGiroNumber" DefaultValue="" MappedIsValidMember="m_IsValidFactoringPlusGiroNumber" MappedSetValidName="SetValidFactoringPlusGiroNumber" MappedIsValidName="IsValidFactoringPlusGiroNumber" MappedIsNilMember="m_IsNilFactoringPlusGiroNumber" MappedSetNilName="SetNilFactoringPlusGiroNumber" MappedIsNilName="IsNilFactoringPlusGiroNumber" MappedMemberName="m_FactoringPlusGiroNumber" MappedDisplayName="FactoringPlusGiroNumber" MappedSetterName="FactoringPlusGiroNumber" MappedGetterName="FactoringPlusGiroNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="Head" LongName="Head" MappedClassColName="HeadCol" MappedClassName="Head">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="SellersOrderNumber" DefaultValue="" MappedIsValidMember="m_IsValidSellersOrderNumber" MappedSetValidName="SetValidSellersOrderNumber" MappedIsValidName="IsValidSellersOrderNumber" MappedIsNilMember="m_IsNilSellersOrderNumber" MappedSetNilName="SetNilSellersOrderNumber" MappedIsNilName="IsNilSellersOrderNumber" MappedMemberName="m_SellersOrderNumber" MappedDisplayName="SellersOrderNumber" MappedSetterName="SellersOrderNumber" MappedGetterName="SellersOrderNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="OrderDate" DefaultValue="" MappedIsValidMember="m_IsValidOrderDate" MappedSetValidName="SetValidOrderDate" MappedIsValidName="IsValidOrderDate" MappedIsNilMember="m_IsNilOrderDate" MappedSetNilName="SetNilOrderDate" MappedIsNilName="IsNilOrderDate" MappedMemberName="m_OrderDate" MappedDisplayName="OrderDate" MappedSetterName="OrderDate" MappedGetterName="OrderDate" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BuyersOrderNumber" DefaultValue="" MappedIsValidMember="m_IsValidBuyersOrderNumber" MappedSetValidName="SetValidBuyersOrderNumber" MappedIsValidName="IsValidBuyersOrderNumber" MappedIsNilMember="m_IsNilBuyersOrderNumber" MappedSetNilName="SetNilBuyersOrderNumber" MappedIsNilName="IsNilBuyersOrderNumber" MappedMemberName="m_BuyersOrderNumber" MappedDisplayName="BuyersOrderNumber" MappedSetterName="BuyersOrderNumber" MappedGetterName="BuyersOrderNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="DebitInvoiceNumber" DefaultValue="" MappedIsValidMember="m_IsValidDebitInvoiceNumber" MappedSetValidName="SetValidDebitInvoiceNumber" MappedIsValidName="IsValidDebitInvoiceNumber" MappedIsNilMember="m_IsNilDebitInvoiceNumber" MappedSetNilName="SetNilDebitInvoiceNumber" MappedIsNilName="IsNilDebitInvoiceNumber" MappedMemberName="m_DebitInvoiceNumber" MappedDisplayName="DebitInvoiceNumber" MappedSetterName="DebitInvoiceNumber" MappedGetterName="DebitInvoiceNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InvoiceDate" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceDate" MappedSetValidName="SetValidInvoiceDate" MappedIsValidName="IsValidInvoiceDate" MappedIsNilMember="m_IsNilInvoiceDate" MappedSetNilName="SetNilInvoiceDate" MappedIsNilName="IsNilInvoiceDate" MappedMemberName="m_InvoiceDate" MappedDisplayName="InvoiceDate" MappedSetterName="InvoiceDate" MappedGetterName="InvoiceDate" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="LanguageNameCode" DefaultValue="" MappedIsValidMember="m_IsValidLanguageNameCode" MappedSetValidName="SetValidLanguageNameCode" MappedIsValidName="IsValidLanguageNameCode" MappedIsNilMember="m_IsNilLanguageNameCode" MappedSetNilName="SetNilLanguageNameCode" MappedIsNilName="IsNilLanguageNameCode" MappedMemberName="m_LanguageNameCode" MappedDisplayName="LanguageNameCode" MappedSetterName="LanguageNameCode" MappedGetterName="LanguageNameCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Buyer" DefaultValue="" MappedIsValidMember="m_IsValidBuyer" MappedSetValidName="SetValidBuyer" MappedIsValidName="IsValidBuyer" MappedIsNilMember="m_IsNilBuyer" MappedSetNilName="SetNilBuyer" MappedIsNilName="IsNilBuyer" MappedMemberName="m_Buyer" MappedDisplayName="Buyer" MappedSetterName="Buyer" MappedGetterName="Buyer">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Seller" DefaultValue="" MappedIsValidMember="m_IsValidSeller" MappedSetValidName="SetValidSeller" MappedIsValidName="IsValidSeller" MappedIsNilMember="m_IsNilSeller" MappedSetNilName="SetNilSeller" MappedIsNilName="IsNilSeller" MappedMemberName="m_Seller" MappedDisplayName="Seller" MappedSetterName="Seller" MappedGetterName="Seller">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InvoiceCurrency" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceCurrency" MappedSetValidName="SetValidInvoiceCurrency" MappedIsValidName="IsValidInvoiceCurrency" MappedIsNilMember="m_IsNilInvoiceCurrency" MappedSetNilName="SetNilInvoiceCurrency" MappedIsNilName="IsNilInvoiceCurrency" MappedMemberName="m_InvoiceCurrency" MappedDisplayName="InvoiceCurrency" MappedSetterName="InvoiceCurrency" MappedGetterName="InvoiceCurrency" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="PaymentDueDate" DefaultValue="" MappedIsValidMember="m_IsValidPaymentDueDate" MappedSetValidName="SetValidPaymentDueDate" MappedIsValidName="IsValidPaymentDueDate" MappedIsNilMember="m_IsNilPaymentDueDate" MappedSetNilName="SetNilPaymentDueDate" MappedIsNilName="IsNilPaymentDueDate" MappedMemberName="m_PaymentDueDate" MappedDisplayName="PaymentDueDate" MappedSetterName="PaymentDueDate" MappedGetterName="PaymentDueDate" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="CurrencyExchangeRate" DefaultValue="" MappedIsValidMember="m_IsValidCurrencyExchangeRate" MappedSetValidName="SetValidCurrencyExchangeRate" MappedIsValidName="IsValidCurrencyExchangeRate" MappedIsNilMember="m_IsNilCurrencyExchangeRate" MappedSetNilName="SetNilCurrencyExchangeRate" MappedIsNilName="IsNilCurrencyExchangeRate" MappedMemberName="m_CurrencyExchangeRate" MappedDisplayName="CurrencyExchangeRate" MappedSetterName="CurrencyExchangeRate" MappedGetterName="CurrencyExchangeRate" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="RateOfExchangeDate" DefaultValue="" MappedIsValidMember="m_IsValidRateOfExchangeDate" MappedSetValidName="SetValidRateOfExchangeDate" MappedIsValidName="IsValidRateOfExchangeDate" MappedIsNilMember="m_IsNilRateOfExchangeDate" MappedSetNilName="SetNilRateOfExchangeDate" MappedIsNilName="IsNilRateOfExchangeDate" MappedMemberName="m_RateOfExchangeDate" MappedDisplayName="RateOfExchangeDate" MappedSetterName="RateOfExchangeDate" MappedGetterName="RateOfExchangeDate" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="EuVatText" DefaultValue="" MappedIsValidMember="m_IsValidEuVatText" MappedSetValidName="SetValidEuVatText" MappedIsValidName="IsValidEuVatText" MappedIsNilMember="m_IsNilEuVatText" MappedSetNilName="SetNilEuVatText" MappedIsNilName="IsNilEuVatText" MappedMemberName="m_EuVatText" MappedDisplayName="EuVatText" MappedSetterName="EuVatText" MappedGetterName="EuVatText" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="GodsLabelLine1" DefaultValue="" MappedIsValidMember="m_IsValidGodsLabelLine1" MappedSetValidName="SetValidGodsLabelLine1" MappedIsValidName="IsValidGodsLabelLine1" MappedIsNilMember="m_IsNilGodsLabelLine1" MappedSetNilName="SetNilGodsLabelLine1" MappedIsNilName="IsNilGodsLabelLine1" MappedMemberName="m_GodsLabelLine1" MappedDisplayName="GodsLabelLine1" MappedSetterName="GodsLabelLine1" MappedGetterName="GodsLabelLine1" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="GodsLabelLine2" DefaultValue="" MappedIsValidMember="m_IsValidGodsLabelLine2" MappedSetValidName="SetValidGodsLabelLine2" MappedIsValidName="IsValidGodsLabelLine2" MappedIsNilMember="m_IsNilGodsLabelLine2" MappedSetNilName="SetNilGodsLabelLine2" MappedIsNilName="IsNilGodsLabelLine2" MappedMemberName="m_GodsLabelLine2" MappedDisplayName="GodsLabelLine2" MappedSetterName="GodsLabelLine2" MappedGetterName="GodsLabelLine2" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="HomeCurrency" DefaultValue="" MappedIsValidMember="m_IsValidHomeCurrency" MappedSetValidName="SetValidHomeCurrency" MappedIsValidName="IsValidHomeCurrency" MappedIsNilMember="m_IsNilHomeCurrency" MappedSetNilName="SetNilHomeCurrency" MappedIsNilName="IsNilHomeCurrency" MappedMemberName="m_HomeCurrency" MappedDisplayName="HomeCurrency" MappedSetterName="HomeCurrency" MappedGetterName="HomeCurrency" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="TermsOfPayment" DefaultValue="" MappedIsValidMember="m_IsValidTermsOfPayment" MappedSetValidName="SetValidTermsOfPayment" MappedIsValidName="IsValidTermsOfPayment" MappedIsNilMember="m_IsNilTermsOfPayment" MappedSetNilName="SetNilTermsOfPayment" MappedIsNilName="IsNilTermsOfPayment" MappedMemberName="m_TermsOfPayment" MappedDisplayName="TermsOfPayment" MappedSetterName="TermsOfPayment" MappedGetterName="TermsOfPayment" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="TermsOfPaymentNoOfDays" DefaultValue="" MappedIsValidMember="m_IsValidTermsOfPaymentNoOfDays" MappedSetValidName="SetValidTermsOfPaymentNoOfDays" MappedIsValidName="IsValidTermsOfPaymentNoOfDays" MappedIsNilMember="m_IsNilTermsOfPaymentNoOfDays" MappedSetNilName="SetNilTermsOfPaymentNoOfDays" MappedIsNilName="IsNilTermsOfPaymentNoOfDays" MappedMemberName="m_TermsOfPaymentNoOfDays" MappedDisplayName="TermsOfPaymentNoOfDays" MappedSetterName="TermsOfPaymentNoOfDays" MappedGetterName="TermsOfPaymentNoOfDays" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BankName" DefaultValue="" MappedIsValidMember="m_IsValidBankName" MappedSetValidName="SetValidBankName" MappedIsValidName="IsValidBankName" MappedIsNilMember="m_IsNilBankName" MappedSetNilName="SetNilBankName" MappedIsNilName="IsNilBankName" MappedMemberName="m_BankName" MappedDisplayName="BankName" MappedSetterName="BankName" MappedGetterName="BankName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="AccountNumber" DefaultValue="" MappedIsValidMember="m_IsValidAccountNumber" MappedSetValidName="SetValidAccountNumber" MappedIsValidName="IsValidAccountNumber" MappedIsNilMember="m_IsNilAccountNumber" MappedSetNilName="SetNilAccountNumber" MappedIsNilName="IsNilAccountNumber" MappedMemberName="m_AccountNumber" MappedDisplayName="AccountNumber" MappedSetterName="AccountNumber" MappedGetterName="AccountNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SwiftAddress" DefaultValue="" MappedIsValidMember="m_IsValidSwiftAddress" MappedSetValidName="SetValidSwiftAddress" MappedIsValidName="IsValidSwiftAddress" MappedIsNilMember="m_IsNilSwiftAddress" MappedSetNilName="SetNilSwiftAddress" MappedIsNilName="IsNilSwiftAddress" MappedMemberName="m_SwiftAddress" MappedDisplayName="SwiftAddress" MappedSetterName="SwiftAddress" MappedGetterName="SwiftAddress" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BankGiroNumber" DefaultValue="" MappedIsValidMember="m_IsValidBankGiroNumber" MappedSetValidName="SetValidBankGiroNumber" MappedIsValidName="IsValidBankGiroNumber" MappedIsNilMember="m_IsNilBankGiroNumber" MappedSetNilName="SetNilBankGiroNumber" MappedIsNilName="IsNilBankGiroNumber" MappedMemberName="m_BankGiroNumber" MappedDisplayName="BankGiroNumber" MappedSetterName="BankGiroNumber" MappedGetterName="BankGiroNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="PlusGiroNumber" DefaultValue="" MappedIsValidMember="m_IsValidPlusGiroNumber" MappedSetValidName="SetValidPlusGiroNumber" MappedIsValidName="IsValidPlusGiroNumber" MappedIsNilMember="m_IsNilPlusGiroNumber" MappedSetNilName="SetNilPlusGiroNumber" MappedIsNilName="IsNilPlusGiroNumber" MappedMemberName="m_PlusGiroNumber" MappedDisplayName="PlusGiroNumber" MappedSetterName="PlusGiroNumber" MappedGetterName="PlusGiroNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Factoring" DefaultValue="" MappedIsValidMember="m_IsValidFactoring" MappedSetValidName="SetValidFactoring" MappedIsValidName="IsValidFactoring" MappedIsNilMember="m_IsNilFactoring" MappedSetNilName="SetNilFactoring" MappedIsNilName="IsNilFactoring" MappedMemberName="m_Factoring" MappedDisplayName="Factoring" MappedSetterName="Factoring" MappedGetterName="Factoring">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="AlloyCost" DefaultValue="" MappedIsValidMember="m_IsValidAlloyCost" MappedSetValidName="SetValidAlloyCost" MappedIsValidName="IsValidAlloyCost" MappedIsNilMember="m_IsNilAlloyCost" MappedSetNilName="SetNilAlloyCost" MappedIsNilName="IsNilAlloyCost" MappedMemberName="m_AlloyCost" MappedDisplayName="AlloyCost" MappedSetterName="AlloyCost" MappedGetterName="AlloyCost" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="FreightCost" DefaultValue="" MappedIsValidMember="m_IsValidFreightCost" MappedSetValidName="SetValidFreightCost" MappedIsValidName="IsValidFreightCost" MappedIsNilMember="m_IsNilFreightCost" MappedSetNilName="SetNilFreightCost" MappedIsNilName="IsNilFreightCost" MappedMemberName="m_FreightCost" MappedDisplayName="FreightCost" MappedSetterName="FreightCost" MappedGetterName="FreightCost" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="PackingCost" DefaultValue="" MappedIsValidMember="m_IsValidPackingCost" MappedSetValidName="SetValidPackingCost" MappedIsValidName="IsValidPackingCost" MappedIsNilMember="m_IsNilPackingCost" MappedSetNilName="SetNilPackingCost" MappedIsNilName="IsNilPackingCost" MappedMemberName="m_PackingCost" MappedDisplayName="PackingCost" MappedSetterName="PackingCost" MappedGetterName="PackingCost" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InsuranceCost" DefaultValue="" MappedIsValidMember="m_IsValidInsuranceCost" MappedSetValidName="SetValidInsuranceCost" MappedIsValidName="IsValidInsuranceCost" MappedIsNilMember="m_IsNilInsuranceCost" MappedSetNilName="SetNilInsuranceCost" MappedIsNilName="IsNilInsuranceCost" MappedMemberName="m_InsuranceCost" MappedDisplayName="InsuranceCost" MappedSetterName="InsuranceCost" MappedGetterName="InsuranceCost" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="NetAmountInInvoiceCurrency" DefaultValue="" MappedIsValidMember="m_IsValidNetAmountInInvoiceCurrency" MappedSetValidName="SetValidNetAmountInInvoiceCurrency" MappedIsValidName="IsValidNetAmountInInvoiceCurrency" MappedIsNilMember="m_IsNilNetAmountInInvoiceCurrency" MappedSetNilName="SetNilNetAmountInInvoiceCurrency" MappedIsNilName="IsNilNetAmountInInvoiceCurrency" MappedMemberName="m_NetAmountInInvoiceCurrency" MappedDisplayName="NetAmountInInvoiceCurrency" MappedSetterName="NetAmountInInvoiceCurrency" MappedGetterName="NetAmountInInvoiceCurrency" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InvoicingCharge" DefaultValue="" MappedIsValidMember="m_IsValidInvoicingCharge" MappedSetValidName="SetValidInvoicingCharge" MappedIsValidName="IsValidInvoicingCharge" MappedIsNilMember="m_IsNilInvoicingCharge" MappedSetNilName="SetNilInvoicingCharge" MappedIsNilName="IsNilInvoicingCharge" MappedMemberName="m_InvoicingCharge" MappedDisplayName="InvoicingCharge" MappedSetterName="InvoicingCharge" MappedGetterName="InvoicingCharge" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="VatAmountInInvoiceCurrency" DefaultValue="" MappedIsValidMember="m_IsValidVatAmountInInvoiceCurrency" MappedSetValidName="SetValidVatAmountInInvoiceCurrency" MappedIsValidName="IsValidVatAmountInInvoiceCurrency" MappedIsNilMember="m_IsNilVatAmountInInvoiceCurrency" MappedSetNilName="SetNilVatAmountInInvoiceCurrency" MappedIsNilName="IsNilVatAmountInInvoiceCurrency" MappedMemberName="m_VatAmountInInvoiceCurrency" MappedDisplayName="VatAmountInInvoiceCurrency" MappedSetterName="VatAmountInInvoiceCurrency" MappedGetterName="VatAmountInInvoiceCurrency" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Equalization" DefaultValue="" MappedIsValidMember="m_IsValidEqualization" MappedSetValidName="SetValidEqualization" MappedIsValidName="IsValidEqualization" MappedIsNilMember="m_IsNilEqualization" MappedSetNilName="SetNilEqualization" MappedIsNilName="IsNilEqualization" MappedMemberName="m_Equalization" MappedDisplayName="Equalization" MappedSetterName="Equalization" MappedGetterName="Equalization" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="PayableAmountInInvoiceCurrency" DefaultValue="" MappedIsValidMember="m_IsValidPayableAmountInInvoiceCurrency" MappedSetValidName="SetValidPayableAmountInInvoiceCurrency" MappedIsValidName="IsValidPayableAmountInInvoiceCurrency" MappedIsNilMember="m_IsNilPayableAmountInInvoiceCurrency" MappedSetNilName="SetNilPayableAmountInInvoiceCurrency" MappedIsNilName="IsNilPayableAmountInInvoiceCurrency" MappedMemberName="m_PayableAmountInInvoiceCurrency" MappedDisplayName="PayableAmountInInvoiceCurrency" MappedSetterName="PayableAmountInInvoiceCurrency" MappedGetterName="PayableAmountInInvoiceCurrency" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="INVOIC416" LongName="INVOIC416" MappedClassColName="INVOIC416Col" MappedClassName="INVOIC416">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="SoftwareManufacturer" DefaultValue="" MappedIsValidMember="m_IsValidSoftwareManufacturer" MappedSetValidName="SetValidSoftwareManufacturer" MappedIsValidName="IsValidSoftwareManufacturer" MappedIsNilMember="m_IsNilSoftwareManufacturer" MappedSetNilName="SetNilSoftwareManufacturer" MappedIsNilName="IsNilSoftwareManufacturer" MappedMemberName="m_SoftwareManufacturer" MappedDisplayName="SoftwareManufacturer" MappedSetterName="SoftwareManufacturer" MappedGetterName="SoftwareManufacturer" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SoftwareName" DefaultValue="" MappedIsValidMember="m_IsValidSoftwareName" MappedSetValidName="SetValidSoftwareName" MappedIsValidName="IsValidSoftwareName" MappedIsNilMember="m_IsNilSoftwareName" MappedSetNilName="SetNilSoftwareName" MappedIsNilName="IsNilSoftwareName" MappedMemberName="m_SoftwareName" MappedDisplayName="SoftwareName" MappedSetterName="SoftwareName" MappedGetterName="SoftwareName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SoftwareVersion" DefaultValue="" MappedIsValidMember="m_IsValidSoftwareVersion" MappedSetValidName="SetValidSoftwareVersion" MappedIsValidName="IsValidSoftwareVersion" MappedIsNilMember="m_IsNilSoftwareVersion" MappedSetNilName="SetNilSoftwareVersion" MappedIsNilName="IsNilSoftwareVersion" MappedMemberName="m_SoftwareVersion" MappedDisplayName="SoftwareVersion" MappedSetterName="SoftwareVersion" MappedGetterName="SoftwareVersion" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Invoice" DefaultValue="" MappedIsValidMember="m_IsValidInvoice" MappedSetValidName="SetValidInvoice" MappedIsValidName="IsValidInvoice" MappedIsNilMember="m_IsNilInvoice" MappedSetNilName="SetNilInvoice" MappedIsNilName="IsNilInvoice" MappedMemberName="m_Invoice" MappedDisplayName="Invoice" MappedSetterName="Invoice" MappedGetterName="Invoice">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Head" DefaultValue="" MappedIsValidMember="m_IsValidHead" MappedSetValidName="SetValidHead" MappedIsValidName="IsValidHead" MappedIsNilMember="m_IsNilHead" MappedSetNilName="SetNilHead" MappedIsNilName="IsNilHead" MappedMemberName="m_Head" MappedDisplayName="Head" MappedSetterName="Head" MappedGetterName="Head">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Rows" DefaultValue="" MappedIsValidMember="m_IsValidRows" MappedSetValidName="SetValidRows" MappedIsValidName="IsValidRows" MappedIsNilMember="m_IsNilRows" MappedSetNilName="SetNilRows" MappedIsNilName="IsNilRows" MappedMemberName="m_Rows" MappedDisplayName="Rows" MappedSetterName="Rows" MappedGetterName="Rows">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="Invoice" LongName="Invoice" MappedClassColName="InvoiceCol" MappedClassName="Invoice">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="InvoiceNumber" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceNumber" MappedSetValidName="SetValidInvoiceNumber" MappedIsValidName="IsValidInvoiceNumber" MappedIsNilMember="m_IsNilInvoiceNumber" MappedSetNilName="SetNilInvoiceNumber" MappedIsNilName="IsNilInvoiceNumber" MappedMemberName="m_InvoiceNumber" MappedDisplayName="InvoiceNumber" MappedSetterName="InvoiceNumber" MappedGetterName="InvoiceNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InvoiceType" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceType" MappedSetValidName="SetValidInvoiceType" MappedIsValidName="IsValidInvoiceType" MappedIsNilMember="m_IsNilInvoiceType" MappedSetNilName="SetNilInvoiceType" MappedIsNilName="IsNilInvoiceType" MappedMemberName="m_InvoiceType" MappedDisplayName="InvoiceType" MappedSetterName="InvoiceType" MappedGetterName="InvoiceType" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="InvoiceAddress" LongName="InvoiceAddress" MappedClassColName="InvoiceAddressCol" MappedClassName="InvoiceAddress">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="InvoiceAddressName" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceAddressName" MappedSetValidName="SetValidInvoiceAddressName" MappedIsValidName="IsValidInvoiceAddressName" MappedIsNilMember="m_IsNilInvoiceAddressName" MappedSetNilName="SetNilInvoiceAddressName" MappedIsNilName="IsNilInvoiceAddressName" MappedMemberName="m_InvoiceAddressName" MappedDisplayName="InvoiceAddressName" MappedSetterName="InvoiceAddressName" MappedGetterName="InvoiceAddressName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InvoiceAddressStreetBox1" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceAddressStreetBox1" MappedSetValidName="SetValidInvoiceAddressStreetBox1" MappedIsValidName="IsValidInvoiceAddressStreetBox1" MappedIsNilMember="m_IsNilInvoiceAddressStreetBox1" MappedSetNilName="SetNilInvoiceAddressStreetBox1" MappedIsNilName="IsNilInvoiceAddressStreetBox1" MappedMemberName="m_InvoiceAddressStreetBox1" MappedDisplayName="InvoiceAddressStreetBox1" MappedSetterName="InvoiceAddressStreetBox1" MappedGetterName="InvoiceAddressStreetBox1" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InvoiceAddressStreetBox2" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceAddressStreetBox2" MappedSetValidName="SetValidInvoiceAddressStreetBox2" MappedIsValidName="IsValidInvoiceAddressStreetBox2" MappedIsNilMember="m_IsNilInvoiceAddressStreetBox2" MappedSetNilName="SetNilInvoiceAddressStreetBox2" MappedIsNilName="IsNilInvoiceAddressStreetBox2" MappedMemberName="m_InvoiceAddressStreetBox2" MappedDisplayName="InvoiceAddressStreetBox2" MappedSetterName="InvoiceAddressStreetBox2" MappedGetterName="InvoiceAddressStreetBox2" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InvoiceAddressZipCity1" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceAddressZipCity1" MappedSetValidName="SetValidInvoiceAddressZipCity1" MappedIsValidName="IsValidInvoiceAddressZipCity1" MappedIsNilMember="m_IsNilInvoiceAddressZipCity1" MappedSetNilName="SetNilInvoiceAddressZipCity1" MappedIsNilName="IsNilInvoiceAddressZipCity1" MappedMemberName="m_InvoiceAddressZipCity1" MappedDisplayName="InvoiceAddressZipCity1" MappedSetterName="InvoiceAddressZipCity1" MappedGetterName="InvoiceAddressZipCity1" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InvoiceAddressZipCity2" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceAddressZipCity2" MappedSetValidName="SetValidInvoiceAddressZipCity2" MappedIsValidName="IsValidInvoiceAddressZipCity2" MappedIsNilMember="m_IsNilInvoiceAddressZipCity2" MappedSetNilName="SetNilInvoiceAddressZipCity2" MappedIsNilName="IsNilInvoiceAddressZipCity2" MappedMemberName="m_InvoiceAddressZipCity2" MappedDisplayName="InvoiceAddressZipCity2" MappedSetterName="InvoiceAddressZipCity2" MappedGetterName="InvoiceAddressZipCity2" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="InvoiceAddressCountry" DefaultValue="" MappedIsValidMember="m_IsValidInvoiceAddressCountry" MappedSetValidName="SetValidInvoiceAddressCountry" MappedIsValidName="IsValidInvoiceAddressCountry" MappedIsNilMember="m_IsNilInvoiceAddressCountry" MappedSetNilName="SetNilInvoiceAddressCountry" MappedIsNilName="IsNilInvoiceAddressCountry" MappedMemberName="m_InvoiceAddressCountry" MappedDisplayName="InvoiceAddressCountry" MappedSetterName="InvoiceAddressCountry" MappedGetterName="InvoiceAddressCountry" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="PostalAddress" LongName="PostalAddress" MappedClassColName="PostalAddressCol" MappedClassName="PostalAddress">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="PostalAddressStreetBox1" DefaultValue="" MappedIsValidMember="m_IsValidPostalAddressStreetBox1" MappedSetValidName="SetValidPostalAddressStreetBox1" MappedIsValidName="IsValidPostalAddressStreetBox1" MappedIsNilMember="m_IsNilPostalAddressStreetBox1" MappedSetNilName="SetNilPostalAddressStreetBox1" MappedIsNilName="IsNilPostalAddressStreetBox1" MappedMemberName="m_PostalAddressStreetBox1" MappedDisplayName="PostalAddressStreetBox1" MappedSetterName="PostalAddressStreetBox1" MappedGetterName="PostalAddressStreetBox1" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="PostalAddressStreetBox2" DefaultValue="" MappedIsValidMember="m_IsValidPostalAddressStreetBox2" MappedSetValidName="SetValidPostalAddressStreetBox2" MappedIsValidName="IsValidPostalAddressStreetBox2" MappedIsNilMember="m_IsNilPostalAddressStreetBox2" MappedSetNilName="SetNilPostalAddressStreetBox2" MappedIsNilName="IsNilPostalAddressStreetBox2" MappedMemberName="m_PostalAddressStreetBox2" MappedDisplayName="PostalAddressStreetBox2" MappedSetterName="PostalAddressStreetBox2" MappedGetterName="PostalAddressStreetBox2" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="PostalAddressZipCity1" DefaultValue="" MappedIsValidMember="m_IsValidPostalAddressZipCity1" MappedSetValidName="SetValidPostalAddressZipCity1" MappedIsValidName="IsValidPostalAddressZipCity1" MappedIsNilMember="m_IsNilPostalAddressZipCity1" MappedSetNilName="SetNilPostalAddressZipCity1" MappedIsNilName="IsNilPostalAddressZipCity1" MappedMemberName="m_PostalAddressZipCity1" MappedDisplayName="PostalAddressZipCity1" MappedSetterName="PostalAddressZipCity1" MappedGetterName="PostalAddressZipCity1" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="PostalAddressZipCity2" DefaultValue="" MappedIsValidMember="m_IsValidPostalAddressZipCity2" MappedSetValidName="SetValidPostalAddressZipCity2" MappedIsValidName="IsValidPostalAddressZipCity2" MappedIsNilMember="m_IsNilPostalAddressZipCity2" MappedSetNilName="SetNilPostalAddressZipCity2" MappedIsNilName="IsNilPostalAddressZipCity2" MappedMemberName="m_PostalAddressZipCity2" MappedDisplayName="PostalAddressZipCity2" MappedSetterName="PostalAddressZipCity2" MappedGetterName="PostalAddressZipCity2" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="PostalAddressCountry" DefaultValue="" MappedIsValidMember="m_IsValidPostalAddressCountry" MappedSetValidName="SetValidPostalAddressCountry" MappedIsValidName="IsValidPostalAddressCountry" MappedIsNilMember="m_IsNilPostalAddressCountry" MappedSetNilName="SetNilPostalAddressCountry" MappedIsNilName="IsNilPostalAddressCountry" MappedMemberName="m_PostalAddressCountry" MappedDisplayName="PostalAddressCountry" MappedSetterName="PostalAddressCountry" MappedGetterName="PostalAddressCountry" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="Row" LongName="Row" MappedClassColName="RowCol" MappedClassName="Row">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="RowNumber" DefaultValue="" MappedIsValidMember="m_IsValidRowNumber" MappedSetValidName="SetValidRowNumber" MappedIsValidName="IsValidRowNumber" MappedIsNilMember="m_IsNilRowNumber" MappedSetNilName="SetNilRowNumber" MappedIsNilName="IsNilRowNumber" MappedMemberName="m_RowNumber" MappedDisplayName="RowNumber" MappedSetterName="RowNumber" MappedGetterName="RowNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="RowType" DefaultValue="" MappedIsValidMember="m_IsValidRowType" MappedSetValidName="SetValidRowType" MappedIsValidName="IsValidRowType" MappedIsNilMember="m_IsNilRowType" MappedSetNilName="SetNilRowType" MappedIsNilName="IsNilRowType" MappedMemberName="m_RowType" MappedDisplayName="RowType" MappedSetterName="RowType" MappedGetterName="RowType" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="RowPosition" DefaultValue="" MappedIsValidMember="m_IsValidRowPosition" MappedSetValidName="SetValidRowPosition" MappedIsValidName="IsValidRowPosition" MappedIsNilMember="m_IsNilRowPosition" MappedSetNilName="SetNilRowPosition" MappedIsNilName="IsNilRowPosition" MappedMemberName="m_RowPosition" MappedDisplayName="RowPosition" MappedSetterName="RowPosition" MappedGetterName="RowPosition" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="CostType" DefaultValue="" MappedIsValidMember="m_IsValidCostType" MappedSetValidName="SetValidCostType" MappedIsValidName="IsValidCostType" MappedIsNilMember="m_IsNilCostType" MappedSetNilName="SetNilCostType" MappedIsNilName="IsNilCostType" MappedMemberName="m_CostType" MappedDisplayName="CostType" MappedSetterName="CostType" MappedGetterName="CostType" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BuyersPartNumber" DefaultValue="" MappedIsValidMember="m_IsValidBuyersPartNumber" MappedSetValidName="SetValidBuyersPartNumber" MappedIsValidName="IsValidBuyersPartNumber" MappedIsNilMember="m_IsNilBuyersPartNumber" MappedSetNilName="SetNilBuyersPartNumber" MappedIsNilName="IsNilBuyersPartNumber" MappedMemberName="m_BuyersPartNumber" MappedDisplayName="BuyersPartNumber" MappedSetterName="BuyersPartNumber" MappedGetterName="BuyersPartNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellersPartNumber" DefaultValue="" MappedIsValidMember="m_IsValidSellersPartNumber" MappedSetValidName="SetValidSellersPartNumber" MappedIsValidName="IsValidSellersPartNumber" MappedIsNilMember="m_IsNilSellersPartNumber" MappedSetNilName="SetNilSellersPartNumber" MappedIsNilName="IsNilSellersPartNumber" MappedMemberName="m_SellersPartNumber" MappedDisplayName="SellersPartNumber" MappedSetterName="SellersPartNumber" MappedGetterName="SellersPartNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="PartDescription" DefaultValue="" MappedIsValidMember="m_IsValidPartDescription" MappedSetValidName="SetValidPartDescription" MappedIsValidName="IsValidPartDescription" MappedIsNilMember="m_IsNilPartDescription" MappedSetNilName="SetNilPartDescription" MappedIsNilName="IsNilPartDescription" MappedMemberName="m_PartDescription" MappedDisplayName="PartDescription" MappedSetterName="PartDescription" MappedGetterName="PartDescription" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="DeliveryDate" DefaultValue="" MappedIsValidMember="m_IsValidDeliveryDate" MappedSetValidName="SetValidDeliveryDate" MappedIsValidName="IsValidDeliveryDate" MappedIsNilMember="m_IsNilDeliveryDate" MappedSetNilName="SetNilDeliveryDate" MappedIsNilName="IsNilDeliveryDate" MappedMemberName="m_DeliveryDate" MappedDisplayName="DeliveryDate" MappedSetterName="DeliveryDate" MappedGetterName="DeliveryDate" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Quantity" DefaultValue="" MappedIsValidMember="m_IsValidQuantity" MappedSetValidName="SetValidQuantity" MappedIsValidName="IsValidQuantity" MappedIsNilMember="m_IsNilQuantity" MappedSetNilName="SetNilQuantity" MappedIsNilName="IsNilQuantity" MappedMemberName="m_Quantity" MappedDisplayName="Quantity" MappedSetterName="Quantity" MappedGetterName="Quantity" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Unit" DefaultValue="" MappedIsValidMember="m_IsValidUnit" MappedSetValidName="SetValidUnit" MappedIsValidName="IsValidUnit" MappedIsNilMember="m_IsNilUnit" MappedSetNilName="SetNilUnit" MappedIsNilName="IsNilUnit" MappedMemberName="m_Unit" MappedDisplayName="Unit" MappedSetterName="Unit" MappedGetterName="Unit" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Each" DefaultValue="" MappedIsValidMember="m_IsValidEach" MappedSetValidName="SetValidEach" MappedIsValidName="IsValidEach" MappedIsNilMember="m_IsNilEach" MappedSetNilName="SetNilEach" MappedIsNilName="IsNilEach" MappedMemberName="m_Each" MappedDisplayName="Each" MappedSetterName="Each" MappedGetterName="Each" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Discount" DefaultValue="" MappedIsValidMember="m_IsValidDiscount" MappedSetValidName="SetValidDiscount" MappedIsValidName="IsValidDiscount" MappedIsNilMember="m_IsNilDiscount" MappedSetNilName="SetNilDiscount" MappedIsNilName="IsNilDiscount" MappedMemberName="m_Discount" MappedDisplayName="Discount" MappedSetterName="Discount" MappedGetterName="Discount" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="Price" DefaultValue="" MappedIsValidMember="m_IsValidPrice" MappedSetValidName="SetValidPrice" MappedIsValidName="IsValidPrice" MappedIsNilMember="m_IsNilPrice" MappedSetNilName="SetNilPrice" MappedIsNilName="IsNilPrice" MappedMemberName="m_Price" MappedDisplayName="Price" MappedSetterName="Price" MappedGetterName="Price" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="RowSum" DefaultValue="" MappedIsValidMember="m_IsValidRowSum" MappedSetValidName="SetValidRowSum" MappedIsValidName="IsValidRowSum" MappedIsNilMember="m_IsNilRowSum" MappedSetNilName="SetNilRowSum" MappedIsNilName="IsNilRowSum" MappedMemberName="m_RowSum" MappedDisplayName="RowSum" MappedSetterName="RowSum" MappedGetterName="RowSum" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="BuyersOrderNumber" DefaultValue="" MappedIsValidMember="m_IsValidBuyersOrderNumber" MappedSetValidName="SetValidBuyersOrderNumber" MappedIsValidName="IsValidBuyersOrderNumber" MappedIsNilMember="m_IsNilBuyersOrderNumber" MappedSetNilName="SetNilBuyersOrderNumber" MappedIsNilName="IsNilBuyersOrderNumber" MappedMemberName="m_BuyersOrderNumber" MappedDisplayName="BuyersOrderNumber" MappedSetterName="BuyersOrderNumber" MappedGetterName="BuyersOrderNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellersOrderNumber" DefaultValue="" MappedIsValidMember="m_IsValidSellersOrderNumber" MappedSetValidName="SetValidSellersOrderNumber" MappedIsValidName="IsValidSellersOrderNumber" MappedIsNilMember="m_IsNilSellersOrderNumber" MappedSetNilName="SetNilSellersOrderNumber" MappedIsNilName="IsNilSellersOrderNumber" MappedMemberName="m_SellersOrderNumber" MappedDisplayName="SellersOrderNumber" MappedSetterName="SellersOrderNumber" MappedGetterName="SellersOrderNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="CountryOfOriginCode" DefaultValue="" MappedIsValidMember="m_IsValidCountryOfOriginCode" MappedSetValidName="SetValidCountryOfOriginCode" MappedIsValidName="IsValidCountryOfOriginCode" MappedIsNilMember="m_IsNilCountryOfOriginCode" MappedSetNilName="SetNilCountryOfOriginCode" MappedIsNilName="IsNilCountryOfOriginCode" MappedMemberName="m_CountryOfOriginCode" MappedDisplayName="CountryOfOriginCode" MappedSetterName="CountryOfOriginCode" MappedGetterName="CountryOfOriginCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="Rows" LongName="Rows" MappedClassColName="RowsCol" MappedClassName="Rows">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="Row" DefaultValue="" MappedIsValidMember="m_IsValidRow" MappedSetValidName="SetValidRow" MappedIsValidName="IsValidRow" MappedIsNilMember="m_IsNilRow" MappedSetNilName="SetNilRow" MappedIsNilName="IsNilRow" MappedMemberName="m_Row" MappedDisplayName="Row" MappedSetterName="Row" MappedGetterName="Row">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="Seller" LongName="Seller" MappedClassColName="SellerCol" MappedClassName="Seller">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="SellerSuplierCode" DefaultValue="" MappedIsValidMember="m_IsValidSellerSuplierCode" MappedSetValidName="SetValidSellerSuplierCode" MappedIsValidName="IsValidSellerSuplierCode" MappedIsNilMember="m_IsNilSellerSuplierCode" MappedSetNilName="SetNilSellerSuplierCode" MappedIsNilName="IsNilSellerSuplierCode" MappedMemberName="m_SellerSuplierCode" MappedDisplayName="SellerSuplierCode" MappedSetterName="SellerSuplierCode" MappedGetterName="SellerSuplierCode" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerName" DefaultValue="" MappedIsValidMember="m_IsValidSellerName" MappedSetValidName="SetValidSellerName" MappedIsValidName="IsValidSellerName" MappedIsNilMember="m_IsNilSellerName" MappedSetNilName="SetNilSellerName" MappedIsNilName="IsNilSellerName" MappedMemberName="m_SellerName" MappedDisplayName="SellerName" MappedSetterName="SellerName" MappedGetterName="SellerName" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerReference" DefaultValue="" MappedIsValidMember="m_IsValidSellerReference" MappedSetValidName="SetValidSellerReference" MappedIsValidName="IsValidSellerReference" MappedIsNilMember="m_IsNilSellerReference" MappedSetNilName="SetNilSellerReference" MappedIsNilName="IsNilSellerReference" MappedMemberName="m_SellerReference" MappedDisplayName="SellerReference" MappedSetterName="SellerReference" MappedGetterName="SellerReference" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerReferencePhone" DefaultValue="" MappedIsValidMember="m_IsValidSellerReferencePhone" MappedSetValidName="SetValidSellerReferencePhone" MappedIsValidName="IsValidSellerReferencePhone" MappedIsNilMember="m_IsNilSellerReferencePhone" MappedSetNilName="SetNilSellerReferencePhone" MappedIsNilName="IsNilSellerReferencePhone" MappedMemberName="m_SellerReferencePhone" MappedDisplayName="SellerReferencePhone" MappedSetterName="SellerReferencePhone" MappedGetterName="SellerReferencePhone" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerReferenceFax" DefaultValue="" MappedIsValidMember="m_IsValidSellerReferenceFax" MappedSetValidName="SetValidSellerReferenceFax" MappedIsValidName="IsValidSellerReferenceFax" MappedIsNilMember="m_IsNilSellerReferenceFax" MappedSetNilName="SetNilSellerReferenceFax" MappedIsNilName="IsNilSellerReferenceFax" MappedMemberName="m_SellerReferenceFax" MappedDisplayName="SellerReferenceFax" MappedSetterName="SellerReferenceFax" MappedGetterName="SellerReferenceFax" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerReferenceEmail" DefaultValue="" MappedIsValidMember="m_IsValidSellerReferenceEmail" MappedSetValidName="SetValidSellerReferenceEmail" MappedIsValidName="IsValidSellerReferenceEmail" MappedIsNilMember="m_IsNilSellerReferenceEmail" MappedSetNilName="SetNilSellerReferenceEmail" MappedIsNilName="IsNilSellerReferenceEmail" MappedMemberName="m_SellerReferenceEmail" MappedDisplayName="SellerReferenceEmail" MappedSetterName="SellerReferenceEmail" MappedGetterName="SellerReferenceEmail" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerOrigin" DefaultValue="" MappedIsValidMember="m_IsValidSellerOrigin" MappedSetValidName="SetValidSellerOrigin" MappedIsValidName="IsValidSellerOrigin" MappedIsNilMember="m_IsNilSellerOrigin" MappedSetNilName="SetNilSellerOrigin" MappedIsNilName="IsNilSellerOrigin" MappedMemberName="m_SellerOrigin" MappedDisplayName="SellerOrigin" MappedSetterName="SellerOrigin" MappedGetterName="SellerOrigin" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerWeb" DefaultValue="" MappedIsValidMember="m_IsValidSellerWeb" MappedSetValidName="SetValidSellerWeb" MappedIsValidName="IsValidSellerWeb" MappedIsNilMember="m_IsNilSellerWeb" MappedSetNilName="SetNilSellerWeb" MappedIsNilName="IsNilSellerWeb" MappedMemberName="m_SellerWeb" MappedDisplayName="SellerWeb" MappedSetterName="SellerWeb" MappedGetterName="SellerWeb" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerPhone" DefaultValue="" MappedIsValidMember="m_IsValidSellerPhone" MappedSetValidName="SetValidSellerPhone" MappedIsValidName="IsValidSellerPhone" MappedIsNilMember="m_IsNilSellerPhone" MappedSetNilName="SetNilSellerPhone" MappedIsNilName="IsNilSellerPhone" MappedMemberName="m_SellerPhone" MappedDisplayName="SellerPhone" MappedSetterName="SellerPhone" MappedGetterName="SellerPhone" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerFax" DefaultValue="" MappedIsValidMember="m_IsValidSellerFax" MappedSetValidName="SetValidSellerFax" MappedIsValidName="IsValidSellerFax" MappedIsNilMember="m_IsNilSellerFax" MappedSetNilName="SetNilSellerFax" MappedIsNilName="IsNilSellerFax" MappedMemberName="m_SellerFax" MappedDisplayName="SellerFax" MappedSetterName="SellerFax" MappedGetterName="SellerFax" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerRegistrationNumber" DefaultValue="" MappedIsValidMember="m_IsValidSellerRegistrationNumber" MappedSetValidName="SetValidSellerRegistrationNumber" MappedIsValidName="IsValidSellerRegistrationNumber" MappedIsNilMember="m_IsNilSellerRegistrationNumber" MappedSetNilName="SetNilSellerRegistrationNumber" MappedIsNilName="IsNilSellerRegistrationNumber" MappedMemberName="m_SellerRegistrationNumber" MappedDisplayName="SellerRegistrationNumber" MappedSetterName="SellerRegistrationNumber" MappedGetterName="SellerRegistrationNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="SellerVatRegistrationNumber" DefaultValue="" MappedIsValidMember="m_IsValidSellerVatRegistrationNumber" MappedSetValidName="SetValidSellerVatRegistrationNumber" MappedIsValidName="IsValidSellerVatRegistrationNumber" MappedIsNilMember="m_IsNilSellerVatRegistrationNumber" MappedSetNilName="SetNilSellerVatRegistrationNumber" MappedIsNilName="IsNilSellerVatRegistrationNumber" MappedMemberName="m_SellerVatRegistrationNumber" MappedDisplayName="SellerVatRegistrationNumber" MappedSetterName="SellerVatRegistrationNumber" MappedGetterName="SellerVatRegistrationNumber" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="PostalAddress" DefaultValue="" MappedIsValidMember="m_IsValidPostalAddress" MappedSetValidName="SetValidPostalAddress" MappedIsValidName="IsValidPostalAddress" MappedIsNilMember="m_IsNilPostalAddress" MappedSetNilName="SetNilPostalAddress" MappedIsNilName="IsNilPostalAddress" MappedMemberName="m_PostalAddress" MappedDisplayName="PostalAddress" MappedSetterName="PostalAddress" MappedGetterName="PostalAddress">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="VisitingAddress" DefaultValue="" MappedIsValidMember="m_IsValidVisitingAddress" MappedSetValidName="SetValidVisitingAddress" MappedIsValidName="IsValidVisitingAddress" MappedIsNilMember="m_IsNilVisitingAddress" MappedSetNilName="SetNilVisitingAddress" MappedIsNilName="IsNilVisitingAddress" MappedMemberName="m_VisitingAddress" MappedDisplayName="VisitingAddress" MappedSetterName="VisitingAddress" MappedGetterName="VisitingAddress">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Class Name="VisitingAddress" LongName="VisitingAddress" MappedClassColName="VisitingAddressCol" MappedClassName="VisitingAddress">
+    <Description>
+    </Description>
+    <Remarks>
+    </Remarks>
+    <Attribute Name="VisitingAddressStreetBox1" DefaultValue="" MappedIsValidMember="m_IsValidVisitingAddressStreetBox1" MappedSetValidName="SetValidVisitingAddressStreetBox1" MappedIsValidName="IsValidVisitingAddressStreetBox1" MappedIsNilMember="m_IsNilVisitingAddressStreetBox1" MappedSetNilName="SetNilVisitingAddressStreetBox1" MappedIsNilName="IsNilVisitingAddressStreetBox1" MappedMemberName="m_VisitingAddressStreetBox1" MappedDisplayName="VisitingAddressStreetBox1" MappedSetterName="VisitingAddressStreetBox1" MappedGetterName="VisitingAddressStreetBox1" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="VisitingAddressStreetBox2" DefaultValue="" MappedIsValidMember="m_IsValidVisitingAddressStreetBox2" MappedSetValidName="SetValidVisitingAddressStreetBox2" MappedIsValidName="IsValidVisitingAddressStreetBox2" MappedIsNilMember="m_IsNilVisitingAddressStreetBox2" MappedSetNilName="SetNilVisitingAddressStreetBox2" MappedIsNilName="IsNilVisitingAddressStreetBox2" MappedMemberName="m_VisitingAddressStreetBox2" MappedDisplayName="VisitingAddressStreetBox2" MappedSetterName="VisitingAddressStreetBox2" MappedGetterName="VisitingAddressStreetBox2" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="VisitingAddressZipCity1" DefaultValue="" MappedIsValidMember="m_IsValidVisitingAddressZipCity1" MappedSetValidName="SetValidVisitingAddressZipCity1" MappedIsValidName="IsValidVisitingAddressZipCity1" MappedIsNilMember="m_IsNilVisitingAddressZipCity1" MappedSetNilName="SetNilVisitingAddressZipCity1" MappedIsNilName="IsNilVisitingAddressZipCity1" MappedMemberName="m_VisitingAddressZipCity1" MappedDisplayName="VisitingAddressZipCity1" MappedSetterName="VisitingAddressZipCity1" MappedGetterName="VisitingAddressZipCity1" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="VisitingAddressZipCity2" DefaultValue="" MappedIsValidMember="m_IsValidVisitingAddressZipCity2" MappedSetValidName="SetValidVisitingAddressZipCity2" MappedIsValidName="IsValidVisitingAddressZipCity2" MappedIsNilMember="m_IsNilVisitingAddressZipCity2" MappedSetNilName="SetNilVisitingAddressZipCity2" MappedIsNilName="IsNilVisitingAddressZipCity2" MappedMemberName="m_VisitingAddressZipCity2" MappedDisplayName="VisitingAddressZipCity2" MappedSetterName="VisitingAddressZipCity2" MappedGetterName="VisitingAddressZipCity2" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+    <Attribute Name="VisitingAddressCountry" DefaultValue="" MappedIsValidMember="m_IsValidVisitingAddressCountry" MappedSetValidName="SetValidVisitingAddressCountry" MappedIsValidName="IsValidVisitingAddressCountry" MappedIsNilMember="m_IsNilVisitingAddressCountry" MappedSetNilName="SetNilVisitingAddressCountry" MappedIsNilName="IsNilVisitingAddressCountry" MappedMemberName="m_VisitingAddressCountry" MappedDisplayName="VisitingAddressCountry" MappedSetterName="VisitingAddressCountry" MappedGetterName="VisitingAddressCountry" FormatOverride="">
+      <Description>
+      </Description>
+      <Remarks>
+      </Remarks>
+    </Attribute>
+  </Class>
+  <Namespace SchemaNamespace="" SchemaAlias="" ClassNamespace="Invoic416_V4Lib" />
+</MappingSchema>

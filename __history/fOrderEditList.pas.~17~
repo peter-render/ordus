@@ -1,0 +1,80 @@
+unit fOrderEditList;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, wwdblook, ExtCtrls, wwdbdatetimepicker, Db,  ComCtrls,
+  Mask, DBCtrls, Data.Win.ADODB, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client,
+  FireDAC.Comp.DataSet, Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid;
+
+type
+  TfrmOrderEditList = class(TForm)
+    Panel1: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    qryOrderEdit: TFDQuery;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    qryOrderrad: TFDQuery;
+    dsoOrderRad: TDataSource;
+    qryOrderradArtikelnummer: TStringField;
+    qryOrderradantal: TFMTBCDField;
+    qryOrderradYtbehandlingId: TIntegerField;
+    qryOrderradYBBeteckning: TStringField;
+    qryOrderEditId: TFDAutoIncField;
+    qryOrderEditKundId: TIntegerField;
+    qryOrderEditOrdernummer: TStringField;
+    qryOrderEditOrderdatum: TSQLTimeStampField;
+    qryOrderEditGodsmärke: TStringField;
+    qryOrderEditReferensId: TIntegerField;
+    qryOrderEditOrdertypId: TIntegerField;
+    qryOrderEditOrderStatusId: TIntegerField;
+    qryOrderEditLeveransdatum: TSQLTimeStampField;
+    qryOrderEditFakturanummer: TStringField;
+    qryOrderEditFakturadatum: TSQLTimeStampField;
+    qryOrderEditFritext: TStringField;
+    qryOrderEditYtbehandlingDatum: TSQLTimeStampField;
+    qryOrderEditYtbehandlingId: TIntegerField;
+    wwDBGrid1: TwwDBGrid;
+    qryOrderradID: TFDAutoIncField;
+    wwDBLookupCombo1: TwwDBLookupCombo;
+    procedure Button2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmOrderEditList: TfrmOrderEditList;
+
+implementation
+
+uses fMain, fOrderLista, Datamodule;
+
+{$R *.DFM}
+
+procedure TfrmOrderEditList.Button2Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TfrmOrderEditList.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+qryOrderrad.Close;
+  release;
+end;
+
+
+procedure TfrmOrderEditList.FormShow(Sender: TObject);
+begin
+qryOrderrad.open;
+
+end;
+
+end.

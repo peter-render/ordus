@@ -1,0 +1,220 @@
+inherited frmYtbehandling: TfrmYtbehandling
+  Left = 347
+  Top = 186
+  ActiveControl = btnAngra
+  Caption = 'Ytbehandlingar'
+  ClientHeight = 369
+  ClientWidth = 696
+  ExplicitWidth = 702
+  ExplicitHeight = 398
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 552
+    Height = 369
+    ExplicitWidth = 554
+    ExplicitHeight = 369
+    inherited Bevel1: TBevel
+      Top = 217
+      ExplicitTop = 217
+    end
+    inherited Bevel2: TBevel
+      Left = 16
+      Top = 329
+      ExplicitLeft = 16
+      ExplicitTop = 329
+    end
+    object Label2: TLabel [2]
+      Left = 36
+      Top = 236
+      Width = 54
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Beteckning'
+      FocusControl = DBEdit2
+    end
+    object Label3: TLabel [3]
+      Left = 47
+      Top = 264
+      Width = 43
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Sortorder'
+      FocusControl = DBEdit3
+    end
+    object Label1: TLabel [4]
+      Left = 21
+      Top = 293
+      Width = 69
+      Height = 13
+      Caption = 'Bakgrundsf'#228'rg'
+      FocusControl = DBEdit1
+    end
+    inherited dbGrid: TwwDBGrid
+      Left = 29
+      Top = 19
+      Width = 508
+      Height = 192
+      Selected.Strings = (
+        'Beteckning'#9'30'#9'Beteckning'
+        'Sortorder'#9'10'#9'Sortorder'
+        'Pris'#9'16'#9'Pris'
+        'Laserpris'#9'8'#9'Laserpris'
+        'BGColor'#9'10'#9'BGColor')
+      OnCalcCellColors = dbGridCalcCellColors
+      ExplicitLeft = 29
+      ExplicitTop = 19
+      ExplicitWidth = 508
+      ExplicitHeight = 192
+    end
+    object DBEdit2: TDBEdit
+      Left = 96
+      Top = 233
+      Width = 249
+      Height = 21
+      DataField = 'Beteckning'
+      DataSource = DataSource1
+      TabOrder = 1
+    end
+    object DBEdit3: TDBEdit
+      Left = 96
+      Top = 261
+      Width = 89
+      Height = 21
+      DataField = 'Sortorder'
+      DataSource = DataSource1
+      TabOrder = 2
+    end
+    object DBEdit1: TDBEdit
+      Left = 96
+      Top = 289
+      Width = 89
+      Height = 21
+      DataField = 'BGColor'
+      DataSource = DataSource1
+      ReadOnly = True
+      TabOrder = 3
+    end
+    object Button2: TButton
+      Left = 191
+      Top = 287
+      Width = 75
+      Height = 25
+      Caption = #196'ndra f'#228'rg'
+      TabOrder = 4
+      OnClick = Button2Click
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 552
+    Width = 144
+    Height = 369
+    ExplicitLeft = 558
+    ExplicitWidth = 144
+    ExplicitHeight = 369
+    inherited btnNy: TButton
+      Width = 122
+      ExplicitWidth = 122
+    end
+    inherited btnAndra: TButton
+      Width = 122
+      ExplicitWidth = 122
+    end
+    inherited btnAngra: TButton
+      Width = 122
+      ExplicitWidth = 122
+    end
+    inherited btnSpara: TButton
+      Width = 122
+      ExplicitWidth = 122
+    end
+    inherited btnBort: TButton
+      Width = 122
+      ExplicitWidth = 122
+    end
+    inherited btnStang: TButton
+      Width = 122
+      ExplicitWidth = 122
+    end
+    inherited DBNav: TDBNavigator
+      Hints.Strings = ()
+    end
+    object Button1: TButton
+      Left = 12
+      Top = 226
+      Width = 122
+      Height = 25
+      Caption = 'Material-/Laserpris'
+      TabOrder = 7
+      OnClick = Button1Click
+    end
+  end
+  inherited PopupMenu1: TPopupMenu
+    Left = 348
+    Top = 268
+  end
+  inherited DataSource1: TDataSource
+    OnStateChange = DataSource1StateChange
+  end
+  inherited FDQuery1: TFDQuery
+    SQL.Strings = (
+      'Select y.Id'
+      ',y.Beteckning'
+      ',y.Sortorder'
+      
+        ',Fom = (Select cast(max(fom) as datetime) from YtbehandlingPris ' +
+        'where YtbehandlingID= y.ID and fom <= getdate())'
+      
+        ',Pris = (select Pris from Ytbehandlingpris where YtbehandlingID ' +
+        '= y.Id and fom = (Select max(fom) from YtbehandlingPris where Yt' +
+        'behandlingID= y.ID and fom <= getdate()))'
+      
+        ',Laserpris '#9'= (select Laserpris from Ytbehandlingpris where Ytbe' +
+        'handlingID = y.Id and fom = (Select max(fom) from YtbehandlingPr' +
+        'is where YtbehandlingID= y.ID and fom <= getdate()))'
+      ',BGColor'
+      'from Ytbehandling Y')
+    Left = 340
+    Top = 96
+    object FDQuery1Id: TFDAutoIncField
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQuery1Beteckning: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 50
+    end
+    object FDQuery1Sortorder: TSmallintField
+      FieldName = 'Sortorder'
+      Origin = 'Sortorder'
+    end
+    object FDQuery1Fom: TSQLTimeStampField
+      FieldName = 'Fom'
+      Origin = 'Fom'
+      ReadOnly = True
+    end
+    object FDQuery1Pris: TCurrencyField
+      FieldName = 'Pris'
+      Origin = 'Pris'
+      ReadOnly = True
+    end
+    object FDQuery1Laserpris: TCurrencyField
+      FieldName = 'Laserpris'
+      Origin = 'Laserpris'
+      ReadOnly = True
+    end
+    object FDQuery1BGColor: TStringField
+      FieldName = 'BGColor'
+      Origin = 'BGColor'
+      FixedChar = True
+      Size = 10
+    end
+  end
+  object ColorDialog1: TColorDialog
+    Left = 448
+    Top = 264
+  end
+end

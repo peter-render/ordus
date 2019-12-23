@@ -1,0 +1,43 @@
+inherited frmConnection: TfrmConnection
+  Caption = 'Connection parameters'
+  ClientHeight = 362
+  ClientWidth = 446
+  OnShow = FormShow
+  ExplicitWidth = 452
+  ExplicitHeight = 391
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel2: TPanel
+    Top = 321
+    Width = 446
+    ExplicitTop = 321
+    ExplicitWidth = 446
+    inherited Button1: TButton
+      Left = 279
+      OnClick = Button1Click
+      ExplicitLeft = 279
+    end
+    inherited Button2: TButton
+      Left = 361
+      Caption = 'St'#228'ng'
+      ExplicitLeft = 361
+    end
+  end
+  inherited Panel3: TPanel
+    Width = 446
+    Height = 321
+    BorderWidth = 5
+    ExplicitWidth = 446
+    ExplicitHeight = 321
+    object Memo1: TMemo
+      Left = 6
+      Top = 6
+      Width = 434
+      Height = 309
+      Align = alClient
+      Lines.Strings = (
+        'Memo1')
+      TabOrder = 0
+    end
+  end
+end

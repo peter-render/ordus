@@ -1,0 +1,977 @@
+﻿object frmOrderLista: TfrmOrderLista
+  Left = 686
+  Top = 375
+  ActiveControl = wwDBGrid1
+  BorderIcons = []
+  BorderStyle = bsNone
+  Caption = 'Orderlista'
+  ClientHeight = 797
+  ClientWidth = 1116
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  KeyPreview = True
+  OldCreateOrder = False
+  PopupMenu = PopupMenu1
+  Position = poDesigned
+  Scaled = False
+  Visible = True
+  WindowState = wsMaximized
+  OnCreate = FormCreate
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label4: TLabel
+    Left = 640
+    Top = 320
+    Width = 32
+    Height = 13
+    Caption = 'Label4'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1116
+    Height = 797
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 0
+    object Panel2: TPanel
+      Left = 0
+      Top = 0
+      Width = 1116
+      Height = 29
+      Align = alTop
+      TabOrder = 0
+      object Panel3: TPanel
+        Left = 1
+        Top = 1
+        Width = 74
+        Height = 27
+        Align = alLeft
+        Alignment = taLeftJustify
+        BevelOuter = bvNone
+        Caption = '   Orderlista'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+      end
+      object Panel4: TPanel
+        Left = 75
+        Top = 1
+        Width = 1040
+        Height = 27
+        Align = alClient
+        Alignment = taLeftJustify
+        BevelOuter = bvNone
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        object Label1: TLabel
+          Left = 564
+          Top = 6
+          Width = 68
+          Height = 13
+          Caption = '&Best'#228'llningsnr:'
+          FocusControl = wwIncrementalSearch1
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label2: TLabel
+          Left = 220
+          Top = 6
+          Width = 25
+          Height = 13
+          Caption = 'Kund'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label3: TLabel
+          Left = 76
+          Top = 6
+          Width = 35
+          Height = 13
+          Caption = 'Ordernr'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object wwIncrementalSearch1: TwwIncrementalSearch
+          Left = 638
+          Top = 3
+          Width = 92
+          Height = 21
+          DataSource = dsoOrderlist
+          SearchField = 'Ordernummer'
+          TabOrder = 0
+        end
+        object cbVisaAlla: TCheckBox
+          Left = 449
+          Top = 5
+          Width = 97
+          Height = 17
+          Caption = '&Visa fakturerade'
+          TabOrder = 1
+          OnClick = cbVisaAllaClick
+        end
+        object wwDBLookupCombo1: TwwDBLookupCombo
+          Left = 251
+          Top = 3
+          Width = 157
+          Height = 21
+          DropDownAlignment = taLeftJustify
+          Selected.Strings = (
+            'kundnamn'#9'30'#9'kundnamn'#9'F')
+          LookupTable = dm.qryLU_Kund
+          LookupField = 'Kundid'
+          Color = clWhite
+          DropDownCount = 40
+          TabOrder = 2
+          AutoDropDown = True
+          ShowButton = True
+          PreciseEditRegion = False
+          AllowClearKey = False
+          ShowMatchText = True
+          OnCloseUp = wwDBLookupCombo1CloseUp
+        end
+        object wwIncrementalSearch2: TwwIncrementalSearch
+          Left = 116
+          Top = 3
+          Width = 92
+          Height = 21
+          DataSource = dsoOrderlist
+          SearchField = 'OrderId'
+          TabOrder = 3
+        end
+        object Button1: TButton
+          Left = 408
+          Top = 3
+          Width = 22
+          Height = 21
+          Caption = 'X'
+          TabOrder = 4
+          OnClick = Button1Click
+        end
+      end
+    end
+    object Panel5: TPanel
+      Left = 0
+      Top = 29
+      Width = 1116
+      Height = 768
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 10
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      object wwDBGrid1: TwwDBGrid
+        Left = 10
+        Top = 10
+        Width = 1096
+        Height = 748
+        Selected.Strings = (
+          'OrderID'#9'8'#9'Ordernr'
+          'Kundnamn'#9'22'#9'Kundnamn'
+          'Ordernummer'#9'16'#9'Best.Nr'
+          'OrderDatum'#9'12'#9'OrderDatum'
+          'Ytbehandlingdatum'#9'12'#9'Ytbeh datum'
+          'leveransdatum'#9'10'#9'Lev datum'
+          'Godsm'#228'rke'#9'19'#9'Godsm'#228'rke'
+          'Kundreferens'#9'18'#9'Kundreferens'
+          'AntalTotal'#9'4'#9'  B'
+          'AntalAvrapporterad'#9'4'#9'  '#197
+          'Antalprissatt'#9'4'#9'  P'
+          'fakturadatum'#9'10'#9'Fakt datum'
+          'KalkArbetstidTime'#9'13'#9'Utr'#228'knat'
+          'ArbetstidPlaneradTime'#9'13'#9'Inplanerad')
+        IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
+        TitleColor = clBtnFace
+        OnRowChanged = wwDBGrid1RowChanged
+        FixedCols = 0
+        ShowHorzScrollBar = False
+        Align = alClient
+        Color = clWhite
+        DataSource = dsoOrderlist
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+        ParentFont = False
+        PopupMenu = PopupMenu1
+        TabOrder = 0
+        TitleAlignment = taLeftJustify
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        TitleLines = 1
+        TitleButtons = True
+        OnCalcCellColors = wwDBGrid1CalcCellColors
+        OnTitleButtonClick = wwDBGrid1TitleButtonClick
+        OnDblClick = wwDBGrid1DblClick
+        OnKeyDown = wwDBGrid1KeyDown
+        OnMouseDown = wwDBGrid1MouseDown
+        PadColumnStyle = pcsPadHeader
+      end
+    end
+  end
+  object dsoOrderlist: TDataSource
+    AutoEdit = False
+    DataSet = sp_Orderlist
+    Left = 248
+    Top = 516
+  end
+  object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
+    Left = 624
+    Top = 140
+    object Lggtillndrapositioner1: TMenuItem
+      Action = actOrderLäggtillÄndraPositioner
+    end
+    object Uppdatera1: TMenuItem
+      Action = actOrderlistaRefresh
+    end
+    object N4: TMenuItem
+      Caption = '-'
+    end
+    object Nybestllningoffert1: TMenuItem
+      Action = actNyBestallning
+    end
+    object ndraorderhuvud1: TMenuItem
+      Action = actOrderEdit
+    end
+    object N8: TMenuItem
+      Caption = '-'
+    end
+    object Skapaplanering1: TMenuItem
+      Action = actPlaneringSkapa
+    end
+    object abortplaneringfrorder1: TMenuItem
+      Action = actPlaneringTabort
+    end
+    object N2: TMenuItem
+      Caption = '-'
+    end
+    object Visautskrift1: TMenuItem
+      Action = actOrderVisa
+      Caption = 'Visa best'#228'llning'
+    end
+    object actSkrivUtBeställning: TMenuItem
+      Action = actSkrivUt
+      Caption = 'Skriv ut best'#228'llning*'
+    end
+    object N6: TMenuItem
+      Caption = '-'
+    end
+    object Skrivutorderbekrftelse1: TMenuItem
+      Action = actOrderSkrivut
+      Caption = 'Skriv ut orderbekr'#228'ftelse*'
+    end
+    object Skrivutorderbekrftelse2: TMenuItem
+      Action = actOrderbekräftleseViaMail
+    end
+    object N7: TMenuItem
+      Caption = '-'
+    end
+    object Skrivutetiketter1: TMenuItem
+      Action = actEtiketterSkrivUt
+    end
+    object Skrivutfakturaunderlag: TMenuItem
+      Tag = 1
+      Action = actFakturaunderlagPrint
+      Caption = 'Skriv ut fakturaunderlag*'
+    end
+    object Skrivutfakturaunderlag1: TMenuItem
+      Tag = 2
+      Action = actFakturaunderlagPrint
+      Caption = 'Visa fakturaunderlag'
+      Visible = False
+    end
+    object Skrivutfljesedel1: TMenuItem
+      Action = actFöljesdelUtskrift
+      Caption = 'Skriv ut f'#246'ljesdel*'
+    end
+    object offertsommailtillkund2: TMenuItem
+      Action = actOffertSendViamail
+    end
+    object N5: TMenuItem
+      Caption = '-'
+    end
+    object Skrivutritningar1: TMenuItem
+      Action = actOrderPDFPrint
+      Caption = 'Skriv ut PDF - ritningar'
+    end
+    object actPallEtikett1: TMenuItem
+      Action = actPallEtikett
+    end
+    object N3: TMenuItem
+      Caption = '-'
+    end
+    object Prissttningpositioner1: TMenuItem
+      Action = actPrissattningPositioner
+    end
+    object Sttfakturadatum1: TMenuItem
+      Action = actSattFakturadatum
+    end
+    object Sttordertstatus1: TMenuItem
+      Action = actOrderStatusUpdate
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Tabort1: TMenuItem
+      Action = actOrderTaBort
+      Caption = 'Ta bort best'#228'llning / offert'
+    end
+  end
+  object ActionList1: TActionList
+    Left = 484
+    Top = 163
+    object actNyBestallning: TAction
+      Caption = 'Ny best'#228'llning / offert'
+      OnExecute = actNyBestallningExecute
+    end
+    object actSkrivUt: TAction
+      Caption = 'Skriv ut'
+      OnExecute = actSkrivUtExecute
+    end
+    object actSattFakturadatum: TAction
+      Caption = 'S'#228'tt fakturadatum'
+      OnExecute = actSattFakturadatumExecute
+    end
+    object actPrissattningPositioner: TAction
+      Caption = 'Priss'#228'tta positioner'
+      OnExecute = actPrissattningPositionerExecute
+    end
+    object actOrderTaBort: TAction
+      Caption = 'Ta bort order'
+      OnExecute = actOrderTaBortExecute
+    end
+    object actOffertSendViamail: TAction
+      Caption = 'Offert som mail till kund'
+      OnExecute = actOffertSendViamailExecute
+    end
+    object actOrderEdit: TAction
+      Caption = #196'ndra orderhuvud'
+      OnExecute = actOrderEditExecute
+    end
+    object actFakturaunderlagPrint: TAction
+      Tag = 2
+      Caption = 'Skriv ut fakturaunderlag'
+      OnExecute = actFakturaunderlagPrintExecute
+    end
+    object actOrderradUpdate: TAction
+      Caption = 'Updatera orderrader'
+      OnExecute = actOrderradUpdateExecute
+    end
+    object actOrderVisa: TAction
+      Caption = 'Visa utskrift'
+      OnExecute = actOrderVisaExecute
+    end
+    object actOrderStatusUpdate: TAction
+      Caption = #196'ndra orderstatus manuellt'
+      OnExecute = actOrderStatusUpdateExecute
+    end
+    object actPallEtikett: TAction
+      Caption = 'Uskrift palletikett'
+      OnExecute = actPallEtikettExecute
+    end
+    object actArbetsorderPrint: TAction
+      Caption = 'Utskrift arbetsorder'
+      OnExecute = actArbetsorderPrintExecute
+    end
+    object actOrderPDFPrint: TAction
+      Caption = 'Skriv ut ritningar'
+      OnExecute = actOrderPDFPrintExecute
+    end
+    object actOrderlistaRefresh: TAction
+      Caption = 'Refresh orderlista'
+      OnExecute = actOrderlistaRefreshExecute
+    end
+    object actImporteraIntersystem: TAction
+      Caption = 'actImporteraIntersystem'
+      OnExecute = actImporteraIntersystemExecute
+    end
+    object actPlaneringSkapa: TAction
+      Caption = 'Skapa planering'
+      OnExecute = actPlaneringSkapaExecute
+    end
+    object actPlaneringTabort: TAction
+      Caption = 'Ta bort planering'
+      OnExecute = actPlaneringTabortExecute
+    end
+    object actOrderSkrivut: TAction
+      Caption = 'Skriv ut best'#228'llning'
+      OnExecute = actOrderSkrivutExecute
+    end
+    object actEtiketterSkrivUt: TAction
+      Caption = 'Skriv ut etiketter'
+      OnExecute = actEtiketterSkrivUtExecute
+    end
+    object actFöljesdelUtskrift: TAction
+      Caption = 'Skriv ut f'#246'ljesdel'
+      OnExecute = actFöljesdelUtskriftExecute
+    end
+    object actOrderbekräftleseViaMail: TAction
+      Caption = 'Skicka orderbekr'#228'ftlese via epost'
+      OnExecute = actOrderbekräftleseViaMailExecute
+    end
+    object actOrderLäggtillÄndraPositioner: TAction
+      Caption = 'L'#228'gg till/'#228'ndra pos. (dubbelklick)'
+      OnExecute = actOrderLäggtillÄndraPositionerExecute
+    end
+    object actFakturaunderlagPDF: TAction
+      Caption = 'actFakturaunderlagPDF'
+    end
+  end
+  object sp_ftgsystem: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'FtgSystemGet'
+    Left = 108
+    Top = 256
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+        Value = 0
+      end
+      item
+        Position = 2
+        Name = '@ID'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@V'#228'rde'
+        DataType = ftString
+        ParamType = ptInputOutput
+        Size = 100
+      end>
+  end
+  object sp_OrderDelete: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'OrderDelete'
+    Left = 296
+    Top = 260
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@OrderID'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object Custom_OrderhuvudFakturadatumUpdate: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'Custom_OrderhuvudFakturadatumUpdate'
+    Left = 504
+    Top = 312
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+        Value = 0
+      end
+      item
+        Position = 2
+        Name = '@OrderhuvudId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@Fakturadatum'
+        DataType = ftTimeStamp
+        ParamType = ptInput
+      end>
+  end
+  object qryKundFilter: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'select 0 Kundid,'#39'<alla>'#39' Kundnamn,10000000'
+      'union all'
+      'Select '
+      #9'k.id Kundid,k.kundnamn ,count(*)'
+      'from orderhuvud oh'
+      'join kund k on k.id = oh.kundid'
+      'group by k.id,k.Kundnamn'
+      'order by 3 desc,2 asc')
+    Left = 204
+    Top = 156
+    object qryKundFilterKundid: TIntegerField
+      FieldName = 'Kundid'
+      Origin = 'Kundid'
+      ReadOnly = True
+      Required = True
+    end
+    object qryKundFilterKundnamn: TStringField
+      FieldName = 'Kundnamn'
+      Origin = 'Kundnamn'
+      ReadOnly = True
+      Required = True
+      Size = 50
+    end
+    object qryKundFilterUnnamed3: TIntegerField
+      FieldName = 'Unnamed3'
+      Origin = 'Unnamed3'
+      ReadOnly = True
+    end
+  end
+  object qryEtiketter: TFDQuery
+    MasterSource = dsoOrderlist
+    MasterFields = 'OrderID'
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select '
+      'oh.Id OrderId,'
+      'k.Kundnamn,'
+      'isnull(ak.F'#246'rnamn,'#39#39') + isnull(ak.Efternamn,'#39#39') Referens,'
+      'oh.ordernummer,'
+      'oh.Godsm'#228'rke,'
+      'oh.orderdatum,'
+      'oh.Leveransdatum,'
+      'orad.Positionnummer,'
+      'y.Beteckning YtbehandlingBeteckning,'
+      'a.Beteckning,'
+      'orad.Antal,'
+      'orad.Prisperenhet,'
+      'oh.fritext,'
+      'orad.Prisperenhet * orad.Antal as Pris  ,'
+      'oh.OrdertypId'
+      'from OrderRad orad'
+      'join Artikel a on orad.artikelID = a.Id'
+      'join OrderHuvud oh on oh.ID = orad.OrderID'
+      'join kund k on k.Id = oh.kundid'
+      'left join KundPerson kp on kp.ID= oh.ReferensID'
+      'left join akt'#246'r ak on ak.id = kp.Id'
+      'left join personal p on orad.avrapporteradPersonID = p.id'
+      'join Ytbehandling y on orad.ytbehandlingID = y.ID'
+      'where oh.id = :OrderId'
+      'and orad.Antal <> 0'
+      'order by orad.Radnr'
+      ' ')
+    Left = 104
+    Top = 156
+    ParamData = <
+      item
+        Name = 'ORDERID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryEtiketterOrderId: TFDAutoIncField
+      FieldName = 'OrderId'
+      Origin = 'OrderId'
+      ReadOnly = True
+    end
+    object qryEtiketterKundnamn: TStringField
+      FieldName = 'Kundnamn'
+      Origin = 'Kundnamn'
+      Required = True
+      Size = 50
+    end
+    object qryEtiketterReferens: TStringField
+      FieldName = 'Referens'
+      Origin = 'Referens'
+      ReadOnly = True
+      Required = True
+      Size = 100
+    end
+    object qryEtiketterordernummer: TStringField
+      FieldName = 'ordernummer'
+      Origin = 'ordernummer'
+      Required = True
+      Size = 30
+    end
+    object qryEtiketterGodsmärke: TStringField
+      FieldName = 'Godsm'#228'rke'
+      Origin = '[Godsm'#228'rke]'
+      Size = 50
+    end
+    object qryEtiketterorderdatum: TSQLTimeStampField
+      FieldName = 'orderdatum'
+      Origin = 'orderdatum'
+      Required = True
+    end
+    object qryEtiketterLeveransdatum: TSQLTimeStampField
+      FieldName = 'Leveransdatum'
+      Origin = 'Leveransdatum'
+    end
+    object qryEtiketterPositionnummer: TIntegerField
+      FieldName = 'Positionnummer'
+      Origin = 'Positionnummer'
+    end
+    object qryEtiketterYtbehandlingBeteckning: TStringField
+      FieldName = 'YtbehandlingBeteckning'
+      Origin = 'YtbehandlingBeteckning'
+      Size = 50
+    end
+    object qryEtiketterBeteckning: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object qryEtiketterAntal: TFMTBCDField
+      FieldName = 'Antal'
+      Origin = 'Antal'
+      Precision = 19
+      Size = 2
+    end
+    object qryEtiketterPrisperenhet: TCurrencyField
+      FieldName = 'Prisperenhet'
+      Origin = 'Prisperenhet'
+    end
+    object qryEtiketterfritext: TStringField
+      FieldName = 'fritext'
+      Origin = 'fritext'
+      Size = 2000
+    end
+    object qryEtiketterPris: TFMTBCDField
+      FieldName = 'Pris'
+      Origin = 'Pris'
+      ReadOnly = True
+      Precision = 38
+      Size = 6
+    end
+    object qryEtiketterOrdertypId: TIntegerField
+      FieldName = 'OrdertypId'
+      Origin = 'OrdertypId'
+    end
+  end
+  object spPlaneringDelete: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'PlaneringDelete'
+    Left = 312
+    Top = 320
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@OrderId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object sp_Orderlist: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'OrderList'
+    Left = 248
+    Top = 464
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+        Value = 0
+      end
+      item
+        Position = 2
+        Name = '@VisaFakturerade'
+        DataType = ftBoolean
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@Kundid'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 4
+        Name = '@orderby'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end>
+    object sp_OrderlistOrderID: TFDAutoIncField
+      Alignment = taCenter
+      DisplayLabel = 'Ordernr'
+      DisplayWidth = 8
+      FieldName = 'OrderID'
+      Origin = 'OrderID'
+      ReadOnly = True
+    end
+    object sp_OrderlistKundnamn: TStringField
+      DisplayWidth = 22
+      FieldName = 'Kundnamn'
+      Origin = 'Kundnamn'
+      Required = True
+      Size = 50
+    end
+    object sp_OrderlistOrdernummer: TStringField
+      DisplayLabel = 'Best.Nr'
+      DisplayWidth = 16
+      FieldName = 'Ordernummer'
+      Origin = 'Ordernummer'
+      Required = True
+      Size = 30
+    end
+    object sp_OrderlistOrderDatum: TSQLTimeStampField
+      Alignment = taCenter
+      DisplayWidth = 12
+      FieldName = 'OrderDatum'
+      Origin = 'OrderDatum'
+      Required = True
+    end
+    object sp_OrderlistYtbehandlingdatum: TSQLTimeStampField
+      Alignment = taCenter
+      DisplayLabel = 'Ytbeh datum'
+      DisplayWidth = 12
+      FieldName = 'Ytbehandlingdatum'
+      Origin = 'Ytbehandlingdatum'
+    end
+    object sp_Orderlistleveransdatum: TSQLTimeStampField
+      Alignment = taCenter
+      DisplayLabel = 'Lev datum'
+      DisplayWidth = 10
+      FieldName = 'leveransdatum'
+      Origin = 'leveransdatum'
+    end
+    object sp_OrderlistGodsmärke: TStringField
+      DisplayWidth = 19
+      FieldName = 'Godsm'#228'rke'
+      Origin = '[Godsm'#228'rke]'
+      Size = 50
+    end
+    object sp_OrderlistKundreferens: TStringField
+      DisplayWidth = 18
+      FieldName = 'Kundreferens'
+      Origin = 'Kundreferens'
+      ReadOnly = True
+      Size = 101
+    end
+    object sp_OrderlistAntalTotal: TIntegerField
+      DisplayLabel = '  B'
+      DisplayWidth = 4
+      FieldName = 'AntalTotal'
+      Origin = 'AntalTotal'
+      ReadOnly = True
+    end
+    object sp_OrderlistAntalAvrapporterad: TIntegerField
+      DisplayLabel = '  '#197
+      DisplayWidth = 4
+      FieldName = 'AntalAvrapporterad'
+      Origin = 'AntalAvrapporterad'
+      ReadOnly = True
+    end
+    object sp_OrderlistAntalprissatt: TIntegerField
+      DisplayLabel = '  P'
+      DisplayWidth = 4
+      FieldName = 'Antalprissatt'
+      Origin = 'Antalprissatt'
+      ReadOnly = True
+    end
+    object sp_Orderlistfakturadatum: TSQLTimeStampField
+      DisplayLabel = 'Fakt datum'
+      DisplayWidth = 10
+      FieldName = 'fakturadatum'
+      Origin = 'fakturadatum'
+    end
+    object sp_OrderlistKalkArbetstidTime: TStringField
+      DisplayLabel = 'Utr'#228'knat'
+      DisplayWidth = 13
+      FieldName = 'KalkArbetstidTime'
+      Origin = 'KalkArbetstidTime'
+      ReadOnly = True
+      Size = 200
+    end
+    object sp_OrderlistArbetstidPlaneradTime: TStringField
+      DisplayLabel = 'Inplanerad'
+      DisplayWidth = 13
+      FieldName = 'ArbetstidPlaneradTime'
+      Origin = 'ArbetstidPlaneradTime'
+      ReadOnly = True
+      Size = 200
+    end
+    object sp_OrderlistArbetstidManuelltTime: TStringField
+      DisplayLabel = 'Manuellt'
+      DisplayWidth = 13
+      FieldName = 'ArbetstidManuelltTime'
+      Origin = 'ArbetstidManuelltTime'
+      ReadOnly = True
+      Visible = False
+      Size = 200
+    end
+    object sp_OrderlistKalkArbetstid: TFloatField
+      DisplayWidth = 10
+      FieldName = 'KalkArbetstid'
+      Origin = 'KalkArbetstid'
+      ReadOnly = True
+      Visible = False
+      DisplayFormat = '#########.##'
+    end
+    object sp_OrderlistArbetstidManuellt: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'ArbetstidManuellt'
+      Origin = 'ArbetstidManuellt'
+      Visible = False
+    end
+    object sp_OrderlistOrdertypId: TIntegerField
+      FieldName = 'OrdertypId'
+      Origin = 'OrdertypId'
+      Visible = False
+    end
+    object sp_OrderlistoTyp: TStringField
+      FieldName = 'oTyp'
+      Origin = 'oTyp'
+      ReadOnly = True
+      Visible = False
+      Size = 11
+    end
+    object sp_Orderlistemailadress: TStringField
+      FieldName = 'emailadress'
+      Origin = 'emailadress'
+      Visible = False
+      Size = 50
+    end
+    object sp_OrderlistKundID: TIntegerField
+      FieldName = 'KundID'
+      Origin = 'KundID'
+      Required = True
+      Visible = False
+    end
+    object sp_OrderlistSortorder: TSmallintField
+      FieldName = 'Sortorder'
+      Origin = 'Sortorder'
+      Required = True
+      Visible = False
+    end
+    object sp_OrderlistBGColor: TStringField
+      FieldName = 'BGColor'
+      Origin = 'BGColor'
+      Visible = False
+      FixedChar = True
+      Size = 10
+    end
+    object sp_OrderlistOrderStatusId: TIntegerField
+      FieldName = 'OrderStatusId'
+      Origin = 'OrderStatusId'
+      Visible = False
+    end
+    object sp_OrderlistArbetstidPlanerad: TIntegerField
+      FieldName = 'ArbetstidPlanerad'
+      Origin = 'ArbetstidPlanerad'
+      ReadOnly = True
+      Visible = False
+    end
+  end
+  object wwDataSource1: TwwDataSource
+    Left = 440
+    Top = 61
+  end
+  object gtPDFDocument1: TgtPDFDocument
+    About = 'Gnostice PDFtoolkit (www.gnostice.com)'
+    Version = '4.0.1.395'
+    OpenAfterSave = False
+    MergeOptions = []
+    EMailAfterSave = False
+    ShowSetupDialog = False
+    Left = 568
+    Top = 477
+  end
+  object gtDocumentPrinter1: TgtDocumentPrinter
+    AutoRotate = False
+    PagePositioning.Horizontal = hppLeft
+    PagePositioning.Vertical = vppTop
+    PageScaling = psOriginal
+    Left = 720
+    Top = 512
+  end
+  object gtQRExport1: TgtQRExport
+    EncodersSettings.PDF.FileExtension = 'pdf'
+    EncodersSettings.PDF.FileDescription = 'Adobe PDF Files'
+    EncodersSettings.PDF.Compression.Enabled = False
+    EncodersSettings.PDF.PDFVersion = PDFA_VER3B
+    EncodersSettings.PDF.DigitalSignature.Enabled = False
+    EncodersSettings.PDF.DigitalSignature.Field.Visible = True
+    EncodersSettings.PDF.DigitalSignature.Field.FillColor = clWhite
+    EncodersSettings.PDF.DigitalSignature.Field.PageNumber = 1
+    EncodersSettings.XLSX.FileExtension = 'xlsx'
+    EncodersSettings.XLSX.FileDescription = 'Microsoft Excel Workbook'
+    EncodersSettings.RTF.FileExtension = 'rtf'
+    EncodersSettings.RTF.FileDescription = 'Rich Text Format'
+    EncodersSettings.HTML.FileExtension = 'htm'
+    EncodersSettings.HTML.FileDescription = 'HyperText Markup Language'
+    EncodersSettings.XHTML.FileExtension = 'htm'
+    EncodersSettings.XHTML.FileDescription = 'Extended HyperText Markup Language'
+    EncodersSettings.TEXT.FileExtension = 'txt'
+    EncodersSettings.TEXT.FileDescription = 'Text Document'
+    EncodersSettings.SVG.FileExtension = 'svg'
+    EncodersSettings.SVG.FileDescription = 'Scalable Vector Graphics'
+    EncodersSettings.TIFF.FileExtension = 'tif'
+    EncodersSettings.TIFF.FileDescription = 'Tagged Image File Format'
+    EncodersSettings.TIFF.Grayscale = False
+    EncodersSettings.TIFF.CompressionType = ctLZW
+    EncodersSettings.TIFF.MultiPage = True
+    EncodersSettings.PNG.FileExtension = 'png'
+    EncodersSettings.PNG.FileDescription = 'Portable Network Graphics'
+    EncodersSettings.jpeg.FileExtension = 'jpg'
+    EncodersSettings.jpeg.FileDescription = 'JPEG File Interchange Format'
+    EncodersSettings.GIF.FileExtension = 'gif'
+    EncodersSettings.GIF.FileDescription = 'Graphics Interchange Format'
+    EncodersSettings.BMP.FileExtension = 'bmp'
+    EncodersSettings.BMP.FileDescription = 'Windows Bitmap'
+    VisibleFormats = [PDF, XLSX, RTF, HTML, XHTML, TEXT, SVG, TIFF, PNG, jpeg, GIF, BMP]
+    Left = 892
+    Top = 657
+  end
+  object gtDocumentConverter1: TgtDocumentConverter
+    Left = 552
+    Top = 404
+  end
+end

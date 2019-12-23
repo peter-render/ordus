@@ -1,0 +1,59 @@
+object dlgSimple: TdlgSimple
+  Left = 342
+  Top = 342
+  BorderIcons = []
+  BorderStyle = bsDialog
+  Caption = 'dlgSimple'
+  ClientHeight = 133
+  ClientWidth = 274
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Default'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 92
+    Width = 274
+    Height = 41
+    Align = alBottom
+    TabOrder = 0
+    DesignSize = (
+      274
+      41)
+    object Button1: TButton
+      Left = 107
+      Top = 8
+      Width = 75
+      Height = 25
+      Anchors = [akRight, akBottom]
+      Caption = 'Spara'
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 189
+      Top = 8
+      Width = 75
+      Height = 25
+      Anchors = [akRight, akBottom]
+      Caption = 'Avbryt'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 0
+    Width = 274
+    Height = 92
+    Align = alClient
+    TabOrder = 1
+  end
+end

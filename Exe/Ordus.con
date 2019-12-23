@@ -1,0 +1,4 @@
+DriverID=MSSQL
+Server=LENOPEHO
+Database=Ordus
+OSAuthent=Yes

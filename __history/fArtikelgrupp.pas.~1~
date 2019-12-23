@@ -1,0 +1,60 @@
+unit fArtikelgrupp;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Mask, DBCtrls, EditNew, DB, ADODB, wwdblook, ExtCtrls;
+
+type
+  TfrmArtikelgrupp = class(TForm)
+    Panel1: TPanel;
+    wwDBLookupCombo1: TwwDBLookupCombo;
+    qryLU_artikel: TADOQuery;
+    edtAntal: TDBEditN;
+    edtLeverantor: TDBEdit;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Panel2: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    qryLU_artikelArtikelId: TAutoIncField;
+    qryLU_artikelBeteckning: TStringField;
+    qryLU_artikelArtikelnummer: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable,
+      FillTable: TDataSet; modified: Boolean);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmArtikelgrupp: TfrmArtikelgrupp;
+
+implementation
+
+uses fArtikel;
+
+{$R *.dfm}
+
+procedure TfrmArtikelgrupp.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:= caFree;
+end;
+
+procedure TfrmArtikelgrupp.FormShow(Sender: TObject);
+begin
+wwDBLookupCombo1.SetFocus;
+end;
+
+procedure TfrmArtikelgrupp.wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable,
+  FillTable: TDataSet; modified: Boolean);
+begin
+edtAntal.SetFocus;
+end;
+
+end.

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.137,C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - 2013-10-03 - X5\ProjectGroup1.groupproj=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - 2013-10-03 - X5\Ordus projektgrupp.groupproj</Transaction>
+  </Transactions>
+	<Default.Personality>
+		<Projects ActiveProject="C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Ordus2.dproj"/>
+	</Default.Personality>
+</BorlandProject>

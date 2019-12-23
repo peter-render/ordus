@@ -1,0 +1,67 @@
+unit rLagerplatsetikett;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  QRCtrls, QuickRpt, ExtCtrls;
+
+type
+  TrptLagerplatsEtikett = class(TForm)
+    Report: TQuickRep;
+    PageHeaderBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRLabel5: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRShape2: TQRShape;
+    DetailBand1: TQRBand;
+    QRDBText3: TQRDBText;
+    QRLabel1: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRLabel2: TQRLabel;
+    procedure ReportBeforePrint(Sender: TCustomQuickRep;
+      var PrintReport: Boolean);
+    procedure PageHeaderBand1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  rptLagerplatsEtikett: TrptLagerplatsEtikett;
+
+implementation
+
+uses fMainRapport2,inifiles;
+
+{$R *.DFM}
+
+procedure TrptLagerplatsEtikett.PageHeaderBand1BeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+    with TIniFile.Create('Ordus.ini') do
+    begin
+      REPORT.page.Width:= readinteger('Dymo','Width',89);
+      REPORT.page.Length:= readinteger('Dymo','Length',41);
+      free;
+    end;
+
+
+end;
+
+procedure TrptLagerplatsEtikett.ReportBeforePrint(Sender: TCustomQuickRep;
+  var PrintReport: Boolean);
+begin
+   with TIniFile.Create('Ordus.ini') do
+    begin
+      REPORT.page.Width:= readinteger('Dymo','Width',89);
+      REPORT.page.Length:= readinteger('Dymo','Length',41);
+      free;
+    end;
+end;
+
+end.
+

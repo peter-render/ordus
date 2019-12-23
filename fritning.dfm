@@ -1,0 +1,53 @@
+object frmRitning: TfrmRitning
+  Left = 352
+  Top = 199
+  Caption = 'frmRitning'
+  ClientHeight = 699
+  ClientWidth = 742
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Default'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 640
+    Top = 0
+    Width = 102
+    Height = 699
+    Align = alRight
+    TabOrder = 0
+    object Button1: TButton
+      Left = 16
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'St'#228'ng'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 16
+      Top = 108
+      Width = 75
+      Height = 25
+      Caption = 'Klistra in'
+      TabOrder = 1
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 640
+    Height = 699
+    Align = alClient
+    BorderWidth = 7
+    Caption = 'Panel2'
+    TabOrder = 1
+  end
+end

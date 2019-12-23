@@ -1,0 +1,185 @@
+object frmCalc: TfrmCalc
+  Left = 602
+  Top = 292
+  ActiveControl = edtL
+  BorderStyle = bsDialog
+  Caption = 'Viktkalkulator'
+  ClientHeight = 168
+  ClientWidth = 213
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Default'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  OnClose = FormClose
+  OnKeyPress = FormKeyPress
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 32
+    Top = 41
+    Width = 28
+    Height = 13
+    Caption = 'Bredd'
+  end
+  object Label2: TLabel
+    Left = 32
+    Top = 18
+    Width = 29
+    Height = 13
+    Caption = 'L'#228'ngd'
+  end
+  object Label3: TLabel
+    Left = 32
+    Top = 64
+    Width = 38
+    Height = 13
+    Caption = 'Tjocklek'
+  end
+  object Label4: TLabel
+    Left = 156
+    Top = 18
+    Width = 16
+    Height = 13
+    Caption = 'mm'
+  end
+  object Label5: TLabel
+    Left = 156
+    Top = 43
+    Width = 16
+    Height = 13
+    Caption = 'mm'
+  end
+  object Label6: TLabel
+    Left = 156
+    Top = 68
+    Width = 16
+    Height = 13
+    Caption = 'mm'
+  end
+  object Label7: TLabel
+    Left = 36
+    Top = 101
+    Width = 17
+    Height = 13
+    Caption = 'Vikt'
+  end
+  object Label8: TLabel
+    Left = 158
+    Top = 102
+    Width = 11
+    Height = 13
+    Caption = 'kg'
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 132
+    Width = 213
+    Height = 36
+    Align = alBottom
+    BevelOuter = bvSpace
+    TabOrder = 4
+    object Button1: TButton
+      Left = 45
+      Top = 6
+      Width = 125
+      Height = 25
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+  end
+  object edtV: TEdit
+    Left = 87
+    Top = 97
+    Width = 66
+    Height = 21
+    TabStop = False
+    TabOrder = 3
+  end
+  object edtL: TEditN
+    Left = 86
+    Top = 15
+    Width = 67
+    Height = 21
+    Color = clWhite
+    TabOrder = 0
+    TextHint = True
+    OnChange = edtLChange
+    ColorOnFocus = clWhite
+    ColorOnNotFocus = clWhite
+    FontColorOnFocus = clBlack
+    FontColorOnNotFocus = clBlack
+    FontColorOnOverWrite = clBlack
+    EditType = etFloat
+    EditKeyByTab = #9
+    EditAlign = etAlignNone
+    EditLengthAlign = 0
+    EditPrecision = 0
+    ValueInteger = 0
+    ValueDate = 39142.000000000000000000
+    ValueTime = 0.951255416666667000
+    TimeSeconds = False
+    FirstCharUpper = False
+    FirstCharUpList = ' ('
+    WidthOnFocus = 0
+  end
+  object edtB: TEditN
+    Left = 86
+    Top = 39
+    Width = 67
+    Height = 21
+    Color = clWhite
+    TabOrder = 1
+    TextHint = True
+    OnChange = edtLChange
+    ColorOnFocus = clWhite
+    ColorOnNotFocus = clWhite
+    FontColorOnFocus = clBlack
+    FontColorOnNotFocus = clBlack
+    FontColorOnOverWrite = clBlack
+    EditType = etFloat
+    EditKeyByTab = #9
+    EditAlign = etAlignNone
+    EditLengthAlign = 0
+    EditPrecision = 0
+    ValueInteger = 0
+    ValueDate = 39142.000000000000000000
+    ValueTime = 0.951255416666667000
+    TimeSeconds = False
+    FirstCharUpper = False
+    FirstCharUpList = ' ('
+    WidthOnFocus = 0
+  end
+  object edtT: TEditN
+    Left = 86
+    Top = 63
+    Width = 67
+    Height = 21
+    Color = clWhite
+    TabOrder = 2
+    TextHint = True
+    OnChange = edtLChange
+    ColorOnFocus = clWhite
+    ColorOnNotFocus = clWhite
+    FontColorOnFocus = clBlack
+    FontColorOnNotFocus = clBlack
+    FontColorOnOverWrite = clBlack
+    EditType = etFloat
+    EditKeyByTab = #9
+    EditAlign = etAlignNone
+    EditLengthAlign = 0
+    EditPrecision = 0
+    ValueInteger = 0
+    ValueDate = 39142.000000000000000000
+    ValueTime = 0.951255416666667000
+    TimeSeconds = False
+    FirstCharUpper = False
+    FirstCharUpList = ' ('
+    WidthOnFocus = 0
+  end
+end

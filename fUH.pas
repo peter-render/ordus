@@ -1,0 +1,126 @@
+unit fUH;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Grids,
+  Vcl.DBGrids;
+
+type
+  TfrmUH = class(TForm)
+      qry1: TFDQuery;
+    qry1a1id: TFDAutoIncField;
+    qry1Artikelnummer: TStringField;
+    qry1Beteckning: TStringField;
+    qry1a2id: TFDAutoIncField;
+    qry2: TFDQuery;
+    Button2: TButton;
+    DataSource1: TDataSource;
+    DBGrid1: TDBGrid;
+    qry3: TFDQuery;
+    FDAutoIncField3: TFDAutoIncField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    FDAutoIncField4: TFDAutoIncField;
+    StringField7: TStringField;
+    StringField8: TStringField;
+    qry4: TFDQuery;
+    FDAutoIncField5: TFDAutoIncField;
+    StringField9: TStringField;
+    StringField10: TStringField;
+    FDAutoIncField6: TFDAutoIncField;
+    StringField11: TStringField;
+    StringField12: TStringField;
+    qry5: TFDQuery;
+    FDAutoIncField7: TFDAutoIncField;
+    StringField13: TStringField;
+    StringField14: TStringField;
+    FDAutoIncField8: TFDAutoIncField;
+    StringField15: TStringField;
+    StringField16: TStringField;
+    qry6: TFDQuery;
+    FDAutoIncField9: TFDAutoIncField;
+    StringField17: TStringField;
+    StringField18: TStringField;
+    FDAutoIncField10: TFDAutoIncField;
+    StringField19: TStringField;
+    StringField20: TStringField;
+    qry1Artikelnummer_1: TStringField;
+    qry1Beteckning_1: TStringField;
+    procedure Button2Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmUH: TfrmUH;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmUH.Button2Click(Sender: TObject);
+ var
+  a1, a2: integer;
+begin
+
+  button2.Enabled:= false;
+
+  qry1.Close;
+  qry1.Open;
+
+  qry1.First;
+
+  while not qry1.eof do
+  begin
+
+    a1 := qry1.fieldbyname('A1Id').asinteger;
+    a2 := qry1.fieldbyname('A2Id').asinteger;
+
+    with qry2 do
+    begin
+      ParamByName('a2id').asinteger := a2;
+      execsql;
+    end;
+    with qry3 do
+    begin
+      ParamByName('a1id').asinteger := a1;
+      ParamByName('a2id').asinteger := a2;
+      execsql;
+    end;
+    with qry4 do
+    begin
+      ParamByName('a1id').asinteger := a1;
+      ParamByName('a2id').asinteger := a2;
+      execsql;
+    end;
+    with qry5 do
+    begin
+      ParamByName('a1id').asinteger := a1;
+      ParamByName('a2id').asinteger := a2;
+      execsql;
+    end;
+    qry1.Next;
+  end;
+//  qry6.ExecSQL;
+  qry1.Close;
+  qry1.Open;
+
+end;
+
+procedure TfrmUH.FormShow(Sender: TObject);
+begin
+  qry1.Close;
+  qry1.Open;
+
+end;
+
+end.

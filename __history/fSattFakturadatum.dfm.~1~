@@ -1,0 +1,81 @@
+object frmSattFakturadatum: TfrmSattFakturadatum
+  Left = 0
+  Top = 0
+  ActiveControl = Edit1
+  BorderIcons = []
+  Caption = 'frmSattFakturadatum'
+  ClientHeight = 158
+  ClientWidth = 319
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 48
+    Top = 23
+    Width = 75
+    Height = 13
+    Caption = 'Fakturanummer'
+  end
+  object Label2: TLabel
+    Left = 48
+    Top = 58
+    Width = 67
+    Height = 15
+    Caption = 'Fakturadatum'
+  end
+  object Edit1: TEdit
+    Left = 136
+    Top = 20
+    Width = 121
+    Height = 21
+    TabOrder = 0
+  end
+  object DateTimePicker1: TDateTimePicker
+    Left = 136
+    Top = 52
+    Width = 121
+    Height = 21
+    Date = 43441.809780752320000000
+    Time = 43441.809780752320000000
+    TabOrder = 1
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 117
+    Width = 319
+    Height = 41
+    Align = alBottom
+    TabOrder = 2
+    ExplicitLeft = 28
+    ExplicitTop = 109
+    ExplicitWidth = 185
+    DesignSize = (
+      319
+      41)
+    object Button2: TButton
+      Left = 236
+      Top = 8
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight, akBottom]
+      Caption = 'Avbryt'
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 148
+      Top = 8
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight, akBottom]
+      Caption = 'Spara'
+      Default = True
+      TabOrder = 1
+    end
+  end
+end

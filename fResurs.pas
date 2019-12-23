@@ -1,0 +1,43 @@
+unit fResurs;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, fStdRV, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, Vcl.Grids,
+  vcl.wwdbigrd, vcl.wwdbgrid, Vcl.ExtCtrls;
+
+type
+  TfrmResurs = class(TfrmStdRV)
+    FDQuery1Id: TSmallintField;
+    FDQuery1Namn: TStringField;
+    FDQuery1Aktiv: TBooleanField;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    procedure btnNyClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmResurs: TfrmResurs;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmResurs.btnNyClick(Sender: TObject);
+begin
+  inherited;
+  dbedit2.SetFocus;
+  dbedit1.DataSource.DataSet.FieldByName('Aktiv').Value:= true;
+end;
+
+end.

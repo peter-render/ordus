@@ -1,0 +1,390 @@
+object frmOrderImport: TfrmOrderImport
+  Left = 555
+  Top = 344
+  ActiveControl = btnBrowse
+  Caption = 'Importera orderfiler fr'#229'n leverant'#246'ren'
+  ClientHeight = 521
+  ClientWidth = 870
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 753
+    Top = 0
+    Width = 117
+    Height = 521
+    Align = alRight
+    TabOrder = 0
+    ExplicitLeft = 525
+    object Button1: TButton
+      Left = 24
+      Top = 12
+      Width = 75
+      Height = 25
+      Caption = 'S&t'#228'ng'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 753
+    Height = 521
+    Align = alClient
+    TabOrder = 1
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 751
+      Height = 519
+      Align = alClient
+      TabOrder = 0
+      object Label6: TLabel
+        Left = 68
+        Top = 144
+        Width = 71
+        Height = 13
+        Caption = 'Godsm'#228'rkning:'
+      end
+      object Label7: TLabel
+        Left = 68
+        Top = 96
+        Width = 66
+        Height = 13
+        Caption = 'Ordernummer:'
+      end
+      object Label8: TLabel
+        Left = 68
+        Top = 167
+        Width = 46
+        Height = 13
+        Caption = 'Referens:'
+      end
+      object Label1: TLabel
+        Left = 68
+        Top = 120
+        Width = 58
+        Height = 13
+        Caption = 'Orderdatum:'
+      end
+      object Label5: TLabel
+        Left = 68
+        Top = 56
+        Width = 28
+        Height = 13
+        Caption = 'Kund:'
+      end
+      object Label2: TLabel
+        Left = 68
+        Top = 191
+        Width = 76
+        Height = 13
+        Caption = 'Leveransdatum:'
+      end
+      object Label4: TLabel
+        Left = 68
+        Top = 28
+        Width = 13
+        Height = 13
+        Caption = 'Fil:'
+      end
+      object lv: TListView
+        Left = 62
+        Top = 232
+        Width = 659
+        Height = 229
+        Columns = <
+          item
+            AutoSize = True
+            Caption = 'Beteckning'
+            MinWidth = 40
+          end
+          item
+            Caption = 'Artikelnnummer'
+            Width = 89
+          end
+          item
+            Caption = 'Antal'
+          end
+          item
+            Caption = 'Pris'
+          end>
+        IconOptions.AutoArrange = True
+        IconOptions.WrapText = False
+        RowSelect = True
+        ShowWorkAreas = True
+        TabOrder = 9
+        TabStop = False
+        ViewStyle = vsReport
+      end
+      object edtOrdernr: TEdit
+        Left = 148
+        Top = 92
+        Width = 121
+        Height = 21
+        TabOrder = 3
+      end
+      object edtOrderdatum: TEdit
+        Left = 148
+        Top = 116
+        Width = 121
+        Height = 21
+        TabOrder = 4
+      end
+      object edtGodsmarkning: TEdit
+        Left = 148
+        Top = 140
+        Width = 121
+        Height = 21
+        TabOrder = 5
+      end
+      object edtReferens: TEdit
+        Left = 148
+        Top = 164
+        Width = 121
+        Height = 21
+        TabOrder = 6
+      end
+      object LU_kund: TwwDBLookupCombo
+        Left = 146
+        Top = 52
+        Width = 209
+        Height = 21
+        DropDownAlignment = taLeftJustify
+        Selected.Strings = (
+          'Kundnamn'#9'50'#9'Kundnamn'#9'F')
+        LookupTable = qryLU_Kund
+        LookupField = 'KundID'
+        Style = csDropDownList
+        DropDownCount = 30
+        TabOrder = 2
+        AutoDropDown = False
+        ShowButton = True
+        PreciseEditRegion = False
+        AllowClearKey = False
+      end
+      object Edit2: TEdit
+        Left = 146
+        Top = 24
+        Width = 501
+        Height = 21
+        TabOrder = 0
+      end
+      object btnBrowse: TButton
+        Left = 653
+        Top = 23
+        Width = 56
+        Height = 23
+        Caption = '&Bl'#228'ddra'
+        TabOrder = 1
+        OnClick = btnBrowseClick
+      end
+      object btnImport: TButton
+        Left = 518
+        Top = 476
+        Width = 123
+        Height = 25
+        Caption = 'Importera best'#228'llning'
+        Default = True
+        Enabled = False
+        TabOrder = 10
+        OnClick = btnImportClick
+      end
+      object btnAvbryt: TButton
+        Left = 646
+        Top = 476
+        Width = 75
+        Height = 25
+        Caption = 'Avbryt'
+        Enabled = False
+        TabOrder = 11
+        OnClick = btnAvbrytClick
+      end
+      object edtLeveransdatum: TwwDBDateTimePicker
+        Left = 148
+        Top = 188
+        Width = 121
+        Height = 21
+        CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+        CalendarAttributes.Font.Color = clWindowText
+        CalendarAttributes.Font.Height = -11
+        CalendarAttributes.Font.Name = 'MS Sans Serif'
+        CalendarAttributes.Font.Style = []
+        CalendarAttributes.Options = [mdoDayState, mdoWeekNumbers]
+        Epoch = 1950
+        ShowButton = True
+        TabOrder = 7
+        OnCloseUp = edtLeveransdatumCloseUp
+      end
+      object cbImportPris: TCheckBox
+        Left = 300
+        Top = 191
+        Width = 197
+        Height = 17
+        Caption = 'Importera '#228'ven priskolumnen'
+        TabOrder = 8
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Filter = 'Excel-filer (*.xls)|*.xls|CSV (*.csv)|*.csv'
+    Left = 784
+    Top = 116
+  end
+  object qryLU_Kund: TADOQuery
+    Connection = dm.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <>
+    SQL.Strings = (
+      'Select Id KundId,* from kund order by kundnamn')
+    Left = 572
+    Top = 344
+    object qryLU_KundKundnamn: TStringField
+      DisplayWidth = 50
+      FieldName = 'Kundnamn'
+      Size = 50
+    end
+    object qryLU_KundID: TAutoIncField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object qryLU_KundKundId: TAutoIncField
+      FieldName = 'KundId'
+      ReadOnly = True
+    end
+  end
+  object sp: TADOStoredProc
+    Connection = dm.ADOConnection1
+    ProcedureName = 'OrderImport;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@KundID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Size = 10
+        Value = Null
+      end
+      item
+        Name = '@Ordernummer'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 20
+        Value = Null
+      end
+      item
+        Name = '@OrderDatum'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = '@Godsm'#228'rke'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 30
+        Value = Null
+      end
+      item
+        Name = '@Referens'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = '@Leveransdatum'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Value = Null
+      end
+      item
+        Name = '@OrderID'
+        DataType = ftInteger
+        Direction = pdOutput
+        Value = Null
+      end>
+    Left = 558
+    Top = 396
+  end
+  object sp_OrderRadImport: TADOStoredProc
+    Connection = dm.ADOConnection1
+    ProcedureName = 'OrderradImport;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@KundId'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@OrderId'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@Artikelnummer'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 30
+        Value = Null
+      end
+      item
+        Name = '@Artikelbeteckning'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 100
+        Value = Null
+      end
+      item
+        Name = '@Antal'
+        Attributes = [paNullable]
+        DataType = ftFloat
+        Precision = 15
+        Value = Null
+      end
+      item
+        Name = '@PrisperEnhet'
+        Attributes = [paNullable]
+        DataType = ftBCD
+        Precision = 19
+        Value = Null
+      end
+      item
+        Name = '@Positionnummer'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end>
+    Left = 565
+    Top = 452
+  end
+end

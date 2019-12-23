@@ -1,0 +1,248 @@
+unit fOrderImport;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  ExtCtrls, StdCtrls, wwdblook, Db, ComCtrls, ADODB,
+  wwdbdatetimepicker ;
+
+type
+  TfrmOrderImport = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    OpenDialog1: TOpenDialog;
+    qryLU_Kund: TADOQuery;
+    qryLU_KundKundnamn: TStringField;
+    Panel3: TPanel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Label8: TLabel;
+    Label1: TLabel;
+    Label5: TLabel;
+    lv: TListView;
+    edtOrdernr: TEdit;
+    edtOrderdatum: TEdit;
+    edtGodsmarkning: TEdit;
+    edtReferens: TEdit;
+    LU_kund: TwwDBLookupCombo;
+    Edit2: TEdit;
+    btnBrowse: TButton;
+    btnImport: TButton;
+    btnAvbryt: TButton;
+    sp: TADOStoredProc;
+    Label2: TLabel;
+    Button1: TButton;
+    Label4: TLabel;
+    edtLeveransdatum: TwwDBDateTimePicker;
+    sp_OrderRadImport: TADOStoredProc;
+    cbImportPris: TCheckBox;
+    qryLU_KundID: TAutoIncField;
+    XLS: TXLSMini;
+    qryLU_KundKundId: TAutoIncField;
+    procedure btnBrowseClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnImportClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button1Click(Sender: TObject);
+    procedure readXLS(intKundid: integer);
+    procedure btnAvbrytClick(Sender: TObject);
+    procedure edtLeveransdatumCloseUp(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmOrderImport: TfrmOrderImport;
+  intKundId: integer;
+implementation
+
+uses fMain, Datamodule;
+
+{$R *.DFM}
+
+procedure TfrmOrderImport.btnBrowseClick(Sender: TObject);
+
+var
+  radnr: integer;
+  I: Integer;
+  ListItem: TListItem;
+  NewColumn: TListColumn;
+  dat: Tdatetime;
+
+  strArtikelBeteckning, strArtikelnr, strAntal, strPris: string;
+
+begin
+  with Opendialog1 do
+  begin
+    if execute then
+    begin
+
+
+      edit2.text := filename;
+      xls.filename := filename;
+      xls.read;
+
+      if xls.Sheets[0].asString[5, 14] = 'Org.nr: 556531-5289' then
+      begin
+        intKundId := 7;
+        if qryLU_Kund.Locate('KundId', inttostr(intKundId), []) then
+          LU_kund.text := lu_kund.lookuptable.fieldbyname('Kundnamn').asstring;
+        readxls(intKundId);
+        edtLeveransdatum.SetFocus;
+      end;
+
+
+    end;
+  end;
+end;
+
+procedure TfrmOrderImport.FormShow(Sender: TObject);
+begin
+  qryLU_kund.open;
+  edit2.SetFocus;
+
+end;
+
+procedure TfrmOrderImport.btnImportClick(Sender: TObject);
+var
+  intOrderID, i, x: Integer;
+  li: Tlistitem;
+
+begin
+  x := 0;
+  with sp do
+  begin
+    parameters.ParamByName('@Kundid').value := intKundId;
+    parameters.ParamByName('@ordernummer').value := edtOrdernr.text;
+    parameters.ParamByName('@orderdatum').value := edtOrderdatum.text;
+    parameters.ParamByName('@Godsmärke').value := edtGodsmarkning.text;
+    parameters.ParamByName('@Referens').value := edtReferens.text;
+    parameters.ParamByName('@Leveransdatum').value := edtLeveransdatum.date;
+    execproc;
+
+    intOrderID := parameters.parambyname('@OrderID').value;
+
+  end;
+   // Importera raderna
+
+
+  for i := 0 to pred(lv.items.count) do
+  begin
+    li := lv.items[i];
+    with sp_orderradImport do
+    begin
+      parameters.ParamByName('@KundId').value := intKundId;
+      parameters.ParamByName('@OrderId').value := intOrderID;
+      parameters.ParamByName('@Artikelnummer').value := li.subitems[0];
+      parameters.ParamByName('@Artikelbeteckning').value := li.Caption;
+      parameters.ParamByName('@Antal').value := strtofloat(li.subitems[1]);
+
+      if cbImportPris.checked then
+        parameters.ParamByName('@PrisperEnhet').value := strtofloat(li.subitems[2])
+      else
+        parameters.ParamByName('@PrisperEnhet').value := 0;
+
+      parameters.ParamByName('@Positionnummer').value := i + 1;
+
+      execproc;
+      inc(x);
+    end;
+  end;
+  showmessage(inttostr(x) + ' rader importerad');
+  self.close;
+end;
+
+procedure TfrmOrderImport.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  action := caFree;
+end;
+
+procedure TfrmOrderImport.readXLS(intKundId: integer);
+
+var
+  radnr: integer;
+  I: Integer;
+  ListItem: TListItem;
+  dat: Tdatetime;
+  strArtikelBeteckning, strArtikelnr, strAntal, strPris: string;
+
+begin
+
+  if intKundId = 7 then
+      // Vecto Materialhantering AB
+  begin
+
+    edtOrdernr.text := xls.Sheets[0].asString[1, 1];
+//    edtOrderdatum.text := datetostr(xls.Sheets[0].AsDatetime[5, 21]);
+
+    edtOrderdatum.text := datetostr(xls.Sheets[0].AsVariant[5, 21]);
+
+    edtGodsmarkning.text := xls.Sheets[0].asString[1, 25];
+    edtReferens.text := xls.Sheets[0].asString[1, 21];
+
+
+    radnr := 30;
+
+    while radnr < 300 do
+    begin
+      begin
+
+        if trim(xls.Sheets[0].asString[2, radnr]) <> '' then // är artikelnr ifylld?
+        begin
+          strArtikelBeteckning := xls.Sheets[0].asString[0, radnr];
+          strArtikelnr := xls.Sheets[0].asString[2, radnr];
+          strAntal := xls.Sheets[0].asString[3, radnr];
+
+          strPris := xls.Sheets[0].asString[4, radnr];
+
+          listitem := lv.Items.add;
+
+          listitem.Caption := strArtikelbeteckning;
+          listitem.SubItems.Add(strArtikelnr);
+          listitem.SubItems.Add(strAntal);
+
+          if cbImportPris.checked then
+            listitem.SubItems.Add(strpris)
+          else
+            listitem.SubItems.Add('');
+        end;
+
+        inc(radnr);
+        if trim(xls.Sheets[0].asString[2, radnr]) = '' then
+         break; // är artikelnr ifylld?
+
+      end;
+    end;
+
+    if datetostr(edtLeveransdatum.Date) <> '1899-12-30' then
+      btnImport.Enabled := true;
+
+    btnAvbryt.Enabled := true;
+
+  end;
+
+end;
+
+procedure TfrmOrderImport.Button1Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TfrmOrderImport.btnAvbrytClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TfrmOrderImport.edtLeveransdatumCloseUp(Sender: TObject);
+begin
+  if datetostr(edtLeveransdatum.Date) <> '1899-12-30' then
+    btnImport.Enabled := true;
+
+end;
+
+end.
+

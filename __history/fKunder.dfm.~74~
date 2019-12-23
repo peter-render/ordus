@@ -1,0 +1,278 @@
+﻿inherited frmKunder: TfrmKunder
+  Left = 413
+  Top = 366
+  ActiveControl = wwIncrementalSearch1
+  Caption = 'Kunder'
+  ClientHeight = 774
+  ClientWidth = 974
+  ExplicitWidth = 980
+  ExplicitHeight = 803
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 855
+    Height = 774
+    ExplicitWidth = 855
+    ExplicitHeight = 774
+    inherited Bevel1: TBevel
+      Left = 52
+      Top = 426
+      Width = 421
+      ExplicitLeft = 52
+      ExplicitTop = 426
+      ExplicitWidth = 421
+    end
+    inherited Bevel2: TBevel
+      Left = 52
+      Top = 583
+      Width = 373
+      ExplicitLeft = 52
+      ExplicitTop = 583
+      ExplicitWidth = 373
+    end
+    object Label1: TLabel [2]
+      Left = 52
+      Top = 455
+      Width = 50
+      Height = 13
+      Caption = 'Kundnamn'
+      FocusControl = DBEdit1
+    end
+    object Label2: TLabel [3]
+      Left = 20
+      Top = 22
+      Width = 17
+      Height = 13
+      Caption = 'S'#246'k'
+    end
+    object Label3: TLabel [4]
+      Left = 52
+      Top = 508
+      Width = 77
+      Height = 13
+      Caption = 'Marginalprocent'
+      FocusControl = DBEdit1
+    end
+    inherited dbGrid: TwwDBGrid
+      Left = 52
+      Top = 64
+      Width = 731
+      Height = 362
+      Selected.Strings = (
+        'Kundnr'#9'8'#9'Kundnr'
+        'Kundnamn'#9'29'#9'Kundnamn'
+        'Oms'#228'ttningInnevarande'#197'r'#9'16'#9'        Innevarande'#197'r'
+        'Oms'#228'ttning1'#197'r'#9'15'#9'     Oms'#228'ttning 1 '#229'r'
+        'Oms'#228'ttning3'#197'r'#9'18'#9'           Oms'#228'ttning 3 '#229'r'
+        'MarginalprocentDisplay'#9'10'#9'Marginal i %'
+        'AntalKontaktpersoner'#9'13'#9'Kontaktpersoner')
+      KeyOptions = []
+      TitleButtons = True
+      OnCalcCellColors = dbGridCalcCellColors
+      OnTitleButtonClick = dbGridTitleButtonClick
+      ExplicitLeft = 52
+      ExplicitTop = 64
+      ExplicitWidth = 731
+      ExplicitHeight = 362
+    end
+    object DBEdit1: TDBEdit
+      Left = 52
+      Top = 474
+      Width = 421
+      Height = 21
+      DataField = 'Kundnamn'
+      DataSource = DataSource1
+      TabOrder = 1
+    end
+    object wwIncrementalSearch1: TwwIncrementalSearch
+      Left = 52
+      Top = 19
+      Width = 280
+      Height = 21
+      DataSource = DataSource1
+      SearchField = 'Kundnamn'
+      TabOrder = 3
+    end
+    object DBEditN2: TDBEditN
+      Left = 52
+      Top = 527
+      Width = 131
+      Height = 21
+      Color = clWhite
+      DataField = 'Marginalprocent'
+      DataSource = DataSource1
+      TabOrder = 2
+      ColorOnFocus = clWhite
+      ColorOnNotFocus = clWhite
+      FontColorOnFocus = clRed
+      FontColorOnNotFocus = clBlack
+      FontColorOnOverWrite = clBlue
+      EditKeyByTab = #9
+      FirstCharUpper = False
+      FirstCharUpList = ' ('
+      WidthOnFocus = 0
+      TextHint = True
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 855
+    Height = 774
+    ExplicitLeft = 855
+    ExplicitHeight = 774
+    inherited DBNav: TDBNavigator
+      Left = 39
+      Top = 219
+      Hints.Strings = ()
+      ExplicitLeft = 39
+      ExplicitTop = 219
+    end
+    object btnKontaktpersoner: TButton
+      Left = 12
+      Top = 274
+      Width = 95
+      Height = 25
+      Caption = '&Kontaktpersoner'
+      TabOrder = 7
+      OnClick = btnKontaktpersonerClick
+    end
+  end
+  inherited PopupMenu1: TPopupMenu
+    Left = 288
+    Top = 184
+  end
+  inherited DataSource1: TDataSource
+    Left = 380
+    Top = 100
+  end
+  inherited FDQuery1: TFDQuery
+    AggregatesActive = True
+    ConstraintsEnabled = True
+    SQL.Strings = (
+      'Select'
+      #9'Id Kundnr '
+      #9',Kundnamn'
+      #9',Oms'#228'ttningInnevarande'#197'r  ='
+      #9#9'('
+      #9#9'Select sum(antal*PrisPerEnhet) from orderrad orad '
+      #9#9'join orderhuvud h on h.Id = orad.OrderID and h.KundID = k.id '
+      #9#9'join Orderstatus s on s.Id = h.OrderstatusId'
+      #9#9'where s.Oms'#228'ttningsgrundande = 1'
+      #9#9'AND datepart(yy,h.Orderdatum) >= Datepart(yy,getdate())'
+      '                and h.borttagen is null'
+      #9#9')'
+      ''
+      ',Oms'#228'ttning1'#197'r  ='
+      #9#9'('
+      #9#9'Select sum(antal*PrisPerEnhet) from orderrad orad '
+      #9#9'join orderhuvud h on h.Id = orad.OrderID and h.KundID = k.id '
+      #9#9'join Orderstatus s on s.Id = h.OrderstatusId'
+      #9#9'where s.Oms'#228'ttningsgrundande = 1'
+      #9#9'AND h.Orderdatum >= dateadd(yy,-1,getdate())'
+      '                and h.borttagen is null'
+      ''
+      #9#9')'
+      '   '
+      ',Oms'#228'ttning3'#197'r  ='
+      ''
+      #9#9'('
+      #9#9'Select sum(antal * PrisPerEnhet) from orderrad orad '
+      #9#9'join orderhuvud h on h.Id = orad.OrderID and h.KundID = k.id '
+      #9#9'join Orderstatus s on s.Id = h.OrderstatusId'
+      #9#9'where s.Oms'#228'ttningsgrundande = 1'
+      #9#9'AND h.Orderdatum >= dateadd(yy,-3,getdate())'
+      '                and h.borttagen is null'
+      ''
+      #9#9')'
+      ',AntalKontaktpersoner= (Select Count(*) from kundperson kp '
+      #9#9#9#9#9#9'join akt'#246'r a on a.id = kp.Id'
+      #9#9#9#9#9#9'where kp.Kundid = k.Id '
+      #9#9#9#9#9#9'and a.Aktiv = 1'
+      #9#9#9#9#9#9'and kp.borttagen is null )'
+      ''
+      ',k.Marginalprocent '
+      
+        ',MarginalprocentDisplay = (select isnull(k.Marginalprocent,ftgsy' +
+        'stem.V'#228'rde) from ftgsystem where id = 2)'
+      ',k.Id  '
+      'from Kund k')
+    Left = 284
+    Top = 100
+    object FDQuery1Kundnr: TFDAutoIncField
+      Alignment = taLeftJustify
+      DisplayWidth = 8
+      FieldName = 'Kundnr'
+      Origin = 'Kundnr'
+      ReadOnly = True
+    end
+    object FDQuery1Kundnamn: TStringField
+      DisplayWidth = 29
+      FieldName = 'Kundnamn'
+      Origin = 'Kundnamn'
+      Required = True
+      Size = 50
+    end
+    object FDQuery1OmsättningInnevarandeÅr: TFMTBCDField
+      DisplayLabel = '        Innevarande'#197'r'
+      DisplayWidth = 16
+      FieldName = 'Oms'#228'ttningInnevarande'#197'r'
+      Origin = '[Oms'#228'ttningInnevarande'#197'r]'
+      ReadOnly = True
+      currency = True
+      Precision = 38
+      Size = 6
+    end
+    object FDQuery1Omsättning1År: TFMTBCDField
+      DisplayLabel = '     Oms'#228'ttning 1 '#229'r'
+      DisplayWidth = 15
+      FieldName = 'Oms'#228'ttning1'#197'r'
+      Origin = '[Oms'#228'ttning1'#197'r]'
+      ReadOnly = True
+      currency = True
+      Precision = 38
+      Size = 6
+    end
+    object FDQuery1Omsättning3År: TFMTBCDField
+      DisplayLabel = '           Oms'#228'ttning 3 '#229'r'
+      DisplayWidth = 18
+      FieldName = 'Oms'#228'ttning3'#197'r'
+      Origin = '[Oms'#228'ttning3'#197'r]'
+      ReadOnly = True
+      currency = True
+      Precision = 38
+      Size = 6
+    end
+    object FDQuery1MarginalprocentDisplay: TBCDField
+      DisplayLabel = 'Marginal i %'
+      DisplayWidth = 10
+      FieldName = 'MarginalprocentDisplay'
+      Origin = 'MarginalprocentDisplay'
+      ReadOnly = True
+      Precision = 18
+      Size = 0
+    end
+    object FDQuery1AntalKontaktpersoner: TIntegerField
+      DisplayLabel = 'Kontaktpersoner'
+      DisplayWidth = 13
+      FieldName = 'AntalKontaktpersoner'
+      Origin = 'Kontaktpersoner'
+      ReadOnly = True
+      DisplayFormat = '###'
+    end
+    object FDQuery1Marginalprocent: TBCDField
+      DisplayWidth = 19
+      FieldName = 'Marginalprocent'
+      Origin = 'Marginalprocent'
+      Visible = False
+      Precision = 18
+      Size = 0
+    end
+    object FDQuery1Id: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
+  end
+end

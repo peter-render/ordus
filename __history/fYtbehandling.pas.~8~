@@ -1,0 +1,96 @@
+unit fYtbehandling;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  fStdRV, StdCtrls, Mask, DBCtrls, Db, Menus, Grids, Wwdbigrd,
+  Wwdbgrid, ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmYtbehandling = class(TfrmStdRV)
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Button1: TButton;
+    ColorDialog1: TColorDialog;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Button2: TButton;
+    procedure btnNyClick(Sender: TObject);
+    procedure btnAndraClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure DataSource1StateChange(Sender: TObject);
+    procedure dbGridCalcCellColors(Sender: TObject; Field: TField;
+      State: TGridDrawState; Highlight: Boolean; AFont: TFont; ABrush: TBrush);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmYtbehandling: TfrmYtbehandling;
+
+implementation
+
+uses fMain, fMaterialpris, Datamodule;
+
+{$R *.DFM}
+
+procedure TfrmYtbehandling.btnNyClick(Sender: TObject);
+begin
+  inherited;
+ // dbedit1.enabled := true;
+  dbedit2.setfocus;
+end;
+
+procedure TfrmYtbehandling.btnAndraClick(Sender: TObject);
+begin
+  inherited;
+  dbedit2.setfocus;
+end;
+
+procedure TfrmYtbehandling.Button1Click(Sender: TObject);
+begin
+  inherited;
+  with TfrmMaterialpris.create(Application) do
+    Showmodal;
+end;
+
+procedure TfrmYtbehandling.Button2Click(Sender: TObject);
+begin
+  inherited;
+  with ColorDialog1 do
+  begin
+    if trim(fdquery1.FieldByName('BGColor').AsString) <> '' then
+      color := stringtocolor(trim(fdquery1.FieldByName('BGColor').AsString));
+    if execute then
+    if FDquery1.State in [dsedit,dsinsert] then
+      fdquery1.FieldByName('BGColor').value := colortostring(color);
+
+  end;
+
+end;
+
+procedure TfrmYtbehandling.DataSource1StateChange(Sender: TObject);
+begin
+  inherited;
+//  button2.Enabled:= (sender as Tdatasource).State in [dsedit,dsinsert];
+end;
+
+procedure TfrmYtbehandling.dbGridCalcCellColors(Sender: TObject; Field: TField;
+  State: TGridDrawState; Highlight: Boolean; AFont: TFont; ABrush: TBrush);
+begin
+  inherited;
+  if field.FieldName = 'BGColor' then
+  begin
+  if trim(fdquery1.FieldByName('BGColor').AsString) <> '' then
+        Abrush.color := stringtocolor(trim(fdquery1.FieldByName('BGColor').AsString));
+  end;
+end;
+
+end.

@@ -1,0 +1,34 @@
+unit fftgsystem;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  fStdRV, Db, ADODB, Menus, DBCtrls, StdCtrls, Grids, Wwdbigrd, Wwdbgrid,
+  ExtCtrls, Mask;
+
+type
+  TfrmFtgSystem = class(TfrmStdRV)
+    ADOQuery1ID: TAutoIncField;
+    ADOQuery1Beteckning: TStringField;
+    ADOQuery1Vrde: TStringField;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmFtgSystem: TfrmFtgSystem;
+
+implementation
+
+uses Datamodule;
+
+{$R *.DFM}
+
+end.

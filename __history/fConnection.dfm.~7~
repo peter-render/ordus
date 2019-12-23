@@ -1,0 +1,52 @@
+inherited frmConnection: TfrmConnection
+  Caption = 'Connection parameters'
+  ClientHeight = 482
+  ClientWidth = 583
+  OnShow = FormShow
+  ExplicitWidth = 589
+  ExplicitHeight = 511
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel2: TPanel
+    Top = 441
+    Width = 583
+    OnClick = Panel2Click
+    ExplicitTop = 321
+    ExplicitWidth = 446
+    inherited Button1: TButton
+      Left = 416
+      OnClick = Button1Click
+      ExplicitLeft = 279
+    end
+    inherited Button2: TButton
+      Left = 498
+      Caption = 'St'#228'ng'
+      ExplicitLeft = 361
+    end
+  end
+  inherited Panel3: TPanel
+    Width = 583
+    Height = 441
+    BorderWidth = 5
+    ExplicitWidth = 446
+    ExplicitHeight = 321
+    object Memo1: TMemo
+      Left = 6
+      Top = 6
+      Width = 571
+      Height = 429
+      Align = alClient
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Courier New'
+      Font.Style = [fsBold]
+      Lines.Strings = (
+        'Memo1')
+      ParentFont = False
+      TabOrder = 0
+      ExplicitWidth = 434
+      ExplicitHeight = 309
+    end
+  end
+end

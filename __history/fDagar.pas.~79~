@@ -1,0 +1,162 @@
+unit fDagar;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, REST.Client, Data.Bind.Components,
+  Data.Bind.ObjectScope, Vcl.StdCtrls,
+  Vcl.Wwdbdatetimepicker, Vcl.ExtCtrls, System.DateUtils, Datamodule,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  IPPeerClient, Vcl.DBCtrls, Vcl.Grids, Vcl.wwdbigrd, Vcl.wwdbgrid;
+
+type
+  TfrmDagar = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    edtDatumFom: TwwDBDateTimePicker;
+    wwDBDateTimePicker2: TwwDBDateTimePicker;
+    Button1: TButton;
+    RQ: TRESTRequest;
+    RS: TRESTResponse;
+    spDagarInsert: TFDStoredProc;
+    RC: TRESTClient;
+    wwDBGrid1: TwwDBGrid;
+    FDTable1: TFDTable;
+    DataSource1: TDataSource;
+    FDTable1Id: TFDAutoIncField;
+    FDTable1Datum: TDateField;
+    FDTable1Helg: TBooleanField;
+    FDTable1Beskrivning: TStringField;
+    FDTable1Vecka: TIntegerField;
+    FDTable1Veckodag: TIntegerField;
+    FDTable1Arbetsdag: TBooleanField;
+    FDTable1APIContent: TStringField;
+    FDTable1AntalResurser: TByteField;
+    FDTable1Veckodagnamn: TStringField;
+    Button2: TButton;
+    FDTable1VeckodagKort: TStringField;
+    spDagarUpdateraResursPerVecka: TFDStoredProc;
+    procedure Button1Click(Sender: TObject);
+    procedure wwDBGrid1CalcCellColors(Sender: TObject; Field: TField;
+      State: TGridDrawState; Highlight: Boolean; AFont: TFont; ABrush: TBrush);
+    procedure FormShow(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FDTable1CalcFields(DataSet: TDataSet);
+    procedure FDTable1AntalResurserChange(Sender: TField);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmDagar: TfrmDagar;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmDagar.Button1Click(Sender: TObject);
+var
+  datum, datumTom: tdatetime;
+
+begin
+
+  RC.BaseURL := 'http://api.dryg.net';
+  RQ.Resource := 'dagar/v2/{Datum}';
+
+  datum := edtDatumFom.Date;
+  datum := incday(datum, -1);
+  datumTom := incday(datum, 1000);
+
+  while datum < datumTom do
+  begin
+
+    datum := incday(datum, 1);
+    // Anrop Rest - API
+    RQ.Params.ParameterByName('Datum').Value := stringreplace(datetostr(datum),
+      '-', '/', [rfReplaceAll]);
+    RQ.Execute;
+
+    with spDagarInsert do
+    begin
+      parambyname('@Datum').Value := datum;
+      parambyname('@Vecka').Value := weekoftheyear(datum);
+      parambyname('@Veckodag').Value := dayoftheweek(datum);
+      parambyname('@Arbetsdag').Value := (dayoftheweek(datum) < 6);
+      // parambyname('@AntalResurser').Value := 3;
+      parambyname('@APIContent').Value := RS.Content;
+
+      execproc;
+    end;
+
+  end;
+end;
+
+procedure TfrmDagar.Button2Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TfrmDagar.FDTable1AntalResurserChange(Sender: TField);
+var
+  v: Integer;
+  a: Integer;
+  d: tdatetime;
+begin
+
+  v := (Sender as TByteField).DataSet.FieldByName('Vecka').AsInteger;
+  a := (Sender as TByteField).DataSet.FieldByName('AntalResurser').AsInteger;
+  d := (Sender as TByteField).DataSet.FieldByName('Datum').AsDatetime;
+
+  with spDagarUpdateraResursPerVecka do
+  begin
+    parambyname('@Datum').Value := d;
+    parambyname('@Vecka').Value := v;
+    parambyname('@AntalResurser').Value := a;
+    execproc;
+
+  end;
+
+//  fdtable1.Refresh;
+
+end;
+
+procedure TfrmDagar.FDTable1CalcFields(DataSet: TDataSet);
+begin
+  DataSet.FieldByName('Veckodagkort').AsString :=
+    copy(DataSet.FieldByName('VeckodagNamn').AsString, 1, 2);
+
+end;
+
+procedure TfrmDagar.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TfrmDagar.FormShow(Sender: TObject);
+begin
+  FDTable1.Open;
+  FDTable1.locate('Datum', datetimetostr(now), []);
+end;
+
+procedure TfrmDagar.wwDBGrid1CalcCellColors(Sender: TObject; Field: TField;
+  State: TGridDrawState; Highlight: Boolean; AFont: TFont; ABrush: TBrush);
+begin
+
+  if (FDTable1.FieldByName('veckodag').AsInteger in [6, 7]) or
+    (FDTable1.FieldByName('Beskrivning').AsString <> '')
+
+  then
+    ABrush.Color := $00D0DDE6;
+end;
+
+end.

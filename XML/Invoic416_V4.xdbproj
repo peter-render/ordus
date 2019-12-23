@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lxdb8:LXDBWizardProject xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xmlns:lxdb8="http://www.liquid-technologies.com/LTWizProjectLib8" ProjectVersion="16.1.16.8712" UseRelativePaths="true">
+	<lxdb8:Schema FullPathName=".\Invoic416_V4.xsd" SelectedSchemaType="XSD" XDRAllowAdditionalAttributes="false" XDRIgnoreSimpleElements="false" WSDLGenerateClientInterface="false" WSDLAutoFilterElements="false" SelectedLanguage="CS">
+		<lxdb8:CPP CollectionMapping="Original" OutputPath=".\Invoic416_V4.xsd.Output\SourceCodeCPP" DocumentationOutputPath=".\Invoic416_V4.xsd.Output\DocumentationCPP" SampleAppOutputPath=".\Invoic416_V4.xsd.Output\SampleAppCPP" MappingFilePath=".\Invoic416_V4.xsd_NameMapping.cpp.xml" DefaultClassNamespace="Invoic416_V4Lib"/>
+		<lxdb8:CSharp CollectionMapping="Original" OutputPath="..\..\..\..\..\..\..\Temp" DocumentationOutputPath="..\..\..\..\..\..\..\Temp" SampleAppOutputPath="..\..\..\..\..\..\..\Temp" MappingFilePath=".\Invoic416_V4.xsd_NameMapping.cs.xml" DefaultClassNamespace="Invoic416_V4Lib" BaseNamespace="">
+			<lxdb8:PermProperty>
+				<lxdb8:Name>SolutionGUID</lxdb8:Name>
+				<lxdb8:Value>{F804A3BC-00EF-43E1-BCAF-FDB87F05BDAE}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:PermProperty>
+				<lxdb8:Name>ProjectGUID</lxdb8:Name>
+				<lxdb8:Value>{BDDFC4D5-E460-472B-9EC5-275571A398E9}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:PermProperty>
+				<lxdb8:Name>COMGUID</lxdb8:Name>
+				<lxdb8:Value>{535BFF53-EDA1-4526-A798-E928CBD6B76D}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:PermProperty>
+				<lxdb8:Name>SampleAppGUID</lxdb8:Name>
+				<lxdb8:Value>{57704A5D-EB4E-47C5-9C49-57386F391E88}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:PermProperty>
+				<lxdb8:Name>SampleCOMGUID</lxdb8:Name>
+				<lxdb8:Value>{C857EFF8-F783-4F9A-89B6-7D3C02A4A141}</lxdb8:Value>
+			</lxdb8:PermProperty>
+			<lxdb8:DotNetPlatformOptions UseLiquidRuntimeNuget="true">
+				<lxdb8:DotNetDevEnv>VS2017</lxdb8:DotNetDevEnv>
+				<lxdb8:DotNetPlatform>DotNet452</lxdb8:DotNetPlatform>
+			</lxdb8:DotNetPlatformOptions>
+		</lxdb8:CSharp>
+		<lxdb8:Java CollectionMapping="Original" OutputPath=".\Invoic416_V4.xsd.Output\SourceCodeJava" DocumentationOutputPath=".\Invoic416_V4.xsd.Output\DocumentationJava" SampleAppOutputPath=".\Invoic416_V4.xsd.Output\SampleAppJava" MappingFilePath=".\Invoic416_V4.xsd_NameMapping.java.xml" DefaultPackageName="Invoic416_V4Lib" BasePackage="">
+			<lxdb8:JavaPlatformOptions>
+				<lxdb8:JDK>JDK5</lxdb8:JDK>
+			</lxdb8:JavaPlatformOptions>
+		</lxdb8:Java>
+		<lxdb8:VBNet CollectionMapping="Original" OutputPath=".\Invoic416_V4.xsd.Output\SourceCodeVBNet" DocumentationOutputPath=".\Invoic416_V4.xsd.Output\DocumentationVBNet" SampleAppOutputPath=".\Invoic416_V4.xsd.Output\SampleAppVBNet" MappingFilePath=".\Invoic416_V4.xsd_NameMapping.vbnet.xml" DefaultClassNamespace="Invoic416_V4Lib" BaseNamespace="">
+			<lxdb8:DotNetPlatformOptions UseLiquidRuntimeNuget="true">
+				<lxdb8:DotNetDevEnv>VS2017</lxdb8:DotNetDevEnv>
+				<lxdb8:DotNetPlatform>DotNet452</lxdb8:DotNetPlatform>
+			</lxdb8:DotNetPlatformOptions>
+		</lxdb8:VBNet>
+		<lxdb8:VB6 CollectionMapping="Original" OutputPath=".\Invoic416_V4.xsd.Output\SourceCodeVB" DocumentationOutputPath=".\Invoic416_V4.xsd.Output\DocumentationVB" SampleAppOutputPath=".\Invoic416_V4.xsd.Output\SampleAppVB" MappingFilePath=".\Invoic416_V4.xsd_NameMapping.vb6.xml" ComponentName="Invoic416_V4Lib" Description="" MajorVersion="1" MinorVersion="0" Revision="0" ProductName=""/>
+	</lxdb8:Schema>
+	<lxdb8:Output CreateDocumentation="true" CreateSampleApplication="true" OutputDateInHeaderBlock="false" OutputSchemaPathInHeaderBlock="true" OutputVersionInHeaderBlock="true" OutputProjectFiles="true" OutputFastInfosetTables="false" OutputPropertyEvents="false" OutputElmRefAsInterface="true" OutputPrimitiveClassesAsTextProperty="false" OutputXmlSchemaProviderAttribute="false" OutputNullableSimpleTypes="true">
+		<lxdb8:SelectedWsdlPort Port="" Service=""/>
+		<lxdb8:ProjectReferenceInclude/>
+		<lxdb8:ProjectCompileInclude/>
+		<lxdb8:ProjectNoneInclude/>
+		<lxdb8:ProjectStrongNameKeyFile/>
+	</lxdb8:Output>
+	<lxdb8:PostBuild BuildHelp="true" OpenHelp="true" OpenProject="true"/>
+</lxdb8:LXDBWizardProject>

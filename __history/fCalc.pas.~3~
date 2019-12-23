@@ -1,0 +1,67 @@
+unit fCalc;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, ExtCtrls, Mask, EditNew;
+
+type
+  TfrmCalc = class(TForm)
+    Panel1: TPanel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    Button1: TButton;
+    Label8: TLabel;
+    edtV: TEdit;
+    edtL: TEditN;
+    edtB: TEditN;
+    edtT: TEditN;
+    procedure edtLChange(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCalc: TfrmCalc;
+
+implementation
+
+{$R *.DFM}
+
+procedure TfrmCalc.edtLChange(Sender: TObject);
+begin
+  if (edtL.valuefloat > 0) and (edtB.valuefloat > 0) and (edtT.valuefloat > 0)
+  then
+    edtV.text := floattostr(edtL.valuefloat * edtB.valuefloat * edtT.valuefloat
+      / 1000000 * 8);
+
+end;
+
+procedure TfrmCalc.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #27 then
+    close;
+  if Key = #13 then // Ist die gedrückte Taste ASCII-Return?
+  begin
+    Perform(WM_NEXTDLGCTL, 0, 0); // Zum nächsten Element wechseln
+    Key := #0; // Gedrückte Taste unwirksam machen
+  end;
+
+end;
+
+procedure TfrmCalc.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+end.

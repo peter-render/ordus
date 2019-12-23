@@ -1,0 +1,74 @@
+unit fConnection;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dSimple, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmConnection = class(TdlgSimple)
+    memo1: TMemo;
+    Button3: TButton;
+    FileOpenDialog1: TFileOpenDialog;
+    procedure FormShow(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure Panel2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConnection: TfrmConnection;
+
+implementation
+
+{$R *.dfm}
+
+uses Datamodule;
+
+procedure TfrmConnection.Button1Click(Sender: TObject);
+begin
+  inherited;
+
+  dm.FDConnection1.Params:= memo1.Lines;
+
+end;
+
+procedure TfrmConnection.Button3Click(Sender: TObject);
+begin
+  inherited;
+with fileopendialog1 do
+begin
+  if execute then
+  begin
+    memo1.Lines.LoadFromFile(filename);
+  end;
+end;
+end;
+
+procedure TfrmConnection.FormShow(Sender: TObject);
+begin
+  inherited;
+  memo1.Clear;
+  memo1.Lines.AddStrings(dm.FDConnection1.Params);
+
+end;
+
+procedure TfrmConnection.Panel2Click(Sender: TObject);
+begin
+  inherited;
+with memo1 do
+begin
+   memo1.Clear;
+   memo1.Lines.Add('DriverID=MSSQL');
+   memo1.Lines.Add('Server=snpeho');
+   memo1.Lines.Add('Database=Ordus');
+   memo1.Lines.Add('OSAuthent=Yes');
+end;
+end;
+
+end.

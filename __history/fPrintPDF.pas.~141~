@@ -1,0 +1,301 @@
+unit fPrintPDF;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Db, ADODB, Grids, Wwdbigrd, Wwdbgrid, StdCtrls, ExtCtrls, ImgList,
+  OleCtrls, ShellApi, Inifiles, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, Vcl.Menus, Vcl.gtxDocumentPrinter, Vcl.gtxClasses,
+  Vcl.gtxDocumentViewer;
+
+type
+  TfrmPrintPDF = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    btnClose: TButton;
+    wwDBGrid1: TwwDBGrid;
+    DataSource1: TDataSource;
+    ImageList1: TImageList;
+    Panel4: TPanel;
+    qry: TFDQuery;
+    (* PDFViewer: TgtPDFViewer;
+      PDFPrint: TgtPDFPrinter;
+      PDFDoc: TgtPDFDocument;
+    *)
+    qryOrderhuvudId: TFDAutoIncField;
+    qryGodsmärke: TStringField;
+    qryOrderradId: TFDAutoIncField;
+    qryArtikelnummer: TStringField;
+    qryLeveransDatum: TSQLTimeStampField;
+    qryYtbehandlingDatum: TSQLTimeStampField;
+    qryAntal: TFMTBCDField;
+    btnPrint: TButton;
+    qryPDDocomentname: TStringField;
+    PopupMenu1: TPopupMenu;
+    Skrivut1: TMenuItem;
+    qryPDFFilnamn: TStringField;
+    gtDocumentPrinter1: TgtDocumentPrinter;
+    gtDocumentViewer1: TgtDocumentViewer;
+    procedure qryCalcFields(DataSet: TDataSet);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    // PdfViewer1: TPdfViewer;
+    procedure BtnCloseClick(Sender: TObject);
+    procedure btnPrintClick(Sender: TObject);
+    (*
+      procedure wwDBGrid1RowChanged(Sender: TObject);
+      procedure Button1Click(Sender: TObject);
+      procedure qryCalcFields(DataSet: TDataSet);
+      procedure Skrivut1Click(Sender: TObject);
+    *)
+      procedure FormCreate(Sender: TObject);
+  private
+    function LoadPDF(FilepathName: string; FileName: string): Boolean;
+    procedure PDFShowInViewer;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrintPDF: TfrmPrintPDF;
+  strCommand, strpdfPath, strPrinter: string;
+  PDFFilepathName: string;
+
+implementation
+
+uses fMain, fOrderLista, rBaksidan, Datamodule, funclib;
+
+{$R *.DFM}
+
+procedure TfrmPrintPDF.FormShow(Sender: TObject);
+var
+  strfilename: string;
+
+begin
+
+  qry.Close;
+  qry.open;
+  PDFShowInViewer;
+
+end;
+
+function TfrmPrintPDF.LoadPDF(FilepathName: string; FileName: string): Boolean;
+var
+  PDFFilename: string;
+  TargetfileName, PDFDocumentName, HText: string;
+  lineh, toppos, leftpos: Integer;
+begin
+
+  PDFFilename := FilepathName + trim(FileName);
+  TargetfileName := FilepathName + '_' + FileName;
+
+  self.Caption := PDFFilename;
+
+  if fileexists(PDFFilename) then
+  begin
+
+    gtDocumentPrinter1.PrintDocument(PDFFilename);
+
+  end;
+  (*
+    end;
+    PDFDoc.loadfromfile(PDFFilename);
+    if PDFDoc.IsLoaded then
+    begin
+
+    PDFDoc.MeasurementUnit := muMM;
+
+    leftpos := 55;
+    toppos := 6;
+    lineh := 7;
+
+    HText := '<b>Ordus-Nr:</b>';
+    PDFDoc.TextOut(HText, '1', leftpos, toppos);
+    HText := qry.fieldbyname('OrderhuvudId').asstring;
+    PDFDoc.TextOut(HText, '1', leftpos + 28, toppos);
+
+    HText := '<b>Godsmärke:</b>';
+    PDFDoc.TextOut(HText, '1', leftpos, toppos + lineh);
+    HText := qry.fieldbyname('Godsmärke').asstring;
+    PDFDoc.TextOut(HText, '1', leftpos + 28, toppos + lineh);
+
+    leftpos := leftpos + 70;
+
+    HText := '<b>Ytbehandl:</b>';
+    PDFDoc.TextOut(HText, '1', leftpos, toppos);
+    HText := qry.fieldbyname('YtbehandlingDatum').asstring;
+    PDFDoc.TextOut(HText, '1', leftpos + 25, toppos);
+
+    HText := '<b>Leverans:</b>';
+    PDFDoc.TextOut(HText, '1', leftpos, toppos + lineh);
+    HText := qry.fieldbyname('LeveransDatum').asstring;
+    PDFDoc.TextOut(HText, '1', leftpos + 25, toppos + lineh);
+    leftpos := leftpos + 55;
+    HText := '<b>Antal:</b>';
+    PDFDoc.TextOut(HText, '1', leftpos, toppos);
+    HText := qry.fieldbyname('Antal').asstring;
+
+    PDFDoc.TextOut(HText, '1', leftpos + 15, toppos);
+
+    (*
+    if fileexists(TargetfileName) then
+    begin
+    if not deletefile(TargetfileName) then
+    begin
+    MessageBox(0, pchar('PDF ' + TargetfileName + ' kan inte skapas'),
+    'Skapa PDF', MB_ICONERROR or MB_OK);
+    exit;
+    end;
+    end;
+    try
+    PDFDoc.SaveToFile(TargetfileName);
+    // PDFPrint.PrintDoc;
+    finally
+    PDFDoc.Reset;
+    end;
+  *)
+  (*
+    end;
+    end;
+  *)
+
+  // AddCustomPDFInfo(gtPDFDocument1, edDocName.Text, edDocValue.Text, cbSchema.ItemIndex);
+
+  // showmessage(ftgsystemvalue('pdfritningar.biblioteksnamn'));
+end;
+
+procedure TfrmPrintPDF.PDFShowInViewer;
+begin
+
+  if qry.fieldbyname('PDFDocumentName').asstring <> '--' then
+  begin
+    // LoadPDF(PDFFilepathName, qry.fieldbyname('PDFDocumentName').asstring);
+    gtDocumentViewer1.LoadFromFile(qry.fieldbyname('PDFDocumentName').asstring);
+
+    (* with PDFViewer do
+      begin
+      // reset;
+      PDFdocument := PDFDoc;
+      active := true;
+      end;
+      end
+      else
+      PDFViewer.active := false;
+    *)
+  end;
+end;
+
+procedure TfrmPrintPDF.qryCalcFields(DataSet: TDataSet);
+var
+  sokfileP: string;
+  sokfileA: string;
+  sokfileX: string;
+
+begin
+
+  sokfileP := trim(DataSet.fieldbyname('PDFFilnamn').asstring);
+  sokfileA := trim(DataSet.fieldbyname('Artikelnummer').asstring) + '.pdf';
+  sokfileX := trim(leftstr(sokfileA, 3) + ' ' + copy(sokfileA, 4, 100));
+
+  if fileexists(PDFFilepathName + sokfileP) then
+    DataSet.fieldbyname('PDFDocumentName').asstring := sokfileP
+  else if fileexists(PDFFilepathName + sokfileA) then
+    DataSet.fieldbyname('PDFDocumentName').asstring := sokfileA
+  else if fileexists(PDFFilepathName + sokfileX) then
+    DataSet.fieldbyname('PDFDocumentName').asstring := sokfileX
+  else
+    DataSet.fieldbyname('PDFDocumentName').asstring := '--';
+
+end;
+
+(*
+  procedure TfrmPrintPDF.Skrivut1Click(Sender: TObject);
+  begin
+
+  if qry.fieldbyname('PDFDocumentName').asstring <> '--' then
+  begin
+  LoadPDF(PDFFilepathName, qry.fieldbyname('PDFDocumentName').asstring);
+  with PDFPrint do
+  begin
+  // pdfprint.GetInstalledPrinters
+  // SelectPrinterByName('HP Laserjet 2030 Series');
+  PDFdocument := PDFDoc;
+  PrintDoc;
+  end;
+  end;
+
+  end;
+*)
+
+(*
+  procedure TfrmPrintPDF.Button1Click(Sender: TObject);
+  begin
+  end;
+
+*)
+procedure TfrmPrintPDF.BtnCloseClick(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfrmPrintPDF.btnPrintClick(Sender: TObject);
+begin
+
+  // PDFPrint.ShowSetupDialog := true;
+
+  with qry do
+  begin
+    first;
+    while not eof do
+    begin
+      if qryPDDocomentname.asstring <> '--' then
+      begin
+
+        LoadPDF(PDFFilepathName, qryPDDocomentname.asstring);
+        (* with PDFPrint do
+          begin
+          // pdfprint.GetInstalledPrinters
+          // SelectPrinterByName('HP Laserjet 2030 Series');
+          PDFdocument := PDFDoc;
+          PrintDoc;
+
+          end;
+        *)
+      end;
+      next;
+    end;
+  end;
+
+end;
+
+procedure TfrmPrintPDF.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  release;
+end;
+
+  procedure TfrmPrintPDF.FormCreate(Sender: TObject);
+  begin
+
+  PDFFilepathName := ftgsystemvalue('pdf.folder','');
+  if rightstr(PDFFilepathName, 1) <> '\' then
+  PDFFilepathName := PDFFilepathName + '\';
+  end;
+
+  procedure TfrmPrintPDF.wwDBGrid1RowChanged(Sender: TObject);
+  begin
+
+  Skrivut1.enabled := qry.fieldbyname('PDFDocumentName').asstring <> '--';
+
+  if qry.fieldbyname('PDFDocumentName').asstring <> '--' then
+  begin
+  if self.Visible then
+  PDFShowInViewer;
+  end
+
+  end;
+end.

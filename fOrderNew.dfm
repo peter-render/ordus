@@ -1,0 +1,498 @@
+object frmOrderNew: TfrmOrderNew
+  Left = 409
+  Top = 263
+  ActiveControl = luKund
+  BorderStyle = bsDialog
+  Caption = 'Ny order'
+  ClientHeight = 664
+  ClientWidth = 601
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 14
+  object Label1: TLabel
+    Left = 90
+    Top = 67
+    Width = 28
+    Height = 14
+    Alignment = taRightJustify
+    Caption = 'Kund:'
+  end
+  object Label3: TLabel
+    Left = 28
+    Top = 95
+    Width = 90
+    Height = 14
+    Alignment = taRightJustify
+    Caption = 'Best'#228'llningsdatum:'
+  end
+  object Label4: TLabel
+    Left = 47
+    Top = 124
+    Width = 71
+    Height = 14
+    Hint = 'Kundens best'#228'llningsnummer'
+    Alignment = taRightJustify
+    Caption = 'Best'#228'llningsnr:'
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object Label5: TLabel
+    Left = 64
+    Top = 151
+    Width = 54
+    Height = 15
+    Hint = 'Kundens best'#228'llningsnummer'
+    Alignment = taRightJustify
+    Caption = 'Referens:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clHighlight
+    Font.Height = -12
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsUnderline]
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = True
+    OnClick = Label5Click
+  end
+  object Label7: TLabel
+    Left = 40
+    Top = 318
+    Width = 78
+    Height = 14
+    Hint = 'Kundens best'#228'llningsnummer'
+    Alignment = taRightJustify
+    Caption = 'Leveransdatum:'
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object Label8: TLabel
+    Left = 84
+    Top = 348
+    Width = 33
+    Height = 14
+    Hint = 'Kundens best'#228'llningsnummer'
+    Alignment = taRightJustify
+    Caption = 'Fritext:'
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object Label2: TLabel
+    Left = 48
+    Top = 281
+    Width = 76
+    Height = 14
+    Hint = 'Kundens best'#228'llningsnummer'
+    Alignment = taRightJustify
+    Caption = 'Till ytbehandling'
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object Label6: TLabel
+    Left = 60
+    Top = 211
+    Width = 58
+    Height = 14
+    Hint = 'Kundens best'#228'llningsnummer'
+    Alignment = taRightJustify
+    Caption = 'Godsm'#228'rke:'
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object Label9: TLabel
+    Left = 45
+    Top = 240
+    Width = 73
+    Height = 14
+    Alignment = taRightJustify
+    Caption = 'Egen m'#228'rkning:'
+    ParentShowHint = False
+    ShowHint = True
+  end
+  object lblTyp: TLabel
+    Left = 28
+    Top = 17
+    Width = 66
+    Height = 19
+    Caption = 'Ny order'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label16: TLabel
+    Left = 55
+    Top = 182
+    Width = 67
+    Height = 15
+    Caption = 'V'#229'r referens'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object luKund: TwwDBLookupCombo
+    Left = 130
+    Top = 61
+    Width = 242
+    Height = 22
+    DropDownAlignment = taLeftJustify
+    Selected.Strings = (
+      'Kundnamn'#9'50'#9'Kundnamn'#9'F')
+    LookupTable = dm.sp_KundLookuplist
+    LookupField = 'KundID'
+    DropDownCount = 30
+    TabOrder = 0
+    AutoDropDown = False
+    ShowButton = True
+    PreciseEditRegion = False
+    AllowClearKey = False
+    OnCloseUp = luKundCloseUp
+  end
+  object edtOrderdatum: TwwDBDateTimePicker
+    Left = 130
+    Top = 90
+    Width = 242
+    Height = 22
+    CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+    CalendarAttributes.Font.Color = clWindowText
+    CalendarAttributes.Font.Height = -11
+    CalendarAttributes.Font.Name = 'MS Sans Serif'
+    CalendarAttributes.Font.Style = []
+    CalendarAttributes.Options = [mdoDayState, mdoWeekNumbers, mdoNoTodayCircle]
+    Epoch = 1950
+    ButtonEffects.Flat = True
+    ShowButton = True
+    TabOrder = 1
+  end
+  object Edit1: TEdit
+    Left = 130
+    Top = 120
+    Width = 242
+    Height = 22
+    TabOrder = 2
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 603
+    Width = 601
+    Height = 61
+    Align = alBottom
+    TabOrder = 11
+    DesignSize = (
+      601
+      61)
+    object Button1: TButton
+      Left = 421
+      Top = 17
+      Width = 81
+      Height = 27
+      Anchors = [akRight, akBottom]
+      Caption = 'Spara'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+    object Button2: TButton
+      Left = 508
+      Top = 17
+      Width = 81
+      Height = 27
+      Anchors = [akRight, akBottom]
+      Caption = 'Avbryt'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object edtLevdatum: TwwDBDateTimePicker
+    Left = 130
+    Top = 314
+    Width = 145
+    Height = 22
+    DisableThemes = True
+    CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+    CalendarAttributes.Font.Color = clWindowText
+    CalendarAttributes.Font.Height = -11
+    CalendarAttributes.Font.Name = 'MS Sans Serif'
+    CalendarAttributes.Font.Style = []
+    CalendarAttributes.Options = [mdoDayState, mdoWeekNumbers, mdoNoTodayCircle]
+    Epoch = 1950
+    ButtonEffects.Transparent = True
+    ButtonEffects.Flat = True
+    ShowButton = True
+    TabOrder = 9
+  end
+  object LU_Kundperson: TwwDBLookupCombo
+    Left = 130
+    Top = 149
+    Width = 242
+    Height = 22
+    DropDownAlignment = taLeftJustify
+    Selected.Strings = (
+      'Namn'#9'40'#9'Namn'#9'F')
+    LookupTable = sp_KundpersonlistforKund
+    LookupField = 'KundpersonId'
+    Style = csDropDownList
+    Enabled = False
+    TabOrder = 3
+    AutoDropDown = False
+    ShowButton = True
+    PreciseEditRegion = False
+    AllowClearKey = False
+  end
+  object edtFritext: TMemo
+    Left = 130
+    Top = 348
+    Width = 445
+    Height = 242
+    TabOrder = 10
+  end
+  object edtDatumYtbehandling: TwwDBDateTimePicker
+    Left = 130
+    Top = 278
+    Width = 145
+    Height = 22
+    DisableThemes = True
+    CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+    CalendarAttributes.Font.Color = clWindowText
+    CalendarAttributes.Font.Height = -11
+    CalendarAttributes.Font.Name = 'MS Sans Serif'
+    CalendarAttributes.Font.Style = []
+    CalendarAttributes.Options = [mdoDayState, mdoWeekNumbers, mdoNoTodayCircle]
+    Epoch = 1950
+    ButtonEffects.Transparent = True
+    ButtonEffects.Flat = True
+    ShowButton = True
+    TabOrder = 7
+  end
+  object LUYtbehandling: TwwDBLookupCombo
+    Left = 281
+    Top = 278
+    Width = 293
+    Height = 22
+    DropDownAlignment = taLeftJustify
+    Selected.Strings = (
+      'Beteckning'#9'20'#9'Beteckning'#9'T')
+    LookupTable = dm.qryLUYtbehandling
+    LookupField = 'Id'
+    DropDownCount = 20
+    TabOrder = 8
+    AutoDropDown = False
+    ShowButton = True
+    PreciseEditRegion = False
+    AllowClearKey = False
+    OnCloseUp = LUYtbehandlingCloseUp
+  end
+  object Edit3: TEdit
+    Left = 130
+    Top = 208
+    Width = 242
+    Height = 22
+    TabOrder = 5
+  end
+  object edtEgenMarkning: TEdit
+    Left = 130
+    Top = 237
+    Width = 242
+    Height = 22
+    TabOrder = 6
+  end
+  object edtVarReferens: TwwDBLookupCombo
+    Left = 130
+    Top = 179
+    Width = 242
+    Height = 23
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    DropDownAlignment = taLeftJustify
+    Selected.Strings = (
+      'Namn'#9'101'#9'Namn'#9'F')
+    DataField = 'V'#229'rReferensPersonId'
+    LookupTable = qryLU_personal
+    LookupField = 'Id'
+    Color = clWhite
+    DropDownCount = 40
+    DropDownWidth = 220
+    ParentFont = False
+    TabOrder = 4
+    AutoDropDown = True
+    ShowButton = True
+    PreciseEditRegion = False
+    AllowClearKey = False
+    ShowMatchText = True
+  end
+  object dsoKundPersonlistforKund: TDataSource
+    DataSet = sp_KundpersonlistforKund
+    Left = 472
+    Top = 88
+  end
+  object dsoLUKund: TDataSource
+    DataSet = dm.qryLU_Kund
+    Left = 368
+    Top = 260
+  end
+  object sp_insert: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'dbo.OrderhuvudInsert'
+    Left = 360
+    Top = 124
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@KundID'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@OrderNummer'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        Position = 4
+        Name = '@Orderdatum'
+        DataType = ftTimeStamp
+        NumericScale = 3
+        ParamType = ptInput
+      end
+      item
+        Position = 5
+        Name = '@Godsm'#228'rke'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        Position = 6
+        Name = '@Egenm'#228'rkning'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        Position = 7
+        Name = '@ReferensID'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 8
+        Name = '@OrdertypId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 9
+        Name = '@Leveransdatum'
+        DataType = ftTimeStamp
+        NumericScale = 3
+        ParamType = ptInput
+      end
+      item
+        Position = 10
+        Name = '@Fritext'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 2000
+      end
+      item
+        Position = 11
+        Name = '@YtbehandlingDatum'
+        DataType = ftTimeStamp
+        NumericScale = 3
+        ParamType = ptInput
+      end
+      item
+        Position = 12
+        Name = '@YtbehandlingId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 13
+        Name = '@OrderstatusId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object sp_KundpersonlistforKund: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'KundPersonListForKund'
+    Left = 468
+    Top = 20
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+        Value = 0
+      end
+      item
+        Position = 2
+        Name = '@Kundid'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = '63'
+      end>
+    object sp_KundpersonlistforKundKundpersonId: TFDAutoIncField
+      FieldName = 'KundpersonId'
+      Origin = 'KundpersonId'
+      ReadOnly = True
+    end
+    object sp_KundpersonlistforKundNamn: TStringField
+      FieldName = 'Namn'
+      Origin = 'Namn'
+      ReadOnly = True
+      Size = 101
+    end
+  end
+  object qryLU_personal: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      
+        'Select Id, F'#246'rnamn + '#39' '#39' + Efternamn Namn from Personal where ak' +
+        'tiv = 1 and '#196'rAdministrat'#246'r = 1'
+      'order by f'#246'rnamn')
+    Left = 508
+    Top = 172
+    object qryLU_personalNamn: TStringField
+      DisplayWidth = 101
+      FieldName = 'Namn'
+      Origin = 'Namn'
+      ReadOnly = True
+      Size = 101
+    end
+    object qryLU_personalId: TFDAutoIncField
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
+  end
+end

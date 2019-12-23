@@ -1,0 +1,148 @@
+object frmOrderStatusUpdate: TfrmOrderStatusUpdate
+  Left = 544
+  Top = 365
+  BorderStyle = bsDialog
+  Caption = #196'ndra orderstatus'
+  ClientHeight = 144
+  ClientWidth = 386
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object DBText1: TDBText
+    Left = 101
+    Top = 16
+    Width = 66
+    Height = 17
+    DataField = 'OrderID'
+    DataSource = frmOrderLista.dsoOrderlist
+  end
+  object Label1: TLabel
+    Left = 40
+    Top = 16
+    Width = 47
+    Height = 13
+    Caption = 'Ordernr:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Status: TLabel
+    Left = 44
+    Top = 52
+    Width = 41
+    Height = 13
+    Caption = 'Status:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 103
+    Width = 386
+    Height = 41
+    Align = alBottom
+    TabOrder = 0
+    ExplicitWidth = 314
+    DesignSize = (
+      386
+      41)
+    object Button1: TButton
+      Left = 216
+      Top = 8
+      Width = 75
+      Height = 25
+      Anchors = [akRight, akBottom]
+      Caption = 'Spara'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+      ExplicitLeft = 144
+    end
+    object Button2: TButton
+      Left = 300
+      Top = 8
+      Width = 75
+      Height = 25
+      Anchors = [akRight, akBottom]
+      Caption = 'Avbryt'
+      ModalResult = 2
+      TabOrder = 1
+      OnClick = Button2Click
+      ExplicitLeft = 228
+    end
+  end
+  object LU_Orderstatus: TwwDBLookupCombo
+    Left = 101
+    Top = 49
+    Width = 228
+    Height = 21
+    DropDownAlignment = taLeftJustify
+    Selected.Strings = (
+      'Beteckning'#9'50'#9'Beteckning'#9'F')
+    LookupTable = qryLU_orderstatus
+    LookupField = 'Id'
+    TabOrder = 1
+    AutoDropDown = True
+    ShowButton = True
+    PreciseEditRegion = False
+    AllowClearKey = True
+  end
+  object qryLU_orderstatus: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select * from OrderStatus order by Sortorder')
+    Left = 232
+    Top = 12
+    object qryLU_orderstatusBeteckning: TStringField
+      DisplayWidth = 50
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Required = True
+      Size = 50
+    end
+    object qryLU_orderstatusId: TFDAutoIncField
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
+    object qryLU_orderstatusOrderstatus: TStringField
+      FieldName = 'Orderstatus'
+      Origin = 'Orderstatus'
+      Required = True
+      Visible = False
+      FixedChar = True
+      Size = 1
+    end
+    object qryLU_orderstatusSortorder: TSmallintField
+      FieldName = 'Sortorder'
+      Origin = 'Sortorder'
+      Required = True
+      Visible = False
+    end
+    object qryLU_orderstatusBGColor: TStringField
+      FieldName = 'BGColor'
+      Origin = 'BGColor'
+      Visible = False
+      FixedChar = True
+      Size = 10
+    end
+  end
+end

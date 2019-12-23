@@ -1,0 +1,418 @@
+object frmFoljesedel: TfrmFoljesedel
+  Left = 390
+  Top = 439
+  ActiveControl = Edit1
+  Caption = 'F'#246'ljesedelregister'
+  ClientHeight = 518
+  ClientWidth = 779
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Default'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 652
+    Top = 0
+    Width = 127
+    Height = 518
+    Align = alRight
+    TabOrder = 0
+    object btnClose: TButton
+      Left = 10
+      Top = 12
+      Width = 106
+      Height = 25
+      Caption = 'St'#228'ng'
+      TabOrder = 0
+      OnClick = btnCloseClick
+    end
+    object ButtonPrint: TButton
+      Left = 10
+      Top = 94
+      Width = 106
+      Height = 25
+      Caption = 'Skriva ut f'#246'ljesedel'
+      TabOrder = 1
+      OnClick = ButtonPrintClick
+    end
+    object btnLeveransdatum: TButton
+      Left = 10
+      Top = 196
+      Width = 106
+      Height = 25
+      Hint = 'Updatera f'#246'ljesedelns leveransdatum med dagens datum'
+      Caption = 'S'#228'tt leveransdatum'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Default'
+      Font.Style = []
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 2
+      OnClick = btnLeveransdatumClick
+    end
+    object btnShow: TButton
+      Left = 10
+      Top = 63
+      Width = 106
+      Height = 25
+      Caption = 'F'#246'rhandsgranska fs'
+      TabOrder = 3
+      OnClick = btnShowClick
+    end
+    object CheckBox1: TCheckBox
+      Left = 12
+      Top = 239
+      Width = 97
+      Height = 17
+      Hint = 'Visa '#228'ven f'#246'ljesedlar som har blivit arkiverade tidigare'
+      Caption = 'Visa '#228'ven arkiv.'
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 4
+      OnClick = CheckBox1Click
+    end
+    object btnEpostFoljesedel: TButton
+      Tag = 1
+      Left = 10
+      Top = 125
+      Width = 106
+      Height = 25
+      Caption = 'Skapa PDF-f'#246'ljes.'
+      TabOrder = 5
+      OnClick = btnEpostFoljesedelClick
+    end
+    object Button1: TButton
+      Tag = 2
+      Left = 10
+      Top = 156
+      Width = 106
+      Height = 25
+      Caption = 'Maila f'#246'ljesedel'
+      TabOrder = 6
+      OnClick = btnEpostFoljesedelClick
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 652
+    Height = 518
+    Align = alClient
+    Caption = 'Panel2'
+    TabOrder = 1
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 650
+      Height = 48
+      Align = alTop
+      TabOrder = 0
+      object Edit1: TEdit
+        Left = 16
+        Top = 13
+        Width = 209
+        Height = 21
+        TabOrder = 0
+        OnChange = Edit1Change
+      end
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 49
+      Width = 650
+      Height = 468
+      Align = alClient
+      BorderWidth = 8
+      Caption = 'Panel4'
+      TabOrder = 1
+      object wwDBGrid1: TwwDBGrid
+        Left = 9
+        Top = 9
+        Width = 632
+        Height = 450
+        Selected.Strings = (
+          'Id'#9'10'#9'FS-Nr'
+          'Kundnamn'#9'19'#9'Kundnamn'
+          'Beteckning'#9'26'#9'Beteckning'
+          'Datum'#9'13'#9'Orderdatum'
+          'LevereradDatum'#9'15'#9'Levereraddatum'
+          'Antalrader'#9'11'#9'Antalrader')
+        IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
+        TitleColor = clBtnFace
+        FixedCols = 0
+        ShowHorzScrollBar = True
+        Align = alClient
+        DataSource = DataSource1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Default'
+        Font.Style = []
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+        ParentFont = False
+        PopupMenu = PopupMenu1
+        ReadOnly = True
+        TabOrder = 0
+        TitleAlignment = taLeftJustify
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Default'
+        TitleFont.Style = [fsBold]
+        TitleLines = 1
+        TitleButtons = True
+        TitleMenuAttributes.Options = [sfoSortAscending, sfoSortDescending, sfoFilter, sfoCreateIndexes, sfoAutoTitleButtonSort]
+        TitleMenuAttributes.MenuEnabled = True
+        OnCalcCellColors = wwDBGrid1CalcCellColors
+        OnTitleButtonClick = wwDBGrid1TitleButtonClick
+        FooterColor = clHighlight
+        ExplicitLeft = 209
+        ExplicitTop = 45
+      end
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = qryFoljesedel
+    Left = 369
+    Top = 218
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 129
+    Top = 82
+    object Visafljesedel1: TMenuItem
+      Caption = 'Visa f'#246'ljesedel'
+      OnClick = btnShowClick
+    end
+    object Skrivutfljesdel1: TMenuItem
+      Caption = 'Skriv ut f'#246'ljesdel'
+      OnClick = ButtonPrintClick
+    end
+    object Sttleveransdatum1: TMenuItem
+      Caption = 'S'#228'tt leveransdatum'
+      OnClick = btnLeveransdatumClick
+    end
+    object ndraBeteckning1: TMenuItem
+      Caption = #196'ndra '#39'Egen m'#228'rkning'#39
+      OnClick = ndraBeteckning1Click
+    end
+    object N1: TMenuItem
+      Caption = '-'
+    end
+    object Tabortleveransdatum1: TMenuItem
+      Caption = 'Ta bort leveransdatum'
+      OnClick = Tabortleveransdatum1Click
+    end
+    object Tabortfljesedel1: TMenuItem
+      Caption = 'Ta bort f'#246'ljesedel'
+      OnClick = Tabortfljesedel1Click
+    end
+    object Arkiverafljesedel1: TMenuItem
+      Caption = 'Arkivera f'#246'ljesedel'
+      OnClick = Arkiverafljesedel1Click
+    end
+  end
+  object qryFoljesedel: TFDQuery
+    Filter = 'Arkiverad = 0'
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select '
+      
+        'fs.Id,k.Id Kundid,convert(char(10),fs.Datum,120) Datum,fs.Levere' +
+        'radDatum,k.Kundnamn,'
+      
+        'Antalrader = (Select count(*) from Orderrad where F'#246'ljesedelID =' +
+        ' fs.Id)'
+      ',fs.Beteckning,'
+      'fs.Arkiverad'
+      'from f'#246'ljesedel fs'
+      'join '
+      #9'kund k on k.Id = fs.KundId'
+      'where '
+      #9'(fs.levereraddatum is null  or :checked = 1)'
+      
+        #9'and (:soktext = '#39#39' or k.Kundnamn like :soktext or fs.Beteckning' +
+        ' like :soktext)'
+      'order by '
+      #9'fs.datum desc ,Fs.Id desc'
+      '')
+    Left = 264
+    Top = 284
+    ParamData = <
+      item
+        Name = 'CHECKED'
+        DataType = ftBoolean
+        ParamType = ptInput
+      end
+      item
+        Name = 'SOKTEXT'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryFoljesedelId: TFDAutoIncField
+      DisplayLabel = 'FS-Nr'
+      DisplayWidth = 10
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object qryFoljesedelKundnamn: TStringField
+      DisplayWidth = 19
+      FieldName = 'Kundnamn'
+      Origin = 'Kundnamn'
+      Required = True
+      Size = 50
+    end
+    object qryFoljesedelBeteckning: TStringField
+      DisplayWidth = 26
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Required = True
+      Size = 100
+    end
+    object qryFoljesedelDatum: TStringField
+      DisplayLabel = 'Orderdatum'
+      DisplayWidth = 13
+      FieldName = 'Datum'
+      Origin = 'Datum'
+      ReadOnly = True
+      FixedChar = True
+      Size = 10
+    end
+    object qryFoljesedelLevereradDatum: TSQLTimeStampField
+      DisplayLabel = 'Levereraddatum'
+      DisplayWidth = 15
+      FieldName = 'LevereradDatum'
+      Origin = 'LevereradDatum'
+    end
+    object qryFoljesedelAntalrader: TIntegerField
+      DisplayWidth = 11
+      FieldName = 'Antalrader'
+      Origin = 'Antalrader'
+      ReadOnly = True
+    end
+    object qryFoljesedelArkiverad: TBooleanField
+      DisplayWidth = 5
+      FieldName = 'Arkiverad'
+      Origin = 'Arkiverad'
+      Visible = False
+    end
+    object qryFoljesedelKundid: TFDAutoIncField
+      FieldName = 'Kundid'
+      Origin = 'Kundid'
+      ReadOnly = True
+      Visible = False
+    end
+  end
+  object spCustom_FoljesedelTaBortLeveransdatum: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'Custom_F'#246'ljesedelTaBortLeveransdatum'
+    Left = 452
+    Top = 120
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@F'#246'ljesedelId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object gtPDFDocument1: TgtPDFDocument
+    About = 'Gnostice PDFtoolkit (www.gnostice.com)'
+    Version = '5.0.0.589'
+    OpenAfterSave = False
+    MergeOptions = []
+    EMailAfterSave = False
+    ShowSetupDialog = False
+    Left = 449
+    Top = 394
+  end
+  object gtPDFPrinter1: TgtPDFPrinter
+    Collate = True
+    Options = [poPageNums]
+    About = 'Gnostice PDFtoolkit (www.gnostice.com)'
+    Version = '5.0.0.589'
+    AutoRotate = False
+    IgnoreHardMargin = True
+    RenderingOptions = []
+    Left = 384
+    Top = 264
+  end
+  object gtQRExport1: TgtQRExport
+    Version = '17.5.1117.3264'
+    EncodersSettings.PDF.FileExtension = 'pdf'
+    EncodersSettings.PDF.FileDescription = 'Adobe PDF Files'
+    EncodersSettings.PDF.PDFVersion = PDF_VER14
+    EncodersSettings.PDF.DigitalSignature.Enabled = False
+    EncodersSettings.PDF.DigitalSignature.Field.Visible = True
+    EncodersSettings.PDF.DigitalSignature.Field.FillColor = clWhite
+    EncodersSettings.PDF.DigitalSignature.Field.PageNumber = 1
+    EncodersSettings.PDF.DigitalSignature.Field.FieldAppearenceOptions = [sfaoxShowName, sfaoxShowReason, sfaoxShowLocation, sfaoxShowDate, sfaoxShowLabels]
+    EncodersSettings.PDF.ImageSettings.JPEGQuality = 50
+    EncodersSettings.PDF.ImageSettings.OutputFormat = pifJPEG
+    EncodersSettings.PDF.FontSettings.Embedding = efmSubset
+    EncodersSettings.PDF.FontSettings.Encoding = fenWinAnsiEncoding
+    EncodersSettings.PDF.LineJoinStyle = ljsMiter
+    EncodersSettings.PDF.LineCapStyle = lcsFlat
+    EncodersSettings.XLSX.FileExtension = 'xlsx'
+    EncodersSettings.XLSX.FileDescription = 'Microsoft Excel Workbook'
+    EncodersSettings.XLSX.Formatting.RowSpacing = 0
+    EncodersSettings.XLSX.Formatting.ScaleX = 1.000000000000000000
+    EncodersSettings.XLSX.Formatting.ScaleY = 1.000000000000000000
+    EncodersSettings.XLSX.Formatting.DefaultColumnWidth = 8.000000000000000000
+    EncodersSettings.XLSX.NumberFormatDecimalPlaces = 0
+    EncodersSettings.XLSX.PagesPerWorksheet = 0
+    EncodersSettings.RTF.FileExtension = 'rtf'
+    EncodersSettings.RTF.FileDescription = 'Rich Text Format'
+    EncodersSettings.RTF.ImageSettings.JPEGQuality = 50
+    EncodersSettings.RTF.ImageSettings.OutputFormat = rifJPEG
+    EncodersSettings.HTML.FileExtension = 'htm'
+    EncodersSettings.HTML.FileDescription = 'HyperText Markup Language'
+    EncodersSettings.HTML.ImageSettings.JPEGQuality = 50
+    EncodersSettings.HTML.ImageSettings.OutputFormat = hifJPEG
+    EncodersSettings.XHTML.FileExtension = 'htm'
+    EncodersSettings.XHTML.FileDescription = 'Extended HyperText Markup Language'
+    EncodersSettings.XHTML.ImageSettings.JPEGQuality = 50
+    EncodersSettings.XHTML.ImageSettings.OutputFormat = hifJPEG
+    EncodersSettings.TEXT.FileExtension = 'txt'
+    EncodersSettings.TEXT.FileDescription = 'Text Document'
+    EncodersSettings.SVG.FileExtension = 'svg'
+    EncodersSettings.SVG.FileDescription = 'Scalable Vector Graphics'
+    EncodersSettings.SVG.ImageSettings.JPEGQuality = 50
+    EncodersSettings.SVG.ImageSettings.OutputFormat = sifJPEG
+    EncodersSettings.TIFF.FileExtension = 'tif'
+    EncodersSettings.TIFF.FileDescription = 'Tagged Image File Format'
+    EncodersSettings.TIFF.Grayscale = False
+    EncodersSettings.TIFF.CompressionType = ctLZW
+    EncodersSettings.TIFF.MultiPage = True
+    EncodersSettings.PNG.FileExtension = 'png'
+    EncodersSettings.PNG.FileDescription = 'Portable Network Graphics'
+    EncodersSettings.JPEG.FileExtension = 'jpg'
+    EncodersSettings.JPEG.FileDescription = 'JPEG File Interchange Format'
+    EncodersSettings.JPEG.ProgressiveEncoding = False
+    EncodersSettings.GIF.FileExtension = 'gif'
+    EncodersSettings.GIF.FileDescription = 'Graphics Interchange Format'
+    EncodersSettings.BMP.FileExtension = 'bmp'
+    EncodersSettings.BMP.FileDescription = 'Windows Bitmap'
+    VisibleFormats = [PDF, XLSX, RTF, HTML, XHTML, TEXT, SVG, TIFF, PNG, JPEG, GIF, BMP]
+    Left = 513
+    Top = 314
+  end
+end

@@ -1,0 +1,873 @@
+object rptArbetsorder: TrptArbetsorder
+  Left = 267
+  Top = 174
+  Caption = 'rptArbetsorder'
+  ClientHeight = 606
+  ClientWidth = 862
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Scaled = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object report: TQuickRep
+    Left = 92
+    Top = 32
+    Width = 635
+    Height = 898
+    Frame.Color = clBlack
+    Frame.DrawTop = False
+    Frame.DrawBottom = False
+    Frame.DrawLeft = False
+    Frame.DrawRight = False
+    DataSet = qry
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Microsoft Sans Serif'
+    Font.Style = []
+    Functions.Strings = (
+      'PAGENUMBER'
+      'COLUMNNUMBER'
+      'REPORTTITLE')
+    Functions.DATA = (
+      '0'
+      '0'
+      #39#39)
+    Options = [FirstPageHeader, LastPageFooter]
+    Page.Columns = 1
+    Page.Orientation = poPortrait
+    Page.PaperSize = A4
+    Page.Values = (
+      127.000000000000000000
+      2970.000000000000000000
+      127.000000000000000000
+      2100.000000000000000000
+      127.000000000000000000
+      127.000000000000000000
+      0.000000000000000000)
+    PrinterSettings.Copies = 1
+    PrinterSettings.OutputBin = Auto
+    PrinterSettings.Duplex = False
+    PrinterSettings.FirstPage = 0
+    PrinterSettings.LastPage = 0
+    PrinterSettings.UseStandardprinter = False
+    PrinterSettings.UseCustomBinCode = False
+    PrinterSettings.CustomBinCode = 0
+    PrinterSettings.ExtendedDuplex = 0
+    PrinterSettings.UseCustomPaperCode = False
+    PrinterSettings.CustomPaperCode = 0
+    PrinterSettings.PrintMetaFile = False
+    PrinterSettings.PrintQuality = 0
+    PrinterSettings.Collate = 0
+    PrinterSettings.ColorOption = 0
+    PrintIfEmpty = True
+    ReportTitle = 'Order'
+    SnapToGrid = True
+    Units = MM
+    Zoom = 80
+    PrevFormStyle = fsNormal
+    PreviewInitialState = wsNormal
+    PreviewWidth = 400
+    PreviewHeight = 900
+    PrevInitialZoom = qrZoomToFit
+    PreviewDefaultSaveType = stQRP
+    object DetailBand1: TQRBand
+      Left = 38
+      Top = 38
+      Width = 558
+      Height = 336
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      AlignToBottom = False
+      Color = clWhite
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = True
+      Size.Values = (
+        1111.250000000000000000
+        1845.468750000000000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbDetail
+      object QRDBText4: TQRDBText
+        Left = 100
+        Top = 171
+        Width = 69
+        Height = 13
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          42.994791666666700000
+          330.729166666667000000
+          565.546875000000000000
+          228.203125000000000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Artikelnummer'
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 10
+      end
+      object QRDBText5: TQRDBText
+        Left = 172
+        Top = 171
+        Width = 54
+        Height = 13
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          42.994791666666700000
+          568.854166666667000000
+          565.546875000000000000
+          178.593750000000000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Beteckning'
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 10
+      end
+      object QRLabel5: TQRLabel
+        Left = 4
+        Top = 39
+        Width = 89
+        Height = 20
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          66.145833333333300000
+          13.229166666666700000
+          128.984375000000000000
+          294.348958333333000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Arbetsorder'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 14
+      end
+      object QRLabel7: TQRLabel
+        Left = 12
+        Top = 175
+        Width = 39
+        Height = 13
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          42.994791666666700000
+          39.687500000000000000
+          578.776041666667000000
+          128.984375000000000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Artikel:'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 10
+      end
+      object QRLabel8: TQRLabel
+        Left = 11
+        Top = 203
+        Width = 32
+        Height = 13
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          42.994791666666700000
+          36.380208333333300000
+          671.380208333334000000
+          105.833333333333000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Antal:'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 10
+      end
+      object QRDBText6: TQRDBText
+        Left = 103
+        Top = 199
+        Width = 25
+        Height = 13
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          42.994791666666700000
+          340.651041666667000000
+          658.151041666667000000
+          82.682291666666700000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Antal'
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 10
+      end
+      object QRLabel13: TQRLabel
+        Left = 141
+        Top = 42
+        Width = 30
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          46.302083333333300000
+          466.328125000000000000
+          138.906250000000000000
+          99.218750000000000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Kund:'
+        Color = clWhite
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRLabel15: TQRLabel
+        Left = 141
+        Top = 58
+        Width = 40
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          46.302083333333300000
+          466.328125000000000000
+          191.822916666667000000
+          132.291666666667000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Best.nr:'
+        Color = clWhite
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRDBText12: TQRDBText
+        Left = 194
+        Top = 58
+        Width = 126
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666700000
+          640.291666666667000000
+          193.145833333333000000
+          418.041666666667000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'OrderNummer'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRLabel16: TQRLabel
+        Left = 141
+        Top = 74
+        Width = 46
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          46.302083333333300000
+          466.328125000000000000
+          244.739583333333000000
+          152.135416666667000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Best.dat:'
+        Color = clWhite
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRDBText13: TQRDBText
+        Left = 194
+        Top = 74
+        Width = 126
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666700000
+          640.291666666667000000
+          246.062500000000000000
+          418.041666666667000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Orderdatum'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRLabel17: TQRLabel
+        Left = 328
+        Top = 42
+        Width = 50
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          46.302083333333300000
+          1084.791666666670000000
+          138.906250000000000000
+          165.364583333333000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Referens:'
+        Color = clWhite
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRDBText14: TQRDBText
+        Left = 394
+        Top = 42
+        Width = 92
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666700000
+          1301.750000000000000000
+          140.229166666667000000
+          304.270833333333000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Referens'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRLabel18: TQRLabel
+        Left = 328
+        Top = 58
+        Width = 62
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          46.302083333333300000
+          1084.791666666670000000
+          191.822916666667000000
+          205.052083333333000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Godsm'#228'rke:'
+        Color = clWhite
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRDBText15: TQRDBText
+        Left = 394
+        Top = 58
+        Width = 93
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666700000
+          1301.750000000000000000
+          193.145833333333000000
+          306.916666666667000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Godsm'#228'rke'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRLabel19: TQRLabel
+        Left = 328
+        Top = 74
+        Width = 44
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          46.302083333333300000
+          1084.791666666670000000
+          244.739583333333000000
+          145.520833333333000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = True
+        AutoStretch = False
+        Caption = 'Lev. dat:'
+        Color = clWhite
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRDBText16: TQRDBText
+        Left = 394
+        Top = 74
+        Width = 94
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666700000
+          1301.750000000000000000
+          246.062500000000000000
+          309.562500000000000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Orderdatum'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRDBText1: TQRDBText
+        Left = 194
+        Top = 42
+        Width = 126
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          44.979166666666700000
+          640.291666666667000000
+          140.229166666667000000
+          418.041666666667000000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Kundnamn'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Microsoft Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        Transparent = False
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 9
+      end
+      object QRShape1: TQRShape
+        Left = 0
+        Top = 107
+        Width = 557
+        Height = 29
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          95.911458333333300000
+          0.000000000000000000
+          353.880208333333000000
+          1842.161458333330000000)
+        Shape = qrsHorLine
+        VertAdjust = 0
+      end
+    end
+    object QRLabel6: TQRLabel
+      Left = 44
+      Top = 841
+      Width = 166
+      Height = 15
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      Size.Values = (
+        49.609375000000000000
+        145.520833333333000000
+        2781.432291666670000000
+        549.010416666667000000)
+      Alignment = taLeftJustify
+      AlignToBand = False
+      AutoSize = True
+      AutoStretch = False
+      Caption = #196'ngelholms Mek. Verkstad ab'
+      Color = clWhite
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Microsoft Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = False
+      WordWrap = True
+      ExportAs = exptText
+      FontSize = 10
+    end
+  end
+  object QRLabel2: TQRLabel
+    Left = 140
+    Top = 206
+    Width = 77
+    Height = 16
+    Frame.Color = clBlack
+    Frame.DrawTop = False
+    Frame.DrawBottom = False
+    Frame.DrawLeft = False
+    Frame.DrawRight = False
+    Size.Values = (
+      42.333333333333300000
+      370.416666666667000000
+      545.041666666667000000
+      203.729166666667000000)
+    Alignment = taLeftJustify
+    AlignToBand = False
+    AutoSize = True
+    AutoStretch = False
+    Caption = 'Ordusnr:'
+    Color = clWhite
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Microsoft Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+    Transparent = False
+    WordWrap = True
+    ExportAs = exptText
+    FontSize = 10
+  end
+  object QRDBText2: TQRDBText
+    Left = 230
+    Top = 206
+    Width = 31
+    Height = 16
+    Frame.Color = clBlack
+    Frame.DrawTop = False
+    Frame.DrawBottom = False
+    Frame.DrawLeft = False
+    Frame.DrawRight = False
+    Size.Values = (
+      42.333333333333300000
+      608.541666666667000000
+      545.041666666667000000
+      82.020833333333300000)
+    Alignment = taLeftJustify
+    AlignToBand = False
+    AutoSize = True
+    AutoStretch = False
+    Color = clWhite
+    DataSet = qry
+    DataField = 'OrderID'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    Transparent = False
+    WordWrap = True
+    ExportAs = exptText
+    FontSize = 10
+  end
+  object qry: TADOQuery
+    Connection = dm.ADOConnection1
+    CursorType = ctStatic
+    Parameters = <
+      item
+        Name = 'OrderID'
+        Attributes = [paSigned]
+        DataType = ftInteger
+        Precision = 10
+        Size = 4
+        Value = Null
+      end>
+    SQL.Strings = (
+      'Select *,Prisperenhet * Antal as Pris  from OrderRad orad'
+      'join Artikel a on orad.artikelID = a.artikelid'
+      'join OrderHuvud oh on oh.OrderID = orad.OrderID'
+      'join kund k on k.Kundid = oh.kundid'
+      'where oh.OrderID = :OrderID'
+      'order by orad.Radnr'
+      ' ')
+    Left = 29
+    Top = 77
+    object qryOrderID: TIntegerField
+      FieldName = 'OrderID'
+    end
+    object qryArtikelID: TIntegerField
+      FieldName = 'ArtikelID'
+    end
+    object qryRadNr: TAutoIncField
+      FieldName = 'RadNr'
+      ReadOnly = True
+    end
+    object qryPositionnummer: TIntegerField
+      FieldName = 'Positionnummer'
+    end
+    object qryAntal: TFloatField
+      FieldName = 'Antal'
+    end
+    object qryPrisPerEnhet: TBCDField
+      FieldName = 'PrisPerEnhet'
+      DisplayFormat = '### ##0.00'
+      Precision = 19
+    end
+    object qryDatum: TDateTimeField
+      FieldName = 'Datum'
+    end
+    object qryArtikelnummer: TStringField
+      FieldName = 'Artikelnummer'
+      FixedChar = True
+      Size = 30
+    end
+    object qryBeteckning: TStringField
+      FieldName = 'Beteckning'
+      Size = 200
+    end
+    object qryYtbehandlingIDdefault: TStringField
+      FieldName = 'YtbehandlingIDdefault'
+      FixedChar = True
+      Size = 5
+    end
+    object qryKundID: TIntegerField
+      FieldName = 'KundID'
+    end
+    object qryOrderNummer: TStringField
+      FieldName = 'OrderNummer'
+      Size = 30
+    end
+    object qryOrderdatum: TDateTimeField
+      FieldName = 'Orderdatum'
+    end
+    object qryGodsmrke: TStringField
+      FieldName = 'Godsm'#228'rke'
+      Size = 50
+    end
+    object qryReferens: TStringField
+      FieldName = 'Referens'
+      Size = 50
+    end
+    object qryKundnamn: TStringField
+      FieldName = 'Kundnamn'
+      Size = 50
+    end
+    object qryPris: TFloatField
+      FieldName = 'Pris'
+      ReadOnly = True
+      DisplayFormat = '### ##0.00'
+    end
+  end
+end

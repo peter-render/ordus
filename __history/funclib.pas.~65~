@@ -1,0 +1,639 @@
+unit funclib;
+
+interface
+
+uses datamodule, messages, sysutils, dbtables, forms, windows, typinfo,
+  stdctrls, controls, graphics, wwdbgrid, comobj, dialogs, DB, printers,
+  comctrls, classes,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
+  FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
+  FireDAC.Phys,
+  FireDAC.Comp.Client, FireDAC.Phys.ODBCBase, FireDAC.Phys.MSSQL,
+  FireDAC.VCLUI.Wait, FireDAC.Comp.UI,
+  FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
+  FireDAC.Comp.DataSet, StrUtils;
+
+// Procedure CWriteln(text_string: string; isCon: boolean);
+function RightStr(Const Str: String; Size: Word): String;
+function MidStr(Const Str: String; From, Size: Word): String;
+function LeftStr(Const Str: String; Size: Word): String;
+function LSquote(Str: string): string;
+function ESql(const cSqlstr: string): variant;
+function GetWinUserName: string;
+procedure LSExecSql(const cSqlstr: string);
+function IIF(const bln1: boolean; const var1, var2: variant): variant;
+procedure SETDBControlColor(aControl: Tcontrol; mdataset: TFDDataSet);
+function GetCurrentUserName: string;
+function LastDayOfMonth(inDatum: TDateTime): TDateTime;
+function FirstDayOfMonth(inDatum: TDateTime): TDateTime;
+procedure Grid2Excel(dbGrid: TwwDbgrid; strHeader: string);
+function Roundmoney(f: double): double;
+function strzero(Str: string; ant: Integer): string;
+function cDow(datum: TDateTime): string;
+function WeekDay(strdatum: string): string;
+procedure CursorWait;
+procedure CursorDef;
+
+procedure ShowNorecords;
+function SetDefaultPrinter(PrinterName: string): string;
+function Checkfilename(strfilename: string): string;
+function PrinterExists(PrinterName: string): boolean;
+function HexToTColor(sColor: string): TColor;
+function Parse(Char, S: string; Count: Integer): string;
+function DateIsEmpty(datum: TDateTime): boolean;
+function AddDay(datum: TDateTime; days: Integer): TDateTime;
+function MinutesToDaysHoursMinutes(AMinutes: Integer): string;
+function MinutesToHoursMinutes(AMinutes: Integer): string;
+procedure requery(DataSet: TFDquery);
+procedure KillProcessNow;
+function ftgsystemvalue(key: string; DefaultStr: string): string;
+function GetAppVersionStr: string;
+function GetAppVersionBuildStr: string;
+function FoldernameFix(strfolder: string): String;
+function GetQrfilename(fname: string): string;
+
+implementation
+
+// *********************************************************
+
+// $00 E6E6E6
+
+function GetQrfilename(fname: string): string;
+begin
+  result := FoldernameFix(ftgsystemvalue('pdf.folder.qr', '')) +
+    extractfilename(fname) + '_' + inttostr(random(1000000)) + '.pdf';
+//    extractfilename(fname) + '_' + inttostr(random(1000000)) + '.qrp';
+
+end;
+
+function FoldernameFix(strfolder: string): String;
+begin
+
+  while AnsiRightStr(strfolder, 1) = '\' do
+  begin
+    delete(strfolder, length(strfolder), 1)
+  end;
+
+  result := strfolder + '\';
+
+end;
+
+Procedure CWriteln(text_string: string; isCon: boolean);
+begin
+
+  if isCon then
+    writeln(text_string);
+
+end;
+
+function GetAppVersionBuildStr: string;
+var
+  Exe: string;
+  Size, Handle: DWORD;
+  Buffer: TBytes;
+  FixedPtr: PVSFixedFileInfo;
+begin
+  Exe := ParamStr(0);
+  Size := GetFileVersionInfoSize(PChar(Exe), Handle);
+  if Size = 0 then
+    RaiseLastOSError;
+  SetLength(Buffer, Size);
+  if not GetFileVersionInfo(PChar(Exe), Handle, Size, Buffer) then
+    RaiseLastOSError;
+  if not VerQueryValue(Buffer, '\', Pointer(FixedPtr), Size) then
+    RaiseLastOSError;
+  result := Format('%d.%d.%d.%d', [LongRec(FixedPtr.dwFileVersionMS).Hi,
+    // major
+    LongRec(FixedPtr.dwFileVersionMS).Lo, // minor
+    LongRec(FixedPtr.dwFileVersionLS).Hi, // release
+    LongRec(FixedPtr.dwFileVersionLS).Lo]) // build
+end;
+
+function GetAppVersionStr: string;
+var
+  Rec: LongRec;
+begin
+  Rec := LongRec(GetFileVersion(ParamStr(0)));
+  result := Format('%d.%d', [Rec.Hi, Rec.Lo])
+end;
+
+function ftgsystemvalue(key: string; DefaultStr: string): string;
+var
+
+  res: string;
+  cnt: Integer;
+  bet: string;
+begin
+  cnt := dm.FDConnection1.ExecSQLScalar
+    ('Select count(*) from ftgsystem where systemname = ' + LSquote(key));
+  if cnt = 0 then
+  begin
+    bet := '<ej definierad>';
+    dm.FDConnection1.ExecSQL
+      ('Insert into ftgsystem (Beteckning,Systemname,Värde) values (' +
+      LSquote(bet) + ',' + LSquote(key) + ',' + LSquote(DefaultStr) + ')');
+    res := DefaultStr;
+  end
+  else
+    res := dm.FDConnection1.ExecSQLScalar
+      ('Select värde from ftgsystem where systemname = ' + LSquote(key));
+  result := res;
+end;
+
+procedure KillProcessNow; // in fmxutils.pas
+var
+  memmgr: TMemoryManager;
+begin
+  try
+    exitproc := nil;
+    ExceptProc := nil;
+    ErrorProc := nil;
+    SetRaiseList(nil);
+    LibModuleList := nil;
+    ModuleUnloadList := Nil;
+    // ask windows nicely to kill us. (well, as nice as we get here)
+    TerminateProcess(GetCurrentProcess, 0);
+    // what - still here? Surely not, Let's pop the stack
+    while true do
+      asm
+        pop eax;
+      end;
+
+  finally
+    // we don't believe you could ever get here. but if we do,
+    // well, we'll just make sure that nothing will ever work again anyway.
+    memmgr.GetMem := nil;
+    memmgr.FreeMem := nil;
+    memmgr.ReallocMem := nil;
+    SetMemoryManager(memmgr);
+  end;
+end;
+
+procedure requery(DataSet: TFDquery);
+begin
+  with (DataSet as TFDquery) do
+  begin
+
+    close;
+    open;
+
+  end;
+
+end;
+
+function MinutesToDaysHoursMinutes(AMinutes: Integer): string;
+const
+  HOURSPERDAY = 8;
+  // wieviele Stunden hat der Tag? (Beispiel hier: 1 Arbeitstag)
+var
+  days: Integer;
+  Hours: Integer;
+  Minutes: Integer;
+begin
+
+  if (AMinutes > 0) then
+  begin
+    Hours := AMinutes div 60;
+    Minutes := AMinutes mod 60;
+    days := Hours div HOURSPERDAY;
+    Hours := Hours mod HOURSPERDAY;
+  end
+  else
+  begin
+    Hours := 0;
+    Minutes := 0;
+    days := 0;
+  end;
+  if days > 0 then
+    result := Format('%dd %dh %.2dmin', [days, Hours, Minutes])
+    // Result := Format('%dd %dh %dmin', [days, Hours, Minutes])
+  else if Hours > 0 then
+    result := Format('%dh %.2dmin', [Hours, Minutes])
+    // Result := Format('%dh %dmin', [Hours, Minutes])
+  else
+    // Result := Format('%.2dmin', [Hours, Minutes]);
+    result := Format('%.2dmin', [Minutes]);
+
+  // Result := Format('%dmin', [Minutes]);
+end;
+
+function MinutesToHoursMinutes(AMinutes: Integer): string;
+var
+  Hours: Integer;
+  Minutes: Integer;
+begin
+
+  if (AMinutes > 0) then
+  begin
+    Hours := AMinutes div 60;
+    Minutes := AMinutes mod 60;
+  end
+  else
+  begin
+    Hours := 0;
+    Minutes := 0;
+  end;
+  if (Hours > 0) and (Minutes > 0) then
+    result := Format('%dh %.1dmin', [Hours, Minutes])
+  else if (Hours > 0) then
+    result := Format('%dh', [Hours, Minutes])
+  else
+    result := Format('%.1dmin', [Minutes]);
+end;
+
+function AddDay(datum: TDateTime; days: Integer): TDateTime;
+var
+  Year, Month, Day, Hour: Word;
+begin
+  DecodeDate(datum, Year, Month, Day);
+  result := EncodeDate(Year, Month, Day) + days;
+end;
+
+function DateIsEmpty(datum: TDateTime): boolean;
+begin
+  result := DateTimeToStr(datum) <= '1900-01-01'
+end;
+
+function Parse(Char, S: string; Count: Integer): string;
+var
+  I: Integer;
+  T: string;
+begin
+  if S <> '' then
+  begin
+    if S[length(S)] <> Char then
+      S := S + Char;
+    for I := 1 to Count do
+    begin
+      T := Copy(S, 0, Pos(Char, S) - 1);
+      S := Copy(S, Pos(Char, S) + 1, length(S));
+    end;
+    result := T;
+  end;
+end;
+
+function HexToTColor(sColor: string): TColor;
+begin
+  result := RGB(StrToInt('$' + Copy(sColor, 4, 2)),
+    StrToInt('$' + Copy(sColor, 6, 2)), StrToInt('$' + Copy(sColor, 8, 2)));
+end;
+
+function PrinterExists(PrinterName: string): boolean;
+var
+  j: Integer;
+  aPrinter: TPrinter;
+begin
+
+  result := false;
+  aPrinter := TPrinter.create;
+  for j := 0 to Printer.printers.Count - 1 do
+  begin
+    if Printer.printers[j] = PrinterName then
+      result := true;
+  end;
+  aPrinter.Free;
+end;
+
+function SetDefaultPrinter(PrinterName: string): string;
+var
+  j: Integer;
+  Device: PChar;
+  Driver: PChar;
+  Port: PChar;
+  HdeviceMode: Thandle;
+  aPrinter: TPrinter;
+  DefaultPrinterName: string;
+begin
+
+  Printer.PrinterIndex := -1;
+  DefaultPrinterName := Printer.printers[Printer.PrinterIndex];
+
+  GetMem(Device, 255);
+  GetMem(Driver, 255);
+  GetMem(Port, 255);
+  aPrinter := TPrinter.create;
+  for j := 0 to Printer.printers.Count - 1 do
+  begin
+    if Printer.printers[j] = PrinterName then
+    begin
+      aPrinter.PrinterIndex := j;
+      aPrinter.getprinter(Device, Driver, Port, HdeviceMode);
+      StrCat(Device, ',');
+      StrCat(Device, Driver);
+      StrCat(Device, Port);
+      WriteProfileString('windows', 'device', Device);
+      StrCopy(Device, 'windows');
+      SendMessage(HWND_BROADCAST, WM_WININICHANGE, 0, Longint(@Device));
+    end;
+  end;
+  FreeMem(Device, 255);
+  FreeMem(Driver, 255);
+  FreeMem(Port, 255);
+  aPrinter.Free;
+  result := DefaultPrinterName;
+end;
+
+function Checkfilename(strfilename: string): string;
+var
+  strfile: string;
+  strExt: string;
+  sn, n: string;
+  x, a, b: Integer;
+
+begin
+
+  while fileexists(strfilename) do
+  begin
+
+    strExt := ExtractFileExt(strfilename);
+    strfile := Copy(strfilename, 1, length(strfilename) - length(strExt));
+    if Copy(strfile, length(strfile), 1) <> ')' then
+      strfile := strfile + '(2)'
+    else
+    begin
+      a := Pos('(', strfile);
+      b := Pos(')', strfile);
+      sn := Copy(strfile, a + 1, b - a - 1);
+
+      if (a > 0) and (b > 0) and (a < b) then
+      begin
+        try
+
+          x := StrToInt(sn);
+          inc(x);
+          n := inttostr(x);
+        except
+          n := '2'
+        end;
+
+        strfile := Copy(strfile, 1, a) + n + ')';
+
+      end;
+    end;
+    strfilename := strfile + strExt;
+  end;
+  result := strfilename;
+end;
+
+procedure ShowNorecords;
+begin
+  showmessage('Inga poster funna - rapporten avbryts!');
+end;
+
+procedure CursorWait;
+begin
+  screen.cursor := crHourglass;
+
+end;
+
+procedure CursorDef;
+begin
+  screen.cursor := crDefault;
+end;
+
+function WeekDay(strdatum: string): string;
+begin
+  result := Copy(cDow(strtodate(strdatum)), 1, 2);
+end;
+
+function cDow(datum: TDateTime): string;
+var
+  days: array [1 .. 7] of string;
+begin
+  days[1] := 'Söndag';
+  days[2] := 'Mondag';
+  days[3] := 'Tisdag';
+  days[4] := 'Onsdag';
+  days[5] := 'Torsdag';
+  days[6] := 'Fredag';
+  days[7] := 'Lördag';
+  result := days[DayOfWeek(datum)];
+end;
+
+function strzero(Str: string; ant: Integer): string;
+// fyller upp med  noller på vänster sidan
+var
+  I: Integer;
+begin
+  result := trim(Str);
+  if length(result) < ant then
+    for I := 1 to ant - length(Str) do
+      result := '0' + result;
+end;
+
+function Roundmoney(f: double): double;
+begin
+  result := round(f * 100) / 100;
+end;
+
+function LastDayOfMonth(inDatum: TDateTime): TDateTime;
+var
+  Year, Month, Day: Word;
+begin
+  DecodeDate(inDatum, Year, Month, Day);
+  result := EncodeDate(Year, Month, 15) + 30;
+  DecodeDate(result, Year, Month, Day);
+  result := EncodeDate(Year, Month, 1) - 1;
+end;
+
+function FirstDayOfMonth(inDatum: TDateTime): TDateTime;
+var
+  Year, Month, Day: Word;
+begin
+  DecodeDate(inDatum, Year, Month, Day);
+  result := EncodeDate(Year, Month, 1);
+end;
+
+function GetCurrentUserName: string;
+const
+  cnMaxUserNameLen = 254;
+var
+  sUserName: string;
+  dwUserNameLen: DWORD;
+begin
+  dwUserNameLen := cnMaxUserNameLen - 1;
+  SetLength(sUserName, cnMaxUserNameLen);
+  GetUserName(PChar(sUserName), dwUserNameLen);
+  SetLength(sUserName, dwUserNameLen);
+  result := trim(sUserName);
+end;
+
+procedure SETDBControlColor(aControl: Tcontrol; mdataset: TFDDataSet);
+var
+  FontPropInfo: PPropInfo;
+begin
+
+  // if (GetPropInfo(aControl.classinfo,'Datasource')= nil) then
+  if not((aControl is TCustomedit) or (aControl is TCustomcontrol)) then
+    exit
+  else
+  begin
+
+    FontPropInfo := GetpropInfo(aControl.classinfo, 'Font');
+
+    if (aControl.enabled = false) then
+      TFont(GetOrdProp(aControl, FontPropInfo)).Color := clGrayText
+    else
+    begin
+      if mdataset.state in [dsedit, dsInsert] then
+        TFont(GetOrdProp(aControl, FontPropInfo)).Color := clBlue
+      else
+        TFont(GetOrdProp(aControl, FontPropInfo)).Color := clBlack;
+
+    end;
+
+  end;
+end;
+
+function IIF(const bln1: boolean; const var1, var2: variant): variant;
+begin
+  if bln1 then
+    result := var1
+  else
+    result := var2;
+
+end;
+
+function GetWinUserName: string;
+var
+  Buffer: array [0 .. 255] of Char;
+  buffSize: DWORD;
+begin
+  buffSize := sizeOf(Buffer);
+  GetUserName(@Buffer, buffSize);
+  result := uppercase(Buffer);
+end;
+
+procedure LSExecSql(const cSqlstr: string);
+begin
+  with TFDquery.create(Session) do
+  begin
+    try
+      Connection := dm.FDConnection1;
+      Sql.Add(cSqlstr);
+      // sql.savetofile('C:\lsexec.sql');
+      ExecSQL;
+    finally
+      Free;
+    end;
+  end;
+end;
+
+function LSquote(Str: string): string;
+begin
+  result := #39 + Str + #39;
+end;
+
+function ESql(const cSqlstr: string): variant;
+begin
+  with TFDquery.create(Session) do
+  begin
+    Connection := dm.FDConnection1;
+    Sql.Add(cSqlstr);
+    open;
+    if not eof then
+      result := fields[0].value;
+    close;
+  end;
+
+end;
+
+procedure Grid2Excel(dbGrid: TwwDbgrid; strHeader: string);
+var
+  x, S: variant;
+  I, r, c: Integer;
+begin
+  // ProgressWin('Export der Daten nach Excel...');
+  try
+    x := CreateOLEObject('Excel.Application');
+  except
+    MessageDlg('Kan inte starta Excel!', mtError, [mbOK], 0);
+    // ProgressWin('');
+    exit;
+  end;
+
+  x.WorkBooks.Add;
+  S := x.WorkBooks[1].WorkSheets[1];
+
+  r := 1;
+  c := 1;
+
+  if strHeader <> '' then
+  begin
+    S.Cells[r, c] := 'Timetrack ' + strHeader + '    ' + DateTimeToStr(Now);
+    S.Cells[r, c].Font.Bold := true;
+    r := r + 2;
+  end;
+
+  with dbGrid do
+  begin
+    for I := 0 to FieldCount - 1 do
+      S.Columns[1 + I].ColumnWidth := (ColWidthsPixels[I + 1] div 6);
+
+    S.Rows[r].Font.Bold := true;
+
+    for I := 0 to FieldCount - 1 do
+      S.Cells[r, 1 + I] := fields[I].FieldName;
+  end;
+
+  with dbGrid.DataSource.DataSet do
+  begin
+    DisableControls;
+    First;
+    while not eof do
+    begin
+      r := r + 1;
+      for I := 0 to dbGrid.FieldCount - 1 do
+      begin
+        // progressWin('Export von .. ( R' + IntToStr(r) + '/C' + IntToStr(1 + i) + ')');
+        case dbGrid.fields[I].DataType of
+          ftAutoInc:
+            S.Cells[r, 1 + I] := dbGrid.fields[I].asString;
+          ftString:
+            S.Cells[r, 1 + I] := dbGrid.fields[I].asString;
+          ftInteger:
+            S.Cells[r, 1 + I] := dbGrid.fields[I].asInteger;
+          ftFloat:
+            S.Cells[r, 1 + I] := dbGrid.fields[I].asFloat;
+          ftCurrency:
+            S.Cells[r, 1 + I] := dbGrid.fields[I].asFloat;
+          ftDate:
+            S.Cells[r, 1 + I] := dbGrid.fields[I].asDatetime;
+
+          ftDateTime:
+            begin
+              if dbGrid.fields[I].asString <> '' then
+                S.Cells[r, 1 + I] := dbGrid.fields[I].asDatetime;
+            end;
+          ftMemo:
+            S.Cells[r, 1 + I] := dbGrid.fields[I].asString;
+          ftBoolean:
+            S.Cells[r, 1 + I] := dbGrid.fields[I].asBoolean;
+        end;
+      end;
+      Next;
+    end;
+    EnableControls;
+  end;
+  // ProgressWin('');
+  x.Visible := true;
+end;
+
+function RightStr(Const Str: String; Size: Word): String;
+begin
+  if Size > length(Str) then
+    Size := length(Str);
+  RightStr := Copy(Str, length(Str) - Size + 1, Size)
+end;
+
+function MidStr(Const Str: String; From, Size: Word): String;
+begin
+  MidStr := Copy(Str, From, Size)
+end;
+
+function LeftStr(Const Str: String; Size: Word): String;
+begin
+  LeftStr := Copy(Str, 1, Size)
+end;
+
+end.

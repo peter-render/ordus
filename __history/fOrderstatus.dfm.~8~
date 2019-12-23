@@ -1,0 +1,177 @@
+inherited frmOrderstatus: TfrmOrderstatus
+  Left = 439
+  Top = 284
+  Caption = 'Orderstatus'
+  ClientHeight = 369
+  ClientWidth = 532
+  ExplicitWidth = 538
+  ExplicitHeight = 398
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 413
+    Height = 369
+    ExplicitWidth = 413
+    ExplicitHeight = 369
+    inherited Bevel1: TBevel
+      Width = 376
+      ExplicitWidth = 376
+    end
+    inherited Bevel2: TBevel
+      Top = 344
+      ExplicitTop = 344
+    end
+    object Label1: TLabel [2]
+      Left = 24
+      Top = 216
+      Width = 54
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Orderstatus'
+      FocusControl = DBEdit1
+    end
+    object Label2: TLabel [3]
+      Left = 24
+      Top = 243
+      Width = 54
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Beteckning'
+      FocusControl = DBEdit2
+    end
+    object Label3: TLabel [4]
+      Left = 35
+      Top = 269
+      Width = 43
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Sortorder'
+      FocusControl = DBEdit3
+    end
+    object Label4: TLabel [5]
+      Left = 39
+      Top = 296
+      Width = 39
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'BGColor'
+      FocusControl = DBEdit4
+    end
+    inherited dbGrid: TwwDBGrid
+      Width = 376
+      Selected.Strings = (
+        'Orderstatus'#9'9'#9'Orderstatus'
+        'Beteckning'#9'22'#9'Beteckning'
+        'Sortorder'#9'7'#9'Sortorder'
+        'BGColor'#9'15'#9'BGColor')
+      OnCalcCellColors = dbGridCalcCellColors
+      ExplicitWidth = 376
+    end
+    object DBEdit1: TDBEdit
+      Left = 88
+      Top = 212
+      Width = 41
+      Height = 21
+      DataField = 'Orderstatus'
+      DataSource = DataSource1
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object DBEdit2: TDBEdit
+      Left = 88
+      Top = 239
+      Width = 304
+      Height = 21
+      DataField = 'Beteckning'
+      DataSource = DataSource1
+      TabOrder = 2
+    end
+    object DBEdit3: TDBEdit
+      Left = 88
+      Top = 265
+      Width = 64
+      Height = 21
+      DataField = 'Sortorder'
+      DataSource = DataSource1
+      TabOrder = 3
+    end
+    object DBEdit4: TDBEdit
+      Left = 88
+      Top = 292
+      Width = 81
+      Height = 21
+      DataField = 'BGColor'
+      DataSource = DataSource1
+      TabOrder = 4
+    end
+    object BtnColor: TButton
+      Left = 172
+      Top = 290
+      Width = 75
+      Height = 25
+      Caption = #196'ndra f'#228'rg'
+      Enabled = False
+      TabOrder = 5
+      OnClick = BtnColorClick
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 413
+    Height = 369
+    ExplicitLeft = 413
+    ExplicitHeight = 369
+    inherited DBNav: TDBNavigator
+      Hints.Strings = ()
+    end
+  end
+  inherited DataSource1: TDataSource
+    OnStateChange = DataSource1StateChange
+    Left = 340
+    Top = 288
+  end
+  inherited FDQuery1: TFDQuery
+    SQL.Strings = (
+      'Select * from OrderStatus order by Sortorder')
+    Left = 316
+    object FDQuery1Orderstatus: TStringField
+      DisplayWidth = 9
+      FieldName = 'Orderstatus'
+      Origin = 'Orderstatus'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQuery1Beteckning: TStringField
+      DisplayWidth = 22
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Required = True
+      Size = 50
+    end
+    object FDQuery1Sortorder: TSmallintField
+      DisplayWidth = 7
+      FieldName = 'Sortorder'
+      Origin = 'Sortorder'
+      Required = True
+    end
+    object FDQuery1BGColor: TStringField
+      DisplayWidth = 15
+      FieldName = 'BGColor'
+      Origin = 'BGColor'
+      FixedChar = True
+      Size = 10
+    end
+    object FDQuery1Id: TFDAutoIncField
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
+  end
+  object ColorDialog1: TColorDialog
+    Options = [cdFullOpen]
+    Left = 427
+    Top = 208
+  end
+end

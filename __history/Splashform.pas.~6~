@@ -1,0 +1,47 @@
+unit Splashform;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, ExtCtrls, Vcl.Imaging.jpeg;
+
+type
+  TSplashV = class(TForm)
+    Image1: TImage;
+    Shape1: TShape;
+    Button1: TButton;
+    Label1: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label2: TLabel;
+    Label5: TLabel;
+    procedure Button1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  SplashV: TSplashV;
+
+implementation
+
+{$R *.DFM}
+
+uses funclib;
+
+procedure TSplashV.Button1Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TSplashV.FormShow(Sender: TObject);
+begin
+  label2.Caption:= GetAppVersionBuildStr;
+end;
+
+end.
+

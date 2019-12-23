@@ -1,0 +1,560 @@
+﻿object rptOffertKalkyl: TrptOffertKalkyl
+  Left = 0
+  Top = 0
+  Caption = 'rptOffertKalkyl'
+  ClientHeight = 946
+  ClientWidth = 927
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  Scaled = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Report: TQuickRep
+    Left = 72
+    Top = 40
+    Width = 794
+    Height = 1123
+    ShowingPreview = False
+    DataSet = qry
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    Functions.Strings = (
+      'PAGENUMBER'
+      'COLUMNNUMBER'
+      'REPORTTITLE')
+    Functions.DATA = (
+      '0'
+      '0'
+      #39#39)
+    Options = [FirstPageHeader, LastPageFooter]
+    Page.Columns = 1
+    Page.Orientation = poPortrait
+    Page.PaperSize = A4
+    Page.Continuous = False
+    Page.Values = (
+      100.000000000000000000
+      2970.000000000000000000
+      100.000000000000000000
+      2100.000000000000000000
+      200.000000000000000000
+      100.000000000000000000
+      0.000000000000000000)
+    PrinterSettings.Copies = 1
+    PrinterSettings.OutputBin = Auto
+    PrinterSettings.Duplex = False
+    PrinterSettings.FirstPage = 0
+    PrinterSettings.LastPage = 0
+    PrinterSettings.UseStandardprinter = False
+    PrinterSettings.UseCustomBinCode = False
+    PrinterSettings.CustomBinCode = 0
+    PrinterSettings.ExtendedDuplex = 0
+    PrinterSettings.UseCustomPaperCode = False
+    PrinterSettings.CustomPaperCode = 0
+    PrinterSettings.PrintMetaFile = False
+    PrinterSettings.MemoryLimit = 1000000
+    PrinterSettings.PrintQuality = 0
+    PrinterSettings.Collate = 0
+    PrinterSettings.ColorOption = 0
+    PrintIfEmpty = True
+    SnapToGrid = True
+    Units = MM
+    Zoom = 100
+    PrevFormStyle = fsNormal
+    PreviewInitialState = wsMaximized
+    PreviewWidth = 500
+    PreviewHeight = 500
+    PrevShowThumbs = False
+    PrevInitialZoom = qrZoomToFit
+    PreviewDefaultSaveType = stQRP
+    PreviewLeft = 0
+    PreviewTop = 0
+    object PageHeaderBand1: TQRBand
+      Left = 76
+      Top = 38
+      Width = 681
+      Height = 40
+      AlignToBottom = False
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        105.833333333333300000
+        1801.812500000000000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbPageHeader
+      object QRLabel2: TQRLabel
+        Left = 3
+        Top = 0
+        Width = 87
+        Height = 20
+        Size.Values = (
+          52.916666666666670000
+          7.937500000000000000
+          0.000000000000000000
+          230.187500000000000000)
+        XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Offertkalkyl'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
+        FontSize = 12
+      end
+    end
+    object ColumnHeaderBand1: TQRBand
+      Left = 76
+      Top = 78
+      Width = 681
+      Height = 40
+      AlignToBottom = False
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        105.833333333333300000
+        1801.812500000000000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbColumnHeader
+      object QRLabel3: TQRLabel
+        Left = 0
+        Top = 14
+        Width = 38
+        Height = 20
+        Size.Values = (
+          52.916666666666670000
+          0.000000000000000000
+          37.041666666666670000
+          100.541666666666700000)
+        XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Namn'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
+        FontSize = 10
+      end
+      object QRLabel4: TQRLabel
+        Left = 272
+        Top = 14
+        Width = 42
+        Height = 20
+        Size.Values = (
+          52.916666666666670000
+          719.666666666666700000
+          37.041666666666670000
+          111.125000000000000000)
+        XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Datum'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
+        FontSize = 10
+      end
+      object QRLabel5: TQRLabel
+        Left = 424
+        Top = 14
+        Width = 50
+        Height = 20
+        Size.Values = (
+          52.916666666666670000
+          1121.833333333333000000
+          37.041666666666670000
+          132.291666666666700000)
+        XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Caption = 'Timmar'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
+        FontSize = 10
+      end
+    end
+    object DetailBand1: TQRBand
+      Left = 76
+      Top = 118
+      Width = 681
+      Height = 20
+      AlignToBottom = False
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        52.916666666666670000
+        1801.812500000000000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbDetail
+      object QRDBText2: TQRDBText
+        Left = 3
+        Top = 6
+        Width = 38
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          7.937500000000000000
+          15.875000000000000000
+          100.541666666666700000)
+        XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Artikel'
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        VerticalAlignment = tlTop
+        FontSize = 10
+      end
+      object QRDBText4: TQRDBText
+        Left = 79
+        Top = 6
+        Width = 76
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          209.020833333333300000
+          15.875000000000000000
+          201.083333333333300000)
+        XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Ytbehandling'
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        VerticalAlignment = tlTop
+        FontSize = 10
+      end
+      object QRDBText5: TQRDBText
+        Left = 171
+        Top = 6
+        Width = 31
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          452.437500000000000000
+          15.875000000000000000
+          82.020833333333330000)
+        XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'Antal'
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        VerticalAlignment = tlTop
+        FontSize = 10
+      end
+      object QRDBText6: TQRDBText
+        Left = 235
+        Top = 6
+        Width = 151
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          621.770833333333300000
+          15.875000000000000000
+          399.520833333333300000)
+        XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'TillverkningstidUppskattad'
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        VerticalAlignment = tlTop
+        FontSize = 10
+      end
+      object QRDBText7: TQRDBText
+        Left = 355
+        Top = 6
+        Width = 87
+        Height = 17
+        Size.Values = (
+          44.979166666666670000
+          939.270833333333300000
+          15.875000000000000000
+          230.187500000000000000)
+        XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
+        Alignment = taLeftJustify
+        AlignToBand = False
+        Color = clWhite
+        DataSet = qry
+        DataField = 'PrisUppskattat'
+        Transparent = False
+        ExportAs = exptText
+        WrapStyle = BreakOnSpaces
+        FullJustify = False
+        MaxBreakChars = 0
+        VerticalAlignment = tlTop
+        FontSize = 10
+      end
+    end
+    object SummaryBand1: TQRBand
+      Left = 76
+      Top = 138
+      Width = 681
+      Height = 40
+      AlignToBottom = False
+      TransparentBand = False
+      ForceNewColumn = False
+      ForceNewPage = False
+      Size.Values = (
+        105.833333333333300000
+        1801.812500000000000000)
+      PreCaluculateBandHeight = False
+      KeepOnOnePage = False
+      BandType = rbSummary
+    end
+  end
+  object qry: TFDQuery
+    Active = True
+    OnCalcFields = qryCalcFields
+    Connection = dm.FDConnection1
+    FetchOptions.AssignedValues = [evItems]
+    SQL.Strings = (
+      'select ok.*'
+      'from dbo.OffertkalkylArtikel ok '
+      'where OffertkalkylId = :OffertkalkylId'
+      'and ok.Borttagen is null'
+      'order by ok.Id'
+      '')
+    Left = 20
+    Top = 264
+    ParamData = <
+      item
+        Name = 'OFFERTKALKYLID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryArtikel: TStringField
+      DisplayWidth = 21
+      FieldKind = fkLookup
+      FieldName = 'Artikel'
+      LookupDataSet = qryArtikeluppslag
+      LookupKeyFields = 'Id'
+      LookupResultField = 'Artikel'
+      KeyFields = 'ArtikelId'
+      Lookup = True
+    end
+    object Ytbehandling: TStringField
+      DisplayWidth = 16
+      FieldKind = fkLookup
+      FieldName = 'Ytbehandling'
+      LookupDataSet = qryYtbehandlingUppslag
+      LookupKeyFields = 'Id'
+      LookupResultField = 'Beteckning'
+      KeyFields = 'YtbehandlingId'
+      Lookup = True
+    end
+    object qryAntal: TIntegerField
+      DisplayWidth = 6
+      FieldName = 'Antal'
+      Origin = 'Antal'
+    end
+    object qryTillverkningstidUppskattad: TIntegerField
+      DisplayLabel = 'Tillv.tid uppsk tot.'
+      DisplayWidth = 14
+      FieldName = 'TillverkningstidUppskattad'
+      Origin = 'TillverkningstidUppskattad'
+    end
+    object qryPrisUppskattat: TCurrencyField
+      DisplayLabel = 'Pris ber'#228'knat'
+      DisplayWidth = 11
+      FieldName = 'PrisUppskattat'
+      Origin = 'PrisUppskattat'
+    end
+    object PrisUppskattatSt: TCurrencyField
+      DisplayLabel = 'Pris ber'#228'knat/st'
+      DisplayWidth = 13
+      FieldKind = fkCalculated
+      FieldName = 'PrisUppskattatSt'
+      Calculated = True
+    end
+    object qryPrisUppskattatStRabatt: TCurrencyField
+      DisplayLabel = 'Rabbaterat pris'
+      DisplayWidth = 15
+      FieldKind = fkCalculated
+      FieldName = 'PrisUppskattatStRabatt'
+      Calculated = True
+    end
+    object qryPrisFastställt: TCurrencyField
+      DisplayLabel = 'Pris fastst'#228'llt/st'
+      DisplayWidth = 16
+      FieldName = 'PrisFastst'#228'llt'
+      Origin = '[PrisFastst'#228'llt]'
+    end
+    object qryViktStk: TFloatField
+      DisplayWidth = 10
+      FieldName = 'ViktStk'
+      Origin = 'ViktStk'
+      Visible = False
+    end
+    object qryLasertidSelStk: TFloatField
+      DisplayWidth = 10
+      FieldName = 'LasertidSelStk'
+      Origin = 'LasertidSelStk'
+      Visible = False
+    end
+    object qrySkrotandelprocent: TFloatField
+      DisplayWidth = 10
+      FieldName = 'Skrotandelprocent'
+      Origin = 'Skrotandelprocent'
+      Visible = False
+    end
+    object qryPrisPerstk: TFloatField
+      DisplayLabel = 'Pris fastst'#228'llt/st'
+      DisplayWidth = 15
+      FieldKind = fkCalculated
+      FieldName = 'PrisPerstk'
+      Visible = False
+      currency = True
+      Calculated = True
+    end
+    object qryId: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'Id'
+      Origin = 'Id'
+      ReadOnly = True
+      Visible = False
+    end
+    object qryArtikelId: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'ArtikelId'
+      Origin = 'ArtikelId'
+      Visible = False
+    end
+    object qryBorttagen: TSQLTimeStampField
+      DisplayWidth = 34
+      FieldName = 'Borttagen'
+      Origin = 'Borttagen'
+      Visible = False
+    end
+    object qryOffertId: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'OffertId'
+      Origin = 'OffertId'
+      Visible = False
+    end
+    object qryOffertkalkylId: TIntegerField
+      FieldName = 'OffertkalkylId'
+      Origin = 'OffertkalkylId'
+      Visible = False
+    end
+    object qryYtbehandlingId: TIntegerField
+      FieldName = 'YtbehandlingId'
+      Origin = 'YtbehandlingId'
+      Visible = False
+    end
+  end
+  object qryArtikeluppslag: TFDQuery
+    Active = True
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select Id, Artikelnummer+ '#39' '#39'+ Beteckning Artikel  from artikel')
+    Left = 32
+    Top = 329
+    object qryArtikeluppslagId: TFDAutoIncField
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object qryArtikeluppslagArtikel: TStringField
+      FieldName = 'Artikel'
+      Origin = 'Artikel'
+      ReadOnly = True
+      Size = 231
+    end
+  end
+  object qryYtbehandlingUppslag: TFDQuery
+    Active = True
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select Id, Beteckning from Ytbehandling')
+    Left = 460
+    Top = 509
+  end
+end

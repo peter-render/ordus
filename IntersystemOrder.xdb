@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+  <element xmlns="http://www.w3.org/2001/XMLSchema" name="ORDERS420" type="ORDERS420Type"/>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="ORDERS420Type"><annotation>
+      <appinfo xdb:docElement="ORDERS420"/>
+    </annotation>
+    <sequence>
+      <element name="Order" type="OrderType"/>
+    </sequence>
+    <attribute name="SoftwareManufacturer" type="xs:integer"><annotation>
+        <appinfo xdb:dataType="String"/>
+      </annotation>
+    </attribute>
+    <attribute name="SoftwareName" type="xs:integer"><annotation>
+        <appinfo xdb:dataType="String"/>
+      </annotation>
+    </attribute>
+    <attribute name="SoftwareVersion" type="xs:integer"><annotation>
+        <appinfo xdb:dataType="String"/>
+      </annotation>
+    </attribute>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="OrderType">
+    <sequence>
+      <element name="Head" type="HeadType"/>
+      <element name="Rows" type="RowsType"/>
+    </sequence>
+    <attribute name="OrderNumber" type="xs:integer"><annotation>
+        <appinfo xdb:dataType="String"/>
+      </annotation>
+    </attribute>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="HeadType">
+    <sequence>
+      <element name="Supplier" type="SupplierType"/>
+      <element name="Buyer" type="BuyerType"/>
+      <element name="References" type="ReferencesType"/>
+      <element name="DeliveryAddress" type="DeliveryAddressType"/>
+      <element name="Terms" type="TermsType"/>
+      <element name="Export" type="ExportType"/>
+    </sequence>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="SupplierType">
+    <sequence>
+      <element name="Name" type="xs:integer"/>
+      <element name="StreetBox1" type="xs:integer"/>
+      <element name="StreetBox2" type="xs:string"/>
+      <element name="ZipCity1" type="xs:integer"/>
+      <element name="ZipCity2" type="xs:string"/>
+      <element name="Country" type="xs:integer"/>
+    </sequence>
+    <attribute name="SupplierCodeEdi" type="xs:integer"/>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="BuyerType">
+    <sequence>
+      <element name="Name" type="xs:integer"/>
+      <element name="StreetBox1" type="xs:integer"/>
+      <element name="StreetBox2" type="xs:string"/>
+      <element name="ZipCity1" type="xs:integer"/>
+      <element name="ZipCity2" type="xs:string"/>
+      <element name="Country" type="xs:integer"/>
+    </sequence>
+    <attribute name="BuyerCodeEdi" type="xs:integer"/>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="ReferencesType">
+    <sequence>
+      <element name="BuyerReference" type="xs:integer"/>
+      <element name="BuyerComment" type="xs:string"/>
+      <element name="GoodsLabeling" type="GoodsLabelingType"/>
+    </sequence>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="GoodsLabelingType">
+    <sequence>
+      <element name="Row1" type="xs:integer"/>
+      <element name="Row2" type="xs:string"/>
+    </sequence>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="DeliveryAddressType">
+    <sequence>
+      <element name="Name" type="xs:integer"/>
+      <element name="StreetBox1" type="xs:integer"/>
+      <element name="StreetBox2" type="xs:string"/>
+      <element name="ZipCity1" type="xs:integer"/>
+      <element name="ZipCity2" type="xs:string"/>
+      <element name="Country" type="xs:integer"/>
+      <element name="CompanyAdressFlag" type="xs:integer"/>
+    </sequence>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="TermsType">
+    <sequence>
+      <element name="DeliveryTerms" type="DeliveryTermsType"/>
+      <element name="CustomerInvoiceCode" type="xs:integer"/>
+      <element name="OrderDate" type="xs:integer"/>
+      <element name="PaymentTerms" type="PaymentTermsType"/>
+    </sequence>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="DeliveryTermsType">
+    <sequence>
+      <element name="IncoTermCombiTerm" type="xs:string"/>
+      <element name="DeliveryMethod" type="xs:string"/>
+      <element name="TransportPayer" type="xs:integer"/>
+      <element name="CustomerTransportTimeDays" type="xs:integer"/>
+    </sequence>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="PaymentTermsType">
+    <sequence>
+      <element name="TermsOfPaymentDays" type="xs:integer"/>
+    </sequence>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="ExportType">
+    <sequence>
+      <element name="Currency" type="xs:integer"/>
+    </sequence>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="RowsType">
+    <sequence>
+      <element name="Row" type="RowType" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="RowType">
+    <sequence>
+      <element name="Part" type="PartType"/>
+      <element name="Text" type="xs:integer"><annotation>
+          <appinfo xdb:dataType="String"/>
+        </annotation>
+      </element>
+      <element name="ReferenceNumber" type="xs:string"/>
+      <element name="Quantity" type="xs:integer"/>
+      <element name="Unit" type="xs:integer"><annotation>
+          <appinfo xdb:dataType="String"/>
+        </annotation>
+      </element>
+      <element name="DeliveryPeriod" type="xs:integer"><annotation>
+          <appinfo xdb:dataType="TDateTime"/>
+        </annotation>
+      </element>
+      <element name="Each" type="xs:integer"/>
+      <element name="Discount" type="xs:integer"><annotation>
+          <appinfo xdb:dataType="Word"/>
+        </annotation>
+      </element>
+      <element name="Setup" type="xs:integer"/>
+      <element name="Alloy" type="xs:integer"/>
+    </sequence>
+    <attribute name="RowNumber" type="xs:integer"/>
+    <attribute name="RowType" type="xs:integer"/>
+  </complexType>
+  <complexType xmlns="http://www.w3.org/2001/XMLSchema" name="PartType">
+    <attribute name="PartNumber" type="xs:integer"><annotation>
+        <appinfo xdb:dataType="String"/>
+      </annotation>
+    </attribute>
+    <attribute name="SupplierPartNumber" type="xs:string"/>
+    <attribute name="Revision" type="xs:string"/>
+  </complexType>
+</xs:schema>

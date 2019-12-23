@@ -1,0 +1,66 @@
+object frmEditbeteckning: TfrmEditbeteckning
+  Left = 588
+  Top = 110
+  ActiveControl = DBEdit1
+  Caption = 'Egen m'#228'rkning'
+  ClientHeight = 131
+  ClientWidth = 434
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Default'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 16
+    Top = 24
+    Width = 71
+    Height = 13
+    Caption = 'Egen m'#228'rkning'
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 90
+    Width = 434
+    Height = 41
+    Align = alBottom
+    TabOrder = 0
+    DesignSize = (
+      434
+      41)
+    object btnOK: TButton
+      Left = 268
+      Top = 8
+      Width = 75
+      Height = 25
+      Anchors = [akRight, akBottom]
+      Caption = 'OK'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object btnCancel: TButton
+      Left = 348
+      Top = 8
+      Width = 75
+      Height = 25
+      Anchors = [akRight, akBottom]
+      Caption = 'Avbryt'
+      ModalResult = 2
+      TabOrder = 1
+    end
+  end
+  object DBEdit1: TDBEdit
+    Left = 16
+    Top = 44
+    Width = 393
+    Height = 21
+    DataField = 'Beteckning'
+    DataSource = frmFoljesedel.DataSource1
+    TabOrder = 1
+  end
+end

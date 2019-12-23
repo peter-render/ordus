@@ -1,0 +1,76 @@
+program Ordus2;
+
+uses
+  Forms,
+  Datamodule in 'Datamodule.pas' {dm: TDataModule},
+  dFakturaNummer in 'dFakturaNummer.pas' {dlgFakturaNummer},
+  dSimple in 'dSimple.pas' {dlgSimple},
+  fArbetsorder in 'fArbetsorder.pas' {frmArbetsorder},
+  fCalc in 'fCalc.pas' {frmCalc},
+  fEditBeteckning in 'fEditBeteckning.pas' {frmEditbeteckning},
+  fFoljesedel in 'fFoljesedel.pas' {frmFoljesedel},
+  fftgsystem in 'fftgsystem.pas' {frmFtgSystem},
+  fimpleDialog in 'fimpleDialog.pas' {frmSimpledialog},
+  fKunder in 'fKunder.pas' {frmKunder},
+  fKundPerson in 'fKundPerson.pas' {frmKundPerson},
+  fMain in 'fMain.pas' {frmMain},
+  fMaterialpris in 'fMaterialpris.pas' {frmMaterialpris},
+  fNyFoljesedel in 'fNyFoljesedel.pas' {frmNyFoljesedel},
+  fOrderadUpdate in 'fOrderadUpdate.pas' {frmOrderradUpdate},
+  fOrderPlanering in 'fOrderPlanering.pas' {frmOrderPlanering},
+  fOrderImportInterSystem in 'fOrderImportInterSystem.pas' {frmOrderImportIntersystem},
+  fOrderNew in 'fOrderNew.pas' {frmOrderNew},
+  fOrderstatus in 'fOrderstatus.pas' {frmOrderstatus},
+  fOrderStatusUpdate in 'fOrderStatusUpdate.pas' {frmOrderStatusUpdate},
+  fPersonal in 'fPersonal.pas' {frmPersonal},
+  fPrintPDF in 'fPrintPDF.pas' {frmPrintPDF},
+  fritning in 'fritning.pas' {frmRitning},
+  fStdRV in 'fStdRV.pas' {frmStdRV},
+  rArbetsorder in 'rArbetsorder.pas' {rptArbetsorder},
+  rOrder in 'rOrder.pas' {rptOrder},
+  fYtbehandling in 'fYtbehandling.pas' {frmYtbehandling},
+  fTimpris in 'fTimpris.pas' {frmTimpris},
+  fShoworder in 'fShoworder.pas' {frmShowOrder},
+  rEtikett in 'rEtikett.pas' {rptEtikett},
+  rPallEtikett in 'rPallEtikett.pas' {rptPallEtikett},
+  rAvrapporteradTidrapport in 'rAvrapporteradTidrapport.pas' {rptAvrapporteradTidRapport},
+  fAvtapporteradTidRapport in 'fAvtapporteradTidRapport.pas' {frmAvrapporteradTidRapport},
+  rLagerplatsetikett2 in 'rLagerplatsetikett2.pas' {rptLagerplatsEtikett2},
+  fArtikelgrupp in 'fArtikelgrupp.pas' {frmArtikelgrupp},
+  fArtikeltext in 'fArtikeltext.pas' {frmArtikeltext},
+  rOrderradDetaljer in 'rOrderradDetaljer.pas' {rptOrderradDetaljer},
+  fKalender in 'fKalender.pas' {frmKalender},
+  fOrder in 'fOrder.pas' {frmOrder},
+  Splashform in 'Splashform.pas' {SplashV},
+  fKalenderarende in 'fKalenderarende.pas' {frmKalenderarende},
+  fNotering in 'fNotering.pas' {frmNotering},
+  fDagens in 'fDagens.pas' {frmDagens},
+  fArtikel in 'fArtikel.pas' {frmArtikel},
+  Vcl.Themes,
+  Vcl.Styles,
+  fOrderEdit in 'fOrderEdit.pas' {frmOrderEdit},
+  rFoljesedel in 'rFoljesedel.pas' {rptFoljesedel},
+  fKontakter in 'fKontakter.pas' {frmKontakter},
+  funclibProj in 'funclibProj.pas',
+  fPlaneringsvecka in 'fPlaneringsvecka.pas' {frmPlaneringsvecka},
+  fKontaktEdit in 'fKontaktEdit.pas' {frmKontaktEdit},
+  fSupport in 'fSupport.pas' {frmSupport},
+  fConnectionEdit in 'fConnectionEdit.pas' {frmConnectionEdit},
+  funclib in 'funclib.pas',
+  fDagar in 'fDagar.pas' {frmDagar},
+  IntersystemOrder in 'IntersystemOrder.pas',
+  fUH in 'fUH.pas' {frmUH},
+  fSattFakturadatum in 'fSattFakturadatum.pas' {frmSattFakturadatum},
+  fOrderLista in 'fOrderLista.pas' {frmOrderLista},
+  prefaktura4 in 'prefaktura4.pas',
+  fOrderkalkyl in 'fOrderkalkyl.pas' {frmOrderkalkyl};
+
+{$R *.RES}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(Tdm, dm);
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TfrmOrderLista, frmOrderLista);
+  Application.Run;
+end.

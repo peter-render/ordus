@@ -1,0 +1,42 @@
+unit fKontaktEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dSimple, Vcl.StdCtrls, Vcl.ExtCtrls, vcl.wwdblook, Vcl.Mask, Vcl.DBCtrls,
+  Data.DB, FireDAC.Stan.Intf, FireDAC.Comp.Client;
+
+type
+  TfrmKontaktEdit = class(TdlgSimple)
+    DataSource1: TDataSource;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Label4: TLabel;
+    DBEdit4: TDBEdit;
+    Label5: TLabel;
+    Label6: TLabel;
+    DBEdit6: TDBEdit;
+    Label7: TLabel;
+    DBEdit7: TDBEdit;
+    Label8: TLabel;
+    DBEdit8: TDBEdit;
+    lcKund: TwwDBLookupCombo;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmKontaktEdit: TfrmKontaktEdit;
+
+implementation
+
+{$R *.dfm}
+
+uses Datamodule;
+
+end.

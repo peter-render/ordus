@@ -1,0 +1,267 @@
+﻿object frmOrderEditList: TfrmOrderEditList
+  Left = 377
+  Top = 289
+  BorderStyle = bsDialog
+  Caption = #196'ndra order'
+  ClientHeight = 545
+  ClientWidth = 829
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 504
+    Width = 829
+    Height = 41
+    Align = alBottom
+    TabOrder = 0
+    DesignSize = (
+      829
+      41)
+    object Button1: TButton
+      Left = 662
+      Top = 8
+      Width = 75
+      Height = 25
+      Anchors = [akRight, akBottom]
+      Caption = 'Spara'
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+    end
+    object Button2: TButton
+      Left = 743
+      Top = 8
+      Width = 75
+      Height = 25
+      Anchors = [akRight, akBottom]
+      Caption = 'Avbryt'
+      ModalResult = 2
+      TabOrder = 1
+      OnClick = Button2Click
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 829
+    Height = 61
+    Align = alTop
+    Caption = 'Panel2'
+    TabOrder = 1
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 61
+    Width = 829
+    Height = 443
+    Align = alClient
+    BorderWidth = 3
+    Caption = 'Panel3'
+    TabOrder = 2
+    ExplicitTop = 63
+    object wwDBGrid1: TwwDBGrid
+      Left = 4
+      Top = 4
+      Width = 821
+      Height = 435
+      ControlType.Strings = (
+        'YBBeteckning;CustomEdit;wwDBLookupCombo1;F')
+      Selected.Strings = (
+        'ID'#9'24'#9'ID'#9#9
+        'Antal'#9'20'#9'Antal'#9#9
+        'YtbehandlingId'#9'45'#9'YtbehandlingId'#9#9
+        'YBBeteckning'#9'50'#9'YBBeteckning'#9'F'#9)
+      IniAttributes.Delimiter = ';;'
+      IniAttributes.UnicodeIniFile = False
+      TitleColor = clBtnFace
+      FixedCols = 0
+      ShowHorzScrollBar = True
+      Align = alClient
+      DataSource = dsoOrderRad
+      TabOrder = 0
+      TitleAlignment = taLeftJustify
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      TitleLines = 1
+      TitleButtons = False
+      ExplicitLeft = 8
+      ExplicitTop = 6
+    end
+    object wwDBLookupCombo1: TwwDBLookupCombo
+      Left = 376
+      Top = 316
+      Width = 274
+      Height = 16
+      DropDownAlignment = taLeftJustify
+      Selected.Strings = (
+        'Beteckning'#9'50'#9'Beteckning'#9'F')
+      DataField = 'YtbehandlingId'
+      DataSource = dsoOrderRad
+      LookupTable = dm.qryLUYtbehandling
+      LookupField = 'YtbehandlingId'
+      Style = csDropDownList
+      AutoSelect = False
+      TabOrder = 1
+      AutoDropDown = True
+      ShowButton = True
+      PreciseEditRegion = False
+      AllowClearKey = False
+      ShowMatchText = True
+    end
+  end
+  object qryOrderEdit: TFDQuery
+    MasterSource = frmOrderLista.dsoOrder
+    MasterFields = 'OrderID'
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select  o.Id ,KundId,Ordernummer,Orderdatum,'
+      
+        'Godsm'#228'rke,ReferensId,OrdertypId,OrderStatusId,Leveransdatum,Fakt' +
+        'uranummer,Fakturadatum,Fritext,'
+      'YtbehandlingDatum,YtbehandlingId'
+      'from OrderHuvud o where Id = :OrderID')
+    Left = 688
+    Top = 8
+    ParamData = <
+      item
+        Name = 'ORDERID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryOrderEditId: TFDAutoIncField
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object qryOrderEditKundId: TIntegerField
+      FieldName = 'KundId'
+      Origin = 'KundId'
+      Required = True
+    end
+    object qryOrderEditOrdernummer: TStringField
+      FieldName = 'Ordernummer'
+      Origin = 'Ordernummer'
+      Required = True
+      Size = 30
+    end
+    object qryOrderEditOrderdatum: TSQLTimeStampField
+      FieldName = 'Orderdatum'
+      Origin = 'Orderdatum'
+      Required = True
+    end
+    object qryOrderEditGodsmärke: TStringField
+      FieldName = 'Godsm'#228'rke'
+      Origin = '[Godsm'#228'rke]'
+      Size = 50
+    end
+    object qryOrderEditReferensId: TIntegerField
+      FieldName = 'ReferensId'
+      Origin = 'ReferensId'
+    end
+    object qryOrderEditOrdertypId: TIntegerField
+      FieldName = 'OrdertypId'
+      Origin = 'OrdertypId'
+    end
+    object qryOrderEditOrderStatusId: TIntegerField
+      FieldName = 'OrderStatusId'
+      Origin = 'OrderStatusId'
+    end
+    object qryOrderEditLeveransdatum: TSQLTimeStampField
+      FieldName = 'Leveransdatum'
+      Origin = 'Leveransdatum'
+    end
+    object qryOrderEditFakturanummer: TStringField
+      FieldName = 'Fakturanummer'
+      Origin = 'Fakturanummer'
+    end
+    object qryOrderEditFakturadatum: TSQLTimeStampField
+      FieldName = 'Fakturadatum'
+      Origin = 'Fakturadatum'
+    end
+    object qryOrderEditFritext: TStringField
+      FieldName = 'Fritext'
+      Origin = 'Fritext'
+      Size = 2000
+    end
+    object qryOrderEditYtbehandlingDatum: TSQLTimeStampField
+      FieldName = 'YtbehandlingDatum'
+      Origin = 'YtbehandlingDatum'
+    end
+    object qryOrderEditYtbehandlingId: TIntegerField
+      FieldName = 'YtbehandlingId'
+      Origin = 'YtbehandlingId'
+    end
+  end
+  object qryOrderrad: TFDQuery
+    Active = True
+    MasterSource = frmOrderLista.dsoOrder
+    MasterFields = 'OrderID'
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select '
+      'orad.ID,'
+      '--a.Artikelnummer,'
+      'orad.Antal,'
+      'orad.YtbehandlingId'
+      ',yb.Beteckning YBBeteckning'
+      'from orderrad orad'
+      '--join Artikel a on a.Id = orad.ArtikelId'
+      'left join Ytbehandling yb on yb.Id = orad.YtbehandlingId'
+      ' where orad.OrderId = :OrderId'
+      '')
+    Left = 172
+    Top = 228
+    ParamData = <
+      item
+        Name = 'ORDERID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryOrderradID: TFDAutoIncField
+      DisplayWidth = 24
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object qryOrderradAntal: TFMTBCDField
+      DisplayWidth = 20
+      FieldName = 'Antal'
+      Origin = 'Antal'
+      Precision = 19
+      Size = 2
+    end
+    object qryOrderradYtbehandlingId: TIntegerField
+      DisplayWidth = 45
+      FieldName = 'YtbehandlingId'
+      Origin = 'YtbehandlingId'
+    end
+    object qryOrderradYBBeteckning: TStringField
+      DisplayWidth = 50
+      FieldName = 'YBBeteckning'
+      Origin = 'YBBeteckning'
+      Size = 50
+    end
+  end
+  object dsoOrderRad: TDataSource
+    DataSet = qryOrderrad
+    Left = 532
+    Top = 260
+  end
+end

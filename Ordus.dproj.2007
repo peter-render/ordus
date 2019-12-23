@@ -1,0 +1,175 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{8d4030f8-6197-41ab-8359-a7a33ec2bf43}</ProjectGuid>
+    <MainSource>Ordus.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>Ordus.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Alignment>1</DCC_Alignment>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Alignment>1</DCC_Alignment>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_Define>DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject xmlns=""> <Delphi.Personality>   <Parameters>
+      <Parameters Name="RunParams">/SHSPHR2\HSPHR /dOrdus</Parameters>
+      <Parameters Name="UseLauncher">False</Parameters>
+      <Parameters Name="LoadAllSymbols">True</Parameters>
+      <Parameters Name="LoadUnspecifiedSymbols">False</Parameters>
+    </Parameters>
+    <Language>
+      <Language Name="ProjectLang">$0000041D</Language>
+    </Language>
+    <VersionInfo>
+      <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+      <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+      <VersionInfo Name="MajorVer">1</VersionInfo>
+      <VersionInfo Name="MinorVer">0</VersionInfo>
+      <VersionInfo Name="Release">0</VersionInfo>
+      <VersionInfo Name="Build">0</VersionInfo>
+      <VersionInfo Name="Debug">False</VersionInfo>
+      <VersionInfo Name="PreRelease">False</VersionInfo>
+      <VersionInfo Name="Special">False</VersionInfo>
+      <VersionInfo Name="Private">False</VersionInfo>
+      <VersionInfo Name="DLL">False</VersionInfo>
+      <VersionInfo Name="Locale">1053</VersionInfo>
+      <VersionInfo Name="CodePage">1252</VersionInfo>
+    </VersionInfo>
+    <VersionInfoKeys>
+      <VersionInfoKeys Name="CompanyName"></VersionInfoKeys>
+      <VersionInfoKeys Name="FileDescription"></VersionInfoKeys>
+      <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+      <VersionInfoKeys Name="InternalName"></VersionInfoKeys>
+      <VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys>
+      <VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys>
+      <VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys>
+      <VersionInfoKeys Name="ProductName"></VersionInfoKeys>
+      <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+      <VersionInfoKeys Name="Comments"></VersionInfoKeys>
+    </VersionInfoKeys>
+    <Source>
+      <Source Name="MainSource">Ordus.dpr</Source>
+    </Source>
+  </Delphi.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <ItemGroup />
+  <ItemGroup>
+    <DelphiCompile Include="Ordus.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="Datamodule.pas">
+      <Form>dm</Form>
+    </DCCReference>
+    <DCCReference Include="dFakturaNummer.pas">
+      <Form>dlgFakturaNummer</Form>
+    </DCCReference>
+    <DCCReference Include="dSimple.pas">
+      <Form>dlgSimple</Form>
+    </DCCReference>
+    <DCCReference Include="fArtikel.pas">
+      <Form>frmArtikel</Form>
+    </DCCReference>
+    <DCCReference Include="fFoljesedel.pas">
+      <Form>frmFoljesedel</Form>
+    </DCCReference>
+    <DCCReference Include="fFprinterindex.pas">
+      <Form>frmPrinterindex</Form>
+    </DCCReference>
+    <DCCReference Include="fftgsystem.pas">
+      <Form>frmFtgSystem</Form>
+    </DCCReference>
+    <DCCReference Include="fKunder.pas">
+      <Form>frmKunder</Form>
+    </DCCReference>
+    <DCCReference Include="fKundPerson.pas">
+      <Form>frmKundPerson</Form>
+    </DCCReference>
+    <DCCReference Include="fMain.pas">
+      <Form>frmMain</Form>
+    </DCCReference>
+    <DCCReference Include="fMaterialpris.pas">
+      <Form>frmMaterialpris</Form>
+    </DCCReference>
+    <DCCReference Include="fOrder.pas">
+      <Form>frmOrder</Form>
+    </DCCReference>
+    <DCCReference Include="fOrderadUpdate.pas">
+      <Form>frmOrderradUpdate</Form>
+    </DCCReference>
+    <DCCReference Include="fOrderEdit.pas">
+      <Form>frmOrderEdit</Form>
+    </DCCReference>
+    <DCCReference Include="fOrderImport.pas">
+      <Form>frmOrderImport</Form>
+    </DCCReference>
+    <DCCReference Include="fOrderLista.pas">
+      <Form>frmOrderLista</Form>
+    </DCCReference>
+    <DCCReference Include="fOrderNew.pas">
+      <Form>frmOrderNew</Form>
+    </DCCReference>
+    <DCCReference Include="fOrderstatus.pas">
+      <Form>frmOrderstatus</Form>
+    </DCCReference>
+    <DCCReference Include="fOrderStatusUpdate.pas">
+      <Form>frmOrderStatusUpdate</Form>
+    </DCCReference>
+    <DCCReference Include="fPersonal.pas">
+      <Form>frmPersonal</Form>
+    </DCCReference>
+    <DCCReference Include="fPrintPDF.pas">
+      <Form>frmPrintPDF</Form>
+    </DCCReference>
+    <DCCReference Include="fShoworder.pas">
+      <Form>frmShowOrder</Form>
+    </DCCReference>
+    <DCCReference Include="fStdRV.pas">
+      <Form>frmStdRV</Form>
+    </DCCReference>
+    <DCCReference Include="fSupport.pas">
+      <Form>frmSupport</Form>
+    </DCCReference>
+    <DCCReference Include="fTimpris.pas">
+      <Form>frmTimpris</Form>
+    </DCCReference>
+    <DCCReference Include="funclib.pas" />
+    <DCCReference Include="fYtbehandling.pas">
+      <Form>frmYtbehandling</Form>
+    </DCCReference>
+    <DCCReference Include="rArbetsorder.pas">
+      <Form>rptArbetsorder</Form>
+    </DCCReference>
+    <DCCReference Include="rBaksidan.pas">
+      <Form>rptBaksidan</Form>
+    </DCCReference>
+    <DCCReference Include="rEtikett.pas">
+      <Form>rptEtikett</Form>
+    </DCCReference>
+    <DCCReference Include="rFoljesedel.pas">
+      <Form>rptFoljesedel</Form>
+    </DCCReference>
+    <DCCReference Include="rOrder.pas">
+      <Form>rptOrder</Form>
+    </DCCReference>
+    <DCCReference Include="rPallEtikett.pas">
+      <Form>rptPallEtikett</Form>
+    </DCCReference>
+    <DCCReference Include="Splashform.pas" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+</Project>

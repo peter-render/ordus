@@ -1,0 +1,413 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+	<element xmlns="http://www.w3.org/2001/XMLSchema" name="INVOIC416" type="INVOIC416Type"/>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="INVOIC416Type"><annotation>
+			<appinfo xdb:docElement="INVOIC416"/>
+		</annotation>
+		<sequence>
+			<element name="Invoice" type="InvoiceType"/>
+			<element name="Head" type="HeadType"/>
+			<element name="Rows" type="RowsType"/>
+		</sequence>
+		<attribute name="SoftwareManufacturer" type="xs:integer"><annotation>
+				<appinfo xdb:dataType="UnicodeString"/>
+			</annotation>
+		</attribute>
+		<attribute name="SoftwareName" type="xs:integer"><annotation>
+				<appinfo xdb:dataType="UnicodeString"/>
+			</annotation>
+		</attribute>
+		<attribute name="SoftwareVersion" type="xs:integer"><annotation>
+				<appinfo xdb:dataType="UnicodeString"/>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="InvoiceType">
+		<attribute name="InvoiceNumber" type="xs:integer"><annotation>
+				<appinfo xdb:dataType="unicodeString"/>
+			</annotation>
+		</attribute>
+		<attribute name="InvoiceType" type="xs:integer"><annotation>
+				<appinfo xdb:dataType="unicodeString"/>
+			</annotation>
+		</attribute>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="HeadType">
+		<sequence>
+			<element name="SellersOrderNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="OrderDate" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="BuyersOrderNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="DebitInvoiceNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="InvoiceDate" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="LanguageNameCode" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="Buyer" type="BuyerType"/>
+			<element name="Seller" type="SellerType"/>
+			<element name="InvoiceCurrency" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="PaymentDueDate" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="CurrencyExchangeRate" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="Double"/>
+				</annotation>
+			</element>
+			<element name="RateOfExchangeDate" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="EuVatText" type="xs:decimal"/>
+			<element name="GodsLabelLine1" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="GodsLabelLine2" type="xs:string"/>
+			<element name="HomeCurrency" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="TermsOfPayment" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="TermsOfPaymentNoOfDays" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="BankName" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="AccountNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SwiftAddress" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="BankGiroNumber" type="xs:string"/>
+			<element name="PlusGiroNumber" type="xs:string"/>
+			<element name="Factoring" type="FactoringType"/>
+			<element name="AlloyCost" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="Currency"/>
+				</annotation>
+			</element>
+			<element name="FreightCost" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="currency"/>
+				</annotation>
+			</element>
+			<element name="PackingCost" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="currency"/>
+				</annotation>
+			</element>
+			<element name="InsuranceCost" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="currency"/>
+				</annotation>
+			</element>
+			<element name="NetAmountInInvoiceCurrency" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="Currency"/>
+				</annotation>
+			</element>
+			<element name="InvoicingCharge" type="xs:integer"><annotation>
+          <appinfo xdb:dataType="Currency"/>
+        </annotation>
+      </element>
+			<element name="VatAmountInInvoiceCurrency" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="Currency"/>
+				</annotation>
+			</element>
+			<element name="Equalization" type="xs:integer"/>
+			<element name="PayableAmountInInvoiceCurrency" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="Currency"/>
+				</annotation>
+			</element>
+			<element name="TermsOfPaymentCashDiscount" type="xs:string"><annotation>
+          <appinfo xdb:dataType="Double"/>
+        </annotation>
+      </element>
+			<element name="TermsOfPaymentCashDiscountDate" type="xs:string"/>
+			<element name="AgreementNumber" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="BuyerType">
+		<sequence>
+			<element name="BuyerCode" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="BuyerName" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="BuyerVATRegistrationNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="BuyerRegistrationNumber" type="xs:string"/>
+			<element name="BuyerCountryCode" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="BuyerReference" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="BuyerReferencePhone" type="xs:string"/>
+			<element name="BuyerReferenceFax" type="xs:string"/>
+			<element name="BuyerReferenceEmail" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="InvoiceAddress" type="InvoiceAddressType"/>
+			<element name="DeliveryAddress" type="DeliveryAddressType"/>
+			<element name="GlobalLocationNumber" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="InvoiceAddressType">
+		<sequence>
+			<element name="InvoiceAddressName" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="InvoiceAddressStreetBox1" type="xs:string"/>
+			<element name="InvoiceAddressStreetBox2" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="InvoiceAddressZipCity1" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="InvoiceAddressZipCity2" type="xs:string"/>
+			<element name="InvoiceAddressCountry" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="DeliveryAddressType">
+		<sequence>
+			<element name="DeliveryAddressName" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="DeliveryAddressStreetBox1" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="DeliveryAddressStreetBox2" type="xs:string"/>
+			<element name="DeliveryAddressZipCity1" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="DeliveryAddressZipCity2" type="xs:string"/>
+			<element name="DeliveryAddressCountry" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="SellerType">
+		<sequence>
+			<element name="SellerSuplierCode" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerName" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerReference" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerReferencePhone" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerReferenceFax" type="xs:string"/>
+			<element name="SellerReferenceEmail" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerOrigin" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerWeb" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerPhone" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerFax" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerRegistrationNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerVatRegistrationNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellerCountryCode" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="PostalAddress" type="PostalAddressType"/>
+			<element name="VisitingAddress" type="VisitingAddressType"/>
+		</sequence>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="PostalAddressType">
+		<sequence>
+			<element name="PostalAddressStreetBox1" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="PostalAddressStreetBox2" type="xs:string"/>
+			<element name="PostalAddressZipCity1" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="PostalAddressZipCity2" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="PostalAddressCountry" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="VisitingAddressType">
+		<sequence>
+			<element name="VisitingAddressStreetBox1" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="VisitingAddressStreetBox2" type="xs:string"/>
+			<element name="VisitingAddressZipCity1" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="VisitingAddressZipCity2" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="VisitingAddressCountry" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="FactoringType">
+		<sequence>
+			<element name="FactoringSetting" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="FactoringBankName" type="xs:string"/>
+			<element name="FactoringAccountNumber" type="xs:string"/>
+			<element name="FactoringSwiftAddress" type="xs:string"/>
+			<element name="FactoringBankGiroNumber" type="xs:string"/>
+			<element name="FactoringPlusGiroNumber" type="xs:string"/>
+		</sequence>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="RowsType">
+		<sequence>
+			<element name="Row" type="RowType" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	<complexType xmlns="http://www.w3.org/2001/XMLSchema" name="RowType">
+		<sequence>
+			<element name="BuyersPartNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellersPartNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="PartDescription" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="DeliveryDate" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="Quantity" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="double"/>
+				</annotation>
+			</element>
+			<element name="Unit" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="UnicodeString"/>
+				</annotation>
+			</element>
+			<element name="Each" type="xs:integer"/>
+			<element name="Discount" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="double"/>
+				</annotation>
+			</element>
+			<element name="Price" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="currency"/>
+				</annotation>
+			</element>
+			<element name="VatRate" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="double"/>
+				</annotation>
+			</element>
+			<element name="RowSum" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="currency"/>
+				</annotation>
+			</element>
+			<element name="BuyersOrderNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="unicodeString"/>
+				</annotation>
+			</element>
+			<element name="SellersOrderNumber" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="unicodeString"/>
+				</annotation>
+			</element>
+			<element name="CountryOfOriginCode" type="xs:integer"><annotation>
+					<appinfo xdb:dataType="unicodeString"/>
+				</annotation>
+			</element>
+		</sequence>
+		<attribute name="RowNumber" type="xs:integer"/>
+		<attribute name="RowType" type="xs:integer"><annotation>
+				<appinfo xdb:dataType="UnicodeString"/>
+			</annotation>
+		</attribute>
+		<attribute name="RowPosition" type="xs:integer"/>
+		<attribute name="CostType" type="xs:integer"><annotation>
+				<appinfo xdb:dataType="UnicodeString"/>
+			</annotation>
+		</attribute>
+	</complexType>
+</xs:schema>

@@ -1,0 +1,1919 @@
+
+{*********************************************************************************************************************************}
+{                                                                                                                                 }
+{                                                        XML Data Binding                                                         }
+{                                                                                                                                 }
+{         Generated on: 2018-11-20 22:04:40                                                                                       }
+{       Generated from: C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\XML\Invoic416_V4.xsd   }
+{   Settings stored in: C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\XML\Invoic416_V4.xdb   }
+{                                                                                                                                 }
+{*********************************************************************************************************************************}
+
+unit Invoic416_V4;
+
+interface
+
+uses xmldom, XMLDoc, XMLIntf;
+const
+cuid = '{18646BC6-75DE-4A0E-B687-A1756794D309}'    ;
+
+type
+
+{ Forward Decls }
+
+  IXMLINVOIC416 = interface;
+  IXMLINVOIC416_Invoice = interface;
+  IXMLINVOIC416_Head = interface;
+  IXMLINVOIC416_Head_Buyer = interface;
+  IXMLINVOIC416_Head_Buyer_InvoiceAddress = interface;
+  IXMLINVOIC416_Head_Buyer_DeliveryAddress = interface;
+  IXMLINVOIC416_Head_Seller = interface;
+  IXMLINVOIC416_Head_Seller_PostalAddress = interface;
+  IXMLINVOIC416_Head_Seller_VisitingAddress = interface;
+  IXMLINVOIC416_Head_Factoring = interface;
+  IXMLINVOIC416_Rows = interface;
+  IXMLINVOIC416_Rows_Row = interface;
+
+{ IXMLINVOIC416 }
+
+  //IXMLINVOIC416 = interface(IXMLNode) [cuid]
+  IXMLINVOIC416 = interface[cuid]
+
+    { Property Accessors }
+    function Get_SoftwareManufacturer: String;
+    function Get_SoftwareName: String;
+    function Get_SoftwareVersion: String;
+    function Get_Invoice: IXMLINVOIC416_Invoice;
+    function Get_Head: IXMLINVOIC416_Head;
+    function Get_Rows: IXMLINVOIC416_Rows;
+    procedure Set_SoftwareManufacturer(Value: String);
+    procedure Set_SoftwareName(Value: String);
+    procedure Set_SoftwareVersion(Value: String);
+    { Methods & Properties }
+    property SoftwareManufacturer: String read Get_SoftwareManufacturer write Set_SoftwareManufacturer;
+    property SoftwareName: String read Get_SoftwareName write Set_SoftwareName;
+    property SoftwareVersion: String read Get_SoftwareVersion write Set_SoftwareVersion;
+    property Invoice: IXMLINVOIC416_Invoice read Get_Invoice;
+    property Head: IXMLINVOIC416_Head read Get_Head;
+    property Rows: IXMLINVOIC416_Rows read Get_Rows;
+  end;
+
+{ IXMLINVOIC416_Invoice }
+
+  IXMLINVOIC416_Invoice = interface(IXMLNode)  ['{4D7BACB7-2D3D-4C5F-AFD4-9EEDA333E2CC}']
+    { Property Accessors }
+    function Get_InvoiceNumber: String;
+    function Get_InvoiceType: Integer;
+    procedure Set_InvoiceNumber(Value: String);
+    procedure Set_InvoiceType(Value: Integer);
+    { Methods & Properties }
+    property InvoiceNumber: String read Get_InvoiceNumber write Set_InvoiceNumber;
+    property InvoiceType: Integer read Get_InvoiceType write Set_InvoiceType;
+  end;
+
+{ IXMLINVOIC416_Head }
+
+  IXMLINVOIC416_Head = interface(IXMLNode)
+    ['{CF5AC1A7-FEC2-45D3-99F6-33AE844CF801}']
+    { Property Accessors }
+    function Get_SellersOrderNumber: String;
+    function Get_OrderDate: String;
+    function Get_BuyersOrderNumber: String;
+    function Get_DebitInvoiceNumber: String;
+    function Get_InvoiceDate: String;
+    function Get_LanguageNameCode: String;
+    function Get_Buyer: IXMLINVOIC416_Head_Buyer;
+    function Get_Seller: IXMLINVOIC416_Head_Seller;
+    function Get_InvoiceCurrency: String;
+    function Get_PaymentDueDate: String;
+    function Get_CurrencyExchangeRate: String;
+    function Get_RateOfExchangeDate: String;
+    function Get_EuVatText: String;
+    function Get_GodsLabelLine1: String;
+    function Get_GodsLabelLine2: String;
+    function Get_HomeCurrency: String;
+    function Get_TermsOfPayment: String;
+    function Get_TermsOfPaymentNoOfDays: Integer;
+    function Get_BankName: String;
+    function Get_AccountNumber: String;
+    function Get_SwiftAddress: String;
+    function Get_BankGiroNumber: String;
+    function Get_PlusGiroNumber: String;
+    function Get_Factoring: IXMLINVOIC416_Head_Factoring;
+    function Get_AlloyCost: String;
+    function Get_FreightCost: String;
+    function Get_PackingCost: String;
+    function Get_InsuranceCost: String;
+    function Get_NetAmountInInvoiceCurrency: String;
+    function Get_InvoicingCharge: String;
+    function Get_VatAmountInInvoiceCurrency: String;
+    function Get_Equalization: String;
+    function Get_PayableAmountInInvoiceCurrency: String;
+    procedure Set_SellersOrderNumber(Value: String);
+    procedure Set_OrderDate(Value: String);
+    procedure Set_BuyersOrderNumber(Value: String);
+    procedure Set_DebitInvoiceNumber(Value: String);
+    procedure Set_InvoiceDate(Value: String);
+    procedure Set_LanguageNameCode(Value: String);
+    procedure Set_InvoiceCurrency(Value: String);
+    procedure Set_PaymentDueDate(Value: String);
+    procedure Set_CurrencyExchangeRate(Value: String);
+    procedure Set_RateOfExchangeDate(Value: String);
+    procedure Set_EuVatText(Value: String);
+    procedure Set_GodsLabelLine1(Value: String);
+    procedure Set_GodsLabelLine2(Value: String);
+    procedure Set_HomeCurrency(Value: String);
+    procedure Set_TermsOfPayment(Value: String);
+    procedure Set_TermsOfPaymentNoOfDays(Value: Integer);
+    procedure Set_BankName(Value: String);
+    procedure Set_AccountNumber(Value: String);
+    procedure Set_SwiftAddress(Value: String);
+    procedure Set_BankGiroNumber(Value: String);
+    procedure Set_PlusGiroNumber(Value: String);
+    procedure Set_AlloyCost(Value: String);
+    procedure Set_FreightCost(Value: String);
+    procedure Set_PackingCost(Value: String);
+    procedure Set_InsuranceCost(Value: String);
+    procedure Set_NetAmountInInvoiceCurrency(Value: String);
+    procedure Set_InvoicingCharge(Value: String);
+    procedure Set_VatAmountInInvoiceCurrency(Value: String);
+    procedure Set_Equalization(Value: String);
+    procedure Set_PayableAmountInInvoiceCurrency(Value: String);
+    { Methods & Properties }
+    property SellersOrderNumber: String read Get_SellersOrderNumber write Set_SellersOrderNumber;
+    property OrderDate: String read Get_OrderDate write Set_OrderDate;
+    property BuyersOrderNumber: String read Get_BuyersOrderNumber write Set_BuyersOrderNumber;
+    property DebitInvoiceNumber: String read Get_DebitInvoiceNumber write Set_DebitInvoiceNumber;
+    property InvoiceDate: String read Get_InvoiceDate write Set_InvoiceDate;
+    property LanguageNameCode: String read Get_LanguageNameCode write Set_LanguageNameCode;
+    property Buyer: IXMLINVOIC416_Head_Buyer read Get_Buyer;
+    property Seller: IXMLINVOIC416_Head_Seller read Get_Seller;
+    property InvoiceCurrency: String read Get_InvoiceCurrency write Set_InvoiceCurrency;
+    property PaymentDueDate: String read Get_PaymentDueDate write Set_PaymentDueDate;
+    property CurrencyExchangeRate: String read Get_CurrencyExchangeRate write Set_CurrencyExchangeRate;
+    property RateOfExchangeDate: String read Get_RateOfExchangeDate write Set_RateOfExchangeDate;
+    property EuVatText: String read Get_EuVatText write Set_EuVatText;
+    property GodsLabelLine1: String read Get_GodsLabelLine1 write Set_GodsLabelLine1;
+    property GodsLabelLine2: String read Get_GodsLabelLine2 write Set_GodsLabelLine2;
+    property HomeCurrency: String read Get_HomeCurrency write Set_HomeCurrency;
+    property TermsOfPayment: String read Get_TermsOfPayment write Set_TermsOfPayment;
+    property TermsOfPaymentNoOfDays: Integer read Get_TermsOfPaymentNoOfDays write Set_TermsOfPaymentNoOfDays;
+    property BankName: String read Get_BankName write Set_BankName;
+    property AccountNumber: String read Get_AccountNumber write Set_AccountNumber;
+    property SwiftAddress: String read Get_SwiftAddress write Set_SwiftAddress;
+    property BankGiroNumber: String read Get_BankGiroNumber write Set_BankGiroNumber;
+    property PlusGiroNumber: String read Get_PlusGiroNumber write Set_PlusGiroNumber;
+    property Factoring: IXMLINVOIC416_Head_Factoring read Get_Factoring;
+    property AlloyCost: String read Get_AlloyCost write Set_AlloyCost;
+    property FreightCost: String read Get_FreightCost write Set_FreightCost;
+    property PackingCost: String read Get_PackingCost write Set_PackingCost;
+    property InsuranceCost: String read Get_InsuranceCost write Set_InsuranceCost;
+    property NetAmountInInvoiceCurrency: String read Get_NetAmountInInvoiceCurrency write Set_NetAmountInInvoiceCurrency;
+    property InvoicingCharge: String read Get_InvoicingCharge write Set_InvoicingCharge;
+    property VatAmountInInvoiceCurrency: String read Get_VatAmountInInvoiceCurrency write Set_VatAmountInInvoiceCurrency;
+    property Equalization: String read Get_Equalization write Set_Equalization;
+    property PayableAmountInInvoiceCurrency: String read Get_PayableAmountInInvoiceCurrency write Set_PayableAmountInInvoiceCurrency;
+  end;
+
+{ IXMLINVOIC416_Head_Buyer }
+
+  IXMLINVOIC416_Head_Buyer = interface(IXMLNode)
+    ['{86F39393-5AC1-4874-AEDF-268E187F1DD5}']
+    { Property Accessors }
+    function Get_BuyerCode: String;
+    function Get_BuyerName: String;
+    function Get_BuyerVATRegistrationNumber: String;
+    function Get_BuyerReference: String;
+    function Get_BuyerReferencePhone: String;
+    function Get_BuyerReferenceFax: String;
+    function Get_BuyerReferenceEmail: String;
+    function Get_InvoiceAddress: IXMLINVOIC416_Head_Buyer_InvoiceAddress;
+    function Get_DeliveryAddress: IXMLINVOIC416_Head_Buyer_DeliveryAddress;
+    procedure Set_BuyerCode(Value: String);
+    procedure Set_BuyerName(Value: String);
+    procedure Set_BuyerVATRegistrationNumber(Value: String);
+    procedure Set_BuyerReference(Value: String);
+    procedure Set_BuyerReferencePhone(Value: String);
+    procedure Set_BuyerReferenceFax(Value: String);
+    procedure Set_BuyerReferenceEmail(Value: String);
+    { Methods & Properties }
+    property BuyerCode: String read Get_BuyerCode write Set_BuyerCode;
+    property BuyerName: String read Get_BuyerName write Set_BuyerName;
+    property BuyerVATRegistrationNumber: String read Get_BuyerVATRegistrationNumber write Set_BuyerVATRegistrationNumber;
+    property BuyerReference: String read Get_BuyerReference write Set_BuyerReference;
+    property BuyerReferencePhone: String read Get_BuyerReferencePhone write Set_BuyerReferencePhone;
+    property BuyerReferenceFax: String read Get_BuyerReferenceFax write Set_BuyerReferenceFax;
+    property BuyerReferenceEmail: String read Get_BuyerReferenceEmail write Set_BuyerReferenceEmail;
+    property InvoiceAddress: IXMLINVOIC416_Head_Buyer_InvoiceAddress read Get_InvoiceAddress;
+    property DeliveryAddress: IXMLINVOIC416_Head_Buyer_DeliveryAddress read Get_DeliveryAddress;
+  end;
+
+{ IXMLINVOIC416_Head_Buyer_InvoiceAddress }
+
+  IXMLINVOIC416_Head_Buyer_InvoiceAddress = interface(IXMLNode)
+    ['{65522396-318E-41DA-9A3E-2C0FC3507A0B}']
+    { Property Accessors }
+    function Get_InvoiceAddressName: String;
+    function Get_InvoiceAddressStreetBox1: String;
+    function Get_InvoiceAddressStreetBox2: String;
+    function Get_InvoiceAddressZipCity1: String;
+    function Get_InvoiceAddressZipCity2: String;
+    function Get_InvoiceAddressCountry: String;
+    procedure Set_InvoiceAddressName(Value: String);
+    procedure Set_InvoiceAddressStreetBox1(Value: String);
+    procedure Set_InvoiceAddressStreetBox2(Value: String);
+    procedure Set_InvoiceAddressZipCity1(Value: String);
+    procedure Set_InvoiceAddressZipCity2(Value: String);
+    procedure Set_InvoiceAddressCountry(Value: String);
+    { Methods & Properties }
+    property InvoiceAddressName: String read Get_InvoiceAddressName write Set_InvoiceAddressName;
+    property InvoiceAddressStreetBox1: String read Get_InvoiceAddressStreetBox1 write Set_InvoiceAddressStreetBox1;
+    property InvoiceAddressStreetBox2: String read Get_InvoiceAddressStreetBox2 write Set_InvoiceAddressStreetBox2;
+    property InvoiceAddressZipCity1: String read Get_InvoiceAddressZipCity1 write Set_InvoiceAddressZipCity1;
+    property InvoiceAddressZipCity2: String read Get_InvoiceAddressZipCity2 write Set_InvoiceAddressZipCity2;
+    property InvoiceAddressCountry: String read Get_InvoiceAddressCountry write Set_InvoiceAddressCountry;
+  end;
+
+{ IXMLINVOIC416_Head_Buyer_DeliveryAddress }
+
+  IXMLINVOIC416_Head_Buyer_DeliveryAddress = interface(IXMLNode)
+    ['{A01141DE-FEF4-43EF-9915-B3DC025CBE95}']
+    { Property Accessors }
+    function Get_DeliveryAddressName: String;
+    function Get_DeliveryAddressStreetBox1: String;
+    function Get_DeliveryAddressStreetBox2: String;
+    function Get_DeliveryAddressZipCity1: String;
+    function Get_DeliveryAddressZipCity2: String;
+    function Get_DeliveryAddressCountry: String;
+    procedure Set_DeliveryAddressName(Value: String);
+    procedure Set_DeliveryAddressStreetBox1(Value: String);
+    procedure Set_DeliveryAddressStreetBox2(Value: String);
+    procedure Set_DeliveryAddressZipCity1(Value: String);
+    procedure Set_DeliveryAddressZipCity2(Value: String);
+    procedure Set_DeliveryAddressCountry(Value: String);
+    { Methods & Properties }
+    property DeliveryAddressName: String read Get_DeliveryAddressName write Set_DeliveryAddressName;
+    property DeliveryAddressStreetBox1: String read Get_DeliveryAddressStreetBox1 write Set_DeliveryAddressStreetBox1;
+    property DeliveryAddressStreetBox2: String read Get_DeliveryAddressStreetBox2 write Set_DeliveryAddressStreetBox2;
+    property DeliveryAddressZipCity1: String read Get_DeliveryAddressZipCity1 write Set_DeliveryAddressZipCity1;
+    property DeliveryAddressZipCity2: String read Get_DeliveryAddressZipCity2 write Set_DeliveryAddressZipCity2;
+    property DeliveryAddressCountry: String read Get_DeliveryAddressCountry write Set_DeliveryAddressCountry;
+  end;
+
+{ IXMLINVOIC416_Head_Seller }
+
+  IXMLINVOIC416_Head_Seller = interface(IXMLNode)
+    ['{2F0B250F-2156-480E-B398-9210FE2F3739}']
+    { Property Accessors }
+    function Get_SellerSuplierCode: String;
+    function Get_SellerName: String;
+    function Get_SellerReference: String;
+    function Get_SellerReferencePhone: String;
+    function Get_SellerReferenceFax: String;
+    function Get_SellerReferenceEmail: String;
+    function Get_SellerOrigin: String;
+    function Get_SellerWeb: String;
+    function Get_SellerPhone: String;
+    function Get_SellerFax: String;
+    function Get_SellerRegistrationNumber: String;
+    function Get_SellerVatRegistrationNumber: String;
+    function Get_PostalAddress: IXMLINVOIC416_Head_Seller_PostalAddress;
+    function Get_VisitingAddress: IXMLINVOIC416_Head_Seller_VisitingAddress;
+    procedure Set_SellerSuplierCode(Value: String);
+    procedure Set_SellerName(Value: String);
+    procedure Set_SellerReference(Value: String);
+    procedure Set_SellerReferencePhone(Value: String);
+    procedure Set_SellerReferenceFax(Value: String);
+    procedure Set_SellerReferenceEmail(Value: String);
+    procedure Set_SellerOrigin(Value: String);
+    procedure Set_SellerWeb(Value: String);
+    procedure Set_SellerPhone(Value: String);
+    procedure Set_SellerFax(Value: String);
+    procedure Set_SellerRegistrationNumber(Value: String);
+    procedure Set_SellerVatRegistrationNumber(Value: String);
+    { Methods & Properties }
+    property SellerSuplierCode: String read Get_SellerSuplierCode write Set_SellerSuplierCode;
+    property SellerName: String read Get_SellerName write Set_SellerName;
+    property SellerReference: String read Get_SellerReference write Set_SellerReference;
+    property SellerReferencePhone: String read Get_SellerReferencePhone write Set_SellerReferencePhone;
+    property SellerReferenceFax: String read Get_SellerReferenceFax write Set_SellerReferenceFax;
+    property SellerReferenceEmail: String read Get_SellerReferenceEmail write Set_SellerReferenceEmail;
+    property SellerOrigin: String read Get_SellerOrigin write Set_SellerOrigin;
+    property SellerWeb: String read Get_SellerWeb write Set_SellerWeb;
+    property SellerPhone: String read Get_SellerPhone write Set_SellerPhone;
+    property SellerFax: String read Get_SellerFax write Set_SellerFax;
+    property SellerRegistrationNumber: String read Get_SellerRegistrationNumber write Set_SellerRegistrationNumber;
+    property SellerVatRegistrationNumber: String read Get_SellerVatRegistrationNumber write Set_SellerVatRegistrationNumber;
+    property PostalAddress: IXMLINVOIC416_Head_Seller_PostalAddress read Get_PostalAddress;
+    property VisitingAddress: IXMLINVOIC416_Head_Seller_VisitingAddress read Get_VisitingAddress;
+  end;
+
+{ IXMLINVOIC416_Head_Seller_PostalAddress }
+
+  IXMLINVOIC416_Head_Seller_PostalAddress = interface(IXMLNode)
+    ['{A1F7CBC5-3FE6-40AA-8651-EC7AB6E39727}']
+    { Property Accessors }
+    function Get_PostalAddressStreetBox1: String;
+    function Get_PostalAddressStreetBox2: String;
+    function Get_PostalAddressZipCity1: String;
+    function Get_PostalAddressZipCity2: String;
+    function Get_PostalAddressCountry: String;
+    procedure Set_PostalAddressStreetBox1(Value: String);
+    procedure Set_PostalAddressStreetBox2(Value: String);
+    procedure Set_PostalAddressZipCity1(Value: String);
+    procedure Set_PostalAddressZipCity2(Value: String);
+    procedure Set_PostalAddressCountry(Value: String);
+    { Methods & Properties }
+    property PostalAddressStreetBox1: String read Get_PostalAddressStreetBox1 write Set_PostalAddressStreetBox1;
+    property PostalAddressStreetBox2: String read Get_PostalAddressStreetBox2 write Set_PostalAddressStreetBox2;
+    property PostalAddressZipCity1: String read Get_PostalAddressZipCity1 write Set_PostalAddressZipCity1;
+    property PostalAddressZipCity2: String read Get_PostalAddressZipCity2 write Set_PostalAddressZipCity2;
+    property PostalAddressCountry: String read Get_PostalAddressCountry write Set_PostalAddressCountry;
+  end;
+
+{ IXMLINVOIC416_Head_Seller_VisitingAddress }
+
+  IXMLINVOIC416_Head_Seller_VisitingAddress = interface(IXMLNode)
+    ['{17B75C12-E77A-43A7-A1E5-1066270F0405}']
+    { Property Accessors }
+    function Get_VisitingAddressStreetBox1: String;
+    function Get_VisitingAddressStreetBox2: String;
+    function Get_VisitingAddressZipCity1: String;
+    function Get_VisitingAddressZipCity2: String;
+    function Get_VisitingAddressCountry: String;
+    procedure Set_VisitingAddressStreetBox1(Value: String);
+    procedure Set_VisitingAddressStreetBox2(Value: String);
+    procedure Set_VisitingAddressZipCity1(Value: String);
+    procedure Set_VisitingAddressZipCity2(Value: String);
+    procedure Set_VisitingAddressCountry(Value: String);
+    { Methods & Properties }
+    property VisitingAddressStreetBox1: String read Get_VisitingAddressStreetBox1 write Set_VisitingAddressStreetBox1;
+    property VisitingAddressStreetBox2: String read Get_VisitingAddressStreetBox2 write Set_VisitingAddressStreetBox2;
+    property VisitingAddressZipCity1: String read Get_VisitingAddressZipCity1 write Set_VisitingAddressZipCity1;
+    property VisitingAddressZipCity2: String read Get_VisitingAddressZipCity2 write Set_VisitingAddressZipCity2;
+    property VisitingAddressCountry: String read Get_VisitingAddressCountry write Set_VisitingAddressCountry;
+  end;
+
+{ IXMLINVOIC416_Head_Factoring }
+
+  IXMLINVOIC416_Head_Factoring = interface(IXMLNode)
+    ['{D6982284-2E40-4DFE-BB19-F12CC4D99384}']
+    { Property Accessors }
+    function Get_FactoringSetting: Integer;
+    function Get_FactoringBankName: String;
+    function Get_FactoringAccountNumber: String;
+    function Get_FactoringSwiftAddress: String;
+    function Get_FactoringBankGiroNumber: String;
+    function Get_FactoringPlusGiroNumber: String;
+    procedure Set_FactoringSetting(Value: Integer);
+    procedure Set_FactoringBankName(Value: String);
+    procedure Set_FactoringAccountNumber(Value: String);
+    procedure Set_FactoringSwiftAddress(Value: String);
+    procedure Set_FactoringBankGiroNumber(Value: String);
+    procedure Set_FactoringPlusGiroNumber(Value: String);
+    { Methods & Properties }
+    property FactoringSetting: Integer read Get_FactoringSetting write Set_FactoringSetting;
+    property FactoringBankName: String read Get_FactoringBankName write Set_FactoringBankName;
+    property FactoringAccountNumber: String read Get_FactoringAccountNumber write Set_FactoringAccountNumber;
+    property FactoringSwiftAddress: String read Get_FactoringSwiftAddress write Set_FactoringSwiftAddress;
+    property FactoringBankGiroNumber: String read Get_FactoringBankGiroNumber write Set_FactoringBankGiroNumber;
+    property FactoringPlusGiroNumber: String read Get_FactoringPlusGiroNumber write Set_FactoringPlusGiroNumber;
+  end;
+
+{ IXMLINVOIC416_Rows }
+
+  IXMLINVOIC416_Rows = interface(IXMLNodeCollection)
+    ['{5317470C-6781-45C1-A1DF-C06F66D1C545}']
+    { Property Accessors }
+    function Get_Row(Index: Integer): IXMLINVOIC416_Rows_Row;
+    { Methods & Properties }
+    function Add: IXMLINVOIC416_Rows_Row;
+    function Insert(const Index: Integer): IXMLINVOIC416_Rows_Row;
+    property Row[Index: Integer]: IXMLINVOIC416_Rows_Row read Get_Row; default;
+  end;
+
+{ IXMLINVOIC416_Rows_Row }
+
+  IXMLINVOIC416_Rows_Row = interface(IXMLNode)
+    ['{8EFFF058-FBC8-4FC2-AFCC-277CABA25F4B}']
+    { Property Accessors }
+    function Get_RowNumber: Integer;
+    function Get_RowType: Integer;
+    function Get_RowPosition: Integer;
+    function Get_CostType: Integer;
+    function Get_BuyersPartNumber: String;
+    function Get_SellersPartNumber: String;
+    function Get_PartDescription: String;
+    function Get_DeliveryDate: String;
+    function Get_Quantity: String;
+    function Get_Unit_: String;
+    function Get_Each: Integer;
+    function Get_Discount: String;
+    function Get_Price: String;
+    function Get_RowSum: String;
+    function Get_BuyersOrderNumber: String;
+    function Get_SellersOrderNumber: String;
+    function Get_CountryOfOriginCode: String;
+    procedure Set_RowNumber(Value: Integer);
+    procedure Set_RowType(Value: Integer);
+    procedure Set_RowPosition(Value: Integer);
+    procedure Set_CostType(Value: Integer);
+    procedure Set_BuyersPartNumber(Value: String);
+    procedure Set_SellersPartNumber(Value: String);
+    procedure Set_PartDescription(Value: String);
+    procedure Set_DeliveryDate(Value: String);
+    procedure Set_Quantity(Value: String);
+    procedure Set_Unit_(Value: String);
+    procedure Set_Each(Value: Integer);
+    procedure Set_Discount(Value: String);
+    procedure Set_Price(Value: String);
+    procedure Set_RowSum(Value: String);
+    procedure Set_BuyersOrderNumber(Value: String);
+    procedure Set_SellersOrderNumber(Value: String);
+    procedure Set_CountryOfOriginCode(Value: String);
+    { Methods & Properties }
+    property RowNumber: Integer read Get_RowNumber write Set_RowNumber;
+    property RowType: Integer read Get_RowType write Set_RowType;
+    property RowPosition: Integer read Get_RowPosition write Set_RowPosition;
+    property CostType: Integer read Get_CostType write Set_CostType;
+    property BuyersPartNumber: String read Get_BuyersPartNumber write Set_BuyersPartNumber;
+    property SellersPartNumber: String read Get_SellersPartNumber write Set_SellersPartNumber;
+    property PartDescription: String read Get_PartDescription write Set_PartDescription;
+    property DeliveryDate: String read Get_DeliveryDate write Set_DeliveryDate;
+    property Quantity: String read Get_Quantity write Set_Quantity;
+    property Unit_: String read Get_Unit_ write Set_Unit_;
+    property Each: Integer read Get_Each write Set_Each;
+    property Discount: String read Get_Discount write Set_Discount;
+    property Price: String read Get_Price write Set_Price;
+    property RowSum: String read Get_RowSum write Set_RowSum;
+    property BuyersOrderNumber: String read Get_BuyersOrderNumber write Set_BuyersOrderNumber;
+    property SellersOrderNumber: String read Get_SellersOrderNumber write Set_SellersOrderNumber;
+    property CountryOfOriginCode: String read Get_CountryOfOriginCode write Set_CountryOfOriginCode;
+  end;
+
+{ Forward Decls }
+
+  TXMLINVOIC416 = class;
+  TXMLINVOIC416_Invoice = class;
+  TXMLINVOIC416_Head = class;
+  TXMLINVOIC416_Head_Buyer = class;
+  TXMLINVOIC416_Head_Buyer_InvoiceAddress = class;
+  TXMLINVOIC416_Head_Buyer_DeliveryAddress = class;
+  TXMLINVOIC416_Head_Seller = class;
+  TXMLINVOIC416_Head_Seller_PostalAddress = class;
+  TXMLINVOIC416_Head_Seller_VisitingAddress = class;
+  TXMLINVOIC416_Head_Factoring = class;
+  TXMLINVOIC416_Rows = class;
+  TXMLINVOIC416_Rows_Row = class;
+
+{ TXMLINVOIC416 }
+
+  TXMLINVOIC416 = class(TXMLNode, IXMLINVOIC416)
+  protected
+    { IXMLINVOIC416 }
+    function Get_SoftwareManufacturer: String;
+    function Get_SoftwareName: String;
+    function Get_SoftwareVersion: String;
+    function Get_Invoice: IXMLINVOIC416_Invoice;
+    function Get_Head: IXMLINVOIC416_Head;
+    function Get_Rows: IXMLINVOIC416_Rows;
+    procedure Set_SoftwareManufacturer(Value: String);
+    procedure Set_SoftwareName(Value: String);
+    procedure Set_SoftwareVersion(Value: String);
+  public
+    procedure AfterConstruction; override;
+  end;
+
+{ TXMLINVOIC416_Invoice }
+
+  TXMLINVOIC416_Invoice = class(TXMLNode, IXMLINVOIC416_Invoice)
+  protected
+    { IXMLINVOIC416_Invoice }
+    function Get_InvoiceNumber: String;
+    function Get_InvoiceType: Integer;
+    procedure Set_InvoiceNumber(Value: String);
+    procedure Set_InvoiceType(Value: Integer);
+  end;
+
+{ TXMLINVOIC416_Head }
+
+  TXMLINVOIC416_Head = class(TXMLNode, IXMLINVOIC416_Head)
+  protected
+    { IXMLINVOIC416_Head }
+    function Get_SellersOrderNumber: String;
+    function Get_OrderDate: String;
+    function Get_BuyersOrderNumber: String;
+    function Get_DebitInvoiceNumber: String;
+    function Get_InvoiceDate: String;
+    function Get_LanguageNameCode: String;
+    function Get_Buyer: IXMLINVOIC416_Head_Buyer;
+    function Get_Seller: IXMLINVOIC416_Head_Seller;
+    function Get_InvoiceCurrency: String;
+    function Get_PaymentDueDate: String;
+    function Get_CurrencyExchangeRate: String;
+    function Get_RateOfExchangeDate: String;
+    function Get_EuVatText: String;
+    function Get_GodsLabelLine1: String;
+    function Get_GodsLabelLine2: String;
+    function Get_HomeCurrency: String;
+    function Get_TermsOfPayment: String;
+    function Get_TermsOfPaymentNoOfDays: Integer;
+    function Get_BankName: String;
+    function Get_AccountNumber: String;
+    function Get_SwiftAddress: String;
+    function Get_BankGiroNumber: String;
+    function Get_PlusGiroNumber: String;
+    function Get_Factoring: IXMLINVOIC416_Head_Factoring;
+    function Get_AlloyCost: String;
+    function Get_FreightCost: String;
+    function Get_PackingCost: String;
+    function Get_InsuranceCost: String;
+    function Get_NetAmountInInvoiceCurrency: String;
+    function Get_InvoicingCharge: String;
+    function Get_VatAmountInInvoiceCurrency: String;
+    function Get_Equalization: String;
+    function Get_PayableAmountInInvoiceCurrency: String;
+    procedure Set_SellersOrderNumber(Value: String);
+    procedure Set_OrderDate(Value: String);
+    procedure Set_BuyersOrderNumber(Value: String);
+    procedure Set_DebitInvoiceNumber(Value: String);
+    procedure Set_InvoiceDate(Value: String);
+    procedure Set_LanguageNameCode(Value: String);
+    procedure Set_InvoiceCurrency(Value: String);
+    procedure Set_PaymentDueDate(Value: String);
+    procedure Set_CurrencyExchangeRate(Value: String);
+    procedure Set_RateOfExchangeDate(Value: String);
+    procedure Set_EuVatText(Value: String);
+    procedure Set_GodsLabelLine1(Value: String);
+    procedure Set_GodsLabelLine2(Value: String);
+    procedure Set_HomeCurrency(Value: String);
+    procedure Set_TermsOfPayment(Value: String);
+    procedure Set_TermsOfPaymentNoOfDays(Value: Integer);
+    procedure Set_BankName(Value: String);
+    procedure Set_AccountNumber(Value: String);
+    procedure Set_SwiftAddress(Value: String);
+    procedure Set_BankGiroNumber(Value: String);
+    procedure Set_PlusGiroNumber(Value: String);
+    procedure Set_AlloyCost(Value: String);
+    procedure Set_FreightCost(Value: String);
+    procedure Set_PackingCost(Value: String);
+    procedure Set_InsuranceCost(Value: String);
+    procedure Set_NetAmountInInvoiceCurrency(Value: String);
+    procedure Set_InvoicingCharge(Value: String);
+    procedure Set_VatAmountInInvoiceCurrency(Value: String);
+    procedure Set_Equalization(Value: String);
+    procedure Set_PayableAmountInInvoiceCurrency(Value: String);
+  public
+    procedure AfterConstruction; override;
+  end;
+
+{ TXMLINVOIC416_Head_Buyer }
+
+  TXMLINVOIC416_Head_Buyer = class(TXMLNode, IXMLINVOIC416_Head_Buyer)
+  protected
+    { IXMLINVOIC416_Head_Buyer }
+    function Get_BuyerCode: String;
+    function Get_BuyerName: String;
+    function Get_BuyerVATRegistrationNumber: String;
+    function Get_BuyerReference: String;
+    function Get_BuyerReferencePhone: String;
+    function Get_BuyerReferenceFax: String;
+    function Get_BuyerReferenceEmail: String;
+    function Get_InvoiceAddress: IXMLINVOIC416_Head_Buyer_InvoiceAddress;
+    function Get_DeliveryAddress: IXMLINVOIC416_Head_Buyer_DeliveryAddress;
+    procedure Set_BuyerCode(Value: String);
+    procedure Set_BuyerName(Value: String);
+    procedure Set_BuyerVATRegistrationNumber(Value: String);
+    procedure Set_BuyerReference(Value: String);
+    procedure Set_BuyerReferencePhone(Value: String);
+    procedure Set_BuyerReferenceFax(Value: String);
+    procedure Set_BuyerReferenceEmail(Value: String);
+  public
+    procedure AfterConstruction; override;
+  end;
+
+{ TXMLINVOIC416_Head_Buyer_InvoiceAddress }
+
+  TXMLINVOIC416_Head_Buyer_InvoiceAddress = class(TXMLNode, IXMLINVOIC416_Head_Buyer_InvoiceAddress)
+  protected
+    { IXMLINVOIC416_Head_Buyer_InvoiceAddress }
+    function Get_InvoiceAddressName: String;
+    function Get_InvoiceAddressStreetBox1: String;
+    function Get_InvoiceAddressStreetBox2: String;
+    function Get_InvoiceAddressZipCity1: String;
+    function Get_InvoiceAddressZipCity2: String;
+    function Get_InvoiceAddressCountry: String;
+    procedure Set_InvoiceAddressName(Value: String);
+    procedure Set_InvoiceAddressStreetBox1(Value: String);
+    procedure Set_InvoiceAddressStreetBox2(Value: String);
+    procedure Set_InvoiceAddressZipCity1(Value: String);
+    procedure Set_InvoiceAddressZipCity2(Value: String);
+    procedure Set_InvoiceAddressCountry(Value: String);
+  end;
+
+{ TXMLINVOIC416_Head_Buyer_DeliveryAddress }
+
+  TXMLINVOIC416_Head_Buyer_DeliveryAddress = class(TXMLNode, IXMLINVOIC416_Head_Buyer_DeliveryAddress)
+  protected
+    { IXMLINVOIC416_Head_Buyer_DeliveryAddress }
+    function Get_DeliveryAddressName: String;
+    function Get_DeliveryAddressStreetBox1: String;
+    function Get_DeliveryAddressStreetBox2: String;
+    function Get_DeliveryAddressZipCity1: String;
+    function Get_DeliveryAddressZipCity2: String;
+    function Get_DeliveryAddressCountry: String;
+    procedure Set_DeliveryAddressName(Value: String);
+    procedure Set_DeliveryAddressStreetBox1(Value: String);
+    procedure Set_DeliveryAddressStreetBox2(Value: String);
+    procedure Set_DeliveryAddressZipCity1(Value: String);
+    procedure Set_DeliveryAddressZipCity2(Value: String);
+    procedure Set_DeliveryAddressCountry(Value: String);
+  end;
+
+{ TXMLINVOIC416_Head_Seller }
+
+  TXMLINVOIC416_Head_Seller = class(TXMLNode, IXMLINVOIC416_Head_Seller)
+  protected
+    { IXMLINVOIC416_Head_Seller }
+    function Get_SellerSuplierCode: String;
+    function Get_SellerName: String;
+    function Get_SellerReference: String;
+    function Get_SellerReferencePhone: String;
+    function Get_SellerReferenceFax: String;
+    function Get_SellerReferenceEmail: String;
+    function Get_SellerOrigin: String;
+    function Get_SellerWeb: String;
+    function Get_SellerPhone: String;
+    function Get_SellerFax: String;
+    function Get_SellerRegistrationNumber: String;
+    function Get_SellerVatRegistrationNumber: String;
+    function Get_PostalAddress: IXMLINVOIC416_Head_Seller_PostalAddress;
+    function Get_VisitingAddress: IXMLINVOIC416_Head_Seller_VisitingAddress;
+    procedure Set_SellerSuplierCode(Value: String);
+    procedure Set_SellerName(Value: String);
+    procedure Set_SellerReference(Value: String);
+    procedure Set_SellerReferencePhone(Value: String);
+    procedure Set_SellerReferenceFax(Value: String);
+    procedure Set_SellerReferenceEmail(Value: String);
+    procedure Set_SellerOrigin(Value: String);
+    procedure Set_SellerWeb(Value: String);
+    procedure Set_SellerPhone(Value: String);
+    procedure Set_SellerFax(Value: String);
+    procedure Set_SellerRegistrationNumber(Value: String);
+    procedure Set_SellerVatRegistrationNumber(Value: String);
+  public
+    procedure AfterConstruction; override;
+  end;
+
+{ TXMLINVOIC416_Head_Seller_PostalAddress }
+
+  TXMLINVOIC416_Head_Seller_PostalAddress = class(TXMLNode, IXMLINVOIC416_Head_Seller_PostalAddress)
+  protected
+    { IXMLINVOIC416_Head_Seller_PostalAddress }
+    function Get_PostalAddressStreetBox1: String;
+    function Get_PostalAddressStreetBox2: String;
+    function Get_PostalAddressZipCity1: String;
+    function Get_PostalAddressZipCity2: String;
+    function Get_PostalAddressCountry: String;
+    procedure Set_PostalAddressStreetBox1(Value: String);
+    procedure Set_PostalAddressStreetBox2(Value: String);
+    procedure Set_PostalAddressZipCity1(Value: String);
+    procedure Set_PostalAddressZipCity2(Value: String);
+    procedure Set_PostalAddressCountry(Value: String);
+  end;
+
+{ TXMLINVOIC416_Head_Seller_VisitingAddress }
+
+  TXMLINVOIC416_Head_Seller_VisitingAddress = class(TXMLNode, IXMLINVOIC416_Head_Seller_VisitingAddress)
+  protected
+    { IXMLINVOIC416_Head_Seller_VisitingAddress }
+    function Get_VisitingAddressStreetBox1: String;
+    function Get_VisitingAddressStreetBox2: String;
+    function Get_VisitingAddressZipCity1: String;
+    function Get_VisitingAddressZipCity2: String;
+    function Get_VisitingAddressCountry: String;
+    procedure Set_VisitingAddressStreetBox1(Value: String);
+    procedure Set_VisitingAddressStreetBox2(Value: String);
+    procedure Set_VisitingAddressZipCity1(Value: String);
+    procedure Set_VisitingAddressZipCity2(Value: String);
+    procedure Set_VisitingAddressCountry(Value: String);
+  end;
+
+{ TXMLINVOIC416_Head_Factoring }
+
+  TXMLINVOIC416_Head_Factoring = class(TXMLNode, IXMLINVOIC416_Head_Factoring)
+  protected
+    { IXMLINVOIC416_Head_Factoring }
+    function Get_FactoringSetting: Integer;
+    function Get_FactoringBankName: String;
+    function Get_FactoringAccountNumber: String;
+    function Get_FactoringSwiftAddress: String;
+    function Get_FactoringBankGiroNumber: String;
+    function Get_FactoringPlusGiroNumber: String;
+    procedure Set_FactoringSetting(Value: Integer);
+    procedure Set_FactoringBankName(Value: String);
+    procedure Set_FactoringAccountNumber(Value: String);
+    procedure Set_FactoringSwiftAddress(Value: String);
+    procedure Set_FactoringBankGiroNumber(Value: String);
+    procedure Set_FactoringPlusGiroNumber(Value: String);
+  end;
+
+{ TXMLINVOIC416_Rows }
+
+  TXMLINVOIC416_Rows = class(TXMLNodeCollection, IXMLINVOIC416_Rows)
+  protected
+    { IXMLINVOIC416_Rows }
+    function Get_Row(Index: Integer): IXMLINVOIC416_Rows_Row;
+    function Add: IXMLINVOIC416_Rows_Row;
+    function Insert(const Index: Integer): IXMLINVOIC416_Rows_Row;
+  public
+    procedure AfterConstruction; override;
+  end;
+
+{ TXMLINVOIC416_Rows_Row }
+
+  TXMLINVOIC416_Rows_Row = class(TXMLNode, IXMLINVOIC416_Rows_Row)
+  protected
+    { IXMLINVOIC416_Rows_Row }
+    function Get_RowNumber: Integer;
+    function Get_RowType: Integer;
+    function Get_RowPosition: Integer;
+    function Get_CostType: Integer;
+    function Get_BuyersPartNumber: String;
+    function Get_SellersPartNumber: String;
+    function Get_PartDescription: String;
+    function Get_DeliveryDate: String;
+    function Get_Quantity: String;
+    function Get_Unit_: String;
+    function Get_Each: Integer;
+    function Get_Discount: String;
+    function Get_Price: String;
+    function Get_RowSum: String;
+    function Get_BuyersOrderNumber: String;
+    function Get_SellersOrderNumber: String;
+    function Get_CountryOfOriginCode: String;
+    procedure Set_RowNumber(Value: Integer);
+    procedure Set_RowType(Value: Integer);
+    procedure Set_RowPosition(Value: Integer);
+    procedure Set_CostType(Value: Integer);
+    procedure Set_BuyersPartNumber(Value: String);
+    procedure Set_SellersPartNumber(Value: String);
+    procedure Set_PartDescription(Value: String);
+    procedure Set_DeliveryDate(Value: String);
+    procedure Set_Quantity(Value: String);
+    procedure Set_Unit_(Value: String);
+    procedure Set_Each(Value: Integer);
+    procedure Set_Discount(Value: String);
+    procedure Set_Price(Value: String);
+    procedure Set_RowSum(Value: String);
+    procedure Set_BuyersOrderNumber(Value: String);
+    procedure Set_SellersOrderNumber(Value: String);
+    procedure Set_CountryOfOriginCode(Value: String);
+  end;
+
+{ Global Functions }
+
+function GetINVOIC416(Doc: IXMLDocument): IXMLINVOIC416;
+function LoadINVOIC416(const FileName: string): IXMLINVOIC416;
+function NewINVOIC416: IXMLINVOIC416;
+
+const
+  TargetNamespace = '';
+
+implementation
+
+{ Global Functions }
+
+function GetINVOIC416(Doc: IXMLDocument): IXMLINVOIC416;
+begin
+  Result := Doc.GetDocBinding('INVOIC416', TXMLINVOIC416, TargetNamespace) as IXMLINVOIC416;
+end;
+
+function LoadINVOIC416(const FileName: string): IXMLINVOIC416;
+begin
+  Result := LoadXMLDocument(FileName).GetDocBinding('INVOIC416', TXMLINVOIC416, TargetNamespace) as IXMLINVOIC416;
+end;
+
+function NewINVOIC416: IXMLINVOIC416;
+begin
+  Result := NewXMLDocument.GetDocBinding('INVOIC416', TXMLINVOIC416, TargetNamespace) as IXMLINVOIC416;
+end;
+
+{ TXMLINVOIC416 }
+
+procedure TXMLINVOIC416.AfterConstruction;
+begin
+  RegisterChildNode('Invoice', TXMLINVOIC416_Invoice);
+  RegisterChildNode('Head', TXMLINVOIC416_Head);
+  RegisterChildNode('Rows', TXMLINVOIC416_Rows);
+  inherited;
+end;
+
+function TXMLINVOIC416.Get_SoftwareManufacturer: String;
+begin
+  Result := AttributeNodes['SoftwareManufacturer'].NodeValue;
+end;
+
+procedure TXMLINVOIC416.Set_SoftwareManufacturer(Value: String);
+begin
+  SetAttribute('SoftwareManufacturer', Value);
+end;
+
+function TXMLINVOIC416.Get_SoftwareName: String;
+begin
+  Result := AttributeNodes['SoftwareName'].NodeValue;
+end;
+
+procedure TXMLINVOIC416.Set_SoftwareName(Value: String);
+begin
+  SetAttribute('SoftwareName', Value);
+end;
+
+function TXMLINVOIC416.Get_SoftwareVersion: String;
+begin
+  Result := AttributeNodes['SoftwareVersion'].NodeValue;
+end;
+
+procedure TXMLINVOIC416.Set_SoftwareVersion(Value: String);
+begin
+  SetAttribute('SoftwareVersion', Value);
+end;
+
+function TXMLINVOIC416.Get_Invoice: IXMLINVOIC416_Invoice;
+begin
+  Result := ChildNodes['Invoice'] as IXMLINVOIC416_Invoice;
+end;
+
+function TXMLINVOIC416.Get_Head: IXMLINVOIC416_Head;
+begin
+  Result := ChildNodes['Head'] as IXMLINVOIC416_Head;
+end;
+
+function TXMLINVOIC416.Get_Rows: IXMLINVOIC416_Rows;
+begin
+  Result := ChildNodes['Rows'] as IXMLINVOIC416_Rows;
+end;
+
+{ TXMLINVOIC416_Invoice }
+
+function TXMLINVOIC416_Invoice.Get_InvoiceNumber: String;
+begin
+  Result := AttributeNodes['InvoiceNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Invoice.Set_InvoiceNumber(Value: String);
+begin
+  SetAttribute('InvoiceNumber', Value);
+end;
+
+function TXMLINVOIC416_Invoice.Get_InvoiceType: Integer;
+begin
+  Result := AttributeNodes['InvoiceType'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Invoice.Set_InvoiceType(Value: Integer);
+begin
+  SetAttribute('InvoiceType', Value);
+end;
+
+{ TXMLINVOIC416_Head }
+
+procedure TXMLINVOIC416_Head.AfterConstruction;
+begin
+  RegisterChildNode('Buyer', TXMLINVOIC416_Head_Buyer);
+  RegisterChildNode('Seller', TXMLINVOIC416_Head_Seller);
+  RegisterChildNode('Factoring', TXMLINVOIC416_Head_Factoring);
+  inherited;
+end;
+
+function TXMLINVOIC416_Head.Get_SellersOrderNumber: String;
+begin
+  Result := ChildNodes['SellersOrderNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_SellersOrderNumber(Value: String);
+begin
+  ChildNodes['SellersOrderNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_OrderDate: String;
+begin
+  Result := ChildNodes['OrderDate'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_OrderDate(Value: String);
+begin
+  ChildNodes['OrderDate'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_BuyersOrderNumber: String;
+begin
+  Result := ChildNodes['BuyersOrderNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_BuyersOrderNumber(Value: String);
+begin
+  ChildNodes['BuyersOrderNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_DebitInvoiceNumber: String;
+begin
+  Result := ChildNodes['DebitInvoiceNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_DebitInvoiceNumber(Value: String);
+begin
+  ChildNodes['DebitInvoiceNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_InvoiceDate: String;
+begin
+  Result := ChildNodes['InvoiceDate'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_InvoiceDate(Value: String);
+begin
+  ChildNodes['InvoiceDate'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_LanguageNameCode: String;
+begin
+  Result := ChildNodes['LanguageNameCode'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_LanguageNameCode(Value: String);
+begin
+  ChildNodes['LanguageNameCode'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_Buyer: IXMLINVOIC416_Head_Buyer;
+begin
+  Result := ChildNodes['Buyer'] as IXMLINVOIC416_Head_Buyer;
+end;
+
+function TXMLINVOIC416_Head.Get_Seller: IXMLINVOIC416_Head_Seller;
+begin
+  Result := ChildNodes['Seller'] as IXMLINVOIC416_Head_Seller;
+end;
+
+function TXMLINVOIC416_Head.Get_InvoiceCurrency: String;
+begin
+  Result := ChildNodes['InvoiceCurrency'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_InvoiceCurrency(Value: String);
+begin
+  ChildNodes['InvoiceCurrency'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_PaymentDueDate: String;
+begin
+  Result := ChildNodes['PaymentDueDate'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_PaymentDueDate(Value: String);
+begin
+  ChildNodes['PaymentDueDate'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_CurrencyExchangeRate: String;
+begin
+  Result := ChildNodes['CurrencyExchangeRate'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_CurrencyExchangeRate(Value: String);
+begin
+  ChildNodes['CurrencyExchangeRate'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_RateOfExchangeDate: String;
+begin
+  Result := ChildNodes['RateOfExchangeDate'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_RateOfExchangeDate(Value: String);
+begin
+  ChildNodes['RateOfExchangeDate'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_EuVatText: String;
+begin
+  Result := ChildNodes['EuVatText'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_EuVatText(Value: String);
+begin
+  ChildNodes['EuVatText'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_GodsLabelLine1: String;
+begin
+  Result := ChildNodes['GodsLabelLine1'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_GodsLabelLine1(Value: String);
+begin
+  ChildNodes['GodsLabelLine1'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_GodsLabelLine2: String;
+begin
+  Result := ChildNodes['GodsLabelLine2'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_GodsLabelLine2(Value: String);
+begin
+  ChildNodes['GodsLabelLine2'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_HomeCurrency: String;
+begin
+  Result := ChildNodes['HomeCurrency'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_HomeCurrency(Value: String);
+begin
+  ChildNodes['HomeCurrency'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_TermsOfPayment: String;
+begin
+  Result := ChildNodes['TermsOfPayment'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_TermsOfPayment(Value: String);
+begin
+  ChildNodes['TermsOfPayment'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_TermsOfPaymentNoOfDays: Integer;
+begin
+  Result := ChildNodes['TermsOfPaymentNoOfDays'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_TermsOfPaymentNoOfDays(Value: Integer);
+begin
+  ChildNodes['TermsOfPaymentNoOfDays'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_BankName: String;
+begin
+  Result := ChildNodes['BankName'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_BankName(Value: String);
+begin
+  ChildNodes['BankName'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_AccountNumber: String;
+begin
+  Result := ChildNodes['AccountNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_AccountNumber(Value: String);
+begin
+  ChildNodes['AccountNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_SwiftAddress: String;
+begin
+  Result := ChildNodes['SwiftAddress'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_SwiftAddress(Value: String);
+begin
+  ChildNodes['SwiftAddress'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_BankGiroNumber: String;
+begin
+  Result := ChildNodes['BankGiroNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_BankGiroNumber(Value: String);
+begin
+  ChildNodes['BankGiroNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_PlusGiroNumber: String;
+begin
+  Result := ChildNodes['PlusGiroNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_PlusGiroNumber(Value: String);
+begin
+  ChildNodes['PlusGiroNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_Factoring: IXMLINVOIC416_Head_Factoring;
+begin
+  Result := ChildNodes['Factoring'] as IXMLINVOIC416_Head_Factoring;
+end;
+
+function TXMLINVOIC416_Head.Get_AlloyCost: String;
+begin
+  Result := ChildNodes['AlloyCost'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_AlloyCost(Value: String);
+begin
+  ChildNodes['AlloyCost'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_FreightCost: String;
+begin
+  Result := ChildNodes['FreightCost'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_FreightCost(Value: String);
+begin
+  ChildNodes['FreightCost'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_PackingCost: String;
+begin
+  Result := ChildNodes['PackingCost'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_PackingCost(Value: String);
+begin
+  ChildNodes['PackingCost'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_InsuranceCost: String;
+begin
+  Result := ChildNodes['InsuranceCost'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_InsuranceCost(Value: String);
+begin
+  ChildNodes['InsuranceCost'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_NetAmountInInvoiceCurrency: String;
+begin
+  Result := ChildNodes['NetAmountInInvoiceCurrency'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_NetAmountInInvoiceCurrency(Value: String);
+begin
+  ChildNodes['NetAmountInInvoiceCurrency'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_InvoicingCharge: String;
+begin
+  Result := ChildNodes['InvoicingCharge'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_InvoicingCharge(Value: String);
+begin
+  ChildNodes['InvoicingCharge'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_VatAmountInInvoiceCurrency: String;
+begin
+  Result := ChildNodes['VatAmountInInvoiceCurrency'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_VatAmountInInvoiceCurrency(Value: String);
+begin
+  ChildNodes['VatAmountInInvoiceCurrency'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_Equalization: String;
+begin
+  Result := ChildNodes['Equalization'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_Equalization(Value: String);
+begin
+  ChildNodes['Equalization'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head.Get_PayableAmountInInvoiceCurrency: String;
+begin
+  Result := ChildNodes['PayableAmountInInvoiceCurrency'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head.Set_PayableAmountInInvoiceCurrency(Value: String);
+begin
+  ChildNodes['PayableAmountInInvoiceCurrency'].NodeValue := Value;
+end;
+
+{ TXMLINVOIC416_Head_Buyer }
+
+procedure TXMLINVOIC416_Head_Buyer.AfterConstruction;
+begin
+  RegisterChildNode('InvoiceAddress', TXMLINVOIC416_Head_Buyer_InvoiceAddress);
+  RegisterChildNode('DeliveryAddress', TXMLINVOIC416_Head_Buyer_DeliveryAddress);
+  inherited;
+end;
+
+function TXMLINVOIC416_Head_Buyer.Get_BuyerCode: String;
+begin
+  Result := ChildNodes['BuyerCode'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer.Set_BuyerCode(Value: String);
+begin
+  ChildNodes['BuyerCode'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer.Get_BuyerName: String;
+begin
+  Result := ChildNodes['BuyerName'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer.Set_BuyerName(Value: String);
+begin
+  ChildNodes['BuyerName'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer.Get_BuyerVATRegistrationNumber: String;
+begin
+  Result := ChildNodes['BuyerVATRegistrationNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer.Set_BuyerVATRegistrationNumber(Value: String);
+begin
+  ChildNodes['BuyerVATRegistrationNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer.Get_BuyerReference: String;
+begin
+  Result := ChildNodes['BuyerReference'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer.Set_BuyerReference(Value: String);
+begin
+  ChildNodes['BuyerReference'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer.Get_BuyerReferencePhone: String;
+begin
+  Result := ChildNodes['BuyerReferencePhone'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer.Set_BuyerReferencePhone(Value: String);
+begin
+  ChildNodes['BuyerReferencePhone'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer.Get_BuyerReferenceFax: String;
+begin
+  Result := ChildNodes['BuyerReferenceFax'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer.Set_BuyerReferenceFax(Value: String);
+begin
+  ChildNodes['BuyerReferenceFax'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer.Get_BuyerReferenceEmail: String;
+begin
+  Result := ChildNodes['BuyerReferenceEmail'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer.Set_BuyerReferenceEmail(Value: String);
+begin
+  ChildNodes['BuyerReferenceEmail'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer.Get_InvoiceAddress: IXMLINVOIC416_Head_Buyer_InvoiceAddress;
+begin
+  Result := ChildNodes['InvoiceAddress'] as IXMLINVOIC416_Head_Buyer_InvoiceAddress;
+end;
+
+function TXMLINVOIC416_Head_Buyer.Get_DeliveryAddress: IXMLINVOIC416_Head_Buyer_DeliveryAddress;
+begin
+  Result := ChildNodes['DeliveryAddress'] as IXMLINVOIC416_Head_Buyer_DeliveryAddress;
+end;
+
+{ TXMLINVOIC416_Head_Buyer_InvoiceAddress }
+
+function TXMLINVOIC416_Head_Buyer_InvoiceAddress.Get_InvoiceAddressName: String;
+begin
+  Result := ChildNodes['InvoiceAddressName'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_InvoiceAddress.Set_InvoiceAddressName(Value: String);
+begin
+  ChildNodes['InvoiceAddressName'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer_InvoiceAddress.Get_InvoiceAddressStreetBox1: String;
+begin
+  Result := ChildNodes['InvoiceAddressStreetBox1'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_InvoiceAddress.Set_InvoiceAddressStreetBox1(Value: String);
+begin
+  ChildNodes['InvoiceAddressStreetBox1'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer_InvoiceAddress.Get_InvoiceAddressStreetBox2: String;
+begin
+  Result := ChildNodes['InvoiceAddressStreetBox2'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_InvoiceAddress.Set_InvoiceAddressStreetBox2(Value: String);
+begin
+  ChildNodes['InvoiceAddressStreetBox2'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer_InvoiceAddress.Get_InvoiceAddressZipCity1: String;
+begin
+  Result := ChildNodes['InvoiceAddressZipCity1'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_InvoiceAddress.Set_InvoiceAddressZipCity1(Value: String);
+begin
+  ChildNodes['InvoiceAddressZipCity1'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer_InvoiceAddress.Get_InvoiceAddressZipCity2: String;
+begin
+  Result := ChildNodes['InvoiceAddressZipCity2'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_InvoiceAddress.Set_InvoiceAddressZipCity2(Value: String);
+begin
+  ChildNodes['InvoiceAddressZipCity2'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer_InvoiceAddress.Get_InvoiceAddressCountry: String;
+begin
+  Result := ChildNodes['InvoiceAddressCountry'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_InvoiceAddress.Set_InvoiceAddressCountry(Value: String);
+begin
+  ChildNodes['InvoiceAddressCountry'].NodeValue := Value;
+end;
+
+{ TXMLINVOIC416_Head_Buyer_DeliveryAddress }
+
+function TXMLINVOIC416_Head_Buyer_DeliveryAddress.Get_DeliveryAddressName: String;
+begin
+  Result := ChildNodes['DeliveryAddressName'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_DeliveryAddress.Set_DeliveryAddressName(Value: String);
+begin
+  ChildNodes['DeliveryAddressName'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer_DeliveryAddress.Get_DeliveryAddressStreetBox1: String;
+begin
+  Result := ChildNodes['DeliveryAddressStreetBox1'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_DeliveryAddress.Set_DeliveryAddressStreetBox1(Value: String);
+begin
+  ChildNodes['DeliveryAddressStreetBox1'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer_DeliveryAddress.Get_DeliveryAddressStreetBox2: String;
+begin
+  Result := ChildNodes['DeliveryAddressStreetBox2'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_DeliveryAddress.Set_DeliveryAddressStreetBox2(Value: String);
+begin
+  ChildNodes['DeliveryAddressStreetBox2'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer_DeliveryAddress.Get_DeliveryAddressZipCity1: String;
+begin
+  Result := ChildNodes['DeliveryAddressZipCity1'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_DeliveryAddress.Set_DeliveryAddressZipCity1(Value: String);
+begin
+  ChildNodes['DeliveryAddressZipCity1'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer_DeliveryAddress.Get_DeliveryAddressZipCity2: String;
+begin
+  Result := ChildNodes['DeliveryAddressZipCity2'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_DeliveryAddress.Set_DeliveryAddressZipCity2(Value: String);
+begin
+  ChildNodes['DeliveryAddressZipCity2'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Buyer_DeliveryAddress.Get_DeliveryAddressCountry: String;
+begin
+  Result := ChildNodes['DeliveryAddressCountry'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Buyer_DeliveryAddress.Set_DeliveryAddressCountry(Value: String);
+begin
+  ChildNodes['DeliveryAddressCountry'].NodeValue := Value;
+end;
+
+{ TXMLINVOIC416_Head_Seller }
+
+procedure TXMLINVOIC416_Head_Seller.AfterConstruction;
+begin
+  RegisterChildNode('PostalAddress', TXMLINVOIC416_Head_Seller_PostalAddress);
+  RegisterChildNode('VisitingAddress', TXMLINVOIC416_Head_Seller_VisitingAddress);
+  inherited;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerSuplierCode: String;
+begin
+  Result := ChildNodes['SellerSuplierCode'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerSuplierCode(Value: String);
+begin
+  ChildNodes['SellerSuplierCode'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerName: String;
+begin
+  Result := ChildNodes['SellerName'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerName(Value: String);
+begin
+  ChildNodes['SellerName'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerReference: String;
+begin
+  Result := ChildNodes['SellerReference'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerReference(Value: String);
+begin
+  ChildNodes['SellerReference'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerReferencePhone: String;
+begin
+  Result := ChildNodes['SellerReferencePhone'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerReferencePhone(Value: String);
+begin
+  ChildNodes['SellerReferencePhone'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerReferenceFax: String;
+begin
+  Result := ChildNodes['SellerReferenceFax'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerReferenceFax(Value: String);
+begin
+  ChildNodes['SellerReferenceFax'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerReferenceEmail: String;
+begin
+  Result := ChildNodes['SellerReferenceEmail'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerReferenceEmail(Value: String);
+begin
+  ChildNodes['SellerReferenceEmail'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerOrigin: String;
+begin
+  Result := ChildNodes['SellerOrigin'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerOrigin(Value: String);
+begin
+  ChildNodes['SellerOrigin'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerWeb: String;
+begin
+  Result := ChildNodes['SellerWeb'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerWeb(Value: String);
+begin
+  ChildNodes['SellerWeb'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerPhone: String;
+begin
+  Result := ChildNodes['SellerPhone'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerPhone(Value: String);
+begin
+  ChildNodes['SellerPhone'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerFax: String;
+begin
+  Result := ChildNodes['SellerFax'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerFax(Value: String);
+begin
+  ChildNodes['SellerFax'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerRegistrationNumber: String;
+begin
+  Result := ChildNodes['SellerRegistrationNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerRegistrationNumber(Value: String);
+begin
+  ChildNodes['SellerRegistrationNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_SellerVatRegistrationNumber: String;
+begin
+  Result := ChildNodes['SellerVatRegistrationNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller.Set_SellerVatRegistrationNumber(Value: String);
+begin
+  ChildNodes['SellerVatRegistrationNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_PostalAddress: IXMLINVOIC416_Head_Seller_PostalAddress;
+begin
+  Result := ChildNodes['PostalAddress'] as IXMLINVOIC416_Head_Seller_PostalAddress;
+end;
+
+function TXMLINVOIC416_Head_Seller.Get_VisitingAddress: IXMLINVOIC416_Head_Seller_VisitingAddress;
+begin
+  Result := ChildNodes['VisitingAddress'] as IXMLINVOIC416_Head_Seller_VisitingAddress;
+end;
+
+{ TXMLINVOIC416_Head_Seller_PostalAddress }
+
+function TXMLINVOIC416_Head_Seller_PostalAddress.Get_PostalAddressStreetBox1: String;
+begin
+  Result := ChildNodes['PostalAddressStreetBox1'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller_PostalAddress.Set_PostalAddressStreetBox1(Value: String);
+begin
+  ChildNodes['PostalAddressStreetBox1'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller_PostalAddress.Get_PostalAddressStreetBox2: String;
+begin
+  Result := ChildNodes['PostalAddressStreetBox2'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller_PostalAddress.Set_PostalAddressStreetBox2(Value: String);
+begin
+  ChildNodes['PostalAddressStreetBox2'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller_PostalAddress.Get_PostalAddressZipCity1: String;
+begin
+  Result := ChildNodes['PostalAddressZipCity1'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller_PostalAddress.Set_PostalAddressZipCity1(Value: String);
+begin
+  ChildNodes['PostalAddressZipCity1'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller_PostalAddress.Get_PostalAddressZipCity2: String;
+begin
+  Result := ChildNodes['PostalAddressZipCity2'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller_PostalAddress.Set_PostalAddressZipCity2(Value: String);
+begin
+  ChildNodes['PostalAddressZipCity2'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller_PostalAddress.Get_PostalAddressCountry: String;
+begin
+  Result := ChildNodes['PostalAddressCountry'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller_PostalAddress.Set_PostalAddressCountry(Value: String);
+begin
+  ChildNodes['PostalAddressCountry'].NodeValue := Value;
+end;
+
+{ TXMLINVOIC416_Head_Seller_VisitingAddress }
+
+function TXMLINVOIC416_Head_Seller_VisitingAddress.Get_VisitingAddressStreetBox1: String;
+begin
+  Result := ChildNodes['VisitingAddressStreetBox1'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller_VisitingAddress.Set_VisitingAddressStreetBox1(Value: String);
+begin
+  ChildNodes['VisitingAddressStreetBox1'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller_VisitingAddress.Get_VisitingAddressStreetBox2: String;
+begin
+  Result := ChildNodes['VisitingAddressStreetBox2'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller_VisitingAddress.Set_VisitingAddressStreetBox2(Value: String);
+begin
+  ChildNodes['VisitingAddressStreetBox2'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller_VisitingAddress.Get_VisitingAddressZipCity1: String;
+begin
+  Result := ChildNodes['VisitingAddressZipCity1'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller_VisitingAddress.Set_VisitingAddressZipCity1(Value: String);
+begin
+  ChildNodes['VisitingAddressZipCity1'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller_VisitingAddress.Get_VisitingAddressZipCity2: String;
+begin
+  Result := ChildNodes['VisitingAddressZipCity2'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller_VisitingAddress.Set_VisitingAddressZipCity2(Value: String);
+begin
+  ChildNodes['VisitingAddressZipCity2'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Seller_VisitingAddress.Get_VisitingAddressCountry: String;
+begin
+  Result := ChildNodes['VisitingAddressCountry'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Seller_VisitingAddress.Set_VisitingAddressCountry(Value: String);
+begin
+  ChildNodes['VisitingAddressCountry'].NodeValue := Value;
+end;
+
+{ TXMLINVOIC416_Head_Factoring }
+
+function TXMLINVOIC416_Head_Factoring.Get_FactoringSetting: Integer;
+begin
+  Result := ChildNodes['FactoringSetting'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Factoring.Set_FactoringSetting(Value: Integer);
+begin
+  ChildNodes['FactoringSetting'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Factoring.Get_FactoringBankName: String;
+begin
+  Result := ChildNodes['FactoringBankName'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Factoring.Set_FactoringBankName(Value: String);
+begin
+  ChildNodes['FactoringBankName'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Factoring.Get_FactoringAccountNumber: String;
+begin
+  Result := ChildNodes['FactoringAccountNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Factoring.Set_FactoringAccountNumber(Value: String);
+begin
+  ChildNodes['FactoringAccountNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Factoring.Get_FactoringSwiftAddress: String;
+begin
+  Result := ChildNodes['FactoringSwiftAddress'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Factoring.Set_FactoringSwiftAddress(Value: String);
+begin
+  ChildNodes['FactoringSwiftAddress'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Factoring.Get_FactoringBankGiroNumber: String;
+begin
+  Result := ChildNodes['FactoringBankGiroNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Factoring.Set_FactoringBankGiroNumber(Value: String);
+begin
+  ChildNodes['FactoringBankGiroNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Head_Factoring.Get_FactoringPlusGiroNumber: String;
+begin
+  Result := ChildNodes['FactoringPlusGiroNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Head_Factoring.Set_FactoringPlusGiroNumber(Value: String);
+begin
+  ChildNodes['FactoringPlusGiroNumber'].NodeValue := Value;
+end;
+
+{ TXMLINVOIC416_Rows }
+
+procedure TXMLINVOIC416_Rows.AfterConstruction;
+begin
+  RegisterChildNode('Row', TXMLINVOIC416_Rows_Row);
+  ItemTag := 'Row';
+  ItemInterface := IXMLINVOIC416_Rows_Row;
+  inherited;
+end;
+
+function TXMLINVOIC416_Rows.Get_Row(Index: Integer): IXMLINVOIC416_Rows_Row;
+begin
+  Result := List[Index] as IXMLINVOIC416_Rows_Row;
+end;
+
+function TXMLINVOIC416_Rows.Add: IXMLINVOIC416_Rows_Row;
+begin
+  Result := AddItem(-1) as IXMLINVOIC416_Rows_Row;
+end;
+
+function TXMLINVOIC416_Rows.Insert(const Index: Integer): IXMLINVOIC416_Rows_Row;
+begin
+  Result := AddItem(Index) as IXMLINVOIC416_Rows_Row;
+end;
+
+{ TXMLINVOIC416_Rows_Row }
+
+function TXMLINVOIC416_Rows_Row.Get_RowNumber: Integer;
+begin
+  Result := AttributeNodes['RowNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_RowNumber(Value: Integer);
+begin
+  SetAttribute('RowNumber', Value);
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_RowType: Integer;
+begin
+  Result := AttributeNodes['RowType'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_RowType(Value: Integer);
+begin
+  SetAttribute('RowType', Value);
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_RowPosition: Integer;
+begin
+  Result := AttributeNodes['RowPosition'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_RowPosition(Value: Integer);
+begin
+  SetAttribute('RowPosition', Value);
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_CostType: Integer;
+begin
+  Result := AttributeNodes['CostType'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_CostType(Value: Integer);
+begin
+  SetAttribute('CostType', Value);
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_BuyersPartNumber: String;
+begin
+  Result := ChildNodes['BuyersPartNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_BuyersPartNumber(Value: String);
+begin
+  ChildNodes['BuyersPartNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_SellersPartNumber: String;
+begin
+  Result := ChildNodes['SellersPartNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_SellersPartNumber(Value: String);
+begin
+  ChildNodes['SellersPartNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_PartDescription: String;
+begin
+  Result := ChildNodes['PartDescription'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_PartDescription(Value: String);
+begin
+  ChildNodes['PartDescription'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_DeliveryDate: String;
+begin
+  Result := ChildNodes['DeliveryDate'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_DeliveryDate(Value: String);
+begin
+  ChildNodes['DeliveryDate'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_Quantity: String;
+begin
+  Result := ChildNodes['Quantity'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_Quantity(Value: String);
+begin
+  ChildNodes['Quantity'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_Unit_: String;
+begin
+  Result := ChildNodes['Unit'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_Unit_(Value: String);
+begin
+  ChildNodes['Unit'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_Each: Integer;
+begin
+  Result := ChildNodes['Each'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_Each(Value: Integer);
+begin
+  ChildNodes['Each'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_Discount: String;
+begin
+  Result := ChildNodes['Discount'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_Discount(Value: String);
+begin
+  ChildNodes['Discount'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_Price: String;
+begin
+  Result := ChildNodes['Price'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_Price(Value: String);
+begin
+  ChildNodes['Price'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_RowSum: String;
+begin
+  Result := ChildNodes['RowSum'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_RowSum(Value: String);
+begin
+  ChildNodes['RowSum'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_BuyersOrderNumber: String;
+begin
+  Result := ChildNodes['BuyersOrderNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_BuyersOrderNumber(Value: String);
+begin
+  ChildNodes['BuyersOrderNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_SellersOrderNumber: String;
+begin
+  Result := ChildNodes['SellersOrderNumber'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_SellersOrderNumber(Value: String);
+begin
+  ChildNodes['SellersOrderNumber'].NodeValue := Value;
+end;
+
+function TXMLINVOIC416_Rows_Row.Get_CountryOfOriginCode: String;
+begin
+  Result := ChildNodes['CountryOfOriginCode'].NodeValue;
+end;
+
+procedure TXMLINVOIC416_Rows_Row.Set_CountryOfOriginCode(Value: String);
+begin
+  ChildNodes['CountryOfOriginCode'].NodeValue := Value;
+end;
+
+end.

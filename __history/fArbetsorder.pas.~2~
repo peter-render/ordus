@@ -1,0 +1,47 @@
+unit fArbetsorder;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Qrctrls, QuickRpt, Db, ADODB, ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmArbetsorder = class(TForm)
+    QuickRep1: TQuickRep;
+    qry: TADOQuery;
+    qryOrderID: TIntegerField;
+    qryArtikelID: TIntegerField;
+    qryRadNr: TAutoIncField;
+    qryPositionnummer: TIntegerField;
+    qryAntal: TFloatField;
+    qryPrisPerEnhet: TBCDField;
+    qryDatum: TDateTimeField;
+    qryArtikelnummer: TStringField;
+    qryBeteckning: TStringField;
+    qryYtbehandlingIDdefault: TStringField;
+    qryRitning1: TBlobField;
+    QRDBRichText1: TQRDBRichText;
+    PageHeaderBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    FDQuery1: TFDQuery;
+    IntegerField1: TIntegerField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmArbetsorder: TfrmArbetsorder;
+
+implementation
+
+uses fMain, fOrder,Datamodule;
+
+{$R *.DFM}
+
+end.

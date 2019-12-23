@@ -1,0 +1,7 @@
+[General]
+Name=Ordusplan
+Project=1
+[Classes]
+Count=2
+Class0="TfrmMain","TForm","fmain","11","C:\Users\peho\Documents\Projekt\AMEK\Testplanner\fmain.pas"
+Class1="Tdm","TDataModule","datamodule","12","C:\Users\peho\Documents\Projekt\AMEK\Testplanner\datamodule.pas"

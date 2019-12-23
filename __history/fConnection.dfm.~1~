@@ -1,0 +1,25 @@
+inherited dlgSimple3: TdlgSimple3
+  Caption = 'dlgSimple3'
+  ClientHeight = 559
+  ClientWidth = 415
+  ExplicitWidth = 421
+  ExplicitHeight = 588
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel2: TPanel
+    Top = 518
+    Width = 415
+    inherited Button1: TButton
+      Left = 248
+      Visible = False
+    end
+    inherited Button2: TButton
+      Left = 330
+      Caption = 'St'#228'ng'
+    end
+  end
+  inherited Panel3: TPanel
+    Width = 415
+    Height = 518
+  end
+end

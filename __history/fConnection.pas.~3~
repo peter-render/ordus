@@ -1,0 +1,34 @@
+unit fConnection;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dSimple, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TfrmConnection = class(TdlgSimple)
+    Memo1: TMemo;
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmConnection: TfrmConnection;
+
+implementation
+
+{$R *.dfm}
+
+uses Datamodule;
+
+procedure TfrmConnection.FormShow(Sender: TObject);
+begin
+  inherited;
+memo1.Text.add(dm.FDConnection1.Params);
+end;
+
+end.

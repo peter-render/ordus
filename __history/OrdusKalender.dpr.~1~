@@ -1,0 +1,18 @@
+program OrdusKalender;
+
+uses
+  Vcl.Forms,
+  OK in 'OK.pas' {Form37},
+  datamodule in '..\..\..\RAD Studio\Projects\datamodule.pas' {dm: TDataModule},
+  fKalender in 'fKalender.pas' {frmKalender};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm37, Form37);
+  Application.CreateForm(Tdm, dm);
+  Application.CreateForm(TfrmKalender, frmKalender);
+  Application.Run;
+end.

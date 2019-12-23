@@ -1,0 +1,203 @@
+unit fOffertkalkyl;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Vcl.Grids, Vcl.StdCtrls,
+  Vcl.ExtCtrls, Vcl.ComCtrls, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.wwdblook, Datamodule,
+  Vcl.wwdbigrd, Vcl.wwdbgrid;
+
+type
+  TfrmOrderkalkyl = class(TForm)
+    wwDBLookupCombo1: TwwDBLookupCombo;
+    sp_KundLookuplist: TFDStoredProc;
+    sp_KundLookuplistKundnamn: TStringField;
+    sp_KundLookuplistKundId: TIntegerField;
+    wwDBLookupCombo2: TwwDBLookupCombo;
+    DateTimePicker1: TDateTimePicker;
+    DateTimePicker2: TDateTimePicker;
+    wwDBLookupCombo3: TwwDBLookupCombo;
+    edtFörfrågan: TLabeledEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    tblOrderkalkylArtikel: TFDTable;
+    wwDBGrid1: TwwDBGrid;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    qryLU_Artikel: TFDQuery;
+    btnClose: TButton;
+    btnSkapaOffert: TButton;
+    qryLU_ArtikelArtikelId: TFDAutoIncField;
+    qryLU_ArtikelArtikel: TStringField;
+    qryLU_ArtikelBeteckning: TStringField;
+    qryLU_ArtikelYtbehandlingIdDefault: TIntegerField;
+    qryLU_ArtikelArtikelnummer: TStringField;
+    sp_OrderradPrisinfoPerArtikel: TFDStoredProc;
+    dsoOrderradPrisinfoPerArtikel: TDataSource;
+    sp_OrderradPrisinfoPerArtikelId: TFDAutoIncField;
+    sp_OrderradPrisinfoPerArtikelOrderradID: TIntegerField;
+    sp_OrderradPrisinfoPerArtikelPrisinfotypId: TIntegerField;
+    sp_OrderradPrisinfoPerArtikelTidMinuter: TFloatField;
+    sp_OrderradPrisinfoPerArtikelInfotypBeteckning: TStringField;
+    sp_OrderradPrisinfoPerArtikelAntalArtiklar: TFMTBCDField;
+    sp_OrderradPrisinfoPerArtikelYtbehandlingBeteckning: TStringField;
+    sp_OrderradPrisinfoPerArtikelDatum: TSQLTimeStampField;
+    sp_OrderradHistoryArtikel: TFDStoredProc;
+    dsoOrderradHistoryArtikel: TDataSource;
+    sp_OrderradHistoryArtikelAntal: TFMTBCDField;
+    sp_OrderradHistoryArtikelYtbehandlingId: TIntegerField;
+    sp_OrderradHistoryArtikelYtbehandling: TStringField;
+    sp_OrderradHistoryArtikelOrderstatusId: TIntegerField;
+    sp_OrderradHistoryArtikelOrderststatus: TStringField;
+    sp_OrderradHistoryArtikelFakturadatum: TDateField;
+    wwDBGrid3: TwwDBGrid;
+    sp_OrderradHistoryArtikelPrisPerEnhet: TCurrencyField;
+    dsoOrderkalkylArtikel: TDataSource;
+    sp_OrderradHistoryArtikelOrderdatum: TDateField;
+    sp_OrderradHistoryArtikelOrderradId: TFDAutoIncField;
+    sp_OrderradPrisinfoPerArtikelPrisPerStk: TCurrencyField;
+    wwDBGrid2: TwwDBGrid;
+    sp_OrderRadInsert: TFDStoredProc;
+    tblOrderkalkylArtikelId: TFDAutoIncField;
+    tblOrderkalkylArtikelArtikelnummer: TStringField;
+    tblOrderkalkylArtikelAntal: TIntegerField;
+    tblOrderkalkylArtikelTillverkningstidUppskattad: TIntegerField;
+    tblOrderkalkylArtikelPrisUppskattat: TCurrencyField;
+    tblOrderkalkylArtikelPrisFastställt: TCurrencyField;
+    sp_OrderhuvudInsert: TFDStoredProc;
+    procedure FormShow(Sender: TObject);
+    procedure wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
+    procedure wwDBLookupCombo1BeforeDropDown(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure wwDBLookupCombo3CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
+    procedure tblOrderkalkylArtikelNewRecord(DataSet: TDataSet);
+    procedure wwDBLookupCombo2CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
+    procedure wwDBGrid3RowChanged(Sender: TObject);
+    procedure btnSkapaOffertClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmOrderkalkyl: TfrmOrderkalkyl;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmOrderkalkyl.btnCloseClick(Sender: TObject);
+begin
+  close;
+end;
+
+
+procedure TfrmOrderkalkyl.btnSkapaOffertClick(Sender: TObject);
+var
+  OrderHuvudId: Integer;
+
+begin
+
+with sp_orderhuvudInsert do
+begin
+     parambyname('@KundId').Value:= sp_kundlookuplist.FieldByName('Kundid').AsInteger;
+     parambyname('@Ordernummer').Value:= edtFörfrågan.Text;
+     parambyname('@ReferensId').Value:= dm.sp_KundpersonlistforKund.FieldByName('KundpersonId').AsInteger;
+     parambyname('@OrdertypId').Value:= 3; // Offert
+     parambyname('@OrderstatusId').Value:= 5; // Offert
+     parambyname('@Orderdatum').Value:= now; // Offert
+
+     execproc;
+     OrderHuvudId := params[0].AsInteger;
+
+end;
+end;
+
+procedure TfrmOrderkalkyl.FormShow(Sender: TObject);
+begin
+  sp_KundLookuplist.Open;
+  tblOrderkalkylArtikel.Open;
+
+end;
+
+procedure TfrmOrderkalkyl.tblOrderkalkylArtikelNewRecord(DataSet: TDataSet);
+begin
+  DataSet.FieldByName('Artikelnummer').AsString := qryLU_Artikel.FieldByName('Artikelnummer').AsString;
+end;
+
+procedure TfrmOrderkalkyl.wwDBGrid3RowChanged(Sender: TObject);
+begin
+  with sp_OrderradPrisinfoPerArtikel do
+  begin
+    if 1 = 1 then
+    begin
+      close;
+      parambyname('@OrderradId').Value := sp_OrderradHistoryArtikel.FieldByName('OrderradId').AsInteger;
+      Open;
+    end;
+  end;
+
+end;
+
+procedure TfrmOrderkalkyl.wwDBLookupCombo1BeforeDropDown(Sender: TObject);
+begin
+  wwDBLookupCombo2.Clear;
+end;
+
+procedure TfrmOrderkalkyl.wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
+begin
+  with dm.sp_KundpersonlistforKund do
+  begin
+    close;
+    parambyname('@Kundid').Value := LookupTable.FieldByName('KundId').AsInteger;
+    Open;
+  end;
+  with qryLU_Artikel do
+  begin
+    close;
+    parambyname('KundID').Value := LookupTable.FieldByName('KundId').AsInteger;
+    Open;
+
+  end;
+  wwDBLookupCombo2.Enabled := true;
+  wwDBLookupCombo2.DropDown;
+
+end;
+
+procedure TfrmOrderkalkyl.wwDBLookupCombo2CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
+begin
+  edtFörfrågan.Enabled := true;
+end;
+
+procedure TfrmOrderkalkyl.wwDBLookupCombo3CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
+begin
+
+  with sp_OrderradHistoryArtikel do
+  begin
+    close;
+    parambyname('@ArtikelId').Value := LookupTable.FieldByName('ArtikelId').AsInteger;
+    Open;
+  end;
+
+  wwDBGrid3RowChanged(Sender);
+
+  wwDBGrid1.Enabled := true;
+  tblOrderkalkylArtikel.Open;
+
+  with tblOrderkalkylArtikel do
+  begin
+    first;
+    while not eof do
+    begin
+      delete;
+      next;
+    end;
+  end;
+end;
+
+end.

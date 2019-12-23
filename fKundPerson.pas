@@ -1,0 +1,162 @@
+unit fKundPerson;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  fStdRV, StdCtrls, Mask, DBCtrls, Db, Menus, Grids, Wwdbigrd,
+  Wwdbgrid, ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Data.Win.ADODB;
+
+type
+  TfrmKundPerson = class(TfrmStdRV)
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Label3: TLabel;
+    DBEdit3: TDBEdit;
+    Label4: TLabel;
+    DBEdit4: TDBEdit;
+    Label5: TLabel;
+    DBEdit5: TDBEdit;
+    FDQuery1KundId: TIntegerField;
+    FDQuery1Id: TFDAutoIncField;
+    FDQuery1Förnamn: TStringField;
+    FDQuery1Efternamn: TStringField;
+    FDQuery1Emailadress: TStringField;
+    FDQuery1Telefonnummer: TStringField;
+    FDQuery1Mobilnummer: TStringField;
+    FDQuery1Namn: TStringField;
+    FDQuery1Företag: TStringField;
+    spKontaktpersonInsert: TFDStoredProc;
+    acKundpersonDelete: TFDCommand;
+    spKontaktpersonUpdate: TFDStoredProc;
+    FDQuery1Aktiv: TBooleanField;
+    DBCheckBox1: TDBCheckBox;
+    procedure btnNyClick(Sender: TObject);
+    procedure btnAndraClick(Sender: TObject);
+    procedure btnBortClick(Sender: TObject);
+    procedure btnSparaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnAngraClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmKundPerson: TfrmKundPerson;
+
+implementation
+
+uses fKunder, Datamodule;
+
+{$R *.DFM}
+
+procedure TfrmKundPerson.btnAngraClick(Sender: TObject);
+begin
+  inherited;
+  FDQUERY1.Refresh;
+end;
+
+procedure TfrmKundPerson.btnBortClick(Sender: TObject);
+begin
+
+  if MessageDlg('Vill du ta bort kontaktpersonen?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    try
+      with acKundpersonDelete do
+      begin
+        Commandtext.Add('Delete from Kundperson where Id = ' + FDQUERY1.fieldbyname('Id').asstring);
+        execute;
+        FDQUERY1.Close;
+        FDQUERY1.Open;
+      end;
+    except
+      on e: Exception do
+        raise Exception.create('Fel vid borttaging av posten!' + #13 + e.message);
+    end;
+  end;
+
+end;
+
+procedure TfrmKundPerson.btnNyClick(Sender: TObject);
+begin
+  inherited;
+  DBEdit1.setfocus;
+  DBCheckBox1.DataSource.DataSet.FieldByName('Aktiv').AsBoolean:= true;
+end;
+
+procedure TfrmKundPerson.btnSparaClick(Sender: TObject);
+
+var
+  Id: integer;
+begin
+
+  if FDQUERY1.State in [dsEdit] then
+  begin
+    with spKontaktpersonUpdate do
+    begin
+      parambyname('@AktörId').Value := FDQUERY1.fieldbyname('Id').asInteger;
+      parambyname('@Förnamn').Value := FDQUERY1.fieldbyname('Förnamn').asstring;
+      parambyname('@Efternamn').Value := FDQUERY1.fieldbyname('Efternamn').asstring;
+      parambyname('@Emailadress').Value := FDQUERY1.fieldbyname('Emailadress').asstring;
+      parambyname('@Telefonnummer').Value := FDQUERY1.fieldbyname('Telefonnummer').asstring;
+      parambyname('@Mobilnummer').Value := FDQUERY1.fieldbyname('Mobilnummer').asstring;
+      parambyname('@Aktiv').Value := FDQUERY1.fieldbyname('Aktiv').asboolean;
+      execproc;
+      FDQUERY1.Cancel;
+
+      FDQUERY1.Refresh;
+
+      keystate(self);
+    end;
+  end
+  else
+    with spKontaktpersonInsert do
+    begin
+
+      if (FDQUERY1.fieldbyname('Förnamn').asstring <> '') or (FDQUERY1.fieldbyname('Efternamn').asstring <> '') then
+      begin
+        parambyname('@Kundid').Value := FDQUERY1.mastersource.DataSet.fieldbyname('Id').asInteger;
+
+        parambyname('@Förnamn').Value := FDQUERY1.fieldbyname('Förnamn').asstring;
+        parambyname('@Efternamn').Value := FDQUERY1.fieldbyname('Efternamn').asstring;
+        parambyname('@Emailadress').Value := FDQUERY1.fieldbyname('Emailadress').asstring;
+        parambyname('@Telefonnummer').Value := FDQUERY1.fieldbyname('Telefonnummer').asstring;
+        parambyname('@Mobilnummer').Value := FDQUERY1.fieldbyname('Mobilnummer').asstring;
+        parambyname('@Aktiv').Value := FDQUERY1.fieldbyname('Aktiv').asboolean;
+        execproc;
+        FDQUERY1.Cancel;
+        if parambyname('@RETURN_VALUE').Value > 0 then
+        begin
+          FDQUERY1.Close;
+          FDQUERY1.Open;
+        end;
+        keystate(self);
+
+      end
+      else
+        MessageBox(0, 'Minst förnamn eller efternamn måste vara ifylld!', 'Data saknas', MB_ICONSTOP or MB_OK);
+    end;
+end;
+
+procedure TfrmKundPerson.FormShow(Sender: TObject);
+begin
+  inherited;
+  FDQUERY1.Open;
+end;
+
+procedure TfrmKundPerson.btnAndraClick(Sender: TObject);
+begin
+  inherited;
+  DBEdit1.setfocus;
+
+end;
+
+end.

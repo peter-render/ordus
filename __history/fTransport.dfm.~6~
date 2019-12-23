@@ -1,0 +1,205 @@
+inherited frmTransport: TfrmTransport
+  ActiveControl = wwDBGrid1
+  Caption = 'frmTransport'
+  ClientHeight = 338
+  ClientWidth = 438
+  OnShow = FormShow
+  ExplicitWidth = 444
+  ExplicitHeight = 367
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel2: TPanel
+    Top = 297
+    Width = 438
+    ParentFont = False
+    ExplicitTop = 397
+    ExplicitWidth = 503
+    inherited Button1: TButton
+      Left = 271
+      Caption = 'L'#228'gg till'
+      ParentFont = False
+      ExplicitLeft = 336
+    end
+    inherited Button2: TButton
+      Left = 353
+      ExplicitLeft = 418
+    end
+  end
+  inherited Panel3: TPanel
+    Width = 438
+    Height = 297
+    ParentFont = False
+    ExplicitWidth = 503
+    ExplicitHeight = 397
+    object Panel1: TPanel
+      Left = 1
+      Top = 260
+      Width = 436
+      Height = 36
+      Align = alBottom
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      ExplicitTop = 255
+      ExplicitWidth = 444
+      object DBText1: TDBText
+        Left = 24
+        Top = 6
+        Width = 95
+        Height = 17
+        DataField = 'Artikelnummer'
+        DataSource = DataSource1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object DBText2: TDBText
+        Left = 126
+        Top = 6
+        Width = 209
+        Height = 17
+        DataField = 'Beteckning'
+        DataSource = DataSource1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object EditN1: TEditN
+        Left = 355
+        Top = 6
+        Width = 41
+        Height = 21
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 0
+        Text = '1'
+        TextHint = True
+        ColorOnFocus = clWhite
+        ColorOnNotFocus = clSilver
+        FontColorOnFocus = clRed
+        FontColorOnNotFocus = clBlack
+        FontColorOnOverWrite = clBlue
+        EditType = etString
+        EditKeyByTab = #9
+        EditAlign = etAlignNone
+        EditLengthAlign = 0
+        EditPrecision = 0
+        ValueInteger = 0
+        ValueDate = 41686.000000000000000000
+        ValueTime = 0.901541712962962900
+        TimeSeconds = False
+        FirstCharUpper = False
+        FirstCharUpList = ' ('
+        WidthOnFocus = 0
+      end
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 1
+      Width = 436
+      Height = 259
+      Align = alClient
+      BorderWidth = 10
+      Caption = 'Panel4'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      ExplicitWidth = 501
+      ExplicitHeight = 354
+      object wwDBGrid1: TwwDBGrid
+        Left = 11
+        Top = 11
+        Width = 414
+        Height = 237
+        Selected.Strings = (
+          'Artikelnummer'#9'16'#9'Artikelnummer'
+          'Beteckning'#9'46'#9'Beteckning')
+        IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
+        TitleColor = clBtnFace
+        FixedCols = 0
+        ShowHorzScrollBar = True
+        Align = alClient
+        DataSource = DataSource1
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'MS Sans Serif'
+        Font.Style = []
+        Options = [dgAlwaysShowEditor, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgPerfectRowFit]
+        ParentFont = False
+        TabOrder = 0
+        TitleAlignment = taLeftJustify
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        TitleLines = 1
+        TitleButtons = False
+        PadColumnStyle = pcsPadHeader
+        ExplicitLeft = 24
+        ExplicitTop = 32
+        ExplicitWidth = 417
+        ExplicitHeight = 265
+      end
+    end
+  end
+  object FDQuery1: TFDQuery
+    Active = True
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select a.artikelNummer,a.Beteckning,a.Id from artikel a'
+      'join artikeltyp atyp on atyp.id = a.ArtikeltypId'
+      'where atyp.systemname = '#39'pallar'#39
+      'order by a.Artikelnummer'
+      '')
+    Left = 248
+    Top = 144
+    object FDQuery1Artikelnummer: TStringField
+      DisplayWidth = 16
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object FDQuery1Beteckning: TStringField
+      DisplayWidth = 46
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object FDQuery1Id: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = FDQuery1
+    Left = 328
+    Top = 136
+  end
+end

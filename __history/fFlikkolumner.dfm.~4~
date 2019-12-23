@@ -1,0 +1,107 @@
+object frmFlikkolumner: TfrmFlikkolumner
+  Left = 0
+  Top = 0
+  Caption = 'Flikkolumner'
+  ClientHeight = 369
+  ClientWidth = 764
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poOwnerFormCenter
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 764
+    Height = 41
+    Align = alTop
+    TabOrder = 0
+    ExplicitLeft = 356
+    ExplicitTop = 332
+    ExplicitWidth = 185
+    object Button1: TButton
+      Left = 637
+      Top = 8
+      Width = 111
+      Height = 25
+      Caption = '&St'#228'ng'
+      TabOrder = 0
+      OnClick = Button1Click
+    end
+  end
+  object Panel2: TPanel
+    Left = 0
+    Top = 41
+    Width = 764
+    Height = 328
+    Align = alClient
+    Caption = 'Panel1'
+    TabOrder = 1
+    ExplicitLeft = 324
+    ExplicitTop = 440
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object wwDBGrid1: TwwDBGrid
+      Left = 1
+      Top = 1
+      Width = 762
+      Height = 326
+      ControlType.Strings = (
+        'Status5;CheckBox;True;False'
+        'Status4;CheckBox;True;False'
+        'Status3;CheckBox;True;False'
+        'Status2;CheckBox;True;False'
+        'Status1;CheckBox;True;False')
+      Selected.Strings = (
+        'Id'#9'3'#9'Id'
+        'Ordning'#9'9'#9'Ordning'
+        'Fieldname'#9'23'#9'Fieldname'
+        'DisplayWidth'#9'6'#9'Bredd'
+        'FieldHeader'#9'17'#9'FieldHeader'
+        'Status4'#9'10'#9'Under arbete'
+        'Status3'#9'14'#9#197'terrapporterad'
+        'Status2'#9'9'#9'Prissatt'
+        'Status1'#9'10'#9'Fakturat'
+        'Status5'#9'9'#9'Offert')
+      IniAttributes.Delimiter = ';;'
+      IniAttributes.UnicodeIniFile = False
+      TitleColor = clBtnFace
+      FixedCols = 0
+      ShowHorzScrollBar = True
+      Align = alClient
+      DataSource = dsoGridcolumns
+      TabOrder = 0
+      TitleAlignment = taLeftJustify
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+      TitleLines = 1
+      TitleButtons = False
+    end
+  end
+  object qryGridcolumns: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'select '
+      
+        'Id, Fieldname, DisplayWidth, FieldHeader, Status5, Status4, Stat' +
+        'us3, Status2, Status1, Ordning'
+      'FROM GridColumns')
+    Left = 424
+    Top = 212
+  end
+  object dsoGridcolumns: TDataSource
+    DataSet = qryGridcolumns
+    Left = 328
+    Top = 296
+  end
+end

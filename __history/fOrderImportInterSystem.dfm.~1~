@@ -1,0 +1,188 @@
+object frmOrderImportIntersystem: TfrmOrderImportIntersystem
+  Left = 555
+  Top = 344
+  ActiveControl = btnBrowse
+  Caption = 'Importera orderfiler fr'#229'n Intersystem'
+  ClientHeight = 136
+  ClientWidth = 827
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 827
+    Height = 136
+    Align = alClient
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 825
+      Height = 134
+      Align = alClient
+      TabOrder = 0
+      object Label4: TLabel
+        Left = 28
+        Top = 56
+        Width = 36
+        Height = 13
+        Caption = 'Orderfil:'
+      end
+      object Edit2: TEdit
+        Left = 74
+        Top = 52
+        Width = 589
+        Height = 21
+        TabOrder = 0
+      end
+      object btnBrowse: TButton
+        Left = 669
+        Top = 51
+        Width = 116
+        Height = 23
+        Caption = 'V'#228'lj orderfil (*.csv)'
+        ModalResult = 1
+        TabOrder = 1
+        OnClick = btnBrowseClick
+      end
+    end
+  end
+  object OpenDialog1: TOpenDialog
+    Filter = 'CSV (*.csv)|*.csv'
+    Left = 608
+    Top = 60
+  end
+  object sp: TADOStoredProc
+    Connection = dm.ADOConnection1
+    ProcedureName = 'OrderImport;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@KundID'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Size = 10
+        Value = Null
+      end
+      item
+        Name = '@Ordernummer'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 20
+        Value = Null
+      end
+      item
+        Name = '@OrderDatum'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 16
+        Value = Null
+      end
+      item
+        Name = '@Godsm'#228'rke'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 30
+        Value = Null
+      end
+      item
+        Name = '@Referens'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 50
+        Value = Null
+      end
+      item
+        Name = '@Leveransdatum'
+        Attributes = [paNullable]
+        DataType = ftDateTime
+        Value = Null
+      end
+      item
+        Name = '@OrderID'
+        DataType = ftInteger
+        Direction = pdOutput
+        Value = Null
+      end>
+    Left = 342
+    Top = 68
+  end
+  object sp_OrderRadImport: TADOStoredProc
+    Connection = dm.ADOConnection1
+    ProcedureName = 'OrderradImport;1'
+    Parameters = <
+      item
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        Direction = pdReturnValue
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@KundId'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@OrderId'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end
+      item
+        Name = '@Artikelnummer'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 30
+        Value = Null
+      end
+      item
+        Name = '@Artikelbeteckning'
+        Attributes = [paNullable]
+        DataType = ftString
+        Size = 100
+        Value = Null
+      end
+      item
+        Name = '@Antal'
+        Attributes = [paNullable]
+        DataType = ftFloat
+        Precision = 15
+        Value = Null
+      end
+      item
+        Name = '@PrisperEnhet'
+        Attributes = [paNullable]
+        DataType = ftBCD
+        Precision = 19
+        Value = Null
+      end
+      item
+        Name = '@Positionnummer'
+        Attributes = [paNullable]
+        DataType = ftInteger
+        Precision = 10
+        Value = Null
+      end>
+    Left = 509
+    Top = 32
+  end
+end

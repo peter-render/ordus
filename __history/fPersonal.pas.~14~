@@ -1,0 +1,72 @@
+unit fPersonal;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  fStdRV, Db, ADODB, Menus, DBCtrls, StdCtrls, Grids, Wwdbigrd, Wwdbgrid,
+  ExtCtrls, Mask, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmPersonal = class(TfrmStdRV)
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    Button1: TButton;
+    DBCheckBox1: TDBCheckBox;
+    FDQuery1Id: TFDAutoIncField;
+    FDQuery1Förnamn: TStringField;
+    FDQuery1Efternamn: TStringField;
+    FDQuery1Aktiv: TBooleanField;
+    FDQuery1Aktuellpris: TCurrencyField;
+    procedure btnNyClick(Sender: TObject);
+    procedure btnAndraClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure DataSource1StateChange(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPersonal: TfrmPersonal;
+
+implementation
+
+uses fTimpris, Datamodule;
+
+{$R *.DFM}
+
+procedure TfrmPersonal.btnNyClick(Sender: TObject);
+begin
+  inherited;
+  dbedit1.setfocus;
+end;
+
+procedure TfrmPersonal.btnAndraClick(Sender: TObject);
+begin
+  inherited;
+  dbedit1.setfocus;
+end;
+
+procedure TfrmPersonal.Button1Click(Sender: TObject);
+begin
+  inherited;
+
+  with TfrmTimpris.create(Application) do
+  begin
+    Showmodal;
+  end;
+  fdquery1.Refresh;
+end;
+
+procedure TfrmPersonal.DataSource1StateChange(Sender: TObject);
+begin
+  inherited;
+  button1.Enabled:= not (datasource1.DataSet.State in [dsEdit,dsInsert]);
+end;
+
+end.

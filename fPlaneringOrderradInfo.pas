@@ -1,0 +1,86 @@
+unit fPlaneringOrderradInfo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid, Data.DB, Vcl.ExtCtrls,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ImgList;
+
+type
+  TfrmPlaneringOrderradInfo = class(TForm)
+    Panel1: TPanel;
+    dsoOrderKvarAttTillverka: TDataSource;
+    wwDBGrid1: TwwDBGrid;
+    Panel2: TPanel;
+    DBText1: TDBText;
+    Label1: TLabel;
+    ImageList1: TImageList;
+    CheckBox1: TCheckBox;
+    spOrderKvarAttTillverka: TFDStoredProc;
+    spOrderKvarAttTillverkaOrderid: TIntegerField;
+    spOrderKvarAttTillverkaKundnamn: TStringField;
+    spOrderKvarAttTillverkaGodsmärke: TStringField;
+    spOrderKvarAttTillverkaradnr: TIntegerField;
+    spOrderKvarAttTillverkaPositionnummer: TIntegerField;
+    spOrderKvarAttTillverkaantal: TFMTBCDField;
+    spOrderKvarAttTillverkaArtikelnummer: TStringField;
+    spOrderKvarAttTillverkaBeteckning: TStringField;
+    spOrderKvarAttTillverkaBockritningFinns: TBooleanField;
+    spOrderKvarAttTillverkaFörnamn: TStringField;
+    procedure FormMouseLeave(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure FormKeyPress(Sender: TObject; var Key: Char);
+    procedure CheckBox1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPlaneringOrderradInfo: TfrmPlaneringOrderradInfo;
+
+implementation
+
+{$R *.dfm}
+
+uses Datamodule;
+
+procedure TfrmPlaneringOrderradInfo.CheckBox1Click(Sender: TObject);
+begin
+  with spOrderKvarAttTillverka do
+  begin
+    close;
+    parambyname('@Visaavrapporterade').value := checkbox1.Checked;
+    open;
+  end;
+
+end;
+
+procedure TfrmPlaneringOrderradInfo.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:= caFree;
+end;
+
+procedure TfrmPlaneringOrderradInfo.FormKeyPress(Sender: TObject; var Key: Char);
+begin
+if key = #27 then self.Close;
+
+end;
+
+procedure TfrmPlaneringOrderradInfo.FormMouseLeave(Sender: TObject);
+begin
+  self.Close;
+end;
+
+procedure TfrmPlaneringOrderradInfo.FormShow(Sender: TObject);
+begin
+
+self.SetFocus;
+
+end;
+
+end.

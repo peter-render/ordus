@@ -1,0 +1,109 @@
+unit fNotering;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Grids, Wwdbigrd, Wwdbgrid, DB, ADODB, Menus,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmNotering = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Memo1: TMemo;
+    Button1: TButton;
+    btnSpara: TButton;
+    btnAvbryt: TButton;
+    wwDBGrid1: TwwDBGrid;
+    dsoNotering: TDataSource;
+    PopupMenu1: TPopupMenu;
+    abortraden1: TMenuItem;
+    qryNotering: TFDQuery;
+    qryNoteringInsert: TFDQuery;
+    qryNoteringId: TFDAutoIncField;
+    qryNoteringDatum: TSQLTimeStampField;
+    qryNoteringNotering: TStringField;
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Memo1Change(Sender: TObject);
+    procedure btnSparaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnAvbrytClick(Sender: TObject);
+    procedure abortraden1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmNotering: TfrmNotering;
+
+implementation
+
+uses Datamodule;
+
+{$R *.dfm}
+
+procedure TfrmNotering.abortraden1Click(Sender: TObject);
+begin
+  with qryNotering do
+  begin
+    delete;
+  end;
+end;
+
+procedure TfrmNotering.btnAvbrytClick(Sender: TObject);
+begin
+  Memo1.Clear;
+  Memo1.SetFocus;
+end;
+
+procedure TfrmNotering.btnSparaClick(Sender: TObject);
+begin
+  with qryNoteringInsert do
+  begin
+    parambyname('Notering').value := Memo1.Text;
+    execsql;
+  end;
+  with qryNotering do
+  begin
+    Close;
+    open;
+
+  end;
+  Memo1.Clear;
+  Memo1.SetFocus;
+
+end;
+
+procedure TfrmNotering.Button1Click(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfrmNotering.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TfrmNotering.FormShow(Sender: TObject);
+begin
+  qryNotering.open;
+end;
+
+procedure TfrmNotering.Memo1Change(Sender: TObject);
+begin
+
+  btnSpara.Enabled := Memo1.Text <> '';
+  btnAvbryt.Enabled := btnSpara.Enabled;
+
+end;
+
+end.

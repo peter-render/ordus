@@ -1,0 +1,165 @@
+inherited frmMaterialpris: TfrmMaterialpris
+  Left = 328
+  Top = 387
+  Caption = 'Materialpris'
+  ClientHeight = 367
+  ClientWidth = 505
+  ExplicitWidth = 511
+  ExplicitHeight = 395
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 386
+    Height = 367
+    ExplicitWidth = 386
+    ExplicitHeight = 367
+    inherited Bevel2: TBevel
+      Left = 16
+      ExplicitLeft = 16
+    end
+    object Label1: TLabel [2]
+      Left = 36
+      Top = 220
+      Width = 29
+      Height = 13
+      Caption = 'Fr o m'
+    end
+    object Label2: TLabel [3]
+      Left = 36
+      Top = 245
+      Width = 53
+      Height = 13
+      Caption = 'Materialpris'
+    end
+    object Label3: TLabel [4]
+      Left = 36
+      Top = 270
+      Width = 42
+      Height = 13
+      Caption = 'Laserpris'
+    end
+    inherited dbGrid: TwwDBGrid
+      Top = 12
+      Selected.Strings = (
+        'Fom'#9'13'#9'Fom'
+        'Pris'#9'18'#9'Materialpris'
+        'Laserpris'#9'19'#9'Laserpris')
+      ExplicitTop = 12
+    end
+    object DBEditN1: TDBEditN
+      Left = 96
+      Top = 240
+      Width = 121
+      Height = 21
+      Color = clWhite
+      DataField = 'Pris'
+      DataSource = DataSource1
+      TabOrder = 1
+      ColorOnFocus = clWhite
+      ColorOnNotFocus = clWhite
+      FontColorOnFocus = clRed
+      FontColorOnNotFocus = clBlack
+      FontColorOnOverWrite = clBlue
+      EditKeyByTab = #9
+      FirstCharUpper = False
+      FirstCharUpList = ' ('
+      WidthOnFocus = 0
+      TextHint = True
+    end
+    object DBEditN2: TDBEditN
+      Left = 96
+      Top = 268
+      Width = 121
+      Height = 21
+      Color = clWhite
+      DataField = 'Laserpris'
+      DataSource = DataSource1
+      TabOrder = 2
+      ColorOnFocus = clWhite
+      ColorOnNotFocus = clWhite
+      FontColorOnFocus = clRed
+      FontColorOnNotFocus = clBlack
+      FontColorOnOverWrite = clBlue
+      EditKeyByTab = #9
+      FirstCharUpper = False
+      FirstCharUpList = ' ('
+      WidthOnFocus = 0
+      TextHint = True
+    end
+    object dbedit1: TwwDBDateTimePicker
+      Left = 96
+      Top = 212
+      Width = 121
+      Height = 21
+      CalendarAttributes.Font.Charset = DEFAULT_CHARSET
+      CalendarAttributes.Font.Color = clWindowText
+      CalendarAttributes.Font.Height = -11
+      CalendarAttributes.Font.Name = 'MS Sans Serif'
+      CalendarAttributes.Font.Style = []
+      DataField = 'Fom'
+      DataSource = DataSource1
+      Epoch = 1950
+      ShowButton = True
+      TabOrder = 3
+      UnboundDataType = wwDTEdtDate
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 386
+    Height = 367
+    ExplicitLeft = 386
+    ExplicitHeight = 367
+    inherited DBNav: TDBNavigator
+      Hints.Strings = ()
+    end
+  end
+  inherited DataSource1: TDataSource
+    Left = 36
+    Top = 32
+  end
+  inherited FDQuery1: TFDQuery
+    MasterSource = frmYtbehandling.DataSource1
+    MasterFields = 'Id'
+    SQL.Strings = (
+      'Select '
+      'Id, '
+      'YtbehandlingId,Fom,Pris,Laserpris '
+      'from YtbehandlingPris '
+      'where YtbehandlingID = :Id '
+      'order by Fom desc'
+      '')
+    Left = 92
+    Top = 104
+    ParamData = <
+      item
+        Name = 'ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object ADOQuery1Fom: TDateTimeField
+      DisplayWidth = 13
+      FieldName = 'Fom'
+    end
+    object ADOQuery1Pris: TBCDField
+      DisplayLabel = 'Materialpris'
+      DisplayWidth = 18
+      FieldName = 'Pris'
+      Precision = 19
+    end
+    object ADOQuery1Laserpris: TBCDField
+      DisplayWidth = 19
+      FieldName = 'Laserpris'
+      Precision = 19
+    end
+    object ADOQuery1YtbehandlingsprisId: TAutoIncField
+      FieldName = 'YtbehandlingsprisId'
+      ReadOnly = True
+      Visible = False
+    end
+    object ADOQuery1YtbehandlingId: TIntegerField
+      FieldName = 'YtbehandlingId'
+      Visible = False
+    end
+  end
+end

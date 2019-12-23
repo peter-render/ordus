@@ -1,0 +1,14 @@
+program Ordusplan3;
+
+uses
+  Vcl.Forms,
+  fPlanner in 'fPlanner.pas' {frmPlanner};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmPlanner, frmPlanner);
+  Application.Run;
+end.

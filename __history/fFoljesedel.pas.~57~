@@ -1,0 +1,347 @@
+unit fFoljesedel;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Db, Grids, Wwdbigrd, Wwdbgrid, ExtCtrls, StdCtrls, Menus, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, comobj,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, gtPDFPrinter,
+  gtPDFClasses, gtCstPDFDoc, gtExPDFDoc, gtExProPDFDoc, gtPDFDoc, vcl.gtxXport,
+  vcl.gtQRXport, vcl.gtxClasses, REST.Backend.EMSServices, REST.Backend.EMSFireDAC;
+
+type
+  TfrmFoljesedel = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    wwDBGrid1: TwwDBGrid;
+    DataSource1: TDataSource;
+    btnClose: TButton;
+    ButtonPrint: TButton;
+    btnLeveransdatum: TButton;
+    btnShow: TButton;
+    PopupMenu1: TPopupMenu;
+    Sttleveransdatum1: TMenuItem;
+    Tabortleveransdatum1: TMenuItem;
+    Visafljesedel1: TMenuItem;
+    Skrivutfljesdel1: TMenuItem;
+    N1: TMenuItem;
+    ndraBeteckning1: TMenuItem;
+    Tabortfljesedel1: TMenuItem;
+    CheckBox1: TCheckBox;
+    Arkiverafljesedel1: TMenuItem;
+    qryFoljesedel: TFDQuery;
+    spCustom_FoljesedelTaBortLeveransdatum: TFDStoredProc;
+    qryFoljesedelId: TFDAutoIncField;
+    qryFoljesedelKundid: TFDAutoIncField;
+    qryFoljesedelDatum: TStringField;
+    qryFoljesedelLevereradDatum: TSQLTimeStampField;
+    qryFoljesedelKundnamn: TStringField;
+    qryFoljesedelAntalrader: TIntegerField;
+    qryFoljesedelBeteckning: TStringField;
+    qryFoljesedelArkiverad: TBooleanField;
+    btnEpostFoljesedel: TButton;
+    gtPDFDocument1: TgtPDFDocument;
+    gtPDFPrinter1: TgtPDFPrinter;
+    gtQRExport1: TgtQRExport;
+    Button1: TButton;
+    Edit1: TEdit;
+    EMSFireDACClient1: TEMSFireDACClient;
+    procedure FormShow(Sender: TObject);
+    procedure ButtonPrintClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure btnLeveransdatumClick(Sender: TObject);
+    procedure wwDBGrid1CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+      AFont: TFont; ABrush: TBrush);
+    procedure btnShowClick(Sender: TObject);
+    procedure Tabortleveransdatum1Click(Sender: TObject);
+    procedure ndraBeteckning1Click(Sender: TObject);
+    procedure Tabortfljesedel1Click(Sender: TObject);
+    procedure Arkiverafljesedel1Click(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
+    procedure btnEpostFoljesedelClick(Sender: TObject);
+    procedure Edit1Change(Sender: TObject);
+    procedure wwDBGrid1QuerySortField(Sender: TObject; var SortFieldName: string; var IsDescending: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmFoljesedel: TfrmFoljesedel;
+
+implementation
+
+uses fMainRapport2, rFoljesedel, Datamodule, funclib, fEditBeteckning;
+
+{$R *.DFM}
+
+procedure TfrmFoljesedel.FormShow(Sender: TObject);
+begin
+
+  with qryFoljesedel do
+  begin
+    close;
+    parambyname('Soktext').Value := '';
+    open;
+  end;
+
+end;
+
+procedure TfrmFoljesedel.btnEpostFoljesedelClick(Sender: TObject);
+var
+  xFilename: string;
+  sFilename: string;
+  strbody: string;
+  cr: string;
+  Outlook: OleVariant;
+  Mail: Variant;
+  qrfilename, epostadress: String;
+const
+  olMailItem = $00000000;
+begin
+
+  xFilename := FoldernameFix(ftgsystemvalue('pdf.folder.foljesedel', '')) + 'Följesedel_' + qryFoljesedelId.asstring;
+
+  SetDefaultPrinter('');
+
+  with TrptFoljesedel.create(Application) do
+  begin
+    header.Caption := 'Följesedel';
+    qry.close;
+    qry.parambyname('FSId').Value := qryFoljesedelId.asInteger;
+    qry.open;
+    epostadress := qry.FieldByName('emailadress').asstring;
+
+    // if qry.RecordCount > 0 then
+    // report.print;
+
+    qrfilename := GetQrfilename(xFilename);
+
+    report.Prepare;
+    report.QRPrinter.Compression := True;
+    report.QRPrinter.Save(qrfilename);
+    report.QRPrinter.Free;
+    report.QRPrinter := nil;
+    // up to here, it seems to want to be set back to nil before you preview
+    gtQRExport1.OpenAfterExport := false;
+    // report.PreviewModal;
+    gtQRExport1.ExportToFile(qrfilename, xFilename, TgtxOutputFormat.PDF);
+
+  end;
+
+  if (Sender as TButton).tag = 2 then
+
+  begin
+    try
+      Outlook := GetActiveOleObject('Outlook.Application');
+    except
+      Outlook := CreateOleObject('Outlook.Application');
+    end;
+
+    Mail := Outlook.CreateItem(olMailItem);
+
+    if pos('snpeho', qryFoljesedel.Connection.ConnectionString) > 0 then
+      Mail.To := 'peter@holzer.nu'
+    else
+      Mail.To := epostadress;
+
+    Mail.Subject := 'Följesedel (' + qryFoljesedelId.asstring + ')';
+    Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Följesedel som PDF-bilaga';
+    // + chr(13) + chr(10) +  'Vi tackar för uppdraget.';
+    Mail.Attachments.Add(xFilename + '.pdf');
+    Mail.Display;
+
+  end;
+
+end;
+
+procedure TfrmFoljesedel.ButtonPrintClick(Sender: TObject);
+var
+  xFilename: string;
+  sFilename: string;
+  strbody: string;
+  cr: string;
+  Outlook: OleVariant;
+  Mail: Variant;
+  epostadress: String;
+const
+  olMailItem = $00000000;
+begin
+
+  xFilename := FoldernameFix(ftgsystemvalue('pdf.folder.foljesedel', '')) + 'Följesedel_' + qryFoljesedelId.asstring;
+
+  SetDefaultPrinter('');
+  with TrptFoljesedel.create(Application) do
+  begin
+    header.Caption := 'Följesedel';
+    qry.close;
+    qry.parambyname('FSId').Value := qryFoljesedelId.asInteger;
+    qry.open;
+    epostadress := qry.FieldByName('emailadress').asstring;
+    if qry.RecordCount > 0 then
+      report.print;
+  end;
+end;
+
+procedure TfrmFoljesedel.btnCloseClick(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TfrmFoljesedel.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+procedure TfrmFoljesedel.btnLeveransdatumClick(Sender: TObject);
+begin
+  with qryFoljesedel do
+  begin
+
+    if (qryFoljesedelLevereradDatum.asstring <> '') and
+      (messagedlg('Leveransdatumet är redan ifyllt - vill du ändra det till dagens datum?', mtConfirmation,
+      [mbYes, mbNo], 0) = mrNo) then
+      exit;
+
+    begin
+      edit;
+      qryFoljesedelLevereradDatum.AsDateTime := date;
+      post;
+    end;
+
+  end;
+
+end;
+
+procedure TfrmFoljesedel.wwDBGrid1CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState;
+  Highlight: Boolean; AFont: TFont; ABrush: TBrush);
+begin
+  if qryFoljesedel.FieldByName('Levereraddatum').asstring <> '' then
+  begin
+    if Highlight then
+    begin
+      ABrush.Color := clHighlight;
+      AFont.Color := clsilver;
+    end
+    else
+    begin
+      ABrush.Color := $00EAF3F4;
+      AFont.Color := clBlack;
+    end;
+  end;
+
+  ;
+end;
+
+procedure TfrmFoljesedel.wwDBGrid1QuerySortField(Sender: TObject; var SortFieldName: string; var IsDescending: Boolean);
+begin
+if sortfieldname <> '' then
+showmessage(sortfieldname);
+end;
+
+procedure TfrmFoljesedel.btnShowClick(Sender: TObject);
+begin
+  with TrptFoljesedel.create(Application) do
+  begin
+    qry.close;
+    qry.parambyname('FSId').Value := qryFoljesedelId.asInteger;
+    qry.open;
+    if qry.RecordCount > 0 then
+      report.preview;
+  end;
+
+end;
+
+procedure TfrmFoljesedel.Tabortleveransdatum1Click(Sender: TObject);
+begin
+
+  with spCustom_FoljesedelTaBortLeveransdatum do
+  begin
+
+    parambyname('@FöljesedelId').Value := qryFoljesedelId.asInteger;
+    execproc;
+  end;
+  qryFoljesedel.Refresh
+end;
+
+procedure TfrmFoljesedel.ndraBeteckning1Click(Sender: TObject);
+begin
+  qryFoljesedel.edit;
+  with TfrmEditbeteckning.create(Application) do
+  begin
+    showmodal;
+    if modalresult = mrOK then
+      qryFoljesedel.post
+    else
+      qryFoljesedel.cancel;
+  end;
+end;
+
+procedure TfrmFoljesedel.Tabortfljesedel1Click(Sender: TObject);
+begin
+  with qryFoljesedel do
+  begin
+    if qryFoljesedelAntalrader.asInteger = 0 then
+      delete
+    else
+      showmessage('Bara följesedlar utan rader kan tas bort!');
+
+  end;
+
+end;
+
+procedure TfrmFoljesedel.Arkiverafljesedel1Click(Sender: TObject);
+begin
+  with qryFoljesedel do
+  begin
+
+    if (qryFoljesedelArkiverad.asBoolean = false) and
+      (messagedlg('Vill du arkivera följesedeln?', mtConfirmation, [mbYes, mbNo], 0) = mrYes) then
+    begin
+      edit;
+      qryFoljesedelArkiverad.Value := True;
+      post;
+    end;
+
+    qryFoljesedel.Refresh;
+  end;
+
+end;
+
+procedure TfrmFoljesedel.CheckBox1Click(Sender: TObject);
+begin
+  with qryFoljesedel do
+  begin
+    close;
+    parambyname('Checked').Value := CheckBox1.checked;
+    open;
+  end;
+end;
+
+procedure TfrmFoljesedel.Edit1Change(Sender: TObject);
+var
+  sText: string;
+begin
+  if Edit1.Text <> '' then
+    sText := '%' + Edit1.Text + '%'
+  else
+    sText := '';
+
+  with qryFoljesedel do
+  begin
+    close;
+    parambyname('Soktext').Value := sText;
+    open;
+
+  end;
+
+end;
+
+end.

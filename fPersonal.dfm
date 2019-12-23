@@ -1,0 +1,194 @@
+﻿inherited frmPersonal: TfrmPersonal
+  Left = 412
+  Top = 278
+  Caption = 'Personal'
+  ClientHeight = 427
+  ClientWidth = 709
+  ExplicitWidth = 715
+  ExplicitHeight = 456
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 590
+    Height = 427
+    ExplicitWidth = 590
+    ExplicitHeight = 427
+    inherited Bevel1: TBevel
+      Left = 29
+      Top = 241
+      ExplicitLeft = 29
+      ExplicitTop = 241
+    end
+    inherited Bevel2: TBevel
+      Left = 16
+      Top = 404
+      Width = 501
+      ExplicitLeft = 16
+      ExplicitTop = 404
+      ExplicitWidth = 501
+    end
+    object Label1: TLabel [2]
+      Left = 29
+      Top = 282
+      Width = 42
+      Height = 13
+      Caption = 'F'#246'rnamn'
+      FocusControl = DBEdit1
+    end
+    object Label2: TLabel [3]
+      Left = 29
+      Top = 311
+      Width = 50
+      Height = 13
+      Caption = 'Efternamn'
+      FocusControl = DBEdit2
+    end
+    inherited dbGrid: TwwDBGrid
+      Width = 541
+      Height = 209
+      ControlType.Strings = (
+        'Aktiv;CheckBox;True;False'
+        #196'rAdministrat'#246'r;CheckBox;True;False')
+      Selected.Strings = (
+        'Id'#9'5'#9'Id'
+        'F'#246'rnamn'#9'14'#9'F'#246'rnamn'
+        'Efternamn'#9'33'#9'Efternamn'
+        #196'rAdministrat'#246'r'#9'6'#9'Admin'
+        'Aktiv'#9'5'#9'Aktiv'
+        'Aktuellpris'#9'16'#9'Aktuell timpris')
+      ExplicitWidth = 541
+      ExplicitHeight = 209
+    end
+    object DBEdit1: TDBEdit
+      Left = 115
+      Top = 279
+      Width = 186
+      Height = 21
+      DataField = 'F'#246'rnamn'
+      DataSource = DataSource1
+      TabOrder = 1
+    end
+    object DBEdit2: TDBEdit
+      Left = 115
+      Top = 310
+      Width = 186
+      Height = 21
+      DataField = 'Efternamn'
+      DataSource = DataSource1
+      TabOrder = 2
+    end
+    object DBCheckBox1: TDBCheckBox
+      Left = 29
+      Top = 337
+      Width = 100
+      Height = 17
+      Alignment = taLeftJustify
+      Caption = #196'r administrat'#246'r'
+      DataField = #196'rAdministrat'#246'r'
+      DataSource = DataSource1
+      TabOrder = 3
+    end
+    object DBCheckBox2: TDBCheckBox
+      Left = 29
+      Top = 360
+      Width = 100
+      Height = 17
+      Alignment = taLeftJustify
+      Caption = 'Aktiv'
+      DataField = 'Aktiv'
+      DataSource = DataSource1
+      TabOrder = 4
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 590
+    Height = 427
+    ExplicitLeft = 590
+    ExplicitHeight = 427
+    inherited btnAngra: TButton
+      Top = 153
+      ExplicitTop = 153
+    end
+    inherited btnSpara: TButton
+      Top = 123
+      ExplicitTop = 123
+    end
+    inherited btnBort: TButton
+      Top = 183
+      ExplicitTop = 183
+    end
+    inherited DBNav: TDBNavigator
+      Left = 24
+      Top = 214
+      Hints.Strings = ()
+      ExplicitLeft = 24
+      ExplicitTop = 214
+    end
+    object Button1: TButton
+      Left = 12
+      Top = 257
+      Width = 95
+      Height = 25
+      Caption = 'Timpriser'
+      TabOrder = 7
+      OnClick = Button1Click
+    end
+  end
+  inherited DataSource1: TDataSource
+    OnStateChange = DataSource1StateChange
+  end
+  inherited FDQuery1: TFDQuery
+    Active = True
+    SQL.Strings = (
+      
+        '  Select p.*,Aktuellpris = (select max(Timpris) from timpris whe' +
+        're fom = (select max(fom) from timpris where personalid = p.Id a' +
+        'nd fom <= getdate()) and personalid = p.id)'
+      '  from Personal p order by efternamn'
+      '')
+    Left = 284
+    object FDQuery1Id: TFDAutoIncField
+      Alignment = taLeftJustify
+      DisplayWidth = 5
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQuery1Förnamn: TStringField
+      DisplayWidth = 14
+      FieldName = 'F'#246'rnamn'
+      Origin = '[F'#246'rnamn]'
+      Size = 50
+    end
+    object FDQuery1Efternamn: TStringField
+      DisplayWidth = 33
+      FieldName = 'Efternamn'
+      Origin = 'Efternamn'
+      Size = 50
+    end
+    object FDQuery1ÄrAdministratör: TBooleanField
+      DisplayLabel = 'Admin'
+      DisplayWidth = 6
+      FieldName = #196'rAdministrat'#246'r'
+      Origin = '['#196'rAdministrat'#246'r]'
+    end
+    object FDQuery1Aktiv: TBooleanField
+      DisplayWidth = 5
+      FieldName = 'Aktiv'
+      Origin = 'Aktiv'
+    end
+    object FDQuery1Aktuellpris: TCurrencyField
+      DisplayLabel = 'Aktuell timpris'
+      DisplayWidth = 16
+      FieldName = 'Aktuellpris'
+      Origin = 'Aktuellpris'
+      ReadOnly = True
+    end
+    object FDQuery1ÄrSystemkonto: TBooleanField
+      FieldName = #196'rSystemkonto'
+      Origin = '['#196'rSystemkonto]'
+      Visible = False
+    end
+  end
+end

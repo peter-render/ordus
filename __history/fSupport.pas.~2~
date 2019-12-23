@@ -1,0 +1,79 @@
+unit fSupport;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Db, ADODB, StdCtrls, ExtCtrls, FireDAC.Stan.Intf, FireDAC.Comp.Script;
+
+type
+  TfrmSupport = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Button1: TButton;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Memo1: TMemo;
+    btnExecute: TButton;
+    Button2: TButton;
+    Label1: TLabel;
+    FDScript1: TFDScript;
+    procedure btnExecuteClick(Sender: TObject);
+    procedure Memo1Change(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmSupport: TfrmSupport;
+
+implementation
+
+uses fMain, dFakturaNummer, Datamodule;
+
+{$R *.DFM}
+
+procedure TfrmSupport.btnExecuteClick(Sender: TObject);
+begin
+
+if memo1.Text <> '' then
+with fdscript1 do
+begin
+     close;
+     sqlscripts:= memo1.Text;
+      fdscript1.ExecuteAll;
+end
+
+
+
+
+
+end;
+
+procedure TfrmSupport.Memo1Change(Sender: TObject);
+begin
+btnexecute.Enabled:= memo1.text <> '';
+
+end;
+
+procedure TfrmSupport.Button1Click(Sender: TObject);
+begin
+close;
+end;
+
+procedure TfrmSupport.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:= caFree;
+end;
+
+procedure TfrmSupport.Button2Click(Sender: TObject);
+begin
+memo1.PasteFromClipboard;
+end;
+
+end.

@@ -1,0 +1,32 @@
+unit fPlaneringOrderradInfo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid, Data.DB, Vcl.ExtCtrls;
+
+type
+  TfrmPlaneringOrderradInfo = class(TForm)
+    Panel1: TPanel;
+    DataSource1: TDataSource;
+    wwDBGrid1: TwwDBGrid;
+    Panel2: TPanel;
+    DBText1: TDBText;
+    Label1: TLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPlaneringOrderradInfo: TfrmPlaneringOrderradInfo;
+
+implementation
+
+{$R *.dfm}
+
+uses Datamodule;
+
+end.

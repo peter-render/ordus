@@ -1,0 +1,155 @@
+unit fOrderNew;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, wwdblook, ExtCtrls, wwdbdatetimepicker, Db, ADODB, ComCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.Client, FireDAC.Comp.DataSet;
+
+type
+  TfrmOrderNew = class(TForm)
+    luKund: TwwDBLookupCombo;
+    Label1: TLabel;
+    rb1: TRadioButton;
+    rb2: TRadioButton;
+    edtOrderdatum: TwwDBDateTimePicker;
+    Label3: TLabel;
+    Edit1: TEdit;
+    Label4: TLabel;
+    Panel1: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    Label5: TLabel;
+    Label7: TLabel;
+    edtLevdatum: TwwDBDateTimePicker;
+    dsoKundPersonlistforKund: TDataSource;
+    LU_Kundperson: TwwDBLookupCombo;
+    dsoLUKund: TDataSource;
+    edtFritext: TMemo;
+    Label8: TLabel;
+    Bevel1: TBevel;
+    edtDatumYtbehandling: TwwDBDateTimePicker;
+    Label2: TLabel;
+    LUYtbehandling: TwwDBLookupCombo;
+    qryLU_kund: TFDQuery;
+    qryLU_kundKundId: TFDAutoIncField;
+    qryLU_kundKundnamn: TStringField;
+    sp_insert: TFDStoredProc;
+    sp_KundpersonlistforKund: TFDStoredProc;
+    sp_KundpersonlistforKundKundpersonId: TFDAutoIncField;
+    sp_KundpersonlistforKundNamn: TStringField;
+    Label6: TLabel;
+    Edit3: TEdit;
+    Label9: TLabel;
+    edtEgenMarkning: TEdit;
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure luKundCloseUp(Sender: TObject; LookupTable,
+      FillTable: TDataSet; modified: Boolean);
+    procedure Label5Click(Sender: TObject);
+    procedure LUYtbehandlingCloseUp(Sender: TObject; LookupTable,
+      FillTable: TDataSet; modified: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmOrderNew: TfrmOrderNew;
+
+implementation
+
+uses fMain, Datamodule;
+
+{$R *.DFM}
+
+procedure TfrmOrderNew.Button1Click(Sender: TObject);
+begin
+  with sp_insert do
+  begin
+    parambyname('@KundID').value := luKund.LookupTable.fieldbyname('Kundid').asInteger;
+    parambyname('@OrderNummer').value := edit1.Text;
+    parambyname('@Orderdatum').value := edtOrderdatum.date;
+    parambyname('@Godsmärke').value := edit3.text;
+    parambyname('@Egenmärkning').value := edtegenmarkning.text;
+    parambyname('@ReferensID').value := sp_KundpersonlistforKund.fieldbyname('KundPersonID').asInteger;
+
+    if rb1.checked then
+      parambyname('@OrdertypId').value := 1  // Order
+    else
+      parambyname('@OrdertypId').value := 3;  // Offert
+
+    parambyname('@Leveransdatum').value := edtLevdatum.date;
+    parambyname('@Fritext').value := edtFritext.text;
+
+    showmessage(datetostr(edtdatumYtbehandling.Date));
+
+    parambyname('@YtbehandlingDatum').value := edtdatumYtbehandling.Date;
+
+  if LuYtbehandling.DisplayValue <> '' then
+    parambyname('@YtbehandlingId').value := LuYtbehandling.LookupValue;
+
+    execproc;
+  end;
+
+end;
+
+procedure TfrmOrderNew.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  release;
+end;
+
+procedure TfrmOrderNew.FormShow(Sender: TObject);
+begin
+
+  qryLU_kund.open;
+  dm.qryLUYtbehandling.open;
+
+  lukund.LookupTable.locate('Kundid', 1, []);
+  lukund.Text := lukund.LookupTable.fieldbyname('Kundnamn').asString;
+
+  edtOrderdatum.Date := date;
+
+  with sp_KundpersonlistforKund do
+  begin
+    close;
+    parambyname('@Kundid').value := lukund.LookupTable.FieldByName('Kundid').AsInteger;
+    open;
+    LU_Kundperson.enabled := (recordcount > 0);
+    lu_kundperson.RefreshDisplay;
+  end;
+
+
+end;
+
+procedure TfrmOrderNew.luKundCloseUp(Sender: TObject; LookupTable,
+  FillTable: TDataSet; modified: Boolean);
+begin
+
+  with sp_KundpersonlistforKund do
+  begin
+    close;
+    parambyname('@Kundid').value := lookuptable.FieldByName('Kundid').AsInteger;
+    open;
+    LU_Kundperson.enabled := (recordcount > 0);
+    lu_kundperson.RefreshDisplay;
+  end;
+end;
+
+procedure TfrmOrderNew.LUYtbehandlingCloseUp(Sender: TObject; LookupTable,
+  FillTable: TDataSet; modified: Boolean);
+begin
+  luYtbehandling.Text:= luytbehandling.LookupTable.fieldbyname('Beteckning').asString;
+end;
+
+procedure TfrmOrderNew.Label5Click(Sender: TObject);
+begin
+  frmmain.Kunder1click(sender);
+end;
+
+end.

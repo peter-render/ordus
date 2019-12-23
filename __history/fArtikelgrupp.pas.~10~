@@ -1,0 +1,63 @@
+unit fArtikelgrupp;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Mask, DBCtrls, EditNew, DB, wwdblook, ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmArtikelgrupp = class(TForm)
+    Panel1: TPanel;
+    wwDBLookupCombo1: TwwDBLookupCombo;
+    edtAntal: TDBEditN;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Panel2: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    qryLU_artikel: TFDQuery;
+    qryLU_artikelArtikelId: TFDAutoIncField;
+    qryLU_artikelBeteckning: TStringField;
+    qryLU_artikelArtikelnummer: TStringField;
+    edtLeverantor: TDBEdit;
+    qryLU_artikelArtikelnrBeteckning: TStringField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable,
+      FillTable: TDataSet; modified: Boolean);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmArtikelgrupp: TfrmArtikelgrupp;
+
+implementation
+
+uses fArtikel, Datamodule;
+
+{$R *.dfm}
+
+procedure TfrmArtikelgrupp.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:= caFree;
+end;
+
+procedure TfrmArtikelgrupp.FormShow(Sender: TObject);
+begin
+wwDBLookupCombo1.SetFocus;
+end;
+
+procedure TfrmArtikelgrupp.wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable,
+  FillTable: TDataSet; modified: Boolean);
+begin
+edtAntal.SetFocus;
+end;
+
+end.

@@ -1,0 +1,66 @@
+unit fUnderhåll;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Vcl.StdCtrls, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmUnderhåll = class(TForm)
+    qry1: TFDQuery;
+    qry1a1id: TFDAutoIncField;
+    qry1Artikelnummer: TStringField;
+    qry1Beteckning: TStringField;
+    qry1a2id: TFDAutoIncField;
+    qry1Artikelnummer_1: TStringField;
+    qry1Beteckning_1: TStringField;
+    qry2: TFDQuery;
+    FDAutoIncField1: TFDAutoIncField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    FDAutoIncField2: TFDAutoIncField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmUnderhåll: TfrmUnderhåll;
+
+implementation
+
+{$R *.dfm}
+
+uses Datamodule;
+
+procedure TfrmUnderhåll.Button1Click(Sender: TObject);
+var a1,a2:integer       ;
+begin
+  qry1.Open;
+  while not eof() do
+  begin
+       a1:= qry1.fieldbyname('A1Id').asinteger;
+       a2:= qry1.fieldbyname('A2Id').asinteger;
+
+       with qry2 do
+       begin
+          qry2.ParamByName('a1id').AsInteger:= a1;
+          qry2.ParamByName('a2id').AsInteger:= a2;
+          execute;
+       end;
+    next;
+  end;
+
+end;
+
+end.

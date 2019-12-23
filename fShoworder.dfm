@@ -1,0 +1,319 @@
+object frmShowOrder: TfrmShowOrder
+  Left = 0
+  Top = 0
+  ActiveControl = wwIncrementalSearch1
+  BorderIcons = [biHelp]
+  Caption = 'Artikelhistorik'
+  ClientHeight = 500
+  ClientWidth = 1113
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Default'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poDesigned
+  Visible = True
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 1113
+    Height = 500
+    Align = alClient
+    Caption = 'Panel1'
+    TabOrder = 0
+    object Panel3: TPanel
+      Left = 1
+      Top = 1
+      Width = 687
+      Height = 498
+      Align = alClient
+      BorderWidth = 10
+      Caption = 'Panel3'
+      TabOrder = 0
+      object wwDBGrid1: TwwDBGrid
+        Left = 11
+        Top = 52
+        Width = 665
+        Height = 435
+        Selected.Strings = (
+          'Artikelnummer'#9'17'#9'Artikelnummer'
+          'Beteckning'#9'37'#9'Beteckning'
+          'cnt'#9'10'#9'                   Antal'
+          'Lagersaldo'#9'11'#9'    Lagersaldo'
+          'Lagerplats'#9'14'#9'Lagerplats')
+        IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
+        TitleColor = clBtnFace
+        FixedCols = 0
+        ShowHorzScrollBar = True
+        Align = alClient
+        DataSource = dsoQry
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+        TabOrder = 0
+        TitleAlignment = taLeftJustify
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Default'
+        TitleFont.Style = []
+        TitleLines = 1
+        TitleButtons = True
+        OnTitleButtonClick = wwDBGrid1TitleButtonClick
+      end
+      object Panel2: TPanel
+        Left = 11
+        Top = 11
+        Width = 665
+        Height = 41
+        Align = alTop
+        BevelOuter = bvNone
+        TabOrder = 1
+        DesignSize = (
+          665
+          41)
+        object Label1: TLabel
+          Left = 8
+          Top = 11
+          Width = 88
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'S'#246'k Artikelnummer'
+        end
+        object wwIncrementalSearch1: TwwIncrementalSearch
+          Left = 104
+          Top = 8
+          Width = 121
+          Height = 21
+          DataSource = dsoQry
+          SearchField = 'Artikelnummer'
+          TabOrder = 0
+        end
+        object Button1: TButton
+          Left = 563
+          Top = 6
+          Width = 101
+          Height = 25
+          Anchors = [akTop, akRight]
+          Caption = '&Lagerplatsetikett'
+          TabOrder = 1
+          OnClick = Button1Click
+        end
+        object Button2: TButton
+          Left = 442
+          Top = 6
+          Width = 113
+          Height = 25
+          Anchors = [akTop, akRight]
+          Caption = 'Utskrift artikelhistorik'
+          TabOrder = 2
+          OnClick = Button2Click
+        end
+      end
+    end
+    object Panel4: TPanel
+      Left = 688
+      Top = 1
+      Width = 424
+      Height = 498
+      Align = alRight
+      BorderWidth = 10
+      Caption = 'Panel4'
+      TabOrder = 1
+      object wwDBGrid2: TwwDBGrid
+        Left = 11
+        Top = 11
+        Width = 402
+        Height = 476
+        Selected.Strings = (
+          'Kortdatum'#9'10'#9'Datum'
+          'OrderID'#9'10'#9'        OrderID'
+          'Antal'#9'7'#9'    Antal'
+          'PrisperEnhet'#9'12'#9' Pris per enhet'
+          'YtbehandlingBeteckning'#9'21'#9'Ytbehandling')
+        IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
+        TitleColor = clBtnFace
+        FixedCols = 0
+        ShowHorzScrollBar = True
+        Align = alClient
+        DataSource = DataSource2
+        Options = [dgTitles, dgColumnResize, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+        TabOrder = 0
+        TitleAlignment = taLeftJustify
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Default'
+        TitleFont.Style = []
+        TitleLines = 1
+        TitleButtons = False
+        OnCalcCellColors = wwDBGrid2CalcCellColors
+        PadColumnStyle = pcsPadHeader
+      end
+    end
+  end
+  object dsoQry: TDataSource
+    DataSet = qry
+    Left = 221
+    Top = 109
+  end
+  object DataSource2: TDataSource
+    DataSet = FDQuery3
+    Left = 532
+    Top = 177
+  end
+  object qryEtikett: TFDQuery
+    MasterSource = dsoQry
+    MasterFields = 'ArtikelId'
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select '
+      'a.Artikelnummer,'
+      'a.Beteckning,'
+      'k.kundnamn,'
+      'a.Lagerplats,'
+      'a.Id ArtikelId'
+      'from orderrad orad '
+      'join orderhuvud o on o.ID = orad.Orderid'
+      'join kund k on k.id = o.Kundid'
+      'join Artikel a on a.Id = orad.ArtikelId'
+      'where a.Id= :ArtikelId')
+    Left = 312
+    Top = 280
+    ParamData = <
+      item
+        Name = 'ARTIKELID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryEtikettArtikelnummer: TStringField
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object qryEtikettBeteckning: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object qryEtikettkundnamn: TStringField
+      FieldName = 'kundnamn'
+      Origin = 'kundnamn'
+      Required = True
+      Size = 50
+    end
+    object qryEtikettLagerplats: TStringField
+      FieldName = 'Lagerplats'
+      Origin = 'Lagerplats'
+    end
+    object qryEtikettArtikelId: TFDAutoIncField
+      FieldName = 'ArtikelId'
+      Origin = 'ArtikelId'
+      ReadOnly = True
+    end
+  end
+  object qry: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      
+        'Select Id ArtikelId,Artikelnummer,Beteckning,YtbehandlingIdDefau' +
+        'lt,'
+      
+        'cnt =(select count(*) from orderrad where ArtikelID = artikel.ID' +
+        '),'
+      'Lagersaldo,'
+      'Lagerplats'
+      'from artikel'
+      'where artikel.artikelnummer <> '#39#39
+      'order by ArtikelNummer')
+    Left = 304
+    Top = 108
+  end
+  object FDQuery3: TFDQuery
+    MasterSource = dsoQry
+    MasterFields = 'ArtikelId'
+    Connection = dm.FDConnection1
+    FetchOptions.AssignedValues = [evCache]
+    FetchOptions.Cache = [fiBlobs, fiMeta]
+    SQL.Strings = (
+      ''
+      'Select '
+      #9'orderrad.PrisperEnhet ,'
+      #9'orderrad.Antal ,'
+      '        convert(char(10),orderrad.datum,120) Kortdatum ,'
+      ''
+      #9'y.Beteckning YtbehandlingBeteckning'
+      ',o.id OrderID'
+      ',o.OrdertypId'
+      'from orderrad'
+      'join artikel a on a.Id = orderrad.artikelID'
+      'join orderhuvud o on o.ID = orderrad.orderID'
+      'left Join Ytbehandling y on y.ID = orderrad.YtbehandlingID'
+      'where orderrad.artikelid = :ArtikelId'
+      'order by orderrad.Datum desc')
+    Left = 516
+    Top = 116
+    ParamData = <
+      item
+        Name = 'ARTIKELID'
+        DataType = ftAutoInc
+        ParamType = ptInput
+        Size = 4
+        Value = 14119
+      end>
+    object FDQuery3Kortdatum: TStringField
+      DisplayLabel = 'Datum'
+      DisplayWidth = 10
+      FieldName = 'Kortdatum'
+      Origin = 'Kortdatum'
+      ReadOnly = True
+      FixedChar = True
+      Size = 10
+    end
+    object FDQuery3OrderID: TFDAutoIncField
+      DisplayLabel = '        OrderID'
+      DisplayWidth = 10
+      FieldName = 'OrderID'
+      Origin = 'OrderID'
+      ReadOnly = True
+    end
+    object FDQuery3Antal: TFMTBCDField
+      DisplayLabel = '    Antal'
+      DisplayWidth = 7
+      FieldName = 'Antal'
+      Origin = 'Antal'
+      Precision = 19
+      Size = 2
+    end
+    object FDQuery3PrisperEnhet: TCurrencyField
+      DisplayLabel = ' Pris per enhet'
+      DisplayWidth = 12
+      FieldName = 'PrisperEnhet'
+      Origin = 'PrisperEnhet'
+    end
+    object FDQuery3YtbehandlingBeteckning: TStringField
+      DisplayLabel = 'Ytbehandling'
+      DisplayWidth = 21
+      FieldName = 'YtbehandlingBeteckning'
+      Origin = 'YtbehandlingBeteckning'
+      Size = 50
+    end
+    object FDQuery3OrdertypId: TIntegerField
+      DisplayLabel = '  T'
+      DisplayWidth = 2
+      FieldName = 'OrdertypId'
+      Origin = 'OrdertypId'
+      Visible = False
+    end
+  end
+end

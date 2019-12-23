@@ -1,0 +1,24 @@
+unit fKontaktEdit;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, dSimple, Vcl.StdCtrls, Vcl.ExtCtrls;
+
+type
+  TdlgSimple3 = class(TdlgSimple)
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dlgSimple3: TdlgSimple3;
+
+implementation
+
+{$R *.dfm}
+
+end.

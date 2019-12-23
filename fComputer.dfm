@@ -1,0 +1,122 @@
+﻿inherited frmComputer: TfrmComputer
+  Caption = 'frmComputer'
+  ClientHeight = 392
+  ClientWidth = 669
+  ExplicitWidth = 675
+  ExplicitHeight = 421
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 550
+    Height = 392
+    ExplicitLeft = 8
+    ExplicitTop = -20
+    ExplicitWidth = 550
+    inherited Bevel2: TBevel
+      Left = 8
+      Top = 352
+      ExplicitLeft = 8
+      ExplicitTop = 352
+    end
+    object Label1: TLabel [2]
+      Left = 24
+      Top = 240
+      Width = 73
+      Height = 13
+      Caption = 'Computernamn'
+      FocusControl = DBEdit1
+    end
+    object Label2: TLabel [3]
+      Left = 44
+      Top = 276
+      Width = 54
+      Height = 13
+      Caption = 'Beskrivning'
+      FocusControl = DBEdit2
+    end
+    inherited dbGrid: TwwDBGrid
+      Width = 517
+      ControlType.Strings = (
+        #196'rAdmin;CheckBox;True;False')
+      Selected.Strings = (
+        'Name'#9'20'#9'Computernamn'#9'F'#9
+        'Beteckning'#9'50'#9'Beskrivning'#9#9
+        #196'rAdmin'#9'8'#9#196'rAdmin'#9#9)
+      ExplicitWidth = 517
+    end
+    object DBEdit1: TDBEdit
+      Left = 107
+      Top = 237
+      Width = 264
+      Height = 21
+      DataField = 'Name'
+      DataSource = DataSource1
+      TabOrder = 1
+    end
+    object DBEdit2: TDBEdit
+      Left = 107
+      Top = 273
+      Width = 426
+      Height = 21
+      DataField = 'Beteckning'
+      DataSource = DataSource1
+      TabOrder = 2
+    end
+    object DBCheckBox1: TDBCheckBox
+      Left = 107
+      Top = 308
+      Width = 97
+      Height = 17
+      Caption = #196'r Admin'
+      DataField = #196'rAdmin'
+      DataSource = DataSource1
+      TabOrder = 3
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 550
+    Height = 392
+    inherited DBNav: TDBNavigator
+      Hints.Strings = ()
+    end
+  end
+  inherited PopupMenu1: TPopupMenu
+    Left = 576
+    Top = 296
+  end
+  inherited FDQuery1: TFDQuery
+    SQL.Strings = (
+      'select'#9'Id, Name,Beteckning, '#196'rAdmin from computer'
+      'order by name'
+      '')
+    Left = 308
+    Top = 124
+    object FDQuery1Name: TStringField
+      DisplayLabel = 'Computernamn'
+      DisplayWidth = 20
+      FieldName = 'Name'
+      Origin = 'Name'
+      Size = 100
+    end
+    object FDQuery1Beteckning: TStringField
+      DisplayLabel = 'Beskrivning'
+      DisplayWidth = 50
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 100
+    end
+    object FDQuery1ÄrAdmin: TBooleanField
+      DisplayWidth = 8
+      FieldName = #196'rAdmin'
+      Origin = '['#196'rAdmin]'
+    end
+    object FDQuery1Id: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
+  end
+end

@@ -1,0 +1,125 @@
+unit fOrderEdit;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, wwdblook, ExtCtrls, wwdbdatetimepicker, Db, ComCtrls,
+  Mask, DBCtrls, Data.Win.ADODB, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.Client,
+  FireDAC.Comp.DataSet;
+
+type
+  TfrmOrderEdit = class(TForm)
+    luKund: TwwDBLookupCombo;
+    Label1: TLabel;
+    edtOrderdatum: TwwDBDateTimePicker;
+    Label3: TLabel;
+    Label4: TLabel;
+    Panel1: TPanel;
+    Button1: TButton;
+    Button2: TButton;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label7: TLabel;
+    edtLevdatum: TwwDBDateTimePicker;
+    dsoKundPersonlistforKund: TDataSource;
+    LU_Kundperson: TwwDBLookupCombo;
+    dsoLUKund: TDataSource;
+    dsoOrderedit: TDataSource;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBMemo1: TDBMemo;
+    Label8: TLabel;
+    edtDatumYtbehandling: TwwDBDateTimePicker;
+    LUYtbehandling: TwwDBLookupCombo;
+    Label9: TLabel;
+    qryLU_kund: TFDQuery;
+    FDAutoIncField1: TFDAutoIncField;
+    StringField1: TStringField;
+    sp_KundpersonlistforKund: TFDStoredProc;
+    sp_KundpersonlistforKundKundpersonId: TFDAutoIncField;
+    sp_KundpersonlistforKundNamn: TStringField;
+    CheckBox1: TCheckBox;
+    Label10: TLabel;
+    DBEdit3: TDBEdit;
+    Label11: TLabel;
+    procedure Button2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure luKundCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet;
+      modified: Boolean);
+    procedure FormCreate(Sender: TObject);
+    procedure CheckBox1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmOrderEdit: TfrmOrderEdit;
+
+implementation
+
+uses fMain, fOrderLista, Datamodule;
+
+{$R *.DFM}
+
+procedure TfrmOrderEdit.Button2Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TfrmOrderEdit.CheckBox1Click(Sender: TObject);
+begin
+  luKund.Enabled := CheckBox1.checked;
+end;
+
+procedure TfrmOrderEdit.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  release;
+end;
+
+procedure TfrmOrderEdit.FormShow(Sender: TObject);
+begin
+
+  with sp_KundpersonlistforKund do
+  begin
+    close;
+    parambyname('@Kundid').value := qryOrderEditKundId.asInteger;
+    open;
+  end;
+
+  with dm.qryLUYtbehandling do
+  begin
+    close;
+    open;
+  end;
+
+  caption:= 'Ändra orderhuvud: ' + qryOrderedit.FieldByName('Id').AsString;
+
+end;
+
+procedure TfrmOrderEdit.luKundCloseUp(Sender: TObject;
+  LookupTable, FillTable: TDataSet; modified: Boolean);
+begin
+
+  with sp_KundpersonlistforKund do
+  begin
+    close;
+    parambyname('@Kundid').value := LookupTable.fieldbyname('KundId').asInteger;
+    open;
+  end;
+
+end;
+
+procedure TfrmOrderEdit.FormCreate(Sender: TObject);
+begin
+  qryLU_kund.open;
+
+end;
+
+end.

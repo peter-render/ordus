@@ -1,0 +1,100 @@
+object frmSattFakturadatum: TfrmSattFakturadatum
+  Left = 0
+  Top = 0
+  ActiveControl = edtFakturanummer
+  BorderIcons = []
+  Caption = 'S'#228'tt fakturadata'
+  ClientHeight = 186
+  ClientWidth = 360
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 48
+    Top = 23
+    Width = 75
+    Height = 13
+    Caption = 'Fakturanummer'
+  end
+  object Label2: TLabel
+    Left = 48
+    Top = 58
+    Width = 67
+    Height = 13
+    Caption = 'Fakturadatum'
+  end
+  object Label3: TLabel
+    Left = 48
+    Top = 88
+    Width = 66
+    Height = 13
+    Caption = 'F'#246'rfallodatum'
+  end
+  object edtFakturanummer: TEdit
+    Left = 136
+    Top = 20
+    Width = 121
+    Height = 21
+    TabOrder = 0
+  end
+  object edtFakturadatum: TDateTimePicker
+    Left = 136
+    Top = 53
+    Width = 121
+    Height = 21
+    Date = 43441.809780752320000000
+    Time = 43441.809780752320000000
+    TabOrder = 1
+    OnExit = edtFakturadatumExit
+  end
+  object Panel1: TPanel
+    Left = 0
+    Top = 145
+    Width = 360
+    Height = 41
+    Align = alBottom
+    TabOrder = 2
+    ExplicitWidth = 439
+    DesignSize = (
+      360
+      41)
+    object Button2: TButton
+      Left = 272
+      Top = 8
+      Width = 78
+      Height = 25
+      Anchors = [akTop, akRight, akBottom]
+      Caption = 'Avbryt'
+      ModalResult = 2
+      TabOrder = 0
+    end
+    object Button1: TButton
+      Left = 160
+      Top = 8
+      Width = 106
+      Height = 25
+      Anchors = [akTop, akRight, akBottom]
+      Caption = 'Spara'
+      Default = True
+      ModalResult = 1
+      TabOrder = 1
+    end
+  end
+  object edtForfallodatum: TDateTimePicker
+    Left = 135
+    Top = 87
+    Width = 121
+    Height = 21
+    Date = 43441.809780752320000000
+    Time = 43441.809780752320000000
+    TabOrder = 3
+  end
+end

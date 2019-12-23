@@ -1,0 +1,70 @@
+unit fArbetsorder;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Qrctrls, QuickRpt, Db, ADODB, ExtCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmArbetsorder = class(TForm)
+    QuickRep1: TQuickRep;
+    QRDBRichText1: TQRDBRichText;
+    PageHeaderBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    qry: TFDQuery;
+    qryId: TFDAutoIncField;
+    qryOrderID: TIntegerField;
+    qryArtikelID: TIntegerField;
+    qryRadNr: TIntegerField;
+    qryPositionnummer: TIntegerField;
+    qryAntal: TFMTBCDField;
+    qryPrisPerEnhet: TCurrencyField;
+    qryPrisPerEnhetAuto: TCurrencyField;
+    qryDatum: TSQLTimeStampField;
+    qryYtbehandlingId: TIntegerField;
+    qryOrderInfo: TStringField;
+    qryAvrapporteradDatum: TSQLTimeStampField;
+    qryAvrapporterad: TBooleanField;
+    qryTotaltid: TIntegerField;
+    qryVikt: TFloatField;
+    qryAvrapporteradPersonID: TIntegerField;
+    qrySortorder: TIntegerField;
+    qryAvrapporteradPlasmatid: TIntegerField;
+    qryAvrapporteradAntalStarter: TIntegerField;
+    qryAvrapporteradAntalRitningar: TIntegerField;
+    qryFrånLager: TBCDField;
+    qryAttProducera: TBCDField;
+    qryTillLager: TBCDField;
+    qrySkrotandelProcent: TBCDField;
+    qryLagerplats: TStringField;
+    qryFöljesedelId: TIntegerField;
+    qry_YtbehandlingID: TStringField;
+    qryKalkArbetstid: TFloatField;
+    qryArtikelnummer: TStringField;
+    qryBeteckning: TStringField;
+    qryYtbehandlingIdDefault: TIntegerField;
+    qryKundID: TIntegerField;
+    qryPDFFinns: TIntegerField;
+    qryPDFFilnamn: TStringField;
+    qryLagersaldo: TBCDField;
+    qry_YtbehandlingIDdefault: TStringField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmArbetsorder: TfrmArbetsorder;
+
+implementation
+
+uses fMain, fOrder,Datamodule;
+
+{$R *.DFM}
+
+end.

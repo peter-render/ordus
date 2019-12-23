@@ -1,0 +1,221 @@
+unit rOrder;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  QuickRpt, StdCtrls, Mask, DBCtrls, Db, ADODB, ExtCtrls, QRExport, QRCtrls,
+  QRPDFFilt, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  gtPDFClasses, gtCstPDFDoc, gtExPDFDoc, gtExProPDFDoc, gtPDFDoc,
+//  gtXportIntf, gtQRXportIntf, gtClasses3, gtCstDocEng, gtCstPlnEng,  gtCstPDFEng, gtExPDFEng, gtPDFEng,
+  IdBaseComponent, IdMailBox, Vcl.Imaging.jpeg
+     ;
+
+type
+  TrptOrder = class(TForm)
+    Report: TQuickRep;
+    ColumnHeaderBand1: TQRBand;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    QRLabel1: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabel5: TQRLabel;
+    DetailBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRLabel3: TQRLabel;
+    QRDBText6: TQRDBText;
+    QRLabel4: TQRLabel;
+    TitleBand1: TQRBand;
+    QRLabel13: TQRLabel;
+    header: TQRLabel;
+    lblNr: TQRLabel;
+    QRDBText12: TQRDBText;
+    lblDatum: TQRLabel;
+    QRDBText13: TQRDBText;
+    QRLabel17: TQRLabel;
+    QRDBText14: TQRDBText;
+    QRLabel18: TQRLabel;
+    QRDBText15: TQRDBText;
+    QRLabel19: TQRLabel;
+    QRDBText16: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText2: TQRDBText;
+    SummaryBand1: TQRBand;
+    QRExpr1: TQRExpr;
+    QRShape1: TQRShape;
+    QRShape2: TQRShape;
+    QRShape3: TQRShape;
+    ChildBand1: TQRChildBand;
+    QRSysData1: TQRSysData;
+    QRLabel8: TQRLabel;
+    PageFooterBand1: TQRBand;
+    QRMemo1: TQRMemo;
+    QRMemo2: TQRMemo;
+    QRLabel6: TQRLabel;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRLabel7: TQRLabel;
+    QRChildBand1: TQRChildBand;
+    QRDBText9: TQRDBText;
+    qry: TFDQuery;
+    qryOrderId: TFDAutoIncField;
+    qryKundnamn: TStringField;
+    qryReferens: TStringField;
+    qryordernummer: TStringField;
+    qryGodsmärke: TStringField;
+    qryorderdatum: TSQLTimeStampField;
+    qryLeveransdatum: TSQLTimeStampField;
+    qryPositionnummer: TIntegerField;
+    qryYtbehandlingBeteckning: TStringField;
+    qryBeteckning: TStringField;
+    qryArtikelnummer: TStringField;
+    qryAntal: TFMTBCDField;
+    qryOrdertypId: TIntegerField;
+    qryPrisperenhet: TCurrencyField;
+    qryfritext: TStringField;
+    qryPris: TFMTBCDField;
+    QRMemo3: TQRMemo;
+    IdMailBox1: TIdMailBox;
+    QRLabel9: TQRLabel;
+    QRDBText10: TQRDBText;
+    QRImage1: TQRImage;
+    qryDagensdatum: TDateField;
+    procedure QRSysData1Print(sender: TObject; var Value: string);
+    procedure QRDBText1Print(sender: TObject; var Value: string);
+    procedure QRExpr1Print(sender: TObject; var Value: string);
+    procedure headerPrint(sender: TObject; var Value: string);
+    procedure lblNrPrint(sender: TObject; var Value: string);
+    procedure lblDatumPrint(sender: TObject; var Value: string);
+    procedure QRLabel6Print(sender: TObject; var Value: string);
+    procedure QRChildBand1BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRDBText4Print(sender: TObject; var Value: string);
+    procedure QRLabel5Print(sender: TObject; var Value: string);
+    procedure QRLabel4Print(sender: TObject; var Value: string);
+    procedure QRDBText6Print(sender: TObject; var Value: string);
+    procedure QRLabel9Print(sender: TObject; var Value: string);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  rptOrder: TrptOrder;
+
+implementation
+
+uses fOrder,Datamodule;
+
+{$R *.DFM}
+
+procedure TrptOrder.QRSysData1Print(sender: TObject; var Value: string);
+begin
+  value := 'Sida ' + value;
+end;
+
+procedure TrptOrder.QRDBText1Print(sender: TObject; var Value: string);
+begin
+  value := copy(value, 1, 3) + ' ' + copy(value, 4, 10);
+end;
+
+procedure TrptOrder.QRExpr1Print(sender: TObject; var Value: string);
+begin
+  if self.tag = 1 then
+    value := ''
+  else
+    value := 'Summa   ' + value + ' kr';
+end;
+
+
+procedure TrptOrder.headerPrint(sender: TObject; var Value: string);
+begin
+  if qryOrdertypId.asInteger = 3 then
+  begin
+    value := 'OFFERT';
+  end;
+
+end;
+
+
+procedure TrptOrder.lblNrPrint(sender: TObject; var Value: string);
+begin
+  if qryOrdertypId.asInteger = 3 then
+  begin
+    value := 'Förfrågan:';
+  end;
+
+end;
+
+procedure TrptOrder.lblDatumPrint(sender: TObject; var Value: string);
+begin
+  if qryOrdertypId.asInteger = 3 then
+  begin
+    value := 'Off-datum:';
+  end;
+
+
+end;
+
+procedure TrptOrder.QRLabel6Print(sender: TObject; var Value: string);
+begin
+  if self.tag = 1 then
+    value := '';
+(*
+if qryOrdertyp.asString <> 'O' then
+begin
+   value:='';
+end;
+*)
+
+end;
+
+procedure TrptOrder.QRLabel9Print(sender: TObject; var Value: string);
+begin
+  if qryOrdertypId.asInteger = 3 then
+  begin
+    value := 'Off-nr:';
+  end;
+
+end;
+
+procedure TrptOrder.QRChildBand1BeforePrint(Sender: TQRCustomBand;
+  var PrintBand: Boolean);
+begin
+  printband := (qryFritext.AsString <> '');
+end;
+
+procedure TrptOrder.QRDBText4Print(sender: TObject; var Value: string);
+begin
+  if self.tag = 1 then
+    value := '';
+end;
+
+procedure TrptOrder.QRLabel5Print(sender: TObject; var Value: string);
+begin
+  if self.tag = 1 then
+    value := '';
+
+end;
+
+procedure TrptOrder.QRLabel4Print(sender: TObject; var Value: string);
+begin
+  if self.tag = 1 then
+    value := '';
+
+end;
+
+procedure TrptOrder.QRDBText6Print(sender: TObject; var Value: string);
+begin
+  if self.tag = 1 then
+    value := ''
+    else
+    value:= value + ' kr';
+
+end;
+
+end.
+

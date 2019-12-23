@@ -1,0 +1,85 @@
+unit rOrderradDetaljer;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, QRCtrls, QuickRpt, DB,  ExtCtrls, grimgctrl, Data.Win.ADODB, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TrptOrderradDetaljer = class(TForm)
+    report: TQuickRep;
+    PageHeaderBand1: TQRBand;
+    TitleBand1: TQRBand;
+    ColumnHeaderBand1: TQRBand;
+    DetailBand1: TQRBand;
+    PageFooterBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    QRLabel1: TQRLabel;
+    QRDBText2: TQRDBText;
+    QRDBText7: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRDBText9: TQRDBText;
+    QRLabel7: TQRLabel;
+    QRDBText10: TQRDBText;
+    QRLabel8: TQRLabel;
+    QRDBText11: TQRDBText;
+    QRGroup2: TQRGroup;
+    QRDBText14: TQRDBText;
+    QRDBText15: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRDBText18: TQRDBText;
+    GF: TQRBand;
+    QRHRule1: TQRHRule;
+    QRSysData1: TQRSysData;
+    QRLabel9: TQRLabel;
+    QRExpr1: TQRExpr;
+    QRLabel10: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRExpr2: TQRExpr;
+    qryOrd: TFDQuery;
+    QRDBText3: TQRDBText;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure QRSysData1Print(sender: TObject; var Value: string);
+    procedure QRExpr2Print(sender: TObject; var Value: string);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  rptOrderradDetaljer: TrptOrderradDetaljer;
+
+implementation
+
+uses fShoworder, Datamodule;
+
+{$R *.dfm}
+
+procedure TrptOrderradDetaljer.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+action:=caFree;
+end;
+
+procedure TrptOrderradDetaljer.QRExpr2Print(sender: TObject; var Value: string);
+begin
+value:= 'Marginal: ' + value + '%'
+end;
+
+procedure TrptOrderradDetaljer.QRSysData1Print(sender: TObject;
+  var Value: string);
+begin
+value:= 'Sida: ' + value;
+end;
+
+end.

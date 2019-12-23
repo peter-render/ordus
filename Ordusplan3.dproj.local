@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.927,C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Ordusplan3.dproj=C:\Users\peho\Documents\RAD Studio\Projects\Project28.dproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.769,=C:\Users\peho\Documents\RAD Studio\Projects\Tplanner.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.623,C:\Users\peho\Documents\RAD Studio\Projects\Tplanner.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.943,=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Datamodule.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.136,=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fPlanner.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.077,=C:\Users\peho\Documents\RAD Studio\Projects\Unit31.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.786,=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclib.pas</Transaction>
+  </Transactions>
+</BorlandProject>

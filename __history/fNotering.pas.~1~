@@ -1,0 +1,102 @@
+unit fNotering;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls, Grids, Wwdbigrd, Wwdbgrid, DB, ADODB, Menus;
+
+type
+  TfrmNotering = class(TForm)
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    Memo1: TMemo;
+    Button1: TButton;
+    btnSpara: TButton;
+    btnAvbryt: TButton;
+    wwDBGrid1: TwwDBGrid;
+    qryNotering: TADOQuery;
+    dsoNotering: TDataSource;
+    qryNoteringDatum: TDateTimeField;
+    qryNoteringNotering: TStringField;
+    qryNoteringInsert: TADOQuery;
+    PopupMenu1: TPopupMenu;
+    abortraden1: TMenuItem;
+    qryNoteringId: TAutoIncField;
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure Memo1Change(Sender: TObject);
+    procedure btnSparaClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnAvbrytClick(Sender: TObject);
+    procedure abortraden1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmNotering: TfrmNotering;
+
+implementation
+
+uses Datamodule;
+
+{$R *.dfm}
+
+procedure TfrmNotering.abortraden1Click(Sender: TObject);
+begin
+with qryNotering do
+begin
+  delete;
+end;
+end;
+
+procedure TfrmNotering.btnAvbrytClick(Sender: TObject);
+begin
+memo1.Clear;
+memo1.SetFocus;
+end;
+
+procedure TfrmNotering.btnSparaClick(Sender: TObject);
+begin
+with qryNoteringInsert do
+begin
+  parameters.parambyname('Notering').value:=
+  memo1.Text;
+  execsql;
+end;
+  qryNotering.Requery;
+ memo1.Clear;
+ memo1.SetFocus;
+
+end;
+
+procedure TfrmNotering.Button1Click(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TfrmNotering.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  action := caFree;
+end;
+
+procedure TfrmNotering.FormShow(Sender: TObject);
+begin
+qryNotering.open;
+end;
+
+procedure TfrmNotering.Memo1Change(Sender: TObject);
+begin
+
+  btnSpara.Enabled := memo1.text <> '';
+  btnAvbryt.Enabled := btnSpara.enabled;
+
+end;
+
+end.
+

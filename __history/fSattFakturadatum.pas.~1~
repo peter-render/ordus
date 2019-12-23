@@ -1,0 +1,31 @@
+unit fSattFakturadatum;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.ComCtrls;
+
+type
+  TfrmSattFakturadatum = class(TForm)
+    Edit1: TEdit;
+    Label1: TLabel;
+    DateTimePicker1: TDateTimePicker;
+    Label2: TLabel;
+    Panel1: TPanel;
+    Button2: TButton;
+    Button1: TButton;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmSattFakturadatum: TfrmSattFakturadatum;
+
+implementation
+
+{$R *.dfm}
+
+end.

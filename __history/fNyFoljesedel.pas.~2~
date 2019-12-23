@@ -1,0 +1,50 @@
+unit fNyFoljesedel;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  StdCtrls, Db, ADODB;
+
+type
+  TfrmNyFoljesedel = class(TForm)
+    Edit1: TEdit;
+    Label1: TLabel;
+    btnOK: TButton;
+    btnCancel: TButton;
+    procedure Edit1Change(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmNyFoljesedel: TfrmNyFoljesedel;
+
+implementation
+
+uses Datamodule;
+
+{$R *.DFM}
+
+procedure TfrmNyFoljesedel.Edit1Change(Sender: TObject);
+begin
+  btnOK.enabled := Edit1.text <> '';
+  btnOK.Default := Edit1.text <> '';
+
+end;
+
+procedure TfrmNyFoljesedel.FormShow(Sender: TObject);
+begin
+  btnOK.enabled := false;
+end;
+
+procedure TfrmNyFoljesedel.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := caFree;
+end;
+
+end.

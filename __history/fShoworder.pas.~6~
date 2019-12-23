@@ -1,0 +1,150 @@
+unit fShoworder;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  Db, ADODB, Grids, Wwdbigrd, Wwdbgrid, ExtCtrls, StdCtrls, Wwkeycb, DBCtrls, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmShowOrder = class(TForm)
+    Panel1: TPanel;
+    Panel3: TPanel;
+    Panel4: TPanel;
+    wwDBGrid1: TwwDBGrid;
+    dsoQry: TDataSource;
+    DataSource2: TDataSource;
+    Panel2: TPanel;
+    wwIncrementalSearch1: TwwIncrementalSearch;
+    Label1: TLabel;
+    wwDBGrid2: TwwDBGrid;
+    Button1: TButton;
+    Button2: TButton;
+    DBText1: TDBText;
+    qryEtikett: TFDQuery;
+    qry: TFDQuery;
+    FDQuery3: TFDQuery;
+    qryEtikettArtikelnummer: TStringField;
+    qryEtikettBeteckning: TStringField;
+    qryEtikettkundnamn: TStringField;
+    qryEtikettLagerplats: TStringField;
+    qryEtikettArtikelId: TFDAutoIncField;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure FormShow(Sender: TObject);
+    procedure wwDBGrid1TitleButtonClick(Sender: TObject;
+      AFieldName: string);
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmShowOrder: TfrmShowOrder;
+
+implementation
+
+uses fMain, Datamodule, rLagerplatsetikett, funclib, inifiles,
+  rLagerplatsetikett2, rOrderradDetaljer;
+
+{$R *.DFM}
+
+procedure TfrmShowOrder.Button1Click(Sender: TObject);
+begin
+
+  qryEtikett.open;
+
+  DefaultPrinterName := SetDefaultPrinter('DYMO LabelWriter 400');
+
+  if DefaultPrinterName = '' then
+    with TIniFile.Create('Ordus.ini') do
+    begin
+      DefaultPrinterName := Readstring('Printer', 'DefaultPrinterName2', '');
+      free;
+    end;
+
+  with TrptLagerplatsEtikett2.create(Application) do
+  begin
+//    report.preview;
+    report.print;
+  end;
+
+       //SetDefaultPrinter('LaserJet 1012');
+  SetDefaultPrinter(DefaultPrinterName);
+  qryEtikett.close;
+
+end;
+
+procedure TfrmShowOrder.Button2Click(Sender: TObject);
+begin
+with TrptOrderraddetaljer.create(Application) do
+begin
+   with qryORD do
+   begin
+    close;
+    ParamByName('ArtikelId').value:= qry.FieldByName('ArtikelId').asInteger;
+    open;
+    first;
+   end;
+   report.Preview;
+end;
+end;
+
+procedure TfrmShowOrder.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  release;
+end;
+
+procedure TfrmShowOrder.FormShow(Sender: TObject);
+begin
+  qry.open;
+  FDQuery3.open;
+
+end;
+
+procedure TfrmShowOrder.wwDBGrid1TitleButtonClick(Sender: TObject;
+  AFieldName: string);
+begin
+  if (afieldname = 'Artikelnummer') or (afieldname = 'Beteckning') or (afieldname = 'Lagersaldo') or (afieldname = 'Lagerplats') then
+  begin
+    with qry do
+    begin
+      close;
+      sql.Clear;
+      if afieldname = 'Artikelnummer' then
+      begin
+
+        sql.add('Select Id ArtikelId,Artikelnummer,Beteckning,Lagerplats,YtbehandlingIdDefault,cnt =(select count(*) from orderrad where ArtikelID = artikel.ID),Lagersaldo from artikel where artikel.artikelnummer <> '''' order by ArtikelNummer');
+        wwIncrementalSearch1.SetSearchField('Artikelnummer');
+        label1.caption := 'Sök artikelnummer';
+      end
+      else if afieldname = 'Beteckning' then
+      begin
+        sql.add('Select Id ArtikelId,Artikelnummer,Beteckning,Lagerplats,YtbehandlingIdDefault,cnt =(select count(*) from orderrad where ArtikelID = artikel.ID),Lagersaldo from artikel where artikel.artikelnummer <> '''' order by Beteckning');
+        label1.caption := 'Sök beteckning';
+        wwIncrementalSearch1.SetSearchField('Beteckning');
+      end
+      else if afieldname = 'Lagersaldo' then
+      begin
+        sql.add('Select Id ArtikelId,Artikelnummer,Beteckning,Lagerplats,YtbehandlingIdDefault,cnt =(select count(*) from orderrad where ArtikelID = artikel.ID),Lagersaldo from artikel where artikel.artikelnummer <> '''' order by Lagersaldo desc');
+        wwIncrementalSearch1.SetSearchField('Artikelnummer');
+        label1.caption := 'Sök artikelnummer';
+      end else
+      if afieldname = 'Lagerplats' then
+      begin
+        sql.add('Select Id ArtikelId,Artikelnummer,Beteckning,Lagerplats,YtbehandlingIdDefault,cnt =(select count(*) from orderrad where ArtikelID = artikel.ID),Lagersaldo from artikel where artikel.artikelnummer <> '''' order by Lagerplats');
+        wwIncrementalSearch1.SetSearchField('Lagerplats');
+        label1.caption := 'Sök Lagerplats';
+      end;
+      open;
+    end;
+  end;
+end;
+
+end.
+

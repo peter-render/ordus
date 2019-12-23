@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\pdfMD5.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\pdfCCITT.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - 2013-10-03\EditNew.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.140,=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclib.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.014,C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclib.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\pdfResources.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\pdfGliphNames.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.118,=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fConnection.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Addons\QReport\QRPDFFilterReg.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Addons\QReport\QRPDFFilter.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,H:\Filer\Projekt\Egna\Ängelholms Mek 2007\fNotering.pas=H:\Filer\Projekt\Egna\Ängelholms Mek 2007\frmNotering.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\pdfttf.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\pdfttfcodes.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.dfm,H:\Filer\Projekt\Egna\Ängelholms Mek 2007\frmNotering.dfm=H:\Filer\Projekt\Egna\Ängelholms Mek 2007\Unit3.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.079,C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fimpleDialog.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\pdfRC4.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\pdfZLib.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.586,=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\dSimple.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\pdfMisc.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\pdfWMF.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.790,C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fConnectionEdit.pas=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fConnection.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,C:\Filer\Projekt\Ängelholms Mekaniska\vcl\PDFLib\Sources\PDF.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.790,C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fConnectionEdit.dfm=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fConnection.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,H:\Filer\Projekt\Egna\Ängelholms Mek 2007\funclib.pas=</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.dfm,H:\Filer\Projekt\Egna\Ängelholms Mek 2007\fNotering.dfm=H:\Filer\Projekt\Egna\Ängelholms Mek 2007\frmNotering.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.pas,H:\Filer\Projekt\Egna\Ängelholms Mek 2007\frmNotering.pas=H:\Filer\Projekt\Egna\Ängelholms Mek 2007\Unit3.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.172,=C:\Users\peho\Documents\Projekt\AMEK\Funclib\funclib.pas</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,252 @@
+﻿inherited frmOrderstatus: TfrmOrderstatus
+  Left = 439
+  Top = 284
+  ActiveControl = dbGrid
+  Caption = 'Orderstatus'
+  ClientHeight = 538
+  ClientWidth = 569
+  ExplicitWidth = 575
+  ExplicitHeight = 567
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 450
+    Height = 538
+    ExplicitLeft = 6
+    ExplicitTop = -8
+    ExplicitWidth = 450
+    ExplicitHeight = 538
+    inherited Bevel1: TBevel
+      Width = 376
+      ExplicitWidth = 376
+    end
+    inherited Bevel2: TBevel
+      Left = 8
+      Top = 416
+      ExplicitLeft = 8
+      ExplicitTop = 416
+    end
+    object Label1: TLabel [2]
+      Left = 20
+      Top = 235
+      Width = 58
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Orderstatus'
+      FocusControl = DBEdit1
+    end
+    object Label2: TLabel [3]
+      Left = 26
+      Top = 262
+      Width = 52
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Beteckning'
+      FocusControl = DBEdit2
+    end
+    object Label3: TLabel [4]
+      Left = 11
+      Top = 344
+      Width = 67
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Tab-sortorder'
+      FocusControl = DBEdit3
+    end
+    object Label4: TLabel [5]
+      Left = 40
+      Top = 371
+      Width = 38
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'BGColor'
+      FocusControl = DBEdit4
+    end
+    object Label5: TLabel [6]
+      Left = 8
+      Top = 288
+      Width = 74
+      Height = 13
+      Caption = 'Tab-beteckning'
+      FocusControl = DBEdit5
+    end
+    inherited dbGrid: TwwDBGrid
+      Width = 417
+      Selected.Strings = (
+        'Id'#9'3'#9'Id'#9'F'
+        'Orderstatus'#9'9'#9'Orderstatus'#9#9
+        'Beteckning'#9'22'#9'Beteckning'#9#9
+        'Sortorder'#9'7'#9'Sortorder'#9#9
+        'BGColor'#9'15'#9'BGColor'#9#9)
+      TabOrder = 9
+      OnCalcCellColors = dbGridCalcCellColors
+      ExplicitWidth = 417
+    end
+    object DBEdit1: TDBEdit
+      Left = 88
+      Top = 231
+      Width = 41
+      Height = 21
+      DataField = 'Orderstatus'
+      DataSource = DataSource1
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object DBEdit2: TDBEdit
+      Left = 88
+      Top = 258
+      Width = 304
+      Height = 21
+      DataField = 'Beteckning'
+      DataSource = DataSource1
+      TabOrder = 1
+    end
+    object DBEdit3: TDBEdit
+      Left = 88
+      Top = 340
+      Width = 64
+      Height = 21
+      DataField = 'Sortorder'
+      DataSource = DataSource1
+      TabOrder = 6
+    end
+    object DBEdit4: TDBEdit
+      Left = 88
+      Top = 367
+      Width = 81
+      Height = 21
+      DataField = 'BGColor'
+      DataSource = DataSource1
+      TabOrder = 7
+    end
+    object BtnColor: TButton
+      Left = 172
+      Top = 365
+      Width = 75
+      Height = 25
+      Caption = #196'ndra f'#228'rg'
+      Enabled = False
+      TabOrder = 8
+      OnClick = BtnColorClick
+    end
+    object DBEdit5: TDBEdit
+      Left = 88
+      Top = 285
+      Width = 304
+      Height = 21
+      DataField = 'TabBeteckning'
+      DataSource = DataSource1
+      TabOrder = 2
+    end
+    object DBCheckBox1: TDBCheckBox
+      Left = 88
+      Top = 315
+      Width = 133
+      Height = 17
+      Caption = 'Oms'#228'ttningsgrundande'
+      DataField = 'Oms'#228'ttningsgrundande'
+      DataSource = DataSource1
+      TabOrder = 3
+    end
+    object DBCheckBox2: TDBCheckBox
+      Left = 252
+      Top = 315
+      Width = 97
+      Height = 17
+      Caption = #196'r en Status'
+      DataField = #196'rStatus'
+      DataSource = DataSource1
+      TabOrder = 4
+    end
+    object DBCheckBox3: TDBCheckBox
+      Left = 347
+      Top = 315
+      Width = 97
+      Height = 17
+      Caption = 'Synlig f'#246'r Admin'
+      DataField = 'Kr'#228'verAdmin'
+      DataSource = DataSource1
+      TabOrder = 5
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 450
+    Height = 538
+    ExplicitLeft = 450
+    ExplicitHeight = 439
+    inherited DBNav: TDBNavigator
+      Hints.Strings = ()
+    end
+  end
+  inherited DataSource1: TDataSource
+    OnStateChange = DataSource1StateChange
+    Left = 492
+    Top = 376
+  end
+  inherited FDQuery1: TFDQuery
+    SQL.Strings = (
+      'Select * from OrderStatus order by Sortorder')
+    Left = 316
+    object FDQuery1Id: TFDAutoIncField
+      DisplayWidth = 3
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQuery1Orderstatus: TStringField
+      DisplayWidth = 9
+      FieldName = 'Orderstatus'
+      Origin = 'Orderstatus'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQuery1Beteckning: TStringField
+      DisplayWidth = 22
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Required = True
+      Size = 50
+    end
+    object FDQuery1Sortorder: TSmallintField
+      DisplayWidth = 7
+      FieldName = 'Sortorder'
+      Origin = 'Sortorder'
+      Required = True
+    end
+    object FDQuery1BGColor: TStringField
+      DisplayWidth = 15
+      FieldName = 'BGColor'
+      Origin = 'BGColor'
+      FixedChar = True
+      Size = 10
+    end
+    object FDQuery1TabId: TSmallintField
+      FieldName = 'TabId'
+      Origin = 'TabId'
+    end
+    object FDQuery1TabBeteckning: TStringField
+      FieldName = 'TabBeteckning'
+      Origin = 'TabBeteckning'
+      Size = 30
+    end
+    object FDQuery1Omsättningsgrundande: TBooleanField
+      FieldName = 'Oms'#228'ttningsgrundande'
+      Origin = '[Oms'#228'ttningsgrundande]'
+    end
+    object FDQuery1ÄrStatus: TBooleanField
+      FieldName = #196'rStatus'
+      Origin = '['#196'rStatus]'
+    end
+    object FDQuery1KräverAdmin: TBooleanField
+      FieldName = 'Kr'#228'verAdmin'
+      Origin = '[Kr'#228'verAdmin]'
+    end
+  end
+  object ColorDialog1: TColorDialog
+    Options = [cdFullOpen]
+    Left = 427
+    Top = 208
+  end
+end

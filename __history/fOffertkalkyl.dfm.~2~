@@ -1,0 +1,747 @@
+﻿object frmOrderkalkyl: TfrmOrderkalkyl
+  Left = 0
+  Top = 0
+  Caption = 'frmOffertkalkyl'
+  ClientHeight = 575
+  ClientWidth = 733
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  OnShow = FormShow
+  DesignSize = (
+    733
+    575)
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Label1: TLabel
+    Left = 418
+    Top = 280
+    Width = 62
+    Height = 13
+    Caption = 'Ytbehandling'
+  end
+  object Label2: TLabel
+    Left = 77
+    Top = 31
+    Width = 24
+    Height = 13
+    Caption = 'Kund'
+  end
+  object Label3: TLabel
+    Left = 36
+    Top = 59
+    Width = 70
+    Height = 13
+    Caption = 'Kontaktperson'
+  end
+  object Label4: TLabel
+    Left = 38
+    Top = 140
+    Width = 68
+    Height = 13
+    Caption = 'Artikelnummer'
+  end
+  object Label5: TLabel
+    Left = 412
+    Top = 31
+    Width = 31
+    Height = 13
+    Caption = 'Datum'
+  end
+  object Label6: TLabel
+    Left = 377
+    Top = 58
+    Width = 74
+    Height = 13
+    Caption = 'Leveransdatum'
+  end
+  object wwDBLookupCombo1: TwwDBLookupCombo
+    Left = 112
+    Top = 28
+    Width = 217
+    Height = 21
+    DropDownAlignment = taLeftJustify
+    Selected.Strings = (
+      'kundnamn'#9'30'#9'kundnamn'#9'F')
+    LookupTable = sp_KundLookuplist
+    LookupField = 'Kundid'
+    Color = clWhite
+    DropDownCount = 40
+    TabOrder = 0
+    AutoDropDown = True
+    ShowButton = True
+    PreciseEditRegion = False
+    AllowClearKey = False
+    ShowMatchText = True
+    OnBeforeDropDown = wwDBLookupCombo1BeforeDropDown
+    OnCloseUp = wwDBLookupCombo1CloseUp
+  end
+  object wwDBLookupCombo2: TwwDBLookupCombo
+    Left = 112
+    Top = 55
+    Width = 217
+    Height = 21
+    DropDownAlignment = taLeftJustify
+    Selected.Strings = (
+      'Namn'#9'101'#9'Namn'#9'F')
+    LookupTable = dm.sp_KundpersonlistforKund
+    LookupField = 'KundpersonId'
+    Color = clWhite
+    DropDownCount = 40
+    Enabled = False
+    TabOrder = 1
+    AutoDropDown = True
+    ShowButton = True
+    PreciseEditRegion = False
+    AllowClearKey = False
+    ShowMatchText = True
+    OnCloseUp = wwDBLookupCombo2CloseUp
+  end
+  object DateTimePicker1: TDateTimePicker
+    Left = 457
+    Top = 28
+    Width = 125
+    Height = 21
+    Date = 43444.927729849540000000
+    Time = 43444.927729849540000000
+    Enabled = False
+    TabOrder = 2
+  end
+  object DateTimePicker2: TDateTimePicker
+    Left = 457
+    Top = 58
+    Width = 125
+    Height = 21
+    Date = 43444.927729849540000000
+    Time = 43444.927729849540000000
+    Enabled = False
+    TabOrder = 3
+  end
+  object wwDBLookupCombo3: TwwDBLookupCombo
+    Left = 112
+    Top = 137
+    Width = 257
+    Height = 21
+    DropDownAlignment = taLeftJustify
+    Selected.Strings = (
+      'Artikel'#9'231'#9'Artikel'#9'F')
+    LookupTable = qryLU_Artikel
+    LookupField = 'ArtikelId'
+    Color = clWhite
+    DropDownCount = 40
+    TabOrder = 4
+    AutoDropDown = True
+    ShowButton = True
+    PreciseEditRegion = False
+    AllowClearKey = False
+    ShowMatchText = True
+    OnCloseUp = wwDBLookupCombo3CloseUp
+  end
+  object edtFörfrågan: TLabeledEdit
+    Left = 112
+    Top = 96
+    Width = 217
+    Height = 21
+    EditLabel.Width = 48
+    EditLabel.Height = 13
+    EditLabel.Caption = 'F'#246'rfr'#229'gan'
+    Enabled = False
+    LabelPosition = lpLeft
+    TabOrder = 5
+  end
+  object wwDBGrid1: TwwDBGrid
+    Left = 112
+    Top = 367
+    Width = 577
+    Height = 157
+    Selected.Strings = (
+      'Artikelnummer'#9'18'#9'Artikelnummer'
+      'Antal'#9'10'#9'Antal'
+      'TillverkningstidUppskattad'#9'23'#9'TillverkningstidUppskattad'
+      'PrisUppskattat'#9'16'#9'PrisUppskattat'
+      'PrisFastst'#228'llt'#9'19'#9'PrisFastst'#228'llt')
+    IniAttributes.Delimiter = ';;'
+    IniAttributes.UnicodeIniFile = False
+    TitleColor = clBtnFace
+    FixedCols = 0
+    ShowHorzScrollBar = True
+    DataSource = dsoOrderkalkylArtikel
+    Enabled = False
+    TabOrder = 6
+    TitleAlignment = taLeftJustify
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    TitleLines = 1
+    TitleButtons = False
+  end
+  object btnClose: TButton
+    Left = 632
+    Top = 14
+    Width = 87
+    Height = 25
+    Anchors = [akTop, akRight, akBottom]
+    Caption = 'St'#228'ng'
+    TabOrder = 7
+    OnClick = btnCloseClick
+  end
+  object btnSkapaOffert: TButton
+    Left = 457
+    Top = 538
+    Width = 231
+    Height = 25
+    Anchors = [akTop, akRight, akBottom]
+    Caption = 'Skapa offert '
+    TabOrder = 8
+    OnClick = btnSkapaOffertClick
+  end
+  object wwDBGrid3: TwwDBGrid
+    Left = 112
+    Top = 180
+    Width = 233
+    Height = 162
+    Selected.Strings = (
+      'Orderdatum'#9'10'#9'Orderdatum'#9'F'#9
+      'Antal'#9'7'#9'Antal'#9#9
+      'PrisPerEnhet'#9'13'#9'PrisPerEnhet'#9#9)
+    IniAttributes.Delimiter = ';;'
+    IniAttributes.UnicodeIniFile = False
+    TitleColor = clBtnFace
+    OnRowChanged = wwDBGrid3RowChanged
+    FixedCols = 0
+    ShowHorzScrollBar = True
+    DataSource = dsoOrderradHistoryArtikel
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+    ReadOnly = True
+    TabOrder = 9
+    TitleAlignment = taLeftJustify
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    TitleLines = 1
+    TitleButtons = False
+    PadColumnStyle = pcsPadHeader
+  end
+  object wwDBGrid2: TwwDBGrid
+    Left = 368
+    Top = 180
+    Width = 320
+    Height = 162
+    Selected.Strings = (
+      'InfotypBeteckning'#9'13'#9'Infotyp'
+      'AntalArtiklar'#9'6'#9'Antal'
+      'PrisPerStk'#9'13'#9'PrisPerStk'
+      'TidMinuter'#9'12'#9'Tid i minuter')
+    IniAttributes.Delimiter = ';;'
+    IniAttributes.UnicodeIniFile = False
+    TitleColor = clBtnFace
+    FixedCols = 0
+    ShowHorzScrollBar = True
+    DataSource = dsoOrderradPrisinfoPerArtikel
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+    ReadOnly = True
+    TabOrder = 10
+    TitleAlignment = taLeftJustify
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+    TitleLines = 1
+    TitleButtons = False
+  end
+  object sp_KundLookuplist: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'KundLookuplist'
+    Left = 342
+    Top = 16
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+        Value = 0
+      end>
+    object sp_KundLookuplistKundnamn: TStringField
+      DisplayLabel = 'kundnamn'
+      DisplayWidth = 30
+      FieldName = 'Kundnamn'
+      Origin = 'Kundnamn'
+      Size = 100
+    end
+    object sp_KundLookuplistKundId: TIntegerField
+      FieldName = 'KundId'
+      Origin = 'KundId'
+      Visible = False
+    end
+  end
+  object tblOrderkalkylArtikel: TFDTable
+    OnNewRecord = tblOrderkalkylArtikelNewRecord
+    Connection = dm.FDConnection1
+    UpdateOptions.UpdateTableName = 'Ordus.dbo.OrderkalkylArtikel'
+    TableName = 'Ordus.dbo.OrderkalkylArtikel'
+    Left = 382
+    Top = 404
+    object tblOrderkalkylArtikelArtikelnummer: TStringField
+      DisplayWidth = 18
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Size = 30
+    end
+    object tblOrderkalkylArtikelAntal: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'Antal'
+      Origin = 'Antal'
+    end
+    object tblOrderkalkylArtikelTillverkningstidUppskattad: TIntegerField
+      DisplayWidth = 23
+      FieldName = 'TillverkningstidUppskattad'
+      Origin = 'TillverkningstidUppskattad'
+    end
+    object tblOrderkalkylArtikelPrisUppskattat: TCurrencyField
+      DisplayWidth = 16
+      FieldName = 'PrisUppskattat'
+      Origin = 'PrisUppskattat'
+    end
+    object tblOrderkalkylArtikelPrisFastställt: TCurrencyField
+      DisplayWidth = 19
+      FieldName = 'PrisFastst'#228'llt'
+      Origin = '[PrisFastst'#228'llt]'
+    end
+    object tblOrderkalkylArtikelId: TFDAutoIncField
+      FieldName = 'Id'
+      Origin = 'Id'
+      ReadOnly = True
+      Visible = False
+    end
+  end
+  object qryLU_Artikel: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      
+        'Select a.Id ArtikelId,a.Artikelnummer,a.Artikelnummer + '#39' '#39'+ a.B' +
+        'eteckning Artikel,'
+      'a.Beteckning,'
+      'YtbehandlingIdDefault'
+      '--,cnt=(select count(*) from orderrad where Artikelid = a.id)'
+      ' from Artikel a'
+      ' where kundid = :KundID'
+      'order by a.Artikelnummer')
+    Left = 312
+    Top = 148
+    ParamData = <
+      item
+        Name = 'KUNDID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryLU_ArtikelArtikelId: TFDAutoIncField
+      FieldName = 'ArtikelId'
+      Origin = 'ArtikelId'
+      ReadOnly = True
+    end
+    object qryLU_ArtikelArtikel: TStringField
+      FieldName = 'Artikel'
+      Origin = 'Artikel'
+      ReadOnly = True
+      Size = 231
+    end
+    object qryLU_ArtikelBeteckning: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object qryLU_ArtikelYtbehandlingIdDefault: TIntegerField
+      FieldName = 'YtbehandlingIdDefault'
+      Origin = 'YtbehandlingIdDefault'
+    end
+    object qryLU_ArtikelArtikelnummer: TStringField
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+  end
+  object sp_OrderradPrisinfoPerArtikel: TFDStoredProc
+    MasterSource = dsoOrderradHistoryArtikel
+    MasterFields = 'OrderradId'
+    Connection = dm.FDConnection1
+    StoredProcName = 'OrderradPrisinfoPerArtikel'
+    Left = 412
+    Top = 208
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+        Value = 0
+      end
+      item
+        Position = 2
+        Name = '@OrderradId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+    object sp_OrderradPrisinfoPerArtikelInfotypBeteckning: TStringField
+      DisplayLabel = 'Infotyp'
+      DisplayWidth = 13
+      FieldName = 'InfotypBeteckning'
+      Origin = 'InfotypBeteckning'
+      Size = 50
+    end
+    object sp_OrderradPrisinfoPerArtikelAntalArtiklar: TFMTBCDField
+      DisplayLabel = 'Antal'
+      DisplayWidth = 6
+      FieldName = 'AntalArtiklar'
+      Origin = 'AntalArtiklar'
+      Precision = 19
+      Size = 2
+    end
+    object sp_OrderradPrisinfoPerArtikelPrisPerStk: TCurrencyField
+      DisplayWidth = 13
+      FieldName = 'PrisPerStk'
+      Origin = 'PrisPerStk'
+      ReadOnly = True
+    end
+    object sp_OrderradPrisinfoPerArtikelTidMinuter: TFloatField
+      DisplayLabel = 'Tid i minuter'
+      DisplayWidth = 12
+      FieldName = 'TidMinuter'
+      Origin = 'TidMinuter'
+    end
+    object sp_OrderradPrisinfoPerArtikelYtbehandlingBeteckning: TStringField
+      DisplayLabel = 'Ytbehandling'
+      DisplayWidth = 13
+      FieldName = 'YtbehandlingBeteckning'
+      Origin = 'YtbehandlingBeteckning'
+      Visible = False
+      Size = 50
+    end
+    object sp_OrderradPrisinfoPerArtikelDatum: TSQLTimeStampField
+      DisplayWidth = 10
+      FieldName = 'Datum'
+      Origin = 'Datum'
+      Visible = False
+    end
+    object sp_OrderradPrisinfoPerArtikelId: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'Id'
+      Origin = 'Id'
+      ReadOnly = True
+      Visible = False
+    end
+    object sp_OrderradPrisinfoPerArtikelOrderradID: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'OrderradID'
+      Origin = 'OrderradID'
+      Required = True
+      Visible = False
+    end
+    object sp_OrderradPrisinfoPerArtikelPrisinfotypId: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'PrisinfotypId'
+      Origin = 'PrisinfotypId'
+      Visible = False
+    end
+  end
+  object dsoOrderradPrisinfoPerArtikel: TDataSource
+    DataSet = sp_OrderradPrisinfoPerArtikel
+    Left = 416
+    Top = 260
+  end
+  object sp_OrderradHistoryArtikel: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'Ordus.dbo.OrderradHistoryArtikel'
+    Left = 68
+    Top = 224
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+        Value = 0
+      end
+      item
+        Position = 2
+        Name = '@ArtikelId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+    object sp_OrderradHistoryArtikelOrderdatum: TDateField
+      DisplayWidth = 10
+      FieldName = 'Orderdatum'
+      Origin = 'Orderdatum'
+      ReadOnly = True
+    end
+    object sp_OrderradHistoryArtikelAntal: TFMTBCDField
+      DisplayWidth = 7
+      FieldName = 'Antal'
+      Origin = 'Antal'
+      Precision = 19
+      Size = 2
+    end
+    object sp_OrderradHistoryArtikelPrisPerEnhet: TCurrencyField
+      DisplayWidth = 13
+      FieldName = 'PrisPerEnhet'
+      Origin = 'PrisPerEnhet'
+    end
+    object sp_OrderradHistoryArtikelOrderradId: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'OrderradId'
+      Origin = 'OrderradId'
+      ReadOnly = True
+      Visible = False
+    end
+    object sp_OrderradHistoryArtikelYtbehandlingId: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'YtbehandlingId'
+      Origin = 'YtbehandlingId'
+      Visible = False
+    end
+    object sp_OrderradHistoryArtikelYtbehandling: TStringField
+      DisplayWidth = 50
+      FieldName = 'Ytbehandling'
+      Origin = 'Ytbehandling'
+      Visible = False
+      Size = 50
+    end
+    object sp_OrderradHistoryArtikelOrderstatusId: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'OrderstatusId'
+      Origin = 'OrderstatusId'
+      Visible = False
+    end
+    object sp_OrderradHistoryArtikelOrderststatus: TStringField
+      DisplayWidth = 50
+      FieldName = 'Orderststatus'
+      Origin = 'Orderststatus'
+      Required = True
+      Visible = False
+      Size = 50
+    end
+    object sp_OrderradHistoryArtikelFakturadatum: TDateField
+      DisplayWidth = 10
+      FieldName = 'Fakturadatum'
+      Origin = 'Fakturadatum'
+      Visible = False
+    end
+  end
+  object dsoOrderradHistoryArtikel: TDataSource
+    AutoEdit = False
+    DataSet = sp_OrderradHistoryArtikel
+    Left = 68
+    Top = 280
+  end
+  object dsoOrderkalkylArtikel: TDataSource
+    DataSet = tblOrderkalkylArtikel
+    Left = 506
+    Top = 400
+  end
+  object sp_OrderRadInsert: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'OrderRadInsert'
+    Left = 312
+    Top = 480
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@OrderID'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@ArtikelID'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 4
+        Name = '@Positionnummer'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 5
+        Name = '@PrisPerEnhet'
+        DataType = ftCurrency
+        Precision = 19
+        NumericScale = 4
+        ParamType = ptInput
+      end
+      item
+        Position = 6
+        Name = '@YtbehandlingID'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 5
+      end
+      item
+        Position = 7
+        Name = '@Antal'
+        DataType = ftFloat
+        Precision = 16
+        ParamType = ptInput
+      end
+      item
+        Position = 8
+        Name = '@Fr'#229'nLager'
+        DataType = ftFloat
+        Precision = 16
+        ParamType = ptInput
+      end
+      item
+        Position = 9
+        Name = '@Attproducera'
+        DataType = ftFloat
+        Precision = 16
+        ParamType = ptInput
+      end
+      item
+        Position = 10
+        Name = '@TillLager'
+        DataType = ftFloat
+        Precision = 16
+        ParamType = ptInput
+      end
+      item
+        Position = 11
+        Name = '@Vikt'
+        DataType = ftFloat
+        Precision = 16
+        ParamType = ptInput
+      end
+      item
+        Position = 12
+        Name = '@Tid'
+        DataType = ftFloat
+        Precision = 16
+        ParamType = ptInput
+      end
+      item
+        Position = 13
+        Name = '@Procent'
+        DataType = ftFloat
+        Precision = 16
+        ParamType = ptInput
+      end
+      item
+        Position = 14
+        Name = '@OrderRadInfo'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 255
+      end>
+  end
+  object sp_OrderhuvudInsert: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'OrderhuvudInsert'
+    Left = 184
+    Top = 432
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@KundID'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@OrderNummer'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        Position = 4
+        Name = '@Orderdatum'
+        DataType = ftTimeStamp
+        NumericScale = 3
+        ParamType = ptInput
+      end
+      item
+        Position = 5
+        Name = '@Godsm'#228'rke'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        Position = 6
+        Name = '@Egenm'#228'rkning'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        Position = 7
+        Name = '@ReferensID'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 8
+        Name = '@OrdertypId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 9
+        Name = '@Leveransdatum'
+        DataType = ftTimeStamp
+        NumericScale = 3
+        ParamType = ptInput
+      end
+      item
+        Position = 10
+        Name = '@Fritext'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 2000
+      end
+      item
+        Position = 11
+        Name = '@YtbehandlingDatum'
+        DataType = ftTimeStamp
+        NumericScale = 3
+        ParamType = ptInput
+      end
+      item
+        Position = 12
+        Name = '@YtbehandlingId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 13
+        Name = '@OrderstatusId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+end

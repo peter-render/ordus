@@ -1,0 +1,96 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{8eb8fd33-1b23-4c24-a0c6-a153d84d8d5c}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Ordusrapport2.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Ordus2.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="OrdusKalender.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Ordusplan2.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\..\..\Embarcadero\Studio\Projects\MinaEgna.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="MinaEgnaKomponenter.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Ordusrapport2">
+        <MSBuild Projects="Ordusrapport2.dproj"/>
+    </Target>
+    <Target Name="Ordusrapport2:Clean">
+        <MSBuild Projects="Ordusrapport2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Ordusrapport2:Make">
+        <MSBuild Projects="Ordusrapport2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Ordus2">
+        <MSBuild Projects="Ordus2.dproj"/>
+    </Target>
+    <Target Name="Ordus2:Clean">
+        <MSBuild Projects="Ordus2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Ordus2:Make">
+        <MSBuild Projects="Ordus2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="OrdusKalender">
+        <MSBuild Projects="OrdusKalender.dproj"/>
+    </Target>
+    <Target Name="OrdusKalender:Clean">
+        <MSBuild Projects="OrdusKalender.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrdusKalender:Make">
+        <MSBuild Projects="OrdusKalender.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Ordusplan2">
+        <MSBuild Projects="Ordusplan2.dproj"/>
+    </Target>
+    <Target Name="Ordusplan2:Clean">
+        <MSBuild Projects="Ordusplan2.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Ordusplan2:Make">
+        <MSBuild Projects="Ordusplan2.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MinaEgna">
+        <MSBuild Projects="..\..\..\Embarcadero\Studio\Projects\MinaEgna.dproj"/>
+    </Target>
+    <Target Name="MinaEgna:Clean">
+        <MSBuild Projects="..\..\..\Embarcadero\Studio\Projects\MinaEgna.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MinaEgna:Make">
+        <MSBuild Projects="..\..\..\Embarcadero\Studio\Projects\MinaEgna.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="MinaEgnaKomponenter">
+        <MSBuild Projects="MinaEgnaKomponenter.dproj"/>
+    </Target>
+    <Target Name="MinaEgnaKomponenter:Clean">
+        <MSBuild Projects="MinaEgnaKomponenter.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="MinaEgnaKomponenter:Make">
+        <MSBuild Projects="MinaEgnaKomponenter.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Ordusrapport2;Ordus2;OrdusKalender;Ordusplan2;MinaEgna;MinaEgnaKomponenter"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Ordusrapport2:Clean;Ordus2:Clean;OrdusKalender:Clean;Ordusplan2:Clean;MinaEgna:Clean;MinaEgnaKomponenter:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Ordusrapport2:Make;Ordus2:Make;OrdusKalender:Make;Ordusplan2:Make;MinaEgna:Make;MinaEgnaKomponenter:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -1,0 +1,356 @@
+object frmUH: TfrmUH
+  Left = 0
+  Top = 0
+  Caption = 'frmUH'
+  ClientHeight = 802
+  ClientWidth = 1057
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Button2: TButton
+    Left = 528
+    Top = 52
+    Width = 75
+    Height = 25
+    Caption = 'Button2'
+    TabOrder = 0
+    OnClick = Button2Click
+  end
+  object DBGrid1: TDBGrid
+    Left = 20
+    Top = 128
+    Width = 865
+    Height = 581
+    DataSource = DataSource1
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
+  end
+  object qry1: TFDQuery
+    CachedUpdates = True
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      '/*'
+      
+        'select a1.Id a1id, a1.Artikelnummer,a1.Beteckning,a2.Id a2id,a2.' +
+        'Artikelnummer,a2.Beteckning from Artikel a1'
+      
+        'outer apply (select top 1 Id,artikelnummer,Beteckning from artik' +
+        'el where Artikelnummer = replace(a1.artikelnummer,'#39' '#39','#39#39')) a2'
+      'where '
+      
+        'a1.kundid = 1 and substring(a1.artikelnummer,4,1) = '#39' '#39' and DATA' +
+        'LENGTH(a1.artikelnummer ) = 7'
+      'and a2.id is not null'
+      '*/'
+      
+        'select a1.Id a1id, a1.Artikelnummer,a1.Beteckning,a2.Id a2id,a2.' +
+        'Artikelnummer,a2.Beteckning from Artikel a1'
+      
+        'outer apply (select top 1 Id,artikelnummer,Beteckning from artik' +
+        'el where borttagen IS NULL AND Artikelnummer = replace(a1.artike' +
+        'lnummer,'#39' '#39','#39#39')) a2'
+      'where '
+      
+        'a1.kundid = 1 and substring(a1.artikelnummer,4,1) = '#39' '#39' and DATA' +
+        'LENGTH(a1.artikelnummer ) = 8 and right(a1.artikelnummer,1)= '#39'R'#39
+      'and borttagen IS null'
+      'and a2.id is not null'
+      'ORDER BY 2')
+    Left = 140
+    Top = 40
+    object qry1a1id: TFDAutoIncField
+      DisplayWidth = 12
+      FieldName = 'a1id'
+      Origin = 'a1id'
+      ReadOnly = True
+    end
+    object qry1Artikelnummer: TStringField
+      DisplayWidth = 36
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object qry1Beteckning: TStringField
+      DisplayWidth = 33
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object qry1a2id: TFDAutoIncField
+      DisplayWidth = 12
+      FieldName = 'a2id'
+      Origin = 'a2id'
+      ReadOnly = True
+    end
+  end
+  object qry2: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'update artikel set Borttagen = getdate() where Id = :a2Id')
+    Left = 732
+    Top = 32
+    ParamData = <
+      item
+        Name = 'A2ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object FDAutoIncField1: TFDAutoIncField
+      FieldName = 'a1id'
+      Origin = 'a1id'
+      ReadOnly = True
+    end
+    object StringField1: TStringField
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object StringField2: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object FDAutoIncField2: TFDAutoIncField
+      FieldName = 'a2id'
+      Origin = 'a2id'
+      ReadOnly = True
+    end
+    object StringField3: TStringField
+      FieldName = 'Artikelnummer_1'
+      Origin = 'Artikelnummer'
+      Size = 30
+    end
+    object StringField4: TStringField
+      FieldName = 'Beteckning_1'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+  end
+  object DataSource1: TDataSource
+    DataSet = qry1
+    Left = 264
+    Top = 40
+  end
+  object qry3: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      ''
+      'Update orderrad set ArtikelID = :a1Id where artikelid = :a2Id'
+      '')
+    Left = 732
+    Top = 84
+    ParamData = <
+      item
+        Name = 'A1ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'A2ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object FDAutoIncField3: TFDAutoIncField
+      FieldName = 'a1id'
+      Origin = 'a1id'
+      ReadOnly = True
+    end
+    object StringField5: TStringField
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object StringField6: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object FDAutoIncField4: TFDAutoIncField
+      FieldName = 'a2id'
+      Origin = 'a2id'
+      ReadOnly = True
+    end
+    object StringField7: TStringField
+      FieldName = 'Artikelnummer_1'
+      Origin = 'Artikelnummer'
+      Size = 30
+    end
+    object StringField8: TStringField
+      FieldName = 'Beteckning_1'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+  end
+  object qry4: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      
+        'update artikelgrupp set Artikelid = :a1Id where artikelid = :a2i' +
+        'd'
+      '')
+    Left = 736
+    Top = 144
+    ParamData = <
+      item
+        Name = 'A1ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'A2ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object FDAutoIncField5: TFDAutoIncField
+      FieldName = 'a1id'
+      Origin = 'a1id'
+      ReadOnly = True
+    end
+    object StringField9: TStringField
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object StringField10: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object FDAutoIncField6: TFDAutoIncField
+      FieldName = 'a2id'
+      Origin = 'a2id'
+      ReadOnly = True
+    end
+    object StringField11: TStringField
+      FieldName = 'Artikelnummer_1'
+      Origin = 'Artikelnummer'
+      Size = 30
+    end
+    object StringField12: TStringField
+      FieldName = 'Beteckning_1'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+  end
+  object qry5: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      
+        'update artikelgrupp set UnderartikelId = :a1Id where Underartike' +
+        'lId = :a2id'
+      '')
+    Left = 728
+    Top = 200
+    ParamData = <
+      item
+        Name = 'A1ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'A2ID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object FDAutoIncField7: TFDAutoIncField
+      FieldName = 'a1id'
+      Origin = 'a1id'
+      ReadOnly = True
+    end
+    object StringField13: TStringField
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object StringField14: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object FDAutoIncField8: TFDAutoIncField
+      FieldName = 'a2id'
+      Origin = 'a2id'
+      ReadOnly = True
+    end
+    object StringField15: TStringField
+      FieldName = 'Artikelnummer_1'
+      Origin = 'Artikelnummer'
+      Size = 30
+    end
+    object StringField16: TStringField
+      FieldName = 'Beteckning_1'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+  end
+  object qry6: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      
+        'update artikel set Artikelnummer = left(artikelnummer,3) + '#39' '#39'+ ' +
+        'substring(artikelnummer,4,4)'
+      'WHERE '
+      
+        'kundid = 1 and DATALENGTH(artikelnummer ) = 7 AND RIGHT(Artikeln' +
+        'ummer,1) = '#39'R'#39
+      'and Borttagen is NULL'
+      ''
+      '')
+    Left = 736
+    Top = 264
+    object FDAutoIncField9: TFDAutoIncField
+      FieldName = 'a1id'
+      Origin = 'a1id'
+      ReadOnly = True
+    end
+    object StringField17: TStringField
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object StringField18: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object FDAutoIncField10: TFDAutoIncField
+      FieldName = 'a2id'
+      Origin = 'a2id'
+      ReadOnly = True
+    end
+    object StringField19: TStringField
+      FieldName = 'Artikelnummer_1'
+      Origin = 'Artikelnummer'
+      Size = 30
+    end
+    object StringField20: TStringField
+      FieldName = 'Beteckning_1'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+  end
+end

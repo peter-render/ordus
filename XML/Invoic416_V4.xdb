@@ -1,0 +1,837 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 sp1 (x64) (http://www.altova.com) by Magnus Öhman (Monitor) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" attributeFormDefault="unqualified" xmlns:xdb="http://www.borland.com/schemas/delphi/10.0/XMLDataBinding">
+	<xsd:element name="INVOIC416">
+		<xsd:complexType>
+			<xsd:annotation>
+        <xsd:appinfo xdb:docElement="INVOIC416"/>
+      </xsd:annotation>
+      <xsd:sequence>
+				<xsd:element name="Invoice">
+					<xsd:complexType>
+						<xsd:attribute name="InvoiceNumber" use="required">
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:string">
+									<xsd:minLength value="1"/>
+									<xsd:maxLength value="35"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:attribute>
+						<xsd:attribute name="InvoiceType">
+							<xsd:annotation>
+								<xsd:documentation>InvoiceType - "1 = Debit, 2 = Credit </xsd:documentation>  <xsd:appinfo/>
+              </xsd:annotation>
+							<xsd:simpleType>
+								<xsd:restriction base="xsd:integer">
+									<xsd:totalDigits value="1"/>
+								</xsd:restriction>
+							</xsd:simpleType>
+						</xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Head">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="SellersOrderNumber">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="1"/>
+										<xsd:maxLength value="25"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="OrderDate">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:date"/>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BuyersOrderNumber" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="10"/>
+										<xsd:minLength value="1"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="DebitInvoiceNumber" minOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>DebitInvoiceNumber - Only use with InvoceType 2 </xsd:documentation>  <xsd:appinfo/>
+                </xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="35"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="InvoiceDate">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:date"/>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="LanguageNameCode">
+								<xsd:annotation>
+									<xsd:documentation>LanguageNameCode - "Internal use Monitor" </xsd:documentation>  <xsd:appinfo/>
+                </xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="3"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Buyer">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="BuyerCode">
+											<xsd:annotation>
+												<xsd:documentation>Code identifying the buyer.</xsd:documentation>  <xsd:appinfo/>
+                      </xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="1"/>
+													<xsd:maxLength value="20"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyerName">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="1"/>
+													<xsd:maxLength value="35"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyerVATRegistrationNumber">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="8"/>
+													<xsd:maxLength value="20"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyerReference" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="30"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyerReferencePhone" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="80"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyerReferenceFax" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="80"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyerReferenceEmail" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="80"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="InvoiceAddress">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="InvoiceAddressName">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="InvoiceAddressStreetBox1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="InvoiceAddressStreetBox2" minOccurs="1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="InvoiceAddressZipCity1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="InvoiceAddressZipCity2" minOccurs="1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="InvoiceAddressCountry" minOccurs="1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="DeliveryAddress">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="DeliveryAddressName">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="DeliveryAddressStreetBox1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="DeliveryAddressStreetBox2" minOccurs="1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="DeliveryAddressZipCity1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="DeliveryAddressZipCity2" minOccurs="1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="DeliveryAddressCountry" minOccurs="1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="Seller">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="SellerSuplierCode">
+											<xsd:annotation>
+												<xsd:documentation>Code identifying the supplier.</xsd:documentation>  <xsd:appinfo/>
+                      </xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="17"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerName">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="35"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerReference" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="30"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerReferencePhone" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="80"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerReferenceFax" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="80"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerReferenceEmail" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="80"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerOrigin" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="35"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerWeb" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="255"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerPhone" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="80"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerFax" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="80"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerRegistrationNumber">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="12"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellerVatRegistrationNumber">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="10"/>
+													<xsd:maxLength value="20"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="PostalAddress">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="PostalAddressStreetBox1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="1"/>
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="PostalAddressStreetBox2" minOccurs="1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="PostalAddressZipCity1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:minLength value="1"/>
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="PostalAddressZipCity2" minOccurs="1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="PostalAddressCountry" minOccurs="1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+										<xsd:element name="VisitingAddress" minOccurs="1">
+											<xsd:complexType>
+												<xsd:sequence>
+													<xsd:element name="VisitingAddressStreetBox1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="VisitingAddressStreetBox2">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="VisitingAddressZipCity1">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="VisitingAddressZipCity2">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+													<xsd:element name="VisitingAddressCountry">
+														<xsd:simpleType>
+															<xsd:restriction base="xsd:string">
+																<xsd:maxLength value="35"/>
+															</xsd:restriction>
+														</xsd:simpleType>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:complexType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="InvoiceCurrency">
+								<xsd:annotation>
+									<xsd:documentation>Currency - "ISO 4217 three alpha code" </xsd:documentation>  <xsd:appinfo/>
+                </xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="3"/>
+										<xsd:maxLength value="3"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PaymentDueDate">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:date"/>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="CurrencyExchangeRate">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:decimal">
+										<xsd:totalDigits value="17"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="RateOfExchangeDate">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:date"/>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="EuVatText" minOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>EU VAT exception text.</xsd:documentation>  <xsd:appinfo/>
+                </xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="70"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="GodsLabelLine1" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="30"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="GodsLabelLine2" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="30"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="HomeCurrency">
+								<xsd:annotation>
+									<xsd:documentation>Currency - "ISO 4217 three alpha code" </xsd:documentation>  <xsd:appinfo/>
+                </xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:minLength value="3"/>
+										<xsd:maxLength value="3"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TermsOfPayment">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="30"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="TermsOfPaymentNoOfDays">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:integer">
+										<xsd:totalDigits value="3"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BankName">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="35"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="AccountNumber">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="50"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="SwiftAddress">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="20"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="BankGiroNumber" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="15"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PlusGiroNumber" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:string">
+										<xsd:maxLength value="15"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Factoring" minOccurs="1">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="FactoringSetting">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:integer">
+													<xsd:totalDigits value="1"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FactoringBankName">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="35"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FactoringAccountNumber">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="50"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FactoringSwiftAddress">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="20"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FactoringBankGiroNumber">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="15"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="FactoringPlusGiroNumber">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="15"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+								</xsd:complexType>
+							</xsd:element>
+							<xsd:element name="AlloyCost" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:decimal">
+										<xsd:totalDigits value="17"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="FreightCost" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:decimal">
+										<xsd:totalDigits value="15"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PackingCost" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:decimal">
+										<xsd:totalDigits value="17"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="InsuranceCost" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:decimal">
+										<xsd:totalDigits value="17"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="NetAmountInInvoiceCurrency">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:decimal">
+										<xsd:totalDigits value="17"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="InvoicingCharge" minOccurs="1">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:decimal">
+										<xsd:totalDigits value="17"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="VatAmountInInvoiceCurrency">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:decimal">
+										<xsd:totalDigits value="17"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="Equalization" minOccurs="1">
+								<xsd:annotation>
+									<xsd:documentation>Rounding off amount.</xsd:documentation>  <xsd:appinfo/>
+                </xsd:annotation>
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:decimal">
+										<xsd:totalDigits value="17"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+							<xsd:element name="PayableAmountInInvoiceCurrency">
+								<xsd:simpleType>
+									<xsd:restriction base="xsd:decimal">
+										<xsd:totalDigits value="17"/>
+									</xsd:restriction>
+								</xsd:simpleType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="Rows">
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Row" maxOccurs="999">
+								<xsd:complexType>
+									<xsd:sequence>
+										<xsd:element name="BuyersPartNumber">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="16"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellersPartNumber">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="25"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="PartDescription">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="70"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="DeliveryDate">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:date"/>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Quantity">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:decimal">
+													<xsd:totalDigits value="17"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Unit">
+											<xsd:annotation>
+												<xsd:documentation>Unit of measure.</xsd:documentation>  <xsd:appinfo/>
+                      </xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="0"/>
+													<xsd:maxLength value="3"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Each">
+											<xsd:annotation>
+												<xsd:documentation>Unit price base.</xsd:documentation>  <xsd:appinfo/>
+                      </xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:integer">
+													<xsd:totalDigits value="17"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Discount" minOccurs="1">
+											<xsd:annotation>
+												<xsd:documentation>Line discount in percent.</xsd:documentation>  <xsd:appinfo/>
+                      </xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:decimal">
+													<xsd:totalDigits value="17"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="Price">
+											<xsd:annotation>
+												<xsd:documentation>Unit price.</xsd:documentation>  <xsd:appinfo/>
+                      </xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:decimal">
+													<xsd:totalDigits value="17"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="RowSum">
+											<xsd:annotation>
+												<xsd:documentation>Line amount.</xsd:documentation>  <xsd:appinfo/>
+                      </xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:decimal">
+													<xsd:totalDigits value="17"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="BuyersOrderNumber" minOccurs="1">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="10"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="SellersOrderNumber">
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:maxLength value="25"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+										<xsd:element name="CountryOfOriginCode">
+											<xsd:annotation>
+												<xsd:documentation>CountryOfOriginCode - "ISO 3166-1, two alpha code"</xsd:documentation>  <xsd:appinfo/>
+                      </xsd:annotation>
+											<xsd:simpleType>
+												<xsd:restriction base="xsd:string">
+													<xsd:minLength value="2"/>
+													<xsd:maxLength value="2"/>
+												</xsd:restriction>
+											</xsd:simpleType>
+										</xsd:element>
+									</xsd:sequence>
+									<xsd:attribute name="RowNumber">
+										<xsd:annotation>
+											<xsd:documentation>Row number</xsd:documentation>  <xsd:appinfo/>
+                    </xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:integer">
+												<xsd:totalDigits value="3"/>
+												<xsd:minInclusive value="1"/>
+												<xsd:maxInclusive value="999"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="RowType">
+										<xsd:annotation>
+											<xsd:documentation>RowType - "Internal use Monitor"
+
+1 (Part row) - The part must be registered in the Update Part procedure.
+
+2 (Additional order row) - This row type allows you to register orders for parts that do not exist in the part register.
+
+3 (Service row) - This row type is used when you sell services such as traveling expenses etc.
+
+4 (Text row) - This row type is used to add your own text on a row. 
+
+5 (Serial number) - This is used to trace a part via the product register, by linking it to the serial number of the previous order row.
+
+6 (Underlying fictitious part) - Row type 6 is used for fictitious part sales, if the price must be entered on the fictitious part instead of on the incorporated parts
+
+9 (Tool row) - If you use the supplement Tool Management you can register tools as customer order rows.
+
+</xsd:documentation>  <xsd:appinfo/>
+                    </xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:integer">
+												<xsd:totalDigits value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="RowPosition">
+										<xsd:annotation>
+											<xsd:documentation>Row position. This should refer to the buyer's row number from the original order (ORDERS420/RowNumber).</xsd:documentation>  <xsd:appinfo/>
+                    </xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:integer">
+												<xsd:totalDigits value="3"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+									<xsd:attribute name="CostType">
+										<xsd:annotation>
+											<xsd:documentation>CostType - "Internal use Monitor" 
+
+0 = Normal item line or miscellaneous cost.
+1 = Freight cost.
+2 = Package cost.
+3 = Setup cost.
+4 = Alloy cost.</xsd:documentation>  <xsd:appinfo/>
+                    </xsd:annotation>
+										<xsd:simpleType>
+											<xsd:restriction base="xsd:integer">
+												<xsd:totalDigits value="2"/>
+											</xsd:restriction>
+										</xsd:simpleType>
+									</xsd:attribute>
+								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+			<xsd:attribute name="SoftwareManufacturer" type="xsd:string"/>
+			<xsd:attribute name="SoftwareName" type="xsd:string"/>
+			<xsd:attribute name="SoftwareVersion" type="xsd:string"/>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

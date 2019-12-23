@@ -1,0 +1,190 @@
+﻿inherited frmFtgSystem: TfrmFtgSystem
+  Left = 392
+  Top = 310
+  Caption = 'Systemparameter'
+  ClientHeight = 566
+  ClientWidth = 906
+  ExplicitWidth = 912
+  ExplicitHeight = 595
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 787
+    Height = 566
+    ParentFont = False
+    ExplicitLeft = 16
+    ExplicitTop = -44
+    ExplicitWidth = 787
+    ExplicitHeight = 709
+    inherited Bevel1: TBevel
+      Left = 22
+      Top = 434
+      Width = 727
+      ExplicitLeft = 22
+      ExplicitTop = 434
+      ExplicitWidth = 727
+    end
+    inherited Bevel2: TBevel
+      Left = 4
+      Top = 550
+      Width = 745
+      Height = 9
+      ExplicitLeft = 4
+      ExplicitTop = 550
+      ExplicitWidth = 745
+      ExplicitHeight = 9
+    end
+    object Label2: TLabel [2]
+      Left = 35
+      Top = 457
+      Width = 31
+      Height = 13
+      Caption = 'Nyckel'
+      FocusControl = DBEdit2
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Default'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label4: TLabel [3]
+      Left = 32
+      Top = 511
+      Width = 28
+      Height = 13
+      Caption = 'V'#228'rde'
+      FocusControl = DBEdit1
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Default'
+      Font.Style = []
+      ParentFont = False
+    end
+    object Label3: TLabel [4]
+      Left = 35
+      Top = 484
+      Width = 54
+      Height = 13
+      Caption = 'Beskrivning'
+      FocusControl = DBEdit3
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Default'
+      Font.Style = []
+      ParentFont = False
+    end
+    inherited dbGrid: TwwDBGrid
+      Left = 18
+      Width = 727
+      Height = 400
+      Selected.Strings = (
+        'Beteckning'#9'32'#9'Beskrivning'
+        'V'#228'rde'#9'82'#9'V'#228'rde')
+      TabOrder = 3
+      ExplicitLeft = 18
+      ExplicitWidth = 727
+      ExplicitHeight = 400
+    end
+    object DBEdit1: TDBEdit
+      Left = 113
+      Top = 508
+      Width = 636
+      Height = 21
+      DataField = 'V'#228'rde'
+      DataSource = DataSource1
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Default'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 2
+    end
+    object DBEdit2: TDBEdit
+      Left = 113
+      Top = 454
+      Width = 256
+      Height = 21
+      Color = clBtnFace
+      DataField = 'Systemname'
+      DataSource = DataSource1
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Default'
+      Font.Style = []
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object DBEdit3: TDBEdit
+      Left = 113
+      Top = 481
+      Width = 636
+      Height = 21
+      DataField = 'Beteckning'
+      DataSource = DataSource1
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Default'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 787
+    Height = 566
+    ExplicitLeft = 787
+    ExplicitHeight = 603
+    inherited DBNav: TDBNavigator
+      Hints.Strings = ()
+    end
+  end
+  inherited PopupMenu1: TPopupMenu
+    Left = 492
+    Top = 316
+  end
+  inherited DataSource1: TDataSource
+    Left = 500
+    Top = 220
+  end
+  inherited FDQuery1: TFDQuery
+    Active = True
+    SQL.Strings = (
+      'Select * from ftgsystem order by ordning')
+    object FDQuery1Beteckning: TStringField
+      DisplayLabel = 'Beskrivning'
+      DisplayWidth = 32
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 50
+    end
+    object FDQuery1Värde: TStringField
+      DisplayWidth = 82
+      FieldName = 'V'#228'rde'
+      Origin = '[V'#228'rde]'
+      Size = 100
+    end
+    object FDQuery1Systemname: TStringField
+      DisplayLabel = 'Nyckel'
+      DisplayWidth = 17
+      FieldName = 'Systemname'
+      Origin = 'Systemname'
+      Visible = False
+      Size = 50
+    end
+    object FDQuery1ID: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
+  end
+end

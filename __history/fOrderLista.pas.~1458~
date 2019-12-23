@@ -1,0 +1,2454 @@
+unit fOrderLista;
+
+interface
+
+uses
+
+  variants, messages, system.UITypes, SysUtils, Classes, Graphics, Controls,
+  Forms, system.Types, dateUtils,
+  Dialogs,
+  Grids, Wwdbigrd, Wwdbgrid, ExtCtrls, ComCtrls, ToolWin, Db, Menus,
+  ActnList, Shellapi, StdCtrls, Wwkeycb, wwdblook, wwDataInspector, funclib,
+  system.Actions, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.Client, FireDAC.Comp.DataSet,
+  inifiles, fDagar, Vcl.ActnMan,
+  Vcl.ActnCtrls, Vcl.ActnMenus, Vcl.Buttons, Vcl.PlatformDefaultStyleActnCtrls,
+  Vcl.RibbonLunaStyleActnCtrls, Vcl.Ribbon,
+  Vcl.CategoryButtons, Vcl.wwbutton, Vcl.DBCtrls, Vcl.wwdatsrc, comobj,
+  Vcl.wwcheckbox, gtPDFClasses, gtCstPDFDoc,
+  gtExPDFDoc, gtExProPDFDoc, gtPDFDoc,
+  Vcl.gtxXport,
+  Vcl.gtQRXport, gtPDFPrinter, QRPDFFilt, Vcl.gtxClasses, Xml.xmldom,
+  prefaktura4, Vcl.OleCtrls,
+  SHDocVw, fSattFakturadatum, rSammelfaktura, fOrderkalkyl, fFlikkolumner;
+
+type
+  TfrmOrderLista = class(TForm)
+    dsoOrderlist: TDataSource;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Panel5: TPanel;
+    wwDBGrid1: TwwDBGrid;
+    PopupMenuOrderlista: TPopupMenu;
+    ActionList1: TActionList;
+    actOrderNew: TAction;
+    mnuNyOrder: TMenuItem;
+    actSkrivUt: TAction;
+    mnuSkapaPDFOrder: TMenuItem;
+    actSattFakturadatum: TAction;
+    actPrissattningPositioner: TAction;
+    mnuPrissättaPositioner: TMenuItem;
+    actOrderTaBort: TAction;
+    mnuTabortOrder: TMenuItem;
+    N1: TMenuItem;
+    actOffertSendViamail: TAction;
+    actOrderEdit: TAction;
+    actFakturaunderlagPrint: TAction;
+    mnuSkapaSamlingsfaktura: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    actOrderradUpdate: TAction;
+    mnuSkapaPDFOffert: TMenuItem;
+    N4: TMenuItem;
+    mnuResfreshOrderlista: TMenuItem;
+    actOrderVisa: TAction;
+    mnuVisaOrder: TMenuItem;
+    mnuLäggtillÄndrapositioner: TMenuItem;
+    mnuÄndraOrderstatusManuellt: TMenuItem;
+    actOrderStatusUpdate: TAction;
+    actPallEtikett: TAction;
+    mnuUtsktriftPalletikett: TMenuItem;
+    actArbetsorderPrint: TAction;
+    actOrderPDFPrint: TAction;
+    mnuSkrivutritningar: TMenuItem;
+    mnuSkrivutfljesedel: TMenuItem;
+    mnuSkrivutetiketter: TMenuItem;
+    mnuSkspaPDFOrderbekräftlese: TMenuItem;
+    mnuSkapaPlanering: TMenuItem;
+    sp_ftgsystem: TFDStoredProc;
+    sp_OrderDelete: TFDStoredProc;
+    Custom_OrderhuvudFakturadataUpdate: TFDStoredProc;
+    qryKundFilter: TFDQuery;
+    qryEtiketter: TFDQuery;
+    qryEtiketterOrderId: TFDAutoIncField;
+    qryEtiketterKundnamn: TStringField;
+    qryEtiketterReferens: TStringField;
+    qryEtiketterordernummer: TStringField;
+    qryEtiketterGodsmärke: TStringField;
+    qryEtiketterorderdatum: TSQLTimeStampField;
+    qryEtiketterLeveransdatum: TSQLTimeStampField;
+    qryEtiketterPositionnummer: TIntegerField;
+    qryEtiketterYtbehandlingBeteckning: TStringField;
+    qryEtiketterBeteckning: TStringField;
+    qryEtiketterAntal: TFMTBCDField;
+    qryEtiketterPrisperenhet: TCurrencyField;
+    qryEtiketterfritext: TStringField;
+    qryEtiketterPris: TFMTBCDField;
+    qryEtiketterOrdertypId: TIntegerField;
+    qryKundFilterKundid: TIntegerField;
+    qryKundFilterKundnamn: TStringField;
+    qryKundFilterUnnamed3: TIntegerField;
+    mnuSkickaOrderbekräftelseViaEpost: TMenuItem;
+    N7: TMenuItem;
+    mnuTaBortPlanering: TMenuItem;
+    spPlaneringDelete: TFDStoredProc;
+    actOrderlistaRefresh: TAction;
+    actImporteraIntersystem: TAction;
+    actPlaneringSkapa: TAction;
+    actPlaneringTabort: TAction;
+    actOrderSkrivut: TAction;
+    actEtiketterSkrivUt: TAction;
+    actFöljesdelUtskrift: TAction;
+    actOrderbekräftleseViaMail: TAction;
+    actOrderLäggtillÄndraPositioner: TAction;
+    Label4: TLabel;
+    sp_Orderlist: TFDStoredProc;
+    sp_OrderlistOrderID: TFDAutoIncField;
+    sp_OrderlistKundnamn: TStringField;
+    sp_OrderlistOrdernummer: TStringField;
+    sp_OrderlistOrdertypId: TIntegerField;
+    sp_OrderlistGodsmärke: TStringField;
+    sp_OrderlistoTyp: TStringField;
+    sp_OrderlistAntalprissatt: TIntegerField;
+    sp_OrderlistAntalAvrapporterad: TIntegerField;
+    sp_OrderlistAntalTotal: TIntegerField;
+    sp_OrderlistKundreferens: TStringField;
+    sp_Orderlistemailadress: TStringField;
+    sp_Orderlistleveransdatum: TSQLTimeStampField;
+    sp_OrderlistKundID: TIntegerField;
+    sp_OrderlistOrderDatum: TSQLTimeStampField;
+    sp_OrderlistSortorder: TSmallintField;
+    sp_OrderlistBGColor: TStringField;
+    sp_OrderlistOrderStatusId: TIntegerField;
+    sp_OrderlistYtbehandlingdatum: TSQLTimeStampField;
+    sp_OrderlistKalkArbetstid: TFloatField;
+    sp_OrderlistKalkArbetstidTime: TStringField;
+    sp_OrderlistArbetstidPlanerad: TIntegerField;
+    sp_OrderlistArbetstidPlaneradTime: TStringField;
+    wwDataSource1: TwwDataSource;
+    wwExpandButton1: TwwExpandButton;
+    gtPDFDocument1: TgtPDFDocument;
+    sp_OrderlistEgenMärkning: TStringField;
+    QRPDFFilter1: TQRPDFFilter;
+    N6: TMenuItem;
+    QRExp: TgtQRExport;
+    actFakturarunderlagXML: TAction;
+    mnuSkapaXMLFakturaunderlag: TMenuItem;
+    qryOrder: TFDQuery;
+    qryOrderOrderId: TFDAutoIncField;
+    qryOrderKundnamn: TStringField;
+    qryOrderReferens: TStringField;
+    qryOrderordernummer: TStringField;
+    qryOrderGodsmärke: TStringField;
+    qryOrderorderdatum: TSQLTimeStampField;
+    qryOrderLeveransdatum: TSQLTimeStampField;
+    qryOrderPositionnummer: TIntegerField;
+    qryOrderYtbehandlingBeteckning: TStringField;
+    qryOrderBeteckning: TStringField;
+    qryOrderArtikelnummer: TStringField;
+    qryOrderAntal: TFMTBCDField;
+    qryOrderOrdertypId: TIntegerField;
+    qryOrderPrisperenhet: TCurrencyField;
+    qryOrderfritext: TStringField;
+    qryOrderPris: TFMTBCDField;
+    qryFakturaunderlagXML: TFDQuery;
+    qryFakturaunderlagXMLOrderId: TFDAutoIncField;
+    qryFakturaunderlagXMLKundnamn: TStringField;
+    qryFakturaunderlagXMLReferens: TStringField;
+    qryFakturaunderlagXMLordernummer: TStringField;
+    qryFakturaunderlagXMLGodsmärke: TStringField;
+    qryFakturaunderlagXMLorderdatum: TSQLTimeStampField;
+    qryFakturaunderlagXMLLeveransdatum: TSQLTimeStampField;
+    qryFakturaunderlagXMLPositionnummer: TIntegerField;
+    qryFakturaunderlagXMLYtbehandlingBeteckning: TStringField;
+    qryFakturaunderlagXMLBeteckning: TStringField;
+    qryFakturaunderlagXMLArtikelnummer: TStringField;
+    qryFakturaunderlagXMLAntal: TFMTBCDField;
+    qryFakturaunderlagXMLOrdertypId: TIntegerField;
+    qryFakturaunderlagXMLPrisperenhet: TCurrencyField;
+    qryFakturaunderlagXMLfritext: TStringField;
+    qryFakturaunderlagXMLPris: TFMTBCDField;
+    qryFakturaunderlagXMLDagensdatum: TDateField;
+    Panel6: TPanel;
+    qryOrderSok: TFDQuery;
+    Panel4: TPanel;
+    lblsokbeställningsnummer: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    wwDBLookupCombo1: TwwDBLookupCombo;
+    Button1: TButton;
+    sokOrdernummer: TEdit;
+    actCopyOrder: TAction;
+    mnuKopieraOffert: TMenuItem;
+    sp_OrderKopiera: TFDStoredProc;
+    sp_OrderlistTabId: TSmallintField;
+    actSattFakturadata: TAction;
+    sp_OrderlistFakturadatum: TDateField;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    Label5: TLabel;
+    qryOrdersummaGet: TFDQuery;
+    qryOrderstatus: TFDQuery;
+    sp_OrderlistOrdersumma: TFMTBCDField;
+    qryFakturaunderlagXMLFakturanummer: TStringField;
+    cbVisaAllaFakturor: TCheckBox;
+    qryOrdertstatusUpdatePrissatta: TFDQuery;
+    actOffertNew: TAction;
+    mnuNyOffert: TMenuItem;
+    btnStatusByteNext: TButton;
+    sp_OrdertstatusUpdate: TFDStoredProc;
+    mnuSättfakturamärkning: TMenuItem;
+    actSkapaOrderfrånOffert: TAction;
+    mnuSkapaorderfrånOffert: TMenuItem;
+    qryOrderstatusId: TFDAutoIncField;
+    qryOrderstatusOrderstatus: TStringField;
+    qryOrderstatusBeteckning: TStringField;
+    qryOrderstatusSortorder: TSmallintField;
+    qryOrderstatusBGColor: TStringField;
+    qryOrderstatusTabId: TSmallintField;
+    qryOrderstatusTabBeteckning: TStringField;
+    qryOrderstatusOmsättningsgrundande: TBooleanField;
+    qryOrderstatusKräveradmin: TBooleanField;
+    qryOrderSokId: TFDAutoIncField;
+    qryOrderSokOrderStatusId: TIntegerField;
+    qryOrdernummerSok: TFDQuery;
+    FDAutoIncField1: TFDAutoIncField;
+    IntegerField1: TIntegerField;
+    sokBeställningsnummer: TEdit;
+    btnStatusBytePrev: TButton;
+    mnuSkrivutfakturaunderlag: TMenuItem;
+    actSammelfakturaPrint: TAction;
+    qryGridColumns: TFDQuery;
+    qryGridColumnsFieldname: TStringField;
+    qryGridColumnsDisplaywidth: TSmallintField;
+    qryGridColumnsFieldheader: TStringField;
+    mnuLaggtilloffertrader: TMenuItem;
+    actOrderKalkylAddrows: TAction;
+    sp_OrderlistÄrPrissatt: TIntegerField;
+    sp_OrderlistÄrAvrapporterad: TIntegerField;
+    actGörOrdertillOffert: TAction;
+    qryFakturaunderlagXMLFörfallodatum: TDateField;
+    qryFakturaunderlagXMLFakturadatum: TDateField;
+    sp_OrderlistFörfallodatum: TDateField;
+    sp_OrderlistFakturanummer: TStringField;
+    mnuOffertEdit: TMenuItem;
+    Label1: TLabel;
+    edtTextsok: TEdit;
+    btnSok: TButton;
+    qryOrdertextSok: TFDQuery;
+    FDAutoIncField2: TFDAutoIncField;
+    IntegerField2: TIntegerField;
+    actOffertTaBort: TAction;
+    mnuTaBortOffert: TMenuItem;
+    N5: TMenuItem;
+    actCopyOffert: TAction;
+    mnuKopieraOrder: TMenuItem;
+    actArkivera: TAction;
+    procedure wwDBGrid1DblClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure ToolButton3Click(Sender: TObject);
+    procedure ToolButton2Click(Sender: TObject);
+    procedure ToolButton4Click(Sender: TObject);
+    procedure ToolButton5Click(Sender: TObject);
+    procedure wwDBGrid1CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+      AFont: TFont; ABrush: TBrush);
+    procedure actOrderNewExecute(Sender: TObject);
+    procedure actSkrivUtExecute(Sender: TObject);
+    procedure actPrissattningPositionerExecute(Sender: TObject);
+    procedure actOrderTaBortExecute(Sender: TObject);
+    procedure actOffertSendViamailExecute(Sender: TObject);
+    procedure actOrderEditExecute(Sender: TObject);
+    procedure actFakturaunderlagPrintExecute(Sender: TObject);
+    procedure wwDBGrid1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure actOrderradUpdateExecute(Sender: TObject);
+    procedure actUpdateOrderlistaExecute(Sender: TObject);
+    procedure actOrderVisaExecute(Sender: TObject);
+    procedure PopupMenuOrderlistaPopup(Sender: TObject);
+    procedure actOrderStatusUpdateExecute(Sender: TObject);
+    procedure actPallEtikettExecute(Sender: TObject);
+    procedure wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
+    procedure wwDBGrid1TitleButtonClick(Sender: TObject; AFieldName: string);
+    procedure actArbetsorderPrintExecute(Sender: TObject);
+    procedure actOrderPDFPrintExecute(Sender: TObject);
+    procedure Importorderfilfrnleverantr1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Skapaplanering1Click(Sender: TObject);
+    procedure wwDBGrid1RowChanged(Sender: TObject);
+    procedure actOrderlistaRefreshExecute(Sender: TObject);
+    procedure actImporteraIntersystemExecute(Sender: TObject);
+    procedure actPlaneringSkapaExecute(Sender: TObject);
+    procedure actPlaneringTabortExecute(Sender: TObject);
+    procedure actOrderSkrivutExecute(Sender: TObject);
+    procedure actEtiketterSkrivUtExecute(Sender: TObject);
+    procedure actFöljesdelUtskriftExecute(Sender: TObject);
+    procedure actOrderbekräftleseViaMailExecute(Sender: TObject);
+    procedure actOrderLäggtillÄndraPositionerExecute(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+    procedure actFakturarunderlagXMLExecute(Sender: TObject);
+    Procedure Skapa_Fakturaunderlag_XML;
+    procedure sokOrdernummerChange(Sender: TObject);
+    procedure sokOrdernummerEnter(Sender: TObject);
+    procedure actCopyOrderExecute(Sender: TObject);
+    procedure actSattFakturadataExecute(Sender: TObject);
+    procedure PageControl1Change(Sender: TObject);
+    procedure wwDBGrid1MultiSelectRecord(Grid: TwwDBGrid; Selecting: Boolean; var Accept: Boolean);
+    procedure PageControl1DrawTab(Control: TCustomTabControl; TabIndex: Integer; const Rect: TRect; Active: Boolean);
+    procedure cbVisaAllaFakturorClick(Sender: TObject);
+    procedure actOffertNewExecute(Sender: TObject);
+    procedure btnStatusByteNextClick(Sender: TObject);
+    procedure actSkapaOrderfrånOffertExecute(Sender: TObject);
+    procedure sokBeställningsnummerChange(Sender: TObject);
+    procedure sokBeställningsnummerEnter(Sender: TObject);
+    procedure btnStatusBytePrevClick(Sender: TObject);
+    procedure actSammelfakturaPrintExecute(Sender: TObject);
+    procedure actOrderKalkylAddrowsExecute(Sender: TObject);
+    procedure actGörOrdertillOffertExecute(Sender: TObject);
+    // procedure edtTextsokChange(Sender: TObject);
+    procedure btnSokClick(Sender: TObject);
+    procedure edtTextsokChange(Sender: TObject);
+    procedure actOffertTaBortExecute(Sender: TObject);
+    procedure actCopyOffertExecute(Sender: TObject);
+    procedure actArkiveraExecute(Sender: TObject);
+  private
+    xfilename: string;
+    qrfilename: string;
+
+    { Private declarations }
+    procedure WMDROPFILES(var msg: TWMDropFiles); message WM_DROPFILES;
+    procedure RefreshOrderlist;
+    function FU_FolderGet(Kundid: Integer): string;
+    procedure Soktext;
+
+  public
+    { Public declarations }
+    FTotalPages: Integer;
+  end;
+
+var
+  frmOrderLista: TfrmOrderLista;
+  ordersumma: double;
+
+Const
+  stUA: Integer = 4; // Under arbete
+  stAR: Integer = 3; // Återrapporterad
+  stPS: Integer = 2; // Prissatt
+  stFA: Integer = 1; // Fakturerat
+  stOF: Integer = 5; // Offert
+  stAK: Integer = 6; // Arkiv
+
+implementation
+
+uses fMain, fOrderNew, rOrder, rArbetsorder, dFakturaNummer,
+  fOrderadUpdate, fOrderEdit, fOrderStatusUpdate, rPallEtikett, fPrintPDF,
+  rEtikett, fOrderImport, Datamodule, fOrder, fOrderImportInterSystem,
+  fimpleDialog,
+  fOrderPlanering, funclibProj;
+
+{$R *.DFM}
+
+procedure TfrmOrderLista.wwDBGrid1DblClick(Sender: TObject);
+var
+  fname: string;
+  f: TfrmOrder;
+  cc, I: Integer;
+begin
+
+  fname := 'F' + sp_OrderlistOrderID.asstring;
+  cc := application.componentcount;
+  for I := 0 to cc - 1 do
+    if application.Components[I].name = fname then
+    begin
+
+      with (application.FindComponent(fname) as TfrmOrder) do
+      begin
+        windowstate := wsmaximized;
+        show;
+
+      end;
+
+      exit;
+    end;
+
+  f := TfrmOrder.create(application);
+  f.name := fname;
+  f.windowstate := wsmaximized;
+  f.show;
+  frmmain.tbtnOrderlista.ImageIndex := 4;
+
+end;
+
+procedure TfrmOrderLista.FormCreate(Sender: TObject);
+begin
+  DragAcceptFiles(Handle, True);
+  PageControl1.OwnerDraw := True;
+end;
+
+procedure TfrmOrderLista.FormShow(Sender: TObject);
+var
+  I: Integer;
+begin
+
+  for I := 0 to PageControl1.PageCount - 1 do
+    PageControl1.Pages[I].Destroy;
+
+  PageControl1.TabHeight := 30;
+  PageControl1.tabwidth := 160;
+  PageControl1.height := PageControl1.TabHeight;
+
+  /// Skapa tabs
+
+  ///
+
+  with qryOrderstatus do
+  begin
+    open;
+    while not eof do
+    begin
+      if (AdminComputer or (not fieldbyname('Kräveradmin').asBoolean)) then
+      begin
+        with TTabSheet.create(PageControl1) do
+        begin
+
+          PageControl := PageControl1;
+          Name := 'ts' + fieldbyname('Orderstatus').asstring;
+          Caption := fieldbyname('TabBeteckning').asstring; // + ' - ' + fieldbyname('iD').asstring;
+          Tag := fieldbyname('Id').asInteger;
+          if fieldbyname('BGCOlor').asstring <> '' then
+            Brush.Color := stringtocolor(fieldbyname('BGColor').asstring)
+          else
+            Brush.Color := clWhite;
+        end;
+      end;
+      next;
+    end;
+
+  end;
+
+  with sp_Orderlist do
+  begin
+    close;
+    ParamByName('@OrderstatusId').Value := 4; // Underarbete
+    open;
+  end;
+
+  PageControl1.TabIndex := 0;
+
+  // TabControl1.Font.Style := [fsBold];
+
+  wwDBGrid1.setfocus;
+  wwDBLookupCombo1.LookupTable.open;
+
+  dm.sp_KundLookuplist.open;
+  ordersumma := 0;
+
+  Label5.Caption := '';
+  wwDBGrid1.ColumnByName('Ordersumma').Visible := false;
+
+  cbVisaAllaFakturor.Visible := false;
+
+  frmmain.tbtnOrderlista.Enabled := false;
+  frmmain.tbtnOrderlista.ImageIndex := 0;
+
+  PageControl1Change(Sender);
+
+end;
+
+procedure TfrmOrderLista.ToolButton3Click(Sender: TObject);
+begin
+  if messagedlg('Vill du verkligen tar bort hela beställningen/offert?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    with sp_OrderDelete do
+    begin
+      ParamByName('@OrderID').Value := sp_OrderlistOrderID.asInteger;
+
+      execproc;
+      if ParamByName('@RETURN_VALUE').Value = 0 then
+        sp_Orderlist.close;
+      sp_Orderlist.open;
+
+    end;
+  end;
+end;
+
+procedure TfrmOrderLista.ToolButton2Click(Sender: TObject);
+begin
+
+  with TrptOrder.create(application) do
+  begin
+    with qry do
+    begin
+      close;
+      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      open;
+    end;
+    report.preview;
+  end;
+
+end;
+
+procedure TfrmOrderLista.ToolButton4Click(Sender: TObject);
+begin
+  with TrptArbetsOrder.create(application) do
+  begin
+    with qry do
+    begin
+      close;
+      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      open;
+    end;
+    report.preview;
+  end;
+
+end;
+
+procedure TfrmOrderLista.ToolButton5Click(Sender: TObject);
+begin
+
+  with sp_Orderlist do
+  begin
+    edit;
+
+    with TdlgFakturaNummer.create(application) do
+    begin
+      if showmodal = mrOK then
+        post
+      else
+        cancel;
+    end;
+  end;
+
+end;
+
+procedure TfrmOrderLista.wwDBGrid1CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState;
+  Highlight: Boolean; AFont: TFont; ABrush: TBrush);
+
+begin
+  // showmessage(field.fieldname);
+  // if field.fieldname = 'OrderID' then
+  // begin
+
+  // Ordertyp : Offert
+
+  if (Field.fieldname = 'Leveransdatum') and (sp_Orderlist.fieldbyname('Leveransdatum').asdatetime <= date) and
+    (sp_Orderlist.fieldbyname('Fakturadatum').asstring = '') then
+  begin
+    AFont.Color := clMaroon;
+    AFont.Style := [fsBold]
+  end;
+
+  if (sp_Orderlist.fieldbyname('ÄrPrissatt').asInteger = 1) AND (sp_Orderlist.fieldbyname('Antaltotal').asInteger > 0)
+    and (sp_Orderlist.fieldbyname('OrderStatusId').asInteger in [stAR, stUA]) AND
+    ((Field.fieldname = 'AntalTotal') or (Field.fieldname = 'AntalAvrapporterad') or
+    (Field.fieldname = 'Antalprissatt'))
+
+  then
+  begin
+    AFont.Color := clWhite;
+    ABrush.Color := clTeal;
+    if Highlight then
+    begin
+      AFont.Color := clWhite;
+      ABrush.Color := clTeal;
+    end;
+
+  end;
+
+  (*
+    if sp_OrderlistOrderstatusId.asInteger = stFA then
+    begin
+    AFont.Color := clblack;
+    ABrush.Color := $00F2FFF2;
+    if Highlight then
+    begin
+    AFont.Color := clWhite;
+    ABrush.Color := clTeal;
+    end;
+
+    end
+  *)
+end;
+
+procedure TfrmOrderLista.actOrderNewExecute(Sender: TObject);
+begin
+  with TfrmOrderNew.create(application) do
+  begin
+    lblTyp.Caption := 'Ny order';
+    Caption := 'Ny order';
+
+    lblTyp.Tag := 1; // Order
+    showmodal;
+
+    if modalresult = mrOK then
+      with sp_Orderlist do
+      begin
+        close;
+        open;
+      end;
+  end;
+end;
+
+procedure TfrmOrderLista.actPlaneringSkapaExecute(Sender: TObject);
+begin
+
+  // if sp_orderlist.fieldbyname('Arbetstidplanerad').asInteger > 0 then
+  // begin
+  // MessageBox(0,
+  // 'Order är redan planerad - du måste först ta bort planeringen innan du kan göra en ny.',
+  // '', MB_ICONINFORMATION or MB_OK);
+  // exit;
+  // end;
+  //
+
+  with TfrmOrderPlanering.create(application) do
+  begin
+
+    qryOrderEdit.open;
+    qryOrderEdit.edit;
+    label13.Caption := sp_OrderlistKalkArbetstidTime.asstring;
+    application.ProcessMessages;
+    showmodal;
+  end;
+
+  sp_Orderlist.refresh; // RefreshOrderlist fungera inte här !!!!!!!!!!!!!!
+
+end;
+
+procedure TfrmOrderLista.actSkapaOrderfrånOffertExecute(Sender: TObject);
+var
+  OrderIdNy: Integer;
+begin
+  // Kopiera en hel order
+
+  if messagedlg('Vill du skapa en order från denna offert?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+
+    with sp_OrderKopiera do
+    begin
+      ParamByName('@OrderId').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
+      ParamByName('@SkapaOrderFrånOffert').Value := True;
+
+      execproc;
+
+      OrderIdNy := ParamByName('@OrderIdNew').asInteger;
+
+      RefreshOrderlist;
+
+      // wwdbgrid1.Refresh;
+      sp_Orderlist.Locate('OrderId', OrderIdNy, []);
+
+      // actOrderEditExecute(Sender);
+
+      showmessage('Order ' + inttostr(OrderIdNy) + ' skapat!');
+    end;
+
+end;
+
+procedure TfrmOrderLista.actSkrivUtExecute(Sender: TObject);
+begin
+
+  with TrptOrder.create(application) do
+  begin
+    header.Caption := 'BESTÄLLNING';
+
+    with sp_ftgsystem do
+    begin
+      ParamByName('@ID').Value := 6; // >Kopior beställning
+      execproc;
+      report.PrinterSettings.Copies := strtoint(ParamByName('@Värde').Value);
+    end;
+
+    with qry do
+    begin
+      close;
+      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      open;
+    end;
+
+    xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.bestallning', 'c:\temp')) + 'Beställning_' +
+      sp_OrderlistOrderID.asstring;
+
+    qrfilename := GetQrfilename(xfilename);
+
+    report.Prepare;
+    report.QRPrinter.Compression := True;
+    report.QRPrinter.Save(qrfilename);
+    report.QRPrinter.Free;
+    report.QRPrinter := nil;
+    // up to here, it seems to want to be set back to nil before you preview
+
+    QRExp.OpenAfterExport := True;
+    // report.PreviewModal;
+    QRExp.ExportToFile(qrfilename, xfilename, TgtxOutputFormat.PDF);
+
+  end;
+
+end;
+
+procedure TfrmOrderLista.actOrderSkrivutExecute(Sender: TObject);
+
+begin
+  with TrptOrder.create(application) do
+  begin
+    header.Caption := 'Orderbekräftelse';
+    with qry do
+    begin
+      close;
+      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      open;
+    end;
+
+    xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
+      sp_OrderlistOrderID.asstring;
+
+    qrfilename := GetQrfilename(xfilename);
+    // report.print;
+
+    report.Prepare;
+    report.QRPrinter.Compression := True;
+    report.QRPrinter.Save(qrfilename);
+    report.QRPrinter.Free;
+    report.QRPrinter := nil;
+    // up to here, it seems to want to be set back to nil before you preview
+    QRExp.OpenAfterExport := false;
+    // report.PreviewModal;
+    QRExp.ExportToFile(qrfilename, xfilename, TgtxOutputFormat.PDF);
+
+  end;
+
+end;
+
+procedure TfrmOrderLista.actSattFakturadataExecute(Sender: TObject);
+var
+  I, OrderId: Integer;
+  Fakturadatum, Forfallodatum: Tdate;
+  Fakturanummer: string;
+
+begin
+
+  if wwDBGrid1.selectedlist.count < 1 then
+    showmessage('OBS!' + chr(13) + chr(13) + 'Du behöver markera minst en order för att kunna sätta fakturanummer osv. '
+      + chr(13) + chr(13) + 'Du markerar genom Ctrl-musknapp')
+  else
+  begin
+
+    with TfrmSattfakturadatum.create(application) do
+    begin
+
+      edtFakturanummer.Text := sp_Orderlist.fieldbyname('Fakturanummer').asstring;
+
+      if sp_Orderlist.fieldbyname('Fakturadatum').asstring <> '' then
+        edtFakturadatum.date := sp_Orderlist.fieldbyname('Fakturadatum').asdatetime
+      else
+        edtFakturadatum.date := now();
+
+      if sp_Orderlist.fieldbyname('Förfallodatum').asstring <> '' then
+        edtForfallodatum.date := sp_Orderlist.fieldbyname('Förfallodatum').asdatetime
+      else
+        edtForfallodatum.date := incday(edtFakturadatum.date, 30);
+
+      showmodal;
+
+      if modalresult = mrOK then
+
+      begin
+
+        Fakturanummer := edtFakturanummer.Text;
+        Fakturadatum := edtFakturadatum.date;
+        Forfallodatum := edtForfallodatum.date;
+
+        if Fakturanummer <> '' then
+        begin
+
+          with wwDBGrid1 do
+          begin
+            if selectedlist.count > 0 then
+              for I := 0 to selectedlist.count - 1 do
+              begin
+                sp_Orderlist.GotoBookmark(selectedlist.Items[I]);
+                OrderId := sp_OrderlistOrderID.asInteger;
+
+                with Custom_OrderhuvudFakturadataUpdate do
+                begin
+                  ParamByName('@Orderhuvudid').Value := OrderId;
+                  ParamByName('@Fakturanummer').Value := Fakturanummer;
+                  ParamByName('@Fakturadatum').Value := Fakturadatum;
+                  ParamByName('@Forfallodatum').Value := Forfallodatum;
+
+                  execproc;
+                end;
+
+              end;
+          end;
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure TfrmOrderLista.actPrissattningPositionerExecute(Sender: TObject);
+begin
+
+  frmmain.tbtnOrderlista.Enabled := True;
+  frmmain.tbtnOrderlista.ImageIndex := 4;
+
+  with TfrmOrderradUpdate.create(application) do
+    show;
+
+
+
+  // Skall inte ändra status föran orderbekräftelsen är utskriven
+
+  // with qryOrdertstatusUpdatePrissatta do
+  // begin
+  // ParamByName('OrderID').Value := sp_Orderlist.fieldbyname('Orderid').asInteger;
+  // ExecSQL;
+  // end;
+
+  // frmmain.tbtnOrderlista.enabled:= false;
+  RefreshOrderlist;
+
+end;
+
+procedure TfrmOrderLista.actOrderTaBortExecute(Sender: TObject);
+begin
+  if messagedlg('Vill du verkligen tar bort hela beställningen?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    with sp_OrderDelete do
+    begin
+      ParamByName('@OrderID').Value := sp_OrderlistOrderID.asInteger;
+      execproc;
+      if ParamByName('@RETURN_VALUE').Value = 0 then
+        RefreshOrderlist;
+    end;
+  end;
+end;
+
+procedure TfrmOrderLista.actOffertNewExecute(Sender: TObject);
+begin
+  with TfrmOrderNew.create(application) do
+  begin
+    lblTyp.Caption := 'Ny offert';
+    Caption := 'Ny offert';
+    lblTyp.Tag := 2;
+
+    showmodal;
+
+    if modalresult = mrOK then
+      with sp_Orderlist do
+      begin
+        close;
+        open;
+      end;
+  end;
+
+end;
+
+procedure TfrmOrderLista.actOffertSendViamailExecute(Sender: TObject);
+const
+  olMailItem = $00000000;
+begin
+
+  with TrptOrder.create(application) do
+  begin
+    header.Caption := 'Offert';
+    with qry do
+    begin
+      close;
+      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      open;
+    end;
+
+    xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.offert.epost', '')) + 'Offert_ ' +
+      sp_OrderlistOrderID.asstring;
+
+    with TrptOrder.create(application) do
+    begin
+      header.Caption := 'Offert';
+      with qry do
+      begin
+        close;
+        params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+        open;
+      end;
+      qrfilename := GetQrfilename(xfilename);
+
+      report.Prepare;
+      report.QRPrinter.Compression := True;
+      report.QRPrinter.Save(qrfilename);
+      report.QRPrinter.Free;
+      report.QRPrinter := nil;
+      // up to here, it seems to want to be set back to nil before you preview
+      QRExp.OpenAfterExport := false;
+      // report.PreviewModal;
+      QRExp.ExportToFile(qrfilename, xfilename, TgtxOutputFormat.PDF);
+    end;
+    (*
+      begin
+      try
+      Outlook := GetActiveOleObject('Outlook.Application');
+      except
+      Outlook := CreateOleObject('Outlook.Application');
+      end;
+
+      Mail := Outlook.CreateItem(olMailItem);
+
+      if pos('snpeho', sp_Orderlist.Connection.ConnectionString) > 0 then
+      Mail.To := 'peter@holzer.nu'
+      else
+      Mail.To := sp_Orderlist.fieldbyname('Emailadress').asstring;
+
+      Mail.Subject := 'Offert (' + sp_OrderlistOrderID.asstring + ')';
+      Mail.Body := 'Tack för din förfrågan';
+      Mail.Attachments.Add(xfilename + '.pdf');
+      Mail.Display;
+
+      end;
+    *)
+
+  end;
+
+end;
+
+procedure TfrmOrderLista.actOffertTaBortExecute(Sender: TObject);
+begin
+  if messagedlg('Vill du verkligen tar bort hela offerten?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    with sp_OrderDelete do
+    begin
+      ParamByName('@OrderID').Value := sp_OrderlistOrderID.asInteger;
+      execproc;
+      if ParamByName('@RETURN_VALUE').Value = 0 then
+        RefreshOrderlist;
+    end;
+  end;
+
+end;
+
+procedure TfrmOrderLista.actOrderbekräftleseViaMailExecute(Sender: TObject);
+var
+  Outlook: OleVariant;
+  Mail: Variant;
+const
+  olMailItem = $00000000;
+begin
+
+  xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
+    sp_OrderlistOrderID.asstring;
+
+  with TrptOrder.create(application) do
+  begin
+    header.Caption := 'Orderbekräftelse';
+    with qry do
+    begin
+      close;
+      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      open;
+    end;
+
+    qrfilename := GetQrfilename(xfilename);
+
+    report.Prepare;
+    report.QRPrinter.Compression := True;
+    report.QRPrinter.Save(qrfilename);
+    report.QRPrinter.Free;
+    report.QRPrinter := nil;
+    // up to here, it seems to want to be set back to nil before you preview
+    QRExp.OpenAfterExport := false;
+    // report.PreviewModal;
+    QRExp.ExportToFile(qrfilename, xfilename, TgtxOutputFormat.PDF);
+
+  end;
+
+  begin
+    try
+      Outlook := GetActiveOleObject('Outlook.Application');
+    except
+      Outlook := CreateOleObject('Outlook.Application');
+    end;
+
+    Mail := Outlook.CreateItem(olMailItem);
+
+    if pos('LENOPEHO', sp_Orderlist.Connection.ConnectionString) > 0 then
+      Mail.To := 'peter@holzer.se'
+    else
+      Mail.To := sp_Orderlist.fieldbyname('Emailadress').asstring;
+
+    Mail.Subject := 'Orderbekräftelse (' + sp_OrderlistOrderID.asstring + ')';
+    Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vårt orderbekräftelse som PDF-bilaga' + chr(13) + chr(10) +
+      'Vi tackar för uppdraget.';
+    Mail.Attachments.Add(xfilename + '.pdf');
+    Mail.Display;
+
+  end;
+
+end;
+
+procedure TfrmOrderLista.actOrderEditExecute(Sender: TObject);
+begin
+
+  with TfrmOrderEdit.create(application) do
+  begin
+
+    with qryOrderEdit do
+    begin
+      ParamByName('OrderID').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
+      open;
+      edit;
+    end;
+
+    showmodal;
+
+    if modalresult = mrOK then
+    begin
+      qryOrderEdit.post;
+      RefreshOrderlist;
+
+    end
+    else
+      qryOrderEdit.cancel;
+  end;
+
+end;
+
+Procedure TfrmOrderLista.Skapa_Fakturaunderlag_XML;
+
+var
+  xml_filename: string;
+
+  Nettosumma: double;
+  Bruttosumma: double;
+  MomsTotal: double;
+  newInvoice: IXMLINVOIC416Type;
+  Head: IXMLHeadType;
+  Buyer: IXMLBuyerType;
+  InvoiceAddress: IXMLInvoiceAddressType;
+  DeliveryAddress: IXMLDeliveryAddresstype;
+  Seller: IXMLSellertype;
+  Postaladdress: IXMLPostalAddresstype;
+  Visitingaddress: IXMLVisitingAddresstype;
+  Factoring: IXMLFactoringtype;
+  rows: IXMLRowstype;
+  row: IXMLRowtype;
+
+  function FixcommaString(cvalue: double): string;
+  BEGIN
+    RESULT := stringreplace(floattostr(cvalue), ',', '.', [])
+  END;
+
+begin
+
+  xml_filename := FoldernameFix(ftgsystemvalue('pdf.folder.fakturaunderlag', '')) +
+    FU_FolderGet(sp_OrderlistKundID.asInteger) + 'Fakturaunderlag_' + sp_OrderlistFakturanummer.asstring + '.xml';
+
+  with qryFakturaunderlagXML do
+  begin
+
+    close;
+    qryFakturaunderlagXML.params.ParamByName('Fakturanummer').Value :=
+      sp_Orderlist.fieldbyname('Fakturanummer').asstring;
+    open;
+
+    Nettosumma := 0;
+
+    while not eof do
+    begin
+      Nettosumma := Nettosumma + fieldbyname('Prisperenhet').AsCurrency * fieldbyname('Antal').AsFloat;
+      next;
+    end;
+
+    qryFakturaunderlagXML.First;
+
+    Bruttosumma := Nettosumma * 1.25;
+    MomsTotal := Bruttosumma - Nettosumma;
+
+    // Faktura
+
+    newInvoice := NewINVOIC416;
+    /// <summary>
+    ///
+    /// </summary>
+
+    newInvoice.SoftwareVersion := '9.0.6p106';
+    newInvoice.SoftwareManufacturer := 'Monitor ERP System AB';
+    newInvoice.SoftwareName := 'Monitor';
+    newInvoice.Invoice.InvoiceNumber := fieldbyname('Fakturanummer').asstring;
+    newInvoice.Invoice.InvoiceType := '1';
+
+    // Head
+    Head := newInvoice.Head;
+
+    Head.SellersOrderNumber := fieldbyname('OrderId').asstring;
+    Head.OrderDate := fieldbyname('Orderdatum').asstring;
+
+    Head.BuyersOrderNumber := fieldbyname('Ordernummer').asstring;
+    // Head.BuyersOrderNumber := '12345';
+
+    Head.DebitInvoiceNumber := '0';
+
+    Head.InvoiceDate := fieldbyname('Fakturadatum').asstring;
+    Head.LanguageNameCode := 'SV';
+    // Buyer
+    Buyer := Head.Buyer;
+    Buyer.BuyerCode := '1001'; // ? Kundnummmer
+    Buyer.BuyerName := 'INTERSYSTEM AB'; // string
+    Buyer.BuyerVATRegistrationNumber := 'SE556594166201';
+    Buyer.BuyerRegistrationNumber := '';
+    Buyer.BuyerCountryCode := 'SE';
+    Buyer.BuyerReference := fieldbyname('Referens').asstring;
+    Buyer.BuyerReferencePhone := '';
+    Buyer.BuyerReferenceFax := '';
+    Buyer.BuyerReferenceEmail := '';
+    // ? Referensemail, finns det?
+
+    InvoiceAddress := Buyer.InvoiceAddress;
+
+    InvoiceAddress.InvoiceAddressName := 'INTERSYSTEM AB';
+    InvoiceAddress.InvoiceAddressStreetBox1 := 'Brandsvigsgatan 3';
+    InvoiceAddress.InvoiceAddressStreetBox2 := '';
+    InvoiceAddress.InvoiceAddressZipCity1 := '262 73 Ängelholm';
+    InvoiceAddress.InvoiceAddressZipCity2 := '';
+    InvoiceAddress.InvoiceAddressCountry := 'Sverige';
+
+    DeliveryAddress := Buyer.DeliveryAddress;
+    DeliveryAddress.DeliveryAddressName := 'INTERSYSTEM AB';
+    DeliveryAddress.DeliveryAddressStreetBox1 := 'Brandsvigsgatan 3';
+    DeliveryAddress.DeliveryAddressStreetBox2 := '';
+    DeliveryAddress.DeliveryAddressZipCity1 := '262 73 Ängelholm';
+    DeliveryAddress.DeliveryAddressZipCity2 := '';
+    DeliveryAddress.DeliveryAddressCountry := 'Sverige';
+
+    Buyer.GlobalLocationNumber := '';
+
+    Seller := Head.Seller;
+    Seller.SellerSuplierCode := '970087'; // ?
+    Seller.SellerName := 'Ängelholms Mekaniska Verkstad AB';
+    Seller.SellerReference := ''; // ?
+    Seller.SellerReferencePhone := '0431-15459'; // ?
+    Seller.SellerReferenceFax := ''; // ?
+    Seller.SellerReferenceEmail := 'info@angelholms-mekaniska.se';
+    Seller.SellerOrigin := 'Ängelholm'; // ?
+    Seller.SellerWeb := 'www.angelholms-mekaniska.se'; // ?
+    Seller.SellerPhone := '0431-15459'; // 2018-11-14
+    Seller.SellerFax := ''; // ?
+    Seller.SellerRegistrationnumber := '556336-6490'; // ?
+    Seller.SellerVatRegistrationNumber := 'SE556336649001'; // ?
+    Seller.SellerCountrycode := 'SE';
+
+    Postaladdress := Seller.Postaladdress;
+
+    Postaladdress.PostalAddressStreetBox1 := 'Verkstadsgatan 7'; // ?
+    Postaladdress.PostalAddressStreetBox2 := ''; // ?
+    Postaladdress.PostalAddressZipCity1 := '26271 Ängelholm'; // ?
+    Postaladdress.PostalAddressZipCity2 := ''; // ?
+    Postaladdress.PostalAddressCountry := 'Sverige'; // ?
+
+    Visitingaddress := Seller.Visitingaddress;
+
+    Visitingaddress.VisitingaddressStreetBox1 := 'Verkstadsgatan 7'; // ?
+    Visitingaddress.VisitingaddressStreetBox2 := ''; // ?
+    Visitingaddress.VisitingaddressZipCity1 := '26271 Ängelholm'; // ?
+    Visitingaddress.VisitingaddressZipCity2 := ''; // ?
+    Visitingaddress.VisitingaddressCountry := 'Sverige'; // ?
+
+    Head.InvoiceCurrency := 'SEK';
+    Head.PaymentDueDate := fieldbyname('Förfallodatum').asstring;
+    Head.CurrencyExchangeRate := 0; // skall vara double
+    Head.RateOfExchangeDate := ''; // ?
+    Head.EuVatText := ''; // ?
+    Head.GodsLabelLine1 := fieldbyname('Godsmärke').asstring;
+    Head.GodsLabelLine2 := '';
+    Head.HomeCurrency := 'SEK';
+    Head.TermsOfPayment := ''; // ?
+    Head.TermsOfPaymentNoOfDays := '30'; // ?
+    Head.BankName := ''; // ?
+    Head.AccountNumber := ''; // ?
+    Head.SwiftAddress := ''; // ?
+    Head.BankGiroNumber := '';
+    Head.PlusGiroNumber := '';
+
+    Factoring := Head.Factoring;
+    Factoring.FactoringSetting := '';
+    Factoring.FactoringBankname := '';
+    Factoring.FactoringAccountnumber := '';
+    Factoring.FactoringSwiftaddress := '';
+    Factoring.FactoringBankgironumber := '';
+    Factoring.FactoringPlusGiroNumber := '';
+
+    Head.AlloyCost := '0';
+    Head.FreightCost := '0';
+    Head.PackingCost := '0';
+    Head.InsuranceCost := '0';
+    Head.NetAmountInInvoiceCurrency := stringreplace(floattostr(Nettosumma), ',', '.', []);
+    // Summa av alla rader    ska vara currency
+    Head.InvoicingCharge := '0';
+    // Head.VatAmountInInvoiceCurrency := stringreplace(floattostr(MomsTotal),',','.',[]); // Summa Moms?
+    Head.VatAmountInInvoiceCurrency := FixcommaString(MomsTotal); // Summa Moms?
+    Head.Equalization := 0;
+    Head.PayableAmountInInvoiceCurrency := FixcommaString(Bruttosumma);
+    // Summa ink moms;
+
+    Head.TermsOfPaymentCashDiscount := 0;
+    Head.TermsOfPaymentCashDiscountDate := '';
+    Head.AgreementNumber := '';
+
+    // 'SE888888'     string
+    //
+    //
+    // RowType:
+    // 1 (Part row) - The part must be registered in the Update Part procedure.
+    // 2 (Additional order row) - This row type allows you to register orders for parts that do not exist in the part register.
+    // 3 (Service row) - This row type is used when you sell services such as traveling expenses etc.
+    // 4 (Text row) - This row type is used to add your own text on a row.
+    // 5 (Serial number) - This is used to trace a part via the product register, by linking it to the serial number of the previous order row.
+    // 6 (Underlying fictitious part) -  Row type 6 is used for fictitious part sales, if the price must be entered on the fictitious part instead of on the incorporated parts
+    // 9 (Tool row) - If you use the supplement Tool Management you can register tools as customer order rows. </xsd:documentation>
+    //
+    //
+    // Row position:
+    // This should refer to the buyer's row number from the original order (ORDERS420/RowNumber)'
+    //
+    // CostType:
+    // 0 = Normal item line or miscellaneous cost.
+    // 1 = Freight cost.
+    // 2 = Package cost.
+    // 3 = Setup cost.
+    // 4 = Alloy cost.
+    //
+    //
+
+    rows := newInvoice.rows;
+    while not eof do
+    begin
+      row := rows.Add;
+
+      row.RowNumber := fieldbyname('PositionNummer').asInteger;
+      row.RowType := '1'; // Artikelnummer, måste finnas
+      row.RowPosition := fieldbyname('PositionNummer').asstring;
+      row.CostType := '0'; // Normal
+
+      row.BuyersPartNumber := fieldbyname('Artikelnummer').asstring;
+      row.SellersPartNumber := fieldbyname('Artikelnummer').asstring;
+      row.PartDescription := fieldbyname('Beteckning').asstring;
+      row.deliverydate := fieldbyname('Leveransdatum').asstring;
+      row.Quantity := FixcommaString(fieldbyname('Antal').AsFloat);
+      row.Unit_ := 'st'; // 2018-11-14
+      row.Each := 1;
+      row.Discount := 0;
+      row.Price := FixcommaString(fieldbyname('PrisperEnhet').AsFloat);
+      row.VatRate := 25;
+
+      row.RowSum := FixcommaString(fieldbyname('PrisperEnhet').AsCurrency * fieldbyname('Antal').AsFloat);
+      row.BuyersOrderNumber := fieldbyname('Ordernummer').asstring;
+      row.SellersOrderNumber := fieldbyname('OrderId').asstring;
+      row.CountryOfOriginCode := 'SE';
+      next;
+    end;
+
+    // Memo1.Text := newfaktura.Xml;
+
+    newInvoice.OwnerDocument.Encoding := 'UTF-8';
+    newInvoice.OwnerDocument.SaveToFile(xml_filename);
+
+  end;
+end;
+
+procedure TfrmOrderLista.sokBeställningsnummerChange(Sender: TObject);
+var
+  Soktext: string;
+  SokOrderId, tabind, OrderstatusId: Integer;
+begin
+
+  Soktext := (Sender as TEdit).Text;
+  if (length(Soktext) > 4) then
+  begin
+
+    with qryOrdernummerSok do
+    begin
+      close;
+      ParamByName('Ordernummer').Value := Soktext;
+      open;
+
+      if (RecordCount = 1) then
+      begin
+
+        (Sender as TEdit).SelectAll;
+
+        OrderstatusId := fieldbyname('OrderstatusId').asInteger;
+
+        if OrderstatusId = 4 then
+          tabind := 0
+        else if OrderstatusId = 3 then
+          tabind := 1
+        else if OrderstatusId = 2 then
+          tabind := 2
+        else if OrderstatusId = 1 then
+          tabind := 3
+        else if OrderstatusId = 5 then
+          tabind := 4;
+
+        PageControl1.ActivePageIndex := tabind;
+        PageControl1Change(Sender);
+        (*
+          with sp_Orderlist do
+          begin
+          close;
+          ParamByName('@OrderstatusId').Value := OrderstatusId;
+          open;
+          end;
+        *)
+        sp_Orderlist.Locate('Ordernummer', Soktext, [loCaseInsensitive]);
+      end;
+
+    end;
+  end;
+
+end;
+
+procedure TfrmOrderLista.sokBeställningsnummerEnter(Sender: TObject);
+begin
+  sokOrdernummer.Text := '';
+  sokBeställningsnummer.setfocus;
+end;
+
+procedure TfrmOrderLista.sokOrdernummerChange(Sender: TObject);
+var
+  Soktext: string;
+  SokOrderId, tabind, OrderstatusId: Integer;
+begin
+
+  Soktext := (Sender as TEdit).Text;
+
+  if (length(Soktext) > 4) and trystrtoint(Soktext, SokOrderId) then
+  begin
+
+    with qryOrderSok do
+    begin
+      close;
+      ParamByName('Orderid').Value := SokOrderId;
+      open;
+
+      if (RecordCount = 1) and (fieldbyname('Id').asInteger = SokOrderId) then
+      begin
+
+        (Sender as TEdit).SelectAll;
+        OrderstatusId := fieldbyname('OrderstatusId').asInteger;
+
+        if OrderstatusId = 4 then
+          tabind := 0
+        else if OrderstatusId = 3 then
+          tabind := 1
+        else if OrderstatusId = 2 then
+          tabind := 2
+        else if OrderstatusId = 1 then
+          tabind := 3
+        else if OrderstatusId = 5 then
+          tabind := 4;
+
+        PageControl1.ActivePageIndex := tabind;
+        PageControl1Change(Sender);
+        (*
+          with sp_Orderlist do
+          begin
+          close;
+          ParamByName('@OrderstatusId').Value := OrderstatusId;
+          open;
+          end;
+        *)
+        sp_Orderlist.Locate('OrderId', Soktext, []);
+
+      end;
+
+    end;
+  end;
+
+end;
+
+procedure TfrmOrderLista.sokOrdernummerEnter(Sender: TObject);
+begin
+  sokBeställningsnummer.Text := '';
+  sokOrdernummer.setfocus;
+end;
+
+function TfrmOrderLista.FU_FolderGet(Kundid: Integer): string;
+
+begin
+  RESULT := esql('Select isnull(MappFakturaunderlag,'''') from Kund where Id=' + Kundid.ToString);
+  if RESULT <> '' then
+    RESULT := RESULT + '\';
+
+end;
+
+procedure TfrmOrderLista.actFakturaunderlagPrintExecute(Sender: TObject);
+
+begin
+  with TrptOrder.create(application) do
+  begin
+
+    with sp_ftgsystem do
+    begin
+      ParamByName('@ID').Value := 8;
+      execproc;
+      report.PrinterSettings.Copies := strtoint(ParamByName('@Värde').Value);
+    end;
+
+    header.Caption := 'FAKTURAUNDERLAG';
+    with qry do
+    begin
+      close;
+      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      open;
+    end;
+
+    if (Sender as TAction).Owner.Tag = 2 then // MenuItems tag
+      report.preview
+    else
+    begin
+
+      if pos('LENOPEHO', dm.FDConnection1.ConnectionString) = 0 then // om det inte utvecklingsdatorn
+        report.Print;
+
+      xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.fakturaunderlag', '')) +
+        FU_FolderGet(sp_OrderlistKundID.asInteger) + 'Fakturaunderlag_' + sp_OrderlistOrderID.asstring;
+
+      qrfilename := GetQrfilename(xfilename);
+
+      report.Prepare;
+      report.QRPrinter.Compression := True;
+      report.QRPrinter.Save(qrfilename);
+
+      report.QRPrinter.Free;
+      report.QRPrinter := nil;
+      // up to here, it seems to want to be set back to nil before you preview
+
+      QRExp.OpenAfterExport := false;
+      // report.PreviewModal;
+
+      QRExp.ExportToFile(qrfilename, xfilename, TgtxOutputFormat.PDF);
+
+      deletefile(qrfilename);
+
+      if (sp_OrderlistKundID.asInteger = 1) and (sp_OrderlistFakturanummer.asstring <> '') then
+        Skapa_Fakturaunderlag_XML;
+      // Skspa xml-fil
+
+      // up to here, it seems to want to be set back to nil before you preview
+
+    end;
+
+    // Update ststus att order kommer under Prissatta
+    with qryOrdertstatusUpdatePrissatta do
+    begin
+      ParamByName('OrderID').Value := sp_Orderlist.fieldbyname('Orderid').asInteger;
+      ExecSQL;
+    end;
+
+  end;
+
+end;
+
+procedure TfrmOrderLista.actFakturarunderlagXMLExecute(Sender: TObject);
+begin
+  Skapa_Fakturaunderlag_XML;
+end;
+
+procedure TfrmOrderLista.actFöljesdelUtskriftExecute(Sender: TObject);
+begin
+  with TrptOrder.create(application) do
+  begin
+    with sp_ftgsystem do
+    begin
+      ParamByName('@ID').Value := 7;
+      execproc;
+      report.PrinterSettings.Copies := strtoint(ParamByName('@Värde').Value);
+    end;
+    header.Caption := 'FÖLJESEDEL';
+    Tag := 1;
+    with qry do
+    begin
+      close;
+      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      open;
+    end;
+    report.Print;
+    // PDF
+
+    xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.foljesedel', '')) + 'Följesedel_' +
+      sp_OrderlistOrderID.asstring;
+
+    qrfilename := GetQrfilename(xfilename);
+
+    report.Prepare;
+    report.QRPrinter.Compression := True;
+    report.QRPrinter.Save(qrfilename);
+    report.QRPrinter.Free;
+    report.QRPrinter := nil;
+    // up to here, it seems to want to be set back to nil before you preview
+    QRExp.OpenAfterExport := false;
+    // report.PreviewModal;
+    QRExp.ExportToFile(qrfilename, xfilename, TgtxOutputFormat.PDF);
+    deletefile(qrfilename);
+  end;
+
+end;
+
+procedure TfrmOrderLista.actGörOrdertillOffertExecute(Sender: TObject);
+begin
+  if messagedlg('Vill du verkligen göra en order till offert?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    dm.FDConnection1.ExecSQL('Update  Orderhuvud set OrderstatusId = ' + inttostr(stOF) + ' where Id = ' +
+      inttostr(sp_OrderlistOrderID.asInteger));
+    RefreshOrderlist;
+  end;
+end;
+
+procedure TfrmOrderLista.actImporteraIntersystemExecute(Sender: TObject);
+begin
+  with TfrmOrderimportIntersystem.create(application) do
+  begin
+    showmodal;
+    if opendialog1.FileName <> '' then
+    begin
+      ReadOrderfileIntersystem(opendialog1.FileName);
+      with sp_Orderlist do
+      begin
+        close;
+        open;
+      end;
+    end;
+  end;
+
+end;
+
+procedure TfrmOrderLista.actOrderKalkylAddrowsExecute(Sender: TObject);
+begin
+  with TfrmOrderkalkyl.create(application) do
+  begin
+    sp_KundLookuplist.Active := True;
+    sp_KundLookuplist.Locate('Kundid', sp_Orderlist.fieldbyname('KundID').asInteger, []);
+    edtKund.Text := sp_KundLookuplist.fieldbyname('Kundnamn').asstring;
+    edtkalkylDatum.date := sp_Orderlist.fieldbyname('Orderdatum').asdatetime;
+    edtLeveransdatum.date := sp_Orderlist.fieldbyname('Leveransdatum').asdatetime;
+    edtKontaktperson.Enabled := True;
+    edtKontaktperson.Text := sp_Orderlist.fieldbyname('Kundreferens').asstring;
+    edtForfragan.Text := sp_Orderlist.fieldbyname('Ordernummer').asstring;
+
+    edtKund.Enabled := false;
+    edtkalkylDatum.Enabled := false;
+    edtForfragan.Enabled := false;
+    edtKontaktperson.Enabled := false;
+    with qryLU_artikel do
+    begin
+      close;
+      ParamByName('kundid').Value := sp_Orderlist.fieldbyname('KundID').asInteger;
+      open;
+    end;
+
+    OrderHuvudId := sp_Orderlist.fieldbyname('OrderId').asInteger;
+
+    LU_artikel.Enabled := True;
+
+    showmodal;
+
+  end;
+
+end;
+
+procedure TfrmOrderLista.actSammelfakturaPrintExecute(Sender: TObject);
+begin
+  with TrptSammelfaktura.create(application) do
+  begin
+
+    report.PrinterSettings.Copies := strtoint(ftgsystemvalue('samlingsfaktura.kopior', '1'));
+
+    header.Caption := 'SAMLINGSFAKTURA';
+    with qry do
+    begin
+      close;
+      params.ParamByName('Fakturanummer').Value := sp_OrderlistFakturanummer.asstring;
+      open;
+    end;
+
+    if (Sender as TAction).Owner.Tag = 2 then // MenuItems tag
+      report.preview
+    else
+    begin
+
+      if pos('LENOPEHO', dm.FDConnection1.ConnectionString) = 0 then
+        report.Print;
+
+      xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.samlingsfakturaunderlag', '')) + 'Samlingsfakturaunderlag_'
+        + sp_OrderlistFakturanummer.asstring;
+
+      qrfilename := GetQrfilename(xfilename);
+
+      report.Prepare;
+      report.QRPrinter.Compression := True;
+      report.QRPrinter.Save(qrfilename);
+
+      report.QRPrinter.Free;
+      report.QRPrinter := nil;
+      // up to here, it seems to want to be set back to nil before you preview
+
+      QRExp.OpenAfterExport := false;
+      // report.PreviewModal;
+
+      QRExp.ExportToFile(qrfilename, xfilename, TgtxOutputFormat.PDF);
+
+      deletefile(qrfilename);
+
+      if sp_OrderlistKundID.asInteger = 1 then
+        Skapa_Fakturaunderlag_XML; // Skspa xml-fil
+    end;
+
+  end;
+end;
+
+procedure TfrmOrderLista.actOrderLäggtillÄndraPositionerExecute(Sender: TObject);
+var
+  fname: string;
+  f: TfrmOrder;
+  cc, I: Integer;
+begin
+
+  fname := 'F' + sp_OrderlistOrderID.asstring;
+
+  cc := application.componentcount;
+
+  for I := 0 to cc - 1 do
+    if application.Components[I].name = fname then
+    begin
+
+      with (application.FindComponent(fname) as TfrmOrder) do
+      begin
+        windowstate := wsmaximized;
+        show;
+
+      end;
+
+      exit;
+    end;
+
+  f := TfrmOrder.create(application);
+  f.name := fname;
+  f.windowstate := wsmaximized;
+  f.show;
+  frmmain.tbtnOrderlista.ImageIndex := 4;
+
+end;
+
+procedure TfrmOrderLista.actOrderlistaRefreshExecute(Sender: TObject);
+begin
+  RefreshOrderlist;
+end;
+
+procedure TfrmOrderLista.wwDBGrid1KeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if Key = 13 then
+    wwDBGrid1DblClick(Sender);
+end;
+
+procedure TfrmOrderLista.wwDBGrid1MultiSelectRecord(Grid: TwwDBGrid; Selecting: Boolean; var Accept: Boolean);
+var
+  osumma: double;
+begin
+
+  osumma := sp_Orderlist.fieldbyname('Ordersumma').Value;
+
+  if Selecting then
+    ordersumma := ordersumma + osumma
+  else
+    ordersumma := ordersumma - osumma;
+  Label5.Caption := format('%m', [ordersumma]);
+
+end;
+
+procedure TfrmOrderLista.wwDBGrid1RowChanged(Sender: TObject);
+begin
+  // btnPlanera.caption := 'Planera ' + sp_orderlistOrderID.asstring;
+end;
+
+procedure TfrmOrderLista.actOrderradUpdateExecute(Sender: TObject);
+begin
+  with TfrmOrderradUpdate.create(application) do
+    show;
+
+end;
+
+procedure TfrmOrderLista.actUpdateOrderlistaExecute(Sender: TObject);
+begin
+  RefreshOrderlist;
+end;
+
+procedure TfrmOrderLista.btnStatusByteNextClick(Sender: TObject);
+var
+  NuvarandeStatus: Integer;
+  NyStatus: Integer;
+
+begin
+
+  NyStatus := -1;
+  NuvarandeStatus := sp_Orderlist.fieldbyname('OrderstatusId').asInteger;
+
+  if NuvarandeStatus = stUA then
+    NyStatus := stAR
+  else if NuvarandeStatus = stAR then
+    NyStatus := stPS
+  else if NuvarandeStatus = stPS then
+    NyStatus := stFA
+  else if NuvarandeStatus = stFA then
+    NyStatus := stAK;
+
+  if messagedlg('Vill du byta status för order ' + sp_OrderlistOrderID.asstring + ' till "' +
+    Orderstatusbeteckning(NyStatus) + '"?', mtConfirmation, [mbYes, mbNo], 1) = mrYes then
+  begin
+
+    with sp_OrdertstatusUpdate do
+    begin
+      ParamByName('@Orderid').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
+      ParamByName('@OrderstatusIdNew').Value := NyStatus;
+      execproc;
+    end;
+
+    RefreshOrderlist;
+  end;
+
+end;
+
+procedure TfrmOrderLista.btnStatusBytePrevClick(Sender: TObject);
+var
+  NuvarandeStatus: Integer;
+  NyStatus: Integer;
+
+begin
+
+  NyStatus := -1;
+  NuvarandeStatus := sp_Orderlist.fieldbyname('OrderstatusId').asInteger;
+
+  if NuvarandeStatus = stAK then
+    NyStatus := stFA
+  else if NuvarandeStatus = stFA then
+    NyStatus := stPS
+  else if NuvarandeStatus = stPS then
+    NyStatus := stAR
+  else if NuvarandeStatus = stAR then
+    NyStatus := stUA;
+
+  if messagedlg('Vill du byta status för order ' + sp_OrderlistOrderID.asstring + ' till "' +
+    Orderstatusbeteckning(NyStatus) + '"?', mtConfirmation, [mbYes, mbNo], 1) = mrYes then
+  begin
+
+    with sp_OrdertstatusUpdate do
+    begin
+      ParamByName('@Orderid').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
+      ParamByName('@OrderstatusIdNew').Value := NyStatus;
+      execproc;
+    end;
+
+    RefreshOrderlist;
+  end;
+
+end;
+
+procedure TfrmOrderLista.actOrderVisaExecute(Sender: TObject);
+begin
+  with TrptOrder.create(application) do
+  begin
+    header.Caption := 'Beställning';
+    with qry do
+    begin
+      close;
+      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      open;
+    end;
+    report.preview;
+  end;
+
+end;
+
+procedure TfrmOrderLista.Button1Click(Sender: TObject);
+begin
+  with sp_Orderlist do
+  begin
+    close;
+    with sp_Orderlist.ParamByName('@Kundid') do
+    begin
+      DataType := ftInteger;
+      Clear;
+    end;
+    open;
+    wwDBLookupCombo1.Text := '';
+  end;
+end;
+
+procedure TfrmOrderLista.btnSokClick(Sender: TObject);
+var
+  Soktext: string;
+begin
+
+  if (Sender as TButton).Caption = '&Sök' then
+  begin
+
+    Soktext := trim(edtTextsok.Text);
+    with sp_Orderlist do
+    begin
+      close;
+      ParamByName('@soktext').Value := Soktext;
+      open;
+      (Sender as TButton).Caption := 'X';
+      // (Sender as TButton).Caption := 'X (' + recordcount.ToString+')' ;
+      edtTextsok.Enabled := false;
+
+    end;
+
+  end
+  else
+
+    with sp_Orderlist do
+    begin
+      close;
+      with sp_Orderlist.ParamByName('@Kundid') do
+      begin
+        ParamByName('@soktext').Value := null;
+      end;
+      open;
+      wwDBLookupCombo1.Text := '';
+      (Sender as TButton).Caption := '&Sök';
+      edtTextsok.Text := '';
+      (Sender as TButton).Enabled := false;
+      edtTextsok.Enabled := True;
+
+    end;
+
+end;
+
+procedure TfrmOrderLista.cbVisaAllaFakturorClick(Sender: TObject);
+var
+  cnt: Integer;
+begin
+
+  with sp_Orderlist do
+  begin
+    close;
+    ParamByName('@OrderstatusId').Value := 1; // Fakturerade
+    ParamByName('@FakturadatumVisaBaraSenasteÅr').Value := not(cbVisaAllaFakturor.Checked);
+    open;
+  end;
+end;
+
+procedure TfrmOrderLista.edtTextsokChange(Sender: TObject);
+begin
+  btnSok.Enabled := length(edtTextsok.Text) > 1;
+  btnSok.default := btnSok.Enabled;
+
+end;
+
+procedure TfrmOrderLista.Soktext;
+var
+  Soktext: string;
+  SokOrderId, tabind, OrderstatusId: Integer;
+begin
+
+end;
+
+procedure TfrmOrderLista.PageControl1Change(Sender: TObject);
+var
+
+  raderFinns: Boolean;
+
+begin
+  (*
+    stUA: Integer = 4; // Under arbete
+    stAR: Integer = 3; // Återrapporterad
+    stPS: Integer = 2; // Prissatt
+    stFA: Integer = 1; // Fakturerat
+    stOF: Integer = 5; // Offert
+    stAK: Integer = 6; // Arkiv
+
+  *)
+
+  apStatus := PageControl1.ActivePage.Tag;
+  // Menyoptioner
+
+  mnuLäggtillÄndrapositioner.Visible := True; // 1
+  mnuResfreshOrderlista.Visible := True; // 2
+  mnuLaggtilloffertrader.Visible := True; // 3
+  mnuPrissättaPositioner.Visible := True; // 3
+  mnuNyOrder.Visible := True; // 3
+  mnuNyOffert.Visible := True; // 3
+  mnuKopieraOrder.Visible := True; // 3
+  mnuSkapaorderfrånOffert.Visible := True; // 3
+  mnuSkapaPlanering.Visible := True; // 3
+  mnuOffertEdit.Visible := True; // 3
+  mnuÄndraOrderstatusManuellt.Visible := True; // 3
+  mnuTaBortPlanering.Visible := True; // 3
+  mnuVisaOrder.Visible := True; // 3
+  mnuSkapaPDFOrder.Visible := True; // 3
+  mnuSkspaPDFOrderbekräftlese.Visible := True; // 3
+  mnuSkapaPDFOffert.Visible := True; // 3
+  mnuUtsktriftPalletikett.Visible := True; // 3
+  mnuSättfakturamärkning.Visible := True; // 3
+  mnuSkrivutfakturaunderlag.Visible := True; // 3
+  mnuSkapaSamlingsfaktura.Visible := True; // 3
+  mnuSkapaXMLFakturaunderlag.Visible := True; // 3
+  mnuSkickaOrderbekräftelseViaEpost.Visible := True; // 3
+  mnuSkrivutetiketter.Visible := True; // 3
+  mnuSkrivutfljesedel.Visible := True; // 3
+  mnuSkrivutfljesedel.Visible := True; // 3
+  mnuSkrivutritningar.Visible := True; // 3
+  mnuTabortOrder.Visible := True; // 3
+  mnuTaBortOffert.Visible := True; // 3
+
+  (*
+
+    mnuPrissättaPositioner.Visible := (apStatus <> stOF);
+    mnuSkapaPDFOrder.Visible := (apStatus <> stOF);
+    mnuNyOffert.Visible := (apStatus = stOF);
+    mnuLaggtilloffertrader.Visible := (apStatus = stOF);
+    mnuNyOrder.Visible := (apStatus = stUA);
+    mnuSkapaorderfrånOffert.Visible := (apStatus = stOF);
+    mnuOffertEdit.Visible := (apStatus = stOF);
+    mnuÄndraOrderstatusManuellt.Visible := (apStatus <> stOF);
+    mnuGorOmordertilloffert1.Visible := (apStatus <> stOF);
+    mnuSkapaPlanering.Visible := (apStatus = stUA);
+    mnuTaBortPlanering.Visible := (apStatus = stUA);
+    mnuVisaOrder.Visible := True;
+    mnuSkapaPDFOrder.Visible := (apStatus <> stOF);
+    mnuSkspaPDFOrderbekräftlese.Visible := True;
+    mnuUtsktriftPalletikett.Visible := (apStatus in [stUA, stAR, stPS, stFA]);
+    mnuSkrivutfakturaunderlag.Visible := (apStatus in [stAR, stPS, stFA]);
+    mnuSättfakturamärkning.Visible := (apStatus in [stPS]);
+    mnuSkapaSamlingsfaktura.Visible := (apStatus = stFA);
+    mnuSkapaPDFOffert.Visible := (apStatus = stOF);
+    mnuSkapaXMLFakturaunderlag.Visible := (apStatus = stFA);
+    mnuSkickaOrderbekräftelseViaEpost.Visible := True;
+    mnuSkrivutetiketter.Visible := (apStatus in [stUA, stAR, stPS, stFA]);
+
+  *)
+
+  // Buttons för Statusändringar
+  btnStatusBytePrev.Enabled := (apStatus <> stUA);
+  btnStatusByteNext.Enabled := (apStatus <> stAK);
+
+  mnuTabortOrder.Visible := True;
+
+  // PrissättaPositioner.Visible:= raderFinns;
+
+  Label5.Visible := (apStatus = stPS); // Prissatta
+  ordersumma := 0;
+  Label5.Caption := '';
+  cbVisaAllaFakturor.Visible := (apStatus = stFA);
+
+  (*
+    // Original
+    mnuLäggtillÄndrapositioner.Visible := True; // 1
+    mnuResfreshOrderlista.Visible := True; // 2
+
+    mnuPrissättaPositioner.Visible := (apStatus <> stOF);
+    mnuSkapaPDFOrder.Visible := (apStatus <> stOF);
+
+    mnuNyOffert.Visible := (apStatus = stOF);
+    mnuLaggtilloffertrader.Visible := (apStatus = stOF);
+    NyOrder.Visible := (apStatus = stUA);
+    mnuSkapaorderfrånOffert.Visible := (apStatus = stOF);
+    mnuOffertEdit.Visible := (apStatus = stOF);
+    mnuÄndraOrderstatusManuellt.Visible := (apStatus <> stOF);
+
+    mnuGorOmordertilloffert1.Visible := (apStatus <> stOF);
+
+    mnuSkapaPlanering.Visible := (apStatus = stUA);
+    mnuTaBortPlanering.Visible := (apStatus = stUA);
+
+    mnuVisaOrder.Visible := True;
+    mnuSkapaPDFOrder.Visible := (apStatus <> stOF);
+    mnuSkspaPDFOrderbekräftlese.Visible := True;
+
+    mnuUtsktriftPalletikett.Visible := (apStatus in [stUA, stAR, stPS, stFA]);
+    mnuSkrivutfakturaunderlag.Visible := (apStatus in [stAR, stPS, stFA]);
+
+    // mnuSättfakturamärkning.Visible := (apStatus in[ stPS,stFA]);
+    mnuSättfakturamärkning.Visible := (apStatus in [stPS]);
+
+    mnuSkapaSammelfaktura.Visible := (apStatus = stFA);
+
+    // N10.Visible := (apStatus = stUA);
+
+    mnuSkapaPDFOffert.Visible := (apStatus = stOF);
+    mnuSkapaXMLFakturaunderlag.Visible := (apStatus = stFA);
+
+    mnuSkickaOrderbekräftelseViaEpost.Visible := True;
+    mnuSkrivutetiketter.Visible := (apStatus in [stUA, stAR, stPS, stFA]);
+
+    // Buttons för Statusändringar
+    btnStatusBytePrev.Enabled := (apStatus <> stUA);
+    btnStatusByteNext.Enabled := (apStatus <> stAK);
+
+    mnuTabortOrder.Visible := True;
+
+    // PrissättaPositioner.Visible:= raderFinns;
+
+
+    Label5.Visible := (apStatus = stPS); // Prissatta
+    ordersumma := 0;
+    Label5.Caption := '';
+    cbVisaAllaFakturor.Visible := (apStatus = stFA);
+
+  *)
+
+  wwDBGrid1.Selected.Clear;
+  with qryGridColumns do
+  begin
+    sql.Clear;
+    sql.Add('Select Fieldname,Displaywidth, [Fieldheader] from Gridcolumns where Status' + inttostr(apStatus) +
+      ' = 1 order by Ordning');
+    open;
+    while not eof do
+    begin
+      wwDBGrid1.Selected.Add(fieldbyname('Fieldname').asstring + #9 + fieldbyname('Displaywidth').asstring + #9 +
+        fieldbyname('Fieldheader').asstring);
+      next;
+    end;
+  end;
+
+  if apStatus = stFA then // Fakturerade
+  begin
+
+    wwDBGrid1.Options := wwDBGrid1.Options - [dgMultiselect];
+    wwDBGrid1.GroupFieldName := 'Fakturanummer';
+
+  end
+  else
+
+    if apStatus = stPS then // Prissatta
+  begin
+    wwDBGrid1.Options := wwDBGrid1.Options + [dgMultiselect];
+    if not wwDBGrid1.ColumnByName('Ordersumma').Visible then
+      wwDBGrid1.ColumnByName('Ordersumma').Visible := True;
+    wwDBGrid1.GroupFieldName := '';
+  end
+  else if apStatus = stOF then // Offerter
+  begin
+    wwDBGrid1.Options := wwDBGrid1.Options - [dgMultiselect];
+    wwDBGrid1.GroupFieldName := '';
+
+  end
+  else
+
+  begin
+
+    wwDBGrid1.Options := wwDBGrid1.Options - [dgMultiselect];
+    wwDBGrid1.GroupFieldName := '';
+
+  end;
+
+  with sp_Orderlist do
+  begin
+    close;
+    ParamByName('@OrderstatusId').Value := apStatus;
+    ParamByName('@Orderby').Value := 'OrderID';
+    open;
+  end;
+
+end;
+
+procedure TfrmOrderLista.PageControl1DrawTab(Control: TCustomTabControl; TabIndex: Integer; const Rect: TRect;
+  Active: Boolean);
+var
+  h, L: Integer;
+begin
+
+  // Rita upp själva tabsen i olika färgar beråde från status
+
+  Control.Canvas.Font.Color := clblack;
+  Control.Canvas.Font.Size := 10;
+  Control.Canvas.Font.name := 'Verdana';
+
+  if Active then
+  begin
+
+    // Control.Canvas.Font.Style := Control.Canvas.Font.Style + [fsBold];
+    Control.Canvas.Brush.Color := PageControl1.Pages[TabIndex].Brush.Color;
+  end
+  else
+  begin
+    // Control.Canvas.Font.Style := Control.Canvas.Font.Style - [fsBold];
+    Control.Canvas.Brush.Color := $00F9F9F9;
+  end;
+
+  Control.Canvas.Pen.Style := psClear;
+
+  Control.Canvas.Rectangle(Rect);
+  h := Control.Canvas.TextHeight((Control as TPageControl).ActivePage.Caption);
+  L := Rect.Left;
+  Inc(L, 10);
+  Control.Canvas.TextOut(L, Rect.Top + (Rect.Bottom - Rect.Top - h) div 2,
+    (Control as TPageControl).Pages[TabIndex].Caption);
+
+end;
+
+procedure TfrmOrderLista.PopupMenuOrderlistaPopup(Sender: TObject);
+var
+  raderFinns: Boolean;
+
+begin
+
+  raderFinns := (sp_OrderlistAntalTotal.asInteger > 0);
+
+  mnuPrissättaPositioner.Enabled := raderFinns;
+  // Visautskrift1.Enabled := raderFinns;
+  actOrderSkrivut.Enabled := raderFinns;
+  actFakturaunderlagPrint.Enabled := raderFinns;
+  // offertsommailtillkund2.enabled := (sp_orderlistOrdertyp.asstring = 'O');
+  actPrissattningPositioner.Enabled := raderFinns;
+  actSattFakturadatum.Enabled := raderFinns;
+  actFakturarunderlagXML.Enabled := (sp_OrderlistKundID.asInteger = 1) and raderFinns;
+  actSattFakturadata.Enabled := (raderFinns) and (wwDBGrid1.Selected.count > 0);
+  mnuSättfakturamärkning.Enabled := (raderFinns) and (wwDBGrid1.Selected.count > 0);
+
+  if apStatus = stOF then
+  begin
+    mnuVisaOrder.Caption := '1 Visa offert';
+    mnuSkspaPDFOrderbekräftlese.Caption := '3 Skapa PDF-offertbekräftelse';
+    mnuKopieraOrder.Caption := 'Kopiera offert';
+  end
+  else
+  begin
+    mnuVisaOrder.Caption := '1 Visa order';
+    mnuSkspaPDFOrderbekräftlese.Caption := '3 Skapa PDF-orderbekräftelse';
+    mnuKopieraOrder.Caption := 'Kopiera order';
+    // mnuSkapaPDFOrder.Caption := 'Skapa PDF order';
+  end;
+
+end;
+
+procedure TfrmOrderLista.actOrderStatusUpdateExecute(Sender: TObject);
+var
+  OrderId: Integer;
+begin
+
+  OrderId := sp_Orderlist.fieldbyname('Orderid').asInteger;
+
+  with TfrmOrderStatusUpdate.create(application) do
+  begin
+
+    qryLU_orderstatus.open;
+    qryLU_orderstatus.Locate('Id', sp_Orderlist.fieldbyname('OrderstatusId').asInteger, []);
+    LU_orderstatus.LookupValue := sp_Orderlist.fieldbyname('OrderstatusId').asstring;
+
+    showmodal;
+
+    if modalresult = mrOK then
+    begin
+      dm.FDConnection1.ExecSQL('Update  Orderhuvud set OrderstatusId = ' + qryLU_orderstatus.fieldbyname('Id').asstring
+        + ' where Id = ' + OrderId.ToString);
+      RefreshOrderlist;
+    end;
+  end;
+end;
+
+procedure TfrmOrderLista.actPallEtikettExecute(Sender: TObject);
+begin
+  with TrptPalletikett.create(application) do
+  begin
+    with qry do
+    begin
+
+      close;
+      ParamByName('Orderid').Value := sp_Orderlist.fieldbyname('Orderid').asInteger;
+      open;
+    end;
+    report.Print;
+    // report.preview;
+
+  end;
+end;
+
+procedure TfrmOrderLista.wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
+
+begin
+  with sp_Orderlist do
+  begin
+    close;
+    ParamByName('@Kundid').Value := LookupTable.fieldbyname('Kundid').asstring;
+    open;
+  end;
+
+end;
+
+procedure TfrmOrderLista.wwDBGrid1TitleButtonClick(Sender: TObject; AFieldName: string);
+begin
+
+  if (uppercase(AFieldName) = 'ORDERID') or (AFieldName = 'Fakturanummer') then
+    with sp_Orderlist do
+    begin
+      close;
+      ParamByName('@Orderby').Value := AFieldName;
+      ParamByName('@OrderstatusId').Value := apStatus;
+      open;
+    end;
+end;
+
+procedure TfrmOrderLista.actArbetsorderPrintExecute(Sender: TObject);
+begin
+  with TrptArbetsOrder.create(application) do
+  begin
+    with qry do
+    begin
+      close;
+      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      open;
+    end;
+    report.preview;
+  end;
+
+end;
+
+procedure TfrmOrderLista.actArkiveraExecute(Sender: TObject);
+var
+  OrderId: Integer;
+begin
+
+  OrderId := sp_Orderlist.fieldbyname('Orderid').asInteger;
+
+  if messagedlg('Vill du arkivera denna faktura?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+
+
+  if sp_Orderlist.fieldbyname('Orderstausid').asInteger = stFA then
+    dm.FDConnection1.ExecSQL('Update  Orderhuvud set OrderstatusId = ' + inttostr(stAK) + ' where Id = ' + OrderId.ToString);
+  RefreshOrderlist;
+  end;
+end;
+
+end;
+
+procedure TfrmOrderLista.actCopyOffertExecute(Sender: TObject);
+var
+  OrderIdNy: Integer;
+begin
+
+  // Kopiera en hel order
+
+  if messagedlg('Vill du skapa en kopia av denna offert?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+
+    with sp_OrderKopiera do
+    begin
+      ParamByName('@OrderId').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
+      ParamByName('@SkapaOrderFrånOffert').Value := True;
+
+      execproc;
+
+      OrderIdNy := ParamByName('@OrderIdNew').asInteger;
+
+      RefreshOrderlist;
+
+      // wwdbgrid1.Refresh;
+      sp_Orderlist.Locate('OrderId', OrderIdNy, [])
+
+      // actOrderEditExecute(Sender);
+
+    end;
+  end;
+
+end;
+
+procedure TfrmOrderLista.actCopyOrderExecute(Sender: TObject);
+var
+  OrderIdNy: Integer;
+begin
+
+  // Kopiera en hel order
+
+  if messagedlg('Vill du skapa en kopia av denna order?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+
+    with sp_OrderKopiera do
+    begin
+      ParamByName('@OrderId').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
+      ParamByName('@SkapaOrderFrånOffert').Value := false;
+
+      execproc;
+
+      OrderIdNy := ParamByName('@OrderIdNew').asInteger;
+
+      RefreshOrderlist;
+
+      // wwdbgrid1.Refresh;
+      sp_Orderlist.Locate('OrderId', OrderIdNy, [])
+
+      // actOrderEditExecute(Sender);
+
+    end;
+  end;
+end;
+
+procedure TfrmOrderLista.actEtiketterSkrivUtExecute(Sender: TObject);
+var
+  EtikettPrintername: string;
+begin
+
+  qryEtiketter.close;
+  qryEtiketter.open;
+
+  if qryEtiketter.RecordCount > 0 then
+  begin
+
+    with TIniFile.create(extractfilepath(application.ExeName) + 'Ordus.ini') do
+    begin
+      EtikettPrintername := Readstring('Printer', 'EtikettPrinterName', '');
+      Free;
+    end;
+    if EtikettPrintername = '' then
+      EtikettPrintername := 'DYMO LabelWriter 450 Turbo';
+
+    if not printerexists(EtikettPrintername) then
+    begin
+      showmessage('Etikettskrivare "' + EtikettPrintername + '" är ej konfiguerad - utskrift avbryts!');
+      exit;
+    end;
+
+    DefaultPrinterName := SetDefaultPrinter(EtikettPrintername);
+
+    with TrptEtikett.create(application) do
+    begin
+
+      report.DataSet := qryEtiketter;
+
+      QRDBText1.DataSet := qryEtiketter;
+      QRDBText2.DataSet := qryEtiketter;
+      QRDBText3.DataSet := qryEtiketter;
+      QRDBText4.DataSet := qryEtiketter;
+      QRDBText5.DataSet := qryEtiketter;
+      QRDBText6.DataSet := qryEtiketter;
+      QRDBText7.DataSet := qryEtiketter;
+      report.Print;
+    end;
+
+    SetDefaultPrinter(DefaultPrinterName);
+  end;
+
+end;
+
+procedure TfrmOrderLista.actOrderPDFPrintExecute(Sender: TObject);
+begin
+  with TfrmPrintPDF.create(application) do
+    showmodal;
+end;
+
+procedure TfrmOrderLista.actPlaneringTabortExecute(Sender: TObject);
+begin
+  if messagedlg('Vill du verkligen ta bort planeringen för denna order?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  begin
+    with spPlaneringDelete do
+    begin
+      params.ParamByName('@OrderId').Value := sp_OrderlistOrderID.asInteger;
+      execproc;
+      RefreshOrderlist;
+    end;
+  end;
+
+end;
+
+procedure TfrmOrderLista.Skapaplanering1Click(Sender: TObject);
+
+begin
+
+  with TfrmOrderPlanering.create(application) do
+  begin
+
+    qryOrderEdit.open;
+    qryOrderEdit.edit;
+
+    // if qryOrderEditArbetstidPlanerad.asstring = '' then
+    // qryOrderEdit.fieldbyname('ArbetstidPlanerad').asInteger :=
+    // sp_orderlist.fieldbyname('Kalkarbetstid').asInteger;
+    //
+    // label11.caption := MinutesToDaysHoursMinutes
+    // (qryOrderEdit.fieldbyname('ArbetstidPlanerad').asInteger);
+    // application.ProcessMessages;
+
+    showmodal;
+
+    if modalresult = mrOK then
+    begin
+      if qryOrderEdit.State in [dsEdit] then
+
+        qryOrderEdit.post;
+
+      RefreshOrderlist;
+    end
+    else if qryOrderEdit.State in [dsEdit] then
+      qryOrderEdit.cancel;
+  end;
+  RefreshOrderlist;
+end;
+
+procedure TfrmOrderLista.Importorderfilfrnleverantr1Click(Sender: TObject);
+begin
+  with TfrmOrderimport.create(application) do
+    showmodal;
+
+  with sp_Orderlist do
+  begin
+    close;
+    open;
+  end;
+
+end;
+
+procedure TfrmOrderLista.WMDROPFILES(var msg: TWMDropFiles);
+const
+  MAXFILENAME = 255;
+var
+
+  cnt, fileCount: Integer;
+  FileName: array [0 .. MAXFILENAME] of char;
+  strFilename: string;
+begin
+  // how many files dropped?
+  fileCount := DragQueryFile(msg.Drop, $FFFFFFFF, FileName, MAXFILENAME);
+
+  if fileCount > 0 then
+  begin
+    // query for file names
+    for cnt := 0 to -1 + fileCount do
+    begin
+      DragQueryFile(msg.Drop, cnt, FileName, MAXFILENAME);
+
+      // do something with the file(s)
+      // memo1.Lines.Insert(0, fileName);
+
+      strFilename := FileName;
+
+      if lowercase(extractfileext(extractfilename(strFilename))) = '.xml' then
+        ReadOrderfileIntersystemXML(strFilename)
+      else
+        ReadOrderfileIntersystem(strFilename);
+
+    end;
+
+    // release memory
+    DragFinish(msg.Drop);
+
+    RefreshOrderlist;
+
+  end;
+end;
+
+procedure TfrmOrderLista.RefreshOrderlist;
+var
+  CurrentRecord: Integer;
+begin
+  // Refresh orderlist
+  with sp_Orderlist do
+  begin
+    CurrentRecord := fieldbyname('OrderId').asInteger;
+    Active := false;
+    Active := True;
+    Locate('OrderId', CurrentRecord, []);
+  end;
+end;
+
+end.

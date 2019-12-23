@@ -1,0 +1,73 @@
+inherited frmTransport: TfrmTransport
+  Caption = 'frmTransport'
+  ClientHeight = 438
+  ClientWidth = 503
+  ExplicitWidth = 509
+  ExplicitHeight = 467
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel2: TPanel
+    Top = 397
+    Width = 503
+    inherited Button1: TButton
+      Left = 336
+    end
+    inherited Button2: TButton
+      Left = 418
+    end
+  end
+  inherited Panel3: TPanel
+    Width = 503
+    Height = 397
+    object Panel1: TPanel
+      Left = 1
+      Top = 355
+      Width = 501
+      Height = 41
+      Align = alBottom
+      Caption = 'Panel1'
+      TabOrder = 0
+      ExplicitLeft = 160
+      ExplicitTop = 178
+      ExplicitWidth = 185
+    end
+    object Panel4: TPanel
+      Left = 1
+      Top = 1
+      Width = 501
+      Height = 354
+      Align = alClient
+      Caption = 'Panel4'
+      TabOrder = 1
+      ExplicitLeft = 64
+      ExplicitTop = 24
+      ExplicitWidth = 185
+      ExplicitHeight = 41
+      object wwDBGrid1: TwwDBGrid
+        Left = 24
+        Top = 24
+        Width = 425
+        Height = 265
+        IniAttributes.Delimiter = ';;'
+        IniAttributes.UnicodeIniFile = False
+        TitleColor = clBtnFace
+        FixedCols = 0
+        ShowHorzScrollBar = True
+        TabOrder = 0
+        TitleAlignment = taLeftJustify
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'MS Sans Serif'
+        TitleFont.Style = []
+        TitleLines = 1
+        TitleButtons = False
+      end
+    end
+  end
+  object FDQuery1: TFDQuery
+    Connection = dm.FDConnection1
+    Left = 240
+    Top = 216
+  end
+end

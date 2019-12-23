@@ -1,0 +1,177 @@
+unit fKunder;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
+  fStdRV, StdCtrls, Mask, DBCtrls, Db, Menus, Grids, Wwdbigrd,
+  Wwdbgrid, ExtCtrls, Wwkeycb, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, EditNew;
+
+type
+  TfrmKunder = class(TfrmStdRV)
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    btnKontaktpersoner: TButton;
+    wwIncrementalSearch1: TwwIncrementalSearch;
+    Label2: TLabel;
+    Label3: TLabel;
+    DBEditN2: TDBEditN;
+    FDQuery1Id: TFDAutoIncField;
+    FDQuery1Kundnamn: TStringField;
+    FDQuery1MarginalprocentDisplay: TBCDField;
+    FDQuery1AntalKontaktpersoner: TIntegerField;
+    FDQuery1Oms‰ttning1≈r: TFMTBCDField;
+    FDQuery1Oms‰ttning3≈r: TFMTBCDField;
+    FDQuery1Marginalprocent: TBCDField;
+    FDQuery1Oms‰ttningInnevarande≈r: TFMTBCDField;
+    FDQuery1Kundnr: TFDAutoIncField;
+    procedure btnNyClick(Sender: TObject);
+    procedure btnAndraClick(Sender: TObject);
+    procedure btnKontaktpersonerClick(Sender: TObject);
+    procedure btnSparaClick(Sender: TObject);
+    procedure btnAngraClick(Sender: TObject);
+    procedure btnBortClick(Sender: TObject);
+    procedure dbGridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+      AFont: TFont; ABrush: TBrush);
+    procedure FormShow(Sender: TObject);
+    procedure dbGridTitleButtonClick(Sender: TObject; AFieldName: string);
+    procedure FormCreate(Sender: TObject);
+    procedure btnStangClick(Sender: TObject);
+  private
+    procedure btnState;
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmKunder: TfrmKunder;
+
+implementation
+
+uses fKundPerson, Datamodule;
+
+{$R *.DFM}
+
+procedure TfrmKunder.btnSparaClick(Sender: TObject);
+begin
+  inherited;
+  btnState;
+end;
+
+procedure TfrmKunder.btnStangClick(Sender: TObject);
+begin
+  inherited;
+  FDQUERY1.Close;
+end;
+
+procedure TfrmKunder.btnState;
+begin
+  btnKontaktpersoner.Enabled := not(datasource1.DataSet.State in [dsedit, dsInsert]);
+end;
+
+procedure TfrmKunder.dbGridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+  AFont: TFont; ABrush: TBrush);
+begin
+  inherited;
+  if (Field.FieldName = 'MarginalprocentDisplay') and (FDQUERY1.FieldByName('Marginalprocent').AsFloat = 0) then
+    AFont.Color := clgray;
+
+end;
+
+procedure TfrmKunder.dbGridTitleButtonClick(Sender: TObject; AFieldName: string);
+begin
+  inherited;
+
+  with FDQUERY1 do
+  begin
+    Close;
+    // sql.Clear;
+    // sql.Addstrings(qsql);
+    sql.Delete(sql.Count - 1);
+
+    if AFieldName = 'Kundnr' then
+      sql.Add(' Order by 1 asc')
+    else if AFieldName = 'Kundnamn' then
+      sql.Add(' Order by 2 asc')
+    else if AFieldName = 'Oms‰ttningInnevarande≈r' then
+      sql.Add(' Order by 3 desc')
+    else if AFieldName = 'Oms‰ttning1≈r' then
+      sql.Add(' Order by 4 desc')
+    else if AFieldName = 'Oms‰ttning3≈r' then
+      sql.Add(' Order by 5 desc')
+    else if AFieldName = 'AntalKontaktpersoner' then
+      sql.Add(' Order by 6 desc')
+    else if AFieldName = 'MarginalprocentDisplay' then
+      sql.Add(' Order by 7 asc')
+    else
+      sql.Add(' Order by 3 desc');
+
+    open;
+
+  end;
+
+end;
+
+procedure TfrmKunder.FormCreate(Sender: TObject);
+begin
+  inherited;
+  // qsql:= tstrings.Create;
+end;
+
+procedure TfrmKunder.FormShow(Sender: TObject);
+begin
+  inherited;
+  wwIncrementalSearch1.SetFocus;
+
+  with FDQUERY1 do
+  begin
+    Close;
+    sql.Add('Order by 3 desc');
+    open;
+  end;
+end;
+
+procedure TfrmKunder.btnNyClick(Sender: TObject);
+begin
+  inherited;
+  DBEdit1.SetFocus;
+  btnState;
+end;
+
+procedure TfrmKunder.btnAndraClick(Sender: TObject);
+begin
+  inherited;
+  DBEdit1.SetFocus;
+  btnState;
+
+end;
+
+procedure TfrmKunder.btnAngraClick(Sender: TObject);
+begin
+  inherited;
+  btnState;
+end;
+
+procedure TfrmKunder.btnBortClick(Sender: TObject);
+begin
+  inherited;
+  btnState;
+end;
+
+procedure TfrmKunder.btnKontaktpersonerClick(Sender: TObject);
+begin
+  inherited;
+  with TfrmKundPerson.create(Application) do
+  begin
+    FDQUERY1.Active := True;
+    showmodal;
+    FDQUERY1.Active := false;
+  end;
+end;
+
+end.

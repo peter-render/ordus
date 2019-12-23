@@ -1,0 +1,178 @@
+inherited frmOrderstatus: TfrmOrderstatus
+  Left = 439
+  Top = 284
+  Caption = 'Orderstatus'
+  ClientHeight = 439
+  ClientWidth = 569
+  ExplicitWidth = 575
+  ExplicitHeight = 468
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 450
+    Height = 439
+    ExplicitWidth = 413
+    ExplicitHeight = 439
+    inherited Bevel1: TBevel
+      Width = 376
+      ExplicitWidth = 376
+    end
+    inherited Bevel2: TBevel
+      Top = 344
+      ExplicitTop = 344
+    end
+    object Label1: TLabel [2]
+      Left = 20
+      Top = 235
+      Width = 58
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Orderstatus'
+      FocusControl = DBEdit1
+    end
+    object Label2: TLabel [3]
+      Left = 26
+      Top = 262
+      Width = 52
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Beteckning'
+      FocusControl = DBEdit2
+    end
+    object Label3: TLabel [4]
+      Left = 32
+      Top = 288
+      Width = 46
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Sortorder'
+      FocusControl = DBEdit3
+    end
+    object Label4: TLabel [5]
+      Left = 40
+      Top = 315
+      Width = 38
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'BGColor'
+      FocusControl = DBEdit4
+    end
+    inherited dbGrid: TwwDBGrid
+      Width = 417
+      Selected.Strings = (
+        'Id'#9'3'#9'Id'#9'F'
+        'Orderstatus'#9'9'#9'Orderstatus'#9#9
+        'Beteckning'#9'22'#9'Beteckning'#9#9
+        'Sortorder'#9'7'#9'Sortorder'#9#9
+        'BGColor'#9'15'#9'BGColor'#9#9)
+      OnCalcCellColors = dbGridCalcCellColors
+      ExplicitWidth = 417
+    end
+    object DBEdit1: TDBEdit
+      Left = 88
+      Top = 231
+      Width = 41
+      Height = 21
+      DataField = 'Orderstatus'
+      DataSource = DataSource1
+      ReadOnly = True
+      TabOrder = 1
+    end
+    object DBEdit2: TDBEdit
+      Left = 88
+      Top = 258
+      Width = 304
+      Height = 21
+      DataField = 'Beteckning'
+      DataSource = DataSource1
+      TabOrder = 2
+    end
+    object DBEdit3: TDBEdit
+      Left = 88
+      Top = 284
+      Width = 64
+      Height = 21
+      DataField = 'Sortorder'
+      DataSource = DataSource1
+      TabOrder = 3
+    end
+    object DBEdit4: TDBEdit
+      Left = 88
+      Top = 311
+      Width = 81
+      Height = 21
+      DataField = 'BGColor'
+      DataSource = DataSource1
+      TabOrder = 4
+    end
+    object BtnColor: TButton
+      Left = 172
+      Top = 309
+      Width = 75
+      Height = 25
+      Caption = #196'ndra f'#228'rg'
+      Enabled = False
+      TabOrder = 5
+      OnClick = BtnColorClick
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 450
+    Height = 439
+    ExplicitLeft = 413
+    ExplicitHeight = 439
+    inherited DBNav: TDBNavigator
+      Hints.Strings = ()
+    end
+  end
+  inherited DataSource1: TDataSource
+    OnStateChange = DataSource1StateChange
+    Left = 340
+    Top = 288
+  end
+  inherited FDQuery1: TFDQuery
+    SQL.Strings = (
+      'Select * from OrderStatus order by Sortorder')
+    Left = 316
+    object FDQuery1Id: TFDAutoIncField
+      DisplayWidth = 3
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
+    object FDQuery1Orderstatus: TStringField
+      DisplayWidth = 9
+      FieldName = 'Orderstatus'
+      Origin = 'Orderstatus'
+      Required = True
+      FixedChar = True
+      Size = 1
+    end
+    object FDQuery1Beteckning: TStringField
+      DisplayWidth = 22
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Required = True
+      Size = 50
+    end
+    object FDQuery1Sortorder: TSmallintField
+      DisplayWidth = 7
+      FieldName = 'Sortorder'
+      Origin = 'Sortorder'
+      Required = True
+    end
+    object FDQuery1BGColor: TStringField
+      DisplayWidth = 15
+      FieldName = 'BGColor'
+      Origin = 'BGColor'
+      FixedChar = True
+      Size = 10
+    end
+  end
+  object ColorDialog1: TColorDialog
+    Options = [cdFullOpen]
+    Left = 427
+    Top = 208
+  end
+end

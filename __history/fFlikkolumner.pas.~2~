@@ -1,0 +1,44 @@
+unit fFlikkolumner;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Datamodule, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Vcl.StdCtrls, Data.DB, Vcl.Grids, vcl.wwdbigrd, vcl.wwdbgrid, Vcl.ExtCtrls, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TfrmFlikkolumner = class(TForm)
+    qryGridcolumns: TFDQuery;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    wwDBGrid1: TwwDBGrid;
+    dsoGridcolumns: TDataSource;
+    Button1: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmFlikkolumner: TfrmFlikkolumner;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmFlikkolumner.Button1Click(Sender: TObject);
+begin
+self.close;
+end;
+
+procedure TfrmFlikkolumner.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+action:= caFree;
+end;
+
+end.

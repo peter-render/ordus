@@ -1,0 +1,79 @@
+inherited frmFtgSystem: TfrmFtgSystem
+  Left = 392
+  Top = 310
+  Caption = 'Systemparameter'
+  ClientWidth = 575
+  ExplicitWidth = 581
+  PixelsPerInch = 96
+  TextHeight = 13
+  inherited Panel1: TPanel
+    Width = 456
+    ExplicitWidth = 456
+    inherited Bevel1: TBevel
+      Left = 18
+      Width = 417
+      ExplicitLeft = 18
+      ExplicitWidth = 417
+    end
+    object Label1: TLabel [2]
+      Left = 32
+      Top = 256
+      Width = 28
+      Height = 13
+      Caption = 'V'#228'rde'
+      FocusControl = DBEdit1
+    end
+    object Label2: TLabel [3]
+      Left = 25
+      Top = 228
+      Width = 33
+      Height = 13
+      Caption = 'Nyckel'
+      FocusControl = DBEdit2
+    end
+    inherited dbGrid: TwwDBGrid
+      Left = 18
+      Width = 421
+      Height = 158
+      Selected.Strings = (
+        'ID'#9'2'#9'ID'#9#9
+        'Beteckning'#9'33'#9'Beteckning'#9#9
+        'V'#228'rde'#9'27'#9'V'#228'rde'#9#9)
+      TabOrder = 2
+      ExplicitLeft = 18
+      ExplicitWidth = 421
+      ExplicitHeight = 158
+    end
+    object DBEdit1: TDBEdit
+      Left = 69
+      Top = 254
+      Width = 256
+      Height = 21
+      DataField = 'V'#228'rde'
+      DataSource = DataSource1
+      TabOrder = 1
+    end
+    object DBEdit2: TDBEdit
+      Left = 68
+      Top = 224
+      Width = 178
+      Height = 21
+      Color = clBtnFace
+      DataField = 'Beteckning'
+      DataSource = DataSource1
+      ReadOnly = True
+      TabOrder = 0
+    end
+  end
+  inherited Panel2: TPanel
+    Left = 456
+    ExplicitLeft = 456
+    inherited DBNav: TDBNavigator
+      Hints.Strings = ()
+    end
+  end
+  inherited fdQuery1: TFDQuery
+    SQL.Strings = (
+      'Select * from ftgsystem order by Id')
+  end
+end
