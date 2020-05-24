@@ -1,3 +1,8 @@
 .pdf
 .backup
 .exe
+*.exe
+.gitignore
+__*
+.dcu
+.dsk

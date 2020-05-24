@@ -53,7 +53,7 @@
     PrinterSettings.Duplex = False
     PrinterSettings.FirstPage = 0
     PrinterSettings.LastPage = 0
-    PrinterSettings.UseStandardprinter = False
+    PrinterSettings.UseStandardprinter = True
     PrinterSettings.UseCustomBinCode = False
     PrinterSettings.CustomBinCode = 0
     PrinterSettings.ExtendedDuplex = 0
@@ -77,8 +77,8 @@
     PreviewLeft = 0
     PreviewTop = 0
     object TitleBand1: TQRBand
-      Left = 11
-      Top = 11
+      Left = 0
+      Top = 0
       Width = 645
       Height = 718
       AlignToBottom = False
@@ -98,13 +98,13 @@
       KeepOnOnePage = False
       BandType = rbTitle
       object QRShape2: TQRShape
-        Left = 355
+        Left = 341
         Top = 34
         Width = 287
         Height = 408
         Size.Values = (
           1799.166666666667000000
-          1565.451388888889000000
+          1503.715277777778000000
           149.930555555555600000
           1265.590277777778000000)
         XLColumn = 0
@@ -115,13 +115,13 @@
         VertAdjust = 0
       end
       object QRDBText1: TQRDBText
-        Left = 359
+        Left = 345
         Top = 277
         Width = 278
         Height = 29
         Size.Values = (
           127.881944444444400000
-          1583.090277777778000000
+          1521.354166666667000000
           1221.493055555556000000
           1225.902777777778000000)
         XLColumn = 0
@@ -148,13 +148,13 @@
         FontSize = 25
       end
       object QRDBText5: TQRDBText
-        Left = 358
+        Left = 344
         Top = 171
         Width = 282
         Height = 26
         Size.Values = (
           114.652777777777800000
-          1578.680555555556000000
+          1516.944444444444000000
           754.062500000000000000
           1243.541666666667000000)
         XLColumn = 0
@@ -181,13 +181,13 @@
         FontSize = 22
       end
       object QRLabel2: TQRLabel
-        Left = 359
+        Left = 345
         Top = 324
         Width = 278
         Height = 25
         Size.Values = (
           110.243055555555600000
-          1583.090277777778000000
+          1521.354166666667000000
           1428.750000000000000000
           1225.902777777778000000)
         XLColumn = 0
@@ -211,13 +211,13 @@
         FontSize = 18
       end
       object QRLabel4: TQRLabel
-        Left = 359
+        Left = 345
         Top = 388
         Width = 278
         Height = 25
         Size.Values = (
           110.243055555555600000
-          1583.090277777778000000
+          1521.354166666667000000
           1710.972222222222000000
           1225.902777777778000000)
         XLColumn = 0
@@ -241,13 +241,13 @@
         FontSize = 18
       end
       object QRDBText2: TQRDBText
-        Left = 359
+        Left = 345
         Top = 344
         Width = 278
         Height = 30
         Size.Values = (
           132.291666666666700000
-          1583.090277777778000000
+          1521.354166666667000000
           1516.944444444444000000
           1225.902777777778000000)
         XLColumn = 0
@@ -274,13 +274,13 @@
         FontSize = 28
       end
       object QRShape5: TQRShape
-        Left = 359
+        Left = 345
         Top = 58
         Width = 276
         Height = 17
         Size.Values = (
           74.965277777777780000
-          1583.090277777778000000
+          1521.354166666667000000
           255.763888888888900000
           1217.083333333333000000)
         XLColumn = 0
@@ -290,16 +290,18 @@
         VertAdjust = 0
       end
       object QRDBText6: TQRDBText
-        Left = 516
+        Left = 502
         Top = 46
         Width = 118
         Height = 18
         Size.Values = (
           79.375000000000000000
-          2275.416666666667000000
+          2213.680555555556000000
           202.847222222222200000
           520.347222222222200000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
@@ -319,16 +321,17 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 16
       end
       object QRImage1: TQRImage
-        Left = 377
+        Left = 363
         Top = 75
         Width = 246
         Height = 59
         Size.Values = (
           260.173611111111100000
-          1662.465277777778000000
+          1600.729166666667000000
           330.729166666666700000
           1084.791666666667000000)
         XLColumn = 0
@@ -2047,13 +2050,13 @@
           F7BF75EEBDEFDD7BAF7BF75EEBDEFDD7BAF7BF75EEBDEFDD7BAF7BF75EEBFFD9}
       end
       object QRDBText7: TQRDBText
-        Left = 359
+        Left = 345
         Top = 232
         Width = 278
         Height = 26
         Size.Values = (
           114.652777777777800000
-          1583.090277777778000000
+          1521.354166666667000000
           1023.055555555556000000
           1225.902777777778000000)
         XLColumn = 0
@@ -2080,13 +2083,13 @@
         FontSize = 22
       end
       object QRLabel8: TQRLabel
-        Left = 359
+        Left = 345
         Top = 208
         Width = 278
         Height = 25
         Size.Values = (
           110.243055555555600000
-          1583.090277777778000000
+          1521.354166666667000000
           917.222222222222200000
           1225.902777777778000000)
         XLColumn = 0
@@ -2110,13 +2113,13 @@
         FontSize = 18
       end
       object QRShape7: TQRShape
-        Left = 359
+        Left = 345
         Top = 130
         Width = 278
         Height = 17
         Size.Values = (
           74.965277777777780000
-          1583.090277777778000000
+          1521.354166666667000000
           573.263888888888900000
           1225.902777777778000000)
         XLColumn = 0
@@ -2126,13 +2129,13 @@
         VertAdjust = 0
       end
       object QRShape1: TQRShape
-        Left = 359
+        Left = 345
         Top = 187
         Width = 276
         Height = 17
         Size.Values = (
           74.965277777777780000
-          1583.090277777778000000
+          1521.354166666667000000
           824.618055555555600000
           1217.083333333333000000)
         XLColumn = 0
@@ -2142,13 +2145,13 @@
         VertAdjust = 0
       end
       object QRShape3: TQRShape
-        Left = 359
+        Left = 345
         Top = 250
         Width = 276
         Height = 17
         Size.Values = (
           74.965277777777780000
-          1583.090277777778000000
+          1521.354166666667000000
           1102.430555555556000000
           1217.083333333333000000)
         XLColumn = 0
@@ -2158,13 +2161,13 @@
         VertAdjust = 0
       end
       object QRShape4: TQRShape
-        Left = 359
+        Left = 345
         Top = 307
         Width = 276
         Height = 17
         Size.Values = (
           74.965277777777780000
-          1583.090277777778000000
+          1521.354166666667000000
           1353.784722222222000000
           1217.083333333333000000)
         XLColumn = 0
@@ -2174,13 +2177,13 @@
         VertAdjust = 0
       end
       object QRShape6: TQRShape
-        Left = 359
+        Left = 345
         Top = 373
         Width = 276
         Height = 17
         Size.Values = (
           74.965277777777780000
-          1583.090277777778000000
+          1521.354166666667000000
           1644.826388888889000000
           1217.083333333333000000)
         XLColumn = 0
@@ -2190,13 +2193,13 @@
         VertAdjust = 0
       end
       object QRLabel1: TQRLabel
-        Left = 357
+        Left = 343
         Top = 147
         Width = 283
         Height = 19
         Size.Values = (
           83.784722222222220000
-          1574.270833333333000000
+          1512.534722222222000000
           648.229166666666700000
           1247.951388888889000000)
         XLColumn = 0
@@ -2220,13 +2223,13 @@
         FontSize = 18
       end
       object QRDBText3: TQRDBText
-        Left = 359
+        Left = 345
         Top = 407
         Width = 278
         Height = 28
         Size.Values = (
           123.472222222222200000
-          1583.090277777778000000
+          1521.354166666667000000
           1794.756944444444000000
           1225.902777777778000000)
         XLColumn = 0
@@ -2253,13 +2256,13 @@
         FontSize = 28
       end
       object QRDBText4: TQRDBText
-        Left = 363
+        Left = 349
         Top = 46
         Width = 79
         Height = 18
         Size.Values = (
           79.375000000000000000
-          1600.729166666667000000
+          1538.993055555556000000
           202.847222222222200000
           348.368055555555600000)
         XLColumn = 0

@@ -260,6 +260,7 @@ object frmShowOrder: TfrmShowOrder
       'join orderhuvud o on o.ID = orderrad.orderID'
       'left Join Ytbehandling y on y.ID = orderrad.YtbehandlingID'
       'where orderrad.artikelid = :ArtikelId'
+      'and o.borttagen is null'
       'order by orderrad.Datum desc')
     Left = 516
     Top = 116

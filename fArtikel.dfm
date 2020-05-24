@@ -3,15 +3,15 @@
   Top = 231
   ActiveControl = wwIncrementalSearch1
   Caption = 'Artikelregister'
-  ClientHeight = 625
+  ClientHeight = 641
   ClientWidth = 834
   ExplicitWidth = 840
-  ExplicitHeight = 654
+  ExplicitHeight = 670
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
     Width = 715
-    Height = 625
+    Height = 641
     Font.Color = clBlack
     Font.Name = 'MS Sans Serif'
     ParentFont = False
@@ -35,12 +35,12 @@
       Left = 16
       Top = 20
       Width = 87
-      Height = 14
+      Height = 13
       Caption = 'S'#246'k artikelnummer'
     end
     object Label8: TLabel [3]
-      Left = 16
-      Top = 412
+      Left = 20
+      Top = 442
       Width = 76
       Height = 13
       Caption = 'Underartiklar'
@@ -79,7 +79,7 @@
       Left = 108
       Top = 16
       Width = 141
-      Height = 22
+      Height = 21
       DataSource = DataSource1
       SearchField = 'Artikelnummer'
       TabOrder = 1
@@ -88,7 +88,7 @@
       Left = 20
       Top = 222
       Width = 689
-      Height = 184
+      Height = 214
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clBlack
       Font.Height = -11
@@ -98,7 +98,7 @@
       TabOrder = 2
       object Label1: TLabel
         Left = 21
-        Top = 50
+        Top = 41
         Width = 68
         Height = 13
         Alignment = taRightJustify
@@ -107,7 +107,7 @@
       end
       object Label2: TLabel
         Left = 37
-        Top = 73
+        Top = 64
         Width = 52
         Height = 13
         Alignment = taRightJustify
@@ -116,7 +116,7 @@
       end
       object Label3: TLabel
         Left = 6
-        Top = 100
+        Top = 91
         Width = 83
         Height = 13
         Alignment = taRightJustify
@@ -125,7 +125,7 @@
       end
       object Label4: TLabel
         Left = 65
-        Top = 26
+        Top = 17
         Width = 24
         Height = 13
         Alignment = taRightJustify
@@ -134,7 +134,7 @@
       end
       object Label5: TLabel
         Left = 29
-        Top = 125
+        Top = 116
         Width = 60
         Height = 13
         Alignment = taRightJustify
@@ -143,7 +143,7 @@
       end
       object Label7: TLabel
         Left = 37
-        Top = 149
+        Top = 140
         Width = 52
         Height = 13
         Alignment = taRightJustify
@@ -152,7 +152,7 @@
       end
       object Label9: TLabel
         Left = 395
-        Top = 127
+        Top = 118
         Width = 46
         Height = 13
         Alignment = taRightJustify
@@ -161,16 +161,25 @@
       end
       object Label10: TLabel
         Left = 403
-        Top = 155
+        Top = 146
         Width = 38
         Height = 13
         Alignment = taRightJustify
         Caption = 'Fastpris'
         FocusControl = DBEdit1
       end
+      object Label11: TLabel
+        Left = 7
+        Top = 166
+        Width = 78
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Ritningsnotering'
+        FocusControl = DBEdit2
+      end
       object DBEdit1: TDBEdit
         Left = 96
-        Top = 46
+        Top = 37
         Width = 265
         Height = 21
         DataField = 'Artikelnummer'
@@ -179,7 +188,7 @@
       end
       object DBEdit2: TDBEdit
         Left = 95
-        Top = 70
+        Top = 61
         Width = 265
         Height = 21
         DataField = 'Beteckning'
@@ -188,7 +197,7 @@
       end
       object edtYtbehandling: TwwDBLookupCombo
         Left = 95
-        Top = 96
+        Top = 87
         Width = 265
         Height = 21
         DropDownAlignment = taLeftJustify
@@ -206,7 +215,7 @@
       end
       object edtKund: TwwDBLookupCombo
         Left = 96
-        Top = 22
+        Top = 13
         Width = 265
         Height = 21
         DropDownAlignment = taLeftJustify
@@ -224,7 +233,7 @@
       end
       object DBEdit3: TDBEdit
         Left = 95
-        Top = 122
+        Top = 113
         Width = 265
         Height = 21
         DataField = 'PDFFilNamn'
@@ -233,7 +242,7 @@
       end
       object Button1: TButton
         Left = 362
-        Top = 122
+        Top = 113
         Width = 22
         Height = 22
         Caption = '...'
@@ -244,20 +253,20 @@
         Font.Name = 'Default'
         Font.Style = [fsBold]
         ParentFont = False
-        TabOrder = 6
+        TabOrder = 5
       end
       object DBEdit4: TDBEdit
         Left = 96
-        Top = 146
+        Top = 137
         Width = 264
         Height = 21
         DataField = 'Lagersaldo'
         DataSource = DataSource1
-        TabOrder = 5
+        TabOrder = 6
       end
       object wwDBLookupCombo1: TwwDBLookupCombo
         Left = 447
-        Top = 124
+        Top = 115
         Width = 228
         Height = 21
         DropDownAlignment = taLeftJustify
@@ -267,7 +276,7 @@
         DataSource = DataSource1
         LookupTable = qryLU_Artikeltyp
         LookupField = 'Id'
-        TabOrder = 7
+        TabOrder = 10
         AutoDropDown = False
         ShowButton = True
         PreciseEditRegion = False
@@ -275,7 +284,7 @@
       end
       object DBCheckBox1: TDBCheckBox
         Left = 447
-        Top = 73
+        Top = 64
         Width = 97
         Height = 20
         Caption = 'Bockritning finns'
@@ -285,7 +294,7 @@
       end
       object DBCheckBox2: TDBCheckBox
         Left = 447
-        Top = 98
+        Top = 89
         Width = 97
         Height = 20
         Caption = 'Fixatur finns'
@@ -295,39 +304,52 @@
       end
       object DBEdit5: TDBEdit
         Left = 447
-        Top = 21
+        Top = 12
         Width = 61
         Height = 21
+        TabStop = False
+        Color = clInactiveCaption
         DataField = 'Id'
         DataSource = DataSource1
         ReadOnly = True
-        TabOrder = 10
+        TabOrder = 12
       end
       object DBEdit6: TDBEdit
         Left = 447
-        Top = 151
+        Top = 142
         Width = 97
         Height = 21
         DataField = 'Fastpris'
         DataSource = DataSource1
         TabOrder = 11
       end
+      object DBMemo1: TDBMemo
+        Left = 95
+        Top = 164
+        Width = 265
+        Height = 42
+        DataField = 'Notering'
+        DataSource = DataSource1
+        TabOrder = 7
+      end
     end
     object Panel4: TPanel
       Left = 11
-      Top = 432
+      Top = 462
       Width = 693
-      Height = 182
+      Height = 168
       Align = alBottom
       Caption = 'Panel3'
       TabOrder = 3
+      ExplicitTop = 461
       object Panel5: TPanel
         Left = 546
         Top = 1
         Width = 146
-        Height = 180
+        Height = 166
         Align = alRight
         TabOrder = 0
+        ExplicitHeight = 180
         object Button2: TButton
           Left = 11
           Top = 12
@@ -378,15 +400,17 @@
         Left = 1
         Top = 1
         Width = 545
-        Height = 180
+        Height = 166
         Align = alClient
+        BorderWidth = 3
         Caption = 'Panel5'
         TabOrder = 1
+        ExplicitHeight = 180
         object wwDBGrid1: TwwDBGrid
-          Left = 1
-          Top = 1
-          Width = 543
-          Height = 178
+          Left = 4
+          Top = 4
+          Width = 537
+          Height = 158
           Selected.Strings = (
             'UnderartikelNummer'#9'16'#9'Artikelnr'
             'UnderartikelBeteckning'#9'38'#9'Beteckning'
@@ -417,13 +441,15 @@
           TitleLines = 1
           TitleButtons = False
           PadColumnStyle = pcsPadHeader
+          ExplicitWidth = 533
+          ExplicitHeight = 157
         end
       end
     end
   end
   inherited Panel2: TPanel
     Left = 715
-    Height = 625
+    Height = 641
     ExplicitLeft = 715
     ExplicitHeight = 625
     inherited DBNav: TDBNavigator
@@ -446,13 +472,14 @@
     SQL.Strings = (
       
         'Select a.*,typ.Beteckning ArtikeltypBeteckning,typ.systemname Ar' +
-        'tikeltypSystemname from Artikel a'
+        'tikeltypSystemname '
+      'from Artikel a'
       'left join artikeltyp typ on typ.id = a.ArtikeltypId'
       'order by a.Artikelnummer'
       ''
       '')
-    Left = 504
-    Top = 96
+    Left = 440
+    Top = 76
     object FDQuery1Artikelnummer: TStringField
       DisplayWidth = 19
       FieldName = 'Artikelnummer'
@@ -545,6 +572,14 @@
     object FDQuery1Fastpris: TCurrencyField
       FieldName = 'Fastpris'
       Origin = 'Fastpris'
+      Visible = False
+    end
+    object FDQuery1Notering: TMemoField
+      FieldName = 'Notering'
+      Origin = 'Notering'
+      Visible = False
+      BlobType = ftMemo
+      Size = 2147483647
     end
   end
   object Custom_Artikel_Delete: TFDStoredProc
@@ -606,11 +641,13 @@
       end>
   end
   object qryArtikelgrupp: TFDQuery
-    Active = True
     AggregatesActive = True
     MasterSource = DataSource1
     MasterFields = 'Id'
+    DetailFields = 'Id'
     Connection = dm.FDConnection1
+    FetchOptions.AssignedValues = [evCache]
+    FetchOptions.Cache = [fiBlobs, fiMeta]
     UpdateOptions.AssignedValues = [uvRefreshMode]
     UpdateOptions.RefreshMode = rmManual
     SQL.Strings = (
@@ -634,9 +671,10 @@
     ParamData = <
       item
         Name = 'ID'
-        DataType = ftInteger
+        DataType = ftAutoInc
         ParamType = ptInput
-        Value = Null
+        Size = 4
+        Value = 51296
       end>
     object qryArtikelgruppUnderartikelNummer: TStringField
       DisplayLabel = 'Artikelnr'
@@ -778,7 +816,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

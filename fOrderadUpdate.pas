@@ -66,6 +66,8 @@ type
     qryOrderradSenasteOrdertypId: TIntegerField;
     qryOrderradSenasteOrderdatum: TSQLTimeStampField;
     qryOrderhistoryOrdertypString: TStringField;
+    qryOrderradOffertPrisPerEnhet: TCurrencyField;
+    qryOrderradOffertdatum: TSQLTimeStampField;
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Tabort1Click(Sender: TObject);

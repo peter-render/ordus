@@ -331,6 +331,9 @@ type
 var
   frmOrderLista: TfrmOrderLista;
   ordersumma: double;
+  cLeveransdatum: Boolean;
+  cYTBEHANDLINGDATUM: Boolean;
+  cOrderdatum,cOrderid, cKundreferens,cGodsmarke,cordernummer,cFakturanummer,cKundnamn,cEgenmarkning: Boolean;
 
 Const
   stUA: Integer = 4; // Under arbete
@@ -378,6 +381,7 @@ begin
   f.windowstate := wsmaximized;
   f.show;
   frmmain.tbtnOrderlista.ImageIndex := 4;
+  frmmain.tbtnArtikel.Imageindex := 1;
 
 end;
 
@@ -391,6 +395,19 @@ procedure TfrmOrderLista.FormShow(Sender: TObject);
 var
   I: Integer;
 begin
+
+  cLeveransdatum := false;
+  cYTBEHANDLINGDATUM := false;
+  cOrderdatum := false;
+  cOrderid := false;
+  cKundreferens:= false;
+  cGodsmarke := False;
+  cordernummer:= False;
+  cFakturanummer := False;
+  cKundnamn:= False;
+  cEgenmarkning:= False;
+
+
 
   for I := 0 to PageControl1.PageCount - 1 do
     PageControl1.Pages[I].Destroy;
@@ -432,6 +449,9 @@ begin
   begin
     close;
     ParamByName('@OrderstatusId').Value := 4; // Underarbete
+    ParamByName('@Orderby').Value := 'OrderId';
+    ParamByName('@sortasc').Value := 0; // -- 0 = asc, 1 = desc
+
     open;
   end;
 
@@ -451,7 +471,11 @@ begin
   cbVisaAllaFakturor.Visible := false;
 
   frmmain.tbtnOrderlista.Enabled := false;
+
   frmmain.tbtnOrderlista.ImageIndex := 0;
+  frmmain.tbtnArtikel.Imageindex := 1;
+  frmmain.tbtnKunder.ImageIndex:= 2;
+
 
   PageControl1Change(Sender);
 
@@ -2178,16 +2202,98 @@ begin
 end;
 
 procedure TfrmOrderLista.wwDBGrid1TitleButtonClick(Sender: TObject; AFieldName: string);
+var
+  sortasc: Boolean;
 begin
 
-  if (uppercase(AFieldName) = 'ORDERID') or (AFieldName = 'Fakturanummer') then
+
+  if
+    (uppercase(AFieldName) = 'ORDERID') or
+    (uppercase(AFieldName) = 'KUNDNAMN') or
+    (uppercase(AFieldName) = 'ORDERNUMMER') or
+    (uppercase(AFieldName) = 'ORDERDATUM') or
+    (uppercase(AFieldName) = 'YTBEHANDLINGDATUM') or
+    (uppercase(AFieldName) = 'LEVERANSDATUM') or
+    (AFieldName = 'Godsmärke')       or
+    (AFieldName = 'EgenMärkning')      or
+    (uppercase(AFieldName) = 'KUNDREFERENS')      or
+    (uppercase(AFieldName) = 'FAKTURANUMMER')
+
+  then
+  begin
+
+    if uppercase(AFieldName) = 'ORDERID' then
+    begin
+      cOrderid := not cOrderid;
+      sortasc := cOrderid;
+    end;
+
+    if uppercase(AFieldName) = 'KUNDNAMN' then
+    begin
+      cKundnamn := not cKundnamn;
+      sortasc := cKundnamn;
+    end;
+
+    if uppercase(AFieldName) = 'ORDERNUMMER' then
+    begin
+      cOrdernummer := not cOrdernummer;
+      sortasc := cOrdernummer;
+    end;
+
+    if uppercase(AFieldName) = 'ORDERDATUM' then
+    begin
+      cOrderdatum := not cOrderdatum;
+      sortasc := cOrderdatum;
+    end;
+
+    if uppercase(AFieldName) = 'YTBEHANDLINGDATUM' then
+    begin
+      cYTBEHANDLINGDATUM := not cYTBEHANDLINGDATUM;
+      sortasc := cYTBEHANDLINGDATUM;
+    end;
+
+    if uppercase(AFieldName) = 'LEVERANSDATUM' then
+    begin
+      cLeveransdatum := not cLeveransdatum;
+      sortasc := cLeveransdatum;
+    end;
+
+    if AFieldName = 'Godsmärke' then
+    begin
+      cGodsmarke := not cGodsmarke;
+      sortasc := cGodsmarke;
+    end;
+
+
+    if AFieldName = 'EgenMärkning' then
+    begin
+      cEgenmarkning := not cEgenmarkning;
+      sortasc := cEgenmarkning;
+    end;
+
+    if uppercase(AFieldName) = 'KUNDREFERENS' then
+    begin
+      cKundreferens := not cKundreferens;
+      sortasc := cKundreferens;
+    end;
+
+    if uppercase(AFieldName) = 'FAKTURANUMMER' then
+    begin
+      cFakturanummer := not cFakturanummer;
+      sortasc := cFakturanummer;
+    end;
+
     with sp_Orderlist do
     begin
       close;
       ParamByName('@Orderby').Value := AFieldName;
       ParamByName('@OrderstatusId').Value := apStatus;
+      ParamByName('@sortasc').Value := sortasc; // -- 0 = asc, 1 = desc
       open;
     end;
+
+  end;
+
 end;
 
 procedure TfrmOrderLista.actArbetsorderPrintExecute(Sender: TObject);
@@ -2210,15 +2316,17 @@ var
   Fakturanummer: String;
 begin
 
-  Fakturanummer := sp_Orderlist.fieldbyname('Fakturanummer').asString;
+  Fakturanummer := sp_Orderlist.fieldbyname('Fakturanummer').asstring;
 
   if sp_Orderlist.fieldbyname('Orderstatusid').asInteger = stFA then
 
-    if messagedlg('Vill du arkivera denna faktura (alla ordrar med fakturanmummer '+ Fakturanummer+')?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    if messagedlg('Vill du arkivera denna faktura (alla ordrar med fakturanmummer ' + Fakturanummer + ')?',
+      mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     begin
-        dm.FDConnection1.ExecSQL('Update  Orderhuvud set OrderstatusId = ' + inttostr(stAK) + ' where fakturanummer =' +char(39) + fakturanummer+ char(39))  ;
+      dm.FDConnection1.ExecSQL('Update  Orderhuvud set OrderstatusId = ' + inttostr(stAK) + ' where fakturanummer =' +
+        char(39) + Fakturanummer + char(39));
 
-              RefreshOrderlist;
+      RefreshOrderlist;
     end;
 
 end;

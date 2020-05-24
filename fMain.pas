@@ -6,8 +6,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Db, ComCtrls, ToolWin, Menus, ImgList, ExtCtrls, Inifiles,
   StdCtrls, FileCtrl, Mask, EditNew, ActnMan, ActnColorMaps, FireDAC.UI.Intf,
-  FireDAC.VCLUI.Wait,
-  FireDAC.Stan.Intf, FireDAC.Comp.UI, fOrderPlanering, fOrderkalkyl, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.VCLUI.Wait,  FireDAC.Stan.Intf, FireDAC.Comp.UI, fOrderPlanering, fOrderkalkyl, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, System.Actions,
   Vcl.ActnCtrls, Vcl.ActnMenus, fComputer;
@@ -295,6 +294,7 @@ begin
   frmMain.tbtnOrderlista.enabled := True;
   frmMain.tbtnOrderlista.imageindex := 0;
 
+
 end;
 
 procedure TfrmMain.Artikellista1Click(Sender: TObject);
@@ -352,7 +352,6 @@ procedure TfrmMain.Orderstatus1Click(Sender: TObject);
 begin
   with TfrmOrderStatus.Create(application) do
     showmodal;
-
 end;
 
 procedure TfrmMain.Systemparameter1Click(Sender: TObject);
@@ -365,7 +364,6 @@ procedure TfrmMain.Printerindex1Click(Sender: TObject);
 begin
   // with TfrmPrinterindex.create(Application) do
   // showmodal;
-
 end;
 
 procedure TfrmMain.Supportfnster1Click(Sender: TObject);

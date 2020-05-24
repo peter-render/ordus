@@ -28,7 +28,7 @@
     Left = 640
     Top = 320
     Width = 32
-    Height = 14
+    Height = 13
     Caption = 'Label4'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -296,8 +296,8 @@
           'Kundnamn'#9'15'#9'Kundnamn'#9#9
           'Ordernummer'#9'9'#9'Best.Nr'#9#9
           'OrderDatum'#9'12'#9'OrderDatum'#9#9
-          'Ytbehandlingdatum'#9'10'#9'Ytbeh datum'#9#9
-          'leveransdatum'#9'11'#9'Lev datum'#9#9
+          'Ytbehandlingdatum'#9'10'#9'Ytbeh datum'#9'F'#9
+          'leveransdatum'#9'11'#9'Lev datum'#9'T'
           'Godsm'#228'rke'#9'24'#9'Godsm'#228'rke'#9#9
           'EgenM'#228'rkning'#9'25'#9'Egen m'#228'rkning'#9#9
           'Kundreferens'#9'14'#9'Kundreferens'#9#9
@@ -319,6 +319,7 @@
         OnRowChanged = wwDBGrid1RowChanged
         FixedCols = 0
         ShowHorzScrollBar = False
+        EditControlOptions = [ecoCheckboxSingleClick, ecoSearchOwnerForm]
         Align = alClient
         Color = clWhite
         DataSource = dsoOrderlist
@@ -329,7 +330,7 @@
         Font.Style = []
         KeyOptions = []
         MultiSelectOptions = [msoShiftSelect]
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgColLinesDisableFixed]
         ParentFont = False
         PopupMenu = PopupMenuOrderlista
         ReadOnly = True
@@ -342,14 +343,13 @@
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = True
+        TitleMenuAttributes.Options = [sfoSortAscending, sfoSortDescending, sfoFilter, sfoCreateIndexes, sfoAutoTitleButtonSort]
         OnCalcCellColors = wwDBGrid1CalcCellColors
         OnTitleButtonClick = wwDBGrid1TitleButtonClick
         OnDblClick = wwDBGrid1DblClick
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
-        ExplicitLeft = 9
-        ExplicitTop = 6
       end
       object wwExpandButton1: TwwExpandButton
         Left = 600
@@ -398,8 +398,8 @@
   object PopupMenuOrderlista: TPopupMenu
     MenuAnimation = [maTopToBottom]
     OnPopup = PopupMenuOrderlistaPopup
-    Left = 216
-    Top = 128
+    Left = 232
+    Top = 140
     object mnuLäggtillÄndrapositioner: TMenuItem
       Tag = 1
       Action = actOrderLäggtillÄndraPositioner
@@ -933,7 +933,7 @@
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert]
     UpdateOptions.EnableDelete = False
     UpdateOptions.EnableInsert = False
-    StoredProcName = 'OrderList'
+    StoredProcName = 'Orderlist'
     Left = 948
     Top = 168
     ParamData = <
@@ -942,7 +942,6 @@
         Name = '@RETURN_VALUE'
         DataType = ftInteger
         ParamType = ptResult
-        Value = 0
       end
       item
         Position = 2
@@ -975,6 +974,12 @@
         DataType = ftString
         ParamType = ptInput
         Size = 50
+      end
+      item
+        Position = 7
+        Name = '@sortasc'
+        DataType = ftBoolean
+        ParamType = ptInput
       end>
     object sp_OrderlistOrderID: TFDAutoIncField
       Alignment = taCenter

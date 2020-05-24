@@ -470,7 +470,7 @@
     end
     object btnPalettEtikett: TButton
       Left = 8
-      Top = 249
+      Top = 274
       Width = 95
       Height = 25
       Anchors = [akRight, akBottom]
@@ -486,7 +486,7 @@
     end
     object btnLagerplatsetikett: TButton
       Left = 8
-      Top = 218
+      Top = 243
       Width = 95
       Height = 25
       Anchors = [akRight, akBottom]
@@ -569,7 +569,7 @@
     end
     object btnTransport: TButton
       Left = 8
-      Top = 279
+      Top = 304
       Width = 95
       Height = 25
       Caption = '+Pallar'
@@ -597,6 +597,21 @@
       ParentFont = False
       TabOrder = 7
       OnClick = btnJobblistaClick
+    end
+    object btnNotiser: TButton
+      Left = 8
+      Top = 191
+      Width = 95
+      Height = 25
+      Caption = '&Ritningsnotiser'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Default'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 8
+      OnClick = btnNotiserClick
     end
   end
   object StatusBar1: TStatusBar
@@ -1893,7 +1908,7 @@
             'Antal'#9'7'#9'Antal'
             'Personnamn'#9'19'#9'Avrapporterad av'
             'F'#246'ljesedelBeteckning'#9'17'#9'F'#246'ljesedel'
-            'OrderradInfo'#9'21'#9'Info'#9'F')
+            'OrderradInfo'#9'21'#9'Info')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clActiveCaption
@@ -2747,7 +2762,6 @@
     end
   end
   object qryOrderrad: TFDQuery
-    Active = True
     AfterOpen = qryOrderradAfterOpen
     BeforeScroll = qryOrderradBeforeScroll
     AfterScroll = qryOrderradAfterScroll
@@ -3673,7 +3687,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

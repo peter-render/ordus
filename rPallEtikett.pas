@@ -4,9 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  QuickRpt, Qrctrls, ExtCtrls, Db,  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  QuickRpt, Qrctrls, ExtCtrls, Db, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Imaging.jpeg,dateutils;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Imaging.jpeg, dateutils;
 
 type
   TrptPallEtikett = class(TForm)
@@ -41,7 +41,7 @@ type
     QRDBText4: TQRDBText;
     procedure FormShow(Sender: TObject);
     procedure qryCalcFields(DataSet: TDataSet);
-    procedure QRDBText6Print(sender: TObject; var Value: string);
+    procedure QRDBText6Print(Sender: TObject; var Value: string);
   private
     { Private declarations }
   public
@@ -62,18 +62,17 @@ begin
   qry.Open;
 end;
 
-procedure TrptPallEtikett.QRDBText6Print(sender: TObject; var Value: string);
+procedure TrptPallEtikett.QRDBText6Print(Sender: TObject; var Value: string);
 begin
-Value:= 'Antal detaljer: ' + trim(value);
+  Value := 'Antal detaljer: ' + trim(Value);
 end;
 
 procedure TrptPallEtikett.qryCalcFields(DataSet: TDataSet);
 begin
 
-  dataset.fieldbyname('Leveransvecka').AsString:= 'V-'+Format('%.2d',[WeekOfTheYear(qry.FieldByName('Leveransdatum').AsDateTime)])+
-  inttostr(dateutils.DayOfTheWeek(qry.FieldByName('Leveransdatum').AsDateTime));
-
-
+  DataSet.fieldbyname('Leveransvecka').AsString :=
+    'V-' + Format('%.2d', [WeekOfTheYear(qry.fieldbyname('Leveransdatum').AsDateTime)]) +
+    inttostr(dateutils.DayOfTheWeek(qry.fieldbyname('Leveransdatum').AsDateTime));
 
 end;
 

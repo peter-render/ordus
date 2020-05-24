@@ -13,7 +13,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async,
   FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, vcl.Wwkeycb,
-  vcl.ImgList, vcl.Imaging.jpeg;
+  vcl.ImgList, vcl.Imaging.jpeg, fArtikelnotering;
 
 type
   TfrmOrdusrapport2 = class(TForm)
@@ -217,6 +217,7 @@ type
     qryOrderradOrderradInfo: TStringField;
     DBEditN1: TDBEditN;
     Label6: TLabel;
+    btnNotiser: TButton;
     procedure FormShow(Sender: TObject);
     procedure edtOrderNrExit(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -255,6 +256,7 @@ type
     procedure Fixatur1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnJobblistaClick(Sender: TObject);
+    procedure btnNotiserClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -361,109 +363,112 @@ begin
     begin
       if not(btnJobblista.Focused) then
       begin
-        if not(btnFS.Focused) then
+        if not(btnNotiser.Focused) then
         begin
-          if edtOrdernr.Text <> '' then
+          if not(btnFS.Focused) then
           begin
-            if edtOrdernr.ValueInteger > 0 then
+            if edtOrdernr.Text <> '' then
             begin
-
-              cb.checked := false;
-
-              with qryOrderrad do
+              if edtOrdernr.ValueInteger > 0 then
               begin
-                close;
-                parambyname('Orderid').value := strtoint(edtOrdernr.Text);
-                parambyname('visaavrapporterade').value := false;
-                Open;
 
-                if recordcount = 0 then
+                cb.checked := false;
+
+                with qryOrderrad do
                 begin
                   close;
-                  parambyname('visaavrapporterade').value := true;
-                  cb.checked := true;
-                  application.ProcessMessages;
+                  parambyname('Orderid').value := strtoint(edtOrdernr.Text);
+                  parambyname('visaavrapporterade').value := false;
                   Open;
+
+                  if recordcount = 0 then
+                  begin
+                    close;
+                    parambyname('visaavrapporterade').value := true;
+                    cb.checked := true;
+                    application.ProcessMessages;
+                    Open;
+                  end;
+
+                  if recordcount > 0 then
+                  begin
+
+                    DBText4.Visible := true;
+                    dbgrid.Visible := true;
+                    cb.enabled := true;
+                    dbgrid.setfocus;
+                    btnEdit.enabled := true;
+                    btnEdit.Default := true;
+                    btnFSTransport.enabled := true;
+                    lbl.caption := '';
+                    btnEtikett.enabled := true;
+                    btnLagerplatsetikett.enabled := btnEtikett.enabled;
+                    btnTransport.enabled := btnEtikett.enabled;
+                    // *edtSignatur.enabled := true;
+                    btnPalettEtikett.enabled := true;
+
+                    dm.qryLUYtbehandling.Open;
+                    qryLU_personal.Open;
+                    // *edtSignatur.Refreshdisplay;
+                    pnlArtikelsok.Height := 31;
+
+
+
+                    //
+                    // Läsa in följesedlar till pm
+                    //
+
+                    (*
+                      pm.Items.Clear;
+                      with qryFoljesedelperKund do
+                      begin
+                      close;
+                      parambyname('KundId').value :=
+                      qryOrderrad.fieldbyname('KundiD').asString;
+
+                      open;
+                      first;
+                      while not eof do
+                      begin
+                      mi := TMenuItem.Create(Self);
+                      mi.caption := qryFoljesedelperKundBeteckning.asString;
+                      mi.Tag := qryFoljesedelperKundId.asInteger;
+                      mi.OnClick := pmitemClick;
+                      pm.Items.add(mi);
+                      next;
+                      end;
+                      close;
+                      end;
+
+                      mi := TMenuItem.Create(Self);
+                      mi.caption := '-';
+                      mi.Tag := 0;
+                      mi.OnClick := pmitemClick;
+                      pm.Items.add(mi);
+
+                      mi := TMenuItem.Create(Self);
+                      mi.caption := 'Ny Fölesedel';
+                      mi.Tag := -1;
+                      mi.OnClick := pmitemClick;
+                      pm.Items.add(mi);
+                    *)
+
+                  end
+                  else
+                  begin
+                    DBText4.Visible := false;
+                    lbl.caption := 'Order med Ordernr ' + edtOrdernr.Text + ' finns inte i systemet';
+                    edtOrdernr.setfocus;
+                  end;
                 end;
 
-                if recordcount > 0 then
-                begin
+                qryOrderradAfterScroll(qryOrderrad);
 
-                  DBText4.Visible := true;
-                  dbgrid.Visible := true;
-                  cb.enabled := true;
-                  dbgrid.setfocus;
-                  btnEdit.enabled := true;
-                  btnEdit.Default := true;
-                  btnFSTransport.enabled := true;
-                  lbl.caption := '';
-                  btnEtikett.enabled := true;
-                  btnLagerplatsetikett.enabled := btnEtikett.enabled;
-                  btnTransport.enabled := btnEtikett.enabled;
-                  // *edtSignatur.enabled := true;
-                  btnPalettEtikett.enabled := true;
-
-                  dm.qryLUYtbehandling.Open;
-                  qryLU_personal.Open;
-                  // *edtSignatur.Refreshdisplay;
-                  pnlArtikelsok.Height := 31;
-
-
-
-                  //
-                  // Läsa in följesedlar till pm
-                  //
-
-                  (*
-                    pm.Items.Clear;
-                    with qryFoljesedelperKund do
-                    begin
-                    close;
-                    parambyname('KundId').value :=
-                    qryOrderrad.fieldbyname('KundiD').asString;
-
-                    open;
-                    first;
-                    while not eof do
-                    begin
-                    mi := TMenuItem.Create(Self);
-                    mi.caption := qryFoljesedelperKundBeteckning.asString;
-                    mi.Tag := qryFoljesedelperKundId.asInteger;
-                    mi.OnClick := pmitemClick;
-                    pm.Items.add(mi);
-                    next;
-                    end;
-                    close;
-                    end;
-
-                    mi := TMenuItem.Create(Self);
-                    mi.caption := '-';
-                    mi.Tag := 0;
-                    mi.OnClick := pmitemClick;
-                    pm.Items.add(mi);
-
-                    mi := TMenuItem.Create(Self);
-                    mi.caption := 'Ny Fölesedel';
-                    mi.Tag := -1;
-                    mi.OnClick := pmitemClick;
-                    pm.Items.add(mi);
-                  *)
-
-                end
-                else
-                begin
-                  DBText4.Visible := false;
-                  lbl.caption := 'Order med Ordernr ' + edtOrdernr.Text + ' finns inte i systemet';
-                  edtOrdernr.setfocus;
-                end;
               end;
-
-              qryOrderradAfterScroll(qryOrderrad);
-
             end;
+            wwIncrementalSearch1.enabled := true;
+            wwIncrementalSearch1.setfocus;
           end;
-          wwIncrementalSearch1.enabled := true;
-          wwIncrementalSearch1.setfocus;
         end;
       end;
     end;
@@ -727,8 +732,7 @@ begin
 
     if qryOrderrad.fieldbyname('YtbehandlingId').asString = '' then
     begin
-      qryOrderrad.fieldbyname('YtbehandlingId').asInteger := qryOrderrad.fieldbyname('YtbehandlingIdForslag')
-        .asInteger;
+      qryOrderrad.fieldbyname('YtbehandlingId').asInteger := qryOrderrad.fieldbyname('YtbehandlingIdForslag').asInteger;
     end;
     (*
       if qryOrderrad.FieldByName('AttProducera').asFloat = 0 then
@@ -871,6 +875,17 @@ begin
     Showmodal;
   end;
 
+end;
+
+procedure TfrmOrdusrapport2.btnNotiserClick(Sender: TObject);
+begin
+
+  with TfrmArtikelnotering.Create(application) do
+  begin
+    FDquery1.close;
+    Showmodal;
+
+  end;
 end;
 
 procedure TfrmOrdusrapport2.btnJobblistaClick(Sender: TObject);

@@ -83,6 +83,9 @@ type
     qryArtikelgruppUnderartikelBeteckning: TStringField;
     qryArtikelgruppFastpris: TCurrencyField;
     qryArtikelgruppBorttagen: TSQLTimeStampField;
+    DBMemo1: TDBMemo;
+    Label11: TLabel;
+    FDQuery1Notering: TMemoField;
     procedure btnNyClick(Sender: TObject);
     procedure btnAndraClick(Sender: TObject);
     procedure FormShow(Sender: TObject);

@@ -51,7 +51,7 @@
       Left = 89
       Top = 0
       Caption = '&Artikel'
-      ImageIndex = 2
+      ImageIndex = 1
       MenuItem = Artikel1
       OnClick = Artikel1Click
     end
@@ -59,7 +59,7 @@
       Left = 178
       Top = 0
       Caption = '&Kunder'
-      ImageIndex = 3
+      ImageIndex = 2
       MenuItem = Kunder1
       OnClick = tbtnKunderClick
     end
@@ -223,7 +223,7 @@
     Left = 217
     Top = 108
     Bitmap = {
-      494C01010A000D00AC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D00B00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -652,8 +652,8 @@
     end
   end
   object ActionList1: TActionList
-    Left = 604
-    Top = 140
+    Left = 560
+    Top = 116
     object Action2: TAction
       Caption = 'Action2'
     end

@@ -24,7 +24,8 @@ uses
   fKontakter in 'fKontakter.pas' {frmKontakter},
   fKontaktEdit in 'fKontaktEdit.pas' {frmKontaktEdit},
   fStdRV in 'fStdRV.pas' {frmStdRV},
-  fjobblista in 'fjobblista.pas' {frmJobblista};
+  fjobblista in 'fjobblista.pas' {frmJobblista},
+  fArtikelnotering in 'fArtikelnotering.pas' {frmArtikelnotering};
 
 {$R *.RES}
 
@@ -32,6 +33,7 @@ begin
   Application.Initialize;
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmOrdusrapport2, frmOrdusrapport2);
+  Application.CreateForm(TfrmArtikelnotering, frmArtikelnotering);
   Application.Run;
 
 end.

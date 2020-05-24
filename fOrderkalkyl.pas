@@ -274,7 +274,9 @@ begin
         ParamByName('@ArtikelId').value := qry.FieldByName('ArtikelId').asInteger;
         ParamByName('@PrisperEnhet').value := qry.FieldByName('Prisfastställt').asInteger;
         ParamByName('@Antal').value := qry.FieldByName('Antal').asInteger;
-        ParamByName('@YtbehandlingId').value := dm.qryLUYtbehandling.FieldByName('YtbehandlingId').asInteger;
+        ParamByName('@YtbehandlingId').value := qry.FieldByName('YtbehandlingId').asInteger;
+        ParamByName('@Offertdatum').value :=   edtKalkyldatum.Date;
+
         execproc;
       end;
       next;

@@ -324,7 +324,7 @@
         Width = 94
         Height = 21
         Color = clWhite
-        TabOrder = 0
+        TabOrder = 13
         TextHint = True
         OnChange = edtFieldsChange
         OnExit = edtPFstExit
@@ -355,7 +355,7 @@
         Color = cl3DLight
         NumbersOnly = True
         ReadOnly = True
-        TabOrder = 1
+        TabOrder = 0
         TextHint = True
         OnChange = edtFieldsChange
         ColorOnFocus = clWhite
@@ -383,7 +383,7 @@
         Height = 21
         Color = clWhite
         NumbersOnly = True
-        TabOrder = 2
+        TabOrder = 12
         TextHint = True
         OnChange = edtFieldsChange
         OnExit = DBEdit2Exit
@@ -412,7 +412,7 @@
         Height = 21
         Color = clWhite
         NumbersOnly = True
-        TabOrder = 3
+        TabOrder = 11
         TextHint = True
         OnChange = edtFieldsChange
         OnExit = DBEdit2Exit
@@ -441,7 +441,7 @@
         Height = 25
         Caption = 'Spara rad'
         Enabled = False
-        TabOrder = 4
+        TabOrder = 14
         OnClick = Button3Click
       end
       object wwDBGrid3: TwwDBGrid
@@ -466,7 +466,7 @@
         DataSource = dsoOrderradHistoryArtikel
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
         ReadOnly = True
-        TabOrder = 5
+        TabOrder = 4
         TitleAlignment = taLeftJustify
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -492,7 +492,7 @@
         DropDownCount = 40
         DropDownWidth = 300
         Enabled = False
-        TabOrder = 6
+        TabOrder = 1
         AutoDropDown = True
         ShowButton = True
         PreciseEditRegion = False
@@ -507,7 +507,7 @@
         Width = 133
         Height = 25
         Caption = 'Artikelregister'
-        TabOrder = 7
+        TabOrder = 2
         TabStop = False
         OnClick = Button1Click
       end
@@ -518,7 +518,7 @@
         Height = 19
         Color = clMedGray
         ParentBackground = False
-        TabOrder = 8
+        TabOrder = 3
         object Label18: TLabel
           Left = 18
           Top = 4
@@ -573,7 +573,7 @@
         Color = clWhite
         Navigator = True
         ParentFont = False
-        TabOrder = 9
+        TabOrder = 5
         AutoDropDown = False
         ShowButton = True
         PreciseEditRegion = False
@@ -587,7 +587,7 @@
         Height = 21
         Color = clWhite
         NumbersOnly = True
-        TabOrder = 10
+        TabOrder = 6
         Text = 'EditN1'
         TextHint = True
         OnExit = edtLasertidExit
@@ -616,7 +616,7 @@
         Height = 21
         Color = clWhite
         NumbersOnly = True
-        TabOrder = 11
+        TabOrder = 7
         Text = 'EditN1'
         TextHint = True
         OnExit = edtSkrotandelExit
@@ -644,7 +644,7 @@
         Width = 68
         Height = 21
         Color = clWhite
-        TabOrder = 12
+        TabOrder = 8
         Text = 'EditN1'
         TextHint = True
         OnExit = edtViktExit
@@ -676,7 +676,7 @@
         BevelOuter = bvNone
         Color = clMedGray
         ReadOnly = True
-        TabOrder = 13
+        TabOrder = 9
         Text = 'edtArbetstidStk'
         TextHint = True
         ColorOnFocus = clMedGray
@@ -706,7 +706,7 @@
         Color = cl3DLight
         NumbersOnly = True
         ReadOnly = True
-        TabOrder = 14
+        TabOrder = 10
         TextHint = True
         OnChange = edtFieldsChange
         ColorOnFocus = clWhite
@@ -741,7 +741,7 @@
         215)
       object wwDBGrid2: TwwDBGrid
         Left = 21
-        Top = 15
+        Top = 6
         Width = 750
         Height = 191
         TabStop = False
@@ -954,6 +954,7 @@
     Top = 465
     Width = 52
     Height = 21
+    TabStop = False
     Color = clWhite
     TabOrder = 3
     Text = '0'
@@ -1179,7 +1180,7 @@
     Connection = dm.FDConnection1
     StoredProcName = 'OrderRadInsert'
     Left = 288
-    Top = 548
+    Top = 552
     ParamData = <
       item
         Position = 1
@@ -1275,6 +1276,12 @@
         DataType = ftString
         ParamType = ptInput
         Size = 255
+      end
+      item
+        Position = 15
+        Name = '@Offertdatum'
+        DataType = ftDate
+        ParamType = ptInput
       end>
   end
   object sp_OrderhuvudInsert: TFDStoredProc
