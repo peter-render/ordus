@@ -197,6 +197,9 @@ type
     DBText6: TDBText;
     qryOrderFakturadatum: TDateField;
     qryArtikelgruppFastpris: TCurrencyField;
+    qryOrderradcRitningsnoteringFinns: TBooleanField;
+    qryOrderradNotering: TMemoField;
+    qryOrderradcRitningsnoteringFinns_disp: TStringField;
     procedure btnDeleteClick(Sender: TObject);
     procedure edtArtikelCloseUp(Sender: TObject;
       LookupTable, FillTable: TDataSet; modified: Boolean);
@@ -237,6 +240,8 @@ type
     procedure PopupMenu1Popup(Sender: TObject);
     procedure Bockritningok1Click(Sender: TObject);
     procedure qryOrderHistoryCalcFields(DataSet: TDataSet);
+    procedure wwDBGrid1CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+      AFont: TFont; ABrush: TBrush);
   private
     { Private declarations }
   public
@@ -258,6 +263,7 @@ procedure TfrmOrder.btnDeleteClick(Sender: TObject);
 begin
   if messagedlg('Vill du ta bort PosNr: ' + qryOrderradPositionnummer.asString +
     '?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+
   begin
     with sp_OrderradDelete do
     begin
@@ -517,6 +523,15 @@ begin
   // pnlOrderRad.visible := false;
   PageControl1.TabIndex := 1;
 frmmain.tbtnOrderlista.enabled := true;
+
+end;
+
+procedure TfrmOrder.wwDBGrid1CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+  AFont: TFont; ABrush: TBrush);
+begin
+                if (field.FieldName = 'cRitningsnoteringFinns_disp')
+                and (qryOrderrad.FieldByName('cRitningsnoteringFinns').AsBoolean = True) then
+                ABrush.Color :=  clGreen;
 
 end;
 
@@ -795,6 +810,9 @@ begin
     DataSet.FieldByName('cFixatur').value := 1
   else
     DataSet.FieldByName('cFixatur').value := 0;
+
+   dataset.FieldByName('cRitningsnoteringFinns').asBoolean :=
+           dataset.fieldbyname('Notering').AsString <> '';
 
 end;
 

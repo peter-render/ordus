@@ -218,6 +218,9 @@ type
     DBEditN1: TDBEditN;
     Label6: TLabel;
     btnNotiser: TButton;
+    qryOrderradcRitningsnoteringFinns: TBooleanField;
+    qryOrderradNotering: TMemoField;
+    qryOrderradcRitningsnoteringFinns_disp: TStringField;
     procedure FormShow(Sender: TObject);
     procedure edtOrderNrExit(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -257,6 +260,8 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnJobblistaClick(Sender: TObject);
     procedure btnNotiserClick(Sender: TObject);
+    procedure dbgridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+      AFont: TFont; ABrush: TBrush);
   private
     { Private declarations }
   public
@@ -711,6 +716,16 @@ begin
 
 end;
 
+procedure TfrmOrdusrapport2.dbgridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState;
+  Highlight: Boolean; AFont: TFont; ABrush: TBrush);
+begin
+// Fältet cRitningsnoteringFinns_disp finns enbart för att ha en neutrl bakgrund i gridden
+                if (field.FieldName = 'cRitningsnoteringFinns_disp')
+                and (qryOrderrad.FieldByName('cRitningsnoteringFinns').AsBoolean = True) then
+                ABrush.Color :=  clGreen;
+
+end;
+
 procedure TfrmOrdusrapport2.dbgridDblClick(Sender: TObject);
 
 begin
@@ -882,6 +897,7 @@ begin
 
   with TfrmArtikelnotering.Create(application) do
   begin
+    edit1.Text:= qryOrderrad.FieldByName('Artikelnummer').AsString;
     FDquery1.close;
     Showmodal;
 
@@ -979,6 +995,9 @@ begin
     DataSet.fieldbyname('AutoprisFinns').value := '*'
   else
     DataSet.fieldbyname('AutoprisFinns').value := '';
+
+   dataset.FieldByName('cRitningsnoteringFinns').asBoolean :=
+           dataset.fieldbyname('Notering').AsString <> '';
 
   qryOrderradAfterScroll(DataSet);
 end;

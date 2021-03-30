@@ -9,7 +9,7 @@ uses
   FireDAC.VCLUI.Wait,  FireDAC.Stan.Intf, FireDAC.Comp.UI, fOrderPlanering, fOrderkalkyl, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, System.Actions,
-  Vcl.ActnCtrls, Vcl.ActnMenus, fComputer;
+  Vcl.ActnCtrls, Vcl.ActnMenus, fComputer, fRitningsnotering;
 
 type
   TfrmMain = class(TForm)
@@ -57,6 +57,7 @@ type
     Action2: TAction;
     Computer1: TMenuItem;
     Flikkolumner1: TMenuItem;
+    Ritningsnotering1: TMenuItem;
     procedure tbtnKunderClick(Sender: TObject);
     procedure btnAvslutClick(Sender: TObject);
     procedure Ytbehandlingstyper1Click(Sender: TObject);
@@ -87,6 +88,7 @@ type
     procedure tbtnExitClick(Sender: TObject);
     procedure Computer1Click(Sender: TObject);
     procedure Flikkolumner1Click(Sender: TObject);
+    procedure Ritningsnotering1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -384,6 +386,16 @@ procedure TfrmMain.Register2Click(Sender: TObject);
 begin
   with TfrmFoljesedel.Create(application) do
     showmodal;
+end;
+
+procedure TfrmMain.Ritningsnotering1Click(Sender: TObject);
+begin
+
+with TfrmRitningsnotering.create(Application) do
+
+Showmodal;
+
+
 end;
 
 procedure TfrmMain.Importbestllningsfil1Click(Sender: TObject);

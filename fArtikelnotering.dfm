@@ -11,8 +11,7 @@ inherited frmArtikelnotering: TfrmArtikelnotering
   inherited Panel1: TPanel
     Width = 467
     Height = 348
-    ExplicitTop = -8
-    ExplicitWidth = 491
+    ExplicitWidth = 467
     ExplicitHeight = 348
     inherited Bevel1: TBevel
       Left = 20
@@ -61,6 +60,8 @@ inherited frmArtikelnotering: TfrmArtikelnotering
   inherited Panel2: TPanel
     Left = 467
     Height = 348
+    ExplicitLeft = 467
+    ExplicitHeight = 348
     inherited btnNy: TButton
       Top = 300
       Visible = False

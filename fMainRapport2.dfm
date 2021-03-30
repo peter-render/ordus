@@ -1,7 +1,7 @@
 ﻿object frmOrdusrapport2: TfrmOrdusrapport2
   Left = 420
   Top = 223
-  Caption = #197'terrapportering v3.8'
+  Caption = #197'terrapportering v3.9'
   ClientHeight = 570
   ClientWidth = 884
   Color = clBtnFace
@@ -1903,12 +1903,13 @@
             'Positionnummer'#9'4'#9'Pnr'
             'Artikelnummer'#9'14'#9'Artikelnummer'
             'beteckning'#9'26'#9'Beteckning'
-            'cBock'#9'2'#9'B'
-            'cFixatur'#9'2'#9'F'
+            'cRitningsnoteringFinns_disp'#9'2'#9' R'
+            'cFixatur'#9'2'#9' F'
             'Antal'#9'7'#9'Antal'
             'Personnamn'#9'19'#9'Avrapporterad av'
             'F'#246'ljesedelBeteckning'#9'17'#9'F'#246'ljesedel'
-            'OrderradInfo'#9'21'#9'Info')
+            'OrderradInfo'#9'21'#9'Info'
+            'Notering'#9'10'#9'Notering')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clActiveCaption
@@ -1934,6 +1935,7 @@
           TitleLines = 1
           TitleButtons = True
           Visible = False
+          OnCalcCellColors = dbgridCalcCellColors
           OnTitleButtonClick = dbgridTitleButtonClick
           OnDblClick = dbgridDblClick
           ImageList = ImageList1
@@ -2762,6 +2764,7 @@
     end
   end
   object qryOrderrad: TFDQuery
+    Active = True
     AfterOpen = qryOrderradAfterOpen
     BeforeScroll = qryOrderradBeforeScroll
     AfterScroll = qryOrderradAfterScroll
@@ -2808,6 +2811,7 @@
       #9'orad.Ritning1,'
       #9'orad.F'#246'ljesedelId,'
       #9'orad.Totaltid,'
+      'a.Notering,'
       'orad.OrderradInfo,'
       ''
       
@@ -2924,15 +2928,15 @@
       Origin = 'beteckning'
       Size = 200
     end
-    object qryOrderradcBock: TIntegerField
-      DisplayLabel = 'B'
+    object qryOrderradcRitningsnoteringFinns_disp: TStringField
+      DisplayLabel = ' R'
       DisplayWidth = 2
       FieldKind = fkCalculated
-      FieldName = 'cBock'
+      FieldName = 'cRitningsnoteringFinns_disp'
       Calculated = True
     end
     object qryOrderradcFixatur: TIntegerField
-      DisplayLabel = 'F'
+      DisplayLabel = ' F'
       DisplayWidth = 2
       FieldKind = fkCalculated
       FieldName = 'cFixatur'
@@ -2966,6 +2970,29 @@
       FieldName = 'OrderradInfo'
       Origin = 'OrderradInfo'
       Size = 255
+    end
+    object qryOrderradNotering: TMemoField
+      DisplayWidth = 10
+      FieldName = 'Notering'
+      Origin = 'Notering'
+      BlobType = ftMemo
+      Size = 2147483647
+    end
+    object qryOrderradcRitningsnoteringFinns: TBooleanField
+      DisplayLabel = ' R'
+      DisplayWidth = 2
+      FieldKind = fkCalculated
+      FieldName = 'cRitningsnoteringFinns'
+      Visible = False
+      Calculated = True
+    end
+    object qryOrderradcBock: TIntegerField
+      DisplayLabel = 'B'
+      DisplayWidth = 2
+      FieldKind = fkCalculated
+      FieldName = 'cBock'
+      Visible = False
+      Calculated = True
     end
     object qryOrderradFixaturFinns: TBooleanField
       DisplayWidth = 11
@@ -3687,7 +3714,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500240010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020005002C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

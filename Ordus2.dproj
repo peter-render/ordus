@@ -8,7 +8,7 @@
         <FrameworkType>VCL</FrameworkType>
         <ProjectVersion>16.1</ProjectVersion>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Release</Config>
+        <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>1</TargetedPlatforms>
         <AppType>Application</AppType>
@@ -97,14 +97,14 @@
         <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
-        <VerInfo_Build>23</VerInfo_Build>
+        <VerInfo_Build>2</VerInfo_Build>
         <Icon_MainIcon>Ordus3_Icon.ico</Icon_MainIcon>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Release>1</VerInfo_Release>
+        <VerInfo_Release>2</VerInfo_Release>
         <Manifest_File>None</Manifest_File>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_MajorVer>6</VerInfo_MajorVer>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=6.0.1.23;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=6.0.2.2;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <ProjectExtensions>
@@ -569,7 +569,7 @@
         <DCCReference Include="rArbetsorder.pas">
             <Form>rptArbetsorder</Form>
         </DCCReference>
-        <DCCReference Include="rSammelfaktura.pas">
+        <DCCReference Include="rRitningsnotering.pas">
             <Form>rptSammelfaktura</Form>
         </DCCReference>
         <DCCReference Include="fYtbehandling.pas">
@@ -688,6 +688,14 @@
         </DCCReference>
         <DCCReference Include="fFlikkolumner.pas">
             <Form>frmFlikkolumner</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="fRitningsnotering.pas">
+            <Form>frmRitningsnotering</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="dRitningsnoteringNy.pas">
+            <Form>dlgRitningsnoteringNy</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <None Include="Ordus2.todo"/>

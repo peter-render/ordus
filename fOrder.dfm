@@ -216,7 +216,7 @@
           'Positionnummer'#9'4'#9'PosNr'
           'Artikelnummer'#9'22'#9'Artikelnummer'
           'Beteckning'#9'22'#9'Beteckning'
-          'cBock'#9'2'#9' B'
+          'cRitningsnoteringFinns_disp'#9'2'#9'R'#9'F'
           'cFixatur'#9'2'#9' F'
           'PrisperEnhet'#9'9'#9'  Pris/enhet'
           'Fr'#229'nLager'#9'10'#9'     Fr'#229'n lager'
@@ -225,7 +225,8 @@
           'TillLager'#9'9'#9'     Till lager'
           'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'
           'KalkarbetstidTotal'#9'14'#9'Kalk Arbetstid tot'
-          'OrderradInfo'#9'17'#9'Info')
+          'OrderradInfo'#9'17'#9'Info'
+          'Notering'#9'10'#9'Notering')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -250,11 +251,10 @@
         TitleFont.Style = []
         TitleLines = 1
         TitleButtons = False
+        OnCalcCellColors = wwDBGrid1CalcCellColors
         OnDblClick = wwDBGrid1DblClick
         ImageList = ImageList1
         PadColumnStyle = pcsPadHeader
-        ExplicitLeft = 19
-        ExplicitTop = 6
       end
       object btnDelete: TButton
         Left = 1120
@@ -1225,6 +1225,7 @@
       end>
   end
   object qryOrderrad: TFDQuery
+    Active = True
     OnCalcFields = qryOrderradCalcFields
     MasterSource = dsoOrder
     MasterFields = 'OrderId'
@@ -1249,8 +1250,8 @@
       'orad.Kalkarbetstid,'
       'orad.Kalkarbetstid KalkarbetstidTotal,'
       'a.BockritningFinns Bockritning,'
-      'a.FixaturFinns FixaturFinns'
-      ''
+      'a.FixaturFinns FixaturFinns,'
+      'a.Notering'
       'from OrderRad orad'
       'join Artikel a on orad.artikelID = a.id'
       'join orderhuvud oh on oh.id = orad.orderid'
@@ -1293,11 +1294,11 @@
       Origin = 'Beteckning'
       Size = 200
     end
-    object qryOrderradcBock: TIntegerField
-      DisplayLabel = ' B'
+    object qryOrderradcRitningsnoteringFinns_disp: TStringField
+      DisplayLabel = 'R'
       DisplayWidth = 2
       FieldKind = fkCalculated
-      FieldName = 'cBock'
+      FieldName = 'cRitningsnoteringFinns_disp'
       Calculated = True
     end
     object qryOrderradcFixatur: TIntegerField
@@ -1366,6 +1367,29 @@
       FieldName = 'OrderradInfo'
       Origin = 'OrderradInfo'
       Size = 255
+    end
+    object qryOrderradNotering: TMemoField
+      DisplayWidth = 10
+      FieldName = 'Notering'
+      Origin = 'Notering'
+      BlobType = ftMemo
+      Size = 2147483647
+    end
+    object qryOrderradcRitningsnoteringFinns: TBooleanField
+      DisplayLabel = 'R'
+      DisplayWidth = 2
+      FieldKind = fkCalculated
+      FieldName = 'cRitningsnoteringFinns'
+      Visible = False
+      Calculated = True
+    end
+    object qryOrderradcBock: TIntegerField
+      DisplayLabel = ' B'
+      DisplayWidth = 2
+      FieldKind = fkCalculated
+      FieldName = 'cBock'
+      Visible = False
+      Calculated = True
     end
     object qryOrderradKalkarbetstid: TFloatField
       DisplayLabel = 'Kalk arbetstid min'
@@ -2104,7 +2128,7 @@
     Left = 376
     Top = 576
     Bitmap = {
-      494C010102000500380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020005003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

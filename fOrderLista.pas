@@ -1462,7 +1462,7 @@ begin
 
     end;
 
-    // Update ststus att order kommer under Prissatta
+    // Update status att order kommer under Prissatta
     with qryOrdertstatusUpdatePrissatta do
     begin
       ParamByName('OrderID').Value := sp_Orderlist.fieldbyname('Orderid').asInteger;

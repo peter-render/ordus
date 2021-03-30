@@ -51,7 +51,7 @@
       Left = 89
       Top = 0
       Caption = '&Artikel'
-      ImageIndex = 1
+      ImageIndex = 2
       MenuItem = Artikel1
       OnClick = Artikel1Click
     end
@@ -59,7 +59,7 @@
       Left = 178
       Top = 0
       Caption = '&Kunder'
-      ImageIndex = 2
+      ImageIndex = 3
       MenuItem = Kunder1
       OnClick = tbtnKunderClick
     end
@@ -144,6 +144,10 @@
         ImageIndex = 2
         OnClick = Artikel1Click
       end
+      object Ritningsnotering1: TMenuItem
+        Caption = 'Ritningsnotiser'
+        OnClick = Ritningsnotering1Click
+      end
       object Ytbehandlingstyper1: TMenuItem
         Caption = '&Ytbehandlingstyper'
         ImageIndex = 4
@@ -220,10 +224,10 @@
     end
   end
   object ImageList1: TImageList
-    Left = 217
+    Left = 213
     Top = 108
     Bitmap = {
-      494C01010A000D00B00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D00B80010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

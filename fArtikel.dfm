@@ -4,19 +4,19 @@
   ActiveControl = wwIncrementalSearch1
   Caption = 'Artikelregister'
   ClientHeight = 641
-  ClientWidth = 834
-  ExplicitWidth = 840
+  ClientWidth = 856
+  ExplicitWidth = 862
   ExplicitHeight = 670
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 715
+    Width = 737
     Height = 641
     Font.Color = clBlack
     Font.Name = 'MS Sans Serif'
     ParentFont = False
     ExplicitWidth = 715
-    ExplicitHeight = 625
+    ExplicitHeight = 641
     inherited Bevel1: TBevel
       Top = 214
       Width = 689
@@ -58,17 +58,22 @@
       Height = 158
       ControlType.Strings = (
         'BockritningFinns;CheckBox;True;False'
-        'FixaturFinns;CheckBox;1;0')
+        'FixaturFinns;CheckBox;1;0'
+        'RitningsnoterigFinns;CheckBox;True;False'
+        'RitningsnoteringFinns;CheckBox;1;0'
+        'cRitningsnoteringFinns;CheckBox;True;False')
       Selected.Strings = (
-        'Artikelnummer'#9'19'#9'Artikelnummer'
+        'Artikelnummer'#9'16'#9'Artikelnummer'
         'Beteckning'#9'36'#9'beteckning'
         'PDFFilnamn'#9'13'#9'PDFFilnamn'
         'Lagersaldo'#9'10'#9'Lagersaldo'
         'PDFFinns'#9'10'#9'PDFFinns'
-        'Lagerplats'#9'9'#9'Lagerplats'
-        'BockritningFinns'#9'2'#9'B'
-        'FixaturFinns'#9'2'#9'F')
+        'Lagerplats'#9'10'#9'Lagerplats'
+        'cRitningsnoteringFinns'#9'2'#9'R'
+        'FixaturFinns'#9'2'#9'F'
+        'BockritningFinns'#9'2'#9'B')
       TitleButtons = True
+      OnCalcCellColors = dbGridCalcCellColors
       ImageList = ImageList1
       ExplicitLeft = 20
       ExplicitTop = 43
@@ -115,12 +120,12 @@
         FocusControl = DBEdit2
       end
       object Label3: TLabel
-        Left = 6
+        Left = 10
         Top = 91
-        Width = 83
+        Width = 79
         Height = 13
         Alignment = taRightJustify
-        Caption = 'Ytbehandlad def:'
+        Caption = 'Ytbehandlad def'
         FocusControl = DBEdit2
       end
       object Label4: TLabel
@@ -133,12 +138,12 @@
         FocusControl = DBEdit1
       end
       object Label5: TLabel
-        Left = 29
+        Left = 33
         Top = 116
-        Width = 60
+        Width = 56
         Height = 13
         Alignment = taRightJustify
-        Caption = 'Ritning-PDF:'
+        Caption = 'Ritning-PDF'
         FocusControl = DBEdit2
       end
       object Label7: TLabel
@@ -169,8 +174,8 @@
         FocusControl = DBEdit1
       end
       object Label11: TLabel
-        Left = 7
-        Top = 166
+        Left = 11
+        Top = 165
         Width = 78
         Height = 13
         Alignment = taRightJustify
@@ -187,7 +192,7 @@
         TabOrder = 1
       end
       object DBEdit2: TDBEdit
-        Left = 95
+        Left = 96
         Top = 61
         Width = 265
         Height = 21
@@ -196,7 +201,7 @@
         TabOrder = 2
       end
       object edtYtbehandling: TwwDBLookupCombo
-        Left = 95
+        Left = 96
         Top = 87
         Width = 265
         Height = 21
@@ -232,7 +237,7 @@
         AllowClearKey = False
       end
       object DBEdit3: TDBEdit
-        Left = 95
+        Left = 96
         Top = 113
         Width = 265
         Height = 21
@@ -324,8 +329,8 @@
         TabOrder = 11
       end
       object DBMemo1: TDBMemo
-        Left = 95
-        Top = 164
+        Left = 96
+        Top = 162
         Width = 265
         Height = 42
         DataField = 'Notering'
@@ -336,20 +341,20 @@
     object Panel4: TPanel
       Left = 11
       Top = 462
-      Width = 693
+      Width = 715
       Height = 168
       Align = alBottom
       Caption = 'Panel3'
       TabOrder = 3
-      ExplicitTop = 461
+      ExplicitWidth = 693
       object Panel5: TPanel
-        Left = 546
+        Left = 568
         Top = 1
         Width = 146
         Height = 166
         Align = alRight
         TabOrder = 0
-        ExplicitHeight = 180
+        ExplicitLeft = 546
         object Button2: TButton
           Left = 11
           Top = 12
@@ -399,17 +404,17 @@
       object Panel6: TPanel
         Left = 1
         Top = 1
-        Width = 545
+        Width = 567
         Height = 166
         Align = alClient
         BorderWidth = 3
         Caption = 'Panel5'
         TabOrder = 1
-        ExplicitHeight = 180
+        ExplicitWidth = 545
         object wwDBGrid1: TwwDBGrid
           Left = 4
           Top = 4
-          Width = 537
+          Width = 559
           Height = 158
           Selected.Strings = (
             'UnderartikelNummer'#9'16'#9'Artikelnr'
@@ -441,17 +446,16 @@
           TitleLines = 1
           TitleButtons = False
           PadColumnStyle = pcsPadHeader
-          ExplicitWidth = 533
-          ExplicitHeight = 157
+          ExplicitWidth = 537
         end
       end
     end
   end
   inherited Panel2: TPanel
-    Left = 715
+    Left = 737
     Height = 641
     ExplicitLeft = 715
-    ExplicitHeight = 625
+    ExplicitHeight = 641
     inherited DBNav: TDBNavigator
       Left = 39
       Top = 253
@@ -469,19 +473,20 @@
     Top = 68
   end
   inherited FDQuery1: TFDQuery
+    OnCalcFields = FDQuery1CalcFields
     SQL.Strings = (
       
         'Select a.*,typ.Beteckning ArtikeltypBeteckning,typ.systemname Ar' +
-        'tikeltypSystemname '
+        'tikeltypSystemname'
+      ''
       'from Artikel a'
       'left join artikeltyp typ on typ.id = a.ArtikeltypId'
       'order by a.Artikelnummer'
-      ''
-      '')
-    Left = 440
+      ' ')
+    Left = 444
     Top = 76
     object FDQuery1Artikelnummer: TStringField
-      DisplayWidth = 19
+      DisplayWidth = 16
       FieldName = 'Artikelnummer'
       Origin = 'Artikelnummer'
       Required = True
@@ -513,21 +518,28 @@
       Origin = 'PDFFinns'
     end
     object FDQuery1Lagerplats: TStringField
-      DisplayWidth = 9
+      DisplayWidth = 10
       FieldName = 'Lagerplats'
       Origin = 'Lagerplats'
     end
-    object FDQuery1BockritningFinns: TBooleanField
-      DisplayLabel = 'B'
+    object FDQuery1cRitningsNotereingFinns: TBooleanField
+      DisplayLabel = 'R'
       DisplayWidth = 2
-      FieldName = 'BockritningFinns'
-      Origin = 'BockritningFinns'
+      FieldKind = fkCalculated
+      FieldName = 'cRitningsnoteringFinns'
+      Calculated = True
     end
     object FDQuery1FixaturFinns: TBooleanField
       DisplayLabel = 'F'
       DisplayWidth = 2
       FieldName = 'FixaturFinns'
       Origin = 'FixaturFinns'
+    end
+    object FDQuery1BockritningFinns: TBooleanField
+      DisplayLabel = 'B'
+      DisplayWidth = 2
+      FieldName = 'BockritningFinns'
+      Origin = 'BockritningFinns'
     end
     object FDQuery1Id: TFDAutoIncField
       FieldName = 'Id'
@@ -816,7 +828,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500180010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020005001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

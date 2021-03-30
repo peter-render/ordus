@@ -34,25 +34,33 @@ implementation
 procedure TfrmArtikelnotering.btnAndraClick(Sender: TObject);
 begin
   inherited;
-dbmemo1.SetFocus;
+  DBMemo1.SetFocus;
 end;
 
 procedure TfrmArtikelnotering.Edit1Change(Sender: TObject);
 begin
   inherited;
-with fdquery1 do
-begin
-close;
-params.parambyname('ARTIKELNR').Value := edit1.Text;
-open;
-
-end;
+  with fdquery1 do
+  begin
+    close;
+    params.parambyname('ARTIKELNR').Value := Edit1.Text;
+    open;
+  end;
 end;
 
 procedure TfrmArtikelnotering.FormShow(Sender: TObject);
 begin
   inherited;
   Edit1.SetFocus;
+  if edit1.Text <> '' then
+  
+  with fdquery1 do
+  begin
+    close;
+    params.parambyname('ARTIKELNR').Value := Edit1.Text;
+    open;
+  end;
+
 end;
 
 end.

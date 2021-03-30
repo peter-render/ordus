@@ -77,7 +77,6 @@ type
       AFont: TFont; ABrush: TBrush);
     procedure wwDBGrid1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure wwDBGrid1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
-    procedure qryOrderradBeforePost(DataSet: TDataSet);
     procedure FormShow(Sender: TObject);
   private
     { Private declarations }
@@ -190,7 +189,6 @@ begin
       begin
 
         LU_senastePriser.Visible := false;
-
         LU_senastePriser.CloseUp(false);
 
       end;
@@ -258,11 +256,6 @@ begin
   else
     qryOrderradAvrapporteradDatum.AsString := '';
 
-end;
-
-procedure TfrmOrderradUpdate.qryOrderradBeforePost(DataSet: TDataSet);
-begin
-  showmessage('beforepost');
 end;
 
 procedure TfrmOrderradUpdate.wwDBGrid1CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState;

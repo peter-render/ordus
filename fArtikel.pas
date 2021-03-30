@@ -86,6 +86,7 @@ type
     DBMemo1: TDBMemo;
     Label11: TLabel;
     FDQuery1Notering: TMemoField;
+    FDQuery1cRitningsNotereingFinns: TBooleanField;
     procedure btnNyClick(Sender: TObject);
     procedure btnAndraClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -94,6 +95,9 @@ type
     procedure Button3Click(Sender: TObject);
     procedure Button4Click(Sender: TObject);
     procedure btnSparaClick(Sender: TObject);
+    procedure FDQuery1CalcFields(DataSet: TDataSet);
+    procedure dbGridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+      AFont: TFont; ABrush: TBrush);
   private
     procedure btnState;
     { Private declarations }
@@ -256,11 +260,30 @@ begin
 
 end;
 
+procedure TfrmArtikel.dbGridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+  AFont: TFont; ABrush: TBrush);
+begin
+  inherited;
+                if (field.FieldName = 'cRitningsnoteringFinns')
+                and (fdquery1.FieldByName('cRitningsnoteringFinns').AsBoolean = True) then
+                ABrush.Color :=  clGreen;
+
+end;
+
 procedure TfrmArtikel.btnAndraClick(Sender: TObject);
 begin
   inherited;
   edtKund.setfocus;
   btnState;
+
+end;
+
+procedure TfrmArtikel.FDQuery1CalcFields(DataSet: TDataSet);
+begin
+  inherited;
+           dataset.FieldByName('cRitningsnoteringFinns').asBoolean :=
+
+           dataset.fieldbyname('Notering').AsString <> '';
 
 end;
 

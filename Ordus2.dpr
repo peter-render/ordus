@@ -27,7 +27,7 @@ uses
   fritning in 'fritning.pas' {frmRitning},
   fStdRV in 'fStdRV.pas' {frmStdRV},
   rArbetsorder in 'rArbetsorder.pas' {rptArbetsorder},
-  rSammelfaktura in 'rSammelfaktura.pas' {rptSammelfaktura},
+  rRitningsnotering in 'rRitningsnotering.pas' {rptSammelfaktura},
   fYtbehandling in 'fYtbehandling.pas' {frmYtbehandling},
   fTimpris in 'fTimpris.pas' {frmTimpris},
   fShoworder in 'fShoworder.pas' {frmShowOrder},
@@ -66,7 +66,9 @@ uses
   fOrderkalkyl in 'fOrderkalkyl.pas' {frmOrderkalkyl},
   fComputer in 'fComputer.pas' {frmComputer},
   rOrder in 'rOrder.pas' {rptOrder},
-  fFlikkolumner in 'fFlikkolumner.pas' {frmFlikkolumner};
+  fFlikkolumner in 'fFlikkolumner.pas' {frmFlikkolumner},
+  fRitningsnotering in 'fRitningsnotering.pas' {frmRitningsnotering},
+  dRitningsnoteringNy in 'dRitningsnoteringNy.pas' {dlgRitningsnoteringNy};
 
 {$R *.RES}
 
