@@ -5,7 +5,7 @@
   BorderStyle = bsNone
   Caption = 'Best'#228'llning'
   ClientHeight = 671
-  ClientWidth = 1232
+  ClientWidth = 1224
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -28,14 +28,15 @@
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1232
+    Width = 1224
     Height = 671
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 1232
     object Panel3: TPanel
       Left = 1
       Top = 1
-      Width = 1230
+      Width = 1222
       Height = 54
       Align = alTop
       Font.Charset = DEFAULT_CHARSET
@@ -45,6 +46,7 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 1230
       object Label1: TLabel
         Left = 159
         Top = 11
@@ -185,7 +187,7 @@
     object Panel4: TPanel
       Left = 1
       Top = 340
-      Width = 1230
+      Width = 1222
       Height = 330
       Align = alClient
       BorderWidth = 10
@@ -197,9 +199,18 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ExplicitWidth = 1230
       DesignSize = (
-        1230
+        1222
         330)
+      object Label17: TLabel
+        Left = 1053
+        Top = 92
+        Width = 61
+        Height = 14
+        Anchors = [akLeft, akBottom]
+        Caption = 'Ritningsnotis'
+      end
       object wwDBGrid1: TwwDBGrid
         Left = 11
         Top = 11
@@ -216,7 +227,7 @@
           'Positionnummer'#9'4'#9'PosNr'
           'Artikelnummer'#9'22'#9'Artikelnummer'
           'Beteckning'#9'22'#9'Beteckning'
-          'cRitningsnoteringFinns_disp'#9'2'#9'R'#9'F'
+          'cRitningsnoteringFinns_disp'#9'2'#9'R'
           'cFixatur'#9'2'#9' F'
           'PrisperEnhet'#9'9'#9'  Pris/enhet'
           'Fr'#229'nLager'#9'10'#9'     Fr'#229'n lager'
@@ -257,9 +268,9 @@
         PadColumnStyle = pcsPadHeader
       end
       object btnDelete: TButton
-        Left = 1120
+        Left = 1100
         Top = 52
-        Width = 89
+        Width = 113
         Height = 25
         Anchors = [akTop, akRight]
         Caption = 'Ta bort rad'
@@ -273,9 +284,9 @@
         OnClick = btnDeleteClick
       end
       object btnEdit: TButton
-        Left = 1120
+        Left = 1100
         Top = 21
-        Width = 89
+        Width = 113
         Height = 25
         Anchors = [akTop, akRight]
         Caption = #196'ndra rad '
@@ -288,14 +299,26 @@
         TabOrder = 2
         OnClick = wwDBGrid1DblClick
       end
+      object DBMemo1: TDBMemo
+        Left = 1051
+        Top = 108
+        Width = 162
+        Height = 209
+        Anchors = [akLeft, akRight, akBottom]
+        DataField = 'Notering'
+        DataSource = dsoOrderrad
+        ReadOnly = True
+        TabOrder = 3
+      end
     end
     object Panel5: TPanel
       Left = 1
       Top = 55
-      Width = 1230
+      Width = 1222
       Height = 285
       Align = alTop
       TabOrder = 2
+      ExplicitWidth = 1230
       object Splitter1: TSplitter
         Left = 377
         Top = 1
@@ -879,11 +902,12 @@
       object Panel1: TPanel
         Left = 380
         Top = 1
-        Width = 849
+        Width = 841
         Height = 283
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 849
         object Splitter2: TSplitter
           Left = 441
           Top = 0
@@ -1055,15 +1079,16 @@
         object Panel9: TPanel
           Left = 444
           Top = 0
-          Width = 405
+          Width = 397
           Height = 283
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
+          ExplicitWidth = 405
           object Panel10: TPanel
             Left = 0
             Top = 0
-            Width = 405
+            Width = 397
             Height = 24
             Align = alTop
             Alignment = taLeftJustify
@@ -1076,28 +1101,31 @@
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 0
+            ExplicitWidth = 405
           end
           object Panel11: TPanel
             Left = 0
             Top = 24
-            Width = 405
+            Width = 397
             Height = 259
             Align = alClient
             BevelOuter = bvNone
             BorderWidth = 3
             TabOrder = 1
+            ExplicitWidth = 405
             object Panel14: TPanel
               Left = 3
               Top = 3
-              Width = 399
+              Width = 391
               Height = 253
               Align = alClient
               BevelOuter = bvLowered
               TabOrder = 0
+              ExplicitWidth = 399
               object dbgArtikelgrupp: TwwDBGrid
                 Left = 1
                 Top = 1
-                Width = 397
+                Width = 389
                 Height = 251
                 Selected.Strings = (
                   'Artikelnummer'#9'30'#9'Artikelnummer'
@@ -1129,6 +1157,7 @@
                 TitleLines = 1
                 TitleButtons = False
                 PadColumnStyle = pcsPadHeader
+                ExplicitWidth = 397
               end
             end
           end
@@ -1225,7 +1254,6 @@
       end>
   end
   object qryOrderrad: TFDQuery
-    Active = True
     OnCalcFields = qryOrderradCalcFields
     MasterSource = dsoOrder
     MasterFields = 'OrderId'
@@ -2128,7 +2156,7 @@
     Left = 376
     Top = 576
     Bitmap = {
-      494C0101020005003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -2187,6 +2187,7 @@ begin
     // report.preview;
 
   end;
+
 end;
 
 procedure TfrmOrderLista.wwDBLookupCombo1CloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);

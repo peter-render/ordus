@@ -200,6 +200,8 @@ type
     qryOrderradcRitningsnoteringFinns: TBooleanField;
     qryOrderradNotering: TMemoField;
     qryOrderradcRitningsnoteringFinns_disp: TStringField;
+    DBMemo1: TDBMemo;
+    Label17: TLabel;
     procedure btnDeleteClick(Sender: TObject);
     procedure edtArtikelCloseUp(Sender: TObject;
       LookupTable, FillTable: TDataSet; modified: Boolean);

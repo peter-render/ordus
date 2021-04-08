@@ -3,8 +3,8 @@
   Top = 450
   BorderStyle = bsDialog
   Caption = #196'ndra order / planera'
-  ClientHeight = 561
-  ClientWidth = 585
+  ClientHeight = 521
+  ClientWidth = 543
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,46 +16,46 @@
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 14
+  TextHeight = 13
   object Label1: TLabel
-    Left = 86
-    Top = 41
-    Width = 32
-    Height = 15
+    Left = 82
+    Top = 38
+    Width = 28
+    Height = 13
     Alignment = taRightJustify
     Caption = 'Kund:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 11
-    Top = 72
-    Width = 107
-    Height = 15
+    Left = 22
+    Top = 67
+    Width = 88
+    Height = 13
     Alignment = taRightJustify
     Caption = 'Best'#228'llningsdatum:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 35
-    Top = 99
-    Width = 83
-    Height = 15
+    Left = 42
+    Top = 92
+    Width = 68
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Best'#228'llningsnr:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -63,16 +63,16 @@
     ShowHint = True
   end
   object Label5: TLabel
-    Left = 54
-    Top = 127
-    Width = 64
-    Height = 15
+    Left = 56
+    Top = 118
+    Width = 54
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Er referens:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -80,16 +80,16 @@
     ShowHint = True
   end
   object Label6: TLabel
-    Left = 50
-    Top = 193
-    Width = 68
-    Height = 15
+    Left = 53
+    Top = 179
+    Width = 57
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Godsm'#228'rke:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -97,16 +97,16 @@
     ShowHint = True
   end
   object Label7: TLabel
-    Left = 29
-    Top = 290
-    Width = 89
-    Height = 15
+    Left = 34
+    Top = 269
+    Width = 76
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Leveransdatum:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -114,30 +114,30 @@
     ShowHint = True
   end
   object Label8: TLabel
-    Left = 83
-    Top = 320
-    Width = 35
-    Height = 15
+    Left = 79
+    Top = 297
+    Width = 31
+    Height = 13
     Alignment = taRightJustify
     Caption = 'Fritext:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label9: TLabel
-    Left = 29
-    Top = 261
-    Width = 89
-    Height = 15
+    Left = 34
+    Top = 242
+    Width = 76
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Till ytbehandling'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -145,79 +145,79 @@
     ShowHint = True
   end
   object Label10: TLabel
-    Left = 213
-    Top = 447
-    Width = 78
-    Height = 15
+    Left = 203
+    Top = 415
+    Width = 67
+    Height = 13
     Alignment = taRightJustify
     Caption = 'Inplanerad tid:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label11: TLabel
-    Left = 434
-    Top = 448
-    Width = 37
-    Height = 14
+    Left = 403
+    Top = 416
+    Width = 38
+    Height = 13
     Caption = 'Label11'
   end
   object Label12: TLabel
-    Left = 164
-    Top = 420
-    Width = 127
-    Height = 15
+    Left = 160
+    Top = 390
+    Width = 110
+    Height = 13
     Alignment = taRightJustify
     Caption = 'Arbetstid autober'#228'knad'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label13: TLabel
-    Left = 434
-    Top = 421
+    Left = 403
+    Top = 391
     Width = 38
-    Height = 14
+    Height = 13
     Caption = 'Label13'
   end
   object Label14: TLabel
-    Left = 182
-    Top = 476
-    Width = 109
-    Height = 15
+    Left = 176
+    Top = 442
+    Width = 94
+    Height = 13
     Alignment = taRightJustify
     Caption = 'Arbetstid att planera'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object Label15: TLabel
-    Left = 434
-    Top = 477
+    Left = 403
+    Top = 443
     Width = 38
-    Height = 14
+    Height = 13
     Caption = 'Label15'
   end
   object Label2: TLabel
-    Left = 33
-    Top = 221
-    Width = 87
-    Height = 15
+    Left = 37
+    Top = 205
+    Width = 74
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Egen m'#228'rkning:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -225,23 +225,23 @@
     ShowHint = True
   end
   object Label16: TLabel
-    Left = 54
-    Top = 156
-    Width = 67
-    Height = 15
+    Left = 50
+    Top = 145
+    Width = 57
+    Height = 13
     Caption = 'V'#229'r referens'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object edtLevdatum: TwwDBDateTimePicker
-    Left = 130
-    Top = 288
-    Width = 161
-    Height = 23
+    Left = 121
+    Top = 267
+    Width = 149
+    Height = 21
     CalendarAttributes.Font.Charset = DEFAULT_CHARSET
     CalendarAttributes.Font.Color = clWindowText
     CalendarAttributes.Font.Height = -11
@@ -253,7 +253,7 @@
     Epoch = 1950
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -261,13 +261,13 @@
     TabOrder = 9
   end
   object LU_Kundperson: TwwDBLookupCombo
-    Left = 129
-    Top = 124
-    Width = 242
-    Height = 23
+    Left = 120
+    Top = 115
+    Width = 225
+    Height = 21
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     DropDownAlignment = taLeftJustify
@@ -285,55 +285,55 @@
     AllowClearKey = False
   end
   object DBEdit1: TDBEdit
-    Left = 131
-    Top = 96
-    Width = 160
+    Left = 122
+    Top = 89
+    Width = 148
     Height = 23
     DataField = 'OrderNummer'
     DataSource = dsoOrderedit
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
     TabOrder = 2
   end
   object DBEdit2: TDBEdit
-    Left = 129
-    Top = 190
-    Width = 242
+    Left = 120
+    Top = 176
+    Width = 225
     Height = 23
     DataField = 'Godsm'#228'rke'
     DataSource = dsoOrderedit
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
     TabOrder = 5
   end
   object DBMemo1: TDBMemo
-    Left = 130
-    Top = 317
-    Width = 430
-    Height = 79
+    Left = 121
+    Top = 294
+    Width = 399
+    Height = 74
     DataField = 'Fritext'
     DataSource = dsoOrderedit
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
     TabOrder = 10
   end
   object edtDatumYtbehandling: TwwDBDateTimePicker
-    Left = 130
-    Top = 259
-    Width = 161
-    Height = 23
+    Left = 121
+    Top = 241
+    Width = 149
+    Height = 21
     CalendarAttributes.Font.Charset = DEFAULT_CHARSET
     CalendarAttributes.Font.Color = clWindowText
     CalendarAttributes.Font.Height = -11
@@ -345,7 +345,7 @@
     Epoch = 1950
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -353,13 +353,13 @@
     TabOrder = 7
   end
   object LUYtbehandling: TwwDBLookupCombo
-    Left = 304
-    Top = 259
-    Width = 261
-    Height = 23
+    Left = 282
+    Top = 241
+    Width = 243
+    Height = 21
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     DropDownAlignment = taLeftJustify
@@ -380,71 +380,66 @@
   end
   object Panel1: TPanel
     Left = 0
-    Top = 517
-    Width = 585
-    Height = 44
+    Top = 480
+    Width = 543
+    Height = 41
     Align = alBottom
     TabOrder = 15
-    ExplicitTop = 506
-    ExplicitWidth = 579
     DesignSize = (
-      585
-      44)
+      543
+      41)
     object btnSparaPlanera: TButton
-      Left = 334
-      Top = 9
-      Width = 144
-      Height = 27
+      Left = 310
+      Top = 8
+      Width = 134
+      Height = 25
       Anchors = [akRight, akBottom]
       Caption = 'Spara och planera'
       Default = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
       TabOrder = 0
       OnClick = btnSparaPlaneraClick
-      ExplicitLeft = 328
     end
     object Button2: TButton
-      Left = 493
-      Top = 9
-      Width = 81
-      Height = 27
+      Left = 458
+      Top = 8
+      Width = 75
+      Height = 25
       Anchors = [akRight, akBottom]
       Caption = 'Avbryt'
       ModalResult = 2
       TabOrder = 1
       OnClick = Button2Click
-      ExplicitLeft = 487
     end
     object btnSpara: TButton
-      Left = 188
-      Top = 9
-      Width = 131
-      Height = 27
+      Left = 175
+      Top = 8
+      Width = 121
+      Height = 25
       Anchors = [akRight, akBottom]
       Caption = 'Spara'
       Default = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
-      Font.Height = -12
+      Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ModalResult = 1
       ParentFont = False
       TabOrder = 2
       OnClick = btnSparaClick
-      ExplicitLeft = 182
     end
   end
   object wwDBGrid1: TwwDBGrid
-    Left = 600
-    Top = 9
-    Width = 413
-    Height = 199
+    Left = 557
+    Top = 8
+    Width = 384
+    Height = 185
     IniAttributes.Delimiter = ';;'
     IniAttributes.UnicodeIniFile = False
     TitleColor = clBtnFace
@@ -462,9 +457,9 @@
     TitleButtons = False
   end
   object edtTotaltidPlanerad: TDBEditN
-    Left = 297
-    Top = 445
-    Width = 131
+    Left = 276
+    Top = 413
+    Width = 121
     Height = 23
     TabStop = False
     Color = clMenu
@@ -472,7 +467,7 @@
     DataSource = frmOrderLista.dsoOrderlist
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -491,10 +486,10 @@
     TextHint = True
   end
   object wwDBDateTimePicker1: TwwDBDateTimePicker
-    Left = 130
-    Top = 69
-    Width = 161
-    Height = 23
+    Left = 121
+    Top = 64
+    Width = 149
+    Height = 21
     CalendarAttributes.Font.Charset = DEFAULT_CHARSET
     CalendarAttributes.Font.Color = clWindowText
     CalendarAttributes.Font.Height = -11
@@ -505,7 +500,7 @@
     Epoch = 1950
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -514,9 +509,9 @@
     UnboundDataType = wwDTEdtDate
   end
   object edtAutotid: TDBEditN
-    Left = 297
-    Top = 417
-    Width = 131
+    Left = 276
+    Top = 387
+    Width = 121
     Height = 23
     TabStop = False
     Color = clMenu
@@ -525,7 +520,7 @@
     Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -544,31 +539,31 @@
     TextHint = True
   end
   object Memo1: TMemo
-    Left = 600
-    Top = 214
-    Width = 413
-    Height = 276
+    Left = 557
+    Top = 199
+    Width = 384
+    Height = 256
     TabOrder = 16
   end
   object BitBtn1: TBitBtn
-    Left = 533
-    Top = 9
-    Width = 27
-    Height = 27
+    Left = 495
+    Top = 8
+    Width = 25
+    Height = 25
     Caption = '>'
     TabOrder = 17
     TabStop = False
     OnClick = BitBtn1Click
   end
   object edtTotalTid: TEditN
-    Left = 297
-    Top = 473
-    Width = 131
+    Left = 276
+    Top = 439
+    Width = 121
     Height = 23
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -595,13 +590,13 @@
     WidthOnFocus = 0
   end
   object luKund: TwwDBLookupCombo
-    Left = 130
-    Top = 38
-    Width = 241
-    Height = 23
+    Left = 121
+    Top = 35
+    Width = 224
+    Height = 21
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     DropDownAlignment = taLeftJustify
@@ -620,15 +615,15 @@
     AllowClearKey = False
   end
   object CheckBox1: TCheckBox
-    Left = 388
-    Top = 41
-    Width = 133
-    Height = 17
+    Left = 360
+    Top = 38
+    Width = 124
+    Height = 16
     TabStop = False
     Caption = 'L'#229's upp kundv'#228'ljaren'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
@@ -636,28 +631,28 @@
     OnClick = CheckBox1Click
   end
   object DBEdit3: TDBEdit
-    Left = 129
-    Top = 218
-    Width = 242
+    Left = 120
+    Top = 202
+    Width = 225
     Height = 23
     DataField = 'Egenm'#228'rkning'
     DataSource = dsoOrderedit
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
     TabOrder = 6
   end
   object edtVarReferens: TwwDBLookupCombo
-    Left = 129
-    Top = 153
-    Width = 242
-    Height = 23
+    Left = 120
+    Top = 142
+    Width = 225
+    Height = 21
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     DropDownAlignment = taLeftJustify

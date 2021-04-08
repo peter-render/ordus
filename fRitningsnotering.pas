@@ -7,7 +7,7 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, fStdRV, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   Vcl.StdCtrls, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Menus, Vcl.DBCtrls, Vcl.Grids, Vcl.wwdbigrd,
-  Vcl.wwdbgrid, Vcl.ExtCtrls, Vcl.Mask, dRitningsnoteringNy, funclib, Datamodule;
+  Vcl.wwdbgrid, Vcl.ExtCtrls, Vcl.Mask, dRitningsnoteringNy, funclib, Datamodule, rRitningsnotering;
 
 type
   TfrmRitningsnotering = class(TfrmStdRV)
@@ -32,6 +32,7 @@ type
     procedure FDQuery1CalcFields(DataSet: TDataSet);
     procedure dbGridTitleButtonClick(Sender: TObject; AFieldName: string);
     procedure btnBortClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
   private
     { Private declarations }
 
@@ -40,7 +41,7 @@ type
   end;
 
 var
-  frmArtikelnotering_main: TfrmRitningsnotering;
+  frmRitningsnotering: TfrmRitningsnotering;
 
 implementation
 
@@ -99,20 +100,27 @@ begin
 
 end;
 
+procedure TfrmRitningsnotering.Button1Click(Sender: TObject);
+begin
+  with TrptRitningsnotering.create(application) do
+  begin
+    //report.Print;
+    report.preview;
+  end;
+end;
+
 procedure TfrmRitningsnotering.dbGridTitleButtonClick(Sender: TObject; AFieldName: string);
 begin
-  inherited;
-
   // showmessage(afieldname);
   with FDQuery1 do
   begin
     close;
     if AFieldName = 'artikelnummer' then
-      sql.Text := 'Select artikelnummer, Beteckning,Notering from artikel where Notering <> '''' order by Artikelnummer'
+      sql.Text := 'Select Id,artikelnummer, Beteckning,Notering from artikel where Notering <> '''' order by Artikelnummer'
     else if AFieldName = 'Beteckning' then
-      sql.Text := 'Select artikelnummer, Beteckning,Notering from artikel where Notering <> '''' order by Beteckning'
+      sql.Text := 'Select Id,artikelnummer, Beteckning,Notering from artikel where Notering <> '''' order by Beteckning'
     else if AFieldName = 'cNotering1' then
-      sql.Text := 'Select artikelnummer, Beteckning,Notering from artikel where Notering <> '''' order by Notering';
+      sql.Text := 'Select Id,artikelnummer, Beteckning,Notering from artikel where Notering <> '''' order by Notering';
     Open;
   end;
 

@@ -10,7 +10,7 @@ inherited frmRitningsnotering: TfrmRitningsnotering
   inherited Panel1: TPanel
     Width = 731
     Height = 530
-    ExplicitWidth = 758
+    ExplicitWidth = 731
     ExplicitHeight = 530
     inherited Bevel1: TBevel
       Left = 20
@@ -92,7 +92,7 @@ inherited frmRitningsnotering: TfrmRitningsnotering
   inherited Panel2: TPanel
     Left = 731
     Height = 530
-    ExplicitLeft = 758
+    ExplicitLeft = 731
     ExplicitHeight = 530
     inherited btnNy: TButton
       Top = 61
@@ -129,9 +129,8 @@ inherited frmRitningsnotering: TfrmRitningsnotering
       Width = 95
       Height = 25
       Caption = 'Skriv ut'
-      Enabled = False
       TabOrder = 7
-      OnClick = btnBortClick
+      OnClick = Button1Click
     end
   end
   object DBMemo1: TDBMemo [2]
@@ -156,7 +155,7 @@ inherited frmRitningsnotering: TfrmRitningsnotering
   inherited FDQuery1: TFDQuery
     OnCalcFields = FDQuery1CalcFields
     SQL.Strings = (
-      'Select Id,artikelnummer, Beteckning,Notering from artikel where '
+      'Select Id,artikelnummer, Beteckning,Notering from Artikel where '
       'Notering <> '#39#39
       'order by Artikelnummer')
     object FDQuery1artikelnummer: TStringField

@@ -162,10 +162,8 @@ end;
 procedure TfrmOrderPlanering.btnSparaClick(Sender: TObject);
 var
 
-  calcFdatum, fdatum, tdatum, Investdatum, FomDatum, TomDatum, LVDatum,
-    YBDatum: Tdatetime;
-  resursId, intWeekday: integer;
-  tStarttid, tSluttid, dayStart, DayEnd: Tdatetime;
+  calcFdatum, fdatum, tdatum, Investdatum, FomDatum, TomDatum: Tdatetime;
+
   UppdragstidMinuter, TidAttFördela: integer;
   ledigaMinuter: integer;
   TransId: integer;
