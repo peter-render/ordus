@@ -3,25 +3,26 @@ File_0=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms M
 File_1=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderLista.pas',0,1,1,88,10,0,0,,
 File_2=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rSammelfaktura.pas',0,1,1,1,16,0,0,,
 File_3=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMainRapport2.pas',0,1,719,23,728,0,0,,
-File_4=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderEdit.pas',0,1,52,68,25,0,0,,
-File_5=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrder.pas',0,1,243,1,266,0,0,,
-File_6=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\dRitningsnoteringNy.pas',0,1,20,4,42,0,0,,
-File_7=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMain.pas',0,1,391,91,402,0,0,,
-File_8=TSourceModule,'C:\Users\Peter Holzer\Documents\Gnostice\XtremeDocumentStudio Delphi\Lib\RADXE7\vcl\Win32\Export\Vcl.gtQRXport.pas',0,1,339,54,346,0,0,,
-File_9=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas',0,1,59,90,77,0,0,,
-File_10=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fArtikel.pas',0,1,250,1,270,0,0,,
-File_11=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fArtikelnotering.pas',0,1,51,96,62,0,0,,
+File_4=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\dRitningsnoteringNy.pas',0,1,20,4,42,0,0,,
+File_5=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMain.pas',0,1,391,91,402,0,0,,
+File_6=TSourceModule,'C:\Users\Peter Holzer\Documents\Gnostice\XtremeDocumentStudio Delphi\Lib\RADXE7\vcl\Win32\Export\Vcl.gtQRXport.pas',0,1,339,54,346,0,0,,
+File_7=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas',0,1,59,90,77,0,0,,
+File_8=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fArtikel.pas',0,1,250,1,270,0,0,,
+File_9=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fArtikelnotering.pas',0,1,51,96,62,0,0,,
 
 [Modules]
-Module0=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rRitningsnotering.pas
+Module0=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrder.pas
 Module1=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Datamodule.pas
 Module2=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rOrder.pas
-Module3=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rEtikett.pas
+Module3=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fRitningsnotering.pas
 Module4=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rFoljesedel.pas
-Count=5
+Module5=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rRitningsnotering.pas
+Module6=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderEdit.pas
+Module7=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rEtikett.pas
+Count=8
 EditWindowCount=1
 
-[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rRitningsnotering.pas]
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrder.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=1
@@ -29,24 +30,35 @@ FormOnTop=1
 [C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Datamodule.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
 [C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rOrder.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
-[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rEtikett.pas]
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fRitningsnotering.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
 [C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rFoljesedel.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fRitningsnotering.pas]
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rRitningsnotering.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderEdit.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rEtikett.pas]
+ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
@@ -55,13 +67,16 @@ FormState=1
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=5
-CurrentEditView=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rRitningsnotering.pas
+ViewCount=8
+CurrentEditView=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrder.pas
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
+View5=5
+View6=6
+View7=7
 PercentageSizes=1
 Create=1
 Visible=1
@@ -126,6 +141,28 @@ EditViewName=Borland.FormDesignerView
 
 [View3]
 CustomEditViewType=TEditView
+Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderEdit.pas
+CursorX=68
+CursorY=25
+TopLine=25
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=Borland.FormDesignerView
+
+[View4]
+CustomEditViewType=TEditView
+Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrder.pas
+CursorX=1
+CursorY=268
+TopLine=245
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=Borland.FormDesignerView
+
+[View5]
+CustomEditViewType=TEditView
 Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Datamodule.pas
 CursorX=1
 CursorY=1
@@ -135,16 +172,27 @@ Elisions=
 Bookmarks=
 EditViewName=Borland.FormDesignerView
 
-[View4]
+[View6]
 CustomEditViewType=TEditView
 Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rFoljesedel.pas
-CursorX=134
-CursorY=17
+CursorX=67
+CursorY=23
 TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
 EditViewName=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\rFoljesedel.pas
+
+[View7]
+CustomEditViewType=TEditView
+Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fRitningsnotering.pas
+CursorX=28
+CursorY=123
+TopLine=112
+LeftCol=1
+Elisions=
+Bookmarks=
+EditViewName=Borland.FormDesignerView
 
 [Watches]
 Count=0
@@ -160,11 +208,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1105
+Height=1114
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1105
+ClientHeight=1114
 TBDockHeight=210
 LRDockWidth=13599
 Dockable=1
@@ -269,11 +317,11 @@ State=0
 Left=0
 Top=0
 Width=1167
-Height=6781
+Height=8790
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1167
-ClientHeight=6781
+ClientHeight=8790
 TBDockHeight=4886
 LRDockWidth=5307
 Dockable=1
@@ -286,7 +334,7 @@ Visible=0
 Docked=1
 State=0
 Left=-139
-Top=-100
+Top=-102
 Width=1844
 Height=3143
 MaxLeft=-1
@@ -350,11 +398,16 @@ MaxLeft=-1
 MaxTop=-1
 ClientWidth=1453
 ClientHeight=6048
-TBDockHeight=7019
+TBDockHeight=9029
 LRDockWidth=1453
 Dockable=1
 StayOnTop=0
 SplitPos=98
+
+[PropInspDesignerSelection]
+ArrangeBy=Name
+SelectedItem=Action,CustomHint
+ExpandedItems=Anchors=0,BorderIcons=0,Constraints=0,ActiveStoredUsage=0,FetchOptions=0,FieldOptions=0,FilterChanges=0,FilterOptions=0,FormatOptions=0,"LiveBindings Designer=0",ResourceOptions=0,Connection=0,UpdateOptions=0,BevelEdges=0,ButtonEffects=0,Font=0,Frame=0,LiveBindings=0,LookupTable=0,Margins=0,Options=0,ProviderFlags=0,DataSource=0,DittoAttributes=0,EditControlOptions=0,ExportOptions=0,IniAttributes=0,KeyOptions=0,LineColors=0,MemoAttributes=0,MultiSelectOptions=0,PaintOptions=0,StyleElements=0,TitleFont=0,TitleMenuAttributes=0,Touch=0
 
 [TFileExplorerForm]
 PercentageSizes=1
@@ -362,8 +415,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=-1578
-Top=-11
+Left=-1696
+Top=-102
 Width=2844
 Height=6200
 MaxLeft=-1
@@ -382,7 +435,7 @@ Visible=0
 Docked=1
 State=0
 Left=-1808
-Top=272
+Top=-102
 Width=276
 Height=352
 MaxLeft=-1
@@ -406,11 +459,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1105
+Height=1114
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1105
+ClientHeight=1114
 TBDockHeight=410
 LRDockWidth=4948
 Dockable=1
@@ -425,11 +478,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1105
+Height=1114
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1105
+ClientHeight=1114
 TBDockHeight=210
 LRDockWidth=7406
 Dockable=1
@@ -448,11 +501,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1105
+Height=1114
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1105
+ClientHeight=1114
 TBDockHeight=1533
 LRDockWidth=3479
 Dockable=1
@@ -467,11 +520,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1105
+Height=1114
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1105
+ClientHeight=1114
 TBDockHeight=2057
 LRDockWidth=3479
 Dockable=1
@@ -486,11 +539,11 @@ State=0
 Left=0
 Top=0
 Width=2339
-Height=1000
+Height=1248
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=2339
-ClientHeight=1000
+ClientHeight=1248
 TBDockHeight=2314
 LRDockWidth=2823
 Dockable=1
@@ -551,11 +604,11 @@ State=0
 Left=0
 Top=0
 Width=1167
-Height=6781
+Height=8790
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1167
-ClientHeight=6781
+ClientHeight=8790
 TBDockHeight=4886
 LRDockWidth=7151
 Dockable=1
@@ -567,8 +620,8 @@ Create=1
 Visible=0
 Docked=1
 State=0
-Left=370
-Top=836
+Left=0
+Top=0
 Width=2859
 Height=3210
 MaxLeft=-1
@@ -589,11 +642,11 @@ State=0
 Left=0
 Top=0
 Width=3823
-Height=1105
+Height=1114
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1105
+ClientHeight=1114
 TBDockHeight=1552
 LRDockWidth=8745
 Dockable=1
@@ -718,14 +771,14 @@ Visible=0
 Docked=1
 State=0
 Left=0
-Top=23
+Top=0
 Width=3823
-Height=1343
+Height=1352
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=3823
-ClientHeight=1343
-TBDockHeight=1343
+ClientHeight=1352
+TBDockHeight=1352
 LRDockWidth=3823
 Dockable=1
 StayOnTop=0
@@ -749,7 +802,7 @@ MaxLeft=-1
 MaxTop=-1
 ClientWidth=1167
 ClientHeight=4552
-TBDockHeight=7019
+TBDockHeight=9029
 LRDockWidth=1167
 Dockable=1
 StayOnTop=0
@@ -773,7 +826,7 @@ MaxLeft=-1
 MaxTop=-1
 ClientWidth=1453
 ClientHeight=1124
-TBDockHeight=7019
+TBDockHeight=9029
 LRDockWidth=1453
 Dockable=1
 StayOnTop=0
@@ -797,7 +850,7 @@ MaxLeft=-1
 MaxTop=-1
 ClientWidth=1167
 ClientHeight=2619
-TBDockHeight=7019
+TBDockHeight=9029
 LRDockWidth=1167
 Dockable=1
 StayOnTop=0

@@ -221,6 +221,7 @@ type
     qryOrderradcRitningsnoteringFinns: TBooleanField;
     qryOrderradNotering: TMemoField;
     qryOrderradcRitningsnoteringFinns_disp: TStringField;
+    DBMemo1: TDBMemo;
     procedure FormShow(Sender: TObject);
     procedure edtOrderNrExit(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);

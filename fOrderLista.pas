@@ -248,6 +248,8 @@ type
     mnuKopieraOrder: TMenuItem;
     actArkivera: TAction;
     A1: TMenuItem;
+    sp_OrderlistAntalArtikelnoteringar: TIntegerField;
+    sp_OrderlistcAntalArtikelNoteringar: TStringField;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -313,6 +315,7 @@ type
     procedure actOffertTaBortExecute(Sender: TObject);
     procedure actCopyOffertExecute(Sender: TObject);
     procedure actArkiveraExecute(Sender: TObject);
+    procedure sp_OrderlistCalcFields(DataSet: TDataSet);
   private
     xfilename: string;
     qrfilename: string;
@@ -333,7 +336,7 @@ var
   ordersumma: double;
   cLeveransdatum: Boolean;
   cYTBEHANDLINGDATUM: Boolean;
-  cOrderdatum,cOrderid, cKundreferens,cGodsmarke,cordernummer,cFakturanummer,cKundnamn,cEgenmarkning: Boolean;
+  cOrderdatum, cOrderid, cKundreferens, cGodsmarke, cordernummer, cFakturanummer, cKundnamn, cEgenmarkning: Boolean;
 
 Const
   stUA: Integer = 4; // Under arbete
@@ -381,7 +384,7 @@ begin
   f.windowstate := wsmaximized;
   f.show;
   frmmain.tbtnOrderlista.ImageIndex := 4;
-  frmmain.tbtnArtikel.Imageindex := 1;
+  frmmain.tbtnArtikel.ImageIndex := 1;
 
 end;
 
@@ -400,14 +403,12 @@ begin
   cYTBEHANDLINGDATUM := false;
   cOrderdatum := false;
   cOrderid := false;
-  cKundreferens:= false;
-  cGodsmarke := False;
-  cordernummer:= False;
-  cFakturanummer := False;
-  cKundnamn:= False;
-  cEgenmarkning:= False;
-
-
+  cKundreferens := false;
+  cGodsmarke := false;
+  cordernummer := false;
+  cFakturanummer := false;
+  cKundnamn := false;
+  cEgenmarkning := false;
 
   for I := 0 to PageControl1.PageCount - 1 do
     PageControl1.Pages[I].Destroy;
@@ -473,9 +474,8 @@ begin
   frmmain.tbtnOrderlista.Enabled := false;
 
   frmmain.tbtnOrderlista.ImageIndex := 0;
-  frmmain.tbtnArtikel.Imageindex := 1;
-  frmmain.tbtnKunder.ImageIndex:= 2;
-
+  frmmain.tbtnArtikel.ImageIndex := 1;
+  frmmain.tbtnKunder.ImageIndex := 2;
 
   PageControl1Change(Sender);
 
@@ -556,6 +556,16 @@ begin
   // begin
 
   // Ordertyp : Offert
+
+  if (Field.fieldname = 'cAntalArtikelNoteringar') then
+  begin
+
+    if (sp_Orderlist.fieldbyname('cAntalArtikelNoteringar').asString <> '') then
+    begin
+      AFont.Color := clWhite;
+      ABrush.Color := clGreen;
+    end;
+  end;
 
   if (Field.fieldname = 'Leveransdatum') and (sp_Orderlist.fieldbyname('Leveransdatum').asdatetime <= date) and
     (sp_Orderlist.fieldbyname('Fakturadatum').asstring = '') then
@@ -1877,6 +1887,17 @@ begin
 
 end;
 
+procedure TfrmOrderLista.sp_OrderlistCalcFields(DataSet: TDataSet);
+begin
+
+
+  if dataset.FieldByName('AntalArtikelnoteringar').AsInteger > 0 then
+    dataset.FieldByName('cAntalArtikelnoteringar').asString := dataset.FieldByName('AntalArtikelnoteringar').AsInteger.ToString else
+    dataset.FieldByName('cAntalArtikelnoteringar').asString := '';
+
+
+end;
+
 procedure TfrmOrderLista.PageControl1Change(Sender: TObject);
 var
 
@@ -2022,6 +2043,7 @@ begin
   *)
 
   wwDBGrid1.Selected.Clear;
+
   with qryGridColumns do
   begin
     sql.Clear;
@@ -2085,7 +2107,7 @@ begin
 
   // Rita upp själva tabsen i olika färgar beråde från status
 
-  Control.Canvas.Font.Color := clblack;
+  Control.Canvas.Font.Color := clBlack;
   Control.Canvas.Font.Size := 10;
   Control.Canvas.Font.name := 'Verdana';
 
@@ -2207,17 +2229,10 @@ var
   sortasc: Boolean;
 begin
 
-
-  if
-    (uppercase(AFieldName) = 'ORDERID') or
-    (uppercase(AFieldName) = 'KUNDNAMN') or
-    (uppercase(AFieldName) = 'ORDERNUMMER') or
-    (uppercase(AFieldName) = 'ORDERDATUM') or
-    (uppercase(AFieldName) = 'YTBEHANDLINGDATUM') or
-    (uppercase(AFieldName) = 'LEVERANSDATUM') or
-    (AFieldName = 'Godsmärke')       or
-    (AFieldName = 'EgenMärkning')      or
-    (uppercase(AFieldName) = 'KUNDREFERENS')      or
+  if (uppercase(AFieldName) = 'ORDERID') or (uppercase(AFieldName) = 'KUNDNAMN') or
+    (uppercase(AFieldName) = 'ORDERNUMMER') or (uppercase(AFieldName) = 'ORDERDATUM') or
+    (uppercase(AFieldName) = 'YTBEHANDLINGDATUM') or (uppercase(AFieldName) = 'LEVERANSDATUM') or
+    (AFieldName = 'Godsmärke') or (AFieldName = 'EgenMärkning') or (uppercase(AFieldName) = 'KUNDREFERENS') or
     (uppercase(AFieldName) = 'FAKTURANUMMER')
 
   then
@@ -2237,8 +2252,8 @@ begin
 
     if uppercase(AFieldName) = 'ORDERNUMMER' then
     begin
-      cOrdernummer := not cOrdernummer;
-      sortasc := cOrdernummer;
+      cordernummer := not cordernummer;
+      sortasc := cordernummer;
     end;
 
     if uppercase(AFieldName) = 'ORDERDATUM' then
@@ -2264,7 +2279,6 @@ begin
       cGodsmarke := not cGodsmarke;
       sortasc := cGodsmarke;
     end;
-
 
     if AFieldName = 'EgenMärkning' then
     begin

@@ -20,6 +20,7 @@
     Top = 8
     Width = 952
     Height = 1347
+    ShowingPreview = False
     DataSet = qry
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -59,6 +60,7 @@
     PrinterSettings.UseCustomPaperCode = False
     PrinterSettings.CustomPaperCode = 0
     PrinterSettings.PrintMetaFile = False
+    PrinterSettings.MemoryLimit = 1000000
     PrinterSettings.PrintQuality = 0
     PrinterSettings.Collate = 0
     PrinterSettings.ColorOption = 0
@@ -107,6 +109,8 @@
           2.204861111111111000
           213.871527777777800000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -117,6 +121,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRDBText3: TQRDBText
@@ -130,6 +135,8 @@
           2.204861111111111000
           74.965277777777780000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Color = clWhite
@@ -140,6 +147,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRDBText2: TQRDBText
@@ -153,6 +161,8 @@
           2.204861111111110000
           626.180555555556000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -164,6 +174,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRDBText4: TQRDBText
@@ -177,6 +188,8 @@
           2.204861111111111000
           48.506944444444440000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Color = clWhite
@@ -187,6 +200,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRDBText6: TQRDBText
@@ -200,6 +214,8 @@
           2.204861111111111000
           134.496527777777800000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Color = clWhite
@@ -210,6 +226,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRDBText12: TQRDBText
@@ -223,6 +240,8 @@
           4.409722222222222000
           110.243055555555600000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Color = clWhite
@@ -233,6 +252,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
     end
@@ -285,6 +305,8 @@
           15.434027777777780000
           127.881944444444400000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Artikel nr'
@@ -292,6 +314,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRLabel2: TQRLabel
@@ -305,6 +328,8 @@
           15.434027777777780000
           163.159722222222200000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Beteckning'
@@ -312,6 +337,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRLabel3: TQRLabel
@@ -325,6 +351,8 @@
           15.434027777777780000
           74.965277777777780000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Antal'
@@ -332,6 +360,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRShape2: TQRShape
@@ -345,6 +374,8 @@
           -2.645833333333330000
           1688.041666666670000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Shape = qrsHorLine
         VertAdjust = 0
       end
@@ -359,6 +390,8 @@
           59.531250000000000000
           1688.923611111110000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Shape = qrsHorLine
         VertAdjust = 0
       end
@@ -373,6 +406,8 @@
           15.434027777777780000
           119.062500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Totalvikt'
@@ -380,6 +415,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRLabel5: TQRLabel
@@ -393,6 +429,8 @@
           15.434027777777780000
           52.916666666666670000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Vikt'
@@ -400,6 +438,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRLabel9: TQRLabel
@@ -413,6 +452,8 @@
           15.434027777777780000
           127.881944444444400000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Ordus nr'
@@ -420,6 +461,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
     end
@@ -455,6 +497,8 @@
           224.895833333333300000
           268.993055555555600000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Egen m'#228'rkning:'
@@ -468,6 +512,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRLabel13: TQRLabel
@@ -481,6 +526,8 @@
           167.569444444444400000
           101.423611111111100000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Kund:'
@@ -494,6 +541,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object header: TQRLabel
@@ -507,6 +555,8 @@
           15.434027777777780000
           291.041666666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'F'#214'LJESEDEL'
@@ -520,6 +570,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 12
       end
       object QRLabel19: TQRLabel
@@ -533,6 +584,8 @@
           108.038194444444400000
           198.437500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Lev. datum:'
@@ -546,6 +599,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRDBText16: TQRDBText
@@ -559,6 +613,8 @@
           110.243055555555600000
           200.642361111111100000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -570,6 +626,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRDBText5: TQRDBText
@@ -583,6 +640,8 @@
           165.364583333333300000
           648.229166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -594,6 +653,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRImage1: TQRImage
@@ -607,6 +667,8 @@
           11.024305555555560000
           692.326388888888900000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Picture.Data = {
           0A544A504547496D6167656FA10000FFD8FFE11C8A4578696600004D4D002A00
           000008000C010000030000000106510000010100030000000101530000010200
@@ -1912,6 +1974,8 @@
           15.434027777777780000
           119.062500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Color = clWhite
@@ -1920,6 +1984,7 @@
         Text = ''
         Transparent = False
         ExportAs = exptText
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRDBText7: TQRDBText
@@ -1933,6 +1998,8 @@
           227.100694444444400000
           652.638888888888900000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -1944,6 +2011,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRLabel10: TQRLabel
@@ -1957,6 +2025,8 @@
           108.038194444444400000
           330.729166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'F'#246'ljesedelnummer:'
@@ -1970,6 +2040,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRDBText11: TQRDBText
@@ -1983,6 +2054,8 @@
           110.243055555555600000
           121.267361111111100000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -1994,6 +2067,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRLabel8: TQRLabel
@@ -2007,6 +2081,8 @@
           295.451388888888900000
           299.861111111111100000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Fakturam'#228'rkning:'
@@ -2020,6 +2096,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRDBText8: TQRDBText
@@ -2033,6 +2110,8 @@
           293.246527777777800000
           650.434027777777800000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -2045,6 +2124,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
     end
@@ -2080,6 +2160,8 @@
           7.937500000000000000
           1688.041666666670000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Shape = qrsHorLine
         VertAdjust = 0
       end
@@ -2094,6 +2176,8 @@
           44.097222222222220000
           280.017361111111100000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Color = clWhite
@@ -2117,6 +2201,8 @@
           85.989583333333300000
           1688.923611111110000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Shape = qrsHorLine
         VertAdjust = 0
       end
@@ -2164,6 +2250,8 @@
           35.277777777777780000
           366.006944444444400000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taCenter
         AlignToBand = False
         Color = clWhite
@@ -2193,6 +2281,8 @@
           39.687500000000000000
           577.673611111111100000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
@@ -2223,6 +2313,8 @@
           39.687500000000000000
           577.673611111111100000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -2270,6 +2362,8 @@
           26.458333333333300000
           1386.857638888890000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -2288,6 +2382,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
     end
@@ -2319,6 +2414,8 @@
           28.663194444444440000
           121.267361111111100000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'Ordernr:'
@@ -2333,6 +2430,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 9
       end
     end
@@ -2362,6 +2460,8 @@
           28.663194444444440000
           119.062500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Color = clWhite
@@ -2370,6 +2470,7 @@
         Text = ''
         Transparent = False
         ExportAs = exptText
+        VerticalAlignment = tlTop
         FontSize = 9
       end
       object QRLabel11: TQRLabel
@@ -2383,6 +2484,8 @@
           15.434027777777780000
           291.041666666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         Caption = 'F'#214'LJESEDEL'
@@ -2396,6 +2499,7 @@
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 12
       end
       object QRDBText10: TQRDBText
@@ -2409,6 +2513,8 @@
           26.458333333333330000
           295.451388888888900000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -2420,6 +2526,7 @@
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 9
       end
     end
@@ -2561,6 +2668,8 @@
     EncodersSettings.PDF.ImageSettings.OutputFormat = pifJPEG
     EncodersSettings.PDF.FontSettings.Embedding = efmSubset
     EncodersSettings.PDF.FontSettings.Encoding = fenWinAnsiEncoding
+    EncodersSettings.PDF.LineJoinStyle = ljsMiter
+    EncodersSettings.PDF.LineCapStyle = lcsFlat
     EncodersSettings.XLSX.FileExtension = 'xlsx'
     EncodersSettings.XLSX.FileDescription = 'Microsoft Excel Workbook'
     EncodersSettings.XLSX.Formatting.RowSpacing = 0

@@ -2,10 +2,10 @@
   Left = 420
   Top = 223
   Caption = #197'terrapportering v3.9'
-  ClientHeight = 570
-  ClientWidth = 884
+  ClientHeight = 579
+  ClientWidth = 932
   Color = clBtnFace
-  Constraints.MaxWidth = 900
+  Constraints.MaxWidth = 1050
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -28,10 +28,10 @@
     Alignment = taRightJustify
   end
   object Panel2: TPanel
-    Left = 770
+    Left = 790
     Top = 0
-    Width = 114
-    Height = 551
+    Width = 142
+    Height = 560
     Align = alRight
     Anchors = [akTop, akRight]
     BorderWidth = 3
@@ -42,14 +42,15 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    ExplicitLeft = 808
     DesignSize = (
-      114
-      551)
+      142
+      560)
     object btnEtikett: TSpeedButton
-      Left = 9
-      Top = 441
-      Width = 95
-      Height = 100
+      Left = 6
+      Top = 457
+      Width = 125
+      Height = 93
       AllowAllUp = True
       Anchors = [akRight, akBottom]
       Caption = '&Etikett'
@@ -465,15 +466,13 @@
       ShowHint = False
       Transparent = False
       OnClick = btnEtikettClick
-      ExplicitLeft = 7
-      ExplicitTop = 432
     end
     object btnPalettEtikett: TButton
       Left = 8
       Top = 274
-      Width = 95
+      Width = 125
       Height = 25
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akRight]
       Caption = '&Palletikett'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -487,9 +486,9 @@
     object btnLagerplatsetikett: TButton
       Left = 8
       Top = 243
-      Width = 95
+      Width = 125
       Height = 25
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akRight]
       Caption = '&Lagerplatsetik.'
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
@@ -502,11 +501,11 @@
       OnClick = btnLagerplatsetikettClick
     end
     object btnFS: TButton
-      Left = 9
+      Left = 8
       Top = 67
-      Width = 95
+      Width = 125
       Height = 25
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akRight]
       Caption = '&F'#246'ljesedlar'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -519,11 +518,11 @@
       OnClick = btnFSClick
     end
     object btnClose: TButton
-      Left = 9
-      Top = 12
-      Width = 95
+      Left = 8
+      Top = 10
+      Width = 125
       Height = 25
-      Anchors = [akTop, akRight]
+      Anchors = [akLeft, akRight]
       Caption = 'S&t'#228'ng'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -536,11 +535,11 @@
       OnClick = btnCloseClick
     end
     object btnVisaKalender: TButton
-      Left = 9
+      Left = 8
       Top = 98
-      Width = 95
+      Width = 125
       Height = 25
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akRight]
       Caption = 'Kalender'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -552,11 +551,11 @@
       OnClick = btnVisaKalenderClick
     end
     object BtnMaterialbestallning: TButton
-      Left = 9
+      Left = 8
       Top = 129
-      Width = 95
+      Width = 125
       Height = 25
-      Anchors = [akRight, akBottom]
+      Anchors = [akLeft, akRight]
       Caption = 'Materialbest.'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -570,8 +569,9 @@
     object btnTransport: TButton
       Left = 8
       Top = 304
-      Width = 95
+      Width = 125
       Height = 25
+      Anchors = [akLeft, akRight]
       Caption = '+Pallar'
       Enabled = False
       Font.Charset = DEFAULT_CHARSET
@@ -586,8 +586,9 @@
     object btnJobblista: TButton
       Left = 8
       Top = 160
-      Width = 95
+      Width = 125
       Height = 25
+      Anchors = [akLeft, akRight]
       Caption = '&Jobblista'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -601,8 +602,9 @@
     object btnNotiser: TButton
       Left = 8
       Top = 191
-      Width = 95
+      Width = 125
       Height = 25
+      Anchors = [akLeft, akRight]
       Caption = '&Ritningsnotiser'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -613,21 +615,32 @@
       TabOrder = 8
       OnClick = btnNotiserClick
     end
+    object DBMemo1: TDBMemo
+      Left = 6
+      Top = 335
+      Width = 125
+      Height = 110
+      DataField = 'Notering'
+      DataSource = dsoOrderrad
+      TabOrder = 9
+    end
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 551
-    Width = 884
+    Top = 560
+    Width = 932
     Height = 19
     Panels = <>
     SimplePanel = True
     SizeGrip = False
+    ExplicitTop = 551
+    ExplicitWidth = 884
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 770
-    Height = 551
+    Width = 790
+    Height = 560
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
@@ -637,6 +650,8 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 770
+    ExplicitHeight = 551
     object Label10: TLabel
       Left = 228
       Top = 76
@@ -646,16 +661,20 @@
     object Panel3: TPanel
       Left = 0
       Top = 0
-      Width = 770
+      Width = 790
       Height = 66
       Align = alTop
       BevelEdges = []
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitWidth = 770
+      DesignSize = (
+        790
+        66)
       object DBText4: TDBText
         Left = 353
         Top = 15
-        Width = 213
+        Width = 211
         Height = 17
         DataField = 'kundnamn'
         DataSource = dsoOrderrad
@@ -667,7 +686,7 @@
         ParentFont = False
       end
       object Label1: TLabel
-        Left = 229
+        Left = 231
         Top = 15
         Width = 44
         Height = 13
@@ -684,7 +703,7 @@
       object DBText5: TDBText
         Left = 353
         Top = 35
-        Width = 209
+        Width = 215
         Height = 14
         DataField = 'Godsm'#228'rke'
         DataSource = dsoOrderrad
@@ -702,7 +721,7 @@
         Height = 13
       end
       object edtOrdernr: TEditN
-        Left = 280
+        Left = 282
         Top = 12
         Width = 65
         Height = 21
@@ -737,10 +756,11 @@
         WidthOnFocus = 0
       end
       object btnKontakter: TButton
-        Left = 568
-        Top = 12
+        Left = 680
+        Top = 10
         Width = 85
         Height = 25
+        Anchors = [akTop, akRight]
         Caption = 'Kontakter'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -1869,8 +1889,8 @@
     object Panel4: TPanel
       Left = 0
       Top = 97
-      Width = 770
-      Height = 454
+      Width = 790
+      Height = 463
       Align = alClient
       BorderWidth = 1
       Font.Charset = DEFAULT_CHARSET
@@ -1880,18 +1900,22 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ExplicitWidth = 770
+      ExplicitHeight = 454
       object Panel5: TPanel
         Left = 2
         Top = 2
-        Width = 766
-        Height = 249
+        Width = 786
+        Height = 258
         Align = alClient
         TabOrder = 0
+        ExplicitWidth = 766
+        ExplicitHeight = 249
         object dbgrid: TwwDBGrid
           Left = 1
           Top = 1
-          Width = 764
-          Height = 247
+          Width = 784
+          Height = 256
           ControlType.Strings = (
             'F'#246'ljesedelId;CustomEdit;wwDBLookupCombo1;F'
             'Bockritning;ImageIndex;Shrink To Fit'
@@ -1908,8 +1932,7 @@
             'Antal'#9'7'#9'Antal'
             'Personnamn'#9'19'#9'Avrapporterad av'
             'F'#246'ljesedelBeteckning'#9'17'#9'F'#246'ljesedel'
-            'OrderradInfo'#9'21'#9'Info'
-            'Notering'#9'10'#9'Notering')
+            'OrderradInfo'#9'24'#9'Info')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clActiveCaption
@@ -1945,8 +1968,8 @@
       end
       object Panel6: TPanel
         Left = 2
-        Top = 251
-        Width = 766
+        Top = 260
+        Width = 786
         Height = 201
         Align = alBottom
         Font.Charset = DEFAULT_CHARSET
@@ -1956,8 +1979,10 @@
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        ExplicitTop = 251
+        ExplicitWidth = 766
         DesignSize = (
-          766
+          786
           201)
         object Bevel2: TBevel
           Left = 102
@@ -2580,7 +2605,7 @@
           OnClick = btnCalcClick
         end
         object btnLagersaldo: TButton
-          Left = 203
+          Left = 223
           Top = 139
           Width = 52
           Height = 20
@@ -2596,9 +2621,10 @@
           TabOrder = 5
           TabStop = False
           OnClick = btnLagersaldoClick
+          ExplicitLeft = 203
         end
         object btnEdit: TButton
-          Left = 4
+          Left = 24
           Top = 11
           Width = 55
           Height = 22
@@ -2615,6 +2641,7 @@
           TabOrder = 16
           TabStop = False
           OnClick = dbgridDblClick
+          ExplicitLeft = 4
         end
         object btnFSTransport: TButton
           Left = 649
@@ -2658,7 +2685,7 @@
     object pnlArtikelsok: TPanel
       Left = 0
       Top = 66
-      Width = 770
+      Width = 790
       Height = 31
       Align = alTop
       Font.Charset = DEFAULT_CHARSET
@@ -2668,6 +2695,10 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      ExplicitWidth = 770
+      DesignSize = (
+        790
+        31)
       object lblArtnr: TLabel
         Left = 14
         Top = 8
@@ -2699,10 +2730,11 @@
         TabOrder = 0
       end
       object cb: TCheckBox
-        Left = 426
-        Top = 8
+        Left = 542
+        Top = 6
         Width = 223
         Height = 17
+        Anchors = [akTop, akRight]
         Caption = 'Visa orderrader som '#228'r p'#229' f'#246'ljesedel'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -2764,7 +2796,6 @@
     end
   end
   object qryOrderrad: TFDQuery
-    Active = True
     AfterOpen = qryOrderradAfterOpen
     BeforeScroll = qryOrderradBeforeScroll
     AfterScroll = qryOrderradAfterScroll
@@ -2966,7 +2997,7 @@
     end
     object qryOrderradOrderradInfo: TStringField
       DisplayLabel = 'Info'
-      DisplayWidth = 21
+      DisplayWidth = 24
       FieldName = 'OrderradInfo'
       Origin = 'OrderradInfo'
       Size = 255
@@ -2975,6 +3006,7 @@
       DisplayWidth = 10
       FieldName = 'Notering'
       Origin = 'Notering'
+      Visible = False
       BlobType = ftMemo
       Size = 2147483647
     end
@@ -3714,7 +3746,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C0101020005002C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

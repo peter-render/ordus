@@ -33,7 +33,6 @@ begin
   Application.Initialize;
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmOrdusrapport2, frmOrdusrapport2);
-  Application.CreateForm(TfrmArtikelnotering, frmArtikelnotering);
   Application.Run;
 
 end.
