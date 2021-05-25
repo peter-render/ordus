@@ -106,11 +106,9 @@ inherited frmArtikelnotering: TfrmArtikelnotering
     TabOrder = 2
   end
   inherited FDQuery1: TFDQuery
-    Active = True
     SQL.Strings = (
-      
-        'Select artikelnummer, Beteckning,Notering from artikel where art' +
-        'ikelnummer like :Artikelnr +'#39'%'#39)
+      'Select artikelnummer, Beteckning,Notering from artikel '
+      'where artikelnummer = :Artikelnr ')
     ParamData = <
       item
         Name = 'ARTIKELNR'
