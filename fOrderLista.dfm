@@ -292,27 +292,27 @@
         PictureMasks.Strings = (
           'Ordersumma'#9'### ### ###0,00'#9'T'#9'F')
         Selected.Strings = (
-          'OrderID'#9'6'#9'Ordernr'
-          'Kundnamn'#9'15'#9'Kundnamn'
-          'cAntalArtikelNoteringar'#9'2'#9' R'#9'F'
-          'Ordernummer'#9'9'#9'Best.Nr'
-          'OrderDatum'#9'12'#9'OrderDatum'
-          'Ytbehandlingdatum'#9'10'#9'Ytbeh datum'
-          'leveransdatum'#9'11'#9'Lev datum'
-          'Godsm'#228'rke'#9'24'#9'Godsm'#228'rke'
-          'EgenM'#228'rkning'#9'25'#9'Egen m'#228'rkning'
-          'Kundreferens'#9'14'#9'Kundreferens'
-          #196'rAvrapporterad'#9'13'#9#196'rAvrapporterad'
-          'AntalTotal'#9'4'#9'  B'
-          'AntalAvrapporterad'#9'3'#9'  '#197
-          'Antalprissatt'#9'3'#9'  P'
-          'Fakturadatum'#9'10'#9'Fakt datum'
-          'KalkArbetstidTime'#9'10'#9'Utr'#228'knat'
-          'ArbetstidPlaneradTime'#9'13'#9'Inplanerad'
-          'Ordersumma'#9'14'#9'Ordersumma'
-          #196'rPrissatt'#9'10'#9#196'rPrissatt'
-          'F'#246'rfallodatum'#9'11'#9'F'#246'rfallodatum'
-          'Fakturanummer'#9'20'#9'Fakturanummer')
+          'OrderID'#9'6'#9'Ordernr'#9#9
+          'Kundnamn'#9'15'#9'Kundnamn'#9#9
+          'cAntalArtikelNoteringar'#9'2'#9' R'#9#9
+          'Ordernummer'#9'9'#9'Best.Nr'#9#9
+          'OrderDatum'#9'12'#9'OrderDatum'#9#9
+          'Ytbehandlingdatum'#9'10'#9'Ytbeh datum'#9#9
+          'leveransdatum'#9'11'#9'Lev datum'#9#9
+          'Godsm'#228'rke'#9'24'#9'Godsm'#228'rke'#9#9
+          'EgenM'#228'rkning'#9'25'#9'Egen m'#228'rkning'#9#9
+          'Kundreferens'#9'14'#9'Kundreferens'#9#9
+          #196'rAvrapporterad'#9'13'#9#196'rAvrapporterad'#9#9
+          'AntalTotal'#9'4'#9'  B'#9#9
+          'AntalAvrapporterad'#9'3'#9'  '#197#9#9
+          'Antalprissatt'#9'3'#9'  P'#9#9
+          'Fakturadatum'#9'10'#9'Fakt datum'#9#9
+          'KalkArbetstidTime'#9'10'#9'Utr'#228'knat'#9#9
+          'ArbetstidPlaneradTime'#9'13'#9'Inplanerad'#9#9
+          'Ordersumma'#9'14'#9'Ordersumma'#9#9
+          #196'rPrissatt'#9'10'#9#196'rPrissatt'#9#9
+          'F'#246'rfallodatum'#9'11'#9'F'#246'rfallodatum'#9#9
+          'Fakturanummer'#9'20'#9'Fakturanummer'#9#9)
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -351,8 +351,8 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
-        ExplicitLeft = 0
-        ExplicitTop = 2
+        ExplicitLeft = 6
+        ExplicitTop = 6
       end
       object wwExpandButton1: TwwExpandButton
         Left = 600

@@ -330,6 +330,7 @@ begin
 
           if strArtikelnr <> 'T' then
 
+
             with dm.sp_OrderRadImport do
             begin
               parambyname('@KundId').value := 1;
@@ -337,12 +338,18 @@ begin
               parambyname('@Artikelnummer').value := strArtikelnr;
               parambyname('@Artikelbeteckning').value := StrBenamning;
               parambyname('@Antal').value := strtofloat(strAntal);
+
+
+
+
               (*
                 if cbImportPris.checked then
                 parameters.ParamByName('@PrisperEnhet').value := strtofloat(li.subitems[2])
                 else
                 parameters.ParamByName('@PrisperEnhet').value := 0;
               *)
+
+
               parambyname('@Positionnummer').value := i + 1;
               execproc;
 

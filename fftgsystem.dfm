@@ -12,10 +12,8 @@
     Width = 787
     Height = 566
     ParentFont = False
-    ExplicitLeft = 16
-    ExplicitTop = -44
     ExplicitWidth = 787
-    ExplicitHeight = 709
+    ExplicitHeight = 566
     inherited Bevel1: TBevel
       Left = 22
       Top = 434
@@ -139,8 +137,9 @@
   inherited Panel2: TPanel
     Left = 787
     Height = 566
+    PopupMenu = PopupMenu2
     ExplicitLeft = 787
-    ExplicitHeight = 603
+    ExplicitHeight = 566
     inherited DBNav: TDBNavigator
       Hints.Strings = ()
     end
@@ -184,6 +183,14 @@
       ProviderFlags = [pfInWhere, pfInKey]
       ReadOnly = True
       Visible = False
+    end
+  end
+  object PopupMenu2: TPopupMenu
+    Left = 815
+    Top = 344
+    object SttoutputkatalogentillcTemp1: TMenuItem
+      Caption = 'S'#228'tt output-katalogen till c:\Temp'
+      OnClick = SttoutputkatalogentillcTemp1Click
     end
   end
 end

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ORDERS420 SoftwareManufacturer="Monitor ERP System AB" SoftwareName="Monitor" SoftwareVersion="9.0.8">
+    <Order OrderNumber="P204904">
+        <Head>
+            <Supplier SupplierCodeEdi="970087">
+                <Name>Ängelholms Mekaniska Verkstad</Name>
+                <StreetBox1>Verkstadsgatan 7</StreetBox1>
+                <StreetBox2 />
+                <ZipCity1>262 71 Ängelholm</ZipCity1>
+                <ZipCity2 />
+                <Country>Sverige</Country>
+            </Supplier>
+            <Buyer BuyerCodeEdi="101">
+                <Name>InterSystem AB</Name>
+                <StreetBox1>Brandsvigsgatan 3</StreetBox1>
+                <StreetBox2 />
+                <ZipCity1>262 73 Ängelholm</ZipCity1>
+                <ZipCity2 />
+                <Country>SWEDEN</Country>
+            </Buyer>
+            <References>
+                <BuyerReference>Sixten Fors</BuyerReference>
+                <BuyerComment>Konverterad från inköpsorderförsl.</BuyerComment>
+                <GoodsLabeling>
+                    <Row1>401484-2 Vebe Teknik AB</Row1>
+                    <Row2 />
+                </GoodsLabeling>
+            </References>
+            <DeliveryAddress>
+                <Name>InterSystem AB</Name>
+                <StreetBox1>Brandsvigsgatan 3</StreetBox1>
+                <StreetBox2 />
+                <ZipCity1>262 73 Ängelholm</ZipCity1>
+                <ZipCity2 />
+                <Country>SWEDEN</Country>
+                <CompanyAdressFlag>1</CompanyAdressFlag>
+            </DeliveryAddress>
+            <Terms>
+                <DeliveryTerms>
+                    <IncoTermCombiTerm />
+                    <DeliveryMethod />
+                    <TransportPayer>B</TransportPayer>
+                    <CustomerTransportTimeDays>0</CustomerTransportTimeDays>
+                </DeliveryTerms>
+                <CustomerInvoiceCode>101</CustomerInvoiceCode>
+                <OrderDate>2018-12-07</OrderDate>
+                <PaymentTerms>
+                    <TermsOfPaymentDays>30</TermsOfPaymentDays>
+                </PaymentTerms>
+            </Terms>
+            <Export>
+                <Currency>SEK</Currency>
+            </Export>
+        </Head>
+        <Rows>
+            <Row RowNumber="1" RowType="1">
+                <Part PartNumber="251 581" SupplierPartNumber="" />
+                <Text>Fäste M8-90</Text>
+                <ReferenceNumber />
+                <Quantity>5</Quantity>
+                <Unit>ST</Unit>
+                <DeliveryPeriod>2019-01-14</DeliveryPeriod>
+                <Each>60</Each>
+                <Discount>0</Discount>
+                <Setup>0</Setup>
+                <Alloy>0</Alloy>
+            </Row>
+            <Row RowNumber="2" RowType="1">
+                <Part PartNumber="252 693" SupplierPartNumber="" />
+                <Text>Motorhylla kurva</Text>
+                <ReferenceNumber />
+                <Quantity>1</Quantity>
+                <Unit>ST</Unit>
+                <DeliveryPeriod>2019-01-14</DeliveryPeriod>
+                <Each>340</Each>
+                <Discount>0</Discount>
+                <Setup>0</Setup>
+                <Alloy>0</Alloy>
+            </Row>
+            <Row RowNumber="3" RowType="1">
+                <Part PartNumber="253 127" SupplierPartNumber="" />
+                <Text>Stag kurva EL520</Text>
+                <ReferenceNumber />
+                <Quantity>1</Quantity>
+                <Unit>ST</Unit>
+                <DeliveryPeriod>2019-01-14</DeliveryPeriod>
+                <Each>450</Each>
+                <Discount>0</Discount>
+                <Setup>0</Setup>
+                <Alloy>0</Alloy>
+            </Row>
+            <Row RowNumber="4" RowType="1">
+                <Part PartNumber="259 277" SupplierPartNumber="" />
+                <Text>Kurvprofil ImPulz 50</Text>
+                <ReferenceNumber />
+                <Quantity>1</Quantity>
+                <Unit>ST</Unit>
+                <DeliveryPeriod>2019-01-14</DeliveryPeriod>
+                <Each>1725</Each>
+                <Discount>0</Discount>
+                <Setup>0</Setup>
+                <Alloy>0</Alloy>
+            </Row>
+            <Row RowNumber="4" RowType="4">
+                <Part PartNumber="259 277" SupplierPartNumber=" " />
+                <Text>Ytter 90° EL=520, Kedja</Text>
+                <ReferenceNumber />
+                <Quantity>1</Quantity>
+                <Unit />
+                <DeliveryPeriod>2019-01-14</DeliveryPeriod>
+                <Each>0</Each>
+                <Discount>0</Discount>
+                <Setup />
+                <Alloy>0</Alloy>
+            </Row>
+            <Row RowNumber="5" RowType="1">
+                <Part PartNumber="267 206" SupplierPartNumber="" />
+                <Text>Kedjeskydd kurva</Text>
+                <ReferenceNumber />
+                <Quantity>1</Quantity>
+                <Unit>ST</Unit>
+                <DeliveryPeriod>2019-01-14</DeliveryPeriod>
+                <Each>985</Each>
+                <Discount>0</Discount>
+                <Setup>0</Setup>
+                <Alloy>0</Alloy>
+            </Row>
+            <Row RowNumber="6" RowType="1">
+                <Part PartNumber="281 917" SupplierPartNumber="" />
+                <Text>Kedjeskydd Special</Text>
+                <ReferenceNumber />
+                <Quantity>1</Quantity>
+                <Unit>ST</Unit>
+                <DeliveryPeriod>2019-01-14</DeliveryPeriod>
+                <Each>0</Each>
+                <Discount>0</Discount>
+                <Setup>0</Setup>
+                <Alloy>0</Alloy>
+            </Row>
+            <Row RowNumber="6" RowType="4">
+                <Part PartNumber="281 917" SupplierPartNumber=" " />
+                <Text>T=150/200 L=1958</Text>
+                <ReferenceNumber />
+                <Quantity>1</Quantity>
+                <Unit />
+                <DeliveryPeriod>2019-01-14</DeliveryPeriod>
+                <Each>0</Each>
+                <Discount>0</Discount>
+                <Setup />
+                <Alloy>0</Alloy>
+            </Row>
+            <Row RowNumber="7" RowType="1">
+                <Part PartNumber="600 759" SupplierPartNumber="" />
+                <Text>Bandbänk 520-1299</Text>
+                <ReferenceNumber />
+                <Quantity>1</Quantity>
+                <Unit>ST</Unit>
+                <DeliveryPeriod>2019-01-14</DeliveryPeriod>
+                <Each>900</Each>
+                <Discount>0</Discount>
+                <Setup>0</Setup>
+                <Alloy>0</Alloy>
+            </Row>
+        </Rows>
+    </Order>
+</ORDERS420>

@@ -15,6 +15,7 @@
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvAutoReconnect]
+    Connected = True
     LoginDialog = FDGUIxLoginDialog1
     LoginPrompt = False
     OnError = FDConnection1Error
