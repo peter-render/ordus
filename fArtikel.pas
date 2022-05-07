@@ -87,6 +87,7 @@ type
     Label11: TLabel;
     FDQuery1Notering: TMemoField;
     FDQuery1cRitningsNotereingFinns: TBooleanField;
+    cbLagersaldo: TCheckBox;
     procedure btnNyClick(Sender: TObject);
     procedure btnAndraClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -98,6 +99,7 @@ type
     procedure FDQuery1CalcFields(DataSet: TDataSet);
     procedure dbGridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
       AFont: TFont; ABrush: TBrush);
+    procedure cbLagersaldoClick(Sender: TObject);
   private
     procedure btnState;
     { Private declarations }
@@ -126,8 +128,7 @@ procedure TfrmArtikel.btnBortClick(Sender: TObject);
 begin
   // inherited;
 
-  if MessageDlg('Vill du ta bort artikeln?', mtConfirmation, [mbYes, mbNo], 0) = mrYes
-  then
+  if MessageDlg('Vill du ta bort artikeln?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     with Custom_Artikel_Delete do
     begin
       ParamByName('@ArtikelId').value := datasource1.DataSet.FieldByName('Id').asInteger;
@@ -157,11 +158,10 @@ procedure TfrmArtikel.btnSparaClick(Sender: TObject);
 var
   id: integer;
 begin
- fdQuery1.FieldByName('Kundid').Value:= qryLU_Kund.FieldByName('KundID').asInteger;
-
+  fdQuery1.FieldByName('Kundid').value := qryLU_Kund.FieldByName('KundID').asInteger;
 
   inherited;
-  id := fdquery1.FieldByName('Id').asInteger;
+  id := fdQuery1.FieldByName('Id').asInteger;
   dm.qryArtikel.close;
   dm.qryArtikel.open;
   dm.qryArtikel.Locate('ArtikelId', id, []);
@@ -181,8 +181,7 @@ begin
     with qryLU_artikel do
     begin
       close;
-      ParamByName('Id').value := datasource1.DataSet.FieldByName('Id')
-        .asInteger;
+      ParamByName('Id').value := datasource1.DataSet.FieldByName('Id').asInteger;
       open;
     end;
 
@@ -195,14 +194,10 @@ begin
 
       with sp_Custom_ArtikelGrupp_add do
       begin
-        ParamByName('@ArtikelId').value := datasource1.DataSet.FieldByName
-          ('Id').asInteger;
-        ParamByName('@UnderartikelId').value :=
-          qryArtikelgrupp.FieldByName('UnderartikelId').asInteger;
-        ParamByName('@Antal').value := qryArtikelgrupp.FieldByName
-          ('Antal').Asfloat;
-        ParamByName('@Leverantör').value := qryArtikelgrupp.FieldByName
-          ('Leverantör').asString;
+        ParamByName('@ArtikelId').value := datasource1.DataSet.FieldByName('Id').asInteger;
+        ParamByName('@UnderartikelId').value := qryArtikelgrupp.FieldByName('UnderartikelId').asInteger;
+        ParamByName('@Antal').value := qryArtikelgrupp.FieldByName('Antal').Asfloat;
+        ParamByName('@Leverantör').value := qryArtikelgrupp.FieldByName('Leverantör').asString;
         execproc;
 
       end;
@@ -247,8 +242,7 @@ end;
 
 procedure TfrmArtikel.Button4Click(Sender: TObject);
 begin
-  if MessageDlg('Vill du ta bort artiklen från artikelgruppen?', mtConfirmation,
-    [mbYes, mbNo], 0) = mrYes then
+  if MessageDlg('Vill du ta bort artiklen från artikelgruppen?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     with qryArtikelgrupp do
     begin
       Edit;
@@ -260,13 +254,27 @@ begin
 
 end;
 
+procedure TfrmArtikel.cbLagersaldoClick(Sender: TObject);
+begin
+  inherited;
+  with fdQuery1 do
+  begin
+    sql.Clear;
+    if cbLagersaldo.checked then
+      sql.Add('Select a.*,typ.Beteckning ArtikeltypBeteckning,typ.systemname ArtikeltypSystemname from Artikel a left join artikeltyp typ on typ.id = a.ArtikeltypId where Lagersaldo > 0 order by a.Artikelnummer')
+    else
+      sql.Add('Select a.*,typ.Beteckning ArtikeltypBeteckning,typ.systemname ArtikeltypSystemname from Artikel a left join artikeltyp typ on typ.id = a.ArtikeltypId order by a.Artikelnummer');
+    open;
+  end;
+end;
+
 procedure TfrmArtikel.dbGridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
   AFont: TFont; ABrush: TBrush);
 begin
   inherited;
-                if (field.FieldName = 'cRitningsnoteringFinns')
-                and (fdquery1.FieldByName('cRitningsnoteringFinns').AsBoolean = True) then
-                ABrush.Color :=  clGreen;
+  if (Field.FieldName = 'cRitningsnoteringFinns') and (fdQuery1.FieldByName('cRitningsnoteringFinns').AsBoolean = true)
+  then
+    ABrush.Color := clGreen;
 
 end;
 
@@ -281,9 +289,9 @@ end;
 procedure TfrmArtikel.FDQuery1CalcFields(DataSet: TDataSet);
 begin
   inherited;
-           dataset.FieldByName('cRitningsnoteringFinns').asBoolean :=
+  DataSet.FieldByName('cRitningsnoteringFinns').AsBoolean :=
 
-           dataset.fieldbyname('Notering').AsString <> '';
+    DataSet.FieldByName('Notering').asString <> '';
 
 end;
 

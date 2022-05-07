@@ -250,6 +250,8 @@ type
     A1: TMenuItem;
     sp_OrderlistAntalArtikelnoteringar: TIntegerField;
     sp_OrderlistcAntalArtikelNoteringar: TStringField;
+    sp_OrderlistLagersaldo: TIntegerField;
+    Label6: TLabel;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -559,12 +561,26 @@ begin
 
   if (Field.fieldname = 'cAntalArtikelNoteringar') then
   begin
-
-    if (sp_Orderlist.fieldbyname('cAntalArtikelNoteringar').asString <> '') then
+    if (sp_Orderlist.fieldbyname('cAntalArtikelNoteringar').asstring <> '') then
     begin
       AFont.Color := clWhite;
       ABrush.Color := clGreen;
     end;
+  end;
+  //
+  if (Field.fieldname = 'Lagersaldo') then
+  begin
+    if (sp_Orderlist.fieldbyname('Lagersaldo').asInteger <> 0) then
+    begin
+      AFont.Color := clBlack;
+      ABrush.Color := $0000CC00;
+    end
+    else
+    begin
+      AFont.Color := clWhite;
+      ABrush.Color := clWhite;
+    end;
+
   end;
 
   if (Field.fieldname = 'Leveransdatum') and (sp_Orderlist.fieldbyname('Leveransdatum').asdatetime <= date) and
@@ -1890,11 +1906,11 @@ end;
 procedure TfrmOrderLista.sp_OrderlistCalcFields(DataSet: TDataSet);
 begin
 
-
-  if dataset.FieldByName('AntalArtikelnoteringar').AsInteger > 0 then
-    dataset.FieldByName('cAntalArtikelnoteringar').asString := dataset.FieldByName('AntalArtikelnoteringar').AsInteger.ToString else
-    dataset.FieldByName('cAntalArtikelnoteringar').asString := '';
-
+  if DataSet.fieldbyname('AntalArtikelnoteringar').asInteger > 0 then
+    DataSet.fieldbyname('cAntalArtikelnoteringar').asstring := DataSet.fieldbyname('AntalArtikelnoteringar')
+      .asInteger.ToString
+  else
+    DataSet.fieldbyname('cAntalArtikelnoteringar').asstring := '';
 
 end;
 

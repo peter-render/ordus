@@ -202,11 +202,10 @@ type
     qryOrderradcRitningsnoteringFinns_disp: TStringField;
     DBMemo1: TDBMemo;
     Label17: TLabel;
+    qryOrderradLagersaldo: TBCDField;
     procedure btnDeleteClick(Sender: TObject);
-    procedure edtArtikelCloseUp(Sender: TObject;
-      LookupTable, FillTable: TDataSet; modified: Boolean);
-    procedure wwDBGrid2MouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+    procedure edtArtikelCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
+    procedure wwDBGrid2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure btnSparaClick(Sender: TObject);
     procedure edtPrisChange(Sender: TObject);
     procedure Skrivutorderclick(Sender: TObject);
@@ -219,14 +218,13 @@ type
     procedure LblNyArtikelclick(Sender: TObject);
     procedure ArtikelCloseup;
     procedure FormKeyPress(Sender: TObject; var Key: Char);
-    procedure wwDBGrid2CalcCellColors(Sender: TObject; Field: TField;
-      State: TGridDrawState; Highlight: Boolean; AFont: TFont; ABrush: TBrush);
+    procedure wwDBGrid2CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+      AFont: TFont; ABrush: TBrush);
     procedure Markerasomoffert1Click(Sender: TObject);
     procedure btnNyArtikelAvbrytClick(Sender: TObject);
     procedure btnNyArtikelSparaClick(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure edtArtikelNotInList(Sender: TObject; LookupTable: TDataSet;
-      NewValue: string; var Accept: Boolean);
+    procedure edtArtikelNotInList(Sender: TObject; LookupTable: TDataSet; NewValue: string; var Accept: Boolean);
     procedure edtAntalChange(Sender: TObject);
     procedure edtAntalExit(Sender: TObject);
     procedure edtFranLagerExit(Sender: TObject);
@@ -235,8 +233,7 @@ type
     procedure edtArtikelEnter(Sender: TObject);
     procedure mmArtikeltextClick(Sender: TObject);
     procedure edtArtikelnummerChange(Sender: TObject);
-    procedure ExpButtonCheckVisibleButton(Sender: TwwExpandButton;
-      DataSet: TDataSet; var AShowExpand: Boolean);
+    procedure ExpButtonCheckVisibleButton(Sender: TwwExpandButton; DataSet: TDataSet; var AShowExpand: Boolean);
     procedure wwDBGrid2DblClick(Sender: TObject);
     procedure qryOrderradCalcFields(DataSet: TDataSet);
     procedure PopupMenu1Popup(Sender: TObject);
@@ -263,8 +260,8 @@ uses fMain, rOrder, fOrderLista, fArbetsorder, rArbetsorder, fArtikel,
 
 procedure TfrmOrder.btnDeleteClick(Sender: TObject);
 begin
-  if messagedlg('Vill du ta bort PosNr: ' + qryOrderradPositionnummer.asString +
-    '?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+  if messagedlg('Vill du ta bort PosNr: ' + qryOrderradPositionnummer.asString + '?', mtConfirmation, [mbYes, mbNo], 0)
+    = mrYes then
 
   begin
     with sp_OrderradDelete do
@@ -278,8 +275,7 @@ begin
 
 end;
 
-procedure TfrmOrder.edtArtikelCloseUp(Sender: TObject;
-  LookupTable, FillTable: TDataSet; modified: Boolean);
+procedure TfrmOrder.edtArtikelCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
 begin
 
   PageControl1.ActivePageIndex := 0;
@@ -354,12 +350,10 @@ begin
 
 end;
 
-procedure TfrmOrder.wwDBGrid2MouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure TfrmOrder.wwDBGrid2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
 begin
 
-  edtPris.text := wwDBGrid2.DataSource.DataSet.FieldByName
-    ('PrisPerEnhet').asString;
+  edtPris.text := wwDBGrid2.DataSource.DataSet.FieldByName('PrisPerEnhet').asString;
 
 
   // rg.ItemIndex := rg.Values.IndexOf(wwdbgrid2.DataSource.DataSet.fieldbyname('YtbehandlingID').asString);
@@ -385,8 +379,7 @@ begin
 
       ParamByName('@PrisperEnhet').value := edtPris.valueFloat;
 
-      ParamByName('@YtbehandlingID').value :=
-        LU_Ytbehandling.LookupTable.FieldByName('YtbehandlingId').asInteger;
+      ParamByName('@YtbehandlingID').value := LU_Ytbehandling.LookupTable.FieldByName('YtbehandlingId').asInteger;
 
       ParamByName('@FrånLager').value := edtFranLager.valueFloat;
 
@@ -409,8 +402,7 @@ begin
       ParamByName('@ArtikelID').value := qryLU_ArtikelArtikelId.asInteger;
       ParamByName('@Antal').value := strtofloat(edtAntal.text);
       ParamByName('@PrisperEnhet').value := strtofloat(edtPris.text);
-      ParamByName('@YtbehandlingID').value :=
-        LU_Ytbehandling.LookupTable.FieldByName('YtbehandlingId').asInteger;
+      ParamByName('@YtbehandlingID').value := LU_Ytbehandling.LookupTable.FieldByName('YtbehandlingId').asInteger;
       ParamByName('@FrånLager').value := edtFranLager.valueFloat;
       ParamByName('@AttProducera').value := edtAttProducera.valueFloat;
       ParamByName('@TillLager').value := edtTillLager.valueFloat;
@@ -462,8 +454,7 @@ end;
 procedure TfrmOrder.edtPrisChange(Sender: TObject);
 begin
 
-  btnSpara.enabled := (edtAntal.valueFloat <> 0) or
-    (edtAttProducera.valueFloat <> 0);
+  btnSpara.enabled := (edtAntal.valueFloat <> 0) or (edtAttProducera.valueFloat <> 0);
   btnSpara.default := btnSpara.enabled;
 
 end;
@@ -524,16 +515,31 @@ begin
   edtArtikel.setfocus;
   // pnlOrderRad.visible := false;
   PageControl1.TabIndex := 1;
-frmmain.tbtnOrderlista.enabled := true;
+  frmmain.tbtnOrderlista.enabled := true;
 
 end;
 
 procedure TfrmOrder.wwDBGrid1CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
   AFont: TFont; ABrush: TBrush);
 begin
-                if (field.FieldName = 'cRitningsnoteringFinns_disp')
-                and (qryOrderrad.FieldByName('cRitningsnoteringFinns').AsBoolean = True) then
-                ABrush.Color :=  clGreen;
+  if (Field.FieldName = 'cRitningsnoteringFinns_disp') and
+    (qryOrderrad.FieldByName('cRitningsnoteringFinns').AsBoolean = true) then
+    ABrush.Color := clGreen;
+
+  if (Field.FieldName = 'Lagersaldo') then
+  begin
+    if (qryOrderrad.FieldByName('Lagersaldo').asInteger <> 0) then
+    begin
+      AFont.Color := clBlack;
+      ABrush.Color := $0000CC00;
+    end
+    else
+    begin
+      AFont.Color := clWhite;
+      ABrush.Color := clWhite;
+    end;
+
+  end;
 
 end;
 
@@ -593,8 +599,7 @@ begin
 
   with qryOrder do
   begin
-    ParamByName('OrderID').value := frmOrderlista.dsoOrderlist.DataSet.
-      FieldByName('OrderID').asInteger;
+    ParamByName('OrderID').value := frmOrderlista.dsoOrderlist.DataSet.FieldByName('OrderID').asInteger;
     open;
   end;
   qryOrderrad.open;
@@ -629,10 +634,8 @@ begin
 
   with spArtikelBockritningSet do
   begin
-    ParamByName('@ArtikelId').value := qryOrderrad.FieldByName('ArtikelId')
-      .asInteger;
-    ParamByName('@BockritningFinns').value := not qryOrderrad.FieldByName
-      ('Bockritning').asBoolean;
+    ParamByName('@ArtikelId').value := qryOrderrad.FieldByName('ArtikelId').asInteger;
+    ParamByName('@BockritningFinns').value := not qryOrderrad.FieldByName('Bockritning').AsBoolean;
     execproc;
   end;
   qryOrderrad.Refresh;
@@ -716,8 +719,8 @@ begin
 
 end;
 
-procedure TfrmOrder.wwDBGrid2CalcCellColors(Sender: TObject; Field: TField;
-  State: TGridDrawState; Highlight: Boolean; AFont: TFont; ABrush: TBrush);
+procedure TfrmOrder.wwDBGrid2CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+  AFont: TFont; ABrush: TBrush);
 begin
 
   if (qryOrderHistoryOrdertypId.asInteger = 3) or // Offert
@@ -763,8 +766,7 @@ begin
       if RecordCount = 0 then
       begin
         append;
-        FieldByName('Id').asInteger := qryLU_Artikel.FieldByName('Id')
-          .asInteger;
+        FieldByName('Id').asInteger := qryLU_Artikel.FieldByName('Id').asInteger;
 
       end
       else
@@ -787,7 +789,7 @@ end;
 
 procedure TfrmOrder.PopupMenu1Popup(Sender: TObject);
 begin
-  if qryOrderrad.FieldByName('Bockritning').asBoolean = true then
+  if qryOrderrad.FieldByName('Bockritning').AsBoolean = true then
     Bockritningok1.Caption := 'Avmarkera bockritning'
   else
     Bockritningok1.Caption := 'Bockritning klar';
@@ -796,25 +798,23 @@ end;
 
 procedure TfrmOrder.qryOrderHistoryCalcFields(DataSet: TDataSet);
 begin
-  DataSet.FieldByName('InforaderFinns').asBoolean :=
-    (DataSet.FieldByName('Antalinforader').asInteger > 0);
+  DataSet.FieldByName('InforaderFinns').AsBoolean := (DataSet.FieldByName('Antalinforader').asInteger > 0);
 
 end;
 
 procedure TfrmOrder.qryOrderradCalcFields(DataSet: TDataSet);
 begin
-  if DataSet.FieldByName('Bockritning').asBoolean then
+  if DataSet.FieldByName('Bockritning').AsBoolean then
     DataSet.FieldByName('cBock').value := 1
   else
     DataSet.FieldByName('cBock').value := 0;
 
-  if DataSet.FieldByName('FixaturFinns').asBoolean then
+  if DataSet.FieldByName('FixaturFinns').AsBoolean then
     DataSet.FieldByName('cFixatur').value := 1
   else
     DataSet.FieldByName('cFixatur').value := 0;
 
-   dataset.FieldByName('cRitningsnoteringFinns').asBoolean :=
-           dataset.fieldbyname('Notering').AsString <> '';
+  DataSet.FieldByName('cRitningsnoteringFinns').AsBoolean := DataSet.FieldByName('Notering').asString <> '';
 
 end;
 
@@ -856,8 +856,7 @@ begin
     ParamByName('@kundid').value := qryOrder.FieldByName('KundId').asInteger;
     ParamByName('@Artikelnummer').value := edtArtikelnummer.text;
     ParamByName('@Beteckning').value := edtBeteckning.text;
-    ParamByName('@YtbehandlingIdDefault').value :=
-      luYtbehandlingdefault.LookupTable.FieldByName('Id').asString;
+    ParamByName('@YtbehandlingIdDefault').value := luYtbehandlingdefault.LookupTable.FieldByName('Id').asString;
     execproc;
     artikelid := ParamByName('@RETURN_VALUE').asInteger;
   end;
@@ -878,8 +877,7 @@ begin
 
 end;
 
-procedure TfrmOrder.FormKeyDown(Sender: TObject; var Key: Word;
-  Shift: TShiftState);
+procedure TfrmOrder.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
 
   if ShortCutToText(ShortCut(Key, Shift)) = 'Ctrl+N' then
@@ -890,8 +888,7 @@ begin
 
 end;
 
-procedure TfrmOrder.edtArtikelNotInList(Sender: TObject; LookupTable: TDataSet;
-  NewValue: string; var Accept: Boolean);
+procedure TfrmOrder.edtArtikelNotInList(Sender: TObject; LookupTable: TDataSet; NewValue: string; var Accept: Boolean);
 begin
 
   DBText1.visible := false;
@@ -946,8 +943,7 @@ end;
 
 procedure TfrmOrder.edtAttProduceraExit(Sender: TObject);
 begin
-  edtTillLager.setfloat((edtAntal.valueFloat - edtFranLager.valueFloat -
-    edtAttProducera.valueFloat) * -1);
+  edtTillLager.setfloat((edtAntal.valueFloat - edtFranLager.valueFloat - edtAttProducera.valueFloat) * -1);
 
 end;
 
@@ -957,8 +953,7 @@ begin
 
 end;
 
-procedure TfrmOrder.ExpButtonCheckVisibleButton(Sender: TwwExpandButton;
-  DataSet: TDataSet; var AShowExpand: Boolean);
+procedure TfrmOrder.ExpButtonCheckVisibleButton(Sender: TwwExpandButton; DataSet: TDataSet; var AShowExpand: Boolean);
 begin
   AShowExpand := DataSet.FieldByName('AntalInforader').asInteger > 0;
 

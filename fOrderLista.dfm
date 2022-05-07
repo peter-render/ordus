@@ -5,7 +5,7 @@
   BorderStyle = bsNone
   Caption = 'Orderlista'
   ClientHeight = 701
-  ClientWidth = 1430
+  ClientWidth = 1486
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -40,7 +40,7 @@
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1430
+    Width = 1486
     Height = 701
     Align = alClient
     BevelOuter = bvNone
@@ -51,13 +51,15 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1430
     object Panel2: TPanel
       Left = 0
       Top = 0
-      Width = 1430
+      Width = 1486
       Height = 37
       Align = alTop
       TabOrder = 0
+      ExplicitWidth = 1430
       object Panel3: TPanel
         Left = 1
         Top = 1
@@ -78,7 +80,7 @@
       object Panel4: TPanel
         Left = 75
         Top = 1
-        Width = 1354
+        Width = 1410
         Height = 35
         Align = alClient
         Alignment = taLeftJustify
@@ -91,8 +93,9 @@
         ParentBackground = False
         ParentFont = False
         TabOrder = 1
+        ExplicitWidth = 1354
         DesignSize = (
-          1354
+          1410
           35)
         object lblsokbeställningsnummer: TLabel
           Left = 448
@@ -142,11 +145,13 @@
           Width = 46
           Height = 19
           Caption = 'Label5'
+          Color = clLime
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
           Font.Name = 'Default'
           Font.Style = []
+          ParentColor = False
           ParentFont = False
         end
         object Label1: TLabel
@@ -162,6 +167,16 @@
           Font.Name = 'Default'
           Font.Style = []
           ParentFont = False
+        end
+        object Label6: TLabel
+          Left = 1094
+          Top = 12
+          Width = 56
+          Height = 13
+          Caption = 'Label6'
+          Color = 52224
+          ParentColor = False
+          Visible = False
         end
         object wwDBLookupCombo1: TwwDBLookupCombo
           Left = 54
@@ -202,7 +217,7 @@
           OnEnter = sokOrdernummerEnter
         end
         object cbVisaAllaFakturor: TCheckBox
-          Left = 1220
+          Left = 1276
           Top = 10
           Width = 97
           Height = 17
@@ -214,6 +229,7 @@
           TabOrder = 3
           Visible = False
           OnClick = cbVisaAllaFakturorClick
+          ExplicitLeft = 1220
         end
         object btnStatusByteNext: TButton
           Left = 943
@@ -272,7 +288,7 @@
     object Panel5: TPanel
       Left = 0
       Top = 75
-      Width = 1430
+      Width = 1486
       Height = 626
       Align = alClient
       BevelOuter = bvNone
@@ -284,35 +300,38 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ExplicitWidth = 1430
       object wwDBGrid1: TwwDBGrid
         Left = 5
         Top = 5
-        Width = 1420
+        Width = 1476
         Height = 616
         PictureMasks.Strings = (
-          'Ordersumma'#9'### ### ###0,00'#9'T'#9'F')
+          'Ordersumma'#9'### ### ###0,00'#9'T'#9'F'
+          'Lagersaldo'#9'###'#9'T'#9'T')
         Selected.Strings = (
-          'OrderID'#9'6'#9'Ordernr'#9#9
-          'Kundnamn'#9'15'#9'Kundnamn'#9#9
-          'cAntalArtikelNoteringar'#9'2'#9' R'#9#9
-          'Ordernummer'#9'9'#9'Best.Nr'#9#9
-          'OrderDatum'#9'12'#9'OrderDatum'#9#9
-          'Ytbehandlingdatum'#9'10'#9'Ytbeh datum'#9#9
-          'leveransdatum'#9'11'#9'Lev datum'#9#9
-          'Godsm'#228'rke'#9'24'#9'Godsm'#228'rke'#9#9
-          'EgenM'#228'rkning'#9'25'#9'Egen m'#228'rkning'#9#9
-          'Kundreferens'#9'14'#9'Kundreferens'#9#9
-          #196'rAvrapporterad'#9'13'#9#196'rAvrapporterad'#9#9
-          'AntalTotal'#9'4'#9'  B'#9#9
-          'AntalAvrapporterad'#9'3'#9'  '#197#9#9
-          'Antalprissatt'#9'3'#9'  P'#9#9
-          'Fakturadatum'#9'10'#9'Fakt datum'#9#9
-          'KalkArbetstidTime'#9'10'#9'Utr'#228'knat'#9#9
-          'ArbetstidPlaneradTime'#9'13'#9'Inplanerad'#9#9
-          'Ordersumma'#9'14'#9'Ordersumma'#9#9
-          #196'rPrissatt'#9'10'#9#196'rPrissatt'#9#9
-          'F'#246'rfallodatum'#9'11'#9'F'#246'rfallodatum'#9#9
-          'Fakturanummer'#9'20'#9'Fakturanummer'#9#9)
+          'OrderID'#9'6'#9'Ordernr'
+          'Kundnamn'#9'15'#9'Kundnamn'
+          'cAntalArtikelNoteringar'#9'2'#9' R'
+          'Lagersaldo'#9'4'#9'    L'#9'F'
+          'Ordernummer'#9'9'#9'Best.Nr'
+          'OrderDatum'#9'12'#9'OrderDatum'
+          'Ytbehandlingdatum'#9'10'#9'Ytbeh datum'
+          'leveransdatum'#9'11'#9'Lev datum'
+          'Godsm'#228'rke'#9'24'#9'Godsm'#228'rke'
+          'EgenM'#228'rkning'#9'25'#9'Egen m'#228'rkning'
+          'Kundreferens'#9'14'#9'Kundreferens'
+          #196'rAvrapporterad'#9'13'#9#196'rAvrapporterad'
+          'AntalTotal'#9'4'#9'  B'
+          'AntalAvrapporterad'#9'3'#9'  '#197
+          'Antalprissatt'#9'3'#9'  P'
+          'Fakturadatum'#9'10'#9'Fakt datum'
+          'KalkArbetstidTime'#9'10'#9'Utr'#228'knat'
+          'ArbetstidPlaneradTime'#9'13'#9'Inplanerad'
+          'Ordersumma'#9'14'#9'Ordersumma'
+          #196'rPrissatt'#9'10'#9#196'rPrissatt'
+          'F'#246'rfallodatum'#9'11'#9'F'#246'rfallodatum'
+          'Fakturanummer'#9'20'#9'Fakturanummer')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -351,11 +370,10 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
-        ExplicitLeft = 6
-        ExplicitTop = 6
+        ExplicitWidth = 1420
       end
       object wwExpandButton1: TwwExpandButton
-        Left = 600
+        Left = 599
         Top = 112
         Width = 97
         Height = 17
@@ -368,16 +386,17 @@
     object Panel6: TPanel
       Left = 0
       Top = 37
-      Width = 1430
+      Width = 1486
       Height = 8
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
+      ExplicitWidth = 1430
     end
     object PageControl1: TPageControl
       Left = 0
       Top = 45
-      Width = 1430
+      Width = 1486
       Height = 30
       ActivePage = TabSheet1
       Align = alTop
@@ -386,9 +405,11 @@
       TabWidth = 130
       OnChange = PageControl1Change
       OnDrawTab = PageControl1DrawTab
+      ExplicitWidth = 1430
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
+        ExplicitWidth = 1422
       end
     end
   end
@@ -938,7 +959,7 @@
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert]
     UpdateOptions.EnableDelete = False
     UpdateOptions.EnableInsert = False
-    StoredProcName = 'Orderlist'
+    StoredProcName = 'OrderList'
     Left = 948
     Top = 168
     ParamData = <
@@ -1008,6 +1029,13 @@
       FieldKind = fkCalculated
       FieldName = 'cAntalArtikelNoteringar'
       Calculated = True
+    end
+    object sp_OrderlistLagersaldo: TIntegerField
+      DisplayLabel = '    L'
+      DisplayWidth = 4
+      FieldName = 'Lagersaldo'
+      Origin = 'Lagersaldo'
+      ReadOnly = True
     end
     object sp_OrderlistOrdernummer: TStringField
       DisplayLabel = 'Best.Nr'

@@ -209,7 +209,7 @@ end;
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
   application.DefaultFont.Name := 'Tahoma';
-  application.DefaultFont.Size := 8;
+  application.DefaultFont.Size := 10;
 
   caption := 'Ordus orderhantering | ' + GetAppVersionBuildStr + ' | ' + getcomputername + ' | ';
 
@@ -220,7 +220,7 @@ begin
     open;
     AdminComputer := fieldbyname('ÄrAdmin').asboolean;
   end;
-  width:= 1224;
+  width:= 1440;
 
 end;
 

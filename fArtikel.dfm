@@ -15,7 +15,7 @@
     Font.Color = clBlack
     Font.Name = 'MS Sans Serif'
     ParentFont = False
-    ExplicitWidth = 715
+    ExplicitWidth = 737
     ExplicitHeight = 641
     inherited Bevel1: TBevel
       Top = 214
@@ -346,7 +346,6 @@
       Align = alBottom
       Caption = 'Panel3'
       TabOrder = 3
-      ExplicitWidth = 693
       object Panel5: TPanel
         Left = 568
         Top = 1
@@ -354,7 +353,6 @@
         Height = 166
         Align = alRight
         TabOrder = 0
-        ExplicitLeft = 546
         object Button2: TButton
           Left = 11
           Top = 12
@@ -410,7 +408,6 @@
         BorderWidth = 3
         Caption = 'Panel5'
         TabOrder = 1
-        ExplicitWidth = 545
         object wwDBGrid1: TwwDBGrid
           Left = 4
           Top = 4
@@ -446,15 +443,23 @@
           TitleLines = 1
           TitleButtons = False
           PadColumnStyle = pcsPadHeader
-          ExplicitWidth = 537
         end
       end
+    end
+    object cbLagersaldo: TCheckBox
+      Left = 283
+      Top = 18
+      Width = 202
+      Height = 17
+      Caption = 'Artiklar som finns i lager'
+      TabOrder = 4
+      OnClick = cbLagersaldoClick
     end
   end
   inherited Panel2: TPanel
     Left = 737
     Height = 641
-    ExplicitLeft = 715
+    ExplicitLeft = 737
     ExplicitHeight = 641
     inherited DBNav: TDBNavigator
       Left = 39
@@ -478,13 +483,12 @@
       
         'Select a.*,typ.Beteckning ArtikeltypBeteckning,typ.systemname Ar' +
         'tikeltypSystemname'
-      ''
       'from Artikel a'
       'left join artikeltyp typ on typ.id = a.ArtikeltypId'
       'order by a.Artikelnummer'
-      ' ')
-    Left = 444
-    Top = 76
+      '')
+    Left = 448
+    Top = 72
     object FDQuery1Artikelnummer: TStringField
       DisplayWidth = 16
       FieldName = 'Artikelnummer'
@@ -828,7 +832,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C0101020005001C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

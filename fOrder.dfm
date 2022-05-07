@@ -32,7 +32,6 @@
     Height = 671
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 1232
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -46,7 +45,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1230
       object Label1: TLabel
         Left = 159
         Top = 11
@@ -199,7 +197,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitWidth = 1230
       DesignSize = (
         1222
         330)
@@ -223,21 +220,22 @@
         PictureMasks.Strings = (
           'Artikelnummer'#9'### ###'#9'T'#9'T')
         Selected.Strings = (
-          'Radnr'#9'4'#9'Radnr'
-          'Positionnummer'#9'4'#9'PosNr'
-          'Artikelnummer'#9'22'#9'Artikelnummer'
-          'Beteckning'#9'22'#9'Beteckning'
-          'cRitningsnoteringFinns_disp'#9'2'#9'R'
-          'cFixatur'#9'2'#9' F'
-          'PrisperEnhet'#9'9'#9'  Pris/enhet'
-          'Fr'#229'nLager'#9'10'#9'     Fr'#229'n lager'
-          'Attproducera'#9'11'#9'Att producera'
-          'Antal'#9'6'#9'     Antal'
-          'TillLager'#9'9'#9'     Till lager'
-          'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'
-          'KalkarbetstidTotal'#9'14'#9'Kalk Arbetstid tot'
-          'OrderradInfo'#9'17'#9'Info'
-          'Notering'#9'10'#9'Notering')
+          'Radnr'#9'4'#9'Radnr'#9#9
+          'Positionnummer'#9'4'#9'PosNr'#9#9
+          'Artikelnummer'#9'22'#9'Artikelnummer'#9#9
+          'Beteckning'#9'22'#9'Beteckning'#9#9
+          'cRitningsnoteringFinns_disp'#9'2'#9'R'#9#9
+          'Lagersaldo'#9'4'#9'  L'#9'F'
+          'cFixatur'#9'2'#9' F'#9#9
+          'PrisperEnhet'#9'9'#9'  Pris/enhet'#9#9
+          'Fr'#229'nLager'#9'10'#9'     Fr'#229'n lager'#9#9
+          'Attproducera'#9'11'#9'Att producera'#9#9
+          'Antal'#9'6'#9'     Antal'#9#9
+          'TillLager'#9'9'#9'     Till lager'#9#9
+          'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'#9#9
+          'KalkarbetstidTotal'#9'14'#9'Kalk Arbetstid tot'#9#9
+          'OrderradInfo'#9'17'#9'Info'#9#9
+          'Notering'#9'10'#9'Notering'#9#9)
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -318,7 +316,6 @@
       Height = 285
       Align = alTop
       TabOrder = 2
-      ExplicitWidth = 1230
       object Splitter1: TSplitter
         Left = 377
         Top = 1
@@ -907,7 +904,6 @@
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitWidth = 849
         object Splitter2: TSplitter
           Left = 441
           Top = 0
@@ -1084,7 +1080,6 @@
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 405
           object Panel10: TPanel
             Left = 0
             Top = 0
@@ -1101,7 +1096,6 @@
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 0
-            ExplicitWidth = 405
           end
           object Panel11: TPanel
             Left = 0
@@ -1112,7 +1106,6 @@
             BevelOuter = bvNone
             BorderWidth = 3
             TabOrder = 1
-            ExplicitWidth = 405
             object Panel14: TPanel
               Left = 3
               Top = 3
@@ -1121,7 +1114,6 @@
               Align = alClient
               BevelOuter = bvLowered
               TabOrder = 0
-              ExplicitWidth = 399
               object dbgArtikelgrupp: TwwDBGrid
                 Left = 1
                 Top = 1
@@ -1157,7 +1149,6 @@
                 TitleLines = 1
                 TitleButtons = False
                 PadColumnStyle = pcsPadHeader
-                ExplicitWidth = 397
               end
             end
           end
@@ -1279,7 +1270,8 @@
       'orad.Kalkarbetstid KalkarbetstidTotal,'
       'a.BockritningFinns Bockritning,'
       'a.FixaturFinns FixaturFinns,'
-      'a.Notering'
+      'a.Notering,'
+      'a.Lagersaldo'
       'from OrderRad orad'
       'join Artikel a on orad.artikelID = a.id'
       'join orderhuvud oh on oh.id = orad.orderid'
@@ -1328,6 +1320,14 @@
       FieldKind = fkCalculated
       FieldName = 'cRitningsnoteringFinns_disp'
       Calculated = True
+    end
+    object qryOrderradLagersaldo: TBCDField
+      DisplayLabel = '  L'
+      DisplayWidth = 4
+      FieldName = 'Lagersaldo'
+      Origin = 'Lagersaldo'
+      Precision = 18
+      Size = 0
     end
     object qryOrderradcFixatur: TIntegerField
       DisplayLabel = ' F'
@@ -2156,7 +2156,7 @@
     Left = 376
     Top = 576
     Bitmap = {
-      494C010102000500400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
