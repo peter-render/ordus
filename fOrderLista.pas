@@ -252,6 +252,27 @@ type
     sp_OrderlistcAntalArtikelNoteringar: TStringField;
     sp_OrderlistLagersaldo: TIntegerField;
     Label6: TLabel;
+    actOrderbekräftleseExcelViaEpost: TAction;
+    Skickaorderbekrftleseviaepost1: TMenuItem;
+    qryExcelExport: TFDQuery;
+    qryExcelExportOrderId: TFDAutoIncField;
+    qryExcelExportKundnamn: TStringField;
+    qryExcelExportReferens: TStringField;
+    qryExcelExportordernummer: TStringField;
+    qryExcelExportGodsmärke: TStringField;
+    qryExcelExportorderdatum: TSQLTimeStampField;
+    qryExcelExportLeveransdatum: TSQLTimeStampField;
+    qryExcelExportPositionnummer: TIntegerField;
+    qryExcelExportYtbehandlingBeteckning: TStringField;
+    qryExcelExportBeteckning: TStringField;
+    qryExcelExportArtikelnummer: TStringField;
+    qryExcelExportAntal: TFMTBCDField;
+    qryExcelExportOrdertypId: TIntegerField;
+    qryExcelExportPrisperenhet: TCurrencyField;
+    qryExcelExportfritext: TStringField;
+    qryExcelExportPris: TFMTBCDField;
+    qryExcelExportDagensdatum: TDateField;
+    qryExcelExportVårReferens: TStringField;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -318,6 +339,7 @@ type
     procedure actCopyOffertExecute(Sender: TObject);
     procedure actArkiveraExecute(Sender: TObject);
     procedure sp_OrderlistCalcFields(DataSet: TDataSet);
+    procedure actOrderbekräftleseExcelViaEpostExecute(Sender: TObject);
   private
     xfilename: string;
     qrfilename: string;
@@ -977,6 +999,180 @@ begin
 
 end;
 
+procedure TfrmOrderLista.actOrderbekräftleseExcelViaEpostExecute(Sender: TObject);
+var
+  x,ci, row, I, W, NumberOfWorksheetsNeeded: Integer;
+  fstring, ExcelFileName: String;
+  oRng, ExcelApplication, ExcelWorkbook, ExcelWorksheet: Variant;
+  bm: Tbookmark;
+  rTyp: Integer;
+
+  Outlook: OleVariant;
+  Mail: Variant;
+const
+  olMailItem = $00000000;
+begin
+
+  xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
+    sp_OrderlistOrderID.asstring + '.xlsx';
+
+  NumberOfWorksheetsNeeded := 1;
+
+  try
+    // create Excel OLE
+    ExcelApplication := CreateOleObject('Excel.Application');
+  except
+    ExcelApplication := Null;
+    showmessage('Kan inte hitta Excel på denna datorn!');
+    exit;
+  end;
+
+  If VarIsNull(ExcelApplication) = false then
+  begin
+
+    ExcelApplication.Visible := false;
+    // set to False if you do not want to see the activity in the background
+    ExcelApplication.DisplayAlerts := false;
+    // ensures message dialogs do not interrupt the flow of your automation process. May be helpful to set to True during testing and debugging.
+
+    // Open Excel Workbook
+    try
+      ExcelWorkbook := ExcelApplication.WorkBooks.Add(-4167);
+      // or
+      // ExcelWorkbook := ExcelApplication.WorkBooks.Add;
+      // reference
+      // https://docs.microsoft.com/en-us/office/vba/api/excel.workbooks.add
+    except
+      ExcelWorkbook := Null;
+      // add error/exception handling code as desired
+    end;
+
+    If VarIsNull(ExcelWorkbook) = false then
+    begin
+      try
+        // create the desired number of worksheets in this workbook
+        // if the default number of worksheets created is less than the desired number
+
+        If NumberOfWorksheetsNeeded > ExcelWorkbook.Worksheets.count then
+        begin
+          While ExcelWorkbook.Worksheets.count < NumberOfWorksheetsNeeded do
+            ExcelWorkbook.Worksheets.Add(Null, ExcelWorkbook.Worksheets[ExcelWorkbook.Worksheets.count], 1, -4167);
+          // or use the code below if you do not care about the order in which the sheets are named
+          // ExcelWorkbook.WorkSheets.Add(Null,Null,(NumberOfWorksheets-ExcelWorkbook.Worksheets.Count),-4167);
+        end;
+
+        // if the default number of worksheets created is more than the desired number
+        If NumberOfWorksheetsNeeded < ExcelWorkbook.Worksheets.count then
+        begin
+          While ExcelWorkbook.Worksheets.count > NumberOfWorksheetsNeeded do
+            ExcelWorkbook.Worksheets[ExcelWorkbook.Worksheets.count].delete;
+
+          For W := 1 to ExcelWorkbook.Worksheets.count do
+            ExcelWorkbook.Worksheets[W].name := 'Blad' + inttostr(W);
+          // renames the sheets
+        end;
+
+        // connect to Excel Worksheet using either the ExcelApplication or ExcelWorkbook handle
+        ExcelWorksheet := ExcelWorkbook.Worksheets[1]; // [1] specifies the first worksheet
+
+      except
+        ExcelWorksheet := Null;
+        // add error/exception handling code as desired
+      end;
+
+      If VarIsNull(ExcelWorksheet) = false then
+      begin
+
+        ExcelWorksheet.Select;
+
+        row := 1;
+        ExcelWorksheet.Cells[row, 1] := 'Pos';
+        ExcelWorksheet.Cells[row, 2] := 'Artikelnr';
+        ExcelWorksheet.Cells[row, 3] := 'Ytbehandling';
+        ExcelWorksheet.Cells[row, 4] := 'Beteckning';
+        ExcelWorksheet.Cells[row, 5] := 'Antal';
+        ExcelWorksheet.Cells[row, 6] := 'Pris/Enhet';
+        ExcelWorksheet.Cells[row, 7] := 'Pris totalt';
+
+
+        for x := 1 to 7 do
+            ExcelWorksheet.Cells[row, x].Interior.ColorIndex := 24         ;
+
+//        ExcelWorksheet.Columns['A' + inttostr(row), 'G' + inttostr(row)].Interior.ColorIndex := 24;
+
+        row := row + 1;
+
+
+        with qryExcelExport do
+        begin
+          close;
+          ParamByName('ORDERID').Value := sp_OrderlistOrderID.asInteger;
+          open;
+          DisableControls;
+          first;
+          while not eof do
+          begin
+            ExcelWorksheet.Cells[row, 1] := fieldbyname('Positionnummer').asstring;
+            ExcelWorksheet.Cells[row, 2] := fieldbyname('Artikelnummer').asstring;
+            ExcelWorksheet.Cells[row, 3] := fieldbyname('YtbehandlingBeteckning').asstring;
+            ExcelWorksheet.Cells[row, 4] := fieldbyname('Beteckning').asstring;
+            ExcelWorksheet.Cells[row, 5] := fieldbyname('Antal').asstring;
+            ExcelWorksheet.Cells[row, 6] := fieldbyname('Prisperenhet').AsFloat;
+            ExcelWorksheet.Cells[row, 7] := fieldbyname('Pris').AsFloat;
+
+            row := row + 1;
+            next;
+          end;
+          ExcelWorksheet.Range['A1', 'G1'].EntireColumn.AutoFit;
+          EnableControls;
+        end;
+      end;
+
+      ExcelWorkbook.SaveAs(xfilename);
+
+
+      // or
+      // ExcelApplication.WorkBooks[1].SaveAs(NewExcelFileName);
+
+      // Note: If a file with the new name already exists, it overwrites it. Write additional code to address as desired.
+      // reference
+      // https://docs.microsoft.com/en-us/office/vba/api/excel.workbook.saveas
+
+    end;
+
+  end;
+
+  try
+      ExcelWorksheet := Unassigned;
+      ExcelWorkbook := Unassigned;
+      ExcelApplication := Unassigned;
+
+  finally
+    application.ProcessMessages;
+    Screen.cursor := crDefault;
+  end;
+
+  try
+    Outlook := GetActiveOleObject('Outlook.Application');
+  except
+    Outlook := CreateOleObject('Outlook.Application');
+  end;
+
+  Mail := Outlook.CreateItem(olMailItem);
+
+  if pos('LENOPEHO', sp_Orderlist.Connection.ConnectionString) > 0 then
+    Mail.To := 'peter@holzer.se'
+  else
+    Mail.To := sp_Orderlist.fieldbyname('Emailadress').asstring;
+
+  Mail.Subject := 'Orderbekräftelse (' + sp_OrderlistOrderID.asstring + ')';
+  Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse i Excel format.' + chr(13) + chr(10) +
+    'Vi tackar för uppdraget.';
+  Mail.Attachments.Add(xfilename);
+  Mail.Display;
+
+end;
+
 procedure TfrmOrderLista.actOrderbekräftleseViaMailExecute(Sender: TObject);
 var
   Outlook: OleVariant;
@@ -1027,7 +1223,7 @@ begin
       Mail.To := sp_Orderlist.fieldbyname('Emailadress').asstring;
 
     Mail.Subject := 'Orderbekräftelse (' + sp_OrderlistOrderID.asstring + ')';
-    Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vårt orderbekräftelse som PDF-bilaga' + chr(13) + chr(10) +
+    Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse som PDF-bilaga.' + chr(13) + chr(10) +
       'Vi tackar för uppdraget.';
     Mail.Attachments.Add(xfilename + '.pdf');
     Mail.Display;
@@ -1109,7 +1305,7 @@ begin
       next;
     end;
 
-    qryFakturaunderlagXML.First;
+    qryFakturaunderlagXML.first;
 
     Bruttosumma := Nettosumma * 1.25;
     MomsTotal := Bruttosumma - Nettosumma;
@@ -1861,7 +2057,7 @@ begin
       close;
       with sp_Orderlist.ParamByName('@Kundid') do
       begin
-        ParamByName('@soktext').Value := null;
+        ParamByName('@soktext').Value := Null;
       end;
       open;
       wwDBLookupCombo1.Text := '';

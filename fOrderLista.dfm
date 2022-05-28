@@ -51,7 +51,6 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1430
     object Panel2: TPanel
       Left = 0
       Top = 0
@@ -59,7 +58,6 @@
       Height = 37
       Align = alTop
       TabOrder = 0
-      ExplicitWidth = 1430
       object Panel3: TPanel
         Left = 1
         Top = 1
@@ -93,7 +91,6 @@
         ParentBackground = False
         ParentFont = False
         TabOrder = 1
-        ExplicitWidth = 1354
         DesignSize = (
           1410
           35)
@@ -171,7 +168,7 @@
         object Label6: TLabel
           Left = 1094
           Top = 12
-          Width = 56
+          Width = 31
           Height = 13
           Caption = 'Label6'
           Color = 52224
@@ -229,7 +226,6 @@
           TabOrder = 3
           Visible = False
           OnClick = cbVisaAllaFakturorClick
-          ExplicitLeft = 1220
         end
         object btnStatusByteNext: TButton
           Left = 943
@@ -300,7 +296,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitWidth = 1430
       object wwDBGrid1: TwwDBGrid
         Left = 5
         Top = 5
@@ -313,7 +308,7 @@
           'OrderID'#9'6'#9'Ordernr'
           'Kundnamn'#9'15'#9'Kundnamn'
           'cAntalArtikelNoteringar'#9'2'#9' R'
-          'Lagersaldo'#9'4'#9'    L'#9'F'
+          'Lagersaldo'#9'4'#9'    L'
           'Ordernummer'#9'9'#9'Best.Nr'
           'OrderDatum'#9'12'#9'OrderDatum'
           'Ytbehandlingdatum'#9'10'#9'Ytbeh datum'
@@ -370,7 +365,6 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
-        ExplicitWidth = 1420
       end
       object wwExpandButton1: TwwExpandButton
         Left = 599
@@ -391,7 +385,6 @@
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitWidth = 1430
     end
     object PageControl1: TPageControl
       Left = 0
@@ -405,11 +398,13 @@
       TabWidth = 130
       OnChange = PageControl1Change
       OnDrawTab = PageControl1DrawTab
-      ExplicitWidth = 1430
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
-        ExplicitWidth = 1422
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
       end
     end
   end
@@ -526,6 +521,9 @@
     object mnuSkickaOrderbekräftelseViaEpost: TMenuItem
       Action = actOrderbekräftleseViaMail
       Visible = False
+    end
+    object Skickaorderbekrftleseviaepost1: TMenuItem
+      Action = actOrderbekräftleseExcelViaEpost
     end
     object mnuUtsktriftPalletikett: TMenuItem
       Action = actPallEtikett
@@ -644,6 +642,10 @@
     object actFöljesdelUtskrift: TAction
       Caption = 'Skriv ut f'#246'ljesdel'
       OnExecute = actFöljesdelUtskriftExecute
+    end
+    object actOrderbekräftleseExcelViaEpost: TAction
+      Caption = 'Skicka orderbekr'#228'ftlese Excel'
+      OnExecute = actOrderbekräftleseExcelViaEpostExecute
     end
     object actOrderbekräftleseViaMail: TAction
       Caption = 'Skicka orderbekr'#228'ftlese via epost'
@@ -953,7 +955,6 @@
       end>
   end
   object sp_Orderlist: TFDStoredProc
-    Active = True
     OnCalcFields = sp_OrderlistCalcFields
     Connection = dm.FDConnection1
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert]
@@ -1872,6 +1873,147 @@
     object IntegerField2: TIntegerField
       FieldName = 'OrderStatusId'
       Origin = 'OrderStatusId'
+    end
+  end
+  object qryExcelExport: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select '
+      'oh.Id OrderId,'
+      'k.Kundnamn,'
+      'isnull(ak.F'#246'rnamn,'#39#39') +'#39' '#39'+ isnull(ak.Efternamn,'#39#39') Referens,'
+      'oh.ordernummer,'
+      'oh.Godsm'#228'rke,'
+      'oh.orderdatum,'
+      'oh.Leveransdatum,'
+      'orad.Positionnummer,'
+      'y.Beteckning YtbehandlingBeteckning,'
+      'a.Beteckning,'
+      'a.Artikelnummer,'
+      'orad.Antal,'
+      'oh.OrdertypId,'
+      'orad.Prisperenhet,'
+      'oh.fritext,'
+      'orad.Prisperenhet * orad.Antal as Pris  ,'
+      'cast(getdate() as date) Dagensdatum,'
+      'p2.F'#246'rnamn + '#39' '#39'+ p2.Efternamn V'#229'rReferens'
+      ''
+      ''
+      ''
+      'from OrderRad orad'
+      'join Artikel a on orad.artikelID = a.Id'
+      'join OrderHuvud oh on oh.ID = orad.OrderID'
+      'join kund k on k.Id = oh.kundid'
+      'left join KundPerson kp on kp.ID= oh.ReferensID'
+      'left join akt'#246'r ak on ak.id = kp.Id'
+      'left join personal p on orad.avrapporteradPersonID = p.id'
+      'left join personal p2 on oh.V'#229'rreferensPersonId = p2.id'
+      'left join Ytbehandling y on orad.ytbehandlingID = y.ID'
+      'where oh.id = :OrderId'
+      '')
+    Left = 128
+    Top = 549
+    ParamData = <
+      item
+        Name = 'ORDERID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryExcelExportOrderId: TFDAutoIncField
+      FieldName = 'OrderId'
+      Origin = 'OrderId'
+      ReadOnly = True
+    end
+    object qryExcelExportKundnamn: TStringField
+      FieldName = 'Kundnamn'
+      Origin = 'Kundnamn'
+      Required = True
+      Size = 50
+    end
+    object qryExcelExportReferens: TStringField
+      FieldName = 'Referens'
+      Origin = 'Referens'
+      ReadOnly = True
+      Required = True
+      Size = 100
+    end
+    object qryExcelExportordernummer: TStringField
+      FieldName = 'ordernummer'
+      Origin = 'ordernummer'
+      Required = True
+      Size = 30
+    end
+    object qryExcelExportGodsmärke: TStringField
+      FieldName = 'Godsm'#228'rke'
+      Origin = '[Godsm'#228'rke]'
+      Size = 50
+    end
+    object qryExcelExportorderdatum: TSQLTimeStampField
+      FieldName = 'orderdatum'
+      Origin = 'orderdatum'
+      Required = True
+    end
+    object qryExcelExportLeveransdatum: TSQLTimeStampField
+      FieldName = 'Leveransdatum'
+      Origin = 'Leveransdatum'
+    end
+    object qryExcelExportPositionnummer: TIntegerField
+      FieldName = 'Positionnummer'
+      Origin = 'Positionnummer'
+    end
+    object qryExcelExportYtbehandlingBeteckning: TStringField
+      FieldName = 'YtbehandlingBeteckning'
+      Origin = 'YtbehandlingBeteckning'
+      Size = 50
+    end
+    object qryExcelExportBeteckning: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object qryExcelExportArtikelnummer: TStringField
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object qryExcelExportAntal: TFMTBCDField
+      FieldName = 'Antal'
+      Origin = 'Antal'
+      Precision = 19
+      Size = 2
+    end
+    object qryExcelExportOrdertypId: TIntegerField
+      FieldName = 'OrdertypId'
+      Origin = 'OrdertypId'
+    end
+    object qryExcelExportPrisperenhet: TCurrencyField
+      FieldName = 'Prisperenhet'
+      Origin = 'Prisperenhet'
+    end
+    object qryExcelExportfritext: TStringField
+      FieldName = 'fritext'
+      Origin = 'fritext'
+      Size = 2000
+    end
+    object qryExcelExportPris: TFMTBCDField
+      FieldName = 'Pris'
+      Origin = 'Pris'
+      ReadOnly = True
+      Precision = 38
+      Size = 6
+    end
+    object qryExcelExportDagensdatum: TDateField
+      FieldName = 'Dagensdatum'
+      Origin = 'Dagensdatum'
+      ReadOnly = True
+    end
+    object qryExcelExportVårReferens: TStringField
+      FieldName = 'V'#229'rReferens'
+      Origin = '[V'#229'rReferens]'
+      ReadOnly = True
+      Size = 101
     end
   end
 end
