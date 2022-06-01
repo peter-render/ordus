@@ -152,6 +152,7 @@ type
     Label3: TLabel;
     qryPrisUppskattatStRabatt: TCurrencyField;
     btnSkrivUt: TButton;
+    btnCancel: TButton;
     procedure FormShow(Sender: TObject);
     procedure edtKundCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
     procedure edtKundBeforeDropDown(Sender: TObject);
@@ -171,7 +172,7 @@ type
     procedure btnDeleteClick(Sender: TObject);
     procedure DBEdit2Exit(Sender: TObject);
     procedure Button2Click(Sender: TObject);
-    procedure Button3Click(Sender: TObject);
+    procedure btnSaveClick(Sender: TObject);
     procedure mnuEditClick(Sender: TObject);
     procedure mnuDeleteClick(Sender: TObject);
     procedure PopupMenu2Popup(Sender: TObject);
@@ -198,6 +199,7 @@ type
     procedure wwDBGrid2DrawTitleCell(Sender: TObject; Canvas: TCanvas; Field: TField; Rect: TRect;
       var DefaultDrawing: Boolean);
     procedure btnSkrivUtClick(Sender: TObject);
+    procedure btnCancelClick(Sender: TObject);
   private
     i: Integer;
     procedure EnableLowerpanel(isEnabled: Boolean);
@@ -235,6 +237,32 @@ begin
 
     qryOffertkalkyl.Refresh
   end;
+end;
+
+procedure TfrmOrderkalkyl.btnCancelClick(Sender: TObject);
+var
+i:Integer;
+begin
+  for i := 0 to pred(self.ComponentCount) do
+  begin
+    if (self.Components[i] is TEditN) then
+    begin
+      TEditN(self.Components[i]).FontColorOnFocus := clBlack;
+      TEditN(self.Components[i]).FontColorOnNotFocus := clBlack;
+    end;
+
+  end;
+  doEdit := True;
+  qryOffertkalkyl.Refresh;
+  qry.Refresh;
+  btnPost.Enabled := True;
+  btnCancel.Enabled := False;
+
+  LU_artikel.Value:= '';
+             LU_artikel.RefreshDisplay;
+
+  wwdbgrid3.DataSource.DataSet.Close;
+
 end;
 
 procedure TfrmOrderkalkyl.btnCloseClick(Sender: TObject);
@@ -275,7 +303,7 @@ begin
         ParamByName('@PrisperEnhet').value := qry.FieldByName('Prisfastställt').asInteger;
         ParamByName('@Antal').value := qry.FieldByName('Antal').asInteger;
         ParamByName('@YtbehandlingId').value := qry.FieldByName('YtbehandlingId').asInteger;
-        ParamByName('@Offertdatum').value :=   edtKalkyldatum.Date;
+        ParamByName('@Offertdatum').value := edtKalkyldatum.Date;
 
         execproc;
       end;
@@ -313,8 +341,8 @@ procedure TfrmOrderkalkyl.btnSkrivUtClick(Sender: TObject);
 begin
   with TrptOffertkalkyl.Create(application) do
   begin
-    qry.Close;
-    qry.ParamByName('Offertkalkylid').Value:= qryOffertkalkyl.FieldByName('Id').AsInteger;
+    qry.close;
+    qry.ParamByName('Offertkalkylid').value := qryOffertkalkyl.FieldByName('Id').asInteger;
     qry.Open;
     report.Preview;
   end;
@@ -331,7 +359,7 @@ begin
   self.close;
 end;
 
-procedure TfrmOrderkalkyl.Button3Click(Sender: TObject);
+procedure TfrmOrderkalkyl.btnSaveClick(Sender: TObject);
 var
   i: Integer;
 begin
@@ -374,7 +402,6 @@ begin
     edtAntal.SetFocus;
   end;
   btnSkapaOffert.Enabled := qry.RecordCount > 0;
-
   for i := 0 to pred(self.ComponentCount) do
   begin
     if (self.Components[i] is TEditN) then
@@ -388,6 +415,7 @@ begin
   qryOffertkalkyl.Refresh;
   qry.Refresh;
   btnPost.Enabled := false;
+  btnCancel.Enabled:= False;
 end;
 
 procedure TfrmOrderkalkyl.DBEdit1Exit(Sender: TObject);
@@ -870,6 +898,16 @@ begin
 
   end;
 
+//  LU_Artikel.LookupTable.Locate('ArtikelId', qry.FieldByName('ArtikelId').asInteger, []);
+//  LU_Artikel.value := LU_Artikel.LookupTable.FieldByName('ArtikelId').AsString;
+
+  LU_Artikel.value := qry.FieldByName('ArtikelId').AsString;
+
+
+//  LU_Artikel.CloseUp(true);
+  LU_ArtikelCloseUp(Sender, LU_Artikel.LookupTable, nil,false);
+
+
   ArtikelId := qry.FieldByName('ArtikelId').asInteger;
   edtAntal.Text := qry.FieldByName('Antal').AsString;
   edtPU.Text := qry.FieldByName('PrisUppskattat').AsString;
@@ -883,6 +921,7 @@ begin
 
   doEdit := true;
   edtLasertid.SetFocus;
+  btnCancel.Enabled:= true;
 
 end;
 

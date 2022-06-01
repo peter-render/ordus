@@ -58,6 +58,7 @@ type
     Computer1: TMenuItem;
     Flikkolumner1: TMenuItem;
     Ritningsnotering1: TMenuItem;
+    Import1: TMenuItem;
     procedure tbtnKunderClick(Sender: TObject);
     procedure btnAvslutClick(Sender: TObject);
     procedure Ytbehandlingstyper1Click(Sender: TObject);

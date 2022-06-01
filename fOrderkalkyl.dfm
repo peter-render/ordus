@@ -257,7 +257,7 @@
         ParentFont = False
       end
       object lblAntal: TLabel
-        Left = 108
+        Left = 61
         Top = 281
         Width = 35
         Height = 13
@@ -271,7 +271,7 @@
       end
       object Label23: TLabel
         Left = 633
-        Top = 308
+        Top = 310
         Width = 67
         Height = 26
         Caption = 'h'#246'gerklick f'#246'r '#228'ndra/tabort'
@@ -319,8 +319,8 @@
         Caption = 'Materialtyp'
       end
       object edtPFst: TEditN
-        Left = 512
-        Top = 258
+        Left = 453
+        Top = 260
         Width = 94
         Height = 21
         Color = clWhite
@@ -347,8 +347,8 @@
         WidthOnFocus = 0
       end
       object edtPU: TEditN
-        Left = 285
-        Top = 258
+        Left = 226
+        Top = 260
         Width = 97
         Height = 21
         TabStop = False
@@ -377,8 +377,8 @@
         WidthOnFocus = 0
       end
       object edtTVTU: TEditN
-        Left = 174
-        Top = 258
+        Left = 115
+        Top = 260
         Width = 95
         Height = 21
         Color = clWhite
@@ -406,8 +406,8 @@
         WidthOnFocus = 0
       end
       object edtAntal: TEditN
-        Left = 106
-        Top = 258
+        Left = 47
+        Top = 260
         Width = 52
         Height = 21
         Color = clWhite
@@ -435,14 +435,14 @@
         WidthOnFocus = 0
       end
       object btnPost: TButton
-        Left = 614
-        Top = 256
+        Left = 575
+        Top = 258
         Width = 83
         Height = 25
         Caption = 'Spara rad'
         Enabled = False
         TabOrder = 14
-        OnClick = Button3Click
+        OnClick = btnSaveClick
       end
       object wwDBGrid3: TwwDBGrid
         Left = 100
@@ -512,9 +512,9 @@
         OnClick = Button1Click
       end
       object Panel5: TPanel
-        Left = 100
+        Left = 47
         Top = 230
-        Width = 597
+        Width = 669
         Height = 19
         Color = clMedGray
         ParentBackground = False
@@ -527,7 +527,7 @@
           Caption = 'Antal'
         end
         object Label19: TLabel
-          Left = 61
+          Left = 60
           Top = 4
           Width = 111
           Height = 13
@@ -541,11 +541,19 @@
           Caption = 'Pris fastst'#228'llt/st'
         end
         object Label20: TLabel
-          Left = 217
+          Left = 209
           Top = 3
           Width = 63
           Height = 13
           Caption = 'Pris ber'#228'knat'
+          Color = clMedGray
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clHighlightText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentColor = False
+          ParentFont = False
         end
         object Label25: TLabel
           Left = 311
@@ -698,8 +706,8 @@
         WidthOnFocus = 0
       end
       object edtPUst: TEditN
-        Left = 400
-        Top = 258
+        Left = 341
+        Top = 260
         Width = 97
         Height = 21
         TabStop = False
@@ -726,6 +734,16 @@
         FirstCharUpper = False
         FirstCharUpList = ' ('
         WidthOnFocus = 0
+      end
+      object btnCancel: TButton
+        Left = 661
+        Top = 258
+        Width = 50
+        Height = 25
+        Caption = 'Avbryt'
+        Enabled = False
+        TabOrder = 15
+        OnClick = btnCancelClick
       end
     end
     object Panel6: TPanel
@@ -780,7 +798,7 @@
         TitleButtons = True
         OnCalcCellColors = wwDBGrid2CalcCellColors
         OnTitleButtonClick = wwDBGrid2TitleButtonClick
-        OnDblClick = wwDBGrid2DblClick
+        OnDblClick = mnuEditClick
         OnDrawTitleCell = wwDBGrid2DrawTitleCell
       end
     end
@@ -951,7 +969,7 @@
   end
   object edtRabatt: TEditN
     Left = 720
-    Top = 465
+    Top = 467
     Width = 52
     Height = 21
     TabStop = False

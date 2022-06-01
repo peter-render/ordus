@@ -401,10 +401,6 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
     end
   end
@@ -694,6 +690,10 @@
     object actArkivera: TAction
       Caption = 'Arkivera fakura'
       OnExecute = actArkiveraExecute
+    end
+    object actReadExcelRequest: TAction
+      Caption = 'actReadExcelRequest'
+      OnExecute = actReadExcelRequestExecute
     end
   end
   object sp_ftgsystem: TFDStoredProc
@@ -2015,5 +2015,87 @@
       ReadOnly = True
       Size = 101
     end
+  end
+  object OpenExcelDialog: TOpenDialog
+    Filter = 'Excel-fil|*.xlsx'
+    Left = 408
+    Top = 131
+  end
+  object spOffertKalkylInsert: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'OffertKalkylInsert'
+    Left = 432
+    Top = 595
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@Kundid'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@V'#229'rReferensId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 4
+        Name = '@F'#246'rfr'#229'gan'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 50
+      end>
+  end
+  object spOffertkalkylArtikelInsert: TFDStoredProc
+    Connection = dm.FDConnection1
+    StoredProcName = 'OffertkalkylArtikelInsert'
+    Left = 556
+    Top = 599
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@Kundid'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@OffertkalkylId'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 4
+        Name = '@Artikelnummer'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        Position = 5
+        Name = '@Artikelbeteckning'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 200
+      end
+      item
+        Position = 6
+        Name = '@Antal'
+        DataType = ftInteger
+        ParamType = ptInput
+      end>
   end
 end

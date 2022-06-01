@@ -68,6 +68,9 @@ type
     qryOrderhistoryOrdertypString: TStringField;
     qryOrderradOffertPrisPerEnhet: TCurrencyField;
     qryOrderradOffertdatum: TSQLTimeStampField;
+    qryOrderrad÷vrigt1: TCurrencyField;
+    qryOrderrad÷vrigt2: TCurrencyField;
+    qryOrderradSummaAuto: TCurrencyField;
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Tabort1Click(Sender: TObject);
@@ -78,6 +81,7 @@ type
     procedure wwDBGrid1MouseMove(Sender: TObject; Shift: TShiftState; X, Y: Integer);
     procedure wwDBGrid1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
+    procedure qryOrderradCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -145,7 +149,7 @@ end;
 
 procedure TfrmOrderradUpdate.wwDBGrid1CellChanged(Sender: TObject);
 begin
-  wwDBGrid1.datasource.DataSet.Refresh;
+//
 end;
 
 procedure TfrmOrderradUpdate.wwDBGrid1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState;
@@ -255,6 +259,15 @@ begin
     qryOrderradAvrapporteradDatum.AsDateTime := Date
   else
     qryOrderradAvrapporteradDatum.AsString := '';
+
+end;
+
+procedure TfrmOrderradUpdate.qryOrderradCalcFields(DataSet: TDataSet);
+begin
+  if (DataSet.FieldByName('PrisperenhetAuto').AsFloat <> 0) or (DataSet.FieldByName('÷vrigt1').AsFloat <> 0) or
+    (DataSet.FieldByName('÷vrigt2').AsFloat <> 0) then
+    DataSet.FieldByName('SummaAuto').value := DataSet.FieldByName('PrisperenhetAuto').AsFloat +
+      DataSet.FieldByName('÷vrigt1').AsFloat + DataSet.FieldByName('÷vrigt2').AsFloat;
 
 end;
 

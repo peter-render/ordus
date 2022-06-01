@@ -1,11 +1,11 @@
-object frmOrderradUpdate: TfrmOrderradUpdate
+﻿object frmOrderradUpdate: TfrmOrderradUpdate
   Left = 355
   Top = 292
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Best'#228'llning'
   ClientHeight = 545
-  ClientWidth = 1144
+  ClientWidth = 1325
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,18 +26,20 @@ object frmOrderradUpdate: TfrmOrderradUpdate
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1144
+    Width = 1325
     Height = 545
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 0
+    ExplicitWidth = 1144
     object Panel3: TPanel
       Left = 1
       Top = 1
-      Width = 1142
+      Width = 1323
       Height = 43
       Align = alTop
       TabOrder = 0
+      ExplicitWidth = 1142
       object Label1: TLabel
         Left = 150
         Top = 6
@@ -152,16 +154,17 @@ object frmOrderradUpdate: TfrmOrderradUpdate
     object Panel4: TPanel
       Left = 1
       Top = 44
-      Width = 1142
+      Width = 1323
       Height = 500
       Align = alClient
       BorderWidth = 10
       Caption = 'Panel4'
       TabOrder = 1
+      ExplicitWidth = 1142
       object wwDBGrid1: TwwDBGrid
         Left = 11
         Top = 11
-        Width = 1120
+        Width = 1301
         Height = 478
         Margins.Top = 4
         Margins.Bottom = 4
@@ -177,11 +180,14 @@ object frmOrderradUpdate: TfrmOrderradUpdate
           'YtbehandlingBeteckning'#9'18'#9'Ytbehandling'
           'Antal'#9'6'#9'Antal'
           'PrisperEnhetAuto'#9'12'#9'Pris/enhet auto'
+          #214'vrigt1'#9'8'#9'   '#214'vrigt1'
+          #214'vrigt2'#9'8'#9'   '#214'vrigt2'#9'F'
+          'SummaAuto'#9'10'#9'Summa auto'
           'PrisperEnhet'#9'8'#9'Pris/enhet '
           'SenastePrisPerEnhet'#9'9'#9'Senaste pris'
           'SenasteOrderdatum'#9'12'#9'Senaste prisdat.'
           'OffertPrisPerEnhet'#9'14'#9'  Offertpris/enhet'
-          'Offertdatum'#9'14'#9'  Offertdatum'#9'F'
+          'Offertdatum'#9'14'#9'  Offertdatum'
           'AvrapporteradDatum'#9'18'#9'AvrapporteradDatum'
           'AvrapporteradAv'#9'18'#9'AvrapporteradAv')
         IniAttributes.Delimiter = ';;'
@@ -207,6 +213,7 @@ object frmOrderradUpdate: TfrmOrderradUpdate
         LineColors.DataColor = clBlack
         LineColors.ShadowColor = clBlack
         OnCalcCellColors = wwDBGrid1CalcCellColors
+        OnColExit = wwDBGrid1CellChanged
         PadColumnStyle = pcsPadHeader
       end
       object LU_senastePriser: TwwDBLookupCombo
@@ -411,6 +418,8 @@ object frmOrderradUpdate: TfrmOrderradUpdate
     end
   end
   object qryOrderrad: TFDQuery
+    Active = True
+    OnCalcFields = qryOrderradCalcFields
     Connection = dm.FDConnection1
     FetchOptions.AssignedValues = [evCache]
     FetchOptions.Cache = [fiBlobs, fiMeta]
@@ -425,9 +434,10 @@ object frmOrderradUpdate: TfrmOrderradUpdate
       #9'orad.PrisperEnhet,'
       #9'orad.PrisperEnhetAuto,'
       #9'orad.Avrapporterad,'
-      #9'orad.AvrapporteradDatum'
-      ''
-      '        ,per.F'#246'rnamn + '#39' '#39'+ per.Efternamn AvrapporteradAv,'
+      #9'orad.AvrapporteradDatum,'
+      'orad.'#214'vrigt1,'
+      'orad.'#214'vrigt2,'
+      '        per.F'#246'rnamn + '#39' '#39'+ per.Efternamn AvrapporteradAv,'
       #9'a.Artikelnummer,'
       #9'a.beteckning ArtikelBeteckning,'
       #9'y.Beteckning YtbehandlingBeteckning'
@@ -522,6 +532,28 @@ object frmOrderradUpdate: TfrmOrderradUpdate
       DisplayFormat = '### ##0.00'
       currency = False
     end
+    object qryOrderradÖvrigt1: TCurrencyField
+      DisplayLabel = '   '#214'vrigt1'
+      DisplayWidth = 8
+      FieldName = #214'vrigt1'
+      Origin = '['#214'vrigt1]'
+      DisplayFormat = '### ##0.00'
+    end
+    object qryOrderradÖvrigt2: TCurrencyField
+      DisplayLabel = '   '#214'vrigt2'
+      DisplayWidth = 8
+      FieldName = #214'vrigt2'
+      Origin = '['#214'vrigt2]'
+      DisplayFormat = '### ##0.00'
+    end
+    object qryOrderradSummaAuto: TCurrencyField
+      DisplayLabel = 'Summa auto'
+      DisplayWidth = 10
+      FieldKind = fkCalculated
+      FieldName = 'SummaAuto'
+      DisplayFormat = '### ##0.00'
+      Calculated = True
+    end
     object qryOrderradPrisperEnhet: TCurrencyField
       DisplayLabel = 'Pris/enhet '
       DisplayWidth = 8
@@ -544,6 +576,18 @@ object frmOrderradUpdate: TfrmOrderradUpdate
       DisplayWidth = 12
       FieldName = 'SenasteOrderdatum'
       Origin = 'SenasteOrderdatum'
+    end
+    object qryOrderradOffertPrisPerEnhet: TCurrencyField
+      DisplayLabel = '  Offertpris/enhet'
+      DisplayWidth = 14
+      FieldName = 'OffertPrisPerEnhet'
+      Origin = 'OffertPrisPerEnhet'
+    end
+    object qryOrderradOffertdatum: TSQLTimeStampField
+      DisplayLabel = '  Offertdatum'
+      DisplayWidth = 14
+      FieldName = 'Offertdatum'
+      Origin = 'Offertdatum'
     end
     object qryOrderradAvrapporteradDatum: TSQLTimeStampField
       Alignment = taCenter
@@ -598,14 +642,6 @@ object frmOrderradUpdate: TfrmOrderradUpdate
       FieldName = 'SenasteOrdertypId'
       Origin = 'SenasteOrdertypId'
       Visible = False
-    end
-    object qryOrderradOffertPrisPerEnhet: TCurrencyField
-      FieldName = 'OffertPrisPerEnhet'
-      Origin = 'OffertPrisPerEnhet'
-    end
-    object qryOrderradOffertdatum: TSQLTimeStampField
-      FieldName = 'Offertdatum'
-      Origin = 'Offertdatum'
     end
   end
 end

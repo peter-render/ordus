@@ -273,6 +273,10 @@ type
     qryExcelExportPris: TFMTBCDField;
     qryExcelExportDagensdatum: TDateField;
     qryExcelExportVårReferens: TStringField;
+    actReadExcelRequest: TAction;
+    OpenExcelDialog: TOpenDialog;
+    spOffertKalkylInsert: TFDStoredProc;
+    spOffertkalkylArtikelInsert: TFDStoredProc;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -340,6 +344,7 @@ type
     procedure actArkiveraExecute(Sender: TObject);
     procedure sp_OrderlistCalcFields(DataSet: TDataSet);
     procedure actOrderbekräftleseExcelViaEpostExecute(Sender: TObject);
+    procedure actReadExcelRequestExecute(Sender: TObject);
   private
     xfilename: string;
     qrfilename: string;
@@ -884,6 +889,142 @@ begin
 
 end;
 
+procedure TfrmOrderLista.actReadExcelRequestExecute(Sender: TObject);
+var
+  ExcelFileName: String;
+  ExcelApplication, ExcelWorkbook, EWS: Variant;
+  artikelnr, artikelbeteckning: string;
+  intOffertKalkylId, antal, radnr: Integer;
+begin
+
+  // Kommentar:
+  // Import av Offertförfrågan från Intersystem från en excelfil;
+
+  if OpenExcelDialog.Execute then
+  begin
+
+    ExcelFileName := OpenExcelDialog.FileName;
+
+    // be sure ComObj and Variants units are included in the "uses" clause
+    ExcelApplication := Null;
+    ExcelWorkbook := Null;
+    EWS := Null;
+
+    try
+      // create Excel OLE
+      ExcelApplication := CreateOleObject('Excel.Application');
+    except
+      ExcelApplication := Null;
+      // add error/exception handling code as desired
+    end;
+
+    If VarIsNull(ExcelApplication) = false then
+    begin
+      try
+        ExcelApplication.Visible := false; // set to False if you do not want to see the activity in the background
+        ExcelApplication.DisplayAlerts := false;
+        // ensures message dialogs do not interrupt the flow of your automation process. May be helpful to set to True during testing and debugging.
+
+        // Open Excel Workbook
+        try
+          ExcelWorkbook := ExcelApplication.Workbooks.open(ExcelFileName);
+          // reference
+          // https://docs.microsoft.com/en-us/office/vba/api/excel.workbooks.open
+        except
+          ExcelWorkbook := Null;
+          // add error/exception handling code as desired
+        end;
+
+        If VarIsNull(ExcelWorkbook) = false then
+        begin
+          // connect to Excel Worksheet using either the ExcelApplication or ExcelWorkbook handle
+          try
+            EWS := ExcelWorkbook.WorkSheets[1]; // [1] specifies the first worksheet
+            radnr := 4;
+            // Skapa OffertKalkyl
+
+            with spOffertKalkylInsert do
+            begin
+              ParamByName('@Kundid').Value := 1;
+              ParamByName('@VårReferensId').Value := 5;
+              ParamByName('@Förfrågan').Value := ChangeFileExt(extractfilename(ExcelFileName), '');
+              execproc;
+              intOffertKalkylId := ParamByName('@NewId').asInteger;
+            end;
+
+            while True do
+            begin
+              radnr := radnr + 1;
+
+              artikelnr := EWS.cells[radnr, 1];
+              artikelbeteckning := EWS.cells[radnr, 2];
+
+              if artikelnr <> '' then
+              begin
+
+                antal := EWS.cells[radnr, 4];
+                if antal > 0 then
+                  with spOffertkalkylArtikelInsert do
+                  begin
+                    ParamByName('@Kundid').Value := 1;
+                    ParamByName('@OffertKalkylid').Value := intOffertKalkylId;
+                    ParamByName('@Artikelnummer').Value := artikelnr;
+                    ParamByName('@Artikelbeteckning').Value := artikelbeteckning;
+                    ParamByName('@Antal').Value := antal;
+                    execproc;
+                  end;
+
+                antal := EWS.cells[radnr, 6];
+                if antal > 0 then
+                  with spOffertkalkylArtikelInsert do
+                  begin
+                    ParamByName('@Kundid').Value := 1;
+                    ParamByName('@OffertKalkylid').Value := intOffertKalkylId;
+                    ParamByName('@Artikelnummer').Value := artikelnr;
+                    ParamByName('@Artikelbeteckning').Value := artikelbeteckning;
+                    ParamByName('@Antal').Value := antal;
+                    execproc;
+                  end;
+
+                antal := EWS.cells[radnr, 8];
+                if antal > 0 then
+                  with spOffertkalkylArtikelInsert do
+                  begin
+                    ParamByName('@Kundid').Value := 1;
+                    ParamByName('@OffertKalkylid').Value := intOffertKalkylId;
+                    ParamByName('@Artikelnummer').Value := artikelnr;
+                    ParamByName('@Artikelbeteckning').Value := artikelbeteckning;
+                    ParamByName('@Antal').Value := antal;
+                    execproc;
+                  end;
+              end else
+                exit;
+            end;
+          except
+            EWS := Null;
+            // add error/exception handling code as desired
+          end;
+
+          If VarIsNull(EWS) = false then
+          begin
+            EWS.Select;
+            // work on the Excel worksheet as needed
+          end;
+        end;
+      finally
+        Showmessage('Offertkalkyl med ID '+  inttostr(intOffertKalkylId) + ' skapat.');
+        ExcelApplication.Workbooks.close;
+        ExcelApplication.DisplayAlerts := True;
+        ExcelApplication.Quit;
+
+        EWS := Unassigned;
+        ExcelWorkbook := Unassigned;
+        ExcelApplication := Unassigned;
+      end;
+    end;
+  end;
+end;
+
 procedure TfrmOrderLista.actOrderTaBortExecute(Sender: TObject);
 begin
   if messagedlg('Vill du verkligen tar bort hela beställningen?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
@@ -1001,7 +1142,7 @@ end;
 
 procedure TfrmOrderLista.actOrderbekräftleseExcelViaEpostExecute(Sender: TObject);
 var
-  x,ci, row, I, W, NumberOfWorksheetsNeeded: Integer;
+  x, ci, row, I, W, NumberOfWorksheetsNeeded: Integer;
   fstring, ExcelFileName: String;
   oRng, ExcelApplication, ExcelWorkbook, ExcelWorksheet: Variant;
   bm: Tbookmark;
@@ -1037,7 +1178,7 @@ begin
 
     // Open Excel Workbook
     try
-      ExcelWorkbook := ExcelApplication.WorkBooks.Add(-4167);
+      ExcelWorkbook := ExcelApplication.Workbooks.Add(-4167);
       // or
       // ExcelWorkbook := ExcelApplication.WorkBooks.Add;
       // reference
@@ -1053,27 +1194,27 @@ begin
         // create the desired number of worksheets in this workbook
         // if the default number of worksheets created is less than the desired number
 
-        If NumberOfWorksheetsNeeded > ExcelWorkbook.Worksheets.count then
+        If NumberOfWorksheetsNeeded > ExcelWorkbook.WorkSheets.count then
         begin
-          While ExcelWorkbook.Worksheets.count < NumberOfWorksheetsNeeded do
-            ExcelWorkbook.Worksheets.Add(Null, ExcelWorkbook.Worksheets[ExcelWorkbook.Worksheets.count], 1, -4167);
+          While ExcelWorkbook.WorkSheets.count < NumberOfWorksheetsNeeded do
+            ExcelWorkbook.WorkSheets.Add(Null, ExcelWorkbook.WorkSheets[ExcelWorkbook.WorkSheets.count], 1, -4167);
           // or use the code below if you do not care about the order in which the sheets are named
           // ExcelWorkbook.WorkSheets.Add(Null,Null,(NumberOfWorksheets-ExcelWorkbook.Worksheets.Count),-4167);
         end;
 
         // if the default number of worksheets created is more than the desired number
-        If NumberOfWorksheetsNeeded < ExcelWorkbook.Worksheets.count then
+        If NumberOfWorksheetsNeeded < ExcelWorkbook.WorkSheets.count then
         begin
-          While ExcelWorkbook.Worksheets.count > NumberOfWorksheetsNeeded do
-            ExcelWorkbook.Worksheets[ExcelWorkbook.Worksheets.count].delete;
+          While ExcelWorkbook.WorkSheets.count > NumberOfWorksheetsNeeded do
+            ExcelWorkbook.WorkSheets[ExcelWorkbook.WorkSheets.count].delete;
 
-          For W := 1 to ExcelWorkbook.Worksheets.count do
-            ExcelWorkbook.Worksheets[W].name := 'Blad' + inttostr(W);
+          For W := 1 to ExcelWorkbook.WorkSheets.count do
+            ExcelWorkbook.WorkSheets[W].name := 'Blad' + inttostr(W);
           // renames the sheets
         end;
 
         // connect to Excel Worksheet using either the ExcelApplication or ExcelWorkbook handle
-        ExcelWorksheet := ExcelWorkbook.Worksheets[1]; // [1] specifies the first worksheet
+        ExcelWorksheet := ExcelWorkbook.WorkSheets[1]; // [1] specifies the first worksheet
 
       except
         ExcelWorksheet := Null;
@@ -1086,22 +1227,20 @@ begin
         ExcelWorksheet.Select;
 
         row := 1;
-        ExcelWorksheet.Cells[row, 1] := 'Pos';
-        ExcelWorksheet.Cells[row, 2] := 'Artikelnr';
-        ExcelWorksheet.Cells[row, 3] := 'Ytbehandling';
-        ExcelWorksheet.Cells[row, 4] := 'Beteckning';
-        ExcelWorksheet.Cells[row, 5] := 'Antal';
-        ExcelWorksheet.Cells[row, 6] := 'Pris/Enhet';
-        ExcelWorksheet.Cells[row, 7] := 'Pris totalt';
-
+        ExcelWorksheet.cells[row, 1] := 'Pos';
+        ExcelWorksheet.cells[row, 2] := 'Artikelnr';
+        ExcelWorksheet.cells[row, 3] := 'Ytbehandling';
+        ExcelWorksheet.cells[row, 4] := 'Beteckning';
+        ExcelWorksheet.cells[row, 5] := 'Antal';
+        ExcelWorksheet.cells[row, 6] := 'Pris/Enhet';
+        ExcelWorksheet.cells[row, 7] := 'Pris totalt';
 
         for x := 1 to 7 do
-            ExcelWorksheet.Cells[row, x].Interior.ColorIndex := 24         ;
+          ExcelWorksheet.cells[row, x].Interior.ColorIndex := 24;
 
-//        ExcelWorksheet.Columns['A' + inttostr(row), 'G' + inttostr(row)].Interior.ColorIndex := 24;
+        // ExcelWorksheet.Columns['A' + inttostr(row), 'G' + inttostr(row)].Interior.ColorIndex := 24;
 
         row := row + 1;
-
 
         with qryExcelExport do
         begin
@@ -1112,13 +1251,13 @@ begin
           first;
           while not eof do
           begin
-            ExcelWorksheet.Cells[row, 1] := fieldbyname('Positionnummer').asstring;
-            ExcelWorksheet.Cells[row, 2] := fieldbyname('Artikelnummer').asstring;
-            ExcelWorksheet.Cells[row, 3] := fieldbyname('YtbehandlingBeteckning').asstring;
-            ExcelWorksheet.Cells[row, 4] := fieldbyname('Beteckning').asstring;
-            ExcelWorksheet.Cells[row, 5] := fieldbyname('Antal').asstring;
-            ExcelWorksheet.Cells[row, 6] := fieldbyname('Prisperenhet').AsFloat;
-            ExcelWorksheet.Cells[row, 7] := fieldbyname('Pris').AsFloat;
+            ExcelWorksheet.cells[row, 1] := fieldbyname('Positionnummer').asstring;
+            ExcelWorksheet.cells[row, 2] := fieldbyname('Artikelnummer').asstring;
+            ExcelWorksheet.cells[row, 3] := fieldbyname('YtbehandlingBeteckning').asstring;
+            ExcelWorksheet.cells[row, 4] := fieldbyname('Beteckning').asstring;
+            ExcelWorksheet.cells[row, 5] := fieldbyname('Antal').asstring;
+            ExcelWorksheet.cells[row, 6] := fieldbyname('Prisperenhet').AsFloat;
+            ExcelWorksheet.cells[row, 7] := fieldbyname('Pris').AsFloat;
 
             row := row + 1;
             next;
@@ -1143,9 +1282,9 @@ begin
   end;
 
   try
-      ExcelWorksheet := Unassigned;
-      ExcelWorkbook := Unassigned;
-      ExcelApplication := Unassigned;
+    ExcelWorksheet := Unassigned;
+    ExcelWorkbook := Unassigned;
+    ExcelApplication := Unassigned;
 
   finally
     application.ProcessMessages;
