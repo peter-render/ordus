@@ -43,7 +43,6 @@ type
     qryLU_KundID: TFDAutoIncField;
     qryLU_KundKundnamn: TStringField;
     qryLU_KundKortbeteckning: TStringField;
-    sp: TFDStoredProc;
     sp_OrderRadImport: TFDStoredProc;
     sp_KundpersonlistforKund: TFDStoredProc;
     sp_KundpersonlistforKundKundpersonId: TFDAutoIncField;
@@ -95,6 +94,7 @@ type
     qryGetStatusDataÄrStatus: TBooleanField;
     qryGetStatusDataKräverAdmin: TBooleanField;
     DBHalfDayPeriodSource1: TDBHalfDayPeriodSource;
+    sp: TFDStoredProc;
     procedure DataModuleCreate(Sender: TObject);
     procedure FDConnection1Error(ASender: TObject;
       const AInitiator: IFDStanObject; var AException: Exception);

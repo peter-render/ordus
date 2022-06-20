@@ -123,7 +123,10 @@
       end
       object Import1: TMenuItem
         Action = frmOrderLista.actReadExcelRequest
-        Caption = 'Import Excel-f'#246'rfr'#229'gan Intersystem'
+        Visible = False
+      end
+      object SkickaorderbekrftleseExcel1: TMenuItem
+        Action = frmOrderLista.actOrderbekräftleseExcelViaEpost
       end
       object Avslut1: TMenuItem
         Caption = '&Avsluta'
@@ -231,7 +234,7 @@
     Left = 213
     Top = 108
     Bitmap = {
-      494C01010A000D00C40010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D00CC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

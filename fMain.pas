@@ -59,6 +59,7 @@ type
     Flikkolumner1: TMenuItem;
     Ritningsnotering1: TMenuItem;
     Import1: TMenuItem;
+    SkickaorderbekrftleseExcel1: TMenuItem;
     procedure tbtnKunderClick(Sender: TObject);
     procedure btnAvslutClick(Sender: TObject);
     procedure Ytbehandlingstyper1Click(Sender: TObject);

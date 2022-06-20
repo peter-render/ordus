@@ -120,7 +120,6 @@ type
     Label15: TLabel;
     Label4: TLabel;
     Label10: TLabel;
-    Label11: TLabel;
     Label17: TLabel;
     lblAntal: TLabel;
     Label23: TLabel;
@@ -153,6 +152,7 @@ type
     qryPrisUppskattatStRabatt: TCurrencyField;
     btnSkrivUt: TButton;
     btnCancel: TButton;
+    Label5: TLabel;
     procedure FormShow(Sender: TObject);
     procedure edtKundCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
     procedure edtKundBeforeDropDown(Sender: TObject);
@@ -241,7 +241,7 @@ end;
 
 procedure TfrmOrderkalkyl.btnCancelClick(Sender: TObject);
 var
-i:Integer;
+  i: Integer;
 begin
   for i := 0 to pred(self.ComponentCount) do
   begin
@@ -258,16 +258,16 @@ begin
   btnPost.Enabled := True;
   btnCancel.Enabled := False;
 
-  LU_artikel.Value:= '';
-             LU_artikel.RefreshDisplay;
+  LU_Artikel.value := '';
+  LU_Artikel.RefreshDisplay;
 
-  wwdbgrid3.DataSource.DataSet.Close;
+  wwDBGrid3.DataSource.DataSet.Close;
 
 end;
 
 procedure TfrmOrderkalkyl.btnCloseClick(Sender: TObject);
 begin
-  close;
+  Close;
 
 end;
 
@@ -288,7 +288,7 @@ begin
 
     execproc;
     OrderHuvudId := params[0].asInteger;
-    huvudSkapat := true;
+    huvudSkapat := True;
   end;
 
   with qry do
@@ -296,30 +296,33 @@ begin
     first;
     while (not eof) do
     begin
-      with sp_OrderRadInsert do
+      if (qry.FieldByName('YtbehandlingId').asInteger <> 0) and (qry.FieldByName('Prisfastställt').asFloat <> 0) then
       begin
-        ParamByName('@Orderid').value := OrderHuvudId;
-        ParamByName('@ArtikelId').value := qry.FieldByName('ArtikelId').asInteger;
-        ParamByName('@PrisperEnhet').value := qry.FieldByName('Prisfastställt').asInteger;
-        ParamByName('@Antal').value := qry.FieldByName('Antal').asInteger;
-        ParamByName('@YtbehandlingId').value := qry.FieldByName('YtbehandlingId').asInteger;
-        ParamByName('@Offertdatum').value := edtKalkyldatum.Date;
+        with sp_OrderRadInsert do
+        begin
+          ParamByName('@Orderid').value := OrderHuvudId;
+          ParamByName('@ArtikelId').value := qry.FieldByName('ArtikelId').asInteger;
+          ParamByName('@PrisperEnhet').value := qry.FieldByName('Prisfastställt').asFloat;
+          ParamByName('@Antal').value := qry.FieldByName('Antal').asInteger;
+          ParamByName('@YtbehandlingId').value := qry.FieldByName('YtbehandlingId').asInteger;
+          ParamByName('@Offertdatum').value := edtKalkyldatum.Date;
 
-        execproc;
+          execproc;
+        end;
       end;
       next;
     end;
   end;
 
-  sp_OrderradHistoryArtikel.close;
+  sp_OrderradHistoryArtikel.Close;
 
   edtYtbehandling.Text := '';
 
   resetbasefields;
 
-  huvudSkapat := false;
+  huvudSkapat := False;
 
-  EnableLowerpanel(false);
+  EnableLowerpanel(False);
 
   LU_Artikel.Text := '';
 
@@ -327,7 +330,7 @@ begin
 
   showmessage('Offert med Orderid: ' + inttostr(OrderHuvudId) + ' är skapad - kolla under fliken Offerter');
 
-  LU_Artikel.Enabled := true;
+  LU_Artikel.Enabled := True;
   LU_Artikel.SetFocus;
 
 end;
@@ -341,7 +344,7 @@ procedure TfrmOrderkalkyl.btnSkrivUtClick(Sender: TObject);
 begin
   with TrptOffertkalkyl.Create(application) do
   begin
-    qry.close;
+    qry.Close;
     qry.ParamByName('Offertkalkylid').value := qryOffertkalkyl.FieldByName('Id').asInteger;
     qry.Open;
     report.Preview;
@@ -356,7 +359,7 @@ end;
 
 procedure TfrmOrderkalkyl.Button2Click(Sender: TObject);
 begin
-  self.close;
+  self.Close;
 end;
 
 procedure TfrmOrderkalkyl.btnSaveClick(Sender: TObject);
@@ -373,9 +376,9 @@ begin
 
     FieldByName('Antal').asInteger := edtAntal.ValueInteger;
     FieldByName('ArtikelId').asInteger := ArtikelId;
-    FieldByName('LasertidSelStk').Asfloat := edtLasertid.ValueFloat;
-    FieldByName('Skrotandelprocent').Asfloat := edtSkrotandel.ValueFloat;
-    FieldByName('Viktstk').Asfloat := edtVikt.ValueFloat;
+    FieldByName('LasertidSelStk').asFloat := edtLasertid.ValueFloat;
+    FieldByName('Skrotandelprocent').asFloat := edtSkrotandel.ValueFloat;
+    FieldByName('Viktstk').asFloat := edtVikt.ValueFloat;
     FieldByName('YtbehandlingId').asInteger := dm.qryLUYtbehandling.FieldByName('YtbehandlingId').asInteger;
 
     FieldByName('TillverkningstidUppskattad').AsCurrency := edtTVTU.ValueFloat;
@@ -411,11 +414,11 @@ begin
     end;
 
   end;
-  doEdit := false;
+  doEdit := False;
   qryOffertkalkyl.Refresh;
   qry.Refresh;
-  btnPost.Enabled := false;
-  btnCancel.Enabled:= False;
+  btnPost.Enabled := False;
+  btnCancel.Enabled := False;
 end;
 
 procedure TfrmOrderkalkyl.DBEdit1Exit(Sender: TObject);
@@ -476,7 +479,7 @@ begin
 
       execproc;
 
-      pe := ParamByName('@PrisperenhetAuto').Asfloat;
+      pe := ParamByName('@PrisperenhetAuto').asFloat;
 
       // dbedit3.DataSource.DataSet.FieldByName('PrisUppskattat').AsCurrency := pe * qry.FieldByName('Antal').AsFloat;
       // dbedit3.DataSource.DataSet.FieldByName('PrisFastställt').AsCurrency := pe * qry.FieldByName('Antal').AsFloat;
@@ -498,8 +501,8 @@ begin
   lblAntal.caption := '';
   fwidth := self.Width;
   OrderHuvudId := -1;
-  huvudSkapat := false;
-  doEdit := false;
+  huvudSkapat := False;
+  doEdit := False;
 end;
 
 procedure TfrmOrderkalkyl.FormKeyPress(Sender: TObject; var Key: Char);
@@ -549,8 +552,8 @@ begin
 
   edtYtbehandling.Text := '';
 
-  EnableLowerpanel(true);
-  btnPost.Enabled := false;
+  EnableLowerpanel(True);
+  btnPost.Enabled := False;
 
   resetbasefields;
 
@@ -582,21 +585,21 @@ begin
 
   with qry do
   begin
-    close;
+    Close;
     ParamByName('OffertkalkylId').value := qryOffertkalkyl.FieldByName('Id').asInteger;
     Open;
   end;
 
   with dm.sp_KundpersonlistforKund do
   begin
-    close;
+    Close;
     ParamByName('@Kundid').value := Kundid;
     Open;
   end;
 
   with qryLU_Artikel do
   begin
-    close;
+    Close;
     ParamByName('KundID').value := Kundid;
     Open;
   end;
@@ -650,12 +653,12 @@ begin
     if dgediting in wwDBGrid2.Options then
     begin
 
-      qryArtikel.readonly := false;
-      Ytbehandling.readonly := false;
-      qryAntal.readonly := false;
-      qryTillverkningstidUppskattad.readonly := false;
-      qryPrisUppskattat.readonly := false;
-      qryPrisUppskattatStRabatt.readonly := false;
+      qryArtikel.readonly := False;
+      Ytbehandling.readonly := False;
+      qryAntal.readonly := False;
+      qryTillverkningstidUppskattad.readonly := False;
+      qryPrisUppskattat.readonly := False;
+      qryPrisUppskattatStRabatt.readonly := False;
       wwDBGrid2.Options := wwDBGrid2.Options - [dgediting] + [dgRowselect];
 
       wwDBGrid2.PopupMenu := PopupMenu2;
@@ -664,12 +667,12 @@ begin
     begin
 
       wwDBGrid2.Options := wwDBGrid2.Options + [dgediting] - [dgRowselect];
-      qryArtikel.readonly := true;
-      Ytbehandling.readonly := true;
-      qryAntal.readonly := true;
-      qryTillverkningstidUppskattad.readonly := true;
-      qryPrisUppskattat.readonly := true;
-      qryPrisUppskattatStRabatt.readonly := true;
+      qryArtikel.readonly := True;
+      Ytbehandling.readonly := True;
+      qryAntal.readonly := True;
+      qryTillverkningstidUppskattad.readonly := True;
+      qryPrisUppskattat.readonly := True;
+      qryPrisUppskattatStRabatt.readonly := True;
 
       wwDBGrid2.SetActiveField('PrisFastställt');
 
@@ -747,13 +750,13 @@ begin
 
   with dm.sp_KundpersonlistforKund do
   begin
-    close;
+    Close;
     ParamByName('@Kundid').value := LookupTable.FieldByName('KundId').asInteger;
     Open;
   end;
 
-  edtKontaktperson.Enabled := true;
-  edtVarReferens.Enabled := true;
+  edtKontaktperson.Enabled := True;
+  edtVarReferens.Enabled := True;
   edtKontaktperson.DropDown;
 
 end;
@@ -800,16 +803,16 @@ end;
 procedure TfrmOrderkalkyl.edtKontaktpersonCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
 begin
 
-  edtForfragan.Enabled := true;
+  edtForfragan.Enabled := True;
 
-  edtKalkyldatum.Enabled := true;
-  edtVarReferens.Enabled := true;
-  edtLeveransdatum.Enabled := true;
-  LU_Artikel.Enabled := true;
+  edtKalkyldatum.Enabled := True;
+  edtVarReferens.Enabled := True;
+  edtLeveransdatum.Enabled := True;
+  LU_Artikel.Enabled := True;
 
   with qryLU_Artikel do
   begin
-    close;
+    Close;
     ParamByName('KundID').value := sp_KundLookuplist.FieldByName('KundId').asInteger;
     Open;
   end;
@@ -824,7 +827,7 @@ begin
 
   if LU_Artikel.value = '' then
   begin
-    sp_OrderradHistoryArtikel.close;
+    sp_OrderradHistoryArtikel.Close;
   end;
 
 end;
@@ -843,13 +846,13 @@ begin
     qryOffertkalkyl.post;
     OffertkalkyId := qryOffertkalkyl.FieldByName('Id').asInteger;
 
-    qryOffertkalkyl.close;
+    qryOffertkalkyl.Close;
     qryOffertkalkyl.Open;
     qryOffertkalkyl.Locate('Id', OffertkalkyId, []);
 
     btnNykalkyl.caption := 'Ny kalkyl';
-    btnNykalkyl.Enabled := true;
-    edtKund.Enabled := false;
+    btnNykalkyl.Enabled := True;
+    edtKund.Enabled := False;
 
   end;
 
@@ -858,7 +861,7 @@ begin
 
     with sp_OrderradHistoryArtikel do
     begin
-      close;
+      Close;
       ParamByName('@ArtikelId').value := ArtikelId;
       Open;
     end;
@@ -866,18 +869,18 @@ begin
     edtYtbehandling.LookupTable.Locate('Id', LookupTable.FieldByName('YtbehandlingIdDefault').asInteger, []);
     edtYtbehandling.Text := edtYtbehandling.LookupTable.FieldByName('Beteckning').AsString;
 
-    EnableLowerpanel(true);
+    EnableLowerpanel(True);
     edtFieldsChange(Sender);
 
   end;
-  EnableLowerpanel(true);
+  EnableLowerpanel(True);
   resetbasefields;
 end;
 
 procedure TfrmOrderkalkyl.mnuDeleteClick(Sender: TObject);
 begin
   qry.Delete;
-  qry.close;
+  qry.Close;
   qry.Open;
 
   btnSkapaOffert.Enabled := qry.RecordCount > 0;
@@ -898,30 +901,28 @@ begin
 
   end;
 
-//  LU_Artikel.LookupTable.Locate('ArtikelId', qry.FieldByName('ArtikelId').asInteger, []);
-//  LU_Artikel.value := LU_Artikel.LookupTable.FieldByName('ArtikelId').AsString;
+  // LU_Artikel.LookupTable.Locate('ArtikelId', qry.FieldByName('ArtikelId').asInteger, []);
+  // LU_Artikel.value := LU_Artikel.LookupTable.FieldByName('ArtikelId').AsString;
 
   LU_Artikel.value := qry.FieldByName('ArtikelId').AsString;
 
-
-//  LU_Artikel.CloseUp(true);
-  LU_ArtikelCloseUp(Sender, LU_Artikel.LookupTable, nil,false);
-
+  // LU_Artikel.CloseUp(true);
+  LU_ArtikelCloseUp(Sender, LU_Artikel.LookupTable, nil, False);
 
   ArtikelId := qry.FieldByName('ArtikelId').asInteger;
   edtAntal.Text := qry.FieldByName('Antal').AsString;
   edtPU.Text := qry.FieldByName('PrisUppskattat').AsString;
-  edtPUst.Text := floattostr(qry.FieldByName('PrisUppskattat').Asfloat / qry.FieldByName('Antal').Asfloat);
+  edtPUst.Text := floattostr(qry.FieldByName('PrisUppskattat').asFloat / qry.FieldByName('Antal').asFloat);
   edtPFst.Text := qry.FieldByName('PrisFastställt').AsString;
   edtTVTU.Text := qry.FieldByName('TillverkningstidUppskattad').AsString;
   edtYtbehandling.value := qry.FieldByName('YtbehandlingId').AsString;
-  edtLasertid.setfloat(qry.FieldByName('LasertidSelStk').Asfloat);
-  edtSkrotandel.setfloat(qry.FieldByName('Skrotandelprocent').Asfloat);
-  edtVikt.setfloat(qry.FieldByName('Viktstk').Asfloat);
+  edtLasertid.setfloat(qry.FieldByName('LasertidSelStk').asFloat);
+  edtSkrotandel.setfloat(qry.FieldByName('Skrotandelprocent').asFloat);
+  edtVikt.setfloat(qry.FieldByName('Viktstk').asFloat);
 
-  doEdit := true;
+  doEdit := True;
   edtLasertid.SetFocus;
-  btnCancel.Enabled:= true;
+  btnCancel.Enabled := True;
 
 end;
 
@@ -969,7 +970,7 @@ begin
   begin
     qryOffertkalkyl.Cancel;
     btnNykalkyl.caption := 'Ny kalkyl';
-    qryOffertkalkyl.close;
+    qryOffertkalkyl.Close;
     qryOffertkalkyl.Open;
   end
 
@@ -982,8 +983,8 @@ begin
       FieldByName('Leveransdatum').AsDateTime := now;
     end;
 
-    sp_OrderradHistoryArtikel.close;
-    edtKund.Enabled := true;
+    sp_OrderradHistoryArtikel.Close;
+    edtKund.Enabled := True;
     edtKund.SetFocus;
     btnNykalkyl.caption := 'Avbryt';
   end;
@@ -992,19 +993,19 @@ end;
 procedure TfrmOrderkalkyl.qryCalcFields(DataSet: TDataSet);
 begin
 
-  if DataSet.FieldByName('Antal').Asfloat <> 0 then
+  if DataSet.FieldByName('Antal').asFloat <> 0 then
 
-    DataSet.FieldByName('prisperstk').Asfloat := DataSet.FieldByName('Prisfastställt').Asfloat /
-      DataSet.FieldByName('Antal').Asfloat;
+    DataSet.FieldByName('prisperstk').asFloat := DataSet.FieldByName('Prisfastställt').asFloat /
+      DataSet.FieldByName('Antal').asFloat;
 
-  DataSet.FieldByName('PrisUppskattatSt').Asfloat := DataSet.FieldByName('PrisUppskattat').Asfloat /
-    DataSet.FieldByName('Antal').Asfloat;
+  DataSet.FieldByName('PrisUppskattatSt').asFloat := DataSet.FieldByName('PrisUppskattat').asFloat /
+    DataSet.FieldByName('Antal').asFloat;
 
-  DataSet.FieldByName('prisperstk').Asfloat := DataSet.FieldByName('Prisfastställt').Asfloat /
-    DataSet.FieldByName('Antal').Asfloat;
+  DataSet.FieldByName('prisperstk').asFloat := DataSet.FieldByName('Prisfastställt').asFloat /
+    DataSet.FieldByName('Antal').asFloat;
 
-  DataSet.FieldByName('PrisUppskattatStRabatt').Asfloat := DataSet.FieldByName('PrisUppskattatSt').Asfloat -
-    (DataSet.FieldByName('PrisUppskattatSt').Asfloat * edtRabatt.ValueInteger / 100);
+  DataSet.FieldByName('PrisUppskattatStRabatt').asFloat := DataSet.FieldByName('PrisUppskattatSt').asFloat -
+    (DataSet.FieldByName('PrisUppskattatSt').asFloat * edtRabatt.ValueInteger / 100);
 
 end;
 

@@ -17,9 +17,12 @@ procedure ReadOrderfileIntersystem(filename: string);
 procedure ReadOrderfileIntersystemXML(xmlfilename: string);
 function Orderstatusbeteckning(intStatusId: integer): string;
 
+
 implementation
 
 uses funclib, IntersystemOrder;
+
+
 
 function Orderstatusbeteckning(intStatusId: integer): string;
 begin

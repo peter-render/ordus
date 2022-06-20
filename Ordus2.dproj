@@ -83,11 +83,10 @@
         <Manifest_File>None</Manifest_File>
         <Icon_MainIcon>Ordus2_Icon1.ico</Icon_MainIcon>
         <DCC_ExeOutput>C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Exe\</DCC_ExeOutput>
-        <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_MajorVer>2</VerInfo_MajorVer>
-        <VerInfo_Release>10</VerInfo_Release>
+        <VerInfo_Release>11</VerInfo_Release>
         <VerInfo_MinorVer>5</VerInfo_MinorVer>
-        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.5.10.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=2.2.1.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=2.5.11.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=2.2.1.0;Comments=</VerInfo_Keys>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -700,6 +699,10 @@
         </DCCReference>
         <DCCReference Include="rRitningsnotering.pas">
             <Form>rptRitningsnotering</Form>
+        </DCCReference>
+        <DCCReference Include="fExcelimportOrder.pas">
+            <Form>frmExcelImportOrder</Form>
+            <FormType>dfm</FormType>
         </DCCReference>
         <None Include="Ordus2.todo"/>
         <None Include="Ordus3.dpr"/>

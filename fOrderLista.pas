@@ -22,7 +22,7 @@ uses
   Vcl.gtxXport,
   Vcl.gtQRXport, gtPDFPrinter, QRPDFFilt, Vcl.gtxClasses, Xml.xmldom,
   prefaktura4, Vcl.OleCtrls,
-  SHDocVw, fSattFakturadatum, rSammelfaktura, fOrderkalkyl, fFlikkolumner;
+  SHDocVw, fSattFakturadatum, rSammelfaktura, fOrderkalkyl, fFlikkolumner, fExcelimportOrder;
 
 type
   TfrmOrderLista = class(TForm)
@@ -277,6 +277,7 @@ type
     OpenExcelDialog: TOpenDialog;
     spOffertKalkylInsert: TFDStoredProc;
     spOffertkalkylArtikelInsert: TFDStoredProc;
+    actExcelImport: TAction;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -345,6 +346,7 @@ type
     procedure sp_OrderlistCalcFields(DataSet: TDataSet);
     procedure actOrderbekräftleseExcelViaEpostExecute(Sender: TObject);
     procedure actReadExcelRequestExecute(Sender: TObject);
+    procedure ReadOrderfileExcelGenerell(filename: string);
   private
     xfilename: string;
     qrfilename: string;
@@ -385,20 +387,275 @@ uses fMain, fOrderNew, rOrder, rArbetsorder, dFakturaNummer,
 
 {$R *.DFM}
 
+procedure TfrmOrderLista.ReadOrderfileExcelGenerell(filename: string);
+var
+  strKund, ExcelFileName: String;
+  ExcelApplication, ExcelWorkbook, EWS: Variant;
+  radnr: Integer;
+  strBestDatum: string;
+  strInköpsorder: string;
+  strReferens, strGodsMärke: string;
+  strText, strLevDatum: string;
+  artikelnr, artikelbeteckning: string;
+  antalArtiklar, start, i, intOrderid, antal, intKundId, intOffertKalkylId: Integer;
+  levDatum: Tdatetime;
+
+begin
+  ExcelFileName := filename;
+
+  // be sure ComObj and Variants units are included in the "uses" clause
+  ExcelApplication := Null;
+  ExcelWorkbook := Null;
+  EWS := Null;
+
+  try
+    // create Excel OLE
+    ExcelApplication := CreateOleObject('Excel.Application');
+  except
+    ExcelApplication := Null;
+    // add error/exception handling code as desired
+  end;
+
+  If VarIsNull(ExcelApplication) = false then
+  begin
+    try
+      ExcelApplication.Visible := false; // set to False if you do not want to see the activity in the background
+      ExcelApplication.DisplayAlerts := false;
+      // ensures message dialogs do not interrupt the flow of your automation process. May be helpful to set to True during testing and debugging.
+
+      // Open Excel Workbook
+      try
+        ExcelWorkbook := ExcelApplication.Workbooks.open(ExcelFileName);
+        // reference
+        // https://docs.microsoft.com/en-us/office/vba/api/excel.workbooks.open
+      except
+        ExcelWorkbook := Null;
+        // add error/exception handling code as desired
+      end;
+
+      If VarIsNull(ExcelWorkbook) = false then
+      begin
+        // connect to Excel Worksheet using either the ExcelApplication or ExcelWorkbook handle
+        try
+          EWS := ExcelWorkbook.WorkSheets[1]; // [1] specifies the first worksheet
+
+          radnr := 0;
+
+          while True do
+          begin
+            radnr := radnr + 1;
+            strText := EWS.cells[radnr, 1];
+            if trim(strText) = 'Artikelnummer' then
+              break;
+          end;
+
+          start := radnr + 2;
+          radnr := radnr + 1;
+
+          while True do
+          begin
+            radnr := radnr + 1;
+            strText := EWS.cells[radnr, 1];
+            if strText = '' then
+              break;
+          end;
+
+          antalArtiklar := radnr - start;
+
+          strKund := EWS.cells[3, 2];
+          strBestDatum := EWS.cells[4, 2];
+          strInköpsorder := EWS.cells[5, 2];
+          strGodsMärke := EWS.cells[6, 2];
+          strReferens := EWS.cells[7, 2];
+          strLevDatum := EWS.cells[8, 2];
+
+          with dm.qryLU_kund do
+          begin
+            open;
+            if Locate('Kundnamn', strKund, [LoCaseInsensitive, LoPartialKey]) then
+
+              intKundId := dm.qryLU_kund.FieldByName('Id').asInteger;
+
+          end;
+
+          with TfrmExcelImportOrder.create(Application) do
+          begin
+
+            LUCKund.Text := dm.qryLU_KundKundnamn.AsString;
+            edtBestDatum.Date := strtodate(strBestDatum);
+            edtInkopsorder.Text := strInköpsorder;
+            edtGodsmärke.Text := strGodsMärke;
+            edtReferens.Text := strReferens;
+            edtLeveransdatum.Date := strtodate(strLevDatum);
+
+            lblAntal.caption := inttostr(antalArtiklar);
+
+            showmodal;
+
+            if modalResult = mrOK then
+            begin
+              if rgtyp.ItemIndex = 0 then
+              begin
+                // Skapa Ordderhuvud
+                // #################################################################################
+
+                with dm.sp do
+                begin
+
+                  parambyname('@Kundid').value := intKundId;
+                  parambyname('@ordernummer').value := edtInkopsorder.Text;
+                  parambyname('@orderdatum').value := edtBestDatum.Date;
+                  parambyname('@Godsmärke').value := edtGodsmärke.Text;
+                  parambyname('@Referens').value := strReferens;
+                  parambyname('@Leveransdatum').value := edtLeveransdatum.Date;
+
+                  execproc;
+                  intOrderid := parambyname('@OrderID').value;
+                end;
+
+                radnr := start - 1;
+                i := 0;
+
+                while True do
+                begin
+                  radnr := radnr + 1;
+
+                  artikelnr := EWS.cells[radnr, 1];
+                  artikelbeteckning := EWS.cells[radnr, 2];
+
+                  if artikelnr <> '' then
+                  begin
+
+                    antal := EWS.cells[radnr, 3];
+                    if antal > 0 then
+                    begin
+                      i := i + 1;
+                      with dm.sp_OrderRadImport do
+                      begin
+                        parambyname('@KundId').value := intKundId;
+                        parambyname('@OrderId').value := intOrderid;
+                        parambyname('@Artikelnummer').value := artikelnr;
+                        parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                        parambyname('@Antal').value := antal;
+                        parambyname('@Positionnummer').value := i;
+                        execproc;
+                      end;
+                    end;
+                  end
+                  else
+                    break;
+                end;
+                showmessage('Order med Id ' + inttostr(intOrderid) + ' skapat.');
+              end;
+
+              if rgtyp.ItemIndex = 1 then
+              begin
+                //
+                // Skapa OffertKalkyl
+                //
+                with spOffertKalkylInsert do
+                begin
+                  parambyname('@Kundid').value := intKundId;
+                  parambyname('@VårReferensId').value := 5;
+                  parambyname('@Förfrågan').value := ChangeFileExt(extractfilename(ExcelFileName), '');
+                  execproc;
+                  intOffertKalkylId := parambyname('@NewId').asInteger;
+                end;
+
+                //
+                radnr := 10; // Första artikelrad
+                while True do
+                begin
+                  radnr := radnr + 1;
+
+                  artikelnr := EWS.cells[radnr, 1];
+                  artikelbeteckning := EWS.cells[radnr, 2];
+
+                  if artikelnr <> '' then
+                  begin
+
+                    antal := EWS.cells[radnr, 3];
+                    if antal > 0 then
+                      with spOffertkalkylArtikelInsert do
+                      begin
+                        parambyname('@Kundid').value := intKundId;
+                        parambyname('@OffertKalkylid').value := intOffertKalkylId;
+                        parambyname('@Artikelnummer').value := artikelnr;
+                        parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                        parambyname('@Antal').value := antal;
+                        execproc;
+                      end;
+
+                    antal := EWS.cells[radnr, 4];
+                    if antal > 0 then
+                      with spOffertkalkylArtikelInsert do
+                      begin
+                        parambyname('@Kundid').value := intKundId;
+                        parambyname('@OffertKalkylid').value := intOffertKalkylId;
+                        parambyname('@Artikelnummer').value := artikelnr;
+                        parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                        parambyname('@Antal').value := antal;
+                        execproc;
+                      end;
+
+                    antal := EWS.cells[radnr, 5];
+                    if antal > 0 then
+                      with spOffertkalkylArtikelInsert do
+                      begin
+                        parambyname('@Kundid').value := intKundId;
+                        parambyname('@OffertKalkylid').value := intOffertKalkylId;
+                        parambyname('@Artikelnummer').value := artikelnr;
+                        parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                        parambyname('@Antal').value := antal;
+                        execproc;
+                      end;
+                  end
+                  else
+                  begin
+                    showmessage('Offertkalkyl med Id ' + inttostr(intOffertKalkylId) + ' skapat.');
+                    exit;
+                  end;
+                end;
+              end;
+            end;
+          end;
+        except
+          EWS := Null;
+          // add error/exception handling code as desired
+        end;
+
+        If VarIsNull(EWS) = false then
+        begin
+          EWS.Select;
+          // work on the Excel worksheet as needed
+        end;
+      end;
+    finally
+      ExcelApplication.Workbooks.close;
+      ExcelApplication.DisplayAlerts := True;
+      ExcelApplication.Quit;
+
+      EWS := Unassigned;
+      ExcelWorkbook := Unassigned;
+      ExcelApplication := Unassigned;
+    end;
+  end;
+end;
+
 procedure TfrmOrderLista.wwDBGrid1DblClick(Sender: TObject);
 var
   fname: string;
   f: TfrmOrder;
-  cc, I: Integer;
+  cc, i: Integer;
 begin
 
-  fname := 'F' + sp_OrderlistOrderID.asstring;
-  cc := application.componentcount;
-  for I := 0 to cc - 1 do
-    if application.Components[I].name = fname then
+  fname := 'F' + sp_OrderlistOrderID.AsString;
+  cc := Application.componentcount;
+  for i := 0 to cc - 1 do
+    if Application.Components[i].name = fname then
     begin
 
-      with (application.FindComponent(fname) as TfrmOrder) do
+      with (Application.FindComponent(fname) as TfrmOrder) do
       begin
         windowstate := wsmaximized;
         show;
@@ -408,7 +665,7 @@ begin
       exit;
     end;
 
-  f := TfrmOrder.create(application);
+  f := TfrmOrder.create(Application);
   f.name := fname;
   f.windowstate := wsmaximized;
   f.show;
@@ -425,7 +682,7 @@ end;
 
 procedure TfrmOrderLista.FormShow(Sender: TObject);
 var
-  I: Integer;
+  i: Integer;
 begin
 
   cLeveransdatum := false;
@@ -439,8 +696,8 @@ begin
   cKundnamn := false;
   cEgenmarkning := false;
 
-  for I := 0 to PageControl1.PageCount - 1 do
-    PageControl1.Pages[I].Destroy;
+  for i := 0 to PageControl1.PageCount - 1 do
+    PageControl1.Pages[i].Destroy;
 
   PageControl1.TabHeight := 30;
   PageControl1.tabwidth := 160;
@@ -455,17 +712,17 @@ begin
     open;
     while not eof do
     begin
-      if (AdminComputer or (not fieldbyname('Kräveradmin').asBoolean)) then
+      if (AdminComputer or (not FieldByName('Kräveradmin').asBoolean)) then
       begin
         with TTabSheet.create(PageControl1) do
         begin
 
           PageControl := PageControl1;
-          Name := 'ts' + fieldbyname('Orderstatus').asstring;
-          Caption := fieldbyname('TabBeteckning').asstring; // + ' - ' + fieldbyname('iD').asstring;
-          Tag := fieldbyname('Id').asInteger;
-          if fieldbyname('BGCOlor').asstring <> '' then
-            Brush.Color := stringtocolor(fieldbyname('BGColor').asstring)
+          Name := 'ts' + FieldByName('Orderstatus').AsString;
+          caption := FieldByName('TabBeteckning').AsString; // + ' - ' + fieldbyname('iD').asstring;
+          Tag := FieldByName('Id').asInteger;
+          if FieldByName('BGCOlor').AsString <> '' then
+            Brush.Color := stringtocolor(FieldByName('BGColor').AsString)
           else
             Brush.Color := clWhite;
         end;
@@ -478,9 +735,9 @@ begin
   with sp_Orderlist do
   begin
     close;
-    ParamByName('@OrderstatusId').Value := 4; // Underarbete
-    ParamByName('@Orderby').Value := 'OrderId';
-    ParamByName('@sortasc').Value := 0; // -- 0 = asc, 1 = desc
+    parambyname('@OrderstatusId').value := 4; // Underarbete
+    parambyname('@Orderby').value := 'OrderId';
+    parambyname('@sortasc').value := 0; // -- 0 = asc, 1 = desc
 
     open;
   end;
@@ -495,7 +752,7 @@ begin
   dm.sp_KundLookuplist.open;
   ordersumma := 0;
 
-  Label5.Caption := '';
+  Label5.caption := '';
   wwDBGrid1.ColumnByName('Ordersumma').Visible := false;
 
   cbVisaAllaFakturor.Visible := false;
@@ -516,10 +773,10 @@ begin
   begin
     with sp_OrderDelete do
     begin
-      ParamByName('@OrderID').Value := sp_OrderlistOrderID.asInteger;
+      parambyname('@OrderID').value := sp_OrderlistOrderID.asInteger;
 
       execproc;
-      if ParamByName('@RETURN_VALUE').Value = 0 then
+      if parambyname('@RETURN_VALUE').value = 0 then
         sp_Orderlist.close;
       sp_Orderlist.open;
 
@@ -530,12 +787,12 @@ end;
 procedure TfrmOrderLista.ToolButton2Click(Sender: TObject);
 begin
 
-  with TrptOrder.create(application) do
+  with TrptOrder.create(Application) do
   begin
     with qry do
     begin
       close;
-      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
       open;
     end;
     report.preview;
@@ -545,12 +802,12 @@ end;
 
 procedure TfrmOrderLista.ToolButton4Click(Sender: TObject);
 begin
-  with TrptArbetsOrder.create(application) do
+  with TrptArbetsOrder.create(Application) do
   begin
     with qry do
     begin
       close;
-      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
       open;
     end;
     report.preview;
@@ -565,7 +822,7 @@ begin
   begin
     edit;
 
-    with TdlgFakturaNummer.create(application) do
+    with TdlgFakturaNummer.create(Application) do
     begin
       if showmodal = mrOK then
         post
@@ -588,7 +845,7 @@ begin
 
   if (Field.fieldname = 'cAntalArtikelNoteringar') then
   begin
-    if (sp_Orderlist.fieldbyname('cAntalArtikelNoteringar').asstring <> '') then
+    if (sp_Orderlist.FieldByName('cAntalArtikelNoteringar').AsString <> '') then
     begin
       AFont.Color := clWhite;
       ABrush.Color := clGreen;
@@ -597,7 +854,7 @@ begin
   //
   if (Field.fieldname = 'Lagersaldo') then
   begin
-    if (sp_Orderlist.fieldbyname('Lagersaldo').asInteger <> 0) then
+    if (sp_Orderlist.FieldByName('Lagersaldo').asInteger <> 0) then
     begin
       AFont.Color := clBlack;
       ABrush.Color := $0000CC00;
@@ -610,15 +867,15 @@ begin
 
   end;
 
-  if (Field.fieldname = 'Leveransdatum') and (sp_Orderlist.fieldbyname('Leveransdatum').asdatetime <= date) and
-    (sp_Orderlist.fieldbyname('Fakturadatum').asstring = '') then
+  if (Field.fieldname = 'Leveransdatum') and (sp_Orderlist.FieldByName('Leveransdatum').asDateTime <= Date) and
+    (sp_Orderlist.FieldByName('Fakturadatum').AsString = '') then
   begin
     AFont.Color := clMaroon;
     AFont.Style := [fsBold]
   end;
 
-  if (sp_Orderlist.fieldbyname('ÄrPrissatt').asInteger = 1) AND (sp_Orderlist.fieldbyname('Antaltotal').asInteger > 0)
-    and (sp_Orderlist.fieldbyname('OrderStatusId').asInteger in [stAR, stUA]) AND
+  if (sp_Orderlist.FieldByName('ÄrPrissatt').asInteger = 1) AND (sp_Orderlist.FieldByName('Antaltotal').asInteger > 0)
+    and (sp_Orderlist.FieldByName('OrderStatusId').asInteger in [stAR, stUA]) AND
     ((Field.fieldname = 'AntalTotal') or (Field.fieldname = 'AntalAvrapporterad') or
     (Field.fieldname = 'Antalprissatt'))
 
@@ -651,15 +908,15 @@ end;
 
 procedure TfrmOrderLista.actOrderNewExecute(Sender: TObject);
 begin
-  with TfrmOrderNew.create(application) do
+  with TfrmOrderNew.create(Application) do
   begin
-    lblTyp.Caption := 'Ny order';
-    Caption := 'Ny order';
+    lblTyp.caption := 'Ny order';
+    caption := 'Ny order';
 
     lblTyp.Tag := 1; // Order
     showmodal;
 
-    if modalresult = mrOK then
+    if modalResult = mrOK then
       with sp_Orderlist do
       begin
         close;
@@ -680,13 +937,13 @@ begin
   // end;
   //
 
-  with TfrmOrderPlanering.create(application) do
+  with TfrmOrderPlanering.create(Application) do
   begin
 
     qryOrderEdit.open;
     qryOrderEdit.edit;
-    label13.Caption := sp_OrderlistKalkArbetstidTime.asstring;
-    application.ProcessMessages;
+    label13.caption := sp_OrderlistKalkArbetstidTime.AsString;
+    Application.ProcessMessages;
     showmodal;
   end;
 
@@ -704,12 +961,12 @@ begin
 
     with sp_OrderKopiera do
     begin
-      ParamByName('@OrderId').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
-      ParamByName('@SkapaOrderFrånOffert').Value := True;
+      parambyname('@OrderId').value := sp_Orderlist.FieldByName('OrderId').asInteger;
+      parambyname('@SkapaOrderFrånOffert').value := True;
 
       execproc;
 
-      OrderIdNy := ParamByName('@OrderIdNew').asInteger;
+      OrderIdNy := parambyname('@OrderIdNew').asInteger;
 
       RefreshOrderlist;
 
@@ -726,26 +983,26 @@ end;
 procedure TfrmOrderLista.actSkrivUtExecute(Sender: TObject);
 begin
 
-  with TrptOrder.create(application) do
+  with TrptOrder.create(Application) do
   begin
-    header.Caption := 'BESTÄLLNING';
+    header.caption := 'BESTÄLLNING';
 
     with sp_ftgsystem do
     begin
-      ParamByName('@ID').Value := 6; // >Kopior beställning
+      parambyname('@ID').value := 6; // >Kopior beställning
       execproc;
-      report.PrinterSettings.Copies := strtoint(ParamByName('@Värde').Value);
+      report.PrinterSettings.Copies := strtoint(parambyname('@Värde').value);
     end;
 
     with qry do
     begin
       close;
-      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
       open;
     end;
 
     xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.bestallning', 'c:\temp')) + 'Beställning_' +
-      sp_OrderlistOrderID.asstring;
+      sp_OrderlistOrderID.AsString;
 
     qrfilename := GetQrfilename(xfilename);
 
@@ -767,18 +1024,18 @@ end;
 procedure TfrmOrderLista.actOrderSkrivutExecute(Sender: TObject);
 
 begin
-  with TrptOrder.create(application) do
+  with TrptOrder.create(Application) do
   begin
-    header.Caption := 'Orderbekräftelse';
+    header.caption := 'Orderbekräftelse';
     with qry do
     begin
       close;
-      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
       open;
     end;
 
     xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
-      sp_OrderlistOrderID.asstring;
+      sp_OrderlistOrderID.AsString;
 
     qrfilename := GetQrfilename(xfilename);
     // report.print;
@@ -799,7 +1056,7 @@ end;
 
 procedure TfrmOrderLista.actSattFakturadataExecute(Sender: TObject);
 var
-  I, OrderId: Integer;
+  i, OrderId: Integer;
   Fakturadatum, Forfallodatum: Tdate;
   Fakturanummer: string;
 
@@ -811,30 +1068,30 @@ begin
   else
   begin
 
-    with TfrmSattfakturadatum.create(application) do
+    with TfrmSattfakturadatum.create(Application) do
     begin
 
-      edtFakturanummer.Text := sp_Orderlist.fieldbyname('Fakturanummer').asstring;
+      edtFakturanummer.Text := sp_Orderlist.FieldByName('Fakturanummer').AsString;
 
-      if sp_Orderlist.fieldbyname('Fakturadatum').asstring <> '' then
-        edtFakturadatum.date := sp_Orderlist.fieldbyname('Fakturadatum').asdatetime
+      if sp_Orderlist.FieldByName('Fakturadatum').AsString <> '' then
+        edtFakturadatum.Date := sp_Orderlist.FieldByName('Fakturadatum').asDateTime
       else
-        edtFakturadatum.date := now();
+        edtFakturadatum.Date := now();
 
-      if sp_Orderlist.fieldbyname('Förfallodatum').asstring <> '' then
-        edtForfallodatum.date := sp_Orderlist.fieldbyname('Förfallodatum').asdatetime
+      if sp_Orderlist.FieldByName('Förfallodatum').AsString <> '' then
+        edtForfallodatum.Date := sp_Orderlist.FieldByName('Förfallodatum').asDateTime
       else
-        edtForfallodatum.date := incday(edtFakturadatum.date, 30);
+        edtForfallodatum.Date := incday(edtFakturadatum.Date, 30);
 
       showmodal;
 
-      if modalresult = mrOK then
+      if modalResult = mrOK then
 
       begin
 
         Fakturanummer := edtFakturanummer.Text;
-        Fakturadatum := edtFakturadatum.date;
-        Forfallodatum := edtForfallodatum.date;
+        Fakturadatum := edtFakturadatum.Date;
+        Forfallodatum := edtForfallodatum.Date;
 
         if Fakturanummer <> '' then
         begin
@@ -842,17 +1099,17 @@ begin
           with wwDBGrid1 do
           begin
             if selectedlist.count > 0 then
-              for I := 0 to selectedlist.count - 1 do
+              for i := 0 to selectedlist.count - 1 do
               begin
-                sp_Orderlist.GotoBookmark(selectedlist.Items[I]);
+                sp_Orderlist.GotoBookmark(selectedlist.Items[i]);
                 OrderId := sp_OrderlistOrderID.asInteger;
 
                 with Custom_OrderhuvudFakturadataUpdate do
                 begin
-                  ParamByName('@Orderhuvudid').Value := OrderId;
-                  ParamByName('@Fakturanummer').Value := Fakturanummer;
-                  ParamByName('@Fakturadatum').Value := Fakturadatum;
-                  ParamByName('@Forfallodatum').Value := Forfallodatum;
+                  parambyname('@Orderhuvudid').value := OrderId;
+                  parambyname('@Fakturanummer').value := Fakturanummer;
+                  parambyname('@Fakturadatum').value := Fakturadatum;
+                  parambyname('@Forfallodatum').value := Forfallodatum;
 
                   execproc;
                 end;
@@ -871,7 +1128,7 @@ begin
   frmmain.tbtnOrderlista.Enabled := True;
   frmmain.tbtnOrderlista.ImageIndex := 4;
 
-  with TfrmOrderradUpdate.create(application) do
+  with TfrmOrderradUpdate.create(Application) do
     show;
 
 
@@ -903,7 +1160,7 @@ begin
   if OpenExcelDialog.Execute then
   begin
 
-    ExcelFileName := OpenExcelDialog.FileName;
+    ExcelFileName := OpenExcelDialog.filename;
 
     // be sure ComObj and Variants units are included in the "uses" clause
     ExcelApplication := Null;
@@ -945,11 +1202,11 @@ begin
 
             with spOffertKalkylInsert do
             begin
-              ParamByName('@Kundid').Value := 1;
-              ParamByName('@VårReferensId').Value := 5;
-              ParamByName('@Förfrågan').Value := ChangeFileExt(extractfilename(ExcelFileName), '');
+              parambyname('@Kundid').value := 1;
+              parambyname('@VårReferensId').value := 5;
+              parambyname('@Förfrågan').value := ChangeFileExt(extractfilename(ExcelFileName), '');
               execproc;
-              intOffertKalkylId := ParamByName('@NewId').asInteger;
+              intOffertKalkylId := parambyname('@NewId').asInteger;
             end;
 
             while True do
@@ -966,11 +1223,11 @@ begin
                 if antal > 0 then
                   with spOffertkalkylArtikelInsert do
                   begin
-                    ParamByName('@Kundid').Value := 1;
-                    ParamByName('@OffertKalkylid').Value := intOffertKalkylId;
-                    ParamByName('@Artikelnummer').Value := artikelnr;
-                    ParamByName('@Artikelbeteckning').Value := artikelbeteckning;
-                    ParamByName('@Antal').Value := antal;
+                    parambyname('@Kundid').value := 1;
+                    parambyname('@OffertKalkylid').value := intOffertKalkylId;
+                    parambyname('@Artikelnummer').value := artikelnr;
+                    parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                    parambyname('@Antal').value := antal;
                     execproc;
                   end;
 
@@ -978,11 +1235,11 @@ begin
                 if antal > 0 then
                   with spOffertkalkylArtikelInsert do
                   begin
-                    ParamByName('@Kundid').Value := 1;
-                    ParamByName('@OffertKalkylid').Value := intOffertKalkylId;
-                    ParamByName('@Artikelnummer').Value := artikelnr;
-                    ParamByName('@Artikelbeteckning').Value := artikelbeteckning;
-                    ParamByName('@Antal').Value := antal;
+                    parambyname('@Kundid').value := 1;
+                    parambyname('@OffertKalkylid').value := intOffertKalkylId;
+                    parambyname('@Artikelnummer').value := artikelnr;
+                    parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                    parambyname('@Antal').value := antal;
                     execproc;
                   end;
 
@@ -990,14 +1247,15 @@ begin
                 if antal > 0 then
                   with spOffertkalkylArtikelInsert do
                   begin
-                    ParamByName('@Kundid').Value := 1;
-                    ParamByName('@OffertKalkylid').Value := intOffertKalkylId;
-                    ParamByName('@Artikelnummer').Value := artikelnr;
-                    ParamByName('@Artikelbeteckning').Value := artikelbeteckning;
-                    ParamByName('@Antal').Value := antal;
+                    parambyname('@Kundid').value := 1;
+                    parambyname('@OffertKalkylid').value := intOffertKalkylId;
+                    parambyname('@Artikelnummer').value := artikelnr;
+                    parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                    parambyname('@Antal').value := antal;
                     execproc;
                   end;
-              end else
+              end
+              else
                 exit;
             end;
           except
@@ -1012,7 +1270,7 @@ begin
           end;
         end;
       finally
-        Showmessage('Offertkalkyl med ID '+  inttostr(intOffertKalkylId) + ' skapat.');
+        showmessage('Offertkalkyl med ID ' + inttostr(intOffertKalkylId) + ' skapat.');
         ExcelApplication.Workbooks.close;
         ExcelApplication.DisplayAlerts := True;
         ExcelApplication.Quit;
@@ -1031,9 +1289,9 @@ begin
   begin
     with sp_OrderDelete do
     begin
-      ParamByName('@OrderID').Value := sp_OrderlistOrderID.asInteger;
+      parambyname('@OrderID').value := sp_OrderlistOrderID.asInteger;
       execproc;
-      if ParamByName('@RETURN_VALUE').Value = 0 then
+      if parambyname('@RETURN_VALUE').value = 0 then
         RefreshOrderlist;
     end;
   end;
@@ -1041,15 +1299,15 @@ end;
 
 procedure TfrmOrderLista.actOffertNewExecute(Sender: TObject);
 begin
-  with TfrmOrderNew.create(application) do
+  with TfrmOrderNew.create(Application) do
   begin
-    lblTyp.Caption := 'Ny offert';
-    Caption := 'Ny offert';
+    lblTyp.caption := 'Ny offert';
+    caption := 'Ny offert';
     lblTyp.Tag := 2;
 
     showmodal;
 
-    if modalresult = mrOK then
+    if modalResult = mrOK then
       with sp_Orderlist do
       begin
         close;
@@ -1064,26 +1322,26 @@ const
   olMailItem = $00000000;
 begin
 
-  with TrptOrder.create(application) do
+  with TrptOrder.create(Application) do
   begin
-    header.Caption := 'Offert';
+    header.caption := 'Offert';
     with qry do
     begin
       close;
-      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
       open;
     end;
 
     xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.offert.epost', '')) + 'Offert_ ' +
-      sp_OrderlistOrderID.asstring;
+      sp_OrderlistOrderID.AsString;
 
-    with TrptOrder.create(application) do
+    with TrptOrder.create(Application) do
     begin
-      header.Caption := 'Offert';
+      header.caption := 'Offert';
       with qry do
       begin
         close;
-        params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+        params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
         open;
       end;
       qrfilename := GetQrfilename(xfilename);
@@ -1131,9 +1389,9 @@ begin
   begin
     with sp_OrderDelete do
     begin
-      ParamByName('@OrderID').Value := sp_OrderlistOrderID.asInteger;
+      parambyname('@OrderID').value := sp_OrderlistOrderID.asInteger;
       execproc;
-      if ParamByName('@RETURN_VALUE').Value = 0 then
+      if parambyname('@RETURN_VALUE').value = 0 then
         RefreshOrderlist;
     end;
   end;
@@ -1141,8 +1399,31 @@ begin
 end;
 
 procedure TfrmOrderLista.actOrderbekräftleseExcelViaEpostExecute(Sender: TObject);
+
+  function AppendDuplicationNumber(const AStr: string): string;
+  // Used to make strings unique
+  // This examines the string AStr for trailing '(n)' where
+  // 'n' is an integer.
+  // If the (n) part is found, n is incremented, otherwise '(2)' is
+  // appended to the string.
+  var
+    iLH, iRH, p1, p2, i: Integer;
+    s: string;
+  begin
+    p1 := ansipos('(', AStr);
+    if p1 > 0 then
+    begin
+      p2 := LastDelimiter(')', AStr);
+      i := strtoint(copy(AStr, p1 + 1, p2 - p1 - 1));
+      i := i + 1;
+      result := copy(AStr, 1, p1) + inttostr(i) + copy(AStr, p2, 100);
+    end
+    else
+      result := copy(AStr, 1, ansipos('.', AStr) - 1) + ' (2)' + extractfileext(AStr);
+  end;
+
 var
-  x, ci, row, I, W, NumberOfWorksheetsNeeded: Integer;
+  x, ci, row, i, W, NumberOfWorksheetsNeeded: Integer;
   fstring, ExcelFileName: String;
   oRng, ExcelApplication, ExcelWorkbook, ExcelWorksheet: Variant;
   bm: Tbookmark;
@@ -1155,7 +1436,10 @@ const
 begin
 
   xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
-    sp_OrderlistOrderID.asstring + '.xlsx';
+    stringreplace(DateToStr(Date), '-', '', [rfReplaceAll, rfIgnoreCase]) + '.xlsx';
+
+  while FileExists(xfilename) do
+    xfilename := AppendDuplicationNumber(xfilename);
 
   NumberOfWorksheetsNeeded := 1;
 
@@ -1206,7 +1490,7 @@ begin
         If NumberOfWorksheetsNeeded < ExcelWorkbook.WorkSheets.count then
         begin
           While ExcelWorkbook.WorkSheets.count > NumberOfWorksheetsNeeded do
-            ExcelWorkbook.WorkSheets[ExcelWorkbook.WorkSheets.count].delete;
+            ExcelWorkbook.WorkSheets[ExcelWorkbook.WorkSheets.count].Delete;
 
           For W := 1 to ExcelWorkbook.WorkSheets.count do
             ExcelWorkbook.WorkSheets[W].name := 'Blad' + inttostr(W);
@@ -1227,15 +1511,16 @@ begin
         ExcelWorksheet.Select;
 
         row := 1;
-        ExcelWorksheet.cells[row, 1] := 'Pos';
-        ExcelWorksheet.cells[row, 2] := 'Artikelnr';
-        ExcelWorksheet.cells[row, 3] := 'Ytbehandling';
-        ExcelWorksheet.cells[row, 4] := 'Beteckning';
-        ExcelWorksheet.cells[row, 5] := 'Antal';
-        ExcelWorksheet.cells[row, 6] := 'Pris/Enhet';
-        ExcelWorksheet.cells[row, 7] := 'Pris totalt';
+        ExcelWorksheet.cells[row, 1] := 'Ordernummer';
+        ExcelWorksheet.cells[row, 2] := 'Pos';
+        ExcelWorksheet.cells[row, 3] := 'Artikelnr';
+        ExcelWorksheet.cells[row, 4] := 'Ytbehandling';
+        ExcelWorksheet.cells[row, 5] := 'Beteckning';
+        ExcelWorksheet.cells[row, 6] := 'Antal';
+        ExcelWorksheet.cells[row, 7] := 'Pris/Enhet';
+        ExcelWorksheet.cells[row, 8] := 'Pris totalt';
 
-        for x := 1 to 7 do
+        for x := 1 to 8 do
           ExcelWorksheet.cells[row, x].Interior.ColorIndex := 24;
 
         // ExcelWorksheet.Columns['A' + inttostr(row), 'G' + inttostr(row)].Interior.ColorIndex := 24;
@@ -1244,25 +1529,26 @@ begin
 
         with qryExcelExport do
         begin
-          close;
-          ParamByName('ORDERID').Value := sp_OrderlistOrderID.asInteger;
+          // close;
+          // ParamByName('ORDERID').Value := sp_OrderlistOrderID.asInteger;
           open;
           DisableControls;
           first;
           while not eof do
           begin
-            ExcelWorksheet.cells[row, 1] := fieldbyname('Positionnummer').asstring;
-            ExcelWorksheet.cells[row, 2] := fieldbyname('Artikelnummer').asstring;
-            ExcelWorksheet.cells[row, 3] := fieldbyname('YtbehandlingBeteckning').asstring;
-            ExcelWorksheet.cells[row, 4] := fieldbyname('Beteckning').asstring;
-            ExcelWorksheet.cells[row, 5] := fieldbyname('Antal').asstring;
-            ExcelWorksheet.cells[row, 6] := fieldbyname('Prisperenhet').AsFloat;
-            ExcelWorksheet.cells[row, 7] := fieldbyname('Pris').AsFloat;
+            ExcelWorksheet.cells[row, 1] := FieldByName('ordernummer').AsString;
+            ExcelWorksheet.cells[row, 2] := FieldByName('Positionnummer').AsString;
+            ExcelWorksheet.cells[row, 3] := FieldByName('Artikelnummer').AsString;
+            ExcelWorksheet.cells[row, 4] := FieldByName('YtbehandlingBeteckning').AsString;
+            ExcelWorksheet.cells[row, 5] := FieldByName('Beteckning').AsString;
+            ExcelWorksheet.cells[row, 6] := FieldByName('Antal').AsString;
+            ExcelWorksheet.cells[row, 7] := FieldByName('Prisperenhet').AsFloat;
+            ExcelWorksheet.cells[row, 8] := FieldByName('Pris').AsFloat;
 
             row := row + 1;
             next;
           end;
-          ExcelWorksheet.Range['A1', 'G1'].EntireColumn.AutoFit;
+          ExcelWorksheet.Range['A1', 'I1'].EntireColumn.AutoFit;
           EnableControls;
         end;
       end;
@@ -1280,14 +1566,13 @@ begin
     end;
 
   end;
-
   try
     ExcelWorksheet := Unassigned;
     ExcelWorkbook := Unassigned;
     ExcelApplication := Unassigned;
 
   finally
-    application.ProcessMessages;
+    Application.ProcessMessages;
     Screen.cursor := crDefault;
   end;
 
@@ -1302,11 +1587,11 @@ begin
   if pos('LENOPEHO', sp_Orderlist.Connection.ConnectionString) > 0 then
     Mail.To := 'peter@holzer.se'
   else
-    Mail.To := sp_Orderlist.fieldbyname('Emailadress').asstring;
+    Mail.To := sp_Orderlist.FieldByName('Emailadress').AsString;
 
-  Mail.Subject := 'Orderbekräftelse (' + sp_OrderlistOrderID.asstring + ')';
+  Mail.Subject := 'Orderbekräftelse';
   Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse i Excel format.' + chr(13) + chr(10) +
-    'Vi tackar för uppdraget.';
+    'Vi tackar för förfrågan.';
   Mail.Attachments.Add(xfilename);
   Mail.Display;
 
@@ -1321,15 +1606,15 @@ const
 begin
 
   xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
-    sp_OrderlistOrderID.asstring;
+    sp_OrderlistOrderID.AsString;
 
-  with TrptOrder.create(application) do
+  with TrptOrder.create(Application) do
   begin
-    header.Caption := 'Orderbekräftelse';
+    header.caption := 'Orderbekräftelse';
     with qry do
     begin
       close;
-      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
       open;
     end;
 
@@ -1359,9 +1644,9 @@ begin
     if pos('LENOPEHO', sp_Orderlist.Connection.ConnectionString) > 0 then
       Mail.To := 'peter@holzer.se'
     else
-      Mail.To := sp_Orderlist.fieldbyname('Emailadress').asstring;
+      Mail.To := sp_Orderlist.FieldByName('Emailadress').AsString;
 
-    Mail.Subject := 'Orderbekräftelse (' + sp_OrderlistOrderID.asstring + ')';
+    Mail.Subject := 'Orderbekräftelse (' + sp_OrderlistOrderID.AsString + ')';
     Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse som PDF-bilaga.' + chr(13) + chr(10) +
       'Vi tackar för uppdraget.';
     Mail.Attachments.Add(xfilename + '.pdf');
@@ -1374,19 +1659,19 @@ end;
 procedure TfrmOrderLista.actOrderEditExecute(Sender: TObject);
 begin
 
-  with TfrmOrderEdit.create(application) do
+  with TfrmOrderEdit.create(Application) do
   begin
 
     with qryOrderEdit do
     begin
-      ParamByName('OrderID').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
+      parambyname('OrderID').value := sp_Orderlist.FieldByName('OrderId').asInteger;
       open;
       edit;
     end;
 
     showmodal;
 
-    if modalresult = mrOK then
+    if modalResult = mrOK then
     begin
       qryOrderEdit.post;
       RefreshOrderlist;
@@ -1420,27 +1705,27 @@ var
 
   function FixcommaString(cvalue: double): string;
   BEGIN
-    RESULT := stringreplace(floattostr(cvalue), ',', '.', [])
+    result := stringreplace(floattostr(cvalue), ',', '.', [])
   END;
 
 begin
 
   xml_filename := FoldernameFix(ftgsystemvalue('pdf.folder.fakturaunderlag', '')) +
-    FU_FolderGet(sp_OrderlistKundID.asInteger) + 'Fakturaunderlag_' + sp_OrderlistFakturanummer.asstring + '.xml';
+    FU_FolderGet(sp_OrderlistKundID.asInteger) + 'Fakturaunderlag_' + sp_OrderlistFakturanummer.AsString + '.xml';
 
   with qryFakturaunderlagXML do
   begin
 
     close;
-    qryFakturaunderlagXML.params.ParamByName('Fakturanummer').Value :=
-      sp_Orderlist.fieldbyname('Fakturanummer').asstring;
+    qryFakturaunderlagXML.params.parambyname('Fakturanummer').value :=
+      sp_Orderlist.FieldByName('Fakturanummer').AsString;
     open;
 
     Nettosumma := 0;
 
     while not eof do
     begin
-      Nettosumma := Nettosumma + fieldbyname('Prisperenhet').AsCurrency * fieldbyname('Antal').AsFloat;
+      Nettosumma := Nettosumma + FieldByName('Prisperenhet').AsCurrency * FieldByName('Antal').AsFloat;
       next;
     end;
 
@@ -1459,21 +1744,21 @@ begin
     newInvoice.SoftwareVersion := '9.0.6p106';
     newInvoice.SoftwareManufacturer := 'Monitor ERP System AB';
     newInvoice.SoftwareName := 'Monitor';
-    newInvoice.Invoice.InvoiceNumber := fieldbyname('Fakturanummer').asstring;
+    newInvoice.Invoice.InvoiceNumber := FieldByName('Fakturanummer').AsString;
     newInvoice.Invoice.InvoiceType := '1';
 
     // Head
     Head := newInvoice.Head;
 
-    Head.SellersOrderNumber := fieldbyname('OrderId').asstring;
-    Head.OrderDate := fieldbyname('Orderdatum').asstring;
+    Head.SellersOrderNumber := FieldByName('OrderId').AsString;
+    Head.OrderDate := FieldByName('Orderdatum').AsString;
 
-    Head.BuyersOrderNumber := fieldbyname('Ordernummer').asstring;
+    Head.BuyersOrderNumber := FieldByName('Ordernummer').AsString;
     // Head.BuyersOrderNumber := '12345';
 
     Head.DebitInvoiceNumber := '0';
 
-    Head.InvoiceDate := fieldbyname('Fakturadatum').asstring;
+    Head.InvoiceDate := FieldByName('Fakturadatum').AsString;
     Head.LanguageNameCode := 'SV';
     // Buyer
     Buyer := Head.Buyer;
@@ -1482,7 +1767,7 @@ begin
     Buyer.BuyerVATRegistrationNumber := 'SE556594166201';
     Buyer.BuyerRegistrationNumber := '';
     Buyer.BuyerCountryCode := 'SE';
-    Buyer.BuyerReference := fieldbyname('Referens').asstring;
+    Buyer.BuyerReference := FieldByName('Referens').AsString;
     Buyer.BuyerReferencePhone := '';
     Buyer.BuyerReferenceFax := '';
     Buyer.BuyerReferenceEmail := '';
@@ -1539,11 +1824,11 @@ begin
     Visitingaddress.VisitingaddressCountry := 'Sverige'; // ?
 
     Head.InvoiceCurrency := 'SEK';
-    Head.PaymentDueDate := fieldbyname('Förfallodatum').asstring;
+    Head.PaymentDueDate := FieldByName('Förfallodatum').AsString;
     Head.CurrencyExchangeRate := 0; // skall vara double
     Head.RateOfExchangeDate := ''; // ?
     Head.EuVatText := ''; // ?
-    Head.GodsLabelLine1 := fieldbyname('Godsmärke').asstring;
+    Head.GodsLabelLine1 := FieldByName('Godsmärke').AsString;
     Head.GodsLabelLine2 := '';
     Head.HomeCurrency := 'SEK';
     Head.TermsOfPayment := ''; // ?
@@ -1609,25 +1894,25 @@ begin
     begin
       row := rows.Add;
 
-      row.RowNumber := fieldbyname('PositionNummer').asInteger;
+      row.RowNumber := FieldByName('PositionNummer').asInteger;
       row.RowType := '1'; // Artikelnummer, måste finnas
-      row.RowPosition := fieldbyname('PositionNummer').asstring;
+      row.RowPosition := FieldByName('PositionNummer').AsString;
       row.CostType := '0'; // Normal
 
-      row.BuyersPartNumber := fieldbyname('Artikelnummer').asstring;
-      row.SellersPartNumber := fieldbyname('Artikelnummer').asstring;
-      row.PartDescription := fieldbyname('Beteckning').asstring;
-      row.deliverydate := fieldbyname('Leveransdatum').asstring;
-      row.Quantity := FixcommaString(fieldbyname('Antal').AsFloat);
+      row.BuyersPartNumber := FieldByName('Artikelnummer').AsString;
+      row.SellersPartNumber := FieldByName('Artikelnummer').AsString;
+      row.PartDescription := FieldByName('Beteckning').AsString;
+      row.deliverydate := FieldByName('Leveransdatum').AsString;
+      row.Quantity := FixcommaString(FieldByName('Antal').AsFloat);
       row.Unit_ := 'st'; // 2018-11-14
       row.Each := 1;
       row.Discount := 0;
-      row.Price := FixcommaString(fieldbyname('PrisperEnhet').AsFloat);
+      row.Price := FixcommaString(FieldByName('PrisperEnhet').AsFloat);
       row.VatRate := 25;
 
-      row.RowSum := FixcommaString(fieldbyname('PrisperEnhet').AsCurrency * fieldbyname('Antal').AsFloat);
-      row.BuyersOrderNumber := fieldbyname('Ordernummer').asstring;
-      row.SellersOrderNumber := fieldbyname('OrderId').asstring;
+      row.RowSum := FixcommaString(FieldByName('PrisperEnhet').AsCurrency * FieldByName('Antal').AsFloat);
+      row.BuyersOrderNumber := FieldByName('Ordernummer').AsString;
+      row.SellersOrderNumber := FieldByName('OrderId').AsString;
       row.CountryOfOriginCode := 'SE';
       next;
     end;
@@ -1653,15 +1938,15 @@ begin
     with qryOrdernummerSok do
     begin
       close;
-      ParamByName('Ordernummer').Value := Soktext;
+      parambyname('Ordernummer').value := Soktext;
       open;
 
-      if (RecordCount = 1) then
+      if (recordcount = 1) then
       begin
 
         (Sender as TEdit).SelectAll;
 
-        OrderstatusId := fieldbyname('OrderstatusId').asInteger;
+        OrderstatusId := FieldByName('OrderstatusId').asInteger;
 
         if OrderstatusId = 4 then
           tabind := 0
@@ -1684,7 +1969,7 @@ begin
           open;
           end;
         *)
-        sp_Orderlist.Locate('Ordernummer', Soktext, [loCaseInsensitive]);
+        sp_Orderlist.Locate('Ordernummer', Soktext, [LoCaseInsensitive]);
       end;
 
     end;
@@ -1712,14 +1997,14 @@ begin
     with qryOrderSok do
     begin
       close;
-      ParamByName('Orderid').Value := SokOrderId;
+      parambyname('Orderid').value := SokOrderId;
       open;
 
-      if (RecordCount = 1) and (fieldbyname('Id').asInteger = SokOrderId) then
+      if (recordcount = 1) and (FieldByName('Id').asInteger = SokOrderId) then
       begin
 
         (Sender as TEdit).SelectAll;
-        OrderstatusId := fieldbyname('OrderstatusId').asInteger;
+        OrderstatusId := FieldByName('OrderstatusId').asInteger;
 
         if OrderstatusId = 4 then
           tabind := 0
@@ -1760,30 +2045,30 @@ end;
 function TfrmOrderLista.FU_FolderGet(Kundid: Integer): string;
 
 begin
-  RESULT := esql('Select isnull(MappFakturaunderlag,'''') from Kund where Id=' + Kundid.ToString);
-  if RESULT <> '' then
-    RESULT := RESULT + '\';
+  result := esql('Select isnull(MappFakturaunderlag,'''') from Kund where Id=' + Kundid.ToString);
+  if result <> '' then
+    result := result + '\';
 
 end;
 
 procedure TfrmOrderLista.actFakturaunderlagPrintExecute(Sender: TObject);
 
 begin
-  with TrptOrder.create(application) do
+  with TrptOrder.create(Application) do
   begin
 
     with sp_ftgsystem do
     begin
-      ParamByName('@ID').Value := 8;
+      parambyname('@ID').value := 8;
       execproc;
-      report.PrinterSettings.Copies := strtoint(ParamByName('@Värde').Value);
+      report.PrinterSettings.Copies := strtoint(parambyname('@Värde').value);
     end;
 
-    header.Caption := 'FAKTURAUNDERLAG';
+    header.caption := 'FAKTURAUNDERLAG';
     with qry do
     begin
       close;
-      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
       open;
     end;
 
@@ -1796,7 +2081,7 @@ begin
         report.Print;
 
       xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.fakturaunderlag', '')) +
-        FU_FolderGet(sp_OrderlistKundID.asInteger) + 'Fakturaunderlag_' + sp_OrderlistOrderID.asstring;
+        FU_FolderGet(sp_OrderlistKundID.asInteger) + 'Fakturaunderlag_' + sp_OrderlistOrderID.AsString;
 
       qrfilename := GetQrfilename(xfilename);
 
@@ -1815,7 +2100,7 @@ begin
 
       deletefile(qrfilename);
 
-      if (sp_OrderlistKundID.asInteger = 1) and (sp_OrderlistFakturanummer.asstring <> '') then
+      if (sp_OrderlistKundID.asInteger = 1) and (sp_OrderlistFakturanummer.AsString <> '') then
         Skapa_Fakturaunderlag_XML;
       // Skspa xml-fil
 
@@ -1826,7 +2111,7 @@ begin
     // Update status att order kommer under Prissatta
     with qryOrdertstatusUpdatePrissatta do
     begin
-      ParamByName('OrderID').Value := sp_Orderlist.fieldbyname('Orderid').asInteger;
+      parambyname('OrderID').value := sp_Orderlist.FieldByName('Orderid').asInteger;
       ExecSQL;
     end;
 
@@ -1841,27 +2126,27 @@ end;
 
 procedure TfrmOrderLista.actFöljesdelUtskriftExecute(Sender: TObject);
 begin
-  with TrptOrder.create(application) do
+  with TrptOrder.create(Application) do
   begin
     with sp_ftgsystem do
     begin
-      ParamByName('@ID').Value := 7;
+      parambyname('@ID').value := 7;
       execproc;
-      report.PrinterSettings.Copies := strtoint(ParamByName('@Värde').Value);
+      report.PrinterSettings.Copies := strtoint(parambyname('@Värde').value);
     end;
-    header.Caption := 'FÖLJESEDEL';
+    header.caption := 'FÖLJESEDEL';
     Tag := 1;
     with qry do
     begin
       close;
-      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
       open;
     end;
     report.Print;
     // PDF
 
     xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.foljesedel', '')) + 'Följesedel_' +
-      sp_OrderlistOrderID.asstring;
+      sp_OrderlistOrderID.AsString;
 
     qrfilename := GetQrfilename(xfilename);
 
@@ -1891,12 +2176,12 @@ end;
 
 procedure TfrmOrderLista.actImporteraIntersystemExecute(Sender: TObject);
 begin
-  with TfrmOrderimportIntersystem.create(application) do
+  with TfrmOrderimportIntersystem.create(Application) do
   begin
     showmodal;
-    if opendialog1.FileName <> '' then
+    if opendialog1.filename <> '' then
     begin
-      ReadOrderfileIntersystem(opendialog1.FileName);
+      ReadOrderfileIntersystem(opendialog1.filename);
       with sp_Orderlist do
       begin
         close;
@@ -1909,16 +2194,16 @@ end;
 
 procedure TfrmOrderLista.actOrderKalkylAddrowsExecute(Sender: TObject);
 begin
-  with TfrmOrderkalkyl.create(application) do
+  with TfrmOrderkalkyl.create(Application) do
   begin
     sp_KundLookuplist.Active := True;
-    sp_KundLookuplist.Locate('Kundid', sp_Orderlist.fieldbyname('KundID').asInteger, []);
-    edtKund.Text := sp_KundLookuplist.fieldbyname('Kundnamn').asstring;
-    edtkalkylDatum.date := sp_Orderlist.fieldbyname('Orderdatum').asdatetime;
-    edtLeveransdatum.date := sp_Orderlist.fieldbyname('Leveransdatum').asdatetime;
+    sp_KundLookuplist.Locate('Kundid', sp_Orderlist.FieldByName('KundID').asInteger, []);
+    edtKund.Text := sp_KundLookuplist.FieldByName('Kundnamn').AsString;
+    edtkalkylDatum.Date := sp_Orderlist.FieldByName('Orderdatum').asDateTime;
+    edtLeveransdatum.Date := sp_Orderlist.FieldByName('Leveransdatum').asDateTime;
     edtKontaktperson.Enabled := True;
-    edtKontaktperson.Text := sp_Orderlist.fieldbyname('Kundreferens').asstring;
-    edtForfragan.Text := sp_Orderlist.fieldbyname('Ordernummer').asstring;
+    edtKontaktperson.Text := sp_Orderlist.FieldByName('Kundreferens').AsString;
+    edtForfragan.Text := sp_Orderlist.FieldByName('Ordernummer').AsString;
 
     edtKund.Enabled := false;
     edtkalkylDatum.Enabled := false;
@@ -1927,11 +2212,11 @@ begin
     with qryLU_artikel do
     begin
       close;
-      ParamByName('kundid').Value := sp_Orderlist.fieldbyname('KundID').asInteger;
+      parambyname('kundid').value := sp_Orderlist.FieldByName('KundID').asInteger;
       open;
     end;
 
-    OrderHuvudId := sp_Orderlist.fieldbyname('OrderId').asInteger;
+    OrderHuvudId := sp_Orderlist.FieldByName('OrderId').asInteger;
 
     LU_artikel.Enabled := True;
 
@@ -1943,16 +2228,16 @@ end;
 
 procedure TfrmOrderLista.actSammelfakturaPrintExecute(Sender: TObject);
 begin
-  with TrptSammelfaktura.create(application) do
+  with TrptSammelfaktura.create(Application) do
   begin
 
     report.PrinterSettings.Copies := strtoint(ftgsystemvalue('samlingsfaktura.kopior', '1'));
 
-    header.Caption := 'SAMLINGSFAKTURA';
+    header.caption := 'SAMLINGSFAKTURA';
     with qry do
     begin
       close;
-      params.ParamByName('Fakturanummer').Value := sp_OrderlistFakturanummer.asstring;
+      params.parambyname('Fakturanummer').value := sp_OrderlistFakturanummer.AsString;
       open;
     end;
 
@@ -1965,7 +2250,7 @@ begin
         report.Print;
 
       xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.samlingsfakturaunderlag', '')) + 'Samlingsfakturaunderlag_'
-        + sp_OrderlistFakturanummer.asstring;
+        + sp_OrderlistFakturanummer.AsString;
 
       qrfilename := GetQrfilename(xfilename);
 
@@ -1995,18 +2280,18 @@ procedure TfrmOrderLista.actOrderLäggtillÄndraPositionerExecute(Sender: TObject)
 var
   fname: string;
   f: TfrmOrder;
-  cc, I: Integer;
+  cc, i: Integer;
 begin
 
-  fname := 'F' + sp_OrderlistOrderID.asstring;
+  fname := 'F' + sp_OrderlistOrderID.AsString;
 
-  cc := application.componentcount;
+  cc := Application.componentcount;
 
-  for I := 0 to cc - 1 do
-    if application.Components[I].name = fname then
+  for i := 0 to cc - 1 do
+    if Application.Components[i].name = fname then
     begin
 
-      with (application.FindComponent(fname) as TfrmOrder) do
+      with (Application.FindComponent(fname) as TfrmOrder) do
       begin
         windowstate := wsmaximized;
         show;
@@ -2016,7 +2301,7 @@ begin
       exit;
     end;
 
-  f := TfrmOrder.create(application);
+  f := TfrmOrder.create(Application);
   f.name := fname;
   f.windowstate := wsmaximized;
   f.show;
@@ -2040,13 +2325,13 @@ var
   osumma: double;
 begin
 
-  osumma := sp_Orderlist.fieldbyname('Ordersumma').Value;
+  osumma := sp_Orderlist.FieldByName('Ordersumma').value;
 
   if Selecting then
     ordersumma := ordersumma + osumma
   else
     ordersumma := ordersumma - osumma;
-  Label5.Caption := format('%m', [ordersumma]);
+  Label5.caption := format('%m', [ordersumma]);
 
 end;
 
@@ -2057,7 +2342,7 @@ end;
 
 procedure TfrmOrderLista.actOrderradUpdateExecute(Sender: TObject);
 begin
-  with TfrmOrderradUpdate.create(application) do
+  with TfrmOrderradUpdate.create(Application) do
     show;
 
 end;
@@ -2075,7 +2360,7 @@ var
 begin
 
   NyStatus := -1;
-  NuvarandeStatus := sp_Orderlist.fieldbyname('OrderstatusId').asInteger;
+  NuvarandeStatus := sp_Orderlist.FieldByName('OrderstatusId').asInteger;
 
   if NuvarandeStatus = stUA then
     NyStatus := stAR
@@ -2086,14 +2371,14 @@ begin
   else if NuvarandeStatus = stFA then
     NyStatus := stAK;
 
-  if messagedlg('Vill du byta status för order ' + sp_OrderlistOrderID.asstring + ' till "' +
+  if messagedlg('Vill du byta status för order ' + sp_OrderlistOrderID.AsString + ' till "' +
     Orderstatusbeteckning(NyStatus) + '"?', mtConfirmation, [mbYes, mbNo], 1) = mrYes then
   begin
 
     with sp_OrdertstatusUpdate do
     begin
-      ParamByName('@Orderid').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
-      ParamByName('@OrderstatusIdNew').Value := NyStatus;
+      parambyname('@Orderid').value := sp_Orderlist.FieldByName('OrderId').asInteger;
+      parambyname('@OrderstatusIdNew').value := NyStatus;
       execproc;
     end;
 
@@ -2110,7 +2395,7 @@ var
 begin
 
   NyStatus := -1;
-  NuvarandeStatus := sp_Orderlist.fieldbyname('OrderstatusId').asInteger;
+  NuvarandeStatus := sp_Orderlist.FieldByName('OrderstatusId').asInteger;
 
   if NuvarandeStatus = stAK then
     NyStatus := stFA
@@ -2121,14 +2406,14 @@ begin
   else if NuvarandeStatus = stAR then
     NyStatus := stUA;
 
-  if messagedlg('Vill du byta status för order ' + sp_OrderlistOrderID.asstring + ' till "' +
+  if messagedlg('Vill du byta status för order ' + sp_OrderlistOrderID.AsString + ' till "' +
     Orderstatusbeteckning(NyStatus) + '"?', mtConfirmation, [mbYes, mbNo], 1) = mrYes then
   begin
 
     with sp_OrdertstatusUpdate do
     begin
-      ParamByName('@Orderid').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
-      ParamByName('@OrderstatusIdNew').Value := NyStatus;
+      parambyname('@Orderid').value := sp_Orderlist.FieldByName('OrderId').asInteger;
+      parambyname('@OrderstatusIdNew').value := NyStatus;
       execproc;
     end;
 
@@ -2139,13 +2424,13 @@ end;
 
 procedure TfrmOrderLista.actOrderVisaExecute(Sender: TObject);
 begin
-  with TrptOrder.create(application) do
+  with TrptOrder.create(Application) do
   begin
-    header.Caption := 'Beställning';
+    header.caption := 'Beställning';
     with qry do
     begin
       close;
-      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
       open;
     end;
     report.preview;
@@ -2158,7 +2443,7 @@ begin
   with sp_Orderlist do
   begin
     close;
-    with sp_Orderlist.ParamByName('@Kundid') do
+    with sp_Orderlist.parambyname('@Kundid') do
     begin
       DataType := ftInteger;
       Clear;
@@ -2173,16 +2458,16 @@ var
   Soktext: string;
 begin
 
-  if (Sender as TButton).Caption = '&Sök' then
+  if (Sender as TButton).caption = '&Sök' then
   begin
 
     Soktext := trim(edtTextsok.Text);
     with sp_Orderlist do
     begin
       close;
-      ParamByName('@soktext').Value := Soktext;
+      parambyname('@soktext').value := Soktext;
       open;
-      (Sender as TButton).Caption := 'X';
+      (Sender as TButton).caption := 'X';
       // (Sender as TButton).Caption := 'X (' + recordcount.ToString+')' ;
       edtTextsok.Enabled := false;
 
@@ -2194,13 +2479,13 @@ begin
     with sp_Orderlist do
     begin
       close;
-      with sp_Orderlist.ParamByName('@Kundid') do
+      with sp_Orderlist.parambyname('@Kundid') do
       begin
-        ParamByName('@soktext').Value := Null;
+        parambyname('@soktext').value := Null;
       end;
       open;
       wwDBLookupCombo1.Text := '';
-      (Sender as TButton).Caption := '&Sök';
+      (Sender as TButton).caption := '&Sök';
       edtTextsok.Text := '';
       (Sender as TButton).Enabled := false;
       edtTextsok.Enabled := True;
@@ -2217,8 +2502,8 @@ begin
   with sp_Orderlist do
   begin
     close;
-    ParamByName('@OrderstatusId').Value := 1; // Fakturerade
-    ParamByName('@FakturadatumVisaBaraSenasteÅr').Value := not(cbVisaAllaFakturor.Checked);
+    parambyname('@OrderstatusId').value := 1; // Fakturerade
+    parambyname('@FakturadatumVisaBaraSenasteÅr').value := not(cbVisaAllaFakturor.Checked);
     open;
   end;
 end;
@@ -2241,11 +2526,11 @@ end;
 procedure TfrmOrderLista.sp_OrderlistCalcFields(DataSet: TDataSet);
 begin
 
-  if DataSet.fieldbyname('AntalArtikelnoteringar').asInteger > 0 then
-    DataSet.fieldbyname('cAntalArtikelnoteringar').asstring := DataSet.fieldbyname('AntalArtikelnoteringar')
+  if DataSet.FieldByName('AntalArtikelnoteringar').asInteger > 0 then
+    DataSet.FieldByName('cAntalArtikelnoteringar').AsString := DataSet.FieldByName('AntalArtikelnoteringar')
       .asInteger.ToString
   else
-    DataSet.fieldbyname('cAntalArtikelnoteringar').asstring := '';
+    DataSet.FieldByName('cAntalArtikelnoteringar').AsString := '';
 
 end;
 
@@ -2334,7 +2619,7 @@ begin
 
   Label5.Visible := (apStatus = stPS); // Prissatta
   ordersumma := 0;
-  Label5.Caption := '';
+  Label5.caption := '';
   cbVisaAllaFakturor.Visible := (apStatus = stFA);
 
   (*
@@ -2403,8 +2688,8 @@ begin
     open;
     while not eof do
     begin
-      wwDBGrid1.Selected.Add(fieldbyname('Fieldname').asstring + #9 + fieldbyname('Displaywidth').asstring + #9 +
-        fieldbyname('Fieldheader').asstring);
+      wwDBGrid1.Selected.Add(FieldByName('Fieldname').AsString + #9 + FieldByName('Displaywidth').AsString + #9 +
+        FieldByName('Fieldheader').AsString);
       next;
     end;
   end;
@@ -2443,8 +2728,8 @@ begin
   with sp_Orderlist do
   begin
     close;
-    ParamByName('@OrderstatusId').Value := apStatus;
-    ParamByName('@Orderby').Value := 'OrderID';
+    parambyname('@OrderstatusId').value := apStatus;
+    parambyname('@Orderby').value := 'OrderID';
     open;
   end;
 
@@ -2477,11 +2762,11 @@ begin
   Control.Canvas.Pen.Style := psClear;
 
   Control.Canvas.Rectangle(Rect);
-  h := Control.Canvas.TextHeight((Control as TPageControl).ActivePage.Caption);
+  h := Control.Canvas.TextHeight((Control as TPageControl).ActivePage.caption);
   L := Rect.Left;
   Inc(L, 10);
   Control.Canvas.TextOut(L, Rect.Top + (Rect.Bottom - Rect.Top - h) div 2,
-    (Control as TPageControl).Pages[TabIndex].Caption);
+    (Control as TPageControl).Pages[TabIndex].caption);
 
 end;
 
@@ -2506,15 +2791,15 @@ begin
 
   if apStatus = stOF then
   begin
-    mnuVisaOrder.Caption := '1 Visa offert';
-    mnuSkspaPDFOrderbekräftlese.Caption := '3 Skapa PDF-offertbekräftelse';
-    mnuKopieraOrder.Caption := 'Kopiera offert';
+    mnuVisaOrder.caption := '1 Visa offert';
+    mnuSkspaPDFOrderbekräftlese.caption := '3 Skapa PDF-offertbekräftelse';
+    mnuKopieraOrder.caption := 'Kopiera offert';
   end
   else
   begin
-    mnuVisaOrder.Caption := '1 Visa order';
-    mnuSkspaPDFOrderbekräftlese.Caption := '3 Skapa PDF-orderbekräftelse';
-    mnuKopieraOrder.Caption := 'Kopiera order';
+    mnuVisaOrder.caption := '1 Visa order';
+    mnuSkspaPDFOrderbekräftlese.caption := '3 Skapa PDF-orderbekräftelse';
+    mnuKopieraOrder.caption := 'Kopiera order';
     // mnuSkapaPDFOrder.Caption := 'Skapa PDF order';
   end;
 
@@ -2525,20 +2810,20 @@ var
   OrderId: Integer;
 begin
 
-  OrderId := sp_Orderlist.fieldbyname('Orderid').asInteger;
+  OrderId := sp_Orderlist.FieldByName('Orderid').asInteger;
 
-  with TfrmOrderStatusUpdate.create(application) do
+  with TfrmOrderStatusUpdate.create(Application) do
   begin
 
     qryLU_orderstatus.open;
-    qryLU_orderstatus.Locate('Id', sp_Orderlist.fieldbyname('OrderstatusId').asInteger, []);
-    LU_orderstatus.LookupValue := sp_Orderlist.fieldbyname('OrderstatusId').asstring;
+    qryLU_orderstatus.Locate('Id', sp_Orderlist.FieldByName('OrderstatusId').asInteger, []);
+    LU_orderstatus.LookupValue := sp_Orderlist.FieldByName('OrderstatusId').AsString;
 
     showmodal;
 
-    if modalresult = mrOK then
+    if modalResult = mrOK then
     begin
-      dm.FDConnection1.ExecSQL('Update  Orderhuvud set OrderstatusId = ' + qryLU_orderstatus.fieldbyname('Id').asstring
+      dm.FDConnection1.ExecSQL('Update  Orderhuvud set OrderstatusId = ' + qryLU_orderstatus.FieldByName('Id').AsString
         + ' where Id = ' + OrderId.ToString);
       RefreshOrderlist;
     end;
@@ -2547,13 +2832,13 @@ end;
 
 procedure TfrmOrderLista.actPallEtikettExecute(Sender: TObject);
 begin
-  with TrptPalletikett.create(application) do
+  with TrptPalletikett.create(Application) do
   begin
     with qry do
     begin
 
       close;
-      ParamByName('Orderid').Value := sp_Orderlist.fieldbyname('Orderid').asInteger;
+      parambyname('Orderid').value := sp_Orderlist.FieldByName('Orderid').asInteger;
       open;
     end;
     report.Print;
@@ -2569,7 +2854,7 @@ begin
   with sp_Orderlist do
   begin
     close;
-    ParamByName('@Kundid').Value := LookupTable.fieldbyname('Kundid').asstring;
+    parambyname('@Kundid').value := LookupTable.FieldByName('Kundid').AsString;
     open;
   end;
 
@@ -2652,9 +2937,9 @@ begin
     with sp_Orderlist do
     begin
       close;
-      ParamByName('@Orderby').Value := AFieldName;
-      ParamByName('@OrderstatusId').Value := apStatus;
-      ParamByName('@sortasc').Value := sortasc; // -- 0 = asc, 1 = desc
+      parambyname('@Orderby').value := AFieldName;
+      parambyname('@OrderstatusId').value := apStatus;
+      parambyname('@sortasc').value := sortasc; // -- 0 = asc, 1 = desc
       open;
     end;
 
@@ -2664,12 +2949,12 @@ end;
 
 procedure TfrmOrderLista.actArbetsorderPrintExecute(Sender: TObject);
 begin
-  with TrptArbetsOrder.create(application) do
+  with TrptArbetsOrder.create(Application) do
   begin
     with qry do
     begin
       close;
-      params.ParamByName('OrderID').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
       open;
     end;
     report.preview;
@@ -2682,9 +2967,9 @@ var
   Fakturanummer: String;
 begin
 
-  Fakturanummer := sp_Orderlist.fieldbyname('Fakturanummer').asstring;
+  Fakturanummer := sp_Orderlist.FieldByName('Fakturanummer').AsString;
 
-  if sp_Orderlist.fieldbyname('Orderstatusid').asInteger = stFA then
+  if sp_Orderlist.FieldByName('Orderstatusid').asInteger = stFA then
 
     if messagedlg('Vill du arkivera denna faktura (alla ordrar med fakturanmummer ' + Fakturanummer + ')?',
       mtConfirmation, [mbYes, mbNo], 0) = mrYes then
@@ -2709,12 +2994,12 @@ begin
 
     with sp_OrderKopiera do
     begin
-      ParamByName('@OrderId').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
-      ParamByName('@SkapaOrderFrånOffert').Value := True;
+      parambyname('@OrderId').value := sp_Orderlist.FieldByName('OrderId').asInteger;
+      parambyname('@SkapaOrderFrånOffert').value := True;
 
       execproc;
 
-      OrderIdNy := ParamByName('@OrderIdNew').asInteger;
+      OrderIdNy := parambyname('@OrderIdNew').asInteger;
 
       RefreshOrderlist;
 
@@ -2740,12 +3025,12 @@ begin
 
     with sp_OrderKopiera do
     begin
-      ParamByName('@OrderId').Value := sp_Orderlist.fieldbyname('OrderId').asInteger;
-      ParamByName('@SkapaOrderFrånOffert').Value := false;
+      parambyname('@OrderId').value := sp_Orderlist.FieldByName('OrderId').asInteger;
+      parambyname('@SkapaOrderFrånOffert').value := false;
 
       execproc;
 
-      OrderIdNy := ParamByName('@OrderIdNew').asInteger;
+      OrderIdNy := parambyname('@OrderIdNew').asInteger;
 
       RefreshOrderlist;
 
@@ -2766,10 +3051,10 @@ begin
   qryEtiketter.close;
   qryEtiketter.open;
 
-  if qryEtiketter.RecordCount > 0 then
+  if qryEtiketter.recordcount > 0 then
   begin
 
-    with TIniFile.create(extractfilepath(application.ExeName) + 'Ordus.ini') do
+    with TIniFile.create(extractfilepath(Application.ExeName) + 'Ordus.ini') do
     begin
       EtikettPrintername := Readstring('Printer', 'EtikettPrinterName', '');
       Free;
@@ -2785,7 +3070,7 @@ begin
 
     DefaultPrinterName := SetDefaultPrinter(EtikettPrintername);
 
-    with TrptEtikett.create(application) do
+    with TrptEtikett.create(Application) do
     begin
 
       report.DataSet := qryEtiketter;
@@ -2807,7 +3092,7 @@ end;
 
 procedure TfrmOrderLista.actOrderPDFPrintExecute(Sender: TObject);
 begin
-  with TfrmPrintPDF.create(application) do
+  with TfrmPrintPDF.create(Application) do
     showmodal;
 end;
 
@@ -2817,7 +3102,7 @@ begin
   begin
     with spPlaneringDelete do
     begin
-      params.ParamByName('@OrderId').Value := sp_OrderlistOrderID.asInteger;
+      params.parambyname('@OrderId').value := sp_OrderlistOrderID.asInteger;
       execproc;
       RefreshOrderlist;
     end;
@@ -2829,7 +3114,7 @@ procedure TfrmOrderLista.Skapaplanering1Click(Sender: TObject);
 
 begin
 
-  with TfrmOrderPlanering.create(application) do
+  with TfrmOrderPlanering.create(Application) do
   begin
 
     qryOrderEdit.open;
@@ -2845,7 +3130,7 @@ begin
 
     showmodal;
 
-    if modalresult = mrOK then
+    if modalResult = mrOK then
     begin
       if qryOrderEdit.State in [dsEdit] then
 
@@ -2861,7 +3146,7 @@ end;
 
 procedure TfrmOrderLista.Importorderfilfrnleverantr1Click(Sender: TObject);
 begin
-  with TfrmOrderimport.create(application) do
+  with TfrmOrderimport.create(Application) do
     showmodal;
 
   with sp_Orderlist do
@@ -2878,26 +3163,30 @@ const
 var
 
   cnt, fileCount: Integer;
-  FileName: array [0 .. MAXFILENAME] of char;
+  filename: array [0 .. MAXFILENAME] of char;
   strFilename: string;
 begin
   // how many files dropped?
-  fileCount := DragQueryFile(msg.Drop, $FFFFFFFF, FileName, MAXFILENAME);
+  fileCount := DragQueryFile(msg.Drop, $FFFFFFFF, filename, MAXFILENAME);
 
   if fileCount > 0 then
   begin
     // query for file names
     for cnt := 0 to -1 + fileCount do
     begin
-      DragQueryFile(msg.Drop, cnt, FileName, MAXFILENAME);
+      DragQueryFile(msg.Drop, cnt, filename, MAXFILENAME);
 
       // do something with the file(s)
       // memo1.Lines.Insert(0, fileName);
 
-      strFilename := FileName;
+      strFilename := filename;
 
       if lowercase(extractfileext(extractfilename(strFilename))) = '.xml' then
         ReadOrderfileIntersystemXML(strFilename)
+
+      else if lowercase(extractfileext(extractfilename(strFilename))) = '.xlsx' then
+        ReadOrderfileExcelGenerell(strFilename)
+
       else
         ReadOrderfileIntersystem(strFilename);
 
@@ -2918,7 +3207,7 @@ begin
   // Refresh orderlist
   with sp_Orderlist do
   begin
-    CurrentRecord := fieldbyname('OrderId').asInteger;
+    CurrentRecord := FieldByName('OrderId').asInteger;
     Active := false;
     Active := True;
     Locate('OrderId', CurrentRecord, []);

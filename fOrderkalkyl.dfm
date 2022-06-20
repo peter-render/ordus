@@ -235,13 +235,6 @@
         Font.Style = []
         ParentFont = False
       end
-      object Label11: TLabel
-        Left = 738
-        Top = 243
-        Width = 33
-        Height = 13
-        Caption = 'Rabatt'
-      end
       object Label17: TLabel
         Left = 40
         Top = 314
@@ -284,11 +277,11 @@
         WordWrap = True
       end
       object Label24: TLabel
-        Left = 608
-        Top = 24
-        Width = 88
-        Height = 26
-        Caption = 'dubbelklick f'#246'r att kopiera till f'#228'lten'
+        Left = 559
+        Top = 40
+        Width = 200
+        Height = 13
+        Caption = 'dubbelklick f'#246'r att kopiera till f'#228'lten nedan'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowFrame
         Font.Height = -11
@@ -447,7 +440,7 @@
       object wwDBGrid3: TwwDBGrid
         Left = 100
         Top = 56
-        Width = 597
+        Width = 663
         Height = 101
         Selected.Strings = (
           'Orderdatum'#9'11'#9'Orderdatum'
@@ -457,7 +450,7 @@
           'Vikt'#9'8'#9'Vikt'
           'AvrapporteradPlasmatid'#9'9'#9'Lasertid'
           'SkrotandelProcent'#9'11'#9'Skrotandel %'
-          'Ytbehandling'#9'18'#9'Materialtyp')
+          'Ytbehandling'#9'29'#9'Materialtyp')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -502,7 +495,7 @@
         OnCloseUp = LU_ArtikelCloseUp
       end
       object Button1: TButton
-        Left = 336
+        Left = 344
         Top = 17
         Width = 133
         Height = 25
@@ -514,7 +507,7 @@
       object Panel5: TPanel
         Left = 47
         Top = 230
-        Width = 669
+        Width = 724
         Height = 19
         Color = clMedGray
         ParentBackground = False
@@ -525,6 +518,12 @@
           Width = 25
           Height = 13
           Caption = 'Antal'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clHighlightText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
         end
         object Label19: TLabel
           Left = 60
@@ -532,13 +531,25 @@
           Width = 111
           Height = 13
           Caption = 'Tillv.tid uppsk.tot. i min'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clHighlightText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
         end
         object Label21: TLabel
-          Left = 429
+          Left = 423
           Top = 4
           Width = 75
           Height = 13
           Caption = 'Pris fastst'#228'llt/st'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clHighlightText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
         end
         object Label20: TLabel
           Left = 209
@@ -561,6 +572,25 @@
           Width = 76
           Height = 13
           Caption = 'Pris ber'#228'knat/st'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clHighlightText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label5: TLabel
+          Left = 683
+          Top = 4
+          Width = 33
+          Height = 13
+          Caption = 'Rabatt'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clHighlightText
+          Font.Height = -11
+          Font.Name = 'Tahoma'
+          Font.Style = []
+          ParentFont = False
         end
       end
       object edtYtbehandling: TwwDBLookupCombo
@@ -1033,8 +1063,8 @@
       ' from Artikel a'
       ' where kundid = :KundID'
       'order by a.Artikelnummer')
-    Left = 568
-    Top = 196
+    Left = 588
+    Top = 160
     ParamData = <
       item
         Name = 'KUNDID'
@@ -1071,6 +1101,7 @@
     end
   end
   object sp_OrderradHistoryArtikel: TFDStoredProc
+    Active = True
     Connection = dm.FDConnection1
     StoredProcName = 'dbo.OrderradHistoryArtikel'
     Left = 536
@@ -1133,7 +1164,7 @@
     end
     object sp_OrderradHistoryArtikelYtbehandling: TStringField
       DisplayLabel = 'Materialtyp'
-      DisplayWidth = 18
+      DisplayWidth = 29
       FieldName = 'Ytbehandling'
       Origin = 'Ytbehandling'
       Size = 50

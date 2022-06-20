@@ -198,65 +198,6 @@
       Size = 5
     end
   end
-  object sp: TFDStoredProc
-    Connection = FDConnection1
-    StoredProcName = 'OrderImport'
-    Left = 524
-    Top = 412
-    ParamData = <
-      item
-        Position = 1
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        ParamType = ptResult
-      end
-      item
-        Position = 2
-        Name = '@KundID'
-        DataType = ftInteger
-        ParamType = ptInput
-      end
-      item
-        Position = 3
-        Name = '@Ordernummer'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 20
-      end
-      item
-        Position = 4
-        Name = '@OrderDatum'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 16
-      end
-      item
-        Position = 5
-        Name = '@Godsm'#228'rke'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 30
-      end
-      item
-        Position = 6
-        Name = '@Referens'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 50
-      end
-      item
-        Position = 7
-        Name = '@Leveransdatum'
-        DataType = ftTimeStamp
-        ParamType = ptInput
-      end
-      item
-        Position = 8
-        Name = '@OrderId'
-        DataType = ftInteger
-        ParamType = ptInputOutput
-      end>
-  end
   object sp_OrderRadImport: TFDStoredProc
     IndexesActive = False
     Connection = FDConnection1
@@ -726,5 +667,65 @@
     EndDate = 43489.000000000000000000
     Left = 656
     Top = 168
+  end
+  object sp: TFDStoredProc
+    Connection = FDConnection1
+    StoredProcName = 'Ordus.dbo.OrderImport'
+    Left = 476
+    Top = 476
+    ParamData = <
+      item
+        Position = 1
+        Name = '@RETURN_VALUE'
+        DataType = ftInteger
+        ParamType = ptResult
+      end
+      item
+        Position = 2
+        Name = '@KundID'
+        DataType = ftInteger
+        ParamType = ptInput
+      end
+      item
+        Position = 3
+        Name = '@Ordernummer'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        Position = 4
+        Name = '@OrderDatum'
+        DataType = ftTimeStamp
+        NumericScale = 3
+        ParamType = ptInput
+      end
+      item
+        Position = 5
+        Name = '@Godsm'#228'rke'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 30
+      end
+      item
+        Position = 6
+        Name = '@Referens'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 50
+      end
+      item
+        Position = 7
+        Name = '@Leveransdatum'
+        DataType = ftTimeStamp
+        NumericScale = 3
+        ParamType = ptInput
+      end
+      item
+        Position = 8
+        Name = '@OrderId'
+        DataType = ftInteger
+        ParamType = ptInputOutput
+      end>
   end
 end

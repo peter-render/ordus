@@ -69,7 +69,8 @@ uses
   fRitningsnotering in 'fRitningsnotering.pas' {frmRitningsnotering},
   dRitningsnoteringNy in 'dRitningsnoteringNy.pas' {dlgRitningsnoteringNy},
   rSammelfaktura in 'rSammelfaktura.pas' {rptSammelfaktura},
-  rRitningsnotering in 'rRitningsnotering.pas' {rptRitningsnotering};
+  rRitningsnotering in 'rRitningsnotering.pas' {rptRitningsnotering},
+  fExcelimportOrder in 'fExcelimportOrder.pas' {frmExcelImportOrder};
 
 {$R *.RES}
 

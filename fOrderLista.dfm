@@ -401,6 +401,10 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
       end
     end
   end
@@ -520,6 +524,7 @@
     end
     object Skickaorderbekrftleseviaepost1: TMenuItem
       Action = actOrderbekräftleseExcelViaEpost
+      Visible = False
     end
     object mnuUtsktriftPalletikett: TMenuItem
       Action = actPallEtikett
@@ -640,7 +645,7 @@
       OnExecute = actFöljesdelUtskriftExecute
     end
     object actOrderbekräftleseExcelViaEpost: TAction
-      Caption = 'Skicka orderbekr'#228'ftlese Excel'
+      Caption = 'Skicka orderbekr'#228'ftlese Excel via epost'
       OnExecute = actOrderbekräftleseExcelViaEpostExecute
     end
     object actOrderbekräftleseViaMail: TAction
@@ -692,8 +697,11 @@
       OnExecute = actArkiveraExecute
     end
     object actReadExcelRequest: TAction
-      Caption = 'actReadExcelRequest'
+      Caption = 'L'#228'sa in offertf'#246'rfr'#229'gan (Excel)'
       OnExecute = actReadExcelRequestExecute
+    end
+    object actExcelImport: TAction
+      Caption = 'actExcelImport'
     end
   end
   object sp_ftgsystem: TFDStoredProc
@@ -1898,8 +1906,6 @@
       'cast(getdate() as date) Dagensdatum,'
       'p2.F'#246'rnamn + '#39' '#39'+ p2.Efternamn V'#229'rReferens'
       ''
-      ''
-      ''
       'from OrderRad orad'
       'join Artikel a on orad.artikelID = a.Id'
       'join OrderHuvud oh on oh.ID = orad.OrderID'
@@ -1909,17 +1915,14 @@
       'left join personal p on orad.avrapporteradPersonID = p.id'
       'left join personal p2 on oh.V'#229'rreferensPersonId = p2.id'
       'left join Ytbehandling y on orad.ytbehandlingID = y.ID'
-      'where oh.id = :OrderId'
+      'where '
+      '--oh.id = :OrderId'
+      'orad.PrisUpdateDatum = cast(getdate() as date)'
+      'and ordertypid = 1'
+      'and oh.kundid = 1'
       '')
-    Left = 128
-    Top = 549
-    ParamData = <
-      item
-        Name = 'ORDERID'
-        DataType = ftInteger
-        ParamType = ptInput
-        Value = Null
-      end>
+    Left = 152
+    Top = 585
     object qryExcelExportOrderId: TFDAutoIncField
       FieldName = 'OrderId'
       Origin = 'OrderId'

@@ -31,7 +31,6 @@
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 0
-    ExplicitWidth = 1144
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -39,7 +38,6 @@
       Height = 43
       Align = alTop
       TabOrder = 0
-      ExplicitWidth = 1142
       object Label1: TLabel
         Left = 150
         Top = 6
@@ -160,7 +158,6 @@
       BorderWidth = 10
       Caption = 'Panel4'
       TabOrder = 1
-      ExplicitWidth = 1142
       object wwDBGrid1: TwwDBGrid
         Left = 11
         Top = 11
@@ -181,7 +178,7 @@
           'Antal'#9'6'#9'Antal'
           'PrisperEnhetAuto'#9'12'#9'Pris/enhet auto'
           #214'vrigt1'#9'8'#9'   '#214'vrigt1'
-          #214'vrigt2'#9'8'#9'   '#214'vrigt2'#9'F'
+          #214'vrigt2'#9'8'#9'   '#214'vrigt2'
           'SummaAuto'#9'10'#9'Summa auto'
           'PrisperEnhet'#9'8'#9'Pris/enhet '
           'SenastePrisPerEnhet'#9'9'#9'Senaste pris'
@@ -418,7 +415,6 @@
     end
   end
   object qryOrderrad: TFDQuery
-    Active = True
     OnCalcFields = qryOrderradCalcFields
     Connection = dm.FDConnection1
     FetchOptions.AssignedValues = [evCache]

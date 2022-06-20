@@ -1,4 +1,4 @@
-unit funclibProj;
+unit dExcelImportväljare;
 
 interface
 
@@ -15,20 +15,39 @@ uses datamodule, messages, sysutils, forms, windows, typinfo,
 
 procedure ReadOrderfileIntersystem(filename: string);
 procedure ReadOrderfileIntersystemXML(xmlfilename: string);
+function Orderstatusbeteckning(intStatusId: integer): string;
+
 
 implementation
 
 uses funclib, IntersystemOrder;
 
+
+
+function Orderstatusbeteckning(intStatusId: integer): string;
+begin
+  with dm.qryGetStatusData do
+  begin
+    close;
+    parambyname('StatusId').value := intStatusId;
+    open;
+    if recordcount = 1 then
+
+      result := fieldbyname('Beteckning').AsString
+    else
+      result := 'Error: ogiltig OrderstatusId';
+
+  end;
+end;
+
 function VarTypeIsStr(const AVarType: TVarType): Boolean;
 begin
-  Result := (AVarType = varOleStr) or (AVarType = varString) or
-    (AVarType = varUString);
+  result := (AVarType = varOleStr) or (AVarType = varString) or (AVarType = varUString);
 end;
 
 function VarIsStr(const V: Variant): Boolean;
 begin
-  Result := VarTypeIsStr(FindVarData(V)^.VType);
+  result := VarTypeIsStr(FindVarData(V)^.VType);
 end;
 
 function VarStrEmpty(V: Variant): Boolean;
@@ -39,13 +58,13 @@ begin
 
   case data^.VType of
     varOleStr:
-      Result := (data^.VOleStr^ = #0);
+      result := (data^.VOleStr^ = #0);
     varString:
-      Result := (data^.VString = nil);
+      result := (data^.VString = nil);
     varUString:
-      Result := (data^.VUString = nil);
+      result := (data^.VUString = nil);
   else
-    Result := false;
+    result := false;
   end;
 end;
 
@@ -53,8 +72,8 @@ procedure ReadOrderfileIntersystemXML(xmlfilename: string);
 
 var
   Orders420: IXMLORDERS420Type;
-  X: INTEGER;
-  i: INTEGER;
+  X: integer;
+  i: integer;
   sv: string;
   strOrdernummer: string;
 
@@ -62,18 +81,18 @@ var
   strVarRef: string;
   strOrderDate: string;
   strLevDatum: string;
-  intOrderId: INTEGER;
+  intOrderId: integer;
   deliveryDate: Tdatetime;
-  IntRadnr: INTEGER;
+  IntRadnr: integer;
   strArtikelnr: string;
   StrBenamning: string;
   strAntal: string;
-  IntradnrOld: INTEGER;
-  n: INTEGER;
+  n: integer;
   strOrderinfo: string;
-  TOTALN, IntAntal: INTEGER;
+  TOTALN, IntAntal: integer;
 
 begin
+
   Orders420 := LoadORDERS420(xmlfilename);
 
   strOrdernummer := Orders420.Order.OrderNumber;
@@ -108,14 +127,14 @@ begin
   // Skapa Ordderhuvud
   with dm.sp do
   begin
-    ParamByName('@Kundid').value := 1;
-    ParamByName('@ordernummer').value := strOrdernummer;
-    ParamByName('@orderdatum').value := strtodate(strOrderDate);
-    ParamByName('@Godsmärke').value := strMärke;
-    ParamByName('@Referens').value := strVarRef;
-    ParamByName('@Leveransdatum').value := deliveryDate;
+    parambyname('@Kundid').value := 1;
+    parambyname('@ordernummer').value := strOrdernummer;
+    parambyname('@orderdatum').value := strtodate(strOrderDate);
+    parambyname('@Godsmärke').value := strMärke;
+    parambyname('@Referens').value := strVarRef;
+    parambyname('@Leveransdatum').value := deliveryDate;
     execproc;
-    intOrderId := ParamByName('@OrderID').value;
+    intOrderId := parambyname('@OrderID').value;
 
   end;
 
@@ -131,10 +150,9 @@ begin
     memo1.Lines.Add('');
   *)
 
-  IntradnrOld := 0;
   i := 0;
 
-//  while i < (TOTALN - 1) do
+  // while i < (TOTALN - 1) do
 
   while i < (TOTALN) do
   begin
@@ -161,14 +179,13 @@ begin
         while (Orders420.Order.Rows[n].RowNumber = IntRadnr) do
         begin
 
-          if (Orders420.Order.Rows[n].RowType = 4) and
-            (Orders420.Order.Rows[n].Text <> '') THEN
-
-            strOrderinfo := strOrderinfo + ' & ' + Orders420.Order.Rows[n].Text;
+          if (Orders420.Order.Rows[n].RowType = 4) and (Orders420.Order.Rows[n].Text <> '') THEN
+            strOrderinfo := iif(strOrderinfo <> '',strOrderinfo + ' & ','') + Orders420.Order.Rows[n].Text;
 
           (* strOrderinfo := strOrderinfo + iif(strOrderinfo <> '',
             char(13) + chr(10), '') + Orders420.Order.Rows[n].Text;
           *)
+
           inc(n);
 
           if n > TOTALN - 1 then
@@ -188,14 +205,14 @@ begin
 
     with dm.sp_OrderRadImport do
     begin
-      ParamByName('@Positionnummer').value := IntRadnr;
-      ParamByName('@KundId').value := 1;
-      ParamByName('@OrderId').value := intOrderId;
-      ParamByName('@Artikelnummer').value := strArtikelnr;
-      ParamByName('@Artikelbeteckning').value := StrBenamning;
+      parambyname('@Positionnummer').value := IntRadnr;
+      parambyname('@KundId').value := 1;
+      parambyname('@OrderId').value := intOrderId;
+      parambyname('@Artikelnummer').value := strArtikelnr;
+      parambyname('@Artikelbeteckning').value := StrBenamning;
       if IntAntal > 0 then
-        ParamByName('@Antal').value := IntAntal;
-      ParamByName('@OrderradInfo').value := strOrderinfo;
+        parambyname('@Antal').value := IntAntal;
+      parambyname('@OrderradInfo').value := strOrderinfo;
 
       (*
         if cbImportPris.checked then
@@ -203,7 +220,6 @@ begin
         else
         parameters.ParamByName('@PrisperEnhet').value := 0;
       *)
-
       execproc;
     end;
     inc(i);
@@ -213,24 +229,17 @@ end;
 procedure ReadOrderfileIntersystem(filename: string);
 
 var
-  radnr: INTEGER;
-  i: INTEGER;
-  ListItem: TListItem;
-  NewColumn: TListColumn;
-  dat: Tdatetime;
-  intOrderId: INTEGER;
-  strArtikelBeteckning, strPris: string;
+  i: integer;
+  intOrderId: integer;
   csv: TStringlist;
-  fieldcount: INTEGER;
-  recordcount: INTEGER;
+
+  recordcount: integer;
   separator: char;
-  Result: INTEGER;
+  result: integer;
   s: string;
-  _s: string;
-  pos: INTEGER;
-  lastpos: INTEGER;
-  strOrdernummer, strLevDatum, strAntal, StrBenamning, strArtikelnr, strMärke,
-    strLevSatt, strVarRef, strBeställare, strrubrik: string;
+  lastpos: integer;
+  strOrdernummer, strLevDatum, strAntal, StrBenamning, strArtikelnr, strMärke, strLevSatt, strVarRef, strBeställare,
+    strrubrik: string;
 
 begin
 
@@ -242,15 +251,12 @@ begin
 
   if length(strOrdernummer) > 30 then
   begin
-    messagedlg
-      ('Ordernummer är längre än 30 tecken - ordern kan inte importeras!',
-      mtError, [mbOK], 0);
+    messagedlg('Ordernummer är längre än 30 tecken - ordern kan inte importeras!', mtError, [mbOK], 0);
     exit;
   end;
 
-  fieldcount := 0;
   recordcount := 0;
-  Result := 0;
+  result := 0;
   separator := ';';
 
   csv := TStringlist.create;
@@ -259,14 +265,13 @@ begin
     try
       csv.loadfromfile(filename);
     except
-      Result := 1;
+      result := 1;
       exit;
     end;
 
     if Parse(';', trim(csv[0]), 1) <> 'LevBest' then
     begin
-      showmessage
-        ('Dokument innhåller ingen giltig Intersystem leverantörsbeställning');
+      showmessage('Dokument innhåller ingen giltig Intersystem leverantörsbeställning');
     end;
 
     recordcount := csv.Count;
@@ -303,14 +308,14 @@ begin
         // Skapa Ordderhuvud
         with dm.sp do
         begin
-          ParamByName('@Kundid').value := 1;
-          ParamByName('@ordernummer').value := strOrdernummer;
-          ParamByName('@orderdatum').value := date;
-          ParamByName('@Godsmärke').value := strMärke;
-          ParamByName('@Referens').value := strVarRef;
-          ParamByName('@Leveransdatum').value := strtodate(strLevDatum);
+          parambyname('@Kundid').value := 1;
+          parambyname('@ordernummer').value := strOrdernummer;
+          parambyname('@orderdatum').value := date;
+          parambyname('@Godsmärke').value := strMärke;
+          parambyname('@Referens').value := strVarRef;
+          parambyname('@Leveransdatum').value := strtodate(strLevDatum);
           execproc;
-          intOrderId := ParamByName('@OrderID').value;
+          intOrderId := parambyname('@OrderID').value;
         end;
 
         i := i + 1;
@@ -328,20 +333,27 @@ begin
 
           if strArtikelnr <> 'T' then
 
+
             with dm.sp_OrderRadImport do
             begin
-              ParamByName('@KundId').value := 1;
-              ParamByName('@OrderId').value := intOrderId;
-              ParamByName('@Artikelnummer').value := strArtikelnr;
-              ParamByName('@Artikelbeteckning').value := StrBenamning;
-              ParamByName('@Antal').value := strtofloat(strAntal);
+              parambyname('@KundId').value := 1;
+              parambyname('@OrderId').value := intOrderId;
+              parambyname('@Artikelnummer').value := strArtikelnr;
+              parambyname('@Artikelbeteckning').value := StrBenamning;
+              parambyname('@Antal').value := strtofloat(strAntal);
+
+
+
+
               (*
                 if cbImportPris.checked then
                 parameters.ParamByName('@PrisperEnhet').value := strtofloat(li.subitems[2])
                 else
                 parameters.ParamByName('@PrisperEnhet').value := 0;
               *)
-              ParamByName('@Positionnummer').value := i + 1;
+
+
+              parambyname('@Positionnummer').value := i + 1;
               execproc;
 
             end;
