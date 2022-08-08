@@ -398,7 +398,8 @@ var
   strText, strLevDatum: string;
   artikelnr, artikelbeteckning: string;
   antalArtiklar, start, i, intOrderid, antal, intKundId, intOffertKalkylId: Integer;
-  levDatum: Tdatetime;
+  mydat, levDatum: Tdatetime;
+  blnCont: Boolean;
 
 begin
   ExcelFileName := filename;
@@ -469,156 +470,187 @@ begin
           strReferens := EWS.cells[7, 2];
           strLevDatum := EWS.cells[8, 2];
 
+          blnCont := True;
+
+          try
+            mydat := strtodate(strBestDatum);
+          except
+            begin
+              messagedlg('Ogiltig beställningsdatum (format=YYYY-MM-DD), importen avbryts!', mtError, [mbOK], 0);
+              blnCont := false;
+            end;
+          end;
+
+          try
+            mydat := strtodate(strLevDatum);
+          except
+            begin
+              messagedlg('Ogiltig leveransdatum (format=YYYY-MM-DD), importen avbryts!', mtError, [mbOK], 0);
+              blnCont := false;
+            end;
+          end;
+
+
+
           with dm.qryLU_kund do
           begin
             open;
             if Locate('Kundnamn', strKund, [LoCaseInsensitive, LoPartialKey]) then
 
-              intKundId := dm.qryLU_kund.FieldByName('Id').asInteger;
-
+              intKundId := dm.qryLU_kund.FieldByName('Id').asInteger
+            else
+            begin
+              messagedlg('Kundnamnet kunde inte hittas, importen avbryts!', mtError, [mbOK], 0);
+              blnCont := false;
+            end
           end;
 
-          with TfrmExcelImportOrder.create(Application) do
+          if blnCont then
           begin
-
-            LUCKund.Text := dm.qryLU_KundKundnamn.AsString;
-            edtBestDatum.Date := strtodate(strBestDatum);
-            edtInkopsorder.Text := strInköpsorder;
-            edtGodsmärke.Text := strGodsMärke;
-            edtReferens.Text := strReferens;
-            edtLeveransdatum.Date := strtodate(strLevDatum);
-
-            lblAntal.caption := inttostr(antalArtiklar);
-
-            showmodal;
-
-            if modalResult = mrOK then
+            with TfrmExcelImportOrder.create(Application) do
             begin
-              if rgtyp.ItemIndex = 0 then
+
+              LUCKund.Text := dm.qryLU_KundKundnamn.AsString;
+              edtBestDatum.Date := strtodate(strBestDatum);
+              edtInkopsorder.Text := strInköpsorder;
+              edtGodsmärke.Text := strGodsMärke;
+              edtReferens.Text := strReferens;
+              edtLeveransdatum.Date := strtodate(strLevDatum);
+
+              lblAntal.caption := inttostr(antalArtiklar);
+
+              showmodal;
+
+              if modalResult = mrOK then
               begin
-                // Skapa Ordderhuvud
-                // #################################################################################
-
-                with dm.sp do
+                if rgtyp.ItemIndex = 0 then
                 begin
+                  // Skapa Ordderhuvud
+                  // #################################################################################
 
-                  parambyname('@Kundid').value := intKundId;
-                  parambyname('@ordernummer').value := edtInkopsorder.Text;
-                  parambyname('@orderdatum').value := edtBestDatum.Date;
-                  parambyname('@Godsmärke').value := edtGodsmärke.Text;
-                  parambyname('@Referens').value := strReferens;
-                  parambyname('@Leveransdatum').value := edtLeveransdatum.Date;
-
-                  execproc;
-                  intOrderid := parambyname('@OrderID').value;
-                end;
-
-                radnr := start - 1;
-                i := 0;
-
-                while True do
-                begin
-                  radnr := radnr + 1;
-
-                  artikelnr := EWS.cells[radnr, 1];
-                  artikelbeteckning := EWS.cells[radnr, 2];
-
-                  if artikelnr <> '' then
+                  with dm.sp do
                   begin
 
-                    antal := EWS.cells[radnr, 3];
-                    if antal > 0 then
+                    parambyname('@Kundid').value := intKundId;
+                    parambyname('@ordernummer').value := edtInkopsorder.Text;
+                    parambyname('@orderdatum').value := edtBestDatum.Date;
+                    parambyname('@Godsmärke').value := edtGodsmärke.Text;
+                    parambyname('@Referens').value := strReferens;
+                    parambyname('@Leveransdatum').value := edtLeveransdatum.Date;
+
+                    execproc;
+                    intOrderid := parambyname('@OrderID').value;
+                  end;
+
+                  radnr := start - 1;
+                  i := 0;
+
+                  while True do
+                  begin
+                    radnr := radnr + 1;
+
+                    artikelnr := EWS.cells[radnr, 1];
+                    artikelbeteckning := EWS.cells[radnr, 2];
+
+                    if artikelnr <> '' then
                     begin
-                      i := i + 1;
-                      with dm.sp_OrderRadImport do
+
+                      antal := EWS.cells[radnr, 3];
+                      if antal > 0 then
                       begin
-                        parambyname('@KundId').value := intKundId;
-                        parambyname('@OrderId').value := intOrderid;
-                        parambyname('@Artikelnummer').value := artikelnr;
-                        parambyname('@Artikelbeteckning').value := artikelbeteckning;
-                        parambyname('@Antal').value := antal;
-                        parambyname('@Positionnummer').value := i;
-                        execproc;
+                        i := i + 1;
+                        with dm.sp_OrderRadImport do
+                        begin
+                          parambyname('@KundId').value := intKundId;
+                          parambyname('@OrderId').value := intOrderid;
+                          parambyname('@Artikelnummer').value := artikelnr;
+                          parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                          parambyname('@Antal').value := antal;
+                          parambyname('@Positionnummer').value := i;
+                          execproc;
+                        end;
                       end;
+                    end
+                    else
+                      break;
+                  end;
+                  showmessage('Order med Id ' + inttostr(intOrderid) + ' skapat.');
+                end;
+
+                if rgtyp.ItemIndex = 1 then
+                begin
+                  //
+                  // Skapa OffertKalkyl
+                  //
+                  with spOffertKalkylInsert do
+                  begin
+                    parambyname('@Kundid').value := intKundId;
+                    parambyname('@VårReferensId').value := 5;
+                    parambyname('@Förfrågan').value := ChangeFileExt(extractfilename(ExcelFileName), '');
+                    execproc;
+                    intOffertKalkylId := parambyname('@NewId').asInteger;
+                  end;
+
+                  //
+                  radnr := 10; // Första artikelrad
+                  while True do
+                  begin
+                    radnr := radnr + 1;
+
+                    artikelnr := EWS.cells[radnr, 1];
+                    artikelbeteckning := EWS.cells[radnr, 2];
+
+                    if artikelnr <> '' then
+                    begin
+
+                      antal := EWS.cells[radnr, 3];
+                      if antal > 0 then
+                        with spOffertkalkylArtikelInsert do
+                        begin
+                          parambyname('@Kundid').value := intKundId;
+                          parambyname('@OffertKalkylid').value := intOffertKalkylId;
+                          parambyname('@Artikelnummer').value := artikelnr;
+                          parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                          parambyname('@Antal').value := antal;
+                          execproc;
+                        end;
+
+                      antal := EWS.cells[radnr, 4];
+                      if antal > 0 then
+                        with spOffertkalkylArtikelInsert do
+                        begin
+                          parambyname('@Kundid').value := intKundId;
+                          parambyname('@OffertKalkylid').value := intOffertKalkylId;
+                          parambyname('@Artikelnummer').value := artikelnr;
+                          parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                          parambyname('@Antal').value := antal;
+                          execproc;
+                        end;
+
+                      antal := EWS.cells[radnr, 5];
+                      if antal > 0 then
+                        with spOffertkalkylArtikelInsert do
+                        begin
+                          parambyname('@Kundid').value := intKundId;
+                          parambyname('@OffertKalkylid').value := intOffertKalkylId;
+                          parambyname('@Artikelnummer').value := artikelnr;
+                          parambyname('@Artikelbeteckning').value := artikelbeteckning;
+                          parambyname('@Antal').value := antal;
+                          execproc;
+                        end;
+                    end
+                    else
+                    begin
+                      showmessage('Offertkalkyl med Id ' + inttostr(intOffertKalkylId) + ' skapat.');
+                      exit;
                     end;
-                  end
-                  else
-                    break;
-                end;
-                showmessage('Order med Id ' + inttostr(intOrderid) + ' skapat.');
-              end;
-
-              if rgtyp.ItemIndex = 1 then
-              begin
-                //
-                // Skapa OffertKalkyl
-                //
-                with spOffertKalkylInsert do
-                begin
-                  parambyname('@Kundid').value := intKundId;
-                  parambyname('@VårReferensId').value := 5;
-                  parambyname('@Förfrågan').value := ChangeFileExt(extractfilename(ExcelFileName), '');
-                  execproc;
-                  intOffertKalkylId := parambyname('@NewId').asInteger;
-                end;
-
-                //
-                radnr := 10; // Första artikelrad
-                while True do
-                begin
-                  radnr := radnr + 1;
-
-                  artikelnr := EWS.cells[radnr, 1];
-                  artikelbeteckning := EWS.cells[radnr, 2];
-
-                  if artikelnr <> '' then
-                  begin
-
-                    antal := EWS.cells[radnr, 3];
-                    if antal > 0 then
-                      with spOffertkalkylArtikelInsert do
-                      begin
-                        parambyname('@Kundid').value := intKundId;
-                        parambyname('@OffertKalkylid').value := intOffertKalkylId;
-                        parambyname('@Artikelnummer').value := artikelnr;
-                        parambyname('@Artikelbeteckning').value := artikelbeteckning;
-                        parambyname('@Antal').value := antal;
-                        execproc;
-                      end;
-
-                    antal := EWS.cells[radnr, 4];
-                    if antal > 0 then
-                      with spOffertkalkylArtikelInsert do
-                      begin
-                        parambyname('@Kundid').value := intKundId;
-                        parambyname('@OffertKalkylid').value := intOffertKalkylId;
-                        parambyname('@Artikelnummer').value := artikelnr;
-                        parambyname('@Artikelbeteckning').value := artikelbeteckning;
-                        parambyname('@Antal').value := antal;
-                        execproc;
-                      end;
-
-                    antal := EWS.cells[radnr, 5];
-                    if antal > 0 then
-                      with spOffertkalkylArtikelInsert do
-                      begin
-                        parambyname('@Kundid').value := intKundId;
-                        parambyname('@OffertKalkylid').value := intOffertKalkylId;
-                        parambyname('@Artikelnummer').value := artikelnr;
-                        parambyname('@Artikelbeteckning').value := artikelbeteckning;
-                        parambyname('@Antal').value := antal;
-                        execproc;
-                      end;
-                  end
-                  else
-                  begin
-                    showmessage('Offertkalkyl med Id ' + inttostr(intOffertKalkylId) + ' skapat.');
-                    exit;
                   end;
                 end;
               end;
             end;
+
           end;
+
         except
           EWS := Null;
           // add error/exception handling code as desired

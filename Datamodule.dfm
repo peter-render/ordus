@@ -670,7 +670,7 @@
   end
   object sp: TFDStoredProc
     Connection = FDConnection1
-    StoredProcName = 'Ordus.dbo.OrderImport'
+    StoredProcName = 'OrderImport'
     Left = 476
     Top = 476
     ParamData = <

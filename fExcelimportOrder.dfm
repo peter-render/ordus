@@ -21,7 +21,6 @@
     Height = 41
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 449
     DesignSize = (
       513
       41)
@@ -54,7 +53,6 @@
     Height = 410
     Align = alClient
     TabOrder = 1
-    ExplicitHeight = 449
     object Kund: TLabel
       Left = 127
       Top = 71
@@ -106,9 +104,9 @@
     object Label6: TLabel
       Left = 127
       Top = 192
-      Width = 60
+      Width = 54
       Height = 13
-      Caption = 'V'#229'r referens'
+      Caption = 'Er referens'
     end
     object LUCKund: TwwDBLookupCombo
       Left = 230
