@@ -490,8 +490,6 @@ begin
             end;
           end;
 
-
-
           with dm.qryLU_kund do
           begin
             open;
@@ -1463,9 +1461,12 @@ var
 
   Outlook: OleVariant;
   Mail: Variant;
+  rowsfound: Boolean;
 const
   olMailItem = $00000000;
 begin
+
+  rowsfound := false;
 
   xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
     stringreplace(DateToStr(Date), '-', '', [rfReplaceAll, rfIgnoreCase]) + '.xlsx';
@@ -1564,28 +1565,38 @@ begin
           // close;
           // ParamByName('ORDERID').Value := sp_OrderlistOrderID.asInteger;
           open;
-          DisableControls;
-          first;
-          while not eof do
-          begin
-            ExcelWorksheet.cells[row, 1] := FieldByName('ordernummer').AsString;
-            ExcelWorksheet.cells[row, 2] := FieldByName('Positionnummer').AsString;
-            ExcelWorksheet.cells[row, 3] := FieldByName('Artikelnummer').AsString;
-            ExcelWorksheet.cells[row, 4] := FieldByName('YtbehandlingBeteckning').AsString;
-            ExcelWorksheet.cells[row, 5] := FieldByName('Beteckning').AsString;
-            ExcelWorksheet.cells[row, 6] := FieldByName('Antal').AsString;
-            ExcelWorksheet.cells[row, 7] := FieldByName('Prisperenhet').AsFloat;
-            ExcelWorksheet.cells[row, 8] := FieldByName('Pris').AsFloat;
 
-            row := row + 1;
-            next;
-          end;
-          ExcelWorksheet.Range['A1', 'I1'].EntireColumn.AutoFit;
-          EnableControls;
+          if recordcount > 0 then
+          begin
+            rowsfound := True;
+            DisableControls;
+            first;
+            while not eof do
+            begin
+              ExcelWorksheet.cells[row, 1] := FieldByName('ordernummer').AsString;
+              ExcelWorksheet.cells[row, 2] := FieldByName('Positionnummer').AsString;
+              ExcelWorksheet.cells[row, 3] := FieldByName('Artikelnummer').AsString;
+              ExcelWorksheet.cells[row, 4] := FieldByName('YtbehandlingBeteckning').AsString;
+              ExcelWorksheet.cells[row, 5] := FieldByName('Beteckning').AsString;
+              ExcelWorksheet.cells[row, 6] := FieldByName('Antal').AsString;
+              ExcelWorksheet.cells[row, 7] := FieldByName('Prisperenhet').AsFloat;
+              ExcelWorksheet.cells[row, 8] := FieldByName('Pris').AsFloat;
+
+              row := row + 1;
+              next;
+            end;
+            ExcelWorksheet.Range['A1', 'I1'].EntireColumn.AutoFit;
+            EnableControls;
+          end
+          else
+
+            showmessage('Inga priser uppdaterade idag!');
+
         end;
       end;
 
       ExcelWorkbook.SaveAs(xfilename);
+
 
 
       // or
@@ -1607,25 +1618,27 @@ begin
     Application.ProcessMessages;
     Screen.cursor := crDefault;
   end;
+  if rowsfound then
+  begin
+    try
+      Outlook := GetActiveOleObject('Outlook.Application');
+    except
+      Outlook := CreateOleObject('Outlook.Application');
+    end;
 
-  try
-    Outlook := GetActiveOleObject('Outlook.Application');
-  except
-    Outlook := CreateOleObject('Outlook.Application');
+    Mail := Outlook.CreateItem(olMailItem);
+
+    if pos('LENOPEHO', sp_Orderlist.Connection.ConnectionString) > 0 then
+      Mail.To := 'peter@holzer.se'
+    else
+      Mail.To := sp_Orderlist.FieldByName('Emailadress').AsString;
+
+    Mail.Subject := 'Orderbekräftelse';
+    Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse i Excel format.' + chr(13) + chr(10) +
+      'Vi tackar för förfrågan.';
+    Mail.Attachments.Add(xfilename);
+    Mail.Display;
   end;
-
-  Mail := Outlook.CreateItem(olMailItem);
-
-  if pos('LENOPEHO', sp_Orderlist.Connection.ConnectionString) > 0 then
-    Mail.To := 'peter@holzer.se'
-  else
-    Mail.To := sp_Orderlist.FieldByName('Emailadress').AsString;
-
-  Mail.Subject := 'Orderbekräftelse';
-  Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse i Excel format.' + chr(13) + chr(10) +
-    'Vi tackar för förfrågan.';
-  Mail.Attachments.Add(xfilename);
-  Mail.Display;
 
 end;
 

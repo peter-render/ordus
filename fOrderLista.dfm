@@ -401,10 +401,6 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
     end
   end
@@ -524,7 +520,6 @@
     end
     object Skickaorderbekrftleseviaepost1: TMenuItem
       Action = actOrderbekräftleseExcelViaEpost
-      Visible = False
     end
     object mnuUtsktriftPalletikett: TMenuItem
       Action = actPallEtikett
