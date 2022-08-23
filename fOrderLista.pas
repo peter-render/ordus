@@ -1635,7 +1635,9 @@ begin
 
     Mail.Subject := 'Orderbekräftelse';
     Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse i Excel format.' + chr(13) + chr(10) +
-      'Vi tackar för förfrågan.';
+    chr(13) + chr(10) +
+    'Mvh'+chr(13) + chr(10) +
+     'Ängelholms Mekaniska Verkstad';
     Mail.Attachments.Add(xfilename);
     Mail.Display;
   end;
