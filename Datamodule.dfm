@@ -235,7 +235,7 @@
         Name = '@Artikelbeteckning'
         DataType = ftString
         ParamType = ptInput
-        Size = 100
+        Size = 200
       end
       item
         Position = 6
@@ -416,8 +416,8 @@
   object dsoResourceDatasource: TDataSource
     AutoEdit = False
     DataSet = spResourceDatasource
-    Left = 132
-    Top = 148
+    Left = 152
+    Top = 144
   end
   object qryPlanering: TFDQuery
     Connection = FDConnection1
