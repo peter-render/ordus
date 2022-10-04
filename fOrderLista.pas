@@ -397,7 +397,7 @@ var
   strReferens, strGodsMärke: string;
   strText, strLevDatum: string;
   artikelnr, artikelbeteckning: string;
-  antalArtiklar, start, i, intOrderid, antal, intKundId, intOffertKalkylId: Integer;
+  antalArtiklar, start, i, intOrderid, antal, antal_1, antal_2, antal_3, intKundId, intOffertKalkylId: Integer;
   mydat, levDatum: Tdatetime;
   blnCont: Boolean;
 
@@ -424,7 +424,6 @@ begin
       ExcelApplication.Visible := false; // set to False if you do not want to see the activity in the background
       ExcelApplication.DisplayAlerts := false;
       // ensures message dialogs do not interrupt the flow of your automation process. May be helpful to set to True during testing and debugging.
-
       // Open Excel Workbook
       try
         ExcelWorkbook := ExcelApplication.Workbooks.open(ExcelFileName);
@@ -734,7 +733,8 @@ begin
                     end;
 
                     //
-                    radnr := 10; // Första artikelrad
+                    radnr := 11; // Första artikelrad
+
                     while true do
                     begin
                       radnr := radnr + 1;
@@ -745,39 +745,55 @@ begin
                       if artikelnr <> '' then
                       begin
 
-                        antal := EWS.cells[radnr, 3];
-                        if antal > 0 then
+                        try
+                          antal_1 := EWS.cells[radnr, 3];
+                        Except
+                          antal_1 := 0
+                        end;
+
+                        try
+                          antal_2 := EWS.cells[radnr, 4];
+                        Except
+                          antal_2 := 0
+                        end;
+
+                        try
+                          antal_3 := EWS.cells[radnr, 5];
+                        Except
+                          antal_3 := 0
+                        end;
+
+
+                        if antal_1 > 0 then
                           with spOffertkalkylArtikelInsert do
                           begin
-                            parambyname('@Kundid').value := intKundId;
+                            // parambyname('@Kundid').value := intKundId;
                             parambyname('@OffertKalkylid').value := intOffertKalkylId;
                             parambyname('@Artikelnummer').value := artikelnr;
                             parambyname('@Artikelbeteckning').value := artikelbeteckning;
-                            parambyname('@Antal').value := antal;
+                            parambyname('@Antal').value := antal_1;
                             execproc;
                           end;
 
-                        antal := EWS.cells[radnr, 4];
-                        if antal > 0 then
+                        if antal_2 > 0 then
                           with spOffertkalkylArtikelInsert do
                           begin
-                            parambyname('@Kundid').value := intKundId;
+                            // parambyname('@Kundid').value := intKundId;
                             parambyname('@OffertKalkylid').value := intOffertKalkylId;
                             parambyname('@Artikelnummer').value := artikelnr;
                             parambyname('@Artikelbeteckning').value := artikelbeteckning;
-                            parambyname('@Antal').value := antal;
+                            parambyname('@Antal').value := antal_2;
                             execproc;
                           end;
 
-                        antal := EWS.cells[radnr, 5];
-                        if antal > 0 then
+                        if antal_3 > 0 then
                           with spOffertkalkylArtikelInsert do
                           begin
-                            parambyname('@Kundid').value := intKundId;
+                            // parambyname('@Kundid').value := intKundId;
                             parambyname('@OffertKalkylid').value := intOffertKalkylId;
                             parambyname('@Artikelnummer').value := artikelnr;
                             parambyname('@Artikelbeteckning').value := artikelbeteckning;
-                            parambyname('@Antal').value := antal;
+                            parambyname('@Antal').value := antal_3;
                             execproc;
                           end;
                       end
@@ -804,6 +820,7 @@ begin
           // work on the Excel worksheet as needed
         end;
       end;
+
     finally
       ExcelApplication.Workbooks.close;
       ExcelApplication.DisplayAlerts := true;

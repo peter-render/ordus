@@ -2,7 +2,7 @@
   Left = 813
   Top = 678
   Caption = '<'
-  ClientHeight = 847
+  ClientHeight = 729
   ClientWidth = 1208
   Color = clMenu
   Font.Charset = DEFAULT_CHARSET
@@ -101,10 +101,11 @@
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 828
+    Top = 710
     Width = 1208
     Height = 19
     Panels = <>
+    ExplicitTop = 828
   end
   object MainMenu1: TMainMenu
     Left = 132
@@ -123,7 +124,6 @@
       end
       object Import1: TMenuItem
         Action = frmOrderLista.actReadExcelRequest
-        Visible = False
       end
       object SkickaorderbekrftleseExcel1: TMenuItem
         Action = frmOrderLista.actOrderbekräftleseExcelViaEpost
@@ -234,7 +234,7 @@
     Left = 213
     Top = 108
     Bitmap = {
-      494C01010A000D00CC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D00D00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

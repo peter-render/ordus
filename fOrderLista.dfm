@@ -5,7 +5,7 @@
   BorderStyle = bsNone
   Caption = 'Orderlista'
   ClientHeight = 701
-  ClientWidth = 1486
+  ClientWidth = 1369
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -40,7 +40,7 @@
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1486
+    Width = 1369
     Height = 701
     Align = alClient
     BevelOuter = bvNone
@@ -51,10 +51,11 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitWidth = 1486
     object Panel2: TPanel
       Left = 0
       Top = 0
-      Width = 1486
+      Width = 1369
       Height = 37
       Align = alTop
       TabOrder = 0
@@ -78,7 +79,7 @@
       object Panel4: TPanel
         Left = 75
         Top = 1
-        Width = 1410
+        Width = 1293
         Height = 35
         Align = alClient
         Alignment = taLeftJustify
@@ -92,7 +93,7 @@
         ParentFont = False
         TabOrder = 1
         DesignSize = (
-          1410
+          1293
           35)
         object lblsokbeställningsnummer: TLabel
           Left = 448
@@ -214,7 +215,7 @@
           OnEnter = sokOrdernummerEnter
         end
         object cbVisaAllaFakturor: TCheckBox
-          Left = 1276
+          Left = 1159
           Top = 10
           Width = 97
           Height = 17
@@ -226,6 +227,7 @@
           TabOrder = 3
           Visible = False
           OnClick = cbVisaAllaFakturorClick
+          ExplicitLeft = 1276
         end
         object btnStatusByteNext: TButton
           Left = 943
@@ -284,7 +286,7 @@
     object Panel5: TPanel
       Left = 0
       Top = 75
-      Width = 1486
+      Width = 1369
       Height = 626
       Align = alClient
       BevelOuter = bvNone
@@ -296,10 +298,11 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ExplicitWidth = 1486
       object wwDBGrid1: TwwDBGrid
         Left = 5
         Top = 5
-        Width = 1476
+        Width = 1359
         Height = 616
         PictureMasks.Strings = (
           'Ordersumma'#9'### ### ###0,00'#9'T'#9'F'
@@ -365,6 +368,7 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
+        ExplicitWidth = 1476
       end
       object wwExpandButton1: TwwExpandButton
         Left = 599
@@ -380,16 +384,17 @@
     object Panel6: TPanel
       Left = 0
       Top = 37
-      Width = 1486
+      Width = 1369
       Height = 8
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
+      ExplicitWidth = 1486
     end
     object PageControl1: TPageControl
       Left = 0
       Top = 45
-      Width = 1486
+      Width = 1369
       Height = 30
       ActivePage = TabSheet1
       Align = alTop
@@ -398,9 +403,14 @@
       TabWidth = 130
       OnChange = PageControl1Change
       OnDrawTab = PageControl1DrawTab
+      ExplicitWidth = 1486
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 1478
+        ExplicitHeight = 0
       end
     end
   end
@@ -2054,8 +2064,8 @@
   object spOffertkalkylArtikelInsert: TFDStoredProc
     Connection = dm.FDConnection1
     StoredProcName = 'OffertkalkylArtikelInsert'
-    Left = 556
-    Top = 599
+    Left = 604
+    Top = 603
     ParamData = <
       item
         Position = 1
@@ -2065,32 +2075,26 @@
       end
       item
         Position = 2
-        Name = '@Kundid'
-        DataType = ftInteger
-        ParamType = ptInput
-      end
-      item
-        Position = 3
         Name = '@OffertkalkylId'
         DataType = ftInteger
         ParamType = ptInput
       end
       item
-        Position = 4
-        Name = '@Artikelnummer'
+        Position = 3
+        Name = '@artikelnummer'
         DataType = ftString
         ParamType = ptInput
-        Size = 30
+        Size = 20
       end
       item
-        Position = 5
-        Name = '@Artikelbeteckning'
+        Position = 4
+        Name = '@artikelbeteckning'
         DataType = ftString
         ParamType = ptInput
         Size = 200
       end
       item
-        Position = 6
+        Position = 5
         Name = '@Antal'
         DataType = ftInteger
         ParamType = ptInput
