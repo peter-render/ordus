@@ -278,6 +278,25 @@ type
     spOffertKalkylInsert: TFDStoredProc;
     spOffertkalkylArtikelInsert: TFDStoredProc;
     actExcelImport: TAction;
+    qryExcelExport_backup: TFDQuery;
+    FDAutoIncField3: TFDAutoIncField;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    SQLTimeStampField1: TSQLTimeStampField;
+    SQLTimeStampField2: TSQLTimeStampField;
+    IntegerField3: TIntegerField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    StringField7: TStringField;
+    FMTBCDField1: TFMTBCDField;
+    IntegerField4: TIntegerField;
+    CurrencyField1: TCurrencyField;
+    StringField8: TStringField;
+    FMTBCDField2: TFMTBCDField;
+    DateField1: TDateField;
+    StringField9: TStringField;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -762,7 +781,6 @@ begin
                         Except
                           antal_3 := 0
                         end;
-
 
                         if antal_1 > 0 then
                           with spOffertkalkylArtikelInsert do
@@ -1615,7 +1633,7 @@ procedure TfrmOrderLista.actOrderbekräftleseExcelViaEpostExecute(Sender: TObject
 
 var
   x, ci, row, i, W, NumberOfWorksheetsNeeded: Integer;
-  fstring, ExcelFileName: String;
+  param,orderstring, fstring, ExcelFileName: String;
   oRng, ExcelApplication, ExcelWorkbook, ExcelWorksheet: Variant;
   bm: Tbookmark;
   rTyp: Integer;
@@ -1626,16 +1644,47 @@ var
 const
   olMailItem = $00000000;
 begin
+  //
+  // with qryExcelExport do
+  // begin
+  // close;
+  // open;
+  // if recordcount = 0 then
+  // begin
+  // showmessage('Inga priser uppdaterade idag!');
+  // exit;
+  // end;
+  // end;
+
+  orderstring := '';
+  if wwDBGrid1.selectedlist.count >= 0 then
+  Begin
+    wwDBGrid1.datasource.DataSet.Disablecontrols;
+    for i := 0 to wwDBGrid1.selectedlist.count - 1 do
+    Begin
+      wwDBGrid1.datasource.DataSet.GotoBookmark(wwDBGrid1.selectedlist[i]);
+      orderstring := orderstring + QuotedStr(wwDBGrid1.datasource.DataSet.FieldByName('Orderid').AsString) + ',';
+    End;
+    wwDBGrid1.datasource.DataSet.EnableControls;
+    orderstring := StringReplace(orderstring, char(34) , char(39), [rfReplaceAll]);
+  End
+  else
+  begin
+    showmessage('Inga rader är selekterade');
+    exit;
+  end;
 
   with qryExcelExport do
   begin
     close;
+    sql.Clear;
+    sql:=   qryExcelExport_backup.SQL;
+    param :=     '('+ copy(orderstring,1, length(orderstring)-1)+ ')';
+    qryExcelExport.sql.add(param);
     open;
+    showmessage(inttostr(recordcount));
     if recordcount = 0 then
-    begin
-      showmessage('Inga priser uppdaterade idag!');
       exit;
-    end;
   end;
 
   rowsfound := false;
@@ -1694,7 +1743,7 @@ begin
         If NumberOfWorksheetsNeeded < ExcelWorkbook.WorkSheets.count then
         begin
           While ExcelWorkbook.WorkSheets.count > NumberOfWorksheetsNeeded do
-            ExcelWorkbook.WorkSheets[ExcelWorkbook.WorkSheets.count].Delete;
+            ExcelWorkbook.WorkSheets[ExcelWorkbook.WorkSheets.count].delete;
 
           For W := 1 to ExcelWorkbook.WorkSheets.count do
             ExcelWorkbook.WorkSheets[W].name := 'Blad' + inttostr(W);
@@ -1739,7 +1788,7 @@ begin
           if recordcount > 0 then
           begin
             rowsfound := true;
-            DisableControls;
+            Disablecontrols;
             first;
             while not eof do
             begin

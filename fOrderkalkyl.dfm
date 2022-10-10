@@ -224,7 +224,7 @@
       end
       object Label10: TLabel
         Left = 680
-        Top = 199
+        Top = 201
         Width = 16
         Height = 13
         Caption = 'min'
@@ -706,7 +706,7 @@
       end
       object edtArbetstidStk: TEditN
         Left = 605
-        Top = 196
+        Top = 198
         Width = 69
         Height = 21
         TabStop = False
@@ -1104,8 +1104,8 @@
     Active = True
     Connection = dm.FDConnection1
     StoredProcName = 'dbo.OrderradHistoryArtikel'
-    Left = 536
-    Top = 292
+    Left = 552
+    Top = 296
     ParamData = <
       item
         Position = 1
@@ -1217,8 +1217,8 @@
   object dsoOrderradHistoryArtikel: TDataSource
     AutoEdit = False
     DataSet = sp_OrderradHistoryArtikel
-    Left = 466
-    Top = 296
+    Left = 434
+    Top = 300
   end
   object dsoQry: TDataSource
     DataSet = qry

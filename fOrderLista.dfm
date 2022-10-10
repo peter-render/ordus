@@ -51,7 +51,6 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 1486
     object Panel2: TPanel
       Left = 0
       Top = 0
@@ -227,7 +226,6 @@
           TabOrder = 3
           Visible = False
           OnClick = cbVisaAllaFakturorClick
-          ExplicitLeft = 1276
         end
         object btnStatusByteNext: TButton
           Left = 943
@@ -298,7 +296,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitWidth = 1486
       object wwDBGrid1: TwwDBGrid
         Left = 5
         Top = 5
@@ -368,7 +365,8 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
-        ExplicitWidth = 1476
+        ExplicitLeft = 4
+        ExplicitTop = 6
       end
       object wwExpandButton1: TwwExpandButton
         Left = 599
@@ -389,7 +387,6 @@
       Align = alTop
       BevelOuter = bvNone
       TabOrder = 2
-      ExplicitWidth = 1486
     end
     object PageControl1: TPageControl
       Left = 0
@@ -403,14 +400,9 @@
       TabWidth = 130
       OnChange = PageControl1Change
       OnDrawTab = PageControl1DrawTab
-      ExplicitWidth = 1486
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 1478
-        ExplicitHeight = 0
       end
     end
   end
@@ -1890,42 +1882,6 @@
   end
   object qryExcelExport: TFDQuery
     Connection = dm.FDConnection1
-    SQL.Strings = (
-      'Select '
-      'oh.Id OrderId,'
-      'k.Kundnamn,'
-      'isnull(ak.F'#246'rnamn,'#39#39') +'#39' '#39'+ isnull(ak.Efternamn,'#39#39') Referens,'
-      'oh.ordernummer,'
-      'oh.Godsm'#228'rke,'
-      'oh.orderdatum,'
-      'oh.Leveransdatum,'
-      'orad.Positionnummer,'
-      'y.Beteckning YtbehandlingBeteckning,'
-      'a.Beteckning,'
-      'a.Artikelnummer,'
-      'orad.Antal,'
-      'oh.OrdertypId,'
-      'orad.Prisperenhet,'
-      'oh.fritext,'
-      'orad.Prisperenhet * orad.Antal as Pris  ,'
-      'cast(getdate() as date) Dagensdatum,'
-      'p2.F'#246'rnamn + '#39' '#39'+ p2.Efternamn V'#229'rReferens'
-      ''
-      'from OrderRad orad'
-      'join Artikel a on orad.artikelID = a.Id'
-      'join OrderHuvud oh on oh.ID = orad.OrderID'
-      'join kund k on k.Id = oh.kundid'
-      'left join KundPerson kp on kp.ID= oh.ReferensID'
-      'left join akt'#246'r ak on ak.id = kp.Id'
-      'left join personal p on orad.avrapporteradPersonID = p.id'
-      'left join personal p2 on oh.V'#229'rreferensPersonId = p2.id'
-      'left join Ytbehandling y on orad.ytbehandlingID = y.ID'
-      'where '
-      '--oh.id = :OrderId'
-      'orad.PrisUpdateDatum = cast(getdate() as date)'
-      'and ordertypid = 1'
-      'and oh.kundid = 1'
-      '')
     Left = 152
     Top = 585
     object qryExcelExportOrderId: TFDAutoIncField
@@ -2099,5 +2055,142 @@
         DataType = ftInteger
         ParamType = ptInput
       end>
+  end
+  object qryExcelExport_backup: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select '
+      'oh.Id OrderId,'
+      'k.Kundnamn,'
+      'isnull(ak.F'#246'rnamn,'#39#39') +'#39' '#39'+ isnull(ak.Efternamn,'#39#39') Referens,'
+      'oh.ordernummer,'
+      'oh.Godsm'#228'rke,'
+      'oh.orderdatum,'
+      'oh.Leveransdatum,'
+      'orad.Positionnummer,'
+      'y.Beteckning YtbehandlingBeteckning,'
+      'a.Beteckning,'
+      'a.Artikelnummer,'
+      'orad.Antal,'
+      'oh.OrdertypId,'
+      'orad.Prisperenhet,'
+      'oh.fritext,'
+      'orad.Prisperenhet * orad.Antal as Pris  ,'
+      'cast(getdate() as date) Dagensdatum,'
+      'p2.F'#246'rnamn + '#39' '#39'+ p2.Efternamn V'#229'rReferens'
+      ''
+      'from OrderRad orad'
+      'join Artikel a on orad.artikelID = a.Id'
+      'join OrderHuvud oh on oh.ID = orad.OrderID'
+      'join kund k on k.Id = oh.kundid'
+      'left join KundPerson kp on kp.ID= oh.ReferensID'
+      'left join akt'#246'r ak on ak.id = kp.Id'
+      'left join personal p on orad.avrapporteradPersonID = p.id'
+      'left join personal p2 on oh.V'#229'rreferensPersonId = p2.id'
+      'left join Ytbehandling y on orad.ytbehandlingID = y.ID'
+      'where '
+      'ordertypid = 1'
+      'and oh.kundid = 1'
+      'and'
+      'cast(oh.id as varchar(10)) in '
+      ''
+      '')
+    Left = 112
+    Top = 517
+    object FDAutoIncField3: TFDAutoIncField
+      FieldName = 'OrderId'
+      Origin = 'OrderId'
+      ReadOnly = True
+    end
+    object StringField1: TStringField
+      FieldName = 'Kundnamn'
+      Origin = 'Kundnamn'
+      Required = True
+      Size = 50
+    end
+    object StringField2: TStringField
+      FieldName = 'Referens'
+      Origin = 'Referens'
+      ReadOnly = True
+      Required = True
+      Size = 100
+    end
+    object StringField3: TStringField
+      FieldName = 'ordernummer'
+      Origin = 'ordernummer'
+      Required = True
+      Size = 30
+    end
+    object StringField4: TStringField
+      FieldName = 'Godsm'#228'rke'
+      Origin = '[Godsm'#228'rke]'
+      Size = 50
+    end
+    object SQLTimeStampField1: TSQLTimeStampField
+      FieldName = 'orderdatum'
+      Origin = 'orderdatum'
+      Required = True
+    end
+    object SQLTimeStampField2: TSQLTimeStampField
+      FieldName = 'Leveransdatum'
+      Origin = 'Leveransdatum'
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'Positionnummer'
+      Origin = 'Positionnummer'
+    end
+    object StringField5: TStringField
+      FieldName = 'YtbehandlingBeteckning'
+      Origin = 'YtbehandlingBeteckning'
+      Size = 50
+    end
+    object StringField6: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object StringField7: TStringField
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object FMTBCDField1: TFMTBCDField
+      FieldName = 'Antal'
+      Origin = 'Antal'
+      Precision = 19
+      Size = 2
+    end
+    object IntegerField4: TIntegerField
+      FieldName = 'OrdertypId'
+      Origin = 'OrdertypId'
+    end
+    object CurrencyField1: TCurrencyField
+      FieldName = 'Prisperenhet'
+      Origin = 'Prisperenhet'
+    end
+    object StringField8: TStringField
+      FieldName = 'fritext'
+      Origin = 'fritext'
+      Size = 2000
+    end
+    object FMTBCDField2: TFMTBCDField
+      FieldName = 'Pris'
+      Origin = 'Pris'
+      ReadOnly = True
+      Precision = 38
+      Size = 6
+    end
+    object DateField1: TDateField
+      FieldName = 'Dagensdatum'
+      Origin = 'Dagensdatum'
+      ReadOnly = True
+    end
+    object StringField9: TStringField
+      FieldName = 'V'#229'rReferens'
+      Origin = '[V'#229'rReferens]'
+      ReadOnly = True
+      Size = 101
+    end
   end
 end
