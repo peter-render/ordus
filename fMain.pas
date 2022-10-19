@@ -223,7 +223,7 @@ begin
     AdminComputer := fieldbyname('ÄrAdmin').asboolean;
   end;
   width:= 1440;
-
+  height:= 880;
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);

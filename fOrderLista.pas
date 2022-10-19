@@ -887,6 +887,7 @@ procedure TfrmOrderLista.FormCreate(Sender: TObject);
 begin
   DragAcceptFiles(Handle, true);
   PageControl1.OwnerDraw := true;
+
 end;
 
 procedure TfrmOrderLista.FormShow(Sender: TObject);

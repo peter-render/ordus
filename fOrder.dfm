@@ -4,8 +4,8 @@
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Best'#228'llning'
-  ClientHeight = 671
-  ClientWidth = 1224
+  ClientHeight = 742
+  ClientWidth = 1311
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -28,14 +28,16 @@
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1224
-    Height = 671
+    Width = 1311
+    Height = 742
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 1224
+    ExplicitHeight = 671
     object Panel3: TPanel
       Left = 1
       Top = 1
-      Width = 1222
+      Width = 1309
       Height = 54
       Align = alTop
       Font.Charset = DEFAULT_CHARSET
@@ -45,6 +47,7 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 1222
       object Label1: TLabel
         Left = 159
         Top = 11
@@ -184,9 +187,9 @@
     end
     object Panel4: TPanel
       Left = 1
-      Top = 340
-      Width = 1222
-      Height = 330
+      Top = 397
+      Width = 1309
+      Height = 344
       Align = alClient
       BorderWidth = 10
       Caption = 'Panel4'
@@ -197,22 +200,26 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ExplicitTop = 340
+      ExplicitWidth = 1222
+      ExplicitHeight = 330
       DesignSize = (
-        1222
-        330)
+        1309
+        344)
       object Label17: TLabel
-        Left = 1053
-        Top = 92
+        Left = 1075
+        Top = 102
         Width = 61
         Height = 14
         Anchors = [akLeft, akBottom]
         Caption = 'Ritningsnotis'
+        ExplicitTop = 88
       end
       object wwDBGrid1: TwwDBGrid
         Left = 11
         Top = 11
-        Width = 1034
-        Height = 308
+        Width = 1058
+        Height = 322
         ControlType.Strings = (
           'LagerArtikel;CheckBox;True;False'
           'cBock;ImageIndex;Original Size'
@@ -220,22 +227,25 @@
         PictureMasks.Strings = (
           'Artikelnummer'#9'### ###'#9'T'#9'T')
         Selected.Strings = (
-          'Radnr'#9'4'#9'Radnr'#9#9
-          'Positionnummer'#9'4'#9'PosNr'#9#9
-          'Artikelnummer'#9'22'#9'Artikelnummer'#9#9
-          'Beteckning'#9'22'#9'Beteckning'#9#9
-          'cRitningsnoteringFinns_disp'#9'2'#9'R'#9#9
-          'Lagersaldo'#9'4'#9'  L'#9'F'
-          'cFixatur'#9'2'#9' F'#9#9
-          'PrisperEnhet'#9'9'#9'  Pris/enhet'#9#9
-          'Fr'#229'nLager'#9'10'#9'     Fr'#229'n lager'#9#9
-          'Attproducera'#9'11'#9'Att producera'#9#9
-          'Antal'#9'6'#9'     Antal'#9#9
-          'TillLager'#9'9'#9'     Till lager'#9#9
-          'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'#9#9
-          'KalkarbetstidTotal'#9'14'#9'Kalk Arbetstid tot'#9#9
-          'OrderradInfo'#9'17'#9'Info'#9#9
-          'Notering'#9'10'#9'Notering'#9#9)
+          'Radnr'#9'4'#9'Radnr'
+          'Positionnummer'#9'4'#9'PosNr'
+          'Artikelnummer'#9'15'#9'Artikelnummer'
+          'Beteckning'#9'22'#9'Beteckning'
+          'cRitningsnoteringFinns_disp'#9'2'#9'R'
+          'Lagersaldo'#9'2'#9'  L'
+          'cFixatur'#9'2'#9' F'
+          'PrisperEnhet'#9'9'#9'  Pris/enhet'
+          'Fr'#229'nLager'#9'8'#9'Fr'#229'n lager'
+          'Attproducera'#9'7'#9'Att prod'
+          'Antal'#9'6'#9'  Antal'
+          'TillLager'#9'9'#9'   Till lager'
+          'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'
+          'AvrapporteradPlasmatid'#9'6'#9'Lasertid'
+          'SkrotandelProcent'#9'6'#9'Skrot %'
+          'Vikt'#9'6'#9'Vikt/st'
+          'KalkarbetstidTotal'#9'8'#9'Arbetstid'
+          'SenasteAvrapporteradDatum'#9'10'#9'Senast tv.'#9'F'
+          'OrderradInfo'#9'22'#9'Info')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -266,11 +276,10 @@
         PadColumnStyle = pcsPadHeader
       end
       object btnDelete: TButton
-        Left = 1100
+        Left = 1083
         Top = 52
         Width = 113
         Height = 25
-        Anchors = [akTop, akRight]
         Caption = 'Ta bort rad'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -282,11 +291,10 @@
         OnClick = btnDeleteClick
       end
       object btnEdit: TButton
-        Left = 1100
+        Left = 1083
         Top = 21
         Width = 113
         Height = 25
-        Anchors = [akTop, akRight]
         Caption = #196'ndra rad '
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -298,10 +306,10 @@
         OnClick = wwDBGrid1DblClick
       end
       object DBMemo1: TDBMemo
-        Left = 1051
-        Top = 108
-        Width = 162
-        Height = 209
+        Left = 1075
+        Top = 92
+        Width = 225
+        Height = 239
         Anchors = [akLeft, akRight, akBottom]
         DataField = 'Notering'
         DataSource = dsoOrderrad
@@ -312,14 +320,14 @@
     object Panel5: TPanel
       Left = 1
       Top = 55
-      Width = 1222
-      Height = 285
+      Width = 1309
+      Height = 342
       Align = alTop
       TabOrder = 2
       object Splitter1: TSplitter
         Left = 377
         Top = 1
-        Height = 283
+        Height = 340
         ExplicitLeft = 612
         ExplicitTop = 184
         ExplicitHeight = 100
@@ -328,10 +336,11 @@
         Left = 1
         Top = 1
         Width = 376
-        Height = 283
+        Height = 340
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitHeight = 283
         object Panel7: TPanel
           Left = 0
           Top = 0
@@ -435,27 +444,30 @@
           Left = 0
           Top = 61
           Width = 376
-          Height = 222
+          Height = 279
           ActivePage = TabOrderrad
           Align = alClient
           TabHeight = 2
           TabOrder = 1
+          ExplicitHeight = 222
           object TabOrderrad: TTabSheet
             Caption = 'TabOrderrad'
             ImageIndex = 1
+            ExplicitHeight = 210
             object Panel16: TPanel
               Left = 0
               Top = 0
               Width = 368
-              Height = 210
+              Height = 267
               Align = alClient
               BevelOuter = bvNone
               TabOrder = 0
+              ExplicitHeight = 210
               object pnlOrderrad: TPanel
                 Left = 0
                 Top = 0
                 Width = 368
-                Height = 210
+                Height = 267
                 Align = alClient
                 BevelOuter = bvNone
                 Font.Charset = DEFAULT_CHARSET
@@ -466,9 +478,11 @@
                 ParentFont = False
                 TabOrder = 0
                 Visible = False
+                ExplicitLeft = -2
+                ExplicitTop = -1
                 DesignSize = (
                   368
-                  210)
+                  267)
                 object Label7: TLabel
                   Left = 21
                   Top = 22
@@ -525,6 +539,27 @@
                   Height = 13
                   Caption = 'Lagerplats:'
                 end
+                object Label22: TLabel
+                  Left = 21
+                  Top = 174
+                  Width = 38
+                  Height = 13
+                  Caption = 'Lasertid'
+                end
+                object Label23: TLabel
+                  Left = 224
+                  Top = 174
+                  Width = 39
+                  Height = 13
+                  Caption = 'Skrot %'
+                end
+                object Label24: TLabel
+                  Left = 21
+                  Top = 198
+                  Width = 17
+                  Height = 13
+                  Caption = 'Vikt'
+                end
                 object edtPris: TEditN
                   Left = 119
                   Top = 15
@@ -560,7 +595,7 @@
                   WidthOnFocus = 0
                 end
                 object edtAntal: TEditN
-                  Left = 120
+                  Left = 119
                   Top = 42
                   Width = 84
                   Height = 21
@@ -594,7 +629,7 @@
                   WidthOnFocus = 0
                 end
                 object edtFranLager: TEditN
-                  Left = 120
+                  Left = 119
                   Top = 67
                   Width = 84
                   Height = 21
@@ -628,12 +663,12 @@
                   WidthOnFocus = 0
                 end
                 object edtAttProducera: TEditN
-                  Left = 120
+                  Left = 119
                   Top = 91
                   Width = 84
                   Height = 21
                   Color = clWhite
-                  TabOrder = 4
+                  TabOrder = 3
                   TextHint = True
                   OnChange = edtPrisChange
                   OnExit = edtAttProduceraExit
@@ -656,12 +691,12 @@
                   WidthOnFocus = 0
                 end
                 object edtTillLager: TEditN
-                  Left = 120
+                  Left = 119
                   Top = 116
                   Width = 84
                   Height = 21
                   Color = clWhite
-                  TabOrder = 6
+                  TabOrder = 4
                   TextHint = True
                   OnChange = edtPrisChange
                   ColorOnFocus = clWhite
@@ -684,7 +719,7 @@
                 end
                 object btnSpara: TButton
                   Left = 196
-                  Top = 170
+                  Top = 232
                   Width = 77
                   Height = 25
                   Anchors = [akRight, akBottom]
@@ -696,18 +731,18 @@
                   Font.Name = 'Default'
                   Font.Style = []
                   ParentFont = False
-                  TabOrder = 8
+                  TabOrder = 9
                   OnClick = btnSparaClick
                 end
                 object btnAvbryt: TButton
                   Left = 279
-                  Top = 170
+                  Top = 232
                   Width = 77
                   Height = 25
                   Anchors = [akRight, akBottom]
                   Caption = '&Avbryt'
                   Enabled = False
-                  TabOrder = 9
+                  TabOrder = 10
                   OnClick = btnAvbrytClick
                 end
                 object edtLagersaldo: TEditN
@@ -718,7 +753,7 @@
                   TabStop = False
                   Color = clBtnFace
                   ReadOnly = True
-                  TabOrder = 3
+                  TabOrder = 11
                   TextHint = True
                   OnChange = edtPrisChange
                   OnExit = edtFranLagerExit
@@ -742,7 +777,7 @@
                   WidthOnFocus = 0
                 end
                 object LU_Ytbehandling: TwwDBLookupCombo
-                  Left = 120
+                  Left = 119
                   Top = 141
                   Width = 232
                   Height = 21
@@ -753,7 +788,7 @@
                   LookupTable = dm.qryLUYtbehandling
                   LookupField = 'YtbehandlingID'
                   DropDownCount = 20
-                  TabOrder = 7
+                  TabOrder = 5
                   AutoDropDown = False
                   ShowButton = True
                   PreciseEditRegion = False
@@ -765,15 +800,17 @@
                   Top = 92
                   Width = 79
                   Height = 21
+                  TabStop = False
                   Color = clBtnFace
                   ReadOnly = True
-                  TabOrder = 5
+                  TabOrder = 12
                 end
                 object mmArtikeltext: TMemo
                   Left = 217
                   Top = 15
                   Width = 136
                   Height = 49
+                  TabStop = False
                   Color = clMenu
                   Font.Charset = ANSI_CHARSET
                   Font.Color = clWindowText
@@ -781,24 +818,110 @@
                   Font.Name = 'Verdana'
                   Font.Style = []
                   ParentFont = False
-                  TabOrder = 10
+                  TabOrder = 13
                   OnChange = edtPrisChange
                   OnClick = mmArtikeltextClick
+                end
+                object edtLasertid: TEditN
+                  Left = 119
+                  Top = 170
+                  Width = 84
+                  Height = 21
+                  Color = clWhite
+                  TabOrder = 6
+                  TextHint = True
+                  OnChange = edtPrisChange
+                  OnExit = edtAttProduceraExit
+                  ColorOnFocus = clWhite
+                  ColorOnNotFocus = clWhite
+                  FontColorOnFocus = clBlack
+                  FontColorOnNotFocus = clBlack
+                  FontColorOnOverWrite = clBlue
+                  EditType = etFloat
+                  EditKeyByTab = #9
+                  EditAlign = etAlignNone
+                  EditLengthAlign = 0
+                  EditPrecision = 0
+                  ValueInteger = 0
+                  ValueDate = 39107.000000000000000000
+                  ValueTime = 0.922235416666667000
+                  TimeSeconds = False
+                  FirstCharUpper = False
+                  FirstCharUpList = ' ('
+                  WidthOnFocus = 0
+                end
+                object edtSkrot: TEditN
+                  Left = 268
+                  Top = 170
+                  Width = 84
+                  Height = 21
+                  Color = clWhite
+                  TabOrder = 7
+                  TextHint = True
+                  OnChange = edtPrisChange
+                  OnExit = edtAttProduceraExit
+                  ColorOnFocus = clWhite
+                  ColorOnNotFocus = clWhite
+                  FontColorOnFocus = clBlack
+                  FontColorOnNotFocus = clBlack
+                  FontColorOnOverWrite = clBlue
+                  EditType = etFloat
+                  EditKeyByTab = #9
+                  EditAlign = etAlignNone
+                  EditLengthAlign = 0
+                  EditPrecision = 0
+                  ValueInteger = 0
+                  ValueDate = 39107.000000000000000000
+                  ValueTime = 0.922235416666667000
+                  TimeSeconds = False
+                  FirstCharUpper = False
+                  FirstCharUpList = ' ('
+                  WidthOnFocus = 0
+                end
+                object edtVikt: TEditN
+                  Left = 119
+                  Top = 197
+                  Width = 84
+                  Height = 21
+                  Color = clWhite
+                  TabOrder = 8
+                  TextHint = True
+                  OnChange = edtPrisChange
+                  OnExit = edtAttProduceraExit
+                  ColorOnFocus = clWhite
+                  ColorOnNotFocus = clWhite
+                  FontColorOnFocus = clBlack
+                  FontColorOnNotFocus = clBlack
+                  FontColorOnOverWrite = clBlue
+                  EditType = etFloat
+                  EditKeyByTab = #9
+                  EditAlign = etAlignNone
+                  EditLengthAlign = 0
+                  EditPrecision = 0
+                  ValueInteger = 0
+                  ValueDate = 39107.000000000000000000
+                  ValueTime = 0.922235416666667000
+                  TimeSeconds = False
+                  FirstCharUpper = False
+                  FirstCharUpList = ' ('
+                  WidthOnFocus = 0
                 end
               end
             end
           end
           object tabArtikel: TTabSheet
             Caption = 'tabArtikel'
+            ExplicitHeight = 210
             object pnlArtikel: TPanel
               Left = 0
               Top = 0
               Width = 368
-              Height = 210
+              Height = 267
               Align = alClient
               Color = 15330541
               TabOrder = 0
               Visible = False
+              ExplicitHeight = 210
               object Label12: TLabel
                 Left = 35
                 Top = 55
@@ -899,15 +1022,17 @@
       object Panel1: TPanel
         Left = 380
         Top = 1
-        Width = 841
-        Height = 283
+        Width = 928
+        Height = 340
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 841
+        ExplicitHeight = 283
         object Splitter2: TSplitter
           Left = 441
           Top = 0
-          Height = 283
+          Height = 340
           ExplicitLeft = 356
           ExplicitTop = 196
           ExplicitHeight = 100
@@ -916,10 +1041,11 @@
           Left = 0
           Top = 0
           Width = 441
-          Height = 283
+          Height = 340
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitHeight = 283
           object ExpButton: TwwExpandButton
             Left = 124
             Top = 120
@@ -972,24 +1098,26 @@
             Left = 0
             Top = 24
             Width = 441
-            Height = 259
+            Height = 316
             Align = alClient
             BevelOuter = bvNone
             BorderWidth = 3
             TabOrder = 2
+            ExplicitHeight = 259
             object Panel15: TPanel
               Left = 3
               Top = 3
               Width = 435
-              Height = 253
+              Height = 310
               Align = alClient
               BevelOuter = bvLowered
               TabOrder = 0
+              ExplicitHeight = 253
               object wwDBGrid2: TwwDBGrid
                 Left = 1
                 Top = 1
                 Width = 433
-                Height = 251
+                Height = 308
                 TabStop = False
                 ControlType.Strings = (
                   'Kortdatum;CustomEdit;ExpButton;F'
@@ -1031,6 +1159,7 @@
                 OnDblClick = wwDBGrid2DblClick
                 OnMouseDown = wwDBGrid2MouseDown
                 PadColumnStyle = pcsPadHeader
+                ExplicitHeight = 251
               end
             end
             object wwDBGrid6: TwwDBGrid
@@ -1075,15 +1204,17 @@
         object Panel9: TPanel
           Left = 444
           Top = 0
-          Width = 397
-          Height = 283
+          Width = 484
+          Height = 340
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
+          ExplicitWidth = 397
+          ExplicitHeight = 283
           object Panel10: TPanel
             Left = 0
             Top = 0
-            Width = 397
+            Width = 484
             Height = 24
             Align = alTop
             Alignment = taLeftJustify
@@ -1096,29 +1227,34 @@
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 0
+            ExplicitWidth = 397
           end
           object Panel11: TPanel
             Left = 0
             Top = 24
-            Width = 397
-            Height = 259
+            Width = 484
+            Height = 316
             Align = alClient
             BevelOuter = bvNone
             BorderWidth = 3
             TabOrder = 1
+            ExplicitWidth = 397
+            ExplicitHeight = 259
             object Panel14: TPanel
               Left = 3
               Top = 3
-              Width = 391
-              Height = 253
+              Width = 478
+              Height = 310
               Align = alClient
               BevelOuter = bvLowered
               TabOrder = 0
+              ExplicitWidth = 391
+              ExplicitHeight = 253
               object dbgArtikelgrupp: TwwDBGrid
                 Left = 1
                 Top = 1
-                Width = 389
-                Height = 251
+                Width = 476
+                Height = 308
                 Selected.Strings = (
                   'Artikelnummer'#9'30'#9'Artikelnummer'
                   'Antal'#9'9'#9'Antal'
@@ -1149,6 +1285,8 @@
                 TitleLines = 1
                 TitleButtons = False
                 PadColumnStyle = pcsPadHeader
+                ExplicitWidth = 389
+                ExplicitHeight = 251
               end
             end
           end
@@ -1158,23 +1296,23 @@
   end
   object dsoOrderrad: TDataSource
     DataSet = qryOrderrad
-    Left = 173
-    Top = 465
+    Left = 161
+    Top = 525
   end
   object dsoLU_Artikel: TDataSource
     AutoEdit = False
     DataSet = qryLU_Artikel
-    Left = 337
-    Top = 473
+    Left = 329
+    Top = 517
   end
   object dsoOrderHistory: TDataSource
     DataSet = qryOrderHistory
-    Left = 442
-    Top = 472
+    Left = 454
+    Top = 528
   end
   object PopupMenu1: TPopupMenu
     OnPopup = PopupMenu1Popup
-    Left = 561
+    Left = 605
     Top = 461
     object Bockritningok1: TMenuItem
       Caption = 'Bockritning ok'
@@ -1190,8 +1328,8 @@
   end
   object dsoOrder: TDataSource
     DataSet = qryOrder
-    Left = 257
-    Top = 466
+    Left = 245
+    Top = 518
   end
   object PopupMenu2: TPopupMenu
     Left = 1049
@@ -1204,14 +1342,14 @@
   object dsoOrderradPrisinfo: TDataSource
     AutoEdit = False
     DataSet = qryOrderradPrisinfo
-    Left = 540
-    Top = 532
+    Left = 548
+    Top = 564
   end
   object dsoArtikelgrupp: TDataSource
     AutoEdit = False
     DataSet = qryArtikelgrupp
-    Left = 68
-    Top = 468
+    Left = 60
+    Top = 524
   end
   object PopupMenu3: TPopupMenu
     Left = 900
@@ -1245,6 +1383,7 @@
       end>
   end
   object qryOrderrad: TFDQuery
+    Active = True
     OnCalcFields = qryOrderradCalcFields
     MasterSource = dsoOrder
     MasterFields = 'OrderId'
@@ -1268,10 +1407,22 @@
       'yb.Beteckning YtbehandlingBeteckning,'
       'orad.Kalkarbetstid,'
       'orad.Kalkarbetstid KalkarbetstidTotal,'
+      'orad.Vikt,'
+      'orad.AvrapporteradPlasmatid,'
+      'orad.SkrotandelProcent,'
       'a.BockritningFinns Bockritning,'
       'a.FixaturFinns FixaturFinns,'
       'a.Notering,'
-      'a.Lagersaldo'
+      'a.Lagersaldo,'
+      
+        'SenasteAvrapporteradDatum = (select top 1  cast(AvrapporteradDat' +
+        'um as date) from Orderrad '
+      #9#9#9#9#9'where ArtikelID = a.Id and '
+      
+        #9#9#9#9#9'OrderID < orad.OrderId and AvrapporteradDatum is not null o' +
+        'rder by orderid desc)'
+      ''
+      ''
       'from OrderRad orad'
       'join Artikel a on orad.artikelID = a.id'
       'join orderhuvud oh on oh.id = orad.orderid'
@@ -1279,8 +1430,8 @@
       'left join Ytbehandling yb on orad.YtbehandlingID = yb.ID'
       'where oh.ID = :OrderId'
       'order by Radnr desc')
-    Left = 156
-    Top = 400
+    Left = 160
+    Top = 456
     ParamData = <
       item
         Name = 'ORDERID'
@@ -1302,7 +1453,7 @@
       Origin = 'Positionnummer'
     end
     object qryOrderradArtikelnummer: TStringField
-      DisplayWidth = 22
+      DisplayWidth = 15
       FieldName = 'Artikelnummer'
       Origin = 'Artikelnummer'
       Required = True
@@ -1323,7 +1474,7 @@
     end
     object qryOrderradLagersaldo: TBCDField
       DisplayLabel = '  L'
-      DisplayWidth = 4
+      DisplayWidth = 2
       FieldName = 'Lagersaldo'
       Origin = 'Lagersaldo'
       Precision = 18
@@ -1343,23 +1494,23 @@
       Origin = 'PrisperEnhet'
     end
     object qryOrderradFrånLager: TBCDField
-      DisplayLabel = '     Fr'#229'n lager'
-      DisplayWidth = 10
+      DisplayLabel = 'Fr'#229'n lager'
+      DisplayWidth = 8
       FieldName = 'Fr'#229'nLager'
       Origin = '[Fr'#229'nLager]'
       Precision = 10
       Size = 0
     end
     object qryOrderradAttproducera: TBCDField
-      DisplayLabel = 'Att producera'
-      DisplayWidth = 11
+      DisplayLabel = 'Att prod'
+      DisplayWidth = 7
       FieldName = 'Attproducera'
       Origin = 'Attproducera'
       Precision = 10
       Size = 0
     end
     object qryOrderradAntal: TFMTBCDField
-      DisplayLabel = '     Antal'
+      DisplayLabel = '  Antal'
       DisplayWidth = 6
       FieldName = 'Antal'
       Origin = 'Antal'
@@ -1367,7 +1518,7 @@
       Size = 2
     end
     object qryOrderradTillLager: TBCDField
-      DisplayLabel = '     Till lager'
+      DisplayLabel = '   Till lager'
       DisplayWidth = 9
       FieldName = 'TillLager'
       Origin = 'TillLager'
@@ -1381,17 +1532,44 @@
       Origin = 'YtbehandlingBeteckning'
       Size = 50
     end
+    object qryOrderradAvrapporteradPlasmatid: TIntegerField
+      DisplayLabel = 'Lasertid'
+      DisplayWidth = 6
+      FieldName = 'AvrapporteradPlasmatid'
+      Origin = 'AvrapporteradPlasmatid'
+    end
+    object qryOrderradSkrotandelProcent: TBCDField
+      DisplayLabel = 'Skrot %'
+      DisplayWidth = 6
+      FieldName = 'SkrotandelProcent'
+      Origin = 'SkrotandelProcent'
+      Precision = 18
+      Size = 0
+    end
+    object qryOrderradVikt: TFloatField
+      DisplayLabel = 'Vikt/st'
+      DisplayWidth = 6
+      FieldName = 'Vikt'
+      Origin = 'Vikt'
+    end
     object qryOrderradKalkarbetstidTotal: TFloatField
-      DisplayLabel = 'Kalk Arbetstid tot'
-      DisplayWidth = 14
+      DisplayLabel = 'Arbetstid'
+      DisplayWidth = 8
       FieldName = 'KalkarbetstidTotal'
       Origin = 'KalkarbetstidTotal'
       ReadOnly = True
       DisplayFormat = '### ##0.00'
     end
+    object qryOrderradSenasteAvrapporteradDatum: TDateField
+      DisplayLabel = 'Senast tv.'
+      DisplayWidth = 10
+      FieldName = 'SenasteAvrapporteradDatum'
+      Origin = 'SenasteAvrapporteradDatum'
+      ReadOnly = True
+    end
     object qryOrderradOrderradInfo: TStringField
       DisplayLabel = 'Info'
-      DisplayWidth = 17
+      DisplayWidth = 22
       FieldName = 'OrderradInfo'
       Origin = 'OrderradInfo'
       Size = 255
@@ -1400,6 +1578,7 @@
       DisplayWidth = 10
       FieldName = 'Notering'
       Origin = 'Notering'
+      Visible = False
       BlobType = ftMemo
       Size = 2147483647
     end
@@ -1473,8 +1652,8 @@
       '(select count(*) from orderrad where Artikelid = a.id)'
       ' from Artikel a'
       'order by a.Artikelnummer')
-    Left = 336
-    Top = 400
+    Left = 340
+    Top = 476
     object qryLU_ArtikelArtikelId: TFDAutoIncField
       FieldName = 'ArtikelId'
       Origin = 'ArtikelId'
@@ -1543,8 +1722,8 @@
       '  where orpi.OrderradID =:OrderradID'
       'order by pit.Sortorder'
       '  ')
-    Left = 536
-    Top = 404
+    Left = 516
+    Top = 456
     ParamData = <
       item
         Name = 'ORDERRADID'
@@ -1569,8 +1748,8 @@
     Connection = dm.FDConnection1
     SQL.Strings = (
       'Select Id,Text from Artikeltext where Id = :Id')
-    Left = 612
-    Top = 416
+    Left = 644
+    Top = 480
     ParamData = <
       item
         Name = 'ID'
@@ -1610,8 +1789,8 @@
       'join artikel a2 on a2.Id = Ag.UnderArtikelId'
       'where ag.Artikelid =:ArtikelId'
       'and ag.Borttagen is null')
-    Left = 68
-    Top = 396
+    Left = 60
+    Top = 464
     ParamData = <
       item
         Name = 'ARTIKELID'
@@ -1693,8 +1872,8 @@
       'where oh.ID = :OrderID'
       ' '
       ' ')
-    Left = 240
-    Top = 400
+    Left = 244
+    Top = 456
     ParamData = <
       item
         Name = 'ORDERID'
@@ -1825,8 +2004,8 @@
       ''
       ' '
       ' ')
-    Left = 440
-    Top = 408
+    Left = 436
+    Top = 476
     ParamData = <
       item
         Name = 'ARTIKELID'
@@ -2038,6 +2217,7 @@
         Name = '@RETURN_VALUE'
         DataType = ftInteger
         ParamType = ptResult
+        Value = 0
       end
       item
         Position = 2
@@ -2089,6 +2269,27 @@
       item
         Position = 9
         Name = '@TillLager'
+        DataType = ftFloat
+        Precision = 16
+        ParamType = ptInput
+      end
+      item
+        Position = 10
+        Name = '@AvrapporteradPlasmatid'
+        DataType = ftFloat
+        Precision = 16
+        ParamType = ptInput
+      end
+      item
+        Position = 11
+        Name = '@SkrotandelProcent'
+        DataType = ftFloat
+        Precision = 16
+        ParamType = ptInput
+      end
+      item
+        Position = 12
+        Name = '@Vikt'
         DataType = ftFloat
         Precision = 16
         ParamType = ptInput
@@ -2156,7 +2357,7 @@
     Left = 376
     Top = 576
     Bitmap = {
-      494C010102000500440010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

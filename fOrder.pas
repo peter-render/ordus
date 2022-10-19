@@ -203,6 +203,16 @@ type
     DBMemo1: TDBMemo;
     Label17: TLabel;
     qryOrderradLagersaldo: TBCDField;
+    qryOrderradVikt: TFloatField;
+    qryOrderradAvrapporteradPlasmatid: TIntegerField;
+    qryOrderradSkrotandelProcent: TBCDField;
+    edtLasertid: TEditN;
+    Label22: TLabel;
+    edtSkrot: TEditN;
+    Label23: TLabel;
+    edtVikt: TEditN;
+    Label24: TLabel;
+    qryOrderradSenasteAvrapporteradDatum: TDateField;
     procedure btnDeleteClick(Sender: TObject);
     procedure edtArtikelCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
     procedure wwDBGrid2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -241,6 +251,7 @@ type
     procedure qryOrderHistoryCalcFields(DataSet: TDataSet);
     procedure wwDBGrid1CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
       AFont: TFont; ABrush: TBrush);
+    procedure ndra1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -386,6 +397,11 @@ begin
       ParamByName('@AttProducera').value := edtAttProducera.valueFloat;
 
       ParamByName('@TillLager').value := edtTillLager.valueFloat;
+      ParamByName('@AvrapporteradPlasmatid').value := edtLasertid.valueFloat;
+      ParamByName('@Skrotandelprocent').value := edtSkrot.valueFloat;
+      ParamByName('@Vikt').value := edtVikt.valueFloat;
+
+
 
       Label8.Caption := 'Ny rad';
       execproc;
@@ -406,6 +422,11 @@ begin
       ParamByName('@FrånLager').value := edtFranLager.valueFloat;
       ParamByName('@AttProducera').value := edtAttProducera.valueFloat;
       ParamByName('@TillLager').value := edtTillLager.valueFloat;
+      ParamByName('@AvrapporteradPlasmatid').value := edtLasertid.valueFloat;
+      ParamByName('@Skrotandelprocent').value := edtSkrot.valueFloat;
+      ParamByName('@Vikt').value := edtVikt.valueFloat;
+
+
       Label8.Caption := 'Ändra rad';
       execproc;
 
@@ -568,6 +589,9 @@ begin
   edtFranLager.setfloat(qryOrderradFrånLager.asInteger);
   edtAttProducera.setfloat(qryOrderradAttproducera.asInteger);
   edtPris.setfloat(qryOrderradPrisperEnhet.asFloat);
+  edtLasertid.setfloat(qryOrderradAvrapporteradPlasmatid.asFloat);
+  edtSkrot.setfloat(qryOrderradSkrotandelProcent.asFloat);
+  edtVikt.setfloat(qryOrderradVikt.asFloat);
 
   Label8.Font.Color := clRed;
   btnAvbryt.enabled := true;
@@ -785,6 +809,11 @@ begin
     end;
   end;
 
+end;
+
+procedure TfrmOrder.ndra1Click(Sender: TObject);
+begin
+qryOrderrad.Edit;
 end;
 
 procedure TfrmOrder.PopupMenu1Popup(Sender: TObject);

@@ -4,7 +4,7 @@
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Orderlista'
-  ClientHeight = 701
+  ClientHeight = 1061
   ClientWidth = 1369
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -41,7 +41,7 @@
     Left = 0
     Top = 0
     Width = 1369
-    Height = 701
+    Height = 1061
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
@@ -51,6 +51,7 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitHeight = 1275
     object Panel2: TPanel
       Left = 0
       Top = 0
@@ -285,7 +286,7 @@
       Left = 0
       Top = 75
       Width = 1369
-      Height = 626
+      Height = 1200
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -300,7 +301,7 @@
         Left = 5
         Top = 5
         Width = 1359
-        Height = 616
+        Height = 1190
         PictureMasks.Strings = (
           'Ordersumma'#9'### ### ###0,00'#9'T'#9'F'
           'Lagersaldo'#9'###'#9'T'#9'T')
@@ -365,8 +366,7 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
-        ExplicitLeft = 4
-        ExplicitTop = 6
+        ExplicitHeight = 900
       end
       object wwExpandButton1: TwwExpandButton
         Left = 599
@@ -403,10 +403,6 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
     end
   end
