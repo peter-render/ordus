@@ -403,6 +403,10 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
       end
     end
   end

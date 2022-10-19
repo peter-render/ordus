@@ -1682,7 +1682,6 @@ begin
     param :=     '('+ copy(orderstring,1, length(orderstring)-1)+ ')';
     qryExcelExport.sql.add(param);
     open;
-    showmessage(inttostr(recordcount));
     if recordcount = 0 then
       exit;
   end;
