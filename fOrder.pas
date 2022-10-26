@@ -397,10 +397,6 @@ begin
       ParamByName('@AttProducera').value := edtAttProducera.valueFloat;
 
       ParamByName('@TillLager').value := edtTillLager.valueFloat;
-      ParamByName('@AvrapporteradPlasmatid').value := edtLasertid.valueFloat;
-      ParamByName('@Skrotandelprocent').value := edtSkrot.valueFloat;
-      ParamByName('@Vikt').value := edtVikt.valueFloat;
-
 
 
       Label8.Caption := 'Ny rad';

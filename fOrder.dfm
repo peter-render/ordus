@@ -32,8 +32,6 @@
     Height = 742
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 1224
-    ExplicitHeight = 671
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -47,7 +45,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1222
       object Label1: TLabel
         Left = 159
         Top = 11
@@ -200,9 +197,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitTop = 340
-      ExplicitWidth = 1222
-      ExplicitHeight = 330
       DesignSize = (
         1309
         344)
@@ -244,7 +238,7 @@
           'SkrotandelProcent'#9'6'#9'Skrot %'
           'Vikt'#9'6'#9'Vikt/st'
           'KalkarbetstidTotal'#9'8'#9'Arbetstid'
-          'SenasteAvrapporteradDatum'#9'10'#9'Senast tv.'#9'F'
+          'SenasteAvrapporteradDatum'#9'10'#9'Senast tv.'
           'OrderradInfo'#9'22'#9'Info')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
@@ -340,7 +334,6 @@
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 0
-        ExplicitHeight = 283
         object Panel7: TPanel
           Left = 0
           Top = 0
@@ -449,11 +442,9 @@
           Align = alClient
           TabHeight = 2
           TabOrder = 1
-          ExplicitHeight = 222
           object TabOrderrad: TTabSheet
             Caption = 'TabOrderrad'
             ImageIndex = 1
-            ExplicitHeight = 210
             object Panel16: TPanel
               Left = 0
               Top = 0
@@ -462,7 +453,6 @@
               Align = alClient
               BevelOuter = bvNone
               TabOrder = 0
-              ExplicitHeight = 210
               object pnlOrderrad: TPanel
                 Left = 0
                 Top = 0
@@ -478,8 +468,6 @@
                 ParentFont = False
                 TabOrder = 0
                 Visible = False
-                ExplicitLeft = -2
-                ExplicitTop = -1
                 DesignSize = (
                   368
                   267)
@@ -911,7 +899,6 @@
           end
           object tabArtikel: TTabSheet
             Caption = 'tabArtikel'
-            ExplicitHeight = 210
             object pnlArtikel: TPanel
               Left = 0
               Top = 0
@@ -921,7 +908,6 @@
               Color = 15330541
               TabOrder = 0
               Visible = False
-              ExplicitHeight = 210
               object Label12: TLabel
                 Left = 35
                 Top = 55
@@ -1027,8 +1013,6 @@
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitWidth = 841
-        ExplicitHeight = 283
         object Splitter2: TSplitter
           Left = 441
           Top = 0
@@ -1045,7 +1029,6 @@
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitHeight = 283
           object ExpButton: TwwExpandButton
             Left = 124
             Top = 120
@@ -1103,7 +1086,6 @@
             BevelOuter = bvNone
             BorderWidth = 3
             TabOrder = 2
-            ExplicitHeight = 259
             object Panel15: TPanel
               Left = 3
               Top = 3
@@ -1112,7 +1094,6 @@
               Align = alClient
               BevelOuter = bvLowered
               TabOrder = 0
-              ExplicitHeight = 253
               object wwDBGrid2: TwwDBGrid
                 Left = 1
                 Top = 1
@@ -1159,7 +1140,6 @@
                 OnDblClick = wwDBGrid2DblClick
                 OnMouseDown = wwDBGrid2MouseDown
                 PadColumnStyle = pcsPadHeader
-                ExplicitHeight = 251
               end
             end
             object wwDBGrid6: TwwDBGrid
@@ -1209,8 +1189,6 @@
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 397
-          ExplicitHeight = 283
           object Panel10: TPanel
             Left = 0
             Top = 0
@@ -1227,7 +1205,6 @@
             Font.Style = [fsBold]
             ParentFont = False
             TabOrder = 0
-            ExplicitWidth = 397
           end
           object Panel11: TPanel
             Left = 0
@@ -1238,8 +1215,6 @@
             BevelOuter = bvNone
             BorderWidth = 3
             TabOrder = 1
-            ExplicitWidth = 397
-            ExplicitHeight = 259
             object Panel14: TPanel
               Left = 3
               Top = 3
@@ -1248,8 +1223,6 @@
               Align = alClient
               BevelOuter = bvLowered
               TabOrder = 0
-              ExplicitWidth = 391
-              ExplicitHeight = 253
               object dbgArtikelgrupp: TwwDBGrid
                 Left = 1
                 Top = 1
@@ -1285,8 +1258,6 @@
                 TitleLines = 1
                 TitleButtons = False
                 PadColumnStyle = pcsPadHeader
-                ExplicitWidth = 389
-                ExplicitHeight = 251
               end
             end
           end
@@ -2204,6 +2175,19 @@
         DataType = ftFloat
         Precision = 16
         ParamType = ptInput
+      end
+      item
+        Position = 14
+        Name = '@OrderRadInfo'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 255
+      end
+      item
+        Position = 15
+        Name = '@Offertdatum'
+        DataType = ftDate
+        ParamType = ptInput
       end>
   end
   object sp_OrderradUpdate: TFDStoredProc
@@ -2357,7 +2341,7 @@
     Left = 376
     Top = 576
     Bitmap = {
-      494C010102000500480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020005004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
