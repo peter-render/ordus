@@ -18,7 +18,7 @@
     LoginDialog = FDGUIxLoginDialog1
     LoginPrompt = False
     OnError = FDConnection1Error
-    Left = 516
+    Left = 512
     Top = 24
   end
   object FDPhysMSSQLDriverLink1: TFDPhysMSSQLDriverLink

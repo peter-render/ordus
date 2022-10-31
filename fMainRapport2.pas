@@ -13,7 +13,8 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async,
   FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, vcl.Wwkeycb,
-  vcl.ImgList, vcl.Imaging.jpeg, fArtikelnotering;
+  vcl.ImgList, vcl.Imaging.jpeg, fArtikelnotering,
+  system.IOUtils, Winapi.Windows, Winapi.ShellAPI;
 
 type
   TfrmOrdusrapport2 = class(TForm)
@@ -222,6 +223,7 @@ type
     qryOrderradNotering: TMemoField;
     qryOrderradcRitningsnoteringFinns_disp: TStringField;
     DBMemo1: TDBMemo;
+    mi_visaritning: TMenuItem;
     procedure FormShow(Sender: TObject);
     procedure edtOrderNrExit(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -261,8 +263,9 @@ type
     procedure FormCreate(Sender: TObject);
     procedure btnJobblistaClick(Sender: TObject);
     procedure btnNotiserClick(Sender: TObject);
-    procedure dbgridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
+    procedure dbgridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: boolean;
       AFont: TFont; ABrush: TBrush);
+    procedure mi_visaritningClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -718,12 +721,12 @@ begin
 end;
 
 procedure TfrmOrdusrapport2.dbgridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState;
-  Highlight: Boolean; AFont: TFont; ABrush: TBrush);
+  Highlight: boolean; AFont: TFont; ABrush: TBrush);
 begin
-// Fältet cRitningsnoteringFinns_disp finns enbart för att ha en neutrl bakgrund i gridden
-                if (field.FieldName = 'cRitningsnoteringFinns_disp')
-                and (qryOrderrad.FieldByName('cRitningsnoteringFinns').AsBoolean = True) then
-                ABrush.Color :=  clGreen;
+  // Fältet cRitningsnoteringFinns_disp finns enbart för att ha en neutrl bakgrund i gridden
+  if (Field.FieldName = 'cRitningsnoteringFinns_disp') and
+    (qryOrderrad.fieldbyname('cRitningsnoteringFinns').asBoolean = true) then
+    ABrush.color := clGreen;
 
 end;
 
@@ -898,7 +901,7 @@ begin
 
   with TfrmArtikelnotering.Create(application) do
   begin
-    edit1.Text:= qryOrderrad.FieldByName('Artikelnummer').AsString;
+    edit1.Text := qryOrderrad.fieldbyname('Artikelnummer').asString;
     FDquery1.close;
     Showmodal;
 
@@ -997,10 +1000,29 @@ begin
   else
     DataSet.fieldbyname('AutoprisFinns').value := '';
 
-   dataset.FieldByName('cRitningsnoteringFinns').asBoolean :=
-           dataset.fieldbyname('Notering').AsString <> '';
+  DataSet.fieldbyname('cRitningsnoteringFinns').asBoolean := DataSet.fieldbyname('Notering').asString <> '';
 
   qryOrderradAfterScroll(DataSet);
+end;
+
+procedure TfrmOrdusrapport2.mi_visaritningClick(Sender: TObject);
+var
+  folder, filename, LURL: string;
+begin
+
+  folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', ''));
+
+  filename := folder + trim(qryOrderrad.fieldbyname('artikelnummer').asString) + '.pdf';
+  // stringreplace(qryOrderrad.fieldbyname('artikelnummer').asString, ' ', '', [rfReplaceAll]) + '.pdf';
+
+  if fileexists(filename) then
+  begin
+
+    LURL := TPath.GetFullPath(filename).Replace('\', '/', [rfReplaceAll]);
+    LURL := 'file://' + LURL;
+    ShellExecute(0, 'open', PChar(filename), nil, nil, SW_SHOWNORMAL);
+  end;
+
 end;
 
 procedure TfrmOrdusrapport2.Tabortfrnfljesedel1Click(Sender: TObject);
@@ -1151,6 +1173,13 @@ begin
     Bockritningok1.caption := 'Avmarkera bockritning'
   else
     Bockritningok1.caption := 'Bockritning klar';
+
+//  folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', ''));
+//  filename := folder + trim(qryOrderrad.fieldbyname('artikelnummer').asString) + '.pdf';
+  // stringreplace(qryOrderrad.fieldbyname('artikelnummer').asString, ' ', '', [rfReplaceAll]) + '.pdf';
+
+  mi_visaritning.enabled := fileexists(FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', '')) +
+    trim(qryOrderrad.fieldbyname('artikelnummer').asString) + '.pdf');
 
 end;
 

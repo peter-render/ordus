@@ -42,7 +42,6 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    ExplicitLeft = 808
     DesignSize = (
       142
       560)
@@ -633,8 +632,6 @@
     Panels = <>
     SimplePanel = True
     SizeGrip = False
-    ExplicitTop = 551
-    ExplicitWidth = 884
   end
   object Panel1: TPanel
     Left = 0
@@ -650,8 +647,6 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 770
-    ExplicitHeight = 551
     object Label10: TLabel
       Left = 228
       Top = 76
@@ -667,7 +662,6 @@
       BevelEdges = []
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 770
       DesignSize = (
         790
         66)
@@ -1900,8 +1894,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitWidth = 770
-      ExplicitHeight = 454
       object Panel5: TPanel
         Left = 2
         Top = 2
@@ -1909,8 +1901,6 @@
         Height = 258
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 766
-        ExplicitHeight = 249
         object dbgrid: TwwDBGrid
           Left = 1
           Top = 1
@@ -1979,11 +1969,6 @@
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        ExplicitTop = 251
-        ExplicitWidth = 766
-        DesignSize = (
-          786
-          201)
         object Bevel2: TBevel
           Left = 102
           Top = 11
@@ -2605,11 +2590,10 @@
           OnClick = btnCalcClick
         end
         object btnLagersaldo: TButton
-          Left = 223
+          Left = 203
           Top = 139
           Width = 52
           Height = 20
-          Anchors = [akRight, akBottom]
           Caption = #196'ndra'
           Enabled = False
           Font.Charset = DEFAULT_CHARSET
@@ -2621,14 +2605,12 @@
           TabOrder = 5
           TabStop = False
           OnClick = btnLagersaldoClick
-          ExplicitLeft = 203
         end
         object btnEdit: TButton
-          Left = 24
+          Left = 5
           Top = 11
           Width = 55
           Height = 22
-          Anchors = [akTop, akRight]
           Caption = '&'#196'ndra'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
@@ -2641,7 +2623,6 @@
           TabOrder = 16
           TabStop = False
           OnClick = dbgridDblClick
-          ExplicitLeft = 4
         end
         object btnFSTransport: TButton
           Left = 649
@@ -2695,7 +2676,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      ExplicitWidth = 770
       DesignSize = (
         790
         31)
@@ -2774,6 +2754,10 @@
     object Fixatur1: TMenuItem
       Caption = 'Fixatur'
       OnClick = Fixatur1Click
+    end
+    object mi_visaritning: TMenuItem
+      Caption = 'Visa ritning'
+      OnClick = mi_visaritningClick
     end
     object N1: TMenuItem
       Caption = '-'
@@ -3746,7 +3730,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500300010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500380010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
