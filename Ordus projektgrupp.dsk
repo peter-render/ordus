@@ -73,9 +73,9 @@ BottomMiddelPanelData=0000080001020200000009000000446F636B5369746530100000004772
 [View0]
 CustomEditViewType=TEditView
 Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMainRapport2.pas
-CursorX=133
-CursorY=1168
-TopLine=1152
+CursorX=89
+CursorY=1184
+TopLine=1174
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -84,9 +84,9 @@ EditViewName=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 -
 [View1]
 CustomEditViewType=TEditView
 Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclib.pas
-CursorX=87
-CursorY=70
-TopLine=54
+CursorX=27
+CursorY=387
+TopLine=338
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -128,10 +128,11 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=3
+Count=4
 Breakpoint0='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderkalkyl.pas',279,'',0,1,'',1,0,0,'',1,'','','',0,''
 Breakpoint1='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas',98,'',0,1,'',1,0,0,'',1,'','','',0,''
 Breakpoint2='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrder.pas',397,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint3='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMainRapport2.pas',1014,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
 Count=0
@@ -314,11 +315,6 @@ LRDockWidth=1453
 Dockable=1
 StayOnTop=0
 SplitPos=98
-
-[PropInspDesignerSelection]
-ArrangeBy=Name
-SelectedItem=Connected,Action
-ExpandedItems=ConnectedStoredUsage=0,FetchOptions=0,FormatOptions=0,"LiveBindings Designer=0",LoginDialog=0,Params=0,ResourceOptions=0,TxOptions=0,UpdateOptions=0,MenuAnimation=0,Anchors=1,Constraints=0,Font=0
 
 [TFileExplorerForm]
 PercentageSizes=1

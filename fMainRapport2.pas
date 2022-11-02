@@ -267,6 +267,7 @@ type
       AFont: TFont; ABrush: TBrush);
     procedure mi_visaritningClick(Sender: TObject);
   private
+    function GetRitningFilename(Artikelnummer: string; kundnamn:string):string;
     { Private declarations }
   public
     { Public declarations }
@@ -1007,14 +1008,11 @@ end;
 
 procedure TfrmOrdusrapport2.mi_visaritningClick(Sender: TObject);
 var
-  folder, filename, LURL: string;
+  filename, LURL: string;
 begin
 
-  folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', ''));
-
-  filename := folder + trim(qryOrderrad.fieldbyname('artikelnummer').asString) + '.pdf';
+   filename := GetRitningFilename(qryOrderrad.fieldbyname('artikelnummer').asString,qryOrderrad.fieldbyname('kundnamn').asString);
   // stringreplace(qryOrderrad.fieldbyname('artikelnummer').asString, ' ', '', [rfReplaceAll]) + '.pdf';
-
   if fileexists(filename) then
   begin
 
@@ -1023,6 +1021,15 @@ begin
     ShellExecute(0, 'open', PChar(filename), nil, nil, SW_SHOWNORMAL);
   end;
 
+end;
+
+Function TfrmOrdusrapport2.GetRitningFilename(Artikelnummer: string; kundnamn:string):string;
+var
+  filename,folder: string;
+begin
+  folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', '')) + kundnamn +'\';
+   filename := folder + Artikelnummer + '.pdf';
+   result:= filename;
 end;
 
 procedure TfrmOrdusrapport2.Tabortfrnfljesedel1Click(Sender: TObject);
@@ -1178,8 +1185,8 @@ begin
 //  filename := folder + trim(qryOrderrad.fieldbyname('artikelnummer').asString) + '.pdf';
   // stringreplace(qryOrderrad.fieldbyname('artikelnummer').asString, ' ', '', [rfReplaceAll]) + '.pdf';
 
-  mi_visaritning.enabled := fileexists(FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', '')) +
-    trim(qryOrderrad.fieldbyname('artikelnummer').asString) + '.pdf');
+  mi_visaritning.enabled := fileexists(GetRitningFilename(qryOrderrad.fieldbyname('artikelnummer').asString,
+  qryOrderrad.fieldbyname('Kundnamn').asString));
 
 end;
 
