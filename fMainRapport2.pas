@@ -224,6 +224,62 @@ type
     qryOrderradcRitningsnoteringFinns_disp: TStringField;
     DBMemo1: TDBMemo;
     mi_visaritning: TMenuItem;
+    qryOrderradUpdate: TFDQuery;
+    StringField1: TStringField;
+    IntegerField1: TIntegerField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    IntegerField2: TIntegerField;
+    FMTBCDField1: TFMTBCDField;
+    StringField5: TStringField;
+    StringField6: TStringField;
+    StringField7: TStringField;
+    MemoField1: TMemoField;
+    BooleanField1: TBooleanField;
+    IntegerField3: TIntegerField;
+    BooleanField2: TBooleanField;
+    BooleanField3: TBooleanField;
+    FDAutoIncField1: TFDAutoIncField;
+    IntegerField4: TIntegerField;
+    FDAutoIncField2: TFDAutoIncField;
+    FDAutoIncField3: TFDAutoIncField;
+    IntegerField5: TIntegerField;
+    BCDField1: TBCDField;
+    StringField8: TStringField;
+    BooleanField4: TBooleanField;
+    FDAutoIncField4: TFDAutoIncField;
+    StringField9: TStringField;
+    StringField10: TStringField;
+    SQLTimeStampField1: TSQLTimeStampField;
+    StringField11: TStringField;
+    IntegerField6: TIntegerField;
+    CurrencyField1: TCurrencyField;
+    CurrencyField2: TCurrencyField;
+    SQLTimeStampField2: TSQLTimeStampField;
+    IntegerField7: TIntegerField;
+    StringField12: TStringField;
+    SQLTimeStampField3: TSQLTimeStampField;
+    FloatField1: TFloatField;
+    IntegerField8: TIntegerField;
+    IntegerField9: TIntegerField;
+    IntegerField10: TIntegerField;
+    IntegerField11: TIntegerField;
+    IntegerField12: TIntegerField;
+    BCDField2: TBCDField;
+    BCDField3: TBCDField;
+    BCDField4: TBCDField;
+    StringField13: TStringField;
+    BlobField1: TBlobField;
+    IntegerField13: TIntegerField;
+    IntegerField14: TIntegerField;
+    IntegerField15: TIntegerField;
+    IntegerField16: TIntegerField;
+    BCDField5: TBCDField;
+    BCDField6: TBCDField;
+    FloatField2: TFloatField;
+    FloatField3: TFloatField;
+    IntegerField17: TIntegerField;
     procedure FormShow(Sender: TObject);
     procedure edtOrderNrExit(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -267,7 +323,7 @@ type
       AFont: TFont; ABrush: TBrush);
     procedure mi_visaritningClick(Sender: TObject);
   private
-    function GetRitningFilename(Artikelnummer: string; kundnamn:string):string;
+    function GetRitningFilename(Artikelnummer: string; kundnamn: string; OrderradId: integer): string;
     { Private declarations }
   public
     { Public declarations }
@@ -1011,7 +1067,8 @@ var
   filename, LURL: string;
 begin
 
-   filename := GetRitningFilename(qryOrderrad.fieldbyname('artikelnummer').asString,qryOrderrad.fieldbyname('kundnamn').asString);
+  filename := GetRitningFilename(qryOrderrad.fieldbyname('artikelnummer').asString, qryOrderrad.fieldbyname('kundnamn')
+    .asString, qryOrderrad.fieldbyname('Id').asInteger);
   // stringreplace(qryOrderrad.fieldbyname('artikelnummer').asString, ' ', '', [rfReplaceAll]) + '.pdf';
   if fileexists(filename) then
   begin
@@ -1023,13 +1080,32 @@ begin
 
 end;
 
-Function TfrmOrdusrapport2.GetRitningFilename(Artikelnummer: string; kundnamn:string):string;
+Function TfrmOrdusrapport2.GetRitningFilename(Artikelnummer: string; kundnamn: string; OrderradId: integer): string;
 var
-  filename,folder: string;
+  filename, folder: string;
+  c: Char;
+  n: integer;
 begin
-  folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', '')) + kundnamn +'\';
-   filename := folder + Artikelnummer + '.pdf';
-   result:= filename;
+  folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', '')) + kundnamn + '\';
+  filename := folder + Artikelnummer + '.pdf';
+
+  if not fileexists(filename) then
+    for n := 71 downto 65 do
+    begin
+      filename := folder + Artikelnummer + '_REV_' + Chr(n) + '.pdf';
+      if fileexists(filename) then
+        break;
+    end;
+
+  if fileexists(filename) then
+    with qryOrderradUpdate do
+    begin
+      parambyname('Id').value := OrderradId;
+      parambyname('Ritning').value := filename;
+      ExecSQL;
+    end;
+  result := filename;
+
 end;
 
 procedure TfrmOrdusrapport2.Tabortfrnfljesedel1Click(Sender: TObject);
@@ -1181,12 +1257,12 @@ begin
   else
     Bockritningok1.caption := 'Bockritning klar';
 
-//  folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', ''));
-//  filename := folder + trim(qryOrderrad.fieldbyname('artikelnummer').asString) + '.pdf';
+  // folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', ''));
+  // filename := folder + trim(qryOrderrad.fieldbyname('artikelnummer').asString) + '.pdf';
   // stringreplace(qryOrderrad.fieldbyname('artikelnummer').asString, ' ', '', [rfReplaceAll]) + '.pdf';
 
   mi_visaritning.enabled := fileexists(GetRitningFilename(qryOrderrad.fieldbyname('artikelnummer').asString,
-  qryOrderrad.fieldbyname('Kundnamn').asString));
+    qryOrderrad.fieldbyname('Kundnamn').asString, qryOrderrad.fieldbyname('Id').asInteger));
 
 end;
 

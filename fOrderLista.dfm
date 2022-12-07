@@ -4,7 +4,7 @@
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Orderlista'
-  ClientHeight = 1061
+  ClientHeight = 881
   ClientWidth = 1369
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -41,7 +41,7 @@
     Left = 0
     Top = 0
     Width = 1369
-    Height = 1061
+    Height = 881
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
@@ -286,7 +286,7 @@
       Left = 0
       Top = 75
       Width = 1369
-      Height = 1200
+      Height = 806
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -297,6 +297,7 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ExplicitHeight = 1200
       object wwDBGrid1: TwwDBGrid
         Left = 5
         Top = 5
@@ -403,6 +404,10 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
       end
     end
   end

@@ -17,12 +17,9 @@ procedure ReadOrderfileIntersystem(filename: string);
 procedure ReadOrderfileIntersystemXML(xmlfilename: string);
 function Orderstatusbeteckning(intStatusId: integer): string;
 
-
 implementation
 
 uses funclib, IntersystemOrder;
-
-
 
 function Orderstatusbeteckning(intStatusId: integer): string;
 begin
@@ -77,7 +74,7 @@ var
   sv: string;
   strOrdernummer: string;
 
-  strMärke: string;
+  strMärke, strMärke1, strMärke2: string;
   strVarRef: string;
   strOrderDate: string;
   strLevDatum: string;
@@ -100,9 +97,19 @@ begin
 
   // if VarStrEmpty(Orders420.Order.Head.References.GoodsLabeling.Row1) then
   if NOT VarIsStr(Orders420.Order.Head.References.GoodsLabeling.Row1) then
-    strMärke := ''
+    strMärke1 := ''
   else
-    strMärke := Orders420.Order.Head.References.GoodsLabeling.Row1;
+    strMärke1 := Orders420.Order.Head.References.GoodsLabeling.Row1;
+
+  if NOT VarIsStr(Orders420.Order.Head.References.GoodsLabeling.Row2) then
+    strMärke2 := ''
+  else
+    strMärke2 := Orders420.Order.Head.References.GoodsLabeling.Row2;
+
+  if (strMärke1 <> '') and (strMärke2 <> '') then
+    strMärke := strMärke1 + ', ' + strMärke2
+  else
+    strMärke := strMärke1 + strMärke2;
 
   strVarRef := Orders420.Order.Head.References.BuyerReference;
 
@@ -180,7 +187,7 @@ begin
         begin
 
           if (Orders420.Order.Rows[n].RowType = 4) and (Orders420.Order.Rows[n].Text <> '') THEN
-            strOrderinfo := iif(strOrderinfo <> '',strOrderinfo + ' & ','') + Orders420.Order.Rows[n].Text;
+            strOrderinfo := iif(strOrderinfo <> '', strOrderinfo + ' & ', '') + Orders420.Order.Rows[n].Text;
 
           (* strOrderinfo := strOrderinfo + iif(strOrderinfo <> '',
             char(13) + chr(10), '') + Orders420.Order.Rows[n].Text;
@@ -333,7 +340,6 @@ begin
 
           if strArtikelnr <> 'T' then
 
-
             with dm.sp_OrderRadImport do
             begin
               parambyname('@KundId').value := 1;
@@ -342,16 +348,12 @@ begin
               parambyname('@Artikelbeteckning').value := StrBenamning;
               parambyname('@Antal').value := strtofloat(strAntal);
 
-
-
-
               (*
                 if cbImportPris.checked then
                 parameters.ParamByName('@PrisperEnhet').value := strtofloat(li.subitems[2])
                 else
                 parameters.ParamByName('@PrisperEnhet').value := 0;
               *)
-
 
               parambyname('@Positionnummer').value := i + 1;
               execproc;

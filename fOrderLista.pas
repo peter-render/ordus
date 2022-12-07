@@ -480,7 +480,7 @@ begin
 
             // ----------------------------------------------L.Rönning beställningsformat
 
-            strKund := 'L.Rönning Ab';
+            strKund := 'L Rönning Ab';
             strBestDatum := EWS.cells[2, 2];
             strInköpsorder := EWS.cells[2, 3];
             // strGodsMärke := EWS.cells[1, 2];
