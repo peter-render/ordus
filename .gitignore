@@ -5,6 +5,7 @@
 .gitignore
 __*
 .dcu
+*.dcu
 .dsk
 .bak
 *.xlsx

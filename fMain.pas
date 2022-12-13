@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   Db, ComCtrls, ToolWin, Menus, ImgList, ExtCtrls, Inifiles,
   StdCtrls, FileCtrl, Mask, EditNew, ActnMan, ActnColorMaps, FireDAC.UI.Intf,
-  FireDAC.VCLUI.Wait,  FireDAC.Stan.Intf, FireDAC.Comp.UI, fOrderPlanering, fOrderkalkyl, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.VCLUI.Wait, FireDAC.Stan.Intf, FireDAC.Comp.UI, fOrderPlanering, fOrderkalkyl, FireDAC.Stan.Option,
+  FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, System.Actions,
   Vcl.ActnCtrls, Vcl.ActnMenus, fComputer, fRitningsnotering;
@@ -172,7 +173,7 @@ end;
 procedure TfrmMain.Computer1Click(Sender: TObject);
 begin
   with TfrmComputer.Create(application) do
-  showmodal;
+    showmodal;
 end;
 
 procedure TfrmMain.mnuConnectionClick(Sender: TObject);
@@ -203,8 +204,8 @@ end;
 
 procedure TfrmMain.Flikkolumner1Click(Sender: TObject);
 begin
-with TFrmFlikkolumner.Create(Application) do
-showmodal;
+  with TFrmFlikkolumner.Create(application) do
+    showmodal;
 
 end;
 
@@ -222,8 +223,8 @@ begin
     open;
     AdminComputer := fieldbyname('ÄrAdmin').asboolean;
   end;
-  width:= 1440;
-  height:= 880;
+  width := 1440;
+  height := 880;
 end;
 
 procedure TfrmMain.FormShow(Sender: TObject);
@@ -297,7 +298,6 @@ begin
   end;
   frmMain.tbtnOrderlista.enabled := True;
   frmMain.tbtnOrderlista.imageindex := 0;
-
 
 end;
 
@@ -393,10 +393,9 @@ end;
 procedure TfrmMain.Ritningsnotering1Click(Sender: TObject);
 begin
 
-with TfrmRitningsnotering.create(Application) do
+  with TfrmRitningsnotering.Create(application) do
 
-Showmodal;
-
+    showmodal;
 
 end;
 
@@ -410,8 +409,9 @@ end;
 procedure TfrmMain.mnuImportOrderfilIntersystemClick(Sender: TObject);
 begin
   with TfrmOrderimportIntersystem.Create(application) do
+  begin
     showmodal;
-
+  end;
 end;
 
 end.

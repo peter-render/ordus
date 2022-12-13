@@ -15,6 +15,7 @@ uses datamodule, messages, sysutils, forms, windows, typinfo,
 
 procedure ReadOrderfileIntersystem(filename: string);
 procedure ReadOrderfileIntersystemXML(xmlfilename: string);
+
 function Orderstatusbeteckning(intStatusId: integer): string;
 
 implementation
@@ -87,6 +88,7 @@ var
   n: integer;
   strOrderinfo: string;
   TOTALN, IntAntal: integer;
+  dblAntal:double;
 
 begin
 
@@ -172,7 +174,12 @@ begin
       strArtikelnr := Orders420.Order.Rows[i].Part.PartNumber;
 
     StrBenamning := Orders420.Order.Rows[i].Text;
-    IntAntal := Orders420.Order.Rows[i].Quantity;
+
+
+    intantal:= Round(Orders420.Order.Rows[i].Quantity); //30000
+    strAntal := inttostr(intAntal);
+    strAntal := copy(strAntal,1,length(strantal)-2);
+    intantal := strtoint(strantal);
 
     // Finns textrader?
 

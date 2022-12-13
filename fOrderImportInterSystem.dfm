@@ -1,10 +1,9 @@
 object frmOrderImportIntersystem: TfrmOrderImportIntersystem
   Left = 555
   Top = 344
-  ActiveControl = btnBrowse
   Caption = 'Importera orderfiler fr'#229'n Intersystem'
   ClientHeight = 136
-  ClientWidth = 776
+  ClientWidth = 437
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,180 +18,59 @@ object frmOrderImportIntersystem: TfrmOrderImportIntersystem
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 776
+    Width = 437
     Height = 136
     Align = alClient
     TabOrder = 0
-    object Panel3: TPanel
+    ExplicitWidth = 776
+    object Panel1: TPanel
       Left = 1
       Top = 1
-      Width = 774
+      Width = 435
       Height = 134
       Align = alClient
-      Caption = 'tbut'
+      AutoSize = True
       TabOrder = 0
+      ExplicitWidth = 774
       DesignSize = (
-        774
+        435
         134)
-      object Label4: TLabel
-        Left = 28
-        Top = 56
-        Width = 36
+      object Label1: TLabel
+        Left = 36
+        Top = 60
+        Width = 40
         Height = 13
+        Anchors = [akLeft]
         Caption = 'Orderfil:'
       end
-      object Edit2: TEdit
-        Left = 74
-        Top = 52
-        Width = 423
-        Height = 21
-        TabOrder = 0
-      end
       object btnBrowse: TButton
-        Left = 503
-        Top = 51
-        Width = 116
-        Height = 23
-        Anchors = [akTop, akRight]
-        Caption = 'V'#228'lj orderfil (*.csv)'
+        Left = 87
+        Top = 53
+        Width = 134
+        Height = 30
+        Anchors = [akLeft]
+        Caption = 'V'#228'lj orderfil (*.csv, *.xml)'
         ModalResult = 1
-        TabOrder = 1
+        TabOrder = 0
         OnClick = btnBrowseClick
+        ExplicitTop = 59
       end
       object Button1: TButton
-        Left = 636
-        Top = 50
+        Left = 267
+        Top = 53
         Width = 113
-        Height = 25
-        Anchors = [akTop, akRight]
+        Height = 30
+        Anchors = [akLeft]
         Caption = 'Avbryt'
-        TabOrder = 2
+        ModalResult = 2
+        TabOrder = 1
         OnClick = Button1Click
       end
     end
   end
   object OpenDialog1: TOpenDialog
-    Filter = 'CSV (*.csv)|*.csv'
+    Filter = 'CSV  eller XML|*.csv;*.xml'
     Left = 612
     Top = 72
-  end
-  object sp: TFDStoredProc
-    Connection = dm.FDConnection1
-    StoredProcName = 'OrderImport'
-    Left = 352
-    Top = 80
-    ParamData = <
-      item
-        Position = 1
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        ParamType = ptResult
-      end
-      item
-        Position = 2
-        Name = '@KundID'
-        DataType = ftInteger
-        ParamType = ptInput
-      end
-      item
-        Position = 3
-        Name = '@Ordernummer'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 20
-      end
-      item
-        Position = 4
-        Name = '@OrderDatum'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 16
-      end
-      item
-        Position = 5
-        Name = '@Godsm'#228'rke'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 30
-      end
-      item
-        Position = 6
-        Name = '@Referens'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 50
-      end
-      item
-        Position = 7
-        Name = '@Leveransdatum'
-        DataType = ftTimeStamp
-        ParamType = ptInput
-      end
-      item
-        Position = 8
-        Name = '@OrderId'
-        DataType = ftInteger
-        ParamType = ptInputOutput
-      end>
-  end
-  object sp_OrderRadImport: TFDStoredProc
-    Connection = dm.FDConnection1
-    StoredProcName = 'OrderradImport'
-    Left = 472
-    Top = 80
-    ParamData = <
-      item
-        Position = 1
-        Name = '@RETURN_VALUE'
-        DataType = ftInteger
-        ParamType = ptResult
-      end
-      item
-        Position = 2
-        Name = '@KundId'
-        DataType = ftInteger
-        ParamType = ptInput
-      end
-      item
-        Position = 3
-        Name = '@OrderId'
-        DataType = ftInteger
-        ParamType = ptInput
-      end
-      item
-        Position = 4
-        Name = '@Artikelnummer'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 30
-      end
-      item
-        Position = 5
-        Name = '@Artikelbeteckning'
-        DataType = ftString
-        ParamType = ptInput
-        Size = 100
-      end
-      item
-        Position = 6
-        Name = '@Antal'
-        DataType = ftFloat
-        Precision = 16
-        ParamType = ptInput
-      end
-      item
-        Position = 7
-        Name = '@PrisperEnhet'
-        DataType = ftCurrency
-        Precision = 19
-        NumericScale = 4
-        ParamType = ptInput
-      end
-      item
-        Position = 8
-        Name = '@Positionnummer'
-        DataType = ftInteger
-        ParamType = ptInput
-      end>
   end
 end

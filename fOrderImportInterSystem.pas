@@ -12,12 +12,9 @@ type
   TfrmOrderImportIntersystem = class(TForm)
     Panel2: TPanel;
     OpenDialog1: TOpenDialog;
-    Panel3: TPanel;
-    Edit2: TEdit;
+    Panel1: TPanel;
+    Label1: TLabel;
     btnBrowse: TButton;
-    Label4: TLabel;
-    sp: TFDStoredProc;
-    sp_OrderRadImport: TFDStoredProc;
     Button1: TButton;
     procedure btnBrowseClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -32,32 +29,34 @@ type
 var
   frmOrderImportIntersystem: TfrmOrderImportIntersystem;
   intKundId: integer;
+
 implementation
 
 uses fMain, Datamodule, funclib, fOrderLista, funclibProj;
 
 {$R *.DFM}
 
-
 procedure TfrmOrderImportIntersystem.btnBrowseClick(Sender: TObject);
 
 begin
 
-  with Opendialog1 do
+  with OpenDialog1 do
   begin
     if execute then
     begin
-      edit2.text := filename;
-      ReadOrderfileIntersystem(edit2.Text);
+      if extractfileext(filename) = '.xml' then
+        ReadOrderfileIntersystemXML(filename)
+      else
+        ReadOrderfileIntersystem(filename);
+      Showmessage('Du måste trycka på "Refresh orderlista" för att en nyimpoterat order ska visas!');
     end;
+
   end;
-  self.close;
 end;
 
-procedure TfrmOrderImportIntersystem.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TfrmOrderImportIntersystem.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  action := caFree;
+  Action := caFree;
 end;
 
 procedure TfrmOrderImportIntersystem.Button1Click(Sender: TObject);
@@ -71,4 +70,3 @@ begin
 end;
 
 end.
-
