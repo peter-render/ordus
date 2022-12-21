@@ -113,7 +113,7 @@ begin
   else
     strMärke := strMärke1 + strMärke2;
 
-  strVarRef := Orders420.Order.Head.References.BuyerReference;
+ strVarRef := Orders420.Order.Head.References.BuyerReference;
 
   // Ta reda på tidigaste Leveransdatum
 

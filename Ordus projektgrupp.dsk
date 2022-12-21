@@ -166,9 +166,9 @@ EditViewName=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 -
 [View6]
 CustomEditViewType=TEditView
 Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas
-CursorX=63
-CursorY=177
-TopLine=172
+CursorX=57
+CursorY=116
+TopLine=94
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -199,12 +199,13 @@ Dockable=1
 StayOnTop=0
 
 [Breakpoints]
-Count=5
+Count=6
 Breakpoint0='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderkalkyl.pas',279,'',0,1,'',1,0,0,'',1,'','','',0,''
 Breakpoint1='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrder.pas',397,'',0,1,'',1,0,0,'',1,'','','',0,''
 Breakpoint2='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas',222,'',0,1,'',1,0,0,'',1,'','','',0,''
 Breakpoint3='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderLista.pas',2166,'',0,1,'',1,0,0,'',1,'','','',0,''
 Breakpoint4='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas',176,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint5='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas',95,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
 Count=0

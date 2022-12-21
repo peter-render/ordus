@@ -209,8 +209,7 @@ type
     property DeliveryMethod: UnicodeString read Get_DeliveryMethod;
 
     property TransportPayer: Integer read Get_TransportPayer;
-    property CustomerTransportTimeDays: Integer
-      read Get_CustomerTransportTimeDays;
+    property CustomerTransportTimeDays: Integer read Get_CustomerTransportTimeDays;
   end;
 
   { IXMLPaymentTermsType }
@@ -529,20 +528,18 @@ end;
 
 function GetORDERS420(Doc: IXMLDocument): IXMLORDERS420Type;
 begin
-  result := Doc.GetDocBinding('ORDERS420', TXMLORDERS420Type, TargetNamespace)
-    as IXMLORDERS420Type;
+  result := Doc.GetDocBinding('ORDERS420', TXMLORDERS420Type, TargetNamespace) as IXMLORDERS420Type;
 end;
 
 function LoadORDERS420(const FileName: string): IXMLORDERS420Type;
 begin
-  result := LoadXMLDocument(FileName).GetDocBinding('ORDERS420',
-    TXMLORDERS420Type, TargetNamespace) as IXMLORDERS420Type;
+  result := LoadXMLDocument(FileName).GetDocBinding('ORDERS420', TXMLORDERS420Type, TargetNamespace)
+    as IXMLORDERS420Type;
 end;
 
 function NewORDERS420: IXMLORDERS420Type;
 begin
-  result := NewXMLDocument.GetDocBinding('ORDERS420', TXMLORDERS420Type,
-    TargetNamespace) as IXMLORDERS420Type;
+  result := NewXMLDocument.GetDocBinding('ORDERS420', TXMLORDERS420Type, TargetNamespace) as IXMLORDERS420Type;
 end;
 
 { TXMLORDERS420Type }
@@ -724,7 +721,8 @@ end;
 
 function TXMLReferencesType.Get_BuyerReference: String;
 begin
-  result := ChildNodes['BuyerReference'].NodeValue;
+//    result := ChildNodes['BuyerReference'].NodeValue;
+    result := ChildNodes['BuyerReference'].Text;
 end;
 
 function TXMLReferencesType.Get_BuyerComment: UnicodeString;
@@ -901,10 +899,10 @@ end;
 
 function TXMLRowType.Get_Text: String;
 begin
-  IF VARTOSTRDEF(ChildNodes['Text'].NodeValue,'') <> ''  then
+  IF VARTOSTRDEF(ChildNodes['Text'].NodeValue, '') <> '' then
     result := ChildNodes['Text'].NodeValue
-else
-  result := '';
+  else
+    result := '';
 end;
 
 function TXMLRowType.Get_ReferenceNumber: UnicodeString;
