@@ -247,16 +247,31 @@ begin
 
 end;
 
+function ShowOnce(AFormClass: TFormClass; AShowing: Boolean = True): TForm;
+var
+  i: Integer;
+begin
+  Result := nil;
+
+  for i := 0 to Screen.FormCount - 1 do
+    if Screen.Forms[i] is AFormClass then
+      Result := Screen.Forms[i] as TForm;
+
+  if not assigned(Result) then
+    Result := AFormClass.Create(application.MainForm); // Application or a parameter
+  if AShowing then
+    Result.Show;
+end;
+
 procedure TfrmMain.Artikel1Click(Sender: TObject);
 begin
-  with TfrmArtikel.Create(application) do
-    showmodal;
+  TfrmArtikel.Create(application).Show;
 end;
 
 procedure TfrmMain.About2Click(Sender: TObject);
 begin
   with TSplashV.Create(application) do
-    show;
+    Show;
 end;
 
 procedure TfrmMain.Orderlista1Click(Sender: TObject);
@@ -287,14 +302,14 @@ begin
         open;
       end;
 
-      show;
+      Show;
     end
 
   end
   else
   begin
     f.windowstate := wsmaximized;
-    f.show;
+    f.Show;
   end;
   frmMain.tbtnOrderlista.enabled := True;
   frmMain.tbtnOrderlista.imageindex := 0;
@@ -325,7 +340,7 @@ begin
   else
   begin
     f.windowstate := wsmaximized;
-    f.show;
+    f.Show;
   end;
 
   frmMain.tbtnOrderlista.enabled := True;

@@ -777,6 +777,7 @@ end;
 
 procedure TfrmOrder.mmArtikeltextClick(Sender: TObject);
 begin
+
   with TfrmArtikeltext.create(application) do
   begin
 
@@ -793,7 +794,7 @@ begin
         edit;
 
       memo1.text := FieldByName('text').asString;
-      showmodal;
+      show;
       if modalresult = mrOK then
       begin
         qryArtikelText.FieldByName('text').asString := memo1.text;

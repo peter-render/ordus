@@ -15,12 +15,34 @@ uses datamodule, messages, sysutils, forms, windows, typinfo,
 
 procedure ReadOrderfileIntersystem(filename: string);
 procedure ReadOrderfileIntersystemXML(xmlfilename: string);
-
 function Orderstatusbeteckning(intStatusId: integer): string;
+function AppendDuplicationNumber(const AStr: string): string;
 
 implementation
 
 uses funclib, IntersystemOrder;
+
+function AppendDuplicationNumber(const AStr: string): string;
+// Used to make strings unique
+// This examines the string AStr for trailing '(n)' where
+// 'n' is an integer.
+// If the (n) part is found, n is incremented, otherwise '(2)' is
+// appended to the string.
+var
+  iLH, iRH, p1, p2, i: integer;
+  s: string;
+begin
+  p1 := ansipos('(', AStr);
+  if p1 > 0 then
+  begin
+    p2 := LastDelimiter(')', AStr);
+    i := strtoint(copy(AStr, p1 + 1, p2 - p1 - 1));
+    i := i + 1;
+    result := copy(AStr, 1, p1) + inttostr(i) + copy(AStr, p2, 100);
+  end
+  else
+    result := copy(AStr, 1, ansipos('.', AStr) - 1) + ' (2)' + extractfileext(AStr);
+end;
 
 function Orderstatusbeteckning(intStatusId: integer): string;
 begin
@@ -88,7 +110,7 @@ var
   n: integer;
   strOrderinfo: string;
   TOTALN, IntAntal: integer;
-  dblAntal:double;
+  dblAntal: double;
 
 begin
 
@@ -113,7 +135,7 @@ begin
   else
     strMärke := strMärke1 + strMärke2;
 
- strVarRef := Orders420.Order.Head.References.BuyerReference;
+  strVarRef := Orders420.Order.Head.References.BuyerReference;
 
   // Ta reda på tidigaste Leveransdatum
 
@@ -175,11 +197,10 @@ begin
 
     StrBenamning := Orders420.Order.Rows[i].Text;
 
-
-    intantal:= Round(Orders420.Order.Rows[i].Quantity); //30000
-    strAntal := inttostr(intAntal);
-    strAntal := copy(strAntal,1,length(strantal)-2);
-    intantal := strtoint(strantal);
+    IntAntal := Round(Orders420.Order.Rows[i].Quantity); // 30000
+    strAntal := inttostr(IntAntal);
+    strAntal := copy(strAntal, 1, length(strAntal) - 2);
+    IntAntal := strtoint(strAntal);
 
     // Finns textrader?
 

@@ -158,7 +158,6 @@ type
     qryFakturaunderlagXMLOrderId: TFDAutoIncField;
     qryFakturaunderlagXMLKundnamn: TStringField;
     qryFakturaunderlagXMLReferens: TStringField;
-    qryFakturaunderlagXML4ordernummer: TStringField;
     qryFakturaunderlagXMLGodsmärke: TStringField;
     qryFakturaunderlagXMLorderdatum: TSQLTimeStampField;
     qryFakturaunderlagXMLLeveransdatum: TSQLTimeStampField;

@@ -25,7 +25,9 @@ uses
   fKontaktEdit in 'fKontaktEdit.pas' {frmKontaktEdit},
   fStdRV in 'fStdRV.pas' {frmStdRV},
   fjobblista in 'fjobblista.pas' {frmJobblista},
-  fArtikelnotering in 'fArtikelnotering.pas' {frmArtikelnotering};
+  fArtikelnotering in 'fArtikelnotering.pas' {frmArtikelnotering},
+  fDagensOrderlista in '..\..\..\..\iCloudDrive\fDagensOrderlista.pas' {frmDagensOrderlista},
+  fDagens in 'fDagens.pas' {frmDagens};
 
 {$R *.RES}
 

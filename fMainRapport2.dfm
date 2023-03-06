@@ -1913,16 +1913,16 @@
             'BockritningFinns;CheckBox;True;False'
             'cFixatur;ImageIndex;Shrink To Fit')
           Selected.Strings = (
-            'AutoPrisFinns'#9'1'#9' '
-            'Positionnummer'#9'4'#9'Pnr'
-            'Artikelnummer'#9'14'#9'Artikelnummer'
-            'beteckning'#9'26'#9'Beteckning'
-            'cRitningsnoteringFinns_disp'#9'2'#9' R'
-            'cFixatur'#9'2'#9' F'
-            'Antal'#9'7'#9'Antal'
-            'Personnamn'#9'19'#9'Avrapporterad av'
-            'F'#246'ljesedelBeteckning'#9'17'#9'F'#246'ljesedel'
-            'OrderradInfo'#9'24'#9'Info')
+            'AutoPrisFinns'#9'1'#9' '#9#9
+            'Positionnummer'#9'4'#9'Pnr'#9#9
+            'Artikelnummer'#9'14'#9'Artikelnummer'#9#9
+            'beteckning'#9'26'#9'Beteckning'#9#9
+            'cRitningsnoteringFinns_disp'#9'2'#9' R'#9#9
+            'cFixatur'#9'2'#9' F'#9#9
+            'Antal'#9'7'#9'Antal'#9#9
+            'Personnamn'#9'19'#9'Avrapporterad av'#9#9
+            'F'#246'ljesedelBeteckning'#9'17'#9'F'#246'ljesedel'#9#9
+            'OrderradInfo'#9'24'#9'Info'#9#9)
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clActiveCaption
@@ -3730,7 +3730,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500400010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

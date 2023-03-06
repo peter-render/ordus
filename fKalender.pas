@@ -28,7 +28,6 @@ type
     RadioButton2: TRadioButton;
     RadioButton3: TRadioButton;
     Label1: TLabel;
-    qryKalender: TFDQuery;
     qryKalenderId: TFDAutoIncField;
     qryKalenderStarttid: TStringField;
     qryKalenderSluttid: TStringField;
@@ -44,6 +43,7 @@ type
     qryKalenderAntalAvrapporterad: TIntegerField;
     qryKalenderAntalTotal: TIntegerField;
     qryKalenderBGColor: TStringField;
+    qryKalender: TFDQuery;
     procedure FormShow(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button1Click(Sender: TObject);

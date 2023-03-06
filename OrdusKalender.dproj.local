@@ -1,27 +1,2 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<BorlandProject>
-	<Transactions>
-    <Transaction>1899-12-30 00:00:00.000.839,C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\OK.pas=</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.469,=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Datamodule.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.337,C:\Users\peho\Documents\RAD Studio\Projects\Project34.dproj=C:\Users\peho\Documents\RAD Studio\Projects\OrdusKalender.dproj</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.022,=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fKalender.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.178,=C:\Users\peho\Documents\RAD Studio\Projects\Unit37.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.021,C:\Users\peho\Documents\RAD Studio\Projects\Unit37.pas=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\OK.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.738,C:\Users\peho\Documents\RAD Studio\Projects\OrdusKalender.dproj=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\OrdusKalender.dproj</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.800,=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagens.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.021,C:\Users\peho\Documents\RAD Studio\Projects\Unit37.dfm=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\OK.dfm</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.604,C:\Users\peho\Documents\RAD Studio\Projects\datamodule.pas=</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.157,=C:\Users\peho\Documents\RAD Studio\Projects\datamodule.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.919,=C:\Users\peho\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fPlaneringOrderradInfo.pas</Transaction>
-  </Transactions>
-	<ProjectSortOrder AutoSort="0" SortType="0">
-    <File Path="Datamodule.pas"/>
-    <File Path="Datamodule.dfm"/>
-    <File Path="fDagens.pas"/>
-    <File Path="fDagens.dfm"/>
-    <File Path="fKalender.pas"/>
-    <File Path="fKalender.dfm"/>
-    <File Path="fPlaneringOrderradInfo.pas"/>
-    <File Path="fPlaneringOrderradInfo.dfm"/>
-  </ProjectSortOrder>
-</BorlandProject>
+<BorlandProject/>

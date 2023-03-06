@@ -1,21 +1,21 @@
 ﻿inherited frmArtikel: TfrmArtikel
   Left = 302
   Top = 231
-  ActiveControl = wwIncrementalSearch1
+  ActiveControl = nil
   Caption = 'Artikelregister'
   ClientHeight = 641
-  ClientWidth = 856
-  ExplicitWidth = 862
+  ClientWidth = 926
+  ExplicitWidth = 932
   ExplicitHeight = 670
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel1: TPanel
-    Width = 737
+    Width = 807
     Height = 641
     Font.Color = clBlack
     Font.Name = 'MS Sans Serif'
     ParentFont = False
-    ExplicitWidth = 737
+    ExplicitWidth = 807
     ExplicitHeight = 641
     inherited Bevel1: TBevel
       Top = 214
@@ -54,7 +54,7 @@
     inherited dbGrid: TwwDBGrid
       Left = 20
       Top = 43
-      Width = 689
+      Width = 757
       Height = 158
       ControlType.Strings = (
         'BockritningFinns;CheckBox;True;False'
@@ -63,21 +63,25 @@
         'RitningsnoteringFinns;CheckBox;1;0'
         'cRitningsnoteringFinns;CheckBox;True;False')
       Selected.Strings = (
-        'Artikelnummer'#9'16'#9'Artikelnummer'
-        'Beteckning'#9'36'#9'beteckning'
-        'PDFFilnamn'#9'13'#9'PDFFilnamn'
-        'Lagersaldo'#9'10'#9'Lagersaldo'
-        'PDFFinns'#9'10'#9'PDFFinns'
-        'Lagerplats'#9'10'#9'Lagerplats'
-        'cRitningsnoteringFinns'#9'2'#9'R'
-        'FixaturFinns'#9'2'#9'F'
-        'BockritningFinns'#9'2'#9'B')
+        'Artikelnummer'#9'16'#9'Artikelnummer'#9#9
+        'Beteckning'#9'36'#9'Beteckning'#9#9
+        'PDFFilnamn'#9'13'#9'PDFFilnamn'#9#9
+        'Lagersaldo'#9'10'#9'Lagersaldo'#9#9
+        'PDFFinns'#9'10'#9'PDFFinns'#9#9
+        'Lagerplats'#9'10'#9'Lagerplats'#9#9
+        'PrisPerEnhet'#9'10'#9'Senaste pris'#9'F'
+        'cRitningsnoteringFinns'#9'2'#9'R'#9#9
+        'FixaturFinns'#9'2'#9'F'#9#9
+        'BockritningFinns'#9'2'#9'B'#9#9)
       TitleButtons = True
+      TitleMenuAttributes.Options = []
       OnCalcCellColors = dbGridCalcCellColors
+      OnCalcTitleAttributes = dbGridCalcTitleAttributes
+      OnTitleButtonClick = dbGridTitleButtonClick
       ImageList = ImageList1
       ExplicitLeft = 20
       ExplicitTop = 43
-      ExplicitWidth = 689
+      ExplicitWidth = 757
       ExplicitHeight = 158
     end
     object wwIncrementalSearch1: TwwIncrementalSearch
@@ -157,7 +161,7 @@
       end
       object Label9: TLabel
         Left = 395
-        Top = 118
+        Top = 117
         Width = 46
         Height = 13
         Alignment = taRightJustify
@@ -166,7 +170,7 @@
       end
       object Label10: TLabel
         Left = 403
-        Top = 146
+        Top = 142
         Width = 38
         Height = 13
         Alignment = taRightJustify
@@ -181,6 +185,14 @@
         Alignment = taRightJustify
         Caption = 'Ritningsnotering'
         FocusControl = DBEdit2
+      end
+      object Label12: TLabel
+        Left = 391
+        Top = 169
+        Width = 50
+        Height = 13
+        Caption = 'Lagerplats'
+        FocusControl = DBEdit7
       end
       object DBEdit1: TDBEdit
         Left = 96
@@ -262,7 +274,7 @@
       end
       object DBEdit4: TDBEdit
         Left = 96
-        Top = 137
+        Top = 139
         Width = 264
         Height = 21
         DataField = 'Lagersaldo'
@@ -271,7 +283,7 @@
       end
       object wwDBLookupCombo1: TwwDBLookupCombo
         Left = 447
-        Top = 115
+        Top = 113
         Width = 228
         Height = 21
         DropDownAlignment = taLeftJustify
@@ -289,7 +301,7 @@
       end
       object DBCheckBox1: TDBCheckBox
         Left = 447
-        Top = 64
+        Top = 62
         Width = 97
         Height = 20
         Caption = 'Bockritning finns'
@@ -299,7 +311,7 @@
       end
       object DBCheckBox2: TDBCheckBox
         Left = 447
-        Top = 89
+        Top = 86
         Width = 97
         Height = 20
         Caption = 'Fixatur finns'
@@ -321,7 +333,7 @@
       end
       object DBEdit6: TDBEdit
         Left = 447
-        Top = 142
+        Top = 139
         Width = 97
         Height = 21
         DataField = 'Fastpris'
@@ -330,24 +342,33 @@
       end
       object DBMemo1: TDBMemo
         Left = 96
-        Top = 162
+        Top = 165
         Width = 265
         Height = 42
         DataField = 'Notering'
         DataSource = DataSource1
         TabOrder = 7
       end
+      object DBEdit7: TDBEdit
+        Left = 447
+        Top = 166
+        Width = 134
+        Height = 21
+        DataField = 'Lagerplats'
+        DataSource = DataSource1
+        TabOrder = 13
+      end
     end
     object Panel4: TPanel
       Left = 11
       Top = 462
-      Width = 715
+      Width = 785
       Height = 168
       Align = alBottom
       Caption = 'Panel3'
       TabOrder = 3
       object Panel5: TPanel
-        Left = 568
+        Left = 638
         Top = 1
         Width = 146
         Height = 166
@@ -402,7 +423,7 @@
       object Panel6: TPanel
         Left = 1
         Top = 1
-        Width = 567
+        Width = 637
         Height = 166
         Align = alClient
         BorderWidth = 3
@@ -411,7 +432,7 @@
         object wwDBGrid1: TwwDBGrid
           Left = 4
           Top = 4
-          Width = 559
+          Width = 629
           Height = 158
           Selected.Strings = (
             'UnderartikelNummer'#9'16'#9'Artikelnr'
@@ -449,24 +470,31 @@
     object cbLagersaldo: TCheckBox
       Left = 283
       Top = 18
-      Width = 202
+      Width = 121
       Height = 17
-      Caption = 'Artiklar som finns i lager'
+      Caption = 'Enbart lagerartiklar'
       TabOrder = 4
       OnClick = cbLagersaldoClick
     end
   end
   inherited Panel2: TPanel
-    Left = 737
+    Left = 807
     Height = 641
-    ExplicitLeft = 737
+    ExplicitLeft = 807
     ExplicitHeight = 641
     inherited DBNav: TDBNavigator
-      Left = 39
-      Top = 253
+      Top = 318
       Hints.Strings = ()
-      ExplicitLeft = 39
-      ExplicitTop = 253
+      ExplicitTop = 318
+    end
+    object Button5: TButton
+      Left = 12
+      Top = 239
+      Width = 95
+      Height = 25
+      Caption = '&Lagerlista'
+      TabOrder = 7
+      OnClick = btnLagerlistaClick
     end
   end
   inherited PopupMenu1: TPopupMenu
@@ -480,13 +508,33 @@
   inherited FDQuery1: TFDQuery
     OnCalcFields = FDQuery1CalcFields
     SQL.Strings = (
-      
-        'Select a.*,typ.Beteckning ArtikeltypBeteckning,typ.systemname Ar' +
-        'tikeltypSystemname'
+      'Select '
+      'a.Id, '
+      'a.Artikelnummer, '
+      'a.Beteckning, '
+      'a.YtbehandlingIdDefault, '
+      'a.KundID, a.PDFFinns, '
+      'a.PDFFilnamn, '
+      'a.Lagersaldo, '
+      'a.Lagerplats, '
+      'a._YtbehandlingIDdefault, '
+      'a.ArtikeltypId, '
+      'a.BockritningFinns, '
+      'a.FixaturFinns, '
+      'a.Skapatdatum, '
+      'a.Fastpris, '
+      'a.Notering,'
+      'typ.Beteckning ArtikeltypBeteckning,'
+      'typ.systemname ArtikeltypSystemname'
+      ',PrisPerEnhet = (Select top 1 Prisperenhet from orderrad orad '
+      #9#9#9#9'join orderhuvud h on h.id = orad.orderid '
+      #9#9#9#9'where h.orderstatusid = 1'
+      #9#9#9#9'and ArtikelID = a.Id'
+      #9#9#9#9'order by fakturadatum desc)'
       'from Artikel a'
-      'left join artikeltyp typ on typ.id = a.ArtikeltypId'
-      'order by a.Artikelnummer'
-      '')
+      'left join Artikeltyp typ on typ.id = a.ArtikeltypId'
+      'where a.borttagen is null'
+      'order by Artikelnummer')
     Left = 448
     Top = 72
     object FDQuery1Artikelnummer: TStringField
@@ -497,7 +545,6 @@
       Size = 30
     end
     object FDQuery1Beteckning: TStringField
-      DisplayLabel = 'beteckning'
       DisplayWidth = 36
       FieldName = 'Beteckning'
       Origin = 'Beteckning'
@@ -525,6 +572,14 @@
       DisplayWidth = 10
       FieldName = 'Lagerplats'
       Origin = 'Lagerplats'
+    end
+    object FDQuery1PrisPerEnhet: TCurrencyField
+      DisplayLabel = 'Senaste pris'
+      DisplayWidth = 10
+      FieldName = 'PrisPerEnhet'
+      Origin = 'PrisPerEnhet'
+      ReadOnly = True
+      DisplayFormat = '### ###.##'
     end
     object FDQuery1cRitningsNotereingFinns: TBooleanField
       DisplayLabel = 'R'
@@ -832,7 +887,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500200010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -970,5 +1025,9 @@
       FFFFFFC700000000FFFFFFE700000000FFFFFFFF00000000FFFFFFFF00000000
       FFFFFFFF00000000FFFFFFFF0000000000000000000000000000000000000000
       000000000000}
+  end
+  object wwDataSource1: TwwDataSource
+    Left = 468
+    Top = 108
   end
 end

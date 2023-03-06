@@ -9,8 +9,8 @@ object frmKalender: TfrmKalender
   VertScrollBar.Style = ssFlat
   VertScrollBar.Tracking = True
   Caption = 'Ordus Kalender'
-  ClientHeight = 631
-  ClientWidth = 920
+  ClientHeight = 698
+  ClientWidth = 997
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,12 +26,12 @@ object frmKalender: TfrmKalender
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 920
+    Width = 997
     Height = 41
     Align = alTop
     TabOrder = 0
     DesignSize = (
-      920
+      997
       41)
     object Label1: TLabel
       Left = 244
@@ -58,7 +58,7 @@ object frmKalender: TfrmKalender
       OnClick = Button1Click
     end
     object Button2: TButton
-      Left = 831
+      Left = 908
       Top = 10
       Width = 75
       Height = 25
@@ -128,16 +128,16 @@ object frmKalender: TfrmKalender
   object Panel2: TPanel
     Left = 0
     Top = 41
-    Width = 920
-    Height = 590
+    Width = 997
+    Height = 657
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 1
     object kal: TDBPlannerMonthView
       Left = 1
       Top = 1
-      Width = 918
-      Height = 588
+      Width = 995
+      Height = 655
       Cursor = crDefault
       Margins.Left = 1
       Margins.Top = 1

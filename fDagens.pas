@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, DBCtrls, DB, Grids, Wwdbigrd, Wwdbgrid, ExtCtrls,
   ComCtrls, ShellApi, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
-  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  Vcl.Menus;
 
 type
   TfrmDagens = class(TForm)
@@ -32,6 +33,9 @@ type
     btnKund: TRadioButton;
     btnAlla: TRadioButton;
     qryDagensdestinationsbeteckning: TStringField;
+    MainMenu1: TMainMenu;
+    PopupMenu1: TPopupMenu;
+    Visaorderrader1: TMenuItem;
     procedure Button1Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -54,7 +58,7 @@ var
 
 implementation
 
-uses Datamodule;
+uses Datamodule, fDagensOrderlista;
 
 {$R *.dfm}
 
@@ -77,7 +81,6 @@ end;
 procedure TfrmDagens.FormShow(Sender: TObject);
 begin
   OrderString := ' order by oh.Id';
-
   with qryDagens do
   begin
     close;
@@ -163,6 +166,19 @@ begin
     SW_SHOWNORMAL);
     end;
   *)
+  with TfrmDagensOrderlista.create(Application) do
+  begin
+
+    with qryOrderradDagens do
+    begin
+      close;
+      parambyname('OrderId').value := qryDagens.fieldbyname('Orderid').AsInteger;
+      parambyname('VISAAVRAPPORTERADE').value := True;
+      open;
+
+    end;
+    showmodal;
+  end;
 end;
 
 procedure TfrmDagens.wwDBGrid1TitleButtonClick(Sender: TObject; AFieldName: string);

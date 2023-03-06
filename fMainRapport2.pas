@@ -947,8 +947,8 @@ procedure TfrmOrdusrapport2.btnVisaKalenderClick(Sender: TObject);
 begin
   with TfrmKalender.Create(application) do
   begin
-    windowstate := wsMaximized;
-    Showmodal;
+//    windowstate := wsMaximized;
+    Show;
   end;
 
 end;

@@ -51,7 +51,6 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitHeight = 1275
     object Panel2: TPanel
       Left = 0
       Top = 0
@@ -297,12 +296,11 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitHeight = 1200
       object wwDBGrid1: TwwDBGrid
         Left = 5
         Top = 5
         Width = 1359
-        Height = 1190
+        Height = 796
         PictureMasks.Strings = (
           'Ordersumma'#9'### ### ###0,00'#9'T'#9'F'
           'Lagersaldo'#9'###'#9'T'#9'T')
@@ -367,7 +365,6 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
-        ExplicitHeight = 900
       end
       object wwExpandButton1: TwwExpandButton
         Left = 599
@@ -404,10 +401,6 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
     end
   end

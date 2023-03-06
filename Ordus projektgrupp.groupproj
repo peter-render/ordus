@@ -21,6 +21,9 @@
         <Projects Include="MinaEgnaKomponenter.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="OrdusArtikel.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -83,14 +86,23 @@
     <Target Name="MinaEgnaKomponenter:Make">
         <MSBuild Projects="MinaEgnaKomponenter.dproj" Targets="Make"/>
     </Target>
+    <Target Name="OrdusArtikel">
+        <MSBuild Projects="OrdusArtikel.dproj"/>
+    </Target>
+    <Target Name="OrdusArtikel:Clean">
+        <MSBuild Projects="OrdusArtikel.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="OrdusArtikel:Make">
+        <MSBuild Projects="OrdusArtikel.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Ordusrapport2;Ordus2;OrdusKalender;Ordusplan2;MinaEgna;MinaEgnaKomponenter"/>
+        <CallTarget Targets="Ordusrapport2;Ordus2;OrdusKalender;Ordusplan2;MinaEgna;MinaEgnaKomponenter;OrdusArtikel"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Ordusrapport2:Clean;Ordus2:Clean;OrdusKalender:Clean;Ordusplan2:Clean;MinaEgna:Clean;MinaEgnaKomponenter:Clean"/>
+        <CallTarget Targets="Ordusrapport2:Clean;Ordus2:Clean;OrdusKalender:Clean;Ordusplan2:Clean;MinaEgna:Clean;MinaEgnaKomponenter:Clean;OrdusArtikel:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Ordusrapport2:Make;Ordus2:Make;OrdusKalender:Make;Ordusplan2:Make;MinaEgna:Make;MinaEgnaKomponenter:Make"/>
+        <CallTarget Targets="Ordusrapport2:Make;Ordus2:Make;OrdusKalender:Make;Ordusplan2:Make;MinaEgna:Make;MinaEgnaKomponenter:Make;OrdusArtikel:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

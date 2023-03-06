@@ -11,6 +11,7 @@ object frmDagens: TfrmDagens
   Font.Name = 'Tahoma'
   Font.Style = []
   KeyPreview = True
+  Menu = MainMenu1
   OldCreateOrder = False
   Position = poOwnerFormCenter
   OnClose = FormClose
@@ -105,24 +106,26 @@ object frmDagens: TfrmDagens
       Width = 799
       Height = 346
       Selected.Strings = (
-        'OrderID'#9'9'#9'Order-ID'
-        'Kundnamn'#9'26'#9'Kund'#9'F'
-        'Ytbehandlingdatum'#9'12'#9'Till ytbehandling'
-        'YtbehandlingBeteckning'#9'21'#9'Ytbehandling'
-        'leveransdatum'#9'10'#9'Leverans'
-        'AntalTotal'#9'8'#9'       Totalt'
-        'AntalAvrapporterad'#9'11'#9'         Avrapp.'
-        'Antalprissatt'#9'9'#9'     Prissatt'
-        'destinationsbeteckning'#9'19'#9'Destination')
+        'OrderID'#9'9'#9'Order-ID'#9#9
+        'Kundnamn'#9'26'#9'Kund'#9#9
+        'Ytbehandlingdatum'#9'12'#9'Till ytbehandling'#9#9
+        'YtbehandlingBeteckning'#9'21'#9'Ytbehandling'#9#9
+        'leveransdatum'#9'10'#9'Leverans'#9#9
+        'AntalTotal'#9'8'#9'       Totalt'#9#9
+        'AntalAvrapporterad'#9'11'#9'         Avrapp.'#9#9
+        'Antalprissatt'#9'9'#9'     Prissatt'#9#9
+        'destinationsbeteckning'#9'19'#9'Destination'#9#9)
       IniAttributes.Delimiter = ';;'
       IniAttributes.UnicodeIniFile = False
       TitleColor = clBtnFace
       FixedCols = 0
-      ShowHorzScrollBar = True
+      ShowHorzScrollBar = False
       Align = alClient
       DataSource = dsoDagens
       KeyOptions = []
       Options = [dgTitles, dgIndicator, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgWordWrap]
+      ParentShowHint = False
+      ShowHint = True
       TabOrder = 0
       TitleAlignment = taLeftJustify
       TitleFont.Charset = DEFAULT_CHARSET
@@ -176,7 +179,7 @@ object frmDagens: TfrmDagens
     ParamData = <
       item
         Name = 'DATUM'
-        DataType = ftString
+        DataType = ftDate
         ParamType = ptInput
         Value = Null
       end>
@@ -258,6 +261,18 @@ object frmDagens: TfrmDagens
       Required = True
       Visible = False
       Size = 50
+    end
+  end
+  object MainMenu1: TMainMenu
+    Left = 396
+    Top = 208
+  end
+  object PopupMenu1: TPopupMenu
+    Left = 544
+    Top = 209
+    object Visaorderrader1: TMenuItem
+      Caption = 'Visa orderrader'
+      OnClick = wwDBGrid1DblClick
     end
   end
 end
