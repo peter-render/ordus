@@ -1,45 +1,44 @@
 ﻿[Closed Files]
-File_0=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fjobblista.pas',0,1,1,1,1,0,0,,
+File_0=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fKalender.pas',0,1,341,1,368,0,0,,
+File_1=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fjobblista.pas',0,1,1,1,1,0,0,,
 
 [Modules]
-Module0=C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.pas
-Module1=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Ordus2.dproj
-Module2=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMainRapport2.pas
-Module3=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagens.pas
-Module4=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fKalender.pas
+Module0=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMainRapport2.pas
+Module1=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Datamodule.pas
+Module2=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagens.pas
+Module3=C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.pas
+Module4=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas
 Count=5
 EditWindowCount=1
-
-[C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.pas]
-ModuleType=TSourceModule
-FormState=1
-FormOnTop=1
-
-[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Ordus2.dproj]
-ModuleType=TBaseProject
 
 [C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMainRapport2.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
+
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Datamodule.pas]
+ModuleType=TSourceModule
+FormState=1
+FormOnTop=1
 
 [C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagens.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fKalender.pas]
+[C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
 
-[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Datamodule.pas]
-FormState=1
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas]
+ModuleType=TSourceModule
+FormState=0
 FormOnTop=0
 
 [EditWindow0]
 ViewCount=5
-CurrentEditView=C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.pas
+CurrentEditView=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMainRapport2.pas
 View0=0
 View1=1
 View2=2
@@ -77,8 +76,8 @@ BottomMiddelPanelData=0000080001020200000009000000446F636B5369746530100000004772
 [View0]
 CustomEditViewType=TEditView
 Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagens.pas
-CursorX=39
-CursorY=151
+CursorX=125
+CursorY=168
 TopLine=148
 LeftCol=1
 Elisions=
@@ -87,21 +86,21 @@ EditViewName=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 -
 
 [View1]
 CustomEditViewType=TEditView
-Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Ordus2.dpr
-CursorX=68
-CursorY=73
-TopLine=51
+Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Datamodule.pas
+CursorX=1
+CursorY=1
+TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Ordus2.dpr
+EditViewName=Borland.FormDesignerView
 
 [View2]
 CustomEditViewType=TEditView
 Module=C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.pas
-CursorX=1
-CursorY=96
-TopLine=96
+CursorX=18
+CursorY=11
+TopLine=1
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -110,24 +109,24 @@ EditViewName=Borland.FormDesignerView
 [View3]
 CustomEditViewType=TEditView
 Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMainRapport2.pas
-CursorX=1
-CursorY=948
-TopLine=1009
+CursorX=3
+CursorY=1237
+TopLine=1226
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=Borland.FormDesignerView
+EditViewName=Borland.FileHistoryView
 
 [View4]
 CustomEditViewType=TEditView
-Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fKalender.pas
+Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas
 CursorX=1
-CursorY=368
-TopLine=341
+CursorY=21
+TopLine=8
 LeftCol=1
 Elisions=
 Bookmarks=
-EditViewName=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fKalender.pas
+EditViewName=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas
 
 [Watches]
 Count=0

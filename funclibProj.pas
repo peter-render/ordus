@@ -17,10 +17,43 @@ procedure ReadOrderfileIntersystem(filename: string);
 procedure ReadOrderfileIntersystemXML(xmlfilename: string);
 function Orderstatusbeteckning(intStatusId: integer): string;
 function AppendDuplicationNumber(const AStr: string): string;
+Function GetRitningFilename(Artikelnummer: string; kundnamn: string): string;
 
 implementation
 
 uses funclib, IntersystemOrder;
+
+
+Function GetRitningFilename(Artikelnummer: string; kundnamn: string): string;
+var
+  filename, folder: string;
+  c: Char;
+  n: integer;
+begin
+  folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', '')) + kundnamn + '\';
+  filename := folder + Artikelnummer + '.pdf';
+
+  if not fileexists(filename) then
+    for n := 71 downto 65 do
+    begin
+      filename := folder + Artikelnummer + '_REV_' + Chr(n) + '.pdf';
+      if fileexists(filename) then
+        break;
+    end;
+
+//  if fileexists(filename) then
+//    with qryOrderradUpdate do
+//    begin
+//      parambyname('Id').value := OrderradId;
+//      parambyname('Ritning').value := filename;
+//      ExecSQL;
+//    end;
+
+  result := filename;
+
+end;
+
+
 
 function AppendDuplicationNumber(const AStr: string): string;
 // Used to make strings unique

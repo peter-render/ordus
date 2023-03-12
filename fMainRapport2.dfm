@@ -1922,7 +1922,8 @@
             'Antal'#9'7'#9'Antal'#9#9
             'Personnamn'#9'19'#9'Avrapporterad av'#9#9
             'F'#246'ljesedelBeteckning'#9'17'#9'F'#246'ljesedel'#9#9
-            'OrderradInfo'#9'24'#9'Info'#9#9)
+            'OrderradInfo'#9'24'#9'Info'#9#9
+            'Ritning1'#9'10'#9'Ritning1'#9'F'#9)
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clActiveCaption
@@ -2413,7 +2414,7 @@
           TextHint = True
         end
         object edtVikt: TDBEditN
-          Left = 343
+          Left = 342
           Top = 114
           Width = 57
           Height = 21
@@ -2986,6 +2987,11 @@
       Origin = 'OrderradInfo'
       Size = 255
     end
+    object qryOrderradRitning1: TBlobField
+      DisplayWidth = 10
+      FieldName = 'Ritning1'
+      Origin = 'Ritning1'
+    end
     object qryOrderradNotering: TMemoField
       DisplayWidth = 10
       FieldName = 'Notering'
@@ -3228,12 +3234,6 @@
       Origin = 'Lagerplats'
       Visible = False
       Size = 10
-    end
-    object qryOrderradRitning1: TBlobField
-      DisplayWidth = 10
-      FieldName = 'Ritning1'
-      Origin = 'Ritning1'
-      Visible = False
     end
     object qryOrderradFöljesedelId: TIntegerField
       DisplayWidth = 11
@@ -3730,7 +3730,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500480010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

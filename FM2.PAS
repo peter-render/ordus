@@ -1,4 +1,4 @@
-unit fMainRapport2;
+ï»¿                                                        unit fMainRapport2;
 
 interface
 
@@ -129,16 +129,16 @@ type
     qryEtikettAvrapporteradPlasmatid: TIntegerField;
     qryEtikettAvrapporteradAntalStarter: TIntegerField;
     qryEtikettAvrapporteradAntalRitningar: TIntegerField;
-    qryEtikettFrånLager: TBCDField;
+    qryEtikettFrï¿½nLager: TBCDField;
     qryEtikettAttProducera: TBCDField;
     qryEtikettTillLager: TBCDField;
     qryEtikettSkrotandelProcent: TBCDField;
     qryEtikettRitning1: TBlobField;
-    qryEtikettFöljesedelId: TIntegerField;
+    qryEtikettFï¿½ljesedelId: TIntegerField;
     qryEtikettKalkArbetstid: TFloatField;
     qryEtikettOrderradId: TFDAutoIncField;
     qryEtikettOrdernummer: TStringField;
-    qryEtikettGodsmärke: TStringField;
+    qryEtikettGodsmï¿½rke: TStringField;
     qryEtikettLeveransdatum: TSQLTimeStampField;
     qryEtikettkundnamn: TStringField;
     qryFoljesedelperKundId: TFDAutoIncField;
@@ -169,11 +169,11 @@ type
     qryOrderradLagerplats: TStringField;
     qryOrderradOrderId: TFDAutoIncField;
     qryOrderradOrdernummer: TStringField;
-    qryOrderradGodsmärke: TStringField;
+    qryOrderradGodsmï¿½rke: TStringField;
     qryOrderradLeveransdatum: TSQLTimeStampField;
     qryOrderradKundnamn: TStringField;
     qryOrderradBockritningFinns: TBooleanField;
-    qryOrderradFöljesedelBeteckning: TStringField;
+    qryOrderradFï¿½ljesedelBeteckning: TStringField;
     qryOrderradRadnr: TIntegerField;
     qryOrderradPositionnummer: TIntegerField;
     qryOrderradAntal: TFMTBCDField;
@@ -190,12 +190,12 @@ type
     qryOrderradAvrapporteradPlasmatid: TIntegerField;
     qryOrderradAvrapporteradAntalStarter: TIntegerField;
     qryOrderradAvrapporteradAntalRitningar: TIntegerField;
-    qryOrderradFrånLager: TBCDField;
+    qryOrderradFrï¿½nLager: TBCDField;
     qryOrderradAttProducera: TBCDField;
     qryOrderradTillLager: TBCDField;
     qryOrderradLagerplats_1: TStringField;
     qryOrderradRitning1: TBlobField;
-    qryOrderradFöljesedelId: TIntegerField;
+    qryOrderradFï¿½ljesedelId: TIntegerField;
     qryOrderradTotaltid: TIntegerField;
     qryOrderradAntalAvrapprterade: TIntegerField;
     qryOrderradAvrapporteradPlasmatidSenast: TIntegerField;
@@ -322,7 +322,6 @@ type
     procedure dbgridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: boolean;
       AFont: TFont; ABrush: TBrush);
     procedure mi_visaritningClick(Sender: TObject);
-
   private
     function GetRitningFilename(Artikelnummer: string; kundnamn: string; OrderradId: integer): string;
     { Private declarations }
@@ -349,7 +348,7 @@ var
   strId: string;
 begin
 
-  caption := 'Ordus Återrapportering ' + GetAppVersionBuildStr;
+  caption := 'Ordus ï¿½terrapportering ' + GetAppVersionBuildStr;
 
   pnlArtikelsok.Height := 0;
 
@@ -482,7 +481,7 @@ begin
 
 
                     //
-                    // Läsa in följesedlar till pm
+                    // Lï¿½sa in fï¿½ljesedlar till pm
                     //
 
                     (*
@@ -514,7 +513,7 @@ begin
                       pm.Items.add(mi);
 
                       mi := TMenuItem.Create(Self);
-                      mi.caption := 'Ny Fölesedel';
+                      mi.caption := 'Ny Fï¿½lesedel';
                       mi.Tag := -1;
                       mi.OnClick := pmitemClick;
                       pm.Items.add(mi);
@@ -563,7 +562,7 @@ begin
 
   if qryOrderrad.fieldbyname('AttProducera').asFloat = 0 then
   begin
-    attproducera := qryOrderrad.fieldbyname('Antal').asFloat - qryOrderrad.fieldbyname('Frånlager').asFloat;
+    attproducera := qryOrderrad.fieldbyname('Antal').asFloat - qryOrderrad.fieldbyname('Frï¿½nlager').asFloat;
     qryOrderrad.fieldbyname('AttProducera').asFloat := attproducera;
   end;
 
@@ -590,17 +589,17 @@ end;
 procedure TfrmOrdusrapport2.FormKeyPress(Sender: TObject; var Key: Char);
 begin
 
-  if Key = #13 then // Ist die gedrückte Taste ASCII-Return?
+  if Key = #13 then // Ist die gedrï¿½ckte Taste ASCII-Return?
   begin
-    Key := #0; // Gedrückte Taste unwirksam machen
-    Perform(WM_NEXTDLGCTL, 0, 0); // Zum nächsten Element wechseln
+    Key := #0; // Gedrï¿½ckte Taste unwirksam machen
+    Perform(WM_NEXTDLGCTL, 0, 0); // Zum nï¿½chsten Element wechseln
   end;
-  if Key = #27 then // Ist die gedrückte Taste ASCII-Return?
+  if Key = #27 then // Ist die gedrï¿½ckte Taste ASCII-Return?
   begin
-    Key := #0; // Gedrückte Taste unwirksam machen
+    Key := #0; // Gedrï¿½ckte Taste unwirksam machen
     if not(qryOrderrad.State in [dsedit]) then
       edtOrdernr.setfocus;
-    // Perform(WM_NEXTDLGCTL, 0, 0); //Zum nächsten Element wechseln
+    // Perform(WM_NEXTDLGCTL, 0, 0); //Zum nï¿½chsten Element wechseln
   end;
 
 end;
@@ -657,7 +656,7 @@ begin
 
   if not printerexists(EtikettPrintername) then
   begin
-    showmessage('Etikettskrivare "' + EtikettPrintername + '" är ej konfiguerad - utskrift avbryts!');
+    showmessage('Etikettskrivare "' + EtikettPrintername + '" ï¿½r ej konfiguerad - utskrift avbryts!');
     exit;
   end;
 
@@ -734,7 +733,7 @@ procedure TfrmOrdusrapport2.qryOrderradAfterScroll(DataSet: TDataSet);
 begin
   // qryOrderrad.edit;
 
-  btnFSTransport.enabled := (qryOrderradFöljesedelId.asInteger = 0) and (qryOrderradAvrapporteradPersonId.asInteger > 0)
+  btnFSTransport.enabled := (qryOrderradFï¿½ljesedelId.asInteger = 0) and (qryOrderradAvrapporteradPersonId.asInteger > 0)
     and (dsoOrderrad.State in [dsBrowse]);
 
   btnEdit.hint := qryOrderradId.asString;
@@ -781,7 +780,7 @@ end;
 procedure TfrmOrdusrapport2.dbgridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState;
   Highlight: boolean; AFont: TFont; ABrush: TBrush);
 begin
-  // Fältet cRitningsnoteringFinns_disp finns enbart för att ha en neutrl bakgrund i gridden
+  // Fï¿½ltet cRitningsnoteringFinns_disp finns enbart fï¿½r att ha en neutrl bakgrund i gridden
   if (Field.FieldName = 'cRitningsnoteringFinns_disp') and
     (qryOrderrad.fieldbyname('cRitningsnoteringFinns').asBoolean = true) then
     ABrush.color := clGreen;
@@ -814,7 +813,7 @@ begin
     (*
       if qryOrderrad.FieldByName('AttProducera').asFloat = 0 then
       begin
-      attproducera := qryOrderrad.FieldByName('Antal').asFloat - qryOrderrad.FieldByName('Frånlager').asFloat;
+      attproducera := qryOrderrad.FieldByName('Antal').asFloat - qryOrderrad.FieldByName('Frï¿½nlager').asFloat;
       qryOrderrad.FieldByName('AttProducera').asFloat := attproducera;
       end;
     *)
@@ -857,7 +856,7 @@ begin
     if Afieldname = 'beteckning' then ordernr := '3' else
     if Afieldname = 'Antal' then ordernr := '4' else
     if Afieldname = 'Personnamn' then ordernr := '4' else
-    if Afieldname = 'Följesedelbeteckning' then ordernr := '5';
+    if Afieldname = 'Fï¿½ljesedelbeteckning' then ordernr := '5';
   *)
   with qryOrderrad do
   begin
@@ -906,7 +905,7 @@ begin
   end
   else
   begin
-    MessageDlg('Signatur måste vara ifylld', mtConfirmation, [mbOK], 0);
+    MessageDlg('Signatur mï¿½ste vara ifylld', mtConfirmation, [mbOK], 0);
     edtSignatur.setfocus;
   end;
 
@@ -948,7 +947,7 @@ procedure TfrmOrdusrapport2.btnVisaKalenderClick(Sender: TObject);
 begin
   with TfrmKalender.Create(application) do
   begin
-    // windowstate := wsMaximized;
+//    windowstate := wsMaximized;
     Show;
   end;
 
@@ -1020,7 +1019,7 @@ begin
 
         qryOrderrad.edit;
 
-        qryOrderradFöljesedelId.asInteger := sp_OrderradGetFoljesedelId.parambyname('@FöljesedelId').value;
+        qryOrderradFï¿½ljesedelId.asInteger := sp_OrderradGetFoljesedelId.parambyname('@Fï¿½ljesedelId').value;
 
         qryOrderrad.post;
         // dbgrid.refresh;
@@ -1030,7 +1029,7 @@ begin
       // dbgrid.InvalidateCurrentRow;
     end
     else
-      StatusBar1.SimpleText := 'Orderaden måste vara avrapporterad för att kunna läggas på en följesedel!';
+      StatusBar1.SimpleText := 'Orderaden mï¿½ste vara avrapporterad fï¿½r att kunna lï¿½ggas pï¿½ en fï¿½ljesedel!';
   end;
 
 end;
@@ -1070,7 +1069,6 @@ begin
 
   filename := GetRitningFilename(qryOrderrad.fieldbyname('artikelnummer').asString, qryOrderrad.fieldbyname('kundnamn')
     .asString, qryOrderrad.fieldbyname('Id').asInteger);
-
   // stringreplace(qryOrderrad.fieldbyname('artikelnummer').asString, ' ', '', [rfReplaceAll]) + '.pdf';
   if fileexists(filename) then
   begin
@@ -1079,7 +1077,8 @@ begin
     LURL := 'file://' + LURL;
     ShellExecute(0, 'open', PChar(filename), nil, nil, SW_SHOWNORMAL);
   end;
-END;
+
+end;
 
 Function TfrmOrdusrapport2.GetRitningFilename(Artikelnummer: string; kundnamn: string; OrderradId: integer): string;
 var
@@ -1115,7 +1114,7 @@ var
 begin
 
   qryOrderrad.edit;
-  qryOrderradFöljesedelId.Clear;
+  qryOrderradFï¿½ljesedelId.Clear;
   qryOrderrad.post;
 
   bm := qryOrderrad.fieldbyname('Id').asInteger;
@@ -1146,7 +1145,7 @@ procedure TfrmOrdusrapport2.btnFSTransportCklick(Sender: TObject);
 VAR
   mi: TMenuItem;
 begin
-  // Ladda popupmenyn med nya följesedlar
+  // Ladda popupmenyn med nya fï¿½ljesedlar
 
   pm.Items.Clear;
   with qryFoljesedelperKund do
@@ -1174,7 +1173,7 @@ begin
   pm.Items.add(mi);
 
   mi := TMenuItem.Create(Self);
-  mi.caption := 'Ny Följesedel';
+  mi.caption := 'Ny Fï¿½ljesedel';
   mi.Tag := -1;
   mi.OnClick := pmitemClick;
   pm.Items.add(mi);
@@ -1232,7 +1231,7 @@ begin
     with sp_OrderradTillFoljesedel do
     begin
       parambyname('@OrderradId').value := qryOrderradId.asInteger;
-      parambyname('@FöljesedelId').value := (Sender as TMenuItem).Tag;
+      parambyname('@Fï¿½ljesedelId').value := (Sender as TMenuItem).Tag;
       execproc;
 
       bm := qryOrderrad.fieldbyname('Id').asInteger;
@@ -1262,9 +1261,8 @@ begin
   // filename := folder + trim(qryOrderrad.fieldbyname('artikelnummer').asString) + '.pdf';
   // stringreplace(qryOrderrad.fieldbyname('artikelnummer').asString, ' ', '', [rfReplaceAll]) + '.pdf';
 
-
-  // mi_visaritning.enabled := fileexists(GetRitningFilename(qryOrderrad.fieldbyname('artikelnummer').asString,
-  // qryOrderrad.fieldbyname('Kundnamn').asString));
+  mi_visaritning.enabled := fileexists(GetRitningFilename(qryOrderrad.fieldbyname('artikelnummer').asString,
+    qryOrderrad.fieldbyname('Kundnamn').asString, qryOrderrad.fieldbyname('Id').asInteger));
 
 end;
 
@@ -1283,7 +1281,7 @@ begin
 
   if not printerexists(EtikettPrintername) then
   begin
-    showmessage('Etikettskrivare "' + EtikettPrintername + '" är ej konfiguerad - utskrift avbryts!');
+    showmessage('Etikettskrivare "' + EtikettPrintername + '" ï¿½r ej konfiguerad - utskrift avbryts!');
     exit;
   end;
 
