@@ -214,6 +214,7 @@ end;
 
 procedure TfrmKalender.VisaDagens(intTag: integer);
 begin
+
   with TfrmPlaneringOrderradInfo.Create(application) do
   begin
     with spOrderKvarAttTillverka do
@@ -225,6 +226,7 @@ begin
     end;
     showmodal;
   end;
+
 end;
 
 procedure TfrmKalender.kalDeleteItem(Sender: TObject; APlannerItem: TPlannerItem);

@@ -43,7 +43,6 @@ uses
   Splashform in 'Splashform.pas' {SplashV},
   fKalenderarende in 'fKalenderarende.pas' {frmKalenderarende},
   fNotering in 'fNotering.pas' {frmNotering},
-  fDagens in 'fDagens.pas' {frmDagens},
   fArtikel in 'fArtikel.pas' {frmArtikel},
   Vcl.Themes,
   Vcl.Styles,
@@ -70,7 +69,8 @@ uses
   dRitningsnoteringNy in 'dRitningsnoteringNy.pas' {dlgRitningsnoteringNy},
   rSammelfaktura in 'rSammelfaktura.pas' {rptSammelfaktura},
   rRitningsnotering in 'rRitningsnotering.pas' {rptRitningsnotering},
-  fExcelimportOrder in 'fExcelimportOrder.pas' {frmExcelImportOrder};
+  fExcelimportOrder in 'fExcelimportOrder.pas' {frmExcelImportOrder},
+  fDagensOrderlista in 'fDagensOrderlista.pas' {frmDagensOrderlista};
 
 {$R *.RES}
 
@@ -79,5 +79,6 @@ begin
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmOrderLista, frmOrderLista);
+  Application.CreateForm(TfrmDagensOrderlista, frmDagensOrderlista);
   Application.Run;
 end.

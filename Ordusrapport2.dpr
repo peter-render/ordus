@@ -26,8 +26,7 @@ uses
   fStdRV in 'fStdRV.pas' {frmStdRV},
   fjobblista in 'fjobblista.pas' {frmJobblista},
   fArtikelnotering in 'fArtikelnotering.pas' {frmArtikelnotering},
-  fDagensOrderlista in '..\..\..\..\iCloudDrive\fDagensOrderlista.pas' {frmDagensOrderlista},
-  fDagens in 'fDagens.pas' {frmDagens};
+  fDagensOrderlista in 'fDagensOrderlista.pas' {frmDagensOrderlista};
 
 {$R *.RES}
 

@@ -100,20 +100,21 @@
       KeepOnOnePage = False
       BandType = rbDetail
       object QRDBText1: TQRDBText
-        Left = 39
+        Left = 37
         Top = 0
-        Width = 97
+        Width = 112
         Height = 20
         Size.Values = (
           44.097222222222220000
-          85.989583333333330000
+          81.579861111111110000
           0.000000000000000000
-          213.871527777777800000)
+          246.944444444444400000)
         XLColumn = 0
         XLNumFormat = nfGeneral
         ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
+        AutoSize = False
         Color = clWhite
         DataSet = qry
         DataField = 'Artikelnummer'
@@ -240,15 +241,15 @@
         FontSize = 9
       end
       object QRDBText7: TQRDBText
-        Left = 143
+        Left = 155
         Top = 0
-        Width = 155
+        Width = 145
         Height = 19
         Size.Values = (
           41.892361111111110000
-          315.295138888888900000
+          341.753472222222200000
           0.000000000000000000
-          341.753472222222200000)
+          319.704861111111100000)
         XLColumn = 0
         XLNumFormat = nfGeneral
         ActiveInPreview = False
@@ -484,13 +485,13 @@
         VertAdjust = 0
       end
       object QRLabel8: TQRLabel
-        Left = 142
+        Left = 155
         Top = 7
         Width = 88
         Height = 20
         Size.Values = (
           44.097222222222220000
-          313.090277777777800000
+          341.753472222222200000
           15.434027777777780000
           194.027777777777800000)
         XLColumn = 0
@@ -1653,6 +1654,7 @@
       'left join personal p2 on oh.V'#229'rreferensPersonId = p2.id'
       'left join Ytbehandling y on orad.ytbehandlingID = y.ID'
       'where oh.id = :OrderId'
+      'ORDER BY a.Artikelnummer'
       '')
     Left = 84
     Top = 93

@@ -18,11 +18,21 @@ procedure ReadOrderfileIntersystemXML(xmlfilename: string);
 function Orderstatusbeteckning(intStatusId: integer): string;
 function AppendDuplicationNumber(const AStr: string): string;
 Function GetRitningFilename(Artikelnummer: string; kundnamn: string): string;
+Function GetRitningFolder(kundnamn: string): string;
 
 implementation
 
 uses funclib, IntersystemOrder;
 
+Function GetRitningFolder(kundnamn: string): string;
+var
+  filename, folder: string;
+  c: Char;
+  n: integer;
+begin
+  folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', '')) + kundnamn + '\';
+  result := folder;
+end;
 
 Function GetRitningFilename(Artikelnummer: string; kundnamn: string): string;
 var
@@ -30,6 +40,7 @@ var
   c: Char;
   n: integer;
 begin
+
   folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', '')) + kundnamn + '\';
   filename := folder + Artikelnummer + '.pdf';
 
@@ -41,19 +52,17 @@ begin
         break;
     end;
 
-//  if fileexists(filename) then
-//    with qryOrderradUpdate do
-//    begin
-//      parambyname('Id').value := OrderradId;
-//      parambyname('Ritning').value := filename;
-//      ExecSQL;
-//    end;
+  // if fileexists(filename) then
+  // with qryOrderradUpdate do
+  // begin
+  // parambyname('Id').value := OrderradId;
+  // parambyname('Ritning').value := filename;
+  // ExecSQL;
+  // end;
 
   result := filename;
 
 end;
-
-
 
 function AppendDuplicationNumber(const AStr: string): string;
 // Used to make strings unique
@@ -302,7 +311,7 @@ var
   csv: TStringlist;
 
   recordcount: integer;
-  separator: char;
+  separator: Char;
   result: integer;
   s: string;
   lastpos: integer;

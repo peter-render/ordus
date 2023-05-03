@@ -44,7 +44,6 @@ uses
   Splashform in 'Splashform.pas' {SplashV},
   fKalenderarende in 'fKalenderarende.pas' {frmKalenderarende},
   fNotering in 'fNotering.pas' {frmNotering},
-  fDagens in 'fDagens.pas' {frmDagens},
   fArtikel in 'fArtikel.pas' {frmArtikel},
   Vcl.Themes,
   Vcl.Styles,

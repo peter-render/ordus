@@ -252,6 +252,9 @@ type
     procedure wwDBGrid1CalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: Boolean;
       AFont: TFont; ABrush: TBrush);
     procedure ndra1Click(Sender: TObject);
+    procedure wwDBGrid1TitleButtonClick(Sender: TObject; AFieldName: string);
+    procedure wwDBGrid1DragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
+    procedure wwDBGrid1DragDrop(Sender, Source: TObject; X, Y: Integer);
   private
     { Private declarations }
   public
@@ -398,7 +401,6 @@ begin
 
       ParamByName('@TillLager').value := edtTillLager.valueFloat;
 
-
       Label8.Caption := 'Ny rad';
       execproc;
       btnSpara.enabled := false;
@@ -421,7 +423,6 @@ begin
       ParamByName('@AvrapporteradPlasmatid').value := edtLasertid.valueFloat;
       ParamByName('@Skrotandelprocent').value := edtSkrot.valueFloat;
       ParamByName('@Vikt').value := edtVikt.valueFloat;
-
 
       Label8.Caption := 'Ändra rad';
       execproc;
@@ -602,6 +603,55 @@ begin
   edtArtikel.enabled := false;
   edtPris.setfocus;
 
+end;
+
+procedure TfrmOrder.wwDBGrid1DragDrop(Sender, Source: TObject; X, Y: Integer);
+var
+  i: Integer;
+  FileName: string;
+begin
+  // Retrieve the dropped file(s)
+//  for i := 0 to sender.Files.Count - 1 do
+//  begin
+//    FileName := DragObject.Files[i];
+//    showmessage(ExtractFileName(FileName));
+////
+////    // Add the file to the grid
+////    Grid1.RowCount := Grid1.RowCount + 1;
+////    Grid1.Cells[0, Grid1.RowCount - 1] := ExtractFileName(FileName);
+////    Grid1.Cells[1, Grid1.RowCount - 1] := ExtractFilePath(FileName);
+//
+//  end;
+end;
+
+
+procedure TfrmOrder.wwDBGrid1DragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
+begin
+  (* for S in Data.Files do
+    begin
+    ext := uppercase(stringreplace(extractfileext(S), '.', '', []));
+    if pos(ext, 'JPG PNG JPEG GIF') = 0 then
+    Operation := TDragOperation.None
+    else
+    Operation := TDragOperation.copy;
+    end;
+  *)
+ // Operation := TDragOperation.Copy;
+// Accept:= (sender is Tfile);
+//Accept := Source is TDropFilesTarget;
+end;
+
+procedure TfrmOrder.wwDBGrid1TitleButtonClick(Sender: TObject; AFieldName: string);
+begin
+  with qryOrderrad do
+  begin
+    close;
+    sql.Delete(sql.Count - 1);
+//    showmessage(sql.Text);
+    sql.Add('order by ' + AFieldName);
+//    showmessage(sql.Text);
+    open;
+  end;
 end;
 
 procedure TfrmOrder.FormActivate(Sender: TObject);
@@ -810,7 +860,7 @@ end;
 
 procedure TfrmOrder.ndra1Click(Sender: TObject);
 begin
-qryOrderrad.Edit;
+  qryOrderrad.edit;
 end;
 
 procedure TfrmOrder.PopupMenu1Popup(Sender: TObject);

@@ -1970,8 +1970,9 @@ var
 
 begin
 
+
   xml_filename := FoldernameFix(ftgsystemvalue('pdf.folder.fakturaunderlag', '')) +
-    FU_FolderGet(sp_OrderlistKundID.asInteger) + 'Fakturaunderlag_' + sp_OrderlistFakturanummer.AsString + '.xml';
+    FU_FolderGet(sp_OrderlistKundID.asInteger) +  sp_OrderlistFakturanummer.AsString + '.xml';
 
   with qryFakturaunderlagXML do
   begin
@@ -2180,7 +2181,10 @@ begin
     // Memo1.Text := newfaktura.Xml;
 
     newInvoice.OwnerDocument.Encoding := 'UTF-8';
+
     newInvoice.OwnerDocument.SaveToFile(xml_filename);
+
+
 
   end;
 end;
@@ -2341,7 +2345,7 @@ begin
         report.Print;
 
       xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.fakturaunderlag', '')) +
-        FU_FolderGet(sp_OrderlistKundID.asInteger) + 'Fakturaunderlag_' + sp_OrderlistOrderID.AsString;
+        FU_FolderGet(sp_OrderlistKundID.asInteger) + sp_OrderlistOrderID.AsString;
 
       qrfilename := GetQrfilename(xfilename);
 
@@ -2509,8 +2513,12 @@ begin
       if pos('LENOPEHO', dm.FDConnection1.ConnectionString) = 0 then
         report.Print;
 
-      xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.samlingsfakturaunderlag', '')) + 'Samlingsfakturaunderlag_'
-        + sp_OrderlistFakturanummer.AsString;
+//      xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.samlingsfakturaunderlag', '')) + 'Samlingsfakturaunderlag_'
+//        + sp_OrderlistFakturanummer.AsString;
+
+      xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.samlingsfakturaunderlag', '')) + sp_OrderlistFakturanummer.AsString;
+
+
 
       qrfilename := GetQrfilename(xfilename);
 
@@ -3045,7 +3053,11 @@ begin
   // offertsommailtillkund2.enabled := (sp_orderlistOrdertyp.asstring = 'O');
   actPrissattningPositioner.Enabled := raderFinns;
   actSattFakturadatum.Enabled := raderFinns;
-  actFakturarunderlagXML.Enabled := (sp_OrderlistKundID.asInteger = 1) and raderFinns;
+
+  actFakturarunderlagXML.Enabled := (sp_OrderlistKundID.asInteger = 1) and raderFinns and (pagecontrol1.ActivePageIndex=3);
+
+//  showmessage(  pagecontrol1.ActivePageIndex.ToString());
+
   actSattFakturadata.Enabled := (raderFinns) and (wwDBGrid1.Selected.count > 0);
   mnuSättfakturamärkning.Enabled := (raderFinns) and (wwDBGrid1.Selected.count > 0);
 

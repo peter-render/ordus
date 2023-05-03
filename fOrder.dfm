@@ -221,25 +221,25 @@
         PictureMasks.Strings = (
           'Artikelnummer'#9'### ###'#9'T'#9'T')
         Selected.Strings = (
-          'Radnr'#9'4'#9'Radnr'
-          'Positionnummer'#9'4'#9'PosNr'
-          'Artikelnummer'#9'15'#9'Artikelnummer'
-          'Beteckning'#9'22'#9'Beteckning'
-          'cRitningsnoteringFinns_disp'#9'2'#9'R'
-          'Lagersaldo'#9'2'#9'  L'
-          'cFixatur'#9'2'#9' F'
-          'PrisperEnhet'#9'9'#9'  Pris/enhet'
-          'Fr'#229'nLager'#9'8'#9'Fr'#229'n lager'
-          'Attproducera'#9'7'#9'Att prod'
-          'Antal'#9'6'#9'  Antal'
-          'TillLager'#9'9'#9'   Till lager'
-          'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'
-          'AvrapporteradPlasmatid'#9'6'#9'Lasertid'
-          'SkrotandelProcent'#9'6'#9'Skrot %'
-          'Vikt'#9'6'#9'Vikt/st'
-          'KalkarbetstidTotal'#9'8'#9'Arbetstid'
-          'SenasteAvrapporteradDatum'#9'10'#9'Senast tv.'
-          'OrderradInfo'#9'22'#9'Info')
+          'Radnr'#9'4'#9'Radnr'#9#9
+          'Positionnummer'#9'4'#9'PosNr'#9#9
+          'Artikelnummer'#9'15'#9'Artikelnummer'#9#9
+          'Beteckning'#9'22'#9'Beteckning'#9#9
+          'cRitningsnoteringFinns_disp'#9'2'#9'R'#9#9
+          'Lagersaldo'#9'2'#9'  L'#9#9
+          'cFixatur'#9'2'#9' F'#9#9
+          'PrisperEnhet'#9'9'#9'  Pris/enhet'#9#9
+          'Fr'#229'nLager'#9'8'#9'Fr'#229'n lager'#9#9
+          'Attproducera'#9'7'#9'Att prod'#9#9
+          'Antal'#9'6'#9'  Antal'#9#9
+          'TillLager'#9'9'#9'   Till lager'#9#9
+          'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'#9#9
+          'AvrapporteradPlasmatid'#9'6'#9'Lasertid'#9#9
+          'SkrotandelProcent'#9'6'#9'Skrot %'#9#9
+          'Vikt'#9'6'#9'Vikt/st'#9#9
+          'KalkarbetstidTotal'#9'8'#9'Arbetstid'#9#9
+          'SenasteAvrapporteradDatum'#9'10'#9'Senast tv.'#9#9
+          'OrderradInfo'#9'22'#9'Info'#9#9)
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -263,8 +263,9 @@
         TitleFont.Name = 'Default'
         TitleFont.Style = []
         TitleLines = 1
-        TitleButtons = False
+        TitleButtons = True
         OnCalcCellColors = wwDBGrid1CalcCellColors
+        OnTitleButtonClick = wwDBGrid1TitleButtonClick
         OnDblClick = wwDBGrid1DblClick
         ImageList = ImageList1
         PadColumnStyle = pcsPadHeader
@@ -1354,7 +1355,6 @@
       end>
   end
   object qryOrderrad: TFDQuery
-    Active = True
     OnCalcFields = qryOrderradCalcFields
     MasterSource = dsoOrder
     MasterFields = 'OrderId'
@@ -2341,7 +2341,7 @@
     Left = 376
     Top = 576
     Bitmap = {
-      494C0101020005004C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500600010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
