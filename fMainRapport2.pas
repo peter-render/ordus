@@ -280,6 +280,9 @@ type
     FloatField2: TFloatField;
     FloatField3: TFloatField;
     IntegerField17: TIntegerField;
+    Label7: TLabel;
+    DBEditN2: TDBEditN;
+    qryOrderradExtratid: TIntegerField;
     procedure FormShow(Sender: TObject);
     procedure edtOrderNrExit(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);

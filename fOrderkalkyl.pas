@@ -252,7 +252,7 @@ begin
     end;
 
   end;
-  doEdit := True;
+  doEdit := False;
   qryOffertkalkyl.Refresh;
   qry.Refresh;
   btnPost.Enabled := True;
@@ -483,11 +483,15 @@ begin
 
       // dbedit3.DataSource.DataSet.FieldByName('PrisUppskattat').AsCurrency := pe * qry.FieldByName('Antal').AsFloat;
       // dbedit3.DataSource.DataSet.FieldByName('PrisFastställt').AsCurrency := pe * qry.FieldByName('Antal').AsFloat;
+      if pe = 0 then
+        pe := edtPUst.ValueFloat;
 
-      edtPU.Text := floattostr(pe * edtAntal.ValueFloat);
-      edtPUst.Text := floattostr(pe);
-      edtPFst.Text := floattostr(pe);
-
+      if pe > 0 then
+      begin
+        edtPU.Text := floattostr(pe * edtAntal.ValueFloat);
+        edtPUst.Text := floattostr(pe);
+        edtPFst.Text := floattostr(pe);
+      end;
     end;
 
   end;
@@ -582,7 +586,6 @@ var
 begin
 
   Kundid := qryOffertkalkyl.FieldByName('Kundid').asInteger;
-
   with qry do
   begin
     Close;
@@ -603,6 +606,9 @@ begin
     ParamByName('KundID').value := Kundid;
     Open;
   end;
+  LU_Artikel.Text := '';
+  wwDBGrid3.DataSource.DataSet.Close;
+
 end;
 
 procedure TfrmOrderkalkyl.dsoOffertkalkylStateChange(Sender: TObject);
@@ -874,7 +880,8 @@ begin
 
   end;
   EnableLowerpanel(True);
-  resetbasefields;
+  // resetbasefields;
+
 end;
 
 procedure TfrmOrderkalkyl.mnuDeleteClick(Sender: TObject);
@@ -905,7 +912,6 @@ begin
   // LU_Artikel.value := LU_Artikel.LookupTable.FieldByName('ArtikelId').AsString;
 
   LU_Artikel.value := qry.FieldByName('ArtikelId').AsString;
-
   // LU_Artikel.CloseUp(true);
   LU_ArtikelCloseUp(Sender, LU_Artikel.LookupTable, nil, False);
 

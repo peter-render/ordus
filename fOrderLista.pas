@@ -22,7 +22,7 @@ uses
   Vcl.gtxXport,
   Vcl.gtQRXport, gtPDFPrinter, QRPDFFilt, Vcl.gtxClasses, Xml.xmldom,
   prefaktura4, Vcl.OleCtrls,
-  SHDocVw, fSattFakturadatum, rSammelfaktura, fOrderkalkyl, fFlikkolumner, fExcelimportOrder;
+  SHDocVw, fSattFakturadatum, rSammelfaktura, fOrderkalkyl, fFlikkolumner, fExcelimportOrder, XMLIntf, XmlDoc;
 
 type
   TfrmOrderLista = class(TForm)
@@ -296,6 +296,25 @@ type
     FMTBCDField2: TFMTBCDField;
     DateField1: TDateField;
     StringField9: TStringField;
+    qryXMLOrder: TFDQuery;
+    qryXMLOrderOrderId: TFDAutoIncField;
+    qryXMLOrderKundnamn: TStringField;
+    qryXMLOrderReferens: TStringField;
+    qryXMLOrderordernummer: TStringField;
+    qryXMLOrderGodsmärke: TStringField;
+    qryXMLOrderorderdatum: TSQLTimeStampField;
+    qryXMLOrderLeveransdatum: TSQLTimeStampField;
+    qryXMLOrderPositionnummer: TIntegerField;
+    qryXMLOrderYtbehandlingBeteckning: TStringField;
+    qryXMLOrderBeteckning: TStringField;
+    qryXMLOrderArtikelnummer: TStringField;
+    qryXMLOrderAntal: TFMTBCDField;
+    qryXMLOrderOrdertypId: TIntegerField;
+    qryXMLOrderPrisperenhet: TCurrencyField;
+    qryXMLOrderfritext: TStringField;
+    qryXMLOrderPris: TFMTBCDField;
+    qryXMLOrderDagensdatum: TDateField;
+    qryXMLOrderVårReferens: TStringField;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -1633,7 +1652,7 @@ procedure TfrmOrderLista.actOrderbekräftleseExcelViaEpostExecute(Sender: TObject
 
 var
   x, ci, row, i, W, NumberOfWorksheetsNeeded: Integer;
-  param,orderstring, fstring, ExcelFileName: String;
+  Param, orderstring, fstring, ExcelFileName: String;
   oRng, ExcelApplication, ExcelWorkbook, ExcelWorksheet: Variant;
   bm: Tbookmark;
   rTyp: Integer;
@@ -1666,7 +1685,7 @@ begin
       orderstring := orderstring + QuotedStr(wwDBGrid1.datasource.DataSet.FieldByName('Orderid').AsString) + ',';
     End;
     wwDBGrid1.datasource.DataSet.EnableControls;
-    orderstring := StringReplace(orderstring, char(34) , char(39), [rfReplaceAll]);
+    orderstring := StringReplace(orderstring, char(34), char(39), [rfReplaceAll]);
   End
   else
   begin
@@ -1678,9 +1697,9 @@ begin
   begin
     close;
     sql.Clear;
-    sql:=   qryExcelExport_backup.SQL;
-    param :=     '('+ copy(orderstring,1, length(orderstring)-1)+ ')';
-    qryExcelExport.sql.add(param);
+    sql := qryExcelExport_backup.sql;
+    Param := '(' + copy(orderstring, 1, length(orderstring) - 1) + ')';
+    qryExcelExport.sql.add(Param);
     open;
     if recordcount = 0 then
       exit;
@@ -1688,7 +1707,7 @@ begin
 
   rowsfound := false;
   xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
-    stringreplace(DateToStr(Date), '-', '', [rfReplaceAll, rfIgnoreCase]) + '.xlsx';
+    StringReplace(DateToStr(Date), '-', '', [rfReplaceAll, rfIgnoreCase]) + '.xlsx';
 
   while FileExists(xfilename) do
     xfilename := AppendDuplicationNumber(xfilename);
@@ -1714,7 +1733,7 @@ begin
 
     // Open Excel Workbook
     try
-      ExcelWorkbook := ExcelApplication.Workbooks.Add(-4167);
+      ExcelWorkbook := ExcelApplication.Workbooks.add(-4167);
       // or
       // ExcelWorkbook := ExcelApplication.WorkBooks.Add;
       // reference
@@ -1733,7 +1752,7 @@ begin
         If NumberOfWorksheetsNeeded > ExcelWorkbook.WorkSheets.count then
         begin
           While ExcelWorkbook.WorkSheets.count < NumberOfWorksheetsNeeded do
-            ExcelWorkbook.WorkSheets.Add(Null, ExcelWorkbook.WorkSheets[ExcelWorkbook.WorkSheets.count], 1, -4167);
+            ExcelWorkbook.WorkSheets.add(Null, ExcelWorkbook.WorkSheets[ExcelWorkbook.WorkSheets.count], 1, -4167);
           // or use the code below if you do not care about the order in which the sheets are named
           // ExcelWorkbook.WorkSheets.Add(Null,Null,(NumberOfWorksheets-ExcelWorkbook.Worksheets.Count),-4167);
         end;
@@ -1851,7 +1870,7 @@ begin
     Mail.Subject := 'Orderbekräftelse';
     Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse i Excel format.' + chr(13) + chr(10) +
       chr(13) + chr(10) + 'Mvh' + chr(13) + chr(10) + 'Ängelholms Mekaniska Verkstad';
-    Mail.Attachments.Add(xfilename);
+    Mail.Attachments.add(xfilename);
     Mail.Display;
   end;
 
@@ -1860,10 +1879,133 @@ end;
 procedure TfrmOrderLista.actOrderbekräftleseViaMailExecute(Sender: TObject);
 var
   Outlook: OleVariant;
+  xmlFilename: string;
   Mail: Variant;
+  Xml: IXMLDOCUMENT;
+  RootNode, CurNode, Node, HeadNode, RefNode, rn, rNode: IXMLNODE;
+  nRow:integer;
 const
   olMailItem = $00000000;
 begin
+
+  Xml := NewXMLDocument;
+  Xml.Encoding := 'UTF-8';
+  Xml.Options := [doNodeAutoIndent];
+
+  try
+
+    with qryXMLOrder do
+    begin
+      close;
+      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
+      open;
+
+      // RootNode := Xml.CreateNode('ORDUS20 SoftwareManufacturer="Holzer Consulting" SoftwareName="Ordus" SoftwareVerion="3.1.0"');
+      RootNode := Xml.AddChild('ORDUS20');
+      RootNode.attributes['SoftwareManufacturer'] := 'Holzer Consultning - Ängelholm';
+      RootNode.attributes['SoftwareName'] := 'Ordus';
+
+      // Orderresponse
+      CurNode := RootNode.AddChild('OrderResponse');
+      CurNode.attributes['Ordernumber'] := sp_OrderlistOrdernummer.asString;
+      // Name
+      Node := CurNode.AddChild('Name');
+      Node.Text := 'Ängelholms Mekaniska';
+      // Supplierordernumber
+      Node := CurNode.AddChild('SupplierOrderNumber');
+      Node.Text := sp_OrderlistOrderID.AsString;
+
+      // OrderResponseStatus
+      Node := RootNode.AddChild('OrderResponseStatus');
+      Node.Text := '?';
+      // Head
+      HeadNode := CurNode.AddChild('Head');
+      // Supplier
+      Node := HeadNode.AddChild('Supplier');
+      Node.attributes['SupplierCodeEdi'] := '?';
+      // PhoneNumber
+      Node := HeadNode.AddChild('PhoneNumber');
+      Node.Text := '0431 111111';
+      Node := HeadNode.AddChild('Byer');
+      Node.attributes['BuyerOrderConfirmationCodeEdi'] := '';
+      // References
+      RefNode := HeadNode.AddChild('References');
+      Node := RefNode.AddChild('BuyerReference');
+      Node.Text := 'Jimmy Gudmundsson';
+
+      Node := RefNode.AddChild('SupplierReferens');
+      Node.Text := 'Stefan Andersson';
+      Node := RefNode.AddChild('SupplierPhoneNumber');
+      Node := RefNode.AddChild('SupplierEmail');
+      Node.Text := 'info@angelholms-mekaniska.se';
+
+      // Rows
+      rNode := CurNode.AddChild('Rows');
+
+      // ======================================================================
+      // för varje artikel
+      // ======================================================================
+
+      nRow :=1;
+      while not eof do
+      begin
+        nRow :=  nRow+1;
+        rn := rNode.AddChild('Row');
+        rn.attributes['RowNumber'] := inttostr(nRow*10);
+        rn.attributes['OrderResponseRowStatus'] := '5';
+        rn.attributes['RowType'] := '1';
+
+        Node := rn.AddChild('Part');
+        Node.attributes['PartNumber'] := FieldByName('Artikelnummer').AsString;
+        Node.attributes['Revision'] := '?';
+
+        Node := rn.AddChild('SupplierPartNumber');
+        Node.Text := FieldByName('Artikelnummer').AsString;
+
+        Node := rn.AddChild('Text');
+        Node.Text := FieldByName('Beteckning').AsString;
+
+        Node := rn.AddChild('ReferensNumber');
+
+        Node := rn.AddChild('Deliveryperiod');
+        Node.Text := FieldByName('Leveransdatum').AsString;
+
+        Node := rn.AddChild('Quantity');
+        Node.Text := FieldByName('Antal').AsString;
+
+        Node := rn.AddChild('Unit');
+        Node.Text := 'pcs';
+
+        Node := rn.AddChild('ConfirmedPrice');
+        Node.Text := FieldByName('Pris').AsString;
+
+        Node := rn.AddChild('Discount');
+        Node.Text := '0';
+
+        Node := rn.AddChild('RequestedDeliveryperiod');
+        Node.Text := FieldByName('Leveransdatum').AsString;
+
+        Node := rn.AddChild('RequestedQuantity');
+        Node.Text :=FieldByName('Antal').AsString;
+
+        Node := rn.AddChild('PartType');
+        Node.Text := '2';
+
+        Node := rn.AddChild('Setup');
+        Node.Text := '0';
+
+        Node := rn.AddChild('Aloy');
+        Node.Text := '0';
+        next;
+      end;
+    end;
+
+    xmlFilename := FoldernameFix(ftgsystemvalue('xml.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
+      sp_OrderlistOrderID.AsString + '.xml';
+    Xml.SaveToFile(xmlFilename);
+  finally
+    Xml := nil;
+  end;
 
   xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
     sp_OrderlistOrderID.AsString;
@@ -1875,6 +2017,7 @@ begin
     begin
       close;
       params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
+
       open;
     end;
 
@@ -1907,13 +2050,15 @@ begin
       Mail.To := sp_Orderlist.FieldByName('Emailadress').AsString;
 
     Mail.Subject := 'Orderbekräftelse (' + sp_OrderlistOrderID.AsString + ')';
-    Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse som PDF-bilaga.' + chr(13) + chr(10) +
-      'Vi tackar för uppdraget.';
-    Mail.Attachments.Add(xfilename + '.pdf');
+    Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse som PDF- och XML bilaga.' + chr(13) +
+      chr(10) + 'Vi tackar för uppdraget.';
+
+    Mail.Attachments.add(xfilename + '.pdf');
+    Mail.Attachments.add(xmlFilename);
+
     Mail.Display;
 
   end;
-
 end;
 
 procedure TfrmOrderLista.actOrderEditExecute(Sender: TObject);
@@ -1965,14 +2110,13 @@ var
 
   function FixcommaString(cvalue: double): string;
   BEGIN
-    result := stringreplace(floattostr(cvalue), ',', '.', [])
+    result := StringReplace(floattostr(cvalue), ',', '.', [])
   END;
 
 begin
 
-
   xml_filename := FoldernameFix(ftgsystemvalue('pdf.folder.fakturaunderlag', '')) +
-    FU_FolderGet(sp_OrderlistKundID.asInteger) +  sp_OrderlistFakturanummer.AsString + '.xml';
+    FU_FolderGet(sp_OrderlistKundID.asInteger) + sp_OrderlistFakturanummer.AsString + '.xml';
 
   with qryFakturaunderlagXML do
   begin
@@ -2112,7 +2256,7 @@ begin
     Head.FreightCost := '0';
     Head.PackingCost := '0';
     Head.InsuranceCost := '0';
-    Head.NetAmountInInvoiceCurrency := stringreplace(floattostr(Nettosumma), ',', '.', []);
+    Head.NetAmountInInvoiceCurrency := StringReplace(floattostr(Nettosumma), ',', '.', []);
     // Summa av alla rader    ska vara currency
     Head.InvoicingCharge := '0';
     // Head.VatAmountInInvoiceCurrency := stringreplace(floattostr(MomsTotal),',','.',[]); // Summa Moms?
@@ -2153,7 +2297,7 @@ begin
     rows := newInvoice.rows;
     while not eof do
     begin
-      row := rows.Add;
+      row := rows.add;
 
       row.RowNumber := FieldByName('PositionNummer').asInteger;
       row.RowType := '1'; // Artikelnummer, måste finnas
@@ -2183,8 +2327,6 @@ begin
     newInvoice.OwnerDocument.Encoding := 'UTF-8';
 
     newInvoice.OwnerDocument.SaveToFile(xml_filename);
-
-
 
   end;
 end;
@@ -2513,12 +2655,11 @@ begin
       if pos('LENOPEHO', dm.FDConnection1.ConnectionString) = 0 then
         report.Print;
 
-//      xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.samlingsfakturaunderlag', '')) + 'Samlingsfakturaunderlag_'
-//        + sp_OrderlistFakturanummer.AsString;
+      // xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.samlingsfakturaunderlag', '')) + 'Samlingsfakturaunderlag_'
+      // + sp_OrderlistFakturanummer.AsString;
 
-      xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.samlingsfakturaunderlag', '')) + sp_OrderlistFakturanummer.AsString;
-
-
+      xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.samlingsfakturaunderlag', '')) +
+        sp_OrderlistFakturanummer.AsString;
 
       qrfilename := GetQrfilename(xfilename);
 
@@ -2951,12 +3092,12 @@ begin
   with qryGridColumns do
   begin
     sql.Clear;
-    sql.Add('Select Fieldname,Displaywidth, [Fieldheader] from Gridcolumns where Status' + inttostr(apStatus) +
+    sql.add('Select Fieldname,Displaywidth, [Fieldheader] from Gridcolumns where Status' + inttostr(apStatus) +
       ' = 1 order by Ordning');
     open;
     while not eof do
     begin
-      wwDBGrid1.Selected.Add(FieldByName('Fieldname').AsString + #9 + FieldByName('Displaywidth').AsString + #9 +
+      wwDBGrid1.Selected.add(FieldByName('Fieldname').AsString + #9 + FieldByName('Displaywidth').AsString + #9 +
         FieldByName('Fieldheader').AsString);
       next;
     end;
@@ -3054,9 +3195,10 @@ begin
   actPrissattningPositioner.Enabled := raderFinns;
   actSattFakturadatum.Enabled := raderFinns;
 
-  actFakturarunderlagXML.Enabled := (sp_OrderlistKundID.asInteger = 1) and raderFinns and (pagecontrol1.ActivePageIndex=3);
+  actFakturarunderlagXML.Enabled := (sp_OrderlistKundID.asInteger = 1) and raderFinns and
+    (PageControl1.ActivePageIndex = 3);
 
-//  showmessage(  pagecontrol1.ActivePageIndex.ToString());
+  // showmessage(  pagecontrol1.ActivePageIndex.ToString());
 
   actSattFakturadata.Enabled := (raderFinns) and (wwDBGrid1.Selected.count > 0);
   mnuSättfakturamärkning.Enabled := (raderFinns) and (wwDBGrid1.Selected.count > 0);

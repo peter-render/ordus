@@ -365,6 +365,8 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
+        ExplicitLeft = 6
+        ExplicitTop = 6
       end
       object wwExpandButton1: TwwExpandButton
         Left = 599
@@ -2185,6 +2187,148 @@
       ReadOnly = True
     end
     object StringField9: TStringField
+      FieldName = 'V'#229'rReferens'
+      Origin = '[V'#229'rReferens]'
+      ReadOnly = True
+      Size = 101
+    end
+  end
+  object qryXMLOrder: TFDQuery
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'Select '
+      'oh.Id OrderId,'
+      'k.Kundnamn,'
+      'isnull(ak.F'#246'rnamn,'#39#39') +'#39' '#39'+ isnull(ak.Efternamn,'#39#39') Referens,'
+      'oh.ordernummer,'
+      'oh.Godsm'#228'rke,'
+      'oh.orderdatum,'
+      'oh.Leveransdatum,'
+      'orad.Positionnummer,'
+      'y.Beteckning YtbehandlingBeteckning,'
+      'a.Beteckning,'
+      'a.Artikelnummer,'
+      'orad.Antal,'
+      'oh.OrdertypId,'
+      'orad.Prisperenhet,'
+      'oh.fritext,'
+      'orad.Prisperenhet * orad.Antal as Pris  ,'
+      'cast(getdate() as date) Dagensdatum,'
+      'p2.F'#246'rnamn + '#39' '#39'+ p2.Efternamn V'#229'rReferens'
+      ''
+      ''
+      ''
+      'from OrderRad orad'
+      'join Artikel a on orad.artikelID = a.Id'
+      'join OrderHuvud oh on oh.ID = orad.OrderID'
+      'join kund k on k.Id = oh.kundid'
+      'left join KundPerson kp on kp.ID= oh.ReferensID'
+      'left join akt'#246'r ak on ak.id = kp.Id'
+      'left join personal p on orad.avrapporteradPersonID = p.id'
+      'left join personal p2 on oh.V'#229'rreferensPersonId = p2.id'
+      'left join Ytbehandling y on orad.ytbehandlingID = y.ID'
+      'where oh.id = :OrderId'
+      'ORDER BY a.Artikelnummer'
+      '')
+    Left = 84
+    Top = 93
+    ParamData = <
+      item
+        Name = 'ORDERID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryXMLOrderOrderId: TFDAutoIncField
+      FieldName = 'OrderId'
+      Origin = 'OrderId'
+      ReadOnly = True
+    end
+    object qryXMLOrderKundnamn: TStringField
+      FieldName = 'Kundnamn'
+      Origin = 'Kundnamn'
+      Required = True
+      Size = 50
+    end
+    object qryXMLOrderReferens: TStringField
+      FieldName = 'Referens'
+      Origin = 'Referens'
+      ReadOnly = True
+      Required = True
+      Size = 100
+    end
+    object qryXMLOrderordernummer: TStringField
+      FieldName = 'ordernummer'
+      Origin = 'ordernummer'
+      Required = True
+      Size = 30
+    end
+    object qryXMLOrderGodsmärke: TStringField
+      FieldName = 'Godsm'#228'rke'
+      Origin = '[Godsm'#228'rke]'
+      Size = 50
+    end
+    object qryXMLOrderorderdatum: TSQLTimeStampField
+      FieldName = 'orderdatum'
+      Origin = 'orderdatum'
+      Required = True
+    end
+    object qryXMLOrderLeveransdatum: TSQLTimeStampField
+      FieldName = 'Leveransdatum'
+      Origin = 'Leveransdatum'
+    end
+    object qryXMLOrderPositionnummer: TIntegerField
+      FieldName = 'Positionnummer'
+      Origin = 'Positionnummer'
+    end
+    object qryXMLOrderYtbehandlingBeteckning: TStringField
+      FieldName = 'YtbehandlingBeteckning'
+      Origin = 'YtbehandlingBeteckning'
+      Size = 50
+    end
+    object qryXMLOrderBeteckning: TStringField
+      FieldName = 'Beteckning'
+      Origin = 'Beteckning'
+      Size = 200
+    end
+    object qryXMLOrderArtikelnummer: TStringField
+      FieldName = 'Artikelnummer'
+      Origin = 'Artikelnummer'
+      Required = True
+      Size = 30
+    end
+    object qryXMLOrderAntal: TFMTBCDField
+      FieldName = 'Antal'
+      Origin = 'Antal'
+      Precision = 19
+      Size = 2
+    end
+    object qryXMLOrderOrdertypId: TIntegerField
+      FieldName = 'OrdertypId'
+      Origin = 'OrdertypId'
+    end
+    object qryXMLOrderPrisperenhet: TCurrencyField
+      FieldName = 'Prisperenhet'
+      Origin = 'Prisperenhet'
+    end
+    object qryXMLOrderfritext: TStringField
+      FieldName = 'fritext'
+      Origin = 'fritext'
+      Size = 2000
+    end
+    object qryXMLOrderPris: TFMTBCDField
+      FieldName = 'Pris'
+      Origin = 'Pris'
+      ReadOnly = True
+      Precision = 38
+      Size = 6
+    end
+    object qryXMLOrderDagensdatum: TDateField
+      FieldName = 'Dagensdatum'
+      Origin = 'Dagensdatum'
+      ReadOnly = True
+    end
+    object qryXMLOrderVårReferens: TStringField
       FieldName = 'V'#229'rReferens'
       Origin = '[V'#229'rReferens]'
       ReadOnly = True

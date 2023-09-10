@@ -2238,6 +2238,20 @@
           Font.Style = [fsBold]
           ParentFont = False
         end
+        object Label7: TLabel
+          Left = 491
+          Top = 47
+          Width = 75
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Tillv.tid extra'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Default'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object edtAntal: TDBEditN
           Left = 140
           Top = 43
@@ -2626,7 +2640,7 @@
           OnClick = dbgridDblClick
         end
         object btnFSTransport: TButton
-          Left = 649
+          Left = 678
           Top = 12
           Width = 91
           Height = 25
@@ -2651,6 +2665,33 @@
           DataSource = dsoOrderrad
           ReadOnly = True
           TabOrder = 18
+          ColorOnFocus = clWhite
+          ColorOnNotFocus = clWhite
+          FontColorOnFocus = clBlack
+          FontColorOnNotFocus = clBlack
+          FontColorOnOverWrite = clBlack
+          EditKeyByTab = #9
+          FirstCharUpper = False
+          FirstCharUpList = ' ('
+          WidthOnFocus = 0
+          TextHint = True
+        end
+        object DBEditN2: TDBEditN
+          Left = 572
+          Top = 43
+          Width = 57
+          Height = 21
+          TabStop = False
+          Color = clWhite
+          DataField = 'Extratid'
+          DataSource = dsoOrderrad
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Default'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 19
           ColorOnFocus = clWhite
           ColorOnNotFocus = clWhite
           FontColorOnFocus = clBlack
@@ -2827,6 +2868,7 @@
       #9'orad.Ritning1,'
       #9'orad.F'#246'ljesedelId,'
       #9'orad.Totaltid,'
+      #9'orad.Extratid,'
       'a.Notering,'
       'orad.OrderradInfo,'
       ''
@@ -3297,6 +3339,10 @@
       ReadOnly = True
       Visible = False
     end
+    object qryOrderradExtratid: TIntegerField
+      FieldName = 'Extratid'
+      Origin = 'Extratid'
+    end
   end
   object qryLU_Order: TFDQuery
     Connection = dm.FDConnection1
@@ -3730,7 +3776,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500540010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

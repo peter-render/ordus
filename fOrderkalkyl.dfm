@@ -794,14 +794,15 @@
         Height = 191
         TabStop = False
         Selected.Strings = (
-          'Artikel'#9'21'#9'Artikel'#9#9
-          'Ytbehandling'#9'16'#9'Ytbehandling'#9#9
-          'Antal'#9'6'#9'Antal'#9#9
-          'TillverkningstidUppskattad'#9'14'#9'Tillv.tid uppsk tot.'#9#9
-          'PrisUppskattat'#9'11'#9'Pris ber'#228'knat'#9#9
-          'PrisUppskattatSt'#9'13'#9'Pris ber'#228'knat/st'#9#9
-          'PrisUppskattatStRabatt'#9'15'#9'Rabatterat pris'#9'F'#9
-          'PrisFastst'#228'llt'#9'16'#9'Pris fastst'#228'llt/st'#9#9)
+          'Id'#9'5'#9'Id'
+          'Artikel'#9'21'#9'Artikel'
+          'Ytbehandling'#9'14'#9'Ytbehandling'
+          'Antal'#9'6'#9'Antal'
+          'TillverkningstidUppskattad'#9'14'#9'Tillv.tid uppsk tot.'
+          'PrisUppskattat'#9'11'#9'Pris ber'#228'knat'
+          'PrisUppskattatSt'#9'13'#9'Pris ber'#228'knat/st'
+          'PrisUppskattatStRabatt'#9'15'#9'Rabatterat pris'
+          'PrisFastst'#228'llt'#9'16'#9'Pris fastst'#228'llt/st')
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -828,7 +829,6 @@
         TitleButtons = True
         OnCalcCellColors = wwDBGrid2CalcCellColors
         OnTitleButtonClick = wwDBGrid2TitleButtonClick
-        OnDblClick = mnuEditClick
         OnDrawTitleCell = wwDBGrid2DrawTitleCell
       end
     end
@@ -1101,7 +1101,6 @@
     end
   end
   object sp_OrderradHistoryArtikel: TFDStoredProc
-    Active = True
     Connection = dm.FDConnection1
     StoredProcName = 'dbo.OrderradHistoryArtikel'
     Left = 552
@@ -1217,7 +1216,7 @@
   object dsoOrderradHistoryArtikel: TDataSource
     AutoEdit = False
     DataSet = sp_OrderradHistoryArtikel
-    Left = 434
+    Left = 370
     Top = 300
   end
   object dsoQry: TDataSource
@@ -1447,10 +1446,10 @@
       'from dbo.OffertkalkylArtikel ok '
       'where OffertkalkylId = :OffertkalkylId'
       'and ok.Borttagen is null'
-      'order by ok.Id'
+      'order by ok.Id desc'
       '')
-    Left = 48
-    Top = 320
+    Left = 72
+    Top = 592
     ParamData = <
       item
         Name = 'OFFERTKALKYLID'
@@ -1458,6 +1457,12 @@
         ParamType = ptInput
         Value = Null
       end>
+    object qryId: TFDAutoIncField
+      DisplayWidth = 5
+      FieldName = 'Id'
+      Origin = 'Id'
+      ReadOnly = True
+    end
     object qryArtikel: TStringField
       DisplayWidth = 21
       FieldKind = fkLookup
@@ -1469,7 +1474,7 @@
       Lookup = True
     end
     object Ytbehandling: TStringField
-      DisplayWidth = 16
+      DisplayWidth = 14
       FieldKind = fkLookup
       FieldName = 'Ytbehandling'
       LookupDataSet = qryYtbehandlingUppslag
@@ -1541,13 +1546,6 @@
       Visible = False
       currency = True
       Calculated = True
-    end
-    object qryId: TFDAutoIncField
-      DisplayWidth = 10
-      FieldName = 'Id'
-      Origin = 'Id'
-      ReadOnly = True
-      Visible = False
     end
     object qryArtikelId: TIntegerField
       DisplayWidth = 10
