@@ -271,7 +271,7 @@
       ''
       'order by Positionnummer')
     Left = 508
-    Top = 152
+    Top = 116
     ParamData = <
       item
         Name = 'ORDERID'
@@ -672,10 +672,11 @@
   object dsoOrderradDagens: TDataSource
     AutoEdit = False
     DataSet = qryOrderradDagens
-    Left = 507
-    Top = 212
+    Left = 511
+    Top = 244
   end
   object PopupMenu1: TPopupMenu
+    OnPopup = PopupMenu1Popup
     Left = 336
     Top = 225
     object Visaritning1: TMenuItem

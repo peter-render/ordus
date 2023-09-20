@@ -1879,18 +1879,19 @@ end;
 procedure TfrmOrderLista.actOrderbekräftleseViaMailExecute(Sender: TObject);
 var
   Outlook: OleVariant;
-  xmlFilename: string;
+  strprice, xmlFilename: string;
   Mail: Variant;
   Xml: IXMLDOCUMENT;
-  RootNode, CurNode, Node, HeadNode, RefNode, rn, rNode: IXMLNODE;
-  nRow:integer;
+  RootNode, CurNode, Node, HeadNode, RefNode, rn, rNode, expNode: IXMLNODE;
+  nRow: Integer;
 const
   olMailItem = $00000000;
 begin
 
   Xml := NewXMLDocument;
   Xml.Encoding := 'UTF-8';
-  Xml.Options := [doNodeAutoIndent];
+  Xml.Options := [];
+  // Xml.Options := [doNodeAutoIndent];
 
   try
 
@@ -1901,13 +1902,18 @@ begin
       open;
 
       // RootNode := Xml.CreateNode('ORDUS20 SoftwareManufacturer="Holzer Consulting" SoftwareName="Ordus" SoftwareVerion="3.1.0"');
-      RootNode := Xml.AddChild('ORDUS20');
-      RootNode.attributes['SoftwareManufacturer'] := 'Holzer Consultning - Ängelholm';
-      RootNode.attributes['SoftwareName'] := 'Ordus';
+      // RootNode := Xml.AddChild('ORDUS20');
+      // RootNode.attributes['SoftwareManufacturer'] := 'Holzer Consultning - Ängelholm';
+      // RootNode.attributes['SoftwareName'] := 'Ordus';
+
+      RootNode := Xml.AddChild('ORDRSP419');
+      RootNode.attributes['SoftwareManufacturer'] := 'Monitor ERP System AB';
+      RootNode.attributes['SoftwareName'] := 'MONITOR';
+      RootNode.attributes['SoftwareVersion'] := '23.3.12.22266';
 
       // Orderresponse
       CurNode := RootNode.AddChild('OrderResponse');
-      CurNode.attributes['Ordernumber'] := sp_OrderlistOrdernummer.asString;
+      CurNode.attributes['Ordernumber'] := sp_OrderlistOrdernummer.AsString;
       // Name
       Node := CurNode.AddChild('Name');
       Node.Text := 'Ängelholms Mekaniska';
@@ -1922,13 +1928,16 @@ begin
       HeadNode := CurNode.AddChild('Head');
       // Supplier
       Node := HeadNode.AddChild('Supplier');
-      Node.attributes['SupplierCodeEdi'] := '?';
+      Node.attributes['SupplierCodeEdi'] := '970087';
+
       // PhoneNumber
       Node := HeadNode.AddChild('PhoneNumber');
-      Node.Text := '0431 111111';
+
+      // Node.Text := '0431 111111';
+
       Node := HeadNode.AddChild('Byer');
       Node.attributes['BuyerOrderConfirmationCodeEdi'] := '';
-      // References
+      // References -----------------------------------------------------------
       RefNode := HeadNode.AddChild('References');
       Node := RefNode.AddChild('BuyerReference');
       Node.Text := 'Jimmy Gudmundsson';
@@ -1939,6 +1948,14 @@ begin
       Node := RefNode.AddChild('SupplierEmail');
       Node.Text := 'info@angelholms-mekaniska.se';
 
+      expNode := HeadNode.AddChild('Export');
+      Node := expNode.AddChild('IncoTermCombiTerm');
+      Node := expNode.AddChild('DeliveryMethod');
+      Node := expNode.AddChild('TransportPayer');
+      Node := expNode.AddChild('CustomerTransportTimeDays');
+      Node := expNode.AddChild('TermsOfPaymentDays');
+      Node := expNode.AddChild('CompanyAdressFlag');
+
       // Rows
       rNode := CurNode.AddChild('Rows');
 
@@ -1946,18 +1963,21 @@ begin
       // för varje artikel
       // ======================================================================
 
-      nRow :=1;
+      nRow := 1;
       while not eof do
       begin
-        nRow :=  nRow+1;
+        nRow := nRow + 1;
         rn := rNode.AddChild('Row');
-        rn.attributes['RowNumber'] := inttostr(nRow*10);
-        rn.attributes['OrderResponseRowStatus'] := '5';
+        // rn.attributes['RowNumber'] := inttostr(nRow*10);
+
+        rn.attributes['RowNumber'] := FieldByName('PositionNummer').AsString;
+
         rn.attributes['RowType'] := '1';
+        rn.attributes['OrderResponseRowStatus'] := '5';
 
         Node := rn.AddChild('Part');
         Node.attributes['PartNumber'] := FieldByName('Artikelnummer').AsString;
-        Node.attributes['Revision'] := '?';
+        Node.attributes['Revision'] := 'A';
 
         Node := rn.AddChild('SupplierPartNumber');
         Node.Text := FieldByName('Artikelnummer').AsString;
@@ -1971,13 +1991,18 @@ begin
         Node.Text := FieldByName('Leveransdatum').AsString;
 
         Node := rn.AddChild('Quantity');
-        Node.Text := FieldByName('Antal').AsString;
+        Node.Text := stringReplace(FieldByName('Antal').AsString,',','.',[]);
 
         Node := rn.AddChild('Unit');
         Node.Text := 'pcs';
 
+
         Node := rn.AddChild('ConfirmedPrice');
-        Node.Text := FieldByName('Pris').AsString;
+        if FieldByName('PrisPerEnhet').AsString = '' then
+          strprice := '0'
+        else
+          strprice := FieldByName('PrisPerEnhet').AsString;
+        Node.Text := StringReplace(strprice, ',', '.', []);
 
         Node := rn.AddChild('Discount');
         Node.Text := '0';
@@ -1986,13 +2011,12 @@ begin
         Node.Text := FieldByName('Leveransdatum').AsString;
 
         Node := rn.AddChild('RequestedQuantity');
-        Node.Text :=FieldByName('Antal').AsString;
+        Node.Text := FieldByName('Antal').AsString;
 
         Node := rn.AddChild('PartType');
-        Node.Text := '2';
+        Node.Text := '1';
 
         Node := rn.AddChild('Setup');
-        Node.Text := '0';
 
         Node := rn.AddChild('Aloy');
         Node.Text := '0';

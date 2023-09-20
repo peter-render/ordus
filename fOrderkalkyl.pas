@@ -252,6 +252,7 @@ begin
     end;
 
   end;
+
   doEdit := False;
   qryOffertkalkyl.Refresh;
   qry.Refresh;
@@ -260,6 +261,17 @@ begin
 
   LU_Artikel.value := '';
   LU_Artikel.RefreshDisplay;
+  edtYtbehandling.clear;
+  edtLasertid.clear;
+//  edtTVTU.Text:='';
+  edtTVTU.Clear;
+  edtAntal.Clear;
+  edtSkrotandel.Clear;
+  edtVikt.Clear;
+  edtPU.clear;
+  edtPUst.clear;
+  edtPFst.Clear;
+  edtRabatt.clear;
 
   wwDBGrid3.DataSource.DataSet.Close;
 
@@ -445,7 +457,6 @@ begin
   if (edtAntal.ValueFloat <> 0) and (edtTVTU.ValueFloat <> 0) then
   begin
     lblAntal.caption := '';
-
     with sp_Offertkalkyl do
     begin
 
@@ -769,7 +780,7 @@ end;
 
 procedure TfrmOrderkalkyl.edtLasertidExit(Sender: TObject);
 begin
-  if doEdit then
+//  if doEdit then
     DBEdit2Exit(Sender);
 end;
 
@@ -794,14 +805,14 @@ end;
 
 procedure TfrmOrderkalkyl.edtSkrotandelExit(Sender: TObject);
 begin
-  if doEdit then
+//  if doEdit then
     DBEdit2Exit(Sender);
 
 end;
 
 procedure TfrmOrderkalkyl.edtViktExit(Sender: TObject);
 begin
-  if doEdit then
+//  if doEdit then
     DBEdit2Exit(Sender);
 
 end;

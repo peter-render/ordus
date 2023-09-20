@@ -85,6 +85,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure rbClick(Sender: TObject);
     procedure Visaritning1Click(Sender: TObject);
+    procedure PopupMenu1Popup(Sender: TObject);
   private
     { Private declarations }
   public
@@ -101,6 +102,11 @@ implementation
 procedure TfrmDagensOrderlista.Button1Click(Sender: TObject);
 begin
   self.Close;
+end;
+
+procedure TfrmDagensOrderlista.PopupMenu1Popup(Sender: TObject);
+begin
+             Popupmenu1.AutoPopup:= true;
 end;
 
 procedure TfrmDagensOrderlista.rbClick(Sender: TObject);
@@ -135,6 +141,7 @@ begin
     LURL := TPath.GetFullPath(filename).Replace('\', '/', [rfReplaceAll]);
     LURL := 'file://' + LURL;
     ShellExecute(0, 'open', PChar(filename), nil, nil, SW_SHOWNORMAL);
-  end;
+  end else
+  Showmessage('Fil "'+ filename + '" kan inte hittas!');
 end;
 end.

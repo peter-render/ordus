@@ -306,7 +306,7 @@
       end
       object Label3: TLabel
         Left = 98
-        Top = 177
+        Top = 174
         Width = 54
         Height = 13
         Caption = 'Materialtyp'

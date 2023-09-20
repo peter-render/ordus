@@ -367,6 +367,8 @@ begin
 
     qryArtikelgrupp.Append;
     // qryArtikelgrupp.Fieldbyname('ArtikelId').asInteger := dm.qryArtikelArtikelId.AsInteger;
+   qryArtikelgrupp.Fieldbyname('Antal').asFLoat := 1.0;
+
     Showmodal;
 
     if modalresult = mrOK then

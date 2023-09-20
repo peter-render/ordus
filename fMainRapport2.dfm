@@ -529,6 +529,8 @@
       Font.Name = 'Default'
       Font.Style = [fsBold]
       ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
       TabOrder = 0
       TabStop = False
       OnClick = btnCloseClick
@@ -546,6 +548,8 @@
       Font.Name = 'Default'
       Font.Style = [fsBold]
       ParentFont = False
+      ParentShowHint = False
+      ShowHint = False
       TabOrder = 4
       OnClick = btnVisaKalenderClick
     end
@@ -3776,7 +3780,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500580010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020005005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

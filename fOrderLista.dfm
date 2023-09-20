@@ -365,8 +365,6 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
-        ExplicitLeft = 6
-        ExplicitTop = 6
       end
       object wwExpandButton1: TwwExpandButton
         Left = 599
@@ -2204,7 +2202,7 @@
       'oh.Godsm'#228'rke,'
       'oh.orderdatum,'
       'oh.Leveransdatum,'
-      'orad.Positionnummer,'
+      'isnull(orad.Positionnummer,orad.Radnr) Positionnummer,'
       'y.Beteckning YtbehandlingBeteckning,'
       'a.Beteckning,'
       'a.Artikelnummer,'
