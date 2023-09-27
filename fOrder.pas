@@ -213,6 +213,9 @@ type
     edtVikt: TEditN;
     Label24: TLabel;
     qryOrderradSenasteAvrapporteradDatum: TDateField;
+    qryOrderradTotaltid: TIntegerField;
+    qryOrderradExtratid: TIntegerField;
+    qryOrderradTidTotalt: TIntegerField;
     procedure btnDeleteClick(Sender: TObject);
     procedure edtArtikelCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
     procedure wwDBGrid2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);

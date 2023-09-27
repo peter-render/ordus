@@ -1891,7 +1891,7 @@ begin
   Xml := NewXMLDocument;
   Xml.Encoding := 'UTF-8';
   Xml.Options := [];
-  // Xml.Options := [doNodeAutoIndent];
+  Xml.Options := [doNodeAutoIndent];
 
   try
 
@@ -1973,7 +1973,8 @@ begin
         rn.attributes['RowNumber'] := FieldByName('PositionNummer').AsString;
 
         rn.attributes['RowType'] := '1';
-        rn.attributes['OrderResponseRowStatus'] := '5';
+        rn.attributes['OrderResponseRowStatus'] := '2'; //2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
+
 
         Node := rn.AddChild('Part');
         Node.attributes['PartNumber'] := FieldByName('Artikelnummer').AsString;
@@ -2014,7 +2015,7 @@ begin
         Node.Text := FieldByName('Antal').AsString;
 
         Node := rn.AddChild('PartType');
-        Node.Text := '1';
+        Node.Text := '1';           //2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
 
         Node := rn.AddChild('Setup');
 
