@@ -216,6 +216,10 @@ type
     qryOrderradTotaltid: TIntegerField;
     qryOrderradExtratid: TIntegerField;
     qryOrderradTidTotalt: TIntegerField;
+    qryOrderradSum: TFDQuery;
+    qryOrderradSumSumTotaltid: TFloatField;
+    qryOrderradSumSumExtratid: TFloatField;
+    qryOrderradSumSumTotalt: TFloatField;
     procedure btnDeleteClick(Sender: TObject);
     procedure edtArtikelCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
     procedure wwDBGrid2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -258,6 +262,7 @@ type
     procedure wwDBGrid1TitleButtonClick(Sender: TObject; AFieldName: string);
     procedure wwDBGrid1DragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure wwDBGrid1DragDrop(Sender, Source: TObject; X, Y: Integer);
+    procedure qryOrderradAfterOpen(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -614,19 +619,18 @@ var
   FileName: string;
 begin
   // Retrieve the dropped file(s)
-//  for i := 0 to sender.Files.Count - 1 do
-//  begin
-//    FileName := DragObject.Files[i];
-//    showmessage(ExtractFileName(FileName));
-////
-////    // Add the file to the grid
-////    Grid1.RowCount := Grid1.RowCount + 1;
-////    Grid1.Cells[0, Grid1.RowCount - 1] := ExtractFileName(FileName);
-////    Grid1.Cells[1, Grid1.RowCount - 1] := ExtractFilePath(FileName);
-//
-//  end;
+  // for i := 0 to sender.Files.Count - 1 do
+  // begin
+  // FileName := DragObject.Files[i];
+  // showmessage(ExtractFileName(FileName));
+  /// /
+  /// /    // Add the file to the grid
+  /// /    Grid1.RowCount := Grid1.RowCount + 1;
+  /// /    Grid1.Cells[0, Grid1.RowCount - 1] := ExtractFileName(FileName);
+  /// /    Grid1.Cells[1, Grid1.RowCount - 1] := ExtractFilePath(FileName);
+  //
+  // end;
 end;
-
 
 procedure TfrmOrder.wwDBGrid1DragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
 begin
@@ -639,9 +643,9 @@ begin
     Operation := TDragOperation.copy;
     end;
   *)
- // Operation := TDragOperation.Copy;
-// Accept:= (sender is Tfile);
-//Accept := Source is TDropFilesTarget;
+  // Operation := TDragOperation.Copy;
+  // Accept:= (sender is Tfile);
+  // Accept := Source is TDropFilesTarget;
 end;
 
 procedure TfrmOrder.wwDBGrid1TitleButtonClick(Sender: TObject; AFieldName: string);
@@ -650,9 +654,9 @@ begin
   begin
     close;
     sql.Delete(sql.Count - 1);
-//    showmessage(sql.Text);
+    // showmessage(sql.Text);
     sql.Add('order by ' + AFieldName);
-//    showmessage(sql.Text);
+    // showmessage(sql.Text);
     open;
   end;
 end;
@@ -878,6 +882,22 @@ end;
 procedure TfrmOrder.qryOrderHistoryCalcFields(DataSet: TDataSet);
 begin
   DataSet.FieldByName('InforaderFinns').AsBoolean := (DataSet.FieldByName('Antalinforader').asInteger > 0);
+
+end;
+
+procedure TfrmOrder.qryOrderradAfterOpen(DataSet: TDataSet);
+begin
+  with qryOrderradSum do
+  begin
+    close;
+    qryOrderradSum.ParamByName('Orderid').value := qryOrder.FieldByName('Id').asInteger;
+    open;
+  end;
+
+  wwdbgrid1.ColumnByName('Totaltid').FooterValue:= FloatToStrF(qryOrderradSumSumTotaltid.asFloat,ffFixed , 10, 2);
+  wwdbgrid1.ColumnByName('Extratid').FooterValue:= FloatToStrF(qryOrderradSumSumExtratid.asFloat,ffFixed , 10, 2);
+  wwdbgrid1.ColumnByName('TidTotalt').FooterValue:= FloatToStrF(qryOrderradSumSumTotalt.asFloat,ffFixed , 10,2);
+
 
 end;
 

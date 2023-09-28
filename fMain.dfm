@@ -141,6 +141,10 @@
         Caption = 'Avrapporterad tid'
         OnClick = Avrapporteradtid1Click
       end
+      object Extratidrapport1: TMenuItem
+        Caption = 'Extratidrapport'
+        OnClick = Extratidrapport1Click
+      end
     end
     object mnuRegister: TMenuItem
       Caption = '&Register'
@@ -232,7 +236,7 @@
     Left = 213
     Top = 108
     Bitmap = {
-      494C01010A000D00DC0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010A000D00E00010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000003000000001002000000000000030
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

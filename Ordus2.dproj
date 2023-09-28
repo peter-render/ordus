@@ -603,9 +603,6 @@
         <DCCReference Include="rOffertKalkyl.pas">
             <Form>rptOffertKalkyl</Form>
         </DCCReference>
-        <DCCReference Include="fAvtapporteradTidRapport.pas">
-            <Form>frmAvrapporteradTidRapport</Form>
-        </DCCReference>
         <DCCReference Include="rLagerplatsetikett2.pas">
             <Form>rptLagerplatsEtikett2</Form>
         </DCCReference>
@@ -720,6 +717,14 @@
         </DCCReference>
         <DCCReference Include="fDagensOrderlista.pas">
             <Form>frmDagensOrderlista</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="fExtratidRapport.pas">
+            <Form>frmExtratidRapport</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="rExtratidrapport.pas">
+            <Form>rptExtratidRapport</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <None Include="Ordus2.todo"/>

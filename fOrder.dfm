@@ -221,26 +221,26 @@
         PictureMasks.Strings = (
           'Artikelnummer'#9'### ###'#9'T'#9'T')
         Selected.Strings = (
-          'Radnr'#9'4'#9'Radnr'
-          'Positionnummer'#9'4'#9'PosNr'
-          'Artikelnummer'#9'15'#9'Artikelnummer'
-          'Beteckning'#9'22'#9'Beteckning'
-          'cRitningsnoteringFinns_disp'#9'2'#9'R'
-          'Lagersaldo'#9'2'#9'  L'
-          'cFixatur'#9'2'#9' F'
-          'PrisperEnhet'#9'9'#9'  Pris/enhet'
-          'Fr'#229'nLager'#9'8'#9'Fr'#229'n lager'
-          'Attproducera'#9'7'#9'Att prod'
-          'Antal'#9'6'#9'  Antal'
-          'TillLager'#9'9'#9'   Till lager'
-          'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'
-          'AvrapporteradPlasmatid'#9'6'#9'Lasertid'
-          'Totaltid'#9'6'#9'Tv-Tid'
-          'Extratid'#9'7'#9'Extratid'
-          'TidTotalt'#9'7'#9'Tv tid tot.'#9'F'
-          'SkrotandelProcent'#9'6'#9'Skrot %'
-          'Vikt'#9'6'#9'Vikt/st'
-          'OrderradInfo'#9'22'#9'Info')
+          'Radnr'#9'4'#9'Radnr'#9#9
+          'Positionnummer'#9'4'#9'PosNr'#9#9
+          'Artikelnummer'#9'15'#9'Artikelnummer'#9#9
+          'Beteckning'#9'22'#9'Beteckning'#9#9
+          'cRitningsnoteringFinns_disp'#9'2'#9'R'#9#9
+          'Lagersaldo'#9'2'#9'  L'#9#9
+          'cFixatur'#9'2'#9' F'#9#9
+          'PrisperEnhet'#9'9'#9'  Pris/enhet'#9#9
+          'Fr'#229'nLager'#9'8'#9'Fr'#229'n lager'#9#9
+          'Attproducera'#9'7'#9'Att prod'#9#9
+          'Antal'#9'6'#9'  Antal'#9#9
+          'TillLager'#9'9'#9'   Till lager'#9#9
+          'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'#9#9
+          'AvrapporteradPlasmatid'#9'6'#9'Lasertid'#9#9
+          'Totaltid'#9'6'#9'Tv-Tid'#9#9
+          'Extratid'#9'7'#9'Extratid'#9#9
+          'TidTotalt'#9'7'#9'Tv tid tot.'#9'F'#9
+          'SkrotandelProcent'#9'6'#9'Skrot %'#9#9
+          'Vikt'#9'6'#9'Vikt/st'#9#9
+          'OrderradInfo'#9'22'#9'Info'#9#9)
         IniAttributes.Delimiter = ';;'
         IniAttributes.UnicodeIniFile = False
         TitleColor = clBtnFace
@@ -253,7 +253,7 @@
         Font.Height = -11
         Font.Name = 'Default'
         Font.Style = []
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgPerfectRowFit, dgRowResize]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgPerfectRowFit, dgShowFooter, dgRowResize]
         ParentFont = False
         PopupMenu = PopupMenu1
         TabOrder = 0
@@ -1356,6 +1356,7 @@
       end>
   end
   object qryOrderrad: TFDQuery
+    AfterOpen = qryOrderradAfterOpen
     OnCalcFields = qryOrderradCalcFields
     MasterSource = dsoOrder
     MasterFields = 'OrderId'
@@ -2365,7 +2366,7 @@
     Left = 376
     Top = 576
     Bitmap = {
-      494C010102000500640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2528,5 +2529,43 @@
         DataType = ftBoolean
         ParamType = ptInput
       end>
+  end
+  object qryOrderradSum: TFDQuery
+    OnCalcFields = qryOrderradCalcFields
+    MasterSource = dsoOrder
+    MasterFields = 'OrderId'
+    Connection = dm.FDConnection1
+    SQL.Strings = (
+      'select '
+      'cast(sum(orad.Totaltid) as float) SumTotaltid, '
+      'cast(Sum(orad.Extratid) as float) SumExtratid,'
+      'cast(Sum(orad.Totaltid + orad.Extratid) as Float) SumTotalt'
+      ''
+      'from OrderRad orad'
+      'where orad.OrderId = :OrderId')
+    Left = 164
+    Top = 608
+    ParamData = <
+      item
+        Name = 'ORDERID'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+    object qryOrderradSumSumTotaltid: TFloatField
+      FieldName = 'SumTotaltid'
+      Origin = 'SumTotaltid'
+      ReadOnly = True
+    end
+    object qryOrderradSumSumExtratid: TFloatField
+      FieldName = 'SumExtratid'
+      Origin = 'SumExtratid'
+      ReadOnly = True
+    end
+    object qryOrderradSumSumTotalt: TFloatField
+      FieldName = 'SumTotalt'
+      Origin = 'SumTotalt'
+      ReadOnly = True
+    end
   end
 end

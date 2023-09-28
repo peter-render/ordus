@@ -33,7 +33,6 @@ uses
   rEtikett in 'rEtikett.pas' {rptEtikett},
   rPallEtikett in 'rPallEtikett.pas' {rptPallEtikett},
   rOffertKalkyl in 'rOffertKalkyl.pas' {rptOffertKalkyl},
-  fAvtapporteradTidRapport in 'fAvtapporteradTidRapport.pas' {frmAvrapporteradTidRapport},
   rLagerplatsetikett2 in 'rLagerplatsetikett2.pas' {rptLagerplatsEtikett2},
   fArtikelgrupp in 'fArtikelgrupp.pas' {frmArtikelgrupp},
   fArtikeltext in 'fArtikeltext.pas' {frmArtikeltext},
@@ -70,7 +69,9 @@ uses
   rSammelfaktura in 'rSammelfaktura.pas' {rptSammelfaktura},
   rRitningsnotering in 'rRitningsnotering.pas' {rptRitningsnotering},
   fExcelimportOrder in 'fExcelimportOrder.pas' {frmExcelImportOrder},
-  fDagensOrderlista in 'fDagensOrderlista.pas' {frmDagensOrderlista};
+  fDagensOrderlista in 'fDagensOrderlista.pas' {frmDagensOrderlista},
+  fExtratidRapport in 'fExtratidRapport.pas' {frmExtratidRapport},
+  rExtratidrapport in 'rExtratidrapport.pas' {rptExtratidRapport};
 
 {$R *.RES}
 

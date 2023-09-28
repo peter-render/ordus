@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ActnList, Vcl.PlatformDefaultStyleActnCtrls, System.Actions,
-  Vcl.ActnCtrls, Vcl.ActnMenus, fComputer, fRitningsnotering;
+  Vcl.ActnCtrls, Vcl.ActnMenus, fComputer, fRitningsnotering, fExtratidRapport;
 
 type
   TfrmMain = class(TForm)
@@ -61,6 +61,7 @@ type
     Ritningsnotering1: TMenuItem;
     Import1: TMenuItem;
     SkickaorderbekrftleseExcel1: TMenuItem;
+    Extratidrapport1: TMenuItem;
     procedure tbtnKunderClick(Sender: TObject);
     procedure btnAvslutClick(Sender: TObject);
     procedure Ytbehandlingstyper1Click(Sender: TObject);
@@ -92,6 +93,7 @@ type
     procedure Computer1Click(Sender: TObject);
     procedure Flikkolumner1Click(Sender: TObject);
     procedure Ritningsnotering1Click(Sender: TObject);
+    procedure Extratidrapport1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -185,6 +187,13 @@ end;
 procedure TfrmMain.Dagar1Click(Sender: TObject);
 begin
   with TfrmDagar.Create(application) do
+    showmodal;
+
+end;
+
+procedure TfrmMain.Extratidrapport1Click(Sender: TObject);
+begin
+  with TfrmExtratidrapport.Create(application) do
     showmodal;
 
 end;
