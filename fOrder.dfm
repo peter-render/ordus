@@ -5,7 +5,7 @@
   BorderStyle = bsNone
   Caption = 'Best'#228'llning'
   ClientHeight = 742
-  ClientWidth = 1311
+  ClientWidth = 1342
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -28,14 +28,15 @@
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1311
+    Width = 1342
     Height = 742
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 1311
     object Panel3: TPanel
       Left = 1
       Top = 1
-      Width = 1309
+      Width = 1340
       Height = 54
       Align = alTop
       Font.Charset = DEFAULT_CHARSET
@@ -45,6 +46,7 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 1309
       object Label1: TLabel
         Left = 159
         Top = 11
@@ -185,7 +187,7 @@
     object Panel4: TPanel
       Left = 1
       Top = 397
-      Width = 1309
+      Width = 1340
       Height = 344
       Align = alClient
       BorderWidth = 10
@@ -197,129 +199,160 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      DesignSize = (
-        1309
-        344)
-      object Label17: TLabel
-        Left = 1075
-        Top = 102
-        Width = 61
-        Height = 14
-        Anchors = [akLeft, akBottom]
-        Caption = 'Ritningsnotis'
-        ExplicitTop = 88
-      end
-      object wwDBGrid1: TwwDBGrid
+      ExplicitLeft = 27
+      ExplicitTop = 393
+      ExplicitWidth = 1309
+      object Panel17: TPanel
         Left = 11
         Top = 11
-        Width = 1058
+        Width = 1133
         Height = 322
-        ControlType.Strings = (
-          'LagerArtikel;CheckBox;True;False'
-          'cBock;ImageIndex;Original Size'
-          'cFixatur;ImageIndex;Original Size')
-        PictureMasks.Strings = (
-          'Artikelnummer'#9'### ###'#9'T'#9'T')
-        Selected.Strings = (
-          'Radnr'#9'4'#9'Radnr'#9#9
-          'Positionnummer'#9'4'#9'PosNr'#9#9
-          'Artikelnummer'#9'15'#9'Artikelnummer'#9#9
-          'Beteckning'#9'22'#9'Beteckning'#9#9
-          'cRitningsnoteringFinns_disp'#9'2'#9'R'#9#9
-          'Lagersaldo'#9'2'#9'  L'#9#9
-          'cFixatur'#9'2'#9' F'#9#9
-          'PrisperEnhet'#9'9'#9'  Pris/enhet'#9#9
-          'Fr'#229'nLager'#9'8'#9'Fr'#229'n lager'#9#9
-          'Attproducera'#9'7'#9'Att prod'#9#9
-          'Antal'#9'6'#9'  Antal'#9#9
-          'TillLager'#9'9'#9'   Till lager'#9#9
-          'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'#9#9
-          'AvrapporteradPlasmatid'#9'6'#9'Lasertid'#9#9
-          'Totaltid'#9'6'#9'Tv-Tid'#9#9
-          'Extratid'#9'7'#9'Extratid'#9#9
-          'TidTotalt'#9'7'#9'Tv tid tot.'#9'F'#9
-          'SkrotandelProcent'#9'6'#9'Skrot %'#9#9
-          'Vikt'#9'6'#9'Vikt/st'#9#9
-          'OrderradInfo'#9'22'#9'Info'#9#9)
-        IniAttributes.Delimiter = ';;'
-        IniAttributes.UnicodeIniFile = False
-        TitleColor = clBtnFace
-        FixedCols = 0
-        ShowHorzScrollBar = True
-        Align = alLeft
-        DataSource = dsoOrderrad
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Default'
-        Font.Style = []
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgPerfectRowFit, dgShowFooter, dgRowResize]
-        ParentFont = False
-        PopupMenu = PopupMenu1
+        Align = alClient
+        Caption = 'Panel17'
         TabOrder = 0
-        TitleAlignment = taLeftJustify
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Default'
-        TitleFont.Style = []
-        TitleLines = 1
-        TitleButtons = True
-        OnCalcCellColors = wwDBGrid1CalcCellColors
-        OnTitleButtonClick = wwDBGrid1TitleButtonClick
-        OnDblClick = wwDBGrid1DblClick
-        ImageList = ImageList1
-        PadColumnStyle = pcsPadHeader
+        ExplicitLeft = 728
+        ExplicitTop = 101
+        ExplicitWidth = 185
+        ExplicitHeight = 41
+        object wwDBGrid1: TwwDBGrid
+          Left = 1
+          Top = 1
+          Width = 1131
+          Height = 320
+          ControlType.Strings = (
+            'LagerArtikel;CheckBox;True;False'
+            'cBock;ImageIndex;Original Size'
+            'cFixatur;ImageIndex;Original Size')
+          PictureMasks.Strings = (
+            'Artikelnummer'#9'### ###'#9'T'#9'T')
+          Selected.Strings = (
+            'Radnr'#9'4'#9'R-nr'
+            'Positionnummer'#9'4'#9'P-Nr'
+            'Artikelnummer'#9'11'#9'Artikelnummer'
+            'Beteckning'#9'24'#9'Beteckning'
+            'cRitningsnoteringFinns_disp'#9'2'#9'R'
+            'Lagersaldo'#9'2'#9'  L'
+            'cFixatur'#9'2'#9' F'
+            'PrisperEnhet'#9'9'#9'  Pris/enhet'
+            'Fr'#229'nLager'#9'6'#9'Fr. lager'
+            'Attproducera'#9'7'#9'Att prod'
+            'Antal'#9'6'#9'  Antal'
+            'TillLager'#9'7'#9' Till lager'
+            'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'
+            'AvrapporteradPlasmatid'#9'6'#9'Lasertid'
+            'Totaltid'#9'9'#9'Tv-Tid'
+            'Extratid'#9'6'#9'X-tid'
+            'TidTotalt'#9'10'#9'Tv tid tot.'
+            'SkrotandelProcent'#9'6'#9'Skrot %'
+            'Vikt'#9'6'#9'Vikt/st'
+            'SenasteAvrapporteradDatum'#9'10'#9'Senast tv.'
+            'OrderradInfo'#9'25'#9'Info')
+          IniAttributes.Delimiter = ';;'
+          IniAttributes.UnicodeIniFile = False
+          TitleColor = clBtnFace
+          FixedCols = 0
+          ShowHorzScrollBar = True
+          Align = alClient
+          DataSource = dsoOrderrad
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Default'
+          Font.Style = []
+          Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgPerfectRowFit, dgShowFooter, dgRowResize]
+          ParentFont = False
+          PopupMenu = PopupMenu1
+          TabOrder = 0
+          TitleAlignment = taLeftJustify
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Default'
+          TitleFont.Style = []
+          TitleLines = 1
+          TitleButtons = True
+          OnCalcCellColors = wwDBGrid1CalcCellColors
+          OnTitleButtonClick = wwDBGrid1TitleButtonClick
+          OnDblClick = wwDBGrid1DblClick
+          ImageList = ImageList1
+          PadColumnStyle = pcsPadHeader
+        end
       end
-      object btnDelete: TButton
-        Left = 1083
-        Top = 52
-        Width = 113
-        Height = 25
-        Caption = 'Ta bort rad'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Default '
-        Font.Style = []
-        ParentFont = False
+      object Panel18: TPanel
+        Left = 1144
+        Top = 11
+        Width = 185
+        Height = 322
+        Align = alRight
+        Caption = 'Panel18'
         TabOrder = 1
-        OnClick = btnDeleteClick
-      end
-      object btnEdit: TButton
-        Left = 1083
-        Top = 21
-        Width = 113
-        Height = 25
-        Caption = #196'ndra rad '
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Default'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 2
-        OnClick = wwDBGrid1DblClick
-      end
-      object DBMemo1: TDBMemo
-        Left = 1075
-        Top = 92
-        Width = 225
-        Height = 239
-        Anchors = [akLeft, akRight, akBottom]
-        DataField = 'Notering'
-        DataSource = dsoOrderrad
-        ReadOnly = True
-        TabOrder = 3
+        ExplicitLeft = 976
+        ExplicitTop = 2
+        ExplicitHeight = 339
+        DesignSize = (
+          185
+          322)
+        object Label17: TLabel
+          Left = 16
+          Top = 71
+          Width = 61
+          Height = 14
+          Anchors = [akRight, akBottom]
+          Caption = 'Ritningsnotis'
+        end
+        object DBMemo1: TDBMemo
+          Left = 12
+          Top = 91
+          Width = 163
+          Height = 223
+          Anchors = [akLeft, akRight, akBottom]
+          DataField = 'Notering'
+          DataSource = dsoOrderrad
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object btnEdit: TButton
+          Left = 12
+          Top = 5
+          Width = 113
+          Height = 25
+          Anchors = [akTop, akRight]
+          Caption = #196'ndra rad '
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Default'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnClick = wwDBGrid1DblClick
+        end
+        object btnDelete: TButton
+          Left = 12
+          Top = 36
+          Width = 113
+          Height = 25
+          Anchors = [akTop, akRight]
+          Caption = 'Ta bort rad'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Default '
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          OnClick = btnDeleteClick
+        end
       end
     end
     object Panel5: TPanel
       Left = 1
       Top = 55
-      Width = 1309
+      Width = 1340
       Height = 342
       Align = alTop
       TabOrder = 2
+      ExplicitWidth = 1309
       object Splitter1: TSplitter
         Left = 377
         Top = 1
@@ -1010,11 +1043,12 @@
       object Panel1: TPanel
         Left = 380
         Top = 1
-        Width = 928
+        Width = 959
         Height = 340
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
+        ExplicitWidth = 928
         object Splitter2: TSplitter
           Left = 441
           Top = 0
@@ -1186,49 +1220,38 @@
         object Panel9: TPanel
           Left = 444
           Top = 0
-          Width = 484
+          Width = 515
           Height = 340
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          object Panel10: TPanel
-            Left = 0
-            Top = 0
-            Width = 484
-            Height = 24
-            Align = alTop
-            Alignment = taLeftJustify
-            BevelOuter = bvNone
-            Caption = '   Artiklar som ing'#229'r'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Default'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 0
-          end
+          ExplicitWidth = 484
           object Panel11: TPanel
             Left = 0
-            Top = 24
-            Width = 484
-            Height = 316
+            Top = 0
+            Width = 515
+            Height = 340
             Align = alClient
             BevelOuter = bvNone
             BorderWidth = 3
-            TabOrder = 1
+            TabOrder = 0
+            ExplicitTop = 24
+            ExplicitWidth = 484
+            ExplicitHeight = 316
             object Panel14: TPanel
               Left = 3
-              Top = 3
-              Width = 478
+              Top = 27
+              Width = 509
               Height = 310
               Align = alClient
               BevelOuter = bvLowered
               TabOrder = 0
+              ExplicitTop = 3
+              ExplicitWidth = 478
               object dbgArtikelgrupp: TwwDBGrid
                 Left = 1
                 Top = 1
-                Width = 476
+                Width = 507
                 Height = 308
                 Selected.Strings = (
                   'Artikelnummer'#9'30'#9'Artikelnummer'
@@ -1260,7 +1283,28 @@
                 TitleLines = 1
                 TitleButtons = False
                 PadColumnStyle = pcsPadHeader
+                ExplicitWidth = 476
               end
+            end
+            object Panel10: TPanel
+              Left = 3
+              Top = 3
+              Width = 509
+              Height = 24
+              Align = alTop
+              Alignment = taLeftJustify
+              BevelOuter = bvNone
+              Caption = '   Artiklar som ing'#229'r'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Default'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 1
+              ExplicitLeft = 6
+              ExplicitTop = 7
+              ExplicitWidth = 505
             end
           end
         end
@@ -1305,8 +1349,8 @@
     Top = 518
   end
   object PopupMenu2: TPopupMenu
-    Left = 1049
-    Top = 460
+    Left = 801
+    Top = 512
     object Markerasomoffert1: TMenuItem
       Caption = 'Markera som offert'
       OnClick = Markerasomoffert1Click
@@ -1416,6 +1460,7 @@
         Value = Null
       end>
     object qryOrderradRadnr: TIntegerField
+      DisplayLabel = 'R-nr'
       DisplayWidth = 4
       FieldName = 'Radnr'
       Origin = 'Radnr'
@@ -1423,20 +1468,20 @@
     end
     object qryOrderradPositionnummer: TIntegerField
       Alignment = taLeftJustify
-      DisplayLabel = 'PosNr'
+      DisplayLabel = 'P-Nr'
       DisplayWidth = 4
       FieldName = 'Positionnummer'
       Origin = 'Positionnummer'
     end
     object qryOrderradArtikelnummer: TStringField
-      DisplayWidth = 15
+      DisplayWidth = 11
       FieldName = 'Artikelnummer'
       Origin = 'Artikelnummer'
       Required = True
       Size = 30
     end
     object qryOrderradBeteckning: TStringField
-      DisplayWidth = 22
+      DisplayWidth = 24
       FieldName = 'Beteckning'
       Origin = 'Beteckning'
       Size = 200
@@ -1470,8 +1515,8 @@
       Origin = 'PrisperEnhet'
     end
     object qryOrderradFrånLager: TBCDField
-      DisplayLabel = 'Fr'#229'n lager'
-      DisplayWidth = 8
+      DisplayLabel = 'Fr. lager'
+      DisplayWidth = 6
       FieldName = 'Fr'#229'nLager'
       Origin = '[Fr'#229'nLager]'
       Precision = 10
@@ -1494,8 +1539,8 @@
       Size = 2
     end
     object qryOrderradTillLager: TBCDField
-      DisplayLabel = '   Till lager'
-      DisplayWidth = 9
+      DisplayLabel = ' Till lager'
+      DisplayWidth = 7
       FieldName = 'TillLager'
       Origin = 'TillLager'
       Precision = 10
@@ -1516,18 +1561,19 @@
     end
     object qryOrderradTotaltid: TIntegerField
       DisplayLabel = 'Tv-Tid'
-      DisplayWidth = 6
+      DisplayWidth = 9
       FieldName = 'Totaltid'
       Origin = 'Totaltid'
     end
     object qryOrderradExtratid: TIntegerField
-      DisplayWidth = 7
+      DisplayLabel = 'X-tid'
+      DisplayWidth = 6
       FieldName = 'Extratid'
       Origin = 'Extratid'
     end
     object qryOrderradTidTotalt: TIntegerField
       DisplayLabel = 'Tv tid tot.'
-      DisplayWidth = 7
+      DisplayWidth = 10
       FieldName = 'TidTotalt'
       Origin = 'TidTotalt'
       ReadOnly = True
@@ -1546,9 +1592,16 @@
       FieldName = 'Vikt'
       Origin = 'Vikt'
     end
+    object qryOrderradSenasteAvrapporteradDatum: TDateField
+      DisplayLabel = 'Senast tv.'
+      DisplayWidth = 10
+      FieldName = 'SenasteAvrapporteradDatum'
+      Origin = 'SenasteAvrapporteradDatum'
+      ReadOnly = True
+    end
     object qryOrderradOrderradInfo: TStringField
       DisplayLabel = 'Info'
-      DisplayWidth = 22
+      DisplayWidth = 25
       FieldName = 'OrderradInfo'
       Origin = 'OrderradInfo'
       Size = 255
@@ -1561,14 +1614,6 @@
       ReadOnly = True
       Visible = False
       DisplayFormat = '### ##0.00'
-    end
-    object qryOrderradSenasteAvrapporteradDatum: TDateField
-      DisplayLabel = 'Senast tv.'
-      DisplayWidth = 10
-      FieldName = 'SenasteAvrapporteradDatum'
-      Origin = 'SenasteAvrapporteradDatum'
-      ReadOnly = True
-      Visible = False
     end
     object qryOrderradNotering: TMemoField
       DisplayWidth = 10
@@ -2366,7 +2411,7 @@
     Left = 376
     Top = 576
     Bitmap = {
-      494C010102000500680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020005006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -2537,9 +2582,12 @@
     Connection = dm.FDConnection1
     SQL.Strings = (
       'select '
-      'cast(sum(orad.Totaltid) as float) SumTotaltid, '
-      'cast(Sum(orad.Extratid) as float) SumExtratid,'
-      'cast(Sum(orad.Totaltid + orad.Extratid) as Float) SumTotalt'
+      'cast(sum(isnull(orad.Totaltid,0)) as float) SumTotaltid, '
+      'cast(Sum(isnull(orad.Extratid,0)) as float) SumExtratid,'
+      
+        'cast(Sum(orad.Totaltid + isnull(orad.Extratid,0)) as Float) SumT' +
+        'otalt'
+      ''
       ''
       'from OrderRad orad'
       'where orad.OrderId = :OrderId')

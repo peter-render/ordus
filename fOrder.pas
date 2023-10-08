@@ -77,7 +77,6 @@ type
     dsoOrderradPrisinfo: TDataSource;
     wwDBGrid6: TwwDBGrid;
     ExpButton: TwwExpandButton;
-    Panel10: TPanel;
     Panel11: TPanel;
     Panel12: TPanel;
     Panel13: TPanel;
@@ -220,6 +219,9 @@ type
     qryOrderradSumSumTotaltid: TFloatField;
     qryOrderradSumSumExtratid: TFloatField;
     qryOrderradSumSumTotalt: TFloatField;
+    Panel17: TPanel;
+    Panel18: TPanel;
+    Panel10: TPanel;
     procedure btnDeleteClick(Sender: TObject);
     procedure edtArtikelCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
     procedure wwDBGrid2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);

@@ -271,9 +271,6 @@ Coordinates=524,628,94,102
 [qryOrderHistoryAntal]
 Coordinates=1444,1563,135,36
 
-[Panel10]
-Coordinates=1465,628,62,58
-
 [pnlArtikel]
 Coordinates=618,876,68,58
 
@@ -581,6 +578,6 @@ Coordinates=1757,1981,157,36
 Coordinates=384,944,189,36
 
 []
-Coordinates=838,808,73,58
+Coordinates=1465,628,62,58
 Visible=True
 
