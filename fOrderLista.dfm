@@ -2202,7 +2202,8 @@
       'oh.Godsm'#228'rke,'
       'oh.orderdatum,'
       'oh.Leveransdatum,'
-      'isnull(orad.Positionnummer,orad.Radnr) Positionnummer,'
+      'isnull(orad.Positionnummer,orad.Radnr*10) OrderRadnr,'
+      'orad.Positionnummer,'
       'y.Beteckning YtbehandlingBeteckning,'
       'a.Beteckning,'
       'a.Artikelnummer,'
@@ -2213,7 +2214,6 @@
       'orad.Prisperenhet * orad.Antal as Pris  ,'
       'cast(getdate() as date) Dagensdatum,'
       'p2.F'#246'rnamn + '#39' '#39'+ p2.Efternamn V'#229'rReferens'
-      ''
       ''
       ''
       'from OrderRad orad'
@@ -2269,10 +2269,6 @@
     object qryXMLOrderLeveransdatum: TSQLTimeStampField
       FieldName = 'Leveransdatum'
       Origin = 'Leveransdatum'
-    end
-    object qryXMLOrderPositionnummer: TIntegerField
-      FieldName = 'Positionnummer'
-      Origin = 'Positionnummer'
     end
     object qryXMLOrderYtbehandlingBeteckning: TStringField
       FieldName = 'YtbehandlingBeteckning'
@@ -2331,6 +2327,15 @@
       FieldName = 'Godsm'#228'rke'
       Origin = '[Godsm'#228'rke]'
       Size = 100
+    end
+    object qryXMLOrderOrderRadnr: TIntegerField
+      FieldName = 'OrderRadnr'
+      Origin = 'OrderRadnr'
+      ReadOnly = True
+    end
+    object qryXMLOrderPositionnummer: TIntegerField
+      FieldName = 'Positionnummer'
+      Origin = 'Positionnummer'
     end
   end
 end

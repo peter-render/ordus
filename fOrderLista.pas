@@ -303,7 +303,6 @@ type
     qryXMLOrderordernummer: TStringField;
     qryXMLOrderorderdatum: TSQLTimeStampField;
     qryXMLOrderLeveransdatum: TSQLTimeStampField;
-    qryXMLOrderPositionnummer: TIntegerField;
     qryXMLOrderYtbehandlingBeteckning: TStringField;
     qryXMLOrderBeteckning: TStringField;
     qryXMLOrderArtikelnummer: TStringField;
@@ -315,6 +314,8 @@ type
     qryXMLOrderDagensdatum: TDateField;
     qryXMLOrderVårReferens: TStringField;
     qryXMLOrderGodsmärke: TStringField;
+    qryXMLOrderOrderRadnr: TIntegerField;
+    qryXMLOrderPositionnummer: TIntegerField;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -1942,7 +1943,8 @@ begin
       // References -----------------------------------------------------------
       RefNode := HeadNode.AddChild('References');
       Node := RefNode.AddChild('BuyerReference');
-      Node.Text := 'Jimmy Gudmundsson';
+//      Node.Text := 'Jimmy Gudmundsson';
+      Node.Text := sp_OrderlistKundreferens.AsString;
 
       Node := RefNode.AddChild('SupplierReferens');
       Node.Text := 'Stefan Andersson';
@@ -1978,7 +1980,7 @@ begin
         rn := rNode.AddChild('Row');
         // rn.attributes['RowNumber'] := inttostr(nRow*10);
 
-        rn.attributes['RowNumber'] := FieldByName('PositionNummer').AsString;
+        rn.attributes['RowNumber'] := FieldByName('OrderRadnr').AsString;          // det som kommer från kunden
 
         rn.attributes['RowType'] := '1';
         rn.attributes['OrderResponseRowStatus'] := '5';
