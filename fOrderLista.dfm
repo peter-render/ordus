@@ -644,7 +644,7 @@
       OnExecute = actOrderbekräftleseExcelViaEpostExecute
     end
     object actOrderbekräftleseViaMail: TAction
-      Caption = 'Skicka orderbekr'#228'ftlese via epost'
+      Caption = 'Skicka orderbekr'#228'ftlese (XML,PDF) via epost'
       OnExecute = actOrderbekräftleseViaMailExecute
     end
     object actOrderLäggtillÄndraPositioner: TAction
@@ -2261,11 +2261,6 @@
       Required = True
       Size = 30
     end
-    object qryXMLOrderGodsmärke: TStringField
-      FieldName = 'Godsm'#228'rke'
-      Origin = '[Godsm'#228'rke]'
-      Size = 50
-    end
     object qryXMLOrderorderdatum: TSQLTimeStampField
       FieldName = 'orderdatum'
       Origin = 'orderdatum'
@@ -2331,6 +2326,11 @@
       Origin = '[V'#229'rReferens]'
       ReadOnly = True
       Size = 101
+    end
+    object qryXMLOrderGodsmärke: TStringField
+      FieldName = 'Godsm'#228'rke'
+      Origin = '[Godsm'#228'rke]'
+      Size = 100
     end
   end
 end

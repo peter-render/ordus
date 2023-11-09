@@ -301,7 +301,6 @@ type
     qryXMLOrderKundnamn: TStringField;
     qryXMLOrderReferens: TStringField;
     qryXMLOrderordernummer: TStringField;
-    qryXMLOrderGodsmärke: TStringField;
     qryXMLOrderorderdatum: TSQLTimeStampField;
     qryXMLOrderLeveransdatum: TSQLTimeStampField;
     qryXMLOrderPositionnummer: TIntegerField;
@@ -315,6 +314,7 @@ type
     qryXMLOrderPris: TFMTBCDField;
     qryXMLOrderDagensdatum: TDateField;
     qryXMLOrderVårReferens: TStringField;
+    qryXMLOrderGodsmärke: TStringField;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -1676,7 +1676,7 @@ begin
   // end;
 
   orderstring := '';
-  if wwDBGrid1.selectedlist.count >= 0 then
+  if wwDBGrid1.selectedlist.count > 0 then
   Begin
     wwDBGrid1.datasource.DataSet.Disablecontrols;
     for i := 0 to wwDBGrid1.selectedlist.count - 1 do
@@ -1829,10 +1829,6 @@ begin
       end;
 
       ExcelWorkbook.SaveAs(xfilename);
-
-
-
-
       // or
       // ExcelApplication.WorkBooks[1].SaveAs(NewExcelFileName);
 
@@ -1895,6 +1891,12 @@ begin
 
   try
 
+    if wwDBGrid1.selectedlist.count > 0 then
+    begin
+      showmessage('Du kan inte skicka flera poster samtidigt');
+      exit;
+    end;
+
     with qryXMLOrder do
     begin
       close;
@@ -1909,21 +1911,20 @@ begin
       RootNode := Xml.AddChild('ORDRSP419');
       RootNode.attributes['SoftwareManufacturer'] := 'Monitor ERP System AB';
       RootNode.attributes['SoftwareName'] := 'MONITOR';
-      RootNode.attributes['SoftwareVersion'] := '23.3.12.22266';
+      RootNode.attributes['SoftwareVersion'] := '23.2.12.20599';
 
       // Orderresponse
       CurNode := RootNode.AddChild('OrderResponse');
       CurNode.attributes['Ordernumber'] := sp_OrderlistOrdernummer.AsString;
       // Name
       Node := CurNode.AddChild('Name');
-      Node.Text := 'Ängelholms Mekaniska';
+      Node.Text := 'Ängelholms Mekaniska Verkstad AB';
       // Supplierordernumber
       Node := CurNode.AddChild('SupplierOrderNumber');
       Node.Text := sp_OrderlistOrderID.AsString;
-
       // OrderResponseStatus
-      Node := RootNode.AddChild('OrderResponseStatus');
-      Node.Text := '?';
+      Node := CurNode.AddChild('OrderResponseStatus');
+      Node.Text := '4';
       // Head
       HeadNode := CurNode.AddChild('Head');
       // Supplier
@@ -1935,8 +1936,9 @@ begin
 
       // Node.Text := '0431 111111';
 
-      Node := HeadNode.AddChild('Byer');
-      Node.attributes['BuyerOrderConfirmationCodeEdi'] := '';
+      Node := HeadNode.AddChild('Buyer');
+
+//      Node.attributes['BuyerOrderConfirmationCodeEdi'] := '';
       // References -----------------------------------------------------------
       RefNode := HeadNode.AddChild('References');
       Node := RefNode.AddChild('BuyerReference');
@@ -1949,12 +1951,18 @@ begin
       Node.Text := 'info@angelholms-mekaniska.se';
 
       expNode := HeadNode.AddChild('Export');
+      Node := expNode.AddChild('Curency');
+      Node.Text := 'SEK';
       Node := expNode.AddChild('IncoTermCombiTerm');
-      Node := expNode.AddChild('DeliveryMethod');
+      Node.Text := 'DAP';
       Node := expNode.AddChild('TransportPayer');
+      Node.Text := '1';
       Node := expNode.AddChild('CustomerTransportTimeDays');
+      Node.Text := '0';
       Node := expNode.AddChild('TermsOfPaymentDays');
+      Node.Text := '30';
       Node := expNode.AddChild('CompanyAdressFlag');
+      Node.Text := '1';
 
       // Rows
       rNode := CurNode.AddChild('Rows');
@@ -1973,8 +1981,8 @@ begin
         rn.attributes['RowNumber'] := FieldByName('PositionNummer').AsString;
 
         rn.attributes['RowType'] := '1';
-        rn.attributes['OrderResponseRowStatus'] := '2'; //2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
-
+        rn.attributes['OrderResponseRowStatus'] := '5';
+        // 2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
 
         Node := rn.AddChild('Part');
         Node.attributes['PartNumber'] := FieldByName('Artikelnummer').AsString;
@@ -1992,11 +2000,10 @@ begin
         Node.Text := FieldByName('Leveransdatum').AsString;
 
         Node := rn.AddChild('Quantity');
-        Node.Text := stringReplace(FieldByName('Antal').AsString,',','.',[]);
+        Node.Text := StringReplace(FieldByName('Antal').AsString, ',', '.', []);
 
         Node := rn.AddChild('Unit');
         Node.Text := 'pcs';
-
 
         Node := rn.AddChild('ConfirmedPrice');
         if FieldByName('PrisPerEnhet').AsString = '' then
@@ -2015,12 +2022,12 @@ begin
         Node.Text := FieldByName('Antal').AsString;
 
         Node := rn.AddChild('PartType');
-        Node.Text := '1';           //2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
+        Node.Text := '1'; // 2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
 
         Node := rn.AddChild('Setup');
 
         Node := rn.AddChild('Aloy');
-        Node.Text := '0';
+        Node.Text := '0.00';
         next;
       end;
     end;
