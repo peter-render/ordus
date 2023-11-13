@@ -1916,7 +1916,7 @@ begin
 
       // Orderresponse
       CurNode := RootNode.AddChild('OrderResponse');
-      CurNode.attributes['Ordernumber'] := sp_OrderlistOrdernummer.AsString;
+      CurNode.attributes['OrderNumber'] := sp_OrderlistOrdernummer.AsString;
       // Name
       Node := CurNode.AddChild('Name');
       Node.Text := 'Ängelholms Mekaniska Verkstad AB';
@@ -1946,14 +1946,14 @@ begin
 //      Node.Text := 'Jimmy Gudmundsson';
       Node.Text := sp_OrderlistKundreferens.AsString;
 
-      Node := RefNode.AddChild('SupplierReferens');
+      Node := RefNode.AddChild('SupplierReference');
       Node.Text := 'Stefan Andersson';
       Node := RefNode.AddChild('SupplierPhoneNumber');
       Node := RefNode.AddChild('SupplierEmail');
       Node.Text := 'info@angelholms-mekaniska.se';
 
       expNode := HeadNode.AddChild('Export');
-      Node := expNode.AddChild('Curency');
+      Node := expNode.AddChild('Currency');
       Node.Text := 'SEK';
       Node := expNode.AddChild('IncoTermCombiTerm');
       Node.Text := 'DAP';
@@ -2005,7 +2005,7 @@ begin
         Node.Text := StringReplace(FieldByName('Antal').AsString, ',', '.', []);
 
         Node := rn.AddChild('Unit');
-        Node.Text := 'pcs';
+        Node.Text := 'ST';
 
         Node := rn.AddChild('ConfirmedPrice');
         if FieldByName('PrisPerEnhet').AsString = '' then
@@ -2021,14 +2021,14 @@ begin
         Node.Text := FieldByName('Leveransdatum').AsString;
 
         Node := rn.AddChild('RequestedQuantity');
-        Node.Text := FieldByName('Antal').AsString;
+        Node.Text := '0.00';
 
         Node := rn.AddChild('PartType');
         Node.Text := '1'; // 2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
 
         Node := rn.AddChild('Setup');
 
-        Node := rn.AddChild('Aloy');
+        Node := rn.AddChild('Alloy');
         Node.Text := '0.00';
         next;
       end;
