@@ -394,6 +394,7 @@ type
     procedure RefreshOrderlist;
     function FU_FolderGet(Kundid: Integer): string;
     procedure Soktext;
+    function CreateXMLFile(OrderId: Integer): string;
 
   public
     { Public declarations }
@@ -424,6 +425,161 @@ uses fMain, fOrderNew, rOrder, rArbetsorder, dFakturaNummer,
   fOrderPlanering, funclibProj;
 
 {$R *.DFM}
+
+function TfrmOrderLista.CreateXMLFile(OrderId: Integer): string;
+var
+  strprice, xmlFilename: string;
+  Xml: IXMLDOCUMENT;
+  RootNode, CurNode, Node, HeadNode, RefNode, rn, rNode, expNode: IXMLNODE;
+  nRow: Integer;
+
+begin
+
+  try
+
+    Xml := NewXMLDocument;
+    Xml.Encoding := 'UTF-8';
+    Xml.Options := [];
+    Xml.Options := [doNodeAutoIndent];
+
+    with qryXMLOrder do
+    begin
+      close;
+      params.parambyname('OrderID').value := OrderId;
+      open;
+
+      RootNode := Xml.AddChild('ORDRSP419');
+      RootNode.attributes['SoftwareManufacturer'] := 'Monitor ERP System AB';
+      RootNode.attributes['SoftwareName'] := 'MONITOR';
+      RootNode.attributes['SoftwareVersion'] := '23.2.12.20599';
+
+      // Orderresponse
+      CurNode := RootNode.AddChild('OrderResponse');
+      CurNode.attributes['OrderNumber'] := sp_OrderlistOrdernummer.AsString;
+      // Name
+      Node := CurNode.AddChild('Name');
+      Node.Text := 'Ängelholms Mekaniska Verkstad AB';
+      // Supplierordernumber
+      Node := CurNode.AddChild('SupplierOrderNumber');
+      Node.Text := sp_OrderlistOrderID.AsString;
+      // OrderResponseStatus
+      Node := CurNode.AddChild('OrderResponseStatus');
+      Node.Text := '4';
+      // Head
+      HeadNode := CurNode.AddChild('Head');
+      // Supplier
+      Node := HeadNode.AddChild('Supplier');
+      Node.attributes['SupplierCodeEdi'] := '970087';
+
+      // PhoneNumber
+      Node := HeadNode.AddChild('PhoneNumber');
+
+      // Node.Text := '0431 111111';
+
+      Node := HeadNode.AddChild('Buyer');
+
+      // Node.attributes['BuyerOrderConfirmationCodeEdi'] := '';
+      // References -----------------------------------------------------------
+      RefNode := HeadNode.AddChild('References');
+      Node := RefNode.AddChild('BuyerReference');
+      // Node.Text := 'Jimmy Gudmundsson';
+      Node.Text := sp_OrderlistKundreferens.AsString;
+
+      Node := RefNode.AddChild('SupplierReference');
+      Node.Text := 'Stefan Andersson';
+      Node := RefNode.AddChild('SupplierPhoneNumber');
+      Node := RefNode.AddChild('SupplierEmail');
+      Node.Text := 'info@angelholms-mekaniska.se';
+
+      expNode := HeadNode.AddChild('Export');
+      Node := expNode.AddChild('Currency');
+      Node.Text := 'SEK';
+      Node := expNode.AddChild('IncoTermCombiTerm');
+      Node.Text := 'DAP';
+      Node := expNode.AddChild('TransportPayer');
+      Node.Text := '1';
+      Node := expNode.AddChild('CustomerTransportTimeDays');
+      Node.Text := '0';
+      Node := expNode.AddChild('TermsOfPaymentDays');
+      Node.Text := '30';
+      Node := expNode.AddChild('CompanyAdressFlag');
+      Node.Text := '1';
+
+      // Rows
+      rNode := CurNode.AddChild('Rows');
+
+      // ======================================================================
+      // för varje artikel
+      // ======================================================================
+
+      nRow := 1;
+      while not eof do
+      begin
+        nRow := nRow + 1;
+        rn := rNode.AddChild('Row');
+        // rn.attributes['RowNumber'] := inttostr(nRow*10);
+
+        rn.attributes['RowNumber'] := FieldByName('OrderRadnr').AsString; // det som kommer från kunden
+
+        rn.attributes['RowType'] := '1';
+        rn.attributes['OrderResponseRowStatus'] := '5';
+        // 2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
+
+        Node := rn.AddChild('Part');
+        Node.attributes['PartNumber'] := FieldByName('Artikelnummer').AsString;
+        Node.attributes['Revision'] := 'A';
+
+        Node := rn.AddChild('SupplierPartNumber');
+        Node.Text := FieldByName('Artikelnummer').AsString;
+
+        Node := rn.AddChild('Text');
+        Node.Text := FieldByName('Beteckning').AsString;
+
+        Node := rn.AddChild('ReferensNumber');
+
+        Node := rn.AddChild('Deliveryperiod');
+        Node.Text := FieldByName('Leveransdatum').AsString;
+
+        Node := rn.AddChild('Quantity');
+        Node.Text := StringReplace(FieldByName('Antal').AsString, ',', '.', []);
+
+        Node := rn.AddChild('Unit');
+        Node.Text := 'ST';
+
+        Node := rn.AddChild('ConfirmedPrice');
+        if FieldByName('PrisPerEnhet').AsString = '' then
+          strprice := '0'
+        else
+          strprice := FieldByName('PrisPerEnhet').AsString;
+        Node.Text := StringReplace(strprice, ',', '.', []);
+
+        Node := rn.AddChild('Discount');
+        Node.Text := '0';
+
+        Node := rn.AddChild('RequestedDeliveryperiod');
+        Node.Text := FieldByName('Leveransdatum').AsString;
+
+        Node := rn.AddChild('RequestedQuantity');
+        Node.Text := '0.00';
+
+        Node := rn.AddChild('PartType');
+        Node.Text := '1'; // 2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
+
+        Node := rn.AddChild('Setup');
+
+        Node := rn.AddChild('Alloy');
+        Node.Text := '0.00';
+        next;
+      end;
+    end;
+  finally
+    xmlFilename := FoldernameFix(ftgsystemvalue('xml.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
+      sp_OrderlistOrderID.AsString + '.xml';
+    Xml.SaveToFile(xmlFilename);
+    Xml := nil;
+  end;
+  result := xmlFilename;
+end;
 
 procedure TfrmOrderLista.ReadOrderfileExcelGenerell(filename: string);
 var
@@ -1624,8 +1780,9 @@ begin
         RefreshOrderlist;
     end;
   end;
-
 end;
+
+// multixml ===========================================================================================
 
 procedure TfrmOrderLista.actOrderbekräftleseExcelViaEpostExecute(Sender: TObject);
 
@@ -1656,7 +1813,8 @@ var
   Param, orderstring, fstring, ExcelFileName: String;
   oRng, ExcelApplication, ExcelWorkbook, ExcelWorksheet: Variant;
   bm: Tbookmark;
-  rTyp: Integer;
+  n,rTyp: Integer;
+  xmlfilelist: TStringlist;
 
   Outlook: OleVariant;
   Mail: Variant;
@@ -1664,19 +1822,10 @@ var
 const
   olMailItem = $00000000;
 begin
-  //
-  // with qryExcelExport do
-  // begin
-  // close;
-  // open;
-  // if recordcount = 0 then
-  // begin
-  // showmessage('Inga priser uppdaterade idag!');
-  // exit;
-  // end;
-  // end;
 
   orderstring := '';
+  xmlfilelist := TStringlist.create;
+
   if wwDBGrid1.selectedlist.count > 0 then
   Begin
     wwDBGrid1.datasource.DataSet.Disablecontrols;
@@ -1684,6 +1833,7 @@ begin
     Begin
       wwDBGrid1.datasource.DataSet.GotoBookmark(wwDBGrid1.selectedlist[i]);
       orderstring := orderstring + QuotedStr(wwDBGrid1.datasource.DataSet.FieldByName('Orderid').AsString) + ',';
+      xmlfilelist.Add(CreateXMLFile(wwDBGrid1.datasource.DataSet.FieldByName('Orderid').asInteger));
     End;
     wwDBGrid1.datasource.DataSet.EnableControls;
     orderstring := StringReplace(orderstring, char(34), char(39), [rfReplaceAll]);
@@ -1700,7 +1850,7 @@ begin
     sql.Clear;
     sql := qryExcelExport_backup.sql;
     Param := '(' + copy(orderstring, 1, length(orderstring) - 1) + ')';
-    qryExcelExport.sql.add(Param);
+    qryExcelExport.sql.Add(Param);
     open;
     if recordcount = 0 then
       exit;
@@ -1734,7 +1884,7 @@ begin
 
     // Open Excel Workbook
     try
-      ExcelWorkbook := ExcelApplication.Workbooks.add(-4167);
+      ExcelWorkbook := ExcelApplication.Workbooks.Add(-4167);
       // or
       // ExcelWorkbook := ExcelApplication.WorkBooks.Add;
       // reference
@@ -1753,7 +1903,7 @@ begin
         If NumberOfWorksheetsNeeded > ExcelWorkbook.WorkSheets.count then
         begin
           While ExcelWorkbook.WorkSheets.count < NumberOfWorksheetsNeeded do
-            ExcelWorkbook.WorkSheets.add(Null, ExcelWorkbook.WorkSheets[ExcelWorkbook.WorkSheets.count], 1, -4167);
+            ExcelWorkbook.WorkSheets.Add(Null, ExcelWorkbook.WorkSheets[ExcelWorkbook.WorkSheets.count], 1, -4167);
           // or use the code below if you do not care about the order in which the sheets are named
           // ExcelWorkbook.WorkSheets.Add(Null,Null,(NumberOfWorksheets-ExcelWorkbook.Worksheets.Count),-4167);
         end;
@@ -1864,14 +2014,21 @@ begin
     else
       Mail.To := sp_Orderlist.FieldByName('Emailadress').AsString;
 
-    Mail.Subject := 'Orderbekräftelse';
+    Mail.Subject := 'Orderbekräftelse [Order response]';
     Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse i Excel format.' + chr(13) + chr(10) +
       chr(13) + chr(10) + 'Mvh' + chr(13) + chr(10) + 'Ängelholms Mekaniska Verkstad';
-    Mail.Attachments.add(xfilename);
+    Mail.Attachments.Add(xfilename);
+
+    for n:= 0 to xmlfilelist.Count -1 do
+      Mail.Attachments.Add(xmlfilelist[n]);
+
+    FreeAndNil(xmlfilelist);
     Mail.Display;
   end;
 
 end;
+
+// XMLXML =======================================================================================================
 
 procedure TfrmOrderLista.actOrderbekräftleseViaMailExecute(Sender: TObject);
 var
@@ -1885,161 +2042,13 @@ const
   olMailItem = $00000000;
 begin
 
-  Xml := NewXMLDocument;
-  Xml.Encoding := 'UTF-8';
-  Xml.Options := [];
-  Xml.Options := [doNodeAutoIndent];
-
-  try
-
-    if wwDBGrid1.selectedlist.count > 0 then
-    begin
-      showmessage('Du kan inte skicka flera poster samtidigt');
-      exit;
-    end;
-
-    with qryXMLOrder do
-    begin
-      close;
-      params.parambyname('OrderID').value := sp_OrderlistOrderID.asInteger;
-      open;
-
-      // RootNode := Xml.CreateNode('ORDUS20 SoftwareManufacturer="Holzer Consulting" SoftwareName="Ordus" SoftwareVerion="3.1.0"');
-      // RootNode := Xml.AddChild('ORDUS20');
-      // RootNode.attributes['SoftwareManufacturer'] := 'Holzer Consultning - Ängelholm';
-      // RootNode.attributes['SoftwareName'] := 'Ordus';
-
-      RootNode := Xml.AddChild('ORDRSP419');
-      RootNode.attributes['SoftwareManufacturer'] := 'Monitor ERP System AB';
-      RootNode.attributes['SoftwareName'] := 'MONITOR';
-      RootNode.attributes['SoftwareVersion'] := '23.2.12.20599';
-
-      // Orderresponse
-      CurNode := RootNode.AddChild('OrderResponse');
-      CurNode.attributes['OrderNumber'] := sp_OrderlistOrdernummer.AsString;
-      // Name
-      Node := CurNode.AddChild('Name');
-      Node.Text := 'Ängelholms Mekaniska Verkstad AB';
-      // Supplierordernumber
-      Node := CurNode.AddChild('SupplierOrderNumber');
-      Node.Text := sp_OrderlistOrderID.AsString;
-      // OrderResponseStatus
-      Node := CurNode.AddChild('OrderResponseStatus');
-      Node.Text := '4';
-      // Head
-      HeadNode := CurNode.AddChild('Head');
-      // Supplier
-      Node := HeadNode.AddChild('Supplier');
-      Node.attributes['SupplierCodeEdi'] := '970087';
-
-      // PhoneNumber
-      Node := HeadNode.AddChild('PhoneNumber');
-
-      // Node.Text := '0431 111111';
-
-      Node := HeadNode.AddChild('Buyer');
-
-//      Node.attributes['BuyerOrderConfirmationCodeEdi'] := '';
-      // References -----------------------------------------------------------
-      RefNode := HeadNode.AddChild('References');
-      Node := RefNode.AddChild('BuyerReference');
-//      Node.Text := 'Jimmy Gudmundsson';
-      Node.Text := sp_OrderlistKundreferens.AsString;
-
-      Node := RefNode.AddChild('SupplierReference');
-      Node.Text := 'Stefan Andersson';
-      Node := RefNode.AddChild('SupplierPhoneNumber');
-      Node := RefNode.AddChild('SupplierEmail');
-      Node.Text := 'info@angelholms-mekaniska.se';
-
-      expNode := HeadNode.AddChild('Export');
-      Node := expNode.AddChild('Currency');
-      Node.Text := 'SEK';
-      Node := expNode.AddChild('IncoTermCombiTerm');
-      Node.Text := 'DAP';
-      Node := expNode.AddChild('TransportPayer');
-      Node.Text := '1';
-      Node := expNode.AddChild('CustomerTransportTimeDays');
-      Node.Text := '0';
-      Node := expNode.AddChild('TermsOfPaymentDays');
-      Node.Text := '30';
-      Node := expNode.AddChild('CompanyAdressFlag');
-      Node.Text := '1';
-
-      // Rows
-      rNode := CurNode.AddChild('Rows');
-
-      // ======================================================================
-      // för varje artikel
-      // ======================================================================
-
-      nRow := 1;
-      while not eof do
-      begin
-        nRow := nRow + 1;
-        rn := rNode.AddChild('Row');
-        // rn.attributes['RowNumber'] := inttostr(nRow*10);
-
-        rn.attributes['RowNumber'] := FieldByName('OrderRadnr').AsString;          // det som kommer från kunden
-
-        rn.attributes['RowType'] := '1';
-        rn.attributes['OrderResponseRowStatus'] := '5';
-        // 2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
-
-        Node := rn.AddChild('Part');
-        Node.attributes['PartNumber'] := FieldByName('Artikelnummer').AsString;
-        Node.attributes['Revision'] := 'A';
-
-        Node := rn.AddChild('SupplierPartNumber');
-        Node.Text := FieldByName('Artikelnummer').AsString;
-
-        Node := rn.AddChild('Text');
-        Node.Text := FieldByName('Beteckning').AsString;
-
-        Node := rn.AddChild('ReferensNumber');
-
-        Node := rn.AddChild('Deliveryperiod');
-        Node.Text := FieldByName('Leveransdatum').AsString;
-
-        Node := rn.AddChild('Quantity');
-        Node.Text := StringReplace(FieldByName('Antal').AsString, ',', '.', []);
-
-        Node := rn.AddChild('Unit');
-        Node.Text := 'ST';
-
-        Node := rn.AddChild('ConfirmedPrice');
-        if FieldByName('PrisPerEnhet').AsString = '' then
-          strprice := '0'
-        else
-          strprice := FieldByName('PrisPerEnhet').AsString;
-        Node.Text := StringReplace(strprice, ',', '.', []);
-
-        Node := rn.AddChild('Discount');
-        Node.Text := '0';
-
-        Node := rn.AddChild('RequestedDeliveryperiod');
-        Node.Text := FieldByName('Leveransdatum').AsString;
-
-        Node := rn.AddChild('RequestedQuantity');
-        Node.Text := '0.00';
-
-        Node := rn.AddChild('PartType');
-        Node.Text := '1'; // 2 betyder att artikelraden på ordern är Utskriven, vilket den ska vara när vi får OE.
-
-        Node := rn.AddChild('Setup');
-
-        Node := rn.AddChild('Alloy');
-        Node.Text := '0.00';
-        next;
-      end;
-    end;
-
-    xmlFilename := FoldernameFix(ftgsystemvalue('xml.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
-      sp_OrderlistOrderID.AsString + '.xml';
-    Xml.SaveToFile(xmlFilename);
-  finally
-    Xml := nil;
+  if wwDBGrid1.selectedlist.count > 0 then
+  begin
+    showmessage('Du kan inte skicka flera poster samtidigt');
+    exit;
   end;
+
+  xmlFilename := CreateXMLFile(sp_OrderlistOrderID.asInteger);
 
   xfilename := FoldernameFix(ftgsystemvalue('pdf.folder.orderbekraftelse', '')) + 'Orderbekräftelse_' +
     sp_OrderlistOrderID.AsString;
@@ -2083,12 +2092,12 @@ begin
     else
       Mail.To := sp_Orderlist.FieldByName('Emailadress').AsString;
 
-    Mail.Subject := 'Orderbekräftelse (' + sp_OrderlistOrderID.AsString + ')';
+    Mail.Subject := 'Orderbekräftelse (' + sp_OrderlistOrderID.AsString + ') [Order response]';
     Mail.Body := 'Hej!' + chr(13) + chr(10) + 'Här kommer vår orderbekräftelse som PDF- och XML bilaga.' + chr(13) +
       chr(10) + 'Vi tackar för uppdraget.';
 
-    Mail.Attachments.add(xfilename + '.pdf');
-    Mail.Attachments.add(xmlFilename);
+    Mail.Attachments.Add(xfilename + '.pdf');
+    Mail.Attachments.Add(xmlFilename);
 
     Mail.Display;
 
@@ -2331,7 +2340,7 @@ begin
     rows := newInvoice.rows;
     while not eof do
     begin
-      row := rows.add;
+      row := rows.Add;
 
       row.RowNumber := FieldByName('PositionNummer').asInteger;
       row.RowType := '1'; // Artikelnummer, måste finnas
@@ -3126,12 +3135,12 @@ begin
   with qryGridColumns do
   begin
     sql.Clear;
-    sql.add('Select Fieldname,Displaywidth, [Fieldheader] from Gridcolumns where Status' + inttostr(apStatus) +
+    sql.Add('Select Fieldname,Displaywidth, [Fieldheader] from Gridcolumns where Status' + inttostr(apStatus) +
       ' = 1 order by Ordning');
     open;
     while not eof do
     begin
-      wwDBGrid1.Selected.add(FieldByName('Fieldname').AsString + #9 + FieldByName('Displaywidth').AsString + #9 +
+      wwDBGrid1.Selected.Add(FieldByName('Fieldname').AsString + #9 + FieldByName('Displaywidth').AsString + #9 +
         FieldByName('Fieldheader').AsString);
       next;
     end;
