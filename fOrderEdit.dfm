@@ -4,7 +4,7 @@
   BorderStyle = bsDialog
   Caption = #196'ndra offert'
   ClientHeight = 526
-  ClientWidth = 538
+  ClientWidth = 555
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -160,15 +160,16 @@
   object Panel1: TPanel
     Left = 0
     Top = 485
-    Width = 538
+    Width = 555
     Height = 41
     Align = alBottom
     TabOrder = 11
+    ExplicitWidth = 538
     DesignSize = (
-      538
+      555
       41)
     object Button1: TButton
-      Left = 371
+      Left = 388
       Top = 8
       Width = 75
       Height = 25
@@ -177,9 +178,10 @@
       Default = True
       ModalResult = 1
       TabOrder = 0
+      ExplicitLeft = 371
     end
     object Button2: TButton
-      Left = 452
+      Left = 469
       Top = 8
       Width = 75
       Height = 25
@@ -188,6 +190,7 @@
       ModalResult = 2
       TabOrder = 1
       OnClick = Button2Click
+      ExplicitLeft = 452
     end
   end
   object edtLevdatum: TwwDBDateTimePicker

@@ -140,6 +140,7 @@ var
   strOrdernummer: string;
 
   strMärke, strMärke1, strMärke2: string;
+  strBuyer:string;
   strVarRef: string;
   strOrderDate: string;
   strLevDatum: string;
@@ -153,6 +154,8 @@ var
   strOrderinfo: string;
   TOTALN, IntAntal: integer;
   dblAntal: double;
+  strBuyerName:string;
+  intKundnr: Integer;
 
 begin
 
@@ -160,6 +163,8 @@ begin
 
   strOrdernummer := Orders420.Order.OrderNumber;
   strOrderDate := Orders420.Order.Head.Terms.OrderDate;
+
+  strBuyerName := Orders420.Order.Head.Buyer.Name;
 
   // if VarStrEmpty(Orders420.Order.Head.References.GoodsLabeling.Row1) then
   if NOT VarIsStr(Orders420.Order.Head.References.GoodsLabeling.Row1) then
@@ -198,9 +203,21 @@ begin
     deliveryDate := strtodate('');
 
   // Skapa Ordderhuvud
+  // Kolla upp leverantör?
+
+  with dm.qryGetKundnr do
+  begin
+    close;
+    parambyname('KUNDNAMN').Value:= strBuyerName;
+    open;
+    intKundnr := fieldbyname('Id').AsInteger;
+
+  end;
+
+
   with dm.sp do
   begin
-    parambyname('@Kundid').value := 1;
+    parambyname('@Kundid').value :=intKundnr;
     parambyname('@ordernummer').value := strOrdernummer;
     parambyname('@orderdatum').value := strtodate(strOrderDate);
     parambyname('@Godsmärke').value := strMärke;

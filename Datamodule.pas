@@ -95,6 +95,8 @@ type
     qryGetStatusDataKräverAdmin: TBooleanField;
     DBHalfDayPeriodSource1: TDBHalfDayPeriodSource;
     sp: TFDStoredProc;
+    qryGetKundnr: TFDQuery;
+    qryGetKundnrId: TFDAutoIncField;
     procedure DataModuleCreate(Sender: TObject);
     procedure FDConnection1Error(ASender: TObject;
       const AInitiator: IFDStanObject; var AException: Exception);

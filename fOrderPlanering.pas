@@ -133,12 +133,12 @@ begin
 
   if BitBtn1.caption = '>' then
   begin
-    self.Width := 1036;
+    self.Width := 960;
     BitBtn1.caption := '<'
   end
   else
   begin
-    self.Width := 590;
+    self.Width := 540;
     BitBtn1.caption := '>'
   end;
 end;
@@ -523,7 +523,7 @@ end;
 
 procedure TfrmOrderPlanering.FormShow(Sender: TObject);
 begin
-  self.Width:= 590;
+  self.Width:= 540;
 
   qryLU_personal.open;
 

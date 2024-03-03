@@ -4,8 +4,8 @@ object frmOrderNew: TfrmOrderNew
   ActiveControl = luKund
   BorderStyle = bsDialog
   Caption = 'Ny order'
-  ClientHeight = 664
-  ClientWidth = 601
+  ClientHeight = 617
+  ClientWidth = 564
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,28 +17,28 @@ object frmOrderNew: TfrmOrderNew
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 14
+  TextHeight = 13
   object Label1: TLabel
-    Left = 90
-    Top = 67
+    Left = 82
+    Top = 62
     Width = 28
-    Height = 14
+    Height = 13
     Alignment = taRightJustify
     Caption = 'Kund:'
   end
   object Label3: TLabel
-    Left = 28
-    Top = 95
-    Width = 90
-    Height = 14
+    Left = 22
+    Top = 88
+    Width = 88
+    Height = 13
     Alignment = taRightJustify
     Caption = 'Best'#228'llningsdatum:'
   end
   object Label4: TLabel
-    Left = 47
-    Top = 124
-    Width = 71
-    Height = 14
+    Left = 42
+    Top = 115
+    Width = 68
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Best'#228'llningsnr:'
@@ -47,15 +47,15 @@ object frmOrderNew: TfrmOrderNew
   end
   object Label5: TLabel
     Left = 64
-    Top = 151
-    Width = 54
-    Height = 15
+    Top = 140
+    Width = 46
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Referens:'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clHighlight
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsUnderline]
     ParentFont = False
@@ -64,10 +64,10 @@ object frmOrderNew: TfrmOrderNew
     OnClick = Label5Click
   end
   object Label7: TLabel
-    Left = 40
-    Top = 318
-    Width = 78
-    Height = 14
+    Left = 34
+    Top = 295
+    Width = 76
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Leveransdatum:'
@@ -75,10 +75,10 @@ object frmOrderNew: TfrmOrderNew
     ShowHint = True
   end
   object Label8: TLabel
-    Left = 84
-    Top = 348
-    Width = 33
-    Height = 14
+    Left = 78
+    Top = 323
+    Width = 31
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Fritext:'
@@ -86,10 +86,10 @@ object frmOrderNew: TfrmOrderNew
     ShowHint = True
   end
   object Label2: TLabel
-    Left = 48
-    Top = 281
+    Left = 39
+    Top = 261
     Width = 76
-    Height = 14
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Till ytbehandling'
@@ -97,10 +97,10 @@ object frmOrderNew: TfrmOrderNew
     ShowHint = True
   end
   object Label6: TLabel
-    Left = 60
-    Top = 211
-    Width = 58
-    Height = 14
+    Left = 53
+    Top = 196
+    Width = 57
+    Height = 13
     Hint = 'Kundens best'#228'llningsnummer'
     Alignment = taRightJustify
     Caption = 'Godsm'#228'rke:'
@@ -108,46 +108,46 @@ object frmOrderNew: TfrmOrderNew
     ShowHint = True
   end
   object Label9: TLabel
-    Left = 45
-    Top = 240
-    Width = 73
-    Height = 14
+    Left = 36
+    Top = 223
+    Width = 74
+    Height = 13
     Alignment = taRightJustify
     Caption = 'Egen m'#228'rkning:'
     ParentShowHint = False
     ShowHint = True
   end
   object lblTyp: TLabel
-    Left = 28
-    Top = 17
-    Width = 66
-    Height = 19
+    Left = 26
+    Top = 16
+    Width = 61
+    Height = 16
     Caption = 'Ny order'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -16
+    Font.Height = -15
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
   end
   object Label16: TLabel
-    Left = 55
-    Top = 182
-    Width = 67
-    Height = 15
+    Left = 51
+    Top = 169
+    Width = 57
+    Height = 13
     Caption = 'V'#229'r referens'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
   end
   object luKund: TwwDBLookupCombo
-    Left = 130
-    Top = 61
-    Width = 242
-    Height = 22
+    Left = 121
+    Top = 57
+    Width = 224
+    Height = 21
     DropDownAlignment = taLeftJustify
     Selected.Strings = (
       'Kundnamn'#9'50'#9'Kundnamn'#9'F')
@@ -162,10 +162,10 @@ object frmOrderNew: TfrmOrderNew
     OnCloseUp = luKundCloseUp
   end
   object edtOrderdatum: TwwDBDateTimePicker
-    Left = 130
-    Top = 90
-    Width = 242
-    Height = 22
+    Left = 121
+    Top = 84
+    Width = 224
+    Height = 21
     CalendarAttributes.Font.Charset = DEFAULT_CHARSET
     CalendarAttributes.Font.Color = clWindowText
     CalendarAttributes.Font.Height = -11
@@ -178,50 +178,53 @@ object frmOrderNew: TfrmOrderNew
     TabOrder = 1
   end
   object Edit1: TEdit
-    Left = 130
-    Top = 120
-    Width = 242
-    Height = 22
+    Left = 121
+    Top = 111
+    Width = 224
+    Height = 21
     TabOrder = 2
   end
   object Panel1: TPanel
     Left = 0
-    Top = 603
-    Width = 601
-    Height = 61
+    Top = 560
+    Width = 564
+    Height = 57
     Align = alBottom
     TabOrder = 11
+    ExplicitWidth = 558
     DesignSize = (
-      601
-      61)
+      564
+      57)
     object Button1: TButton
-      Left = 421
-      Top = 17
-      Width = 81
-      Height = 27
+      Left = 397
+      Top = 16
+      Width = 75
+      Height = 25
       Anchors = [akRight, akBottom]
       Caption = 'Spara'
       Default = True
       ModalResult = 1
       TabOrder = 0
       OnClick = Button1Click
+      ExplicitLeft = 391
     end
     object Button2: TButton
-      Left = 508
-      Top = 17
-      Width = 81
-      Height = 27
+      Left = 478
+      Top = 16
+      Width = 75
+      Height = 25
       Anchors = [akRight, akBottom]
       Caption = 'Avbryt'
       ModalResult = 2
       TabOrder = 1
+      ExplicitLeft = 472
     end
   end
   object edtLevdatum: TwwDBDateTimePicker
-    Left = 130
-    Top = 314
-    Width = 145
-    Height = 22
+    Left = 121
+    Top = 292
+    Width = 134
+    Height = 21
     DisableThemes = True
     CalendarAttributes.Font.Charset = DEFAULT_CHARSET
     CalendarAttributes.Font.Color = clWindowText
@@ -236,10 +239,10 @@ object frmOrderNew: TfrmOrderNew
     TabOrder = 9
   end
   object LU_Kundperson: TwwDBLookupCombo
-    Left = 130
-    Top = 149
-    Width = 242
-    Height = 22
+    Left = 121
+    Top = 138
+    Width = 224
+    Height = 21
     DropDownAlignment = taLeftJustify
     Selected.Strings = (
       'Namn'#9'40'#9'Namn'#9'F')
@@ -254,17 +257,17 @@ object frmOrderNew: TfrmOrderNew
     AllowClearKey = False
   end
   object edtFritext: TMemo
-    Left = 130
-    Top = 348
-    Width = 445
-    Height = 242
+    Left = 121
+    Top = 323
+    Width = 413
+    Height = 225
     TabOrder = 10
   end
   object edtDatumYtbehandling: TwwDBDateTimePicker
-    Left = 130
-    Top = 278
-    Width = 145
-    Height = 22
+    Left = 121
+    Top = 258
+    Width = 134
+    Height = 21
     DisableThemes = True
     CalendarAttributes.Font.Charset = DEFAULT_CHARSET
     CalendarAttributes.Font.Color = clWindowText
@@ -279,10 +282,10 @@ object frmOrderNew: TfrmOrderNew
     TabOrder = 7
   end
   object LUYtbehandling: TwwDBLookupCombo
-    Left = 281
-    Top = 278
-    Width = 293
-    Height = 22
+    Left = 261
+    Top = 258
+    Width = 272
+    Height = 21
     DropDownAlignment = taLeftJustify
     Selected.Strings = (
       'Beteckning'#9'20'#9'Beteckning'#9'T')
@@ -297,27 +300,27 @@ object frmOrderNew: TfrmOrderNew
     OnCloseUp = LUYtbehandlingCloseUp
   end
   object Edit3: TEdit
-    Left = 130
-    Top = 208
-    Width = 242
-    Height = 22
+    Left = 121
+    Top = 193
+    Width = 224
+    Height = 21
     TabOrder = 5
   end
   object edtEgenMarkning: TEdit
-    Left = 130
-    Top = 237
-    Width = 242
-    Height = 22
+    Left = 121
+    Top = 220
+    Width = 224
+    Height = 21
     TabOrder = 6
   end
   object edtVarReferens: TwwDBLookupCombo
-    Left = 130
-    Top = 179
-    Width = 242
-    Height = 23
+    Left = 121
+    Top = 166
+    Width = 224
+    Height = 21
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     DropDownAlignment = taLeftJustify

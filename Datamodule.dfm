@@ -38,7 +38,7 @@
       
         'Select y.Id, y.Id YtbehandlingId,y.Beteckning,yt.antal,BGColor f' +
         'rom ytbehandling y'
-      'join (select  YtbehandlingId,COUNT(*) antal from Orderrad'
+      'left join (select  YtbehandlingId,COUNT(*) antal from Orderrad'
       #9#9'group by ytbehandlingId) as yt  on yt.YtbehandlingId = y.Id'
       'where isnull(beteckning,'#39#39') <> '#39#39
       'order by yt.antal desc, y.Beteckning')
@@ -727,5 +727,24 @@
         DataType = ftInteger
         ParamType = ptInputOutput
       end>
+  end
+  object qryGetKundnr: TFDQuery
+    Connection = FDConnection1
+    SQL.Strings = (
+      'select Id from Kund where Kundnamn = :kundnamn')
+    Left = 152
+    Top = 488
+    ParamData = <
+      item
+        Name = 'KUNDNAMN'
+        DataType = ftString
+        ParamType = ptInput
+      end>
+    object qryGetKundnrId: TFDAutoIncField
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+    end
   end
 end

@@ -4,7 +4,7 @@
   BorderStyle = bsDialog
   Caption = #196'ndra order / planera'
   ClientHeight = 521
-  ClientWidth = 543
+  ClientWidth = 534
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,6 +15,9 @@
   Position = poOwnerFormCenter
   OnClose = FormClose
   OnShow = FormShow
+  DesignSize = (
+    534
+    521)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -288,7 +291,7 @@
     Left = 122
     Top = 89
     Width = 148
-    Height = 23
+    Height = 21
     DataField = 'OrderNummer'
     DataSource = dsoOrderedit
     Font.Charset = DEFAULT_CHARSET
@@ -303,7 +306,7 @@
     Left = 120
     Top = 176
     Width = 225
-    Height = 23
+    Height = 21
     DataField = 'Godsm'#228'rke'
     DataSource = dsoOrderedit
     Font.Charset = DEFAULT_CHARSET
@@ -355,7 +358,7 @@
   object LUYtbehandling: TwwDBLookupCombo
     Left = 282
     Top = 241
-    Width = 243
+    Width = 238
     Height = 21
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -381,15 +384,16 @@
   object Panel1: TPanel
     Left = 0
     Top = 480
-    Width = 543
+    Width = 534
     Height = 41
     Align = alBottom
     TabOrder = 15
+    ExplicitWidth = 543
     DesignSize = (
-      543
+      534
       41)
     object btnSparaPlanera: TButton
-      Left = 310
+      Left = 301
       Top = 8
       Width = 134
       Height = 25
@@ -404,9 +408,10 @@
       ParentFont = False
       TabOrder = 0
       OnClick = btnSparaPlaneraClick
+      ExplicitLeft = 310
     end
     object Button2: TButton
-      Left = 458
+      Left = 449
       Top = 8
       Width = 75
       Height = 25
@@ -415,9 +420,10 @@
       ModalResult = 2
       TabOrder = 1
       OnClick = Button2Click
+      ExplicitLeft = 458
     end
     object btnSpara: TButton
-      Left = 175
+      Left = 166
       Top = 8
       Width = 121
       Height = 25
@@ -433,11 +439,12 @@
       ParentFont = False
       TabOrder = 2
       OnClick = btnSparaClick
+      ExplicitLeft = 175
     end
   end
   object wwDBGrid1: TwwDBGrid
-    Left = 557
-    Top = 8
+    Left = 544
+    Top = 9
     Width = 384
     Height = 185
     IniAttributes.Delimiter = ';;'
@@ -445,6 +452,7 @@
     TitleColor = clBtnFace
     FixedCols = 0
     ShowHorzScrollBar = True
+    Anchors = [akLeft, akTop, akBottom]
     DataSource = DataSource1
     TabOrder = 14
     TitleAlignment = taLeftJustify
@@ -460,7 +468,7 @@
     Left = 276
     Top = 413
     Width = 121
-    Height = 23
+    Height = 21
     TabStop = False
     Color = clMenu
     DataField = 'ArbetstidPlanerad'
@@ -512,7 +520,7 @@
     Left = 276
     Top = 387
     Width = 121
-    Height = 23
+    Height = 21
     TabStop = False
     Color = clMenu
     DataField = 'KalkArbetstid'
@@ -539,10 +547,11 @@
     TextHint = True
   end
   object Memo1: TMemo
-    Left = 557
-    Top = 199
+    Left = 544
+    Top = 200
     Width = 384
     Height = 256
+    Anchors = [akLeft, akTop, akBottom]
     TabOrder = 16
   end
   object BitBtn1: TBitBtn
@@ -559,7 +568,7 @@
     Left = 276
     Top = 439
     Width = 121
-    Height = 23
+    Height = 21
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -634,7 +643,7 @@
     Left = 120
     Top = 202
     Width = 225
-    Height = 23
+    Height = 21
     DataField = 'Egenm'#228'rkning'
     DataSource = dsoOrderedit
     Font.Charset = DEFAULT_CHARSET
@@ -749,7 +758,7 @@
   end
   object DataSource1: TDataSource
     DataSet = FDMemTable1
-    Left = 484
+    Left = 424
     Top = 12
   end
   object spSkapaPlanering: TFDStoredProc
