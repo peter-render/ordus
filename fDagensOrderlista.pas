@@ -82,6 +82,7 @@ type
     rbEjavrapp: TRadioButton;
     PopupMenu1: TPopupMenu;
     Visaritning1: TMenuItem;
+    qryOrderradDagensRevision: TStringField;
     procedure Button1Click(Sender: TObject);
     procedure rbClick(Sender: TObject);
     procedure Visaritning1Click(Sender: TObject);
@@ -133,7 +134,7 @@ var
   filename, LURL: string;
 begin
 
-  filename := GetRitningFilename(qryOrderradDagens.fieldbyname('artikelnummer').asString, qryOrderradDagens.FieldByName('kundnamn').asString);
+  filename := GetRitningFilename(qryOrderradDagens.fieldbyname('artikelnummer').asString, qryOrderradDagens.FieldByName('kundnamn').asString,qryOrderradDagens.FieldByName('Revision').asString );
 
   // stringreplace(qryOrderrad.fieldbyname('artikelnummer').asString, ' ', '', [rfReplaceAll]) + '.pdf';
   if fileexists(filename) then

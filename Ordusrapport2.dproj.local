@@ -1,12 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899-12-30 00:00:00.000.389,C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.dfm=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagensOrderlista.dfm</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.389,C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.pas=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagensOrderlista.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.724,C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.pas=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Unit5.pas</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.724,C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.dfm=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Unit5.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.724,C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Unit5.dfm=C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.dfm</Transaction>
     <Transaction>1899-12-30 00:00:00.000.197,=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagens.pas</Transaction>
     <Transaction>1899-12-30 00:00:00.000.793,C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagens.pas=</Transaction>
     <Transaction>1899-12-30 00:00:00.000.713,=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Unit5.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.389,C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagensOrderlista.pas=C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.pas</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.389,C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fDagensOrderlista.dfm=C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.724,C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Unit5.pas=C:\Users\Peter Holzer\iCloudDrive\fDagensOrderlista.pas</Transaction>
   </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Datamodule.pas"/>
+    <File Path="Datamodule.dfm"/>
+    <File Path="dSimple.pas"/>
+    <File Path="dSimple.dfm"/>
+    <File Path="fArtikelnotering.pas"/>
+    <File Path="fArtikelnotering.dfm"/>
+    <File Path="fCalc.pas"/>
+    <File Path="fCalc.dfm"/>
+    <File Path="fConnectionEdit.pas"/>
+    <File Path="fConnectionEdit.dfm"/>
+    <File Path="fDagensOrderlista.pas"/>
+    <File Path="fDagensOrderlista.dfm"/>
+    <File Path="fEditBeteckning.pas"/>
+    <File Path="fEditBeteckning.dfm"/>
+    <File Path="fFoljesedel.pas"/>
+    <File Path="fFoljesedel.dfm"/>
+    <File Path="fjobblista.pas"/>
+    <File Path="fjobblista.dfm"/>
+    <File Path="fKalender.pas"/>
+    <File Path="fKalender.dfm"/>
+    <File Path="fKontaktEdit.pas"/>
+    <File Path="fKontaktEdit.dfm"/>
+    <File Path="fKontakter.pas"/>
+    <File Path="fKontakter.dfm"/>
+    <File Path="fLagersaldo.pas"/>
+    <File Path="fLagersaldo.dfm"/>
+    <File Path="fNotering.pas"/>
+    <File Path="fNotering.dfm"/>
+    <File Path="fMainRapport2.pas"/>
+    <File Path="fMainRapport2.dfm"/>
+    <File Path="fNyFoljesedel.pas"/>
+    <File Path="fNyFoljesedel.dfm"/>
+    <File Path="fStdRV.pas"/>
+    <File Path="fStdRV.dfm"/>
+    <File Path="fTransport.pas"/>
+    <File Path="fTransport.dfm"/>
+    <File Path="funclib.pas"/>
+    <File Path="rEtikett.pas"/>
+    <File Path="rEtikett.dfm"/>
+    <File Path="rFoljesedel.pas"/>
+    <File Path="rFoljesedel.dfm"/>
+    <File Path="rLagerplatsetikett.pas"/>
+    <File Path="rLagerplatsetikett.dfm"/>
+    <File Path="rPallEtikett.pas"/>
+    <File Path="rPallEtikett.dfm"/>
+  </ProjectSortOrder>
 </BorlandProject>

@@ -17,7 +17,7 @@ procedure ReadOrderfileIntersystem(filename: string);
 procedure ReadOrderfileIntersystemXML(xmlfilename: string);
 function Orderstatusbeteckning(intStatusId: integer): string;
 function AppendDuplicationNumber(const AStr: string): string;
-Function GetRitningFilename(Artikelnummer: string; kundnamn: string): string;
+Function GetRitningFilename(Artikelnummer: string; kundnamn: string;revision:string): string;
 Function GetRitningFolder(kundnamn: string): string;
 
 implementation
@@ -34,7 +34,7 @@ begin
   result := folder;
 end;
 
-Function GetRitningFilename(Artikelnummer: string; kundnamn: string): string;
+Function GetRitningFilename(Artikelnummer: string; kundnamn: string;revision:string): string;
 var
   filename, folder: string;
   c: Char;
@@ -42,7 +42,10 @@ var
 begin
 
   folder := FoldernameFix(ftgsystemvalue('pdf.folder.ritningar', '')) + kundnamn + '\';
-  filename := folder + Artikelnummer + '.pdf';
+  if revision <> '' then
+    filename := folder + Artikelnummer + '_REV_'+ trim(revision) +  '.pdf'
+  else
+    filename := folder + Artikelnummer + '.pdf';
 
   if not fileexists(filename) then
     for n := 71 downto 65 do
@@ -59,7 +62,6 @@ begin
   // parambyname('Ritning').value := filename;
   // ExecSQL;
   // end;
-
   result := filename;
 
 end;
@@ -156,6 +158,7 @@ var
   dblAntal: double;
   strBuyerName:string;
   intKundnr: Integer;
+  strRevision: string;
 
 begin
 
@@ -207,10 +210,17 @@ begin
 
   with dm.qryGetKundnr do
   begin
+    intKundnr:= -1;
     close;
     parambyname('KUNDNAMN').Value:= strBuyerName;
     open;
     intKundnr := fieldbyname('Id').AsInteger;
+
+    if intkundnr < 1 then
+    begin
+      Showmessage('Kundens namn kan inte hittas, importen avbryts!');
+        exit;
+    end
 
   end;
 
@@ -255,6 +265,8 @@ begin
       strArtikelnr := Orders420.Order.Rows[i].Part.PartNumber;
 
     StrBenamning := Orders420.Order.Rows[i].Text;
+    strRevision := Orders420.Order.Rows[i].Part.Revision;
+
 
     IntAntal := Round(Orders420.Order.Rows[i].Quantity); // 30000
     strAntal := inttostr(IntAntal);
@@ -300,9 +312,10 @@ begin
     with dm.sp_OrderRadImport do
     begin
       parambyname('@Positionnummer').value := IntRadnr;
-      parambyname('@KundId').value := 1;
+      parambyname('@KundId').value := intkundnr;
       parambyname('@OrderId').value := intOrderId;
       parambyname('@Artikelnummer').value := strArtikelnr;
+      parambyname('@Revision').value := strRevision;
       parambyname('@Artikelbeteckning').value := StrBenamning;
       if IntAntal > 0 then
         parambyname('@Antal').value := IntAntal;
@@ -365,7 +378,7 @@ begin
 
     if Parse(';', trim(csv[0]), 1) <> 'LevBest' then
     begin
-      showmessage('Dokument innhåller ingen giltig Intersystem leverantörsbeställning');
+      showmessage('Dokument innhåller ingen giltig leverantörsbeställning');
     end;
 
     recordcount := csv.Count;

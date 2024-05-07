@@ -32,7 +32,6 @@
     Height = 742
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 1311
     object Panel3: TPanel
       Left = 1
       Top = 1
@@ -46,7 +45,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 1309
       object Label1: TLabel
         Left = 159
         Top = 11
@@ -126,7 +124,7 @@
         ParentFont = False
       end
       object DBText4: TDBText
-        Left = 488
+        Left = 489
         Top = 11
         Width = 295
         Height = 17
@@ -134,7 +132,7 @@
         DataSource = dsoOrder
       end
       object DBText5: TDBText
-        Left = 488
+        Left = 489
         Top = 32
         Width = 329
         Height = 17
@@ -199,9 +197,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitLeft = 27
-      ExplicitTop = 393
-      ExplicitWidth = 1309
       object Panel17: TPanel
         Left = 11
         Top = 11
@@ -210,10 +205,6 @@
         Align = alClient
         Caption = 'Panel17'
         TabOrder = 0
-        ExplicitLeft = 728
-        ExplicitTop = 101
-        ExplicitWidth = 185
-        ExplicitHeight = 41
         object wwDBGrid1: TwwDBGrid
           Left = 1
           Top = 1
@@ -226,27 +217,28 @@
           PictureMasks.Strings = (
             'Artikelnummer'#9'### ###'#9'T'#9'T')
           Selected.Strings = (
-            'Radnr'#9'4'#9'R-nr'
-            'Positionnummer'#9'4'#9'P-Nr'
-            'Artikelnummer'#9'11'#9'Artikelnummer'
-            'Beteckning'#9'24'#9'Beteckning'
-            'cRitningsnoteringFinns_disp'#9'2'#9'R'
-            'Lagersaldo'#9'2'#9'  L'
-            'cFixatur'#9'2'#9' F'
-            'PrisperEnhet'#9'9'#9'  Pris/enhet'
-            'Fr'#229'nLager'#9'6'#9'Fr. lager'
-            'Attproducera'#9'7'#9'Att prod'
-            'Antal'#9'6'#9'  Antal'
-            'TillLager'#9'7'#9' Till lager'
-            'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'
-            'AvrapporteradPlasmatid'#9'6'#9'Lasertid'
-            'Totaltid'#9'9'#9'Tv-Tid'
-            'Extratid'#9'6'#9'X-tid'
-            'TidTotalt'#9'10'#9'Tv tid tot.'
-            'SkrotandelProcent'#9'6'#9'Skrot %'
-            'Vikt'#9'6'#9'Vikt/st'
-            'SenasteAvrapporteradDatum'#9'10'#9'Senast tv.'
-            'OrderradInfo'#9'25'#9'Info')
+            'Radnr'#9'4'#9'R-nr'#9#9
+            'Positionnummer'#9'4'#9'P-Nr'#9#9
+            'Artikelnummer'#9'11'#9'Artikelnummer'#9#9
+            'Revision'#9'3'#9'Rev'#9#9
+            'Beteckning'#9'24'#9'Beteckning'#9#9
+            'cRitningsnoteringFinns_disp'#9'2'#9'R'#9#9
+            'Lagersaldo'#9'2'#9'  L'#9#9
+            'cFixatur'#9'2'#9' F'#9#9
+            'PrisperEnhet'#9'9'#9'  Pris/enhet'#9#9
+            'Fr'#229'nLager'#9'6'#9'Fr. lager'#9#9
+            'Attproducera'#9'7'#9'Att prod'#9#9
+            'Antal'#9'6'#9'  Antal'#9#9
+            'TillLager'#9'7'#9' Till lager'#9#9
+            'YtbehandlingBeteckning'#9'15'#9'Ytbehandling'#9#9
+            'AvrapporteradPlasmatid'#9'6'#9'Lasertid'#9#9
+            'Totaltid'#9'9'#9'Tv-Tid'#9#9
+            'Extratid'#9'6'#9'X-tid'#9#9
+            'TidTotalt'#9'10'#9'Tv tid tot.'#9#9
+            'SkrotandelProcent'#9'6'#9'Skrot %'#9#9
+            'Vikt'#9'6'#9'Vikt/st'#9#9
+            'SenasteAvrapporteradDatum'#9'10'#9'Senast tv.'#9#9
+            'OrderradInfo'#9'25'#9'Info'#9#9)
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clBtnFace
@@ -286,9 +278,6 @@
         Align = alRight
         Caption = 'Panel18'
         TabOrder = 1
-        ExplicitLeft = 976
-        ExplicitTop = 2
-        ExplicitHeight = 339
         DesignSize = (
           185
           322)
@@ -352,7 +341,6 @@
       Height = 342
       Align = alTop
       TabOrder = 2
-      ExplicitWidth = 1309
       object Splitter1: TSplitter
         Left = 377
         Top = 1
@@ -1048,7 +1036,6 @@
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
-        ExplicitWidth = 928
         object Splitter2: TSplitter
           Left = 441
           Top = 0
@@ -1225,7 +1212,6 @@
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitWidth = 484
           object Panel11: TPanel
             Left = 0
             Top = 0
@@ -1235,9 +1221,6 @@
             BevelOuter = bvNone
             BorderWidth = 3
             TabOrder = 0
-            ExplicitTop = 24
-            ExplicitWidth = 484
-            ExplicitHeight = 316
             object Panel14: TPanel
               Left = 3
               Top = 27
@@ -1246,8 +1229,6 @@
               Align = alClient
               BevelOuter = bvLowered
               TabOrder = 0
-              ExplicitTop = 3
-              ExplicitWidth = 478
               object dbgArtikelgrupp: TwwDBGrid
                 Left = 1
                 Top = 1
@@ -1283,7 +1264,6 @@
                 TitleLines = 1
                 TitleButtons = False
                 PadColumnStyle = pcsPadHeader
-                ExplicitWidth = 476
               end
             end
             object Panel10: TPanel
@@ -1302,9 +1282,6 @@
               Font.Style = [fsBold]
               ParentFont = False
               TabOrder = 1
-              ExplicitLeft = 6
-              ExplicitTop = 7
-              ExplicitWidth = 505
             end
           end
         end
@@ -1428,6 +1405,7 @@
       'orad.Extratid,'
       'orad.Totaltid + orad.Extratid TidTotalt,'
       'orad.Vikt,'
+      'orad.Revision,'
       'orad.AvrapporteradPlasmatid,'
       'orad.SkrotandelProcent,'
       'a.BockritningFinns Bockritning,'
@@ -1479,6 +1457,14 @@
       Origin = 'Artikelnummer'
       Required = True
       Size = 30
+    end
+    object qryOrderradRevision: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Rev'
+      DisplayWidth = 3
+      FieldName = 'Revision'
+      Origin = 'Revision'
+      Size = 5
     end
     object qryOrderradBeteckning: TStringField
       DisplayWidth = 24
@@ -2258,12 +2244,19 @@
         Name = '@Offertdatum'
         DataType = ftDate
         ParamType = ptInput
+      end
+      item
+        Position = 16
+        Name = '@Revision'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 5
       end>
   end
   object sp_OrderradUpdate: TFDStoredProc
     Connection = dm.FDConnection1
     StoredProcName = 'OrderRadUpdate'
-    Left = 532
+    Left = 536
     Top = 160
     ParamData = <
       item
@@ -2347,6 +2340,13 @@
         DataType = ftFloat
         Precision = 16
         ParamType = ptInput
+      end
+      item
+        Position = 13
+        Name = '@Revision'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 5
       end>
   end
   object sp_OrderradDelete: TFDStoredProc
@@ -2411,7 +2411,7 @@
     Left = 376
     Top = 576
     Bitmap = {
-      494C0101020005006C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

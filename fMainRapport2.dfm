@@ -2,8 +2,8 @@
   Left = 420
   Top = 223
   Caption = #197'terrapportering v3.9'
-  ClientHeight = 579
-  ClientWidth = 932
+  ClientHeight = 697
+  ClientWidth = 954
   Color = clBtnFace
   Constraints.MaxWidth = 1050
   Font.Charset = DEFAULT_CHARSET
@@ -28,10 +28,10 @@
     Alignment = taRightJustify
   end
   object Panel2: TPanel
-    Left = 790
+    Left = 812
     Top = 0
     Width = 142
-    Height = 560
+    Height = 678
     Align = alRight
     Anchors = [akTop, akRight]
     BorderWidth = 3
@@ -42,12 +42,13 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    ExplicitHeight = 560
     DesignSize = (
       142
-      560)
+      678)
     object btnEtikett: TSpeedButton
       Left = 6
-      Top = 457
+      Top = 575
       Width = 125
       Height = 93
       AllowAllUp = True
@@ -465,10 +466,11 @@
       ShowHint = False
       Transparent = False
       OnClick = btnEtikettClick
+      ExplicitTop = 457
     end
     object btnPalettEtikett: TButton
       Left = 8
-      Top = 274
+      Top = 334
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -481,10 +483,11 @@
       ParentFont = False
       TabOrder = 2
       OnClick = btnPalettEtikettClick
+      ExplicitTop = 274
     end
     object btnLagerplatsetikett: TButton
       Left = 8
-      Top = 243
+      Top = 297
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -498,10 +501,11 @@
       ParentFont = False
       TabOrder = 3
       OnClick = btnLagerplatsetikettClick
+      ExplicitTop = 243
     end
     object btnFS: TButton
       Left = 8
-      Top = 67
+      Top = 84
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -515,10 +519,11 @@
       TabOrder = 1
       TabStop = False
       OnClick = btnFSClick
+      ExplicitTop = 67
     end
     object btnClose: TButton
       Left = 8
-      Top = 10
+      Top = 15
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -534,10 +539,11 @@
       TabOrder = 0
       TabStop = False
       OnClick = btnCloseClick
+      ExplicitTop = 10
     end
     object btnVisaKalender: TButton
       Left = 8
-      Top = 98
+      Top = 121
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -552,10 +558,11 @@
       ShowHint = False
       TabOrder = 4
       OnClick = btnVisaKalenderClick
+      ExplicitTop = 98
     end
     object BtnMaterialbestallning: TButton
       Left = 8
-      Top = 129
+      Top = 159
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -568,10 +575,11 @@
       ParentFont = False
       TabOrder = 5
       OnClick = BtnMaterialbestallningClick
+      ExplicitTop = 129
     end
     object btnTransport: TButton
       Left = 8
-      Top = 304
+      Top = 371
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -585,10 +593,11 @@
       ParentFont = False
       TabOrder = 6
       OnClick = btnTransportClick
+      ExplicitTop = 304
     end
     object btnJobblista: TButton
       Left = 8
-      Top = 160
+      Top = 196
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -601,10 +610,11 @@
       ParentFont = False
       TabOrder = 7
       OnClick = btnJobblistaClick
+      ExplicitTop = 160
     end
     object btnNotiser: TButton
       Left = 8
-      Top = 191
+      Top = 234
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -617,6 +627,7 @@
       ParentFont = False
       TabOrder = 8
       OnClick = btnNotiserClick
+      ExplicitTop = 191
     end
     object DBMemo1: TDBMemo
       Left = 6
@@ -630,18 +641,19 @@
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 560
-    Width = 932
+    Top = 678
+    Width = 954
     Height = 19
     Panels = <>
     SimplePanel = True
     SizeGrip = False
+    ExplicitTop = 560
   end
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 790
-    Height = 560
+    Width = 812
+    Height = 678
     Align = alClient
     BevelOuter = bvNone
     Font.Charset = DEFAULT_CHARSET
@@ -651,6 +663,7 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 0
+    ExplicitHeight = 560
     object Label10: TLabel
       Left = 228
       Top = 76
@@ -660,15 +673,17 @@
     object Panel3: TPanel
       Left = 0
       Top = 0
-      Width = 790
-      Height = 66
+      Width = 812
+      Height = 117
       Align = alTop
       BevelEdges = []
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitLeft = 2
+      ExplicitTop = 2
       DesignSize = (
-        790
-        66)
+        812
+        117)
       object DBText4: TDBText
         Left = 353
         Top = 15
@@ -718,6 +733,22 @@
         Width = 3
         Height = 13
       end
+      object lblFritext: TLabel
+        Left = 237
+        Top = 58
+        Width = 38
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Fritext'
+        FocusControl = edtOrdernr
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Default'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Visible = False
+      end
       object edtOrdernr: TEditN
         Left = 282
         Top = 12
@@ -754,7 +785,7 @@
         WidthOnFocus = 0
       end
       object btnKontakter: TButton
-        Left = 680
+        Left = 702
         Top = 10
         Width = 85
         Height = 25
@@ -1883,12 +1914,23 @@
           ExplicitHeight = 39
         end
       end
+      object memoFritext: TDBMemo
+        Left = 281
+        Top = 55
+        Width = 505
+        Height = 56
+        DataField = 'Fritext'
+        DataSource = dsoOrderrad
+        ReadOnly = True
+        TabOrder = 3
+        Visible = False
+      end
     end
     object Panel4: TPanel
       Left = 0
-      Top = 97
-      Width = 790
-      Height = 463
+      Top = 148
+      Width = 812
+      Height = 530
       Align = alClient
       BorderWidth = 1
       Font.Charset = DEFAULT_CHARSET
@@ -1898,18 +1940,21 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      ExplicitTop = 97
+      ExplicitHeight = 463
       object Panel5: TPanel
         Left = 2
         Top = 2
-        Width = 786
-        Height = 258
+        Width = 808
+        Height = 325
         Align = alClient
         TabOrder = 0
+        ExplicitHeight = 258
         object dbgrid: TwwDBGrid
           Left = 1
           Top = 1
-          Width = 784
-          Height = 256
+          Width = 806
+          Height = 323
           ControlType.Strings = (
             'F'#246'ljesedelId;CustomEdit;wwDBLookupCombo1;F'
             'Bockritning;ImageIndex;Shrink To Fit'
@@ -1917,17 +1962,19 @@
             'BockritningFinns;CheckBox;True;False'
             'cFixatur;ImageIndex;Shrink To Fit')
           Selected.Strings = (
-            'AutoPrisFinns'#9'1'#9' '#9#9
-            'Positionnummer'#9'4'#9'Pnr'#9#9
-            'Artikelnummer'#9'14'#9'Artikelnummer'#9#9
-            'beteckning'#9'26'#9'Beteckning'#9#9
-            'cRitningsnoteringFinns_disp'#9'2'#9' R'#9#9
-            'cFixatur'#9'2'#9' F'#9#9
-            'Antal'#9'7'#9'Antal'#9#9
-            'Personnamn'#9'19'#9'Avrapporterad av'#9#9
-            'F'#246'ljesedelBeteckning'#9'17'#9'F'#246'ljesedel'#9#9
-            'OrderradInfo'#9'24'#9'Info'#9#9
-            'Ritning1'#9'10'#9'Ritning1'#9'F'#9)
+            'AutoPrisFinns'#9'1'#9' '
+            'Positionnummer'#9'4'#9'Pnr'
+            'Artikelnummer'#9'14'#9'Artikelnummer'
+            'Revision'#9'3'#9'Rev'
+            'beteckning'#9'26'#9'Beteckning'
+            'cRitningsnoteringFinns_disp'#9'2'#9' R'
+            'cFixatur'#9'2'#9' F'
+            'Antal'#9'7'#9'Antal'
+            'Personnamn'#9'19'#9'Avrapporterad av'
+            'F'#246'ljesedelBeteckning'#9'17'#9'F'#246'ljesedel'
+            'OrderradInfo'#9'24'#9'Info'
+            'Ritning1'#9'10'#9'Ritning1'
+            'Extratid'#9'10'#9'Extratid')
           IniAttributes.Delimiter = ';;'
           IniAttributes.UnicodeIniFile = False
           TitleColor = clActiveCaption
@@ -1963,8 +2010,8 @@
       end
       object Panel6: TPanel
         Left = 2
-        Top = 260
-        Width = 786
+        Top = 327
+        Width = 808
         Height = 201
         Align = alBottom
         Font.Charset = DEFAULT_CHARSET
@@ -1974,6 +2021,7 @@
         Font.Style = []
         ParentFont = False
         TabOrder = 1
+        ExplicitTop = 260
         object Bevel2: TBevel
           Left = 102
           Top = 11
@@ -2711,8 +2759,8 @@
     end
     object pnlArtikelsok: TPanel
       Left = 0
-      Top = 66
-      Width = 790
+      Top = 117
+      Width = 812
       Height = 31
       Align = alTop
       Font.Charset = DEFAULT_CHARSET
@@ -2722,8 +2770,9 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      ExplicitTop = 66
       DesignSize = (
-        790
+        812
         31)
       object lblArtnr: TLabel
         Left = 14
@@ -2756,7 +2805,7 @@
         TabOrder = 0
       end
       object cb: TCheckBox
-        Left = 542
+        Left = 564
         Top = 6
         Width = 223
         Height = 17
@@ -2774,8 +2823,10 @@
     end
   end
   object dsoLU_Order: TDataSource
-    Left = 116
-    Top = 220
+    AutoEdit = False
+    DataSet = qryLU_Order
+    Left = 164
+    Top = 328
   end
   object dsoOrderrad: TDataSource
     AutoEdit = False
@@ -2836,6 +2887,7 @@
       'Select '
       #9'orad.Id,'
       #9'o.Kundid,'
+      'o.Fritext,'
       #9'p.Id PersonId, p.F'#246'rnamn + '#39' '#39'+p.Efternamn Personnamn,'
       
         #9'a.Id ArtikelID,a.Artikelnummer,a.beteckning,a.YtbehandlingIdDef' +
@@ -2933,7 +2985,8 @@
       ''
       ''
       ''
-      #9'orad.Vikt'
+      #9'orad.Vikt,'
+      'orad.Revision'
       #9
       'from orderrad orad '
       'join orderhuvud o on o.Id = orad.Orderid'
@@ -2982,6 +3035,14 @@
       Origin = 'Artikelnummer'
       Required = True
       Size = 30
+    end
+    object qryOrderradRevision: TStringField
+      Alignment = taCenter
+      DisplayLabel = 'Rev'
+      DisplayWidth = 3
+      FieldName = 'Revision'
+      Origin = 'Revision'
+      Size = 5
     end
     object f: TStringField
       DisplayLabel = 'Beteckning'
@@ -3037,6 +3098,11 @@
       DisplayWidth = 10
       FieldName = 'Ritning1'
       Origin = 'Ritning1'
+    end
+    object qryOrderradExtratid: TIntegerField
+      DisplayWidth = 10
+      FieldName = 'Extratid'
+      Origin = 'Extratid'
     end
     object qryOrderradNotering: TMemoField
       DisplayWidth = 10
@@ -3343,15 +3409,16 @@
       ReadOnly = True
       Visible = False
     end
-    object qryOrderradExtratid: TIntegerField
-      FieldName = 'Extratid'
-      Origin = 'Extratid'
+    object qryOrderradFritext: TStringField
+      FieldName = 'Fritext'
+      Origin = 'Fritext'
+      Size = 2000
     end
   end
   object qryLU_Order: TFDQuery
     Connection = dm.FDConnection1
     SQL.Strings = (
-      'Select oh.Id OrderID, k.kundnamn  from OrderHuvud oh '
+      'Select oh.Id OrderID, k.kundnamn,oh.Fritext  from OrderHuvud oh '
       'join kund k on k.id = oh.kundid'
       'where oh.OrderStatusId <> 1 --Fakturerad'
       'and oh.borttagen is null'
@@ -3368,6 +3435,11 @@
       Origin = 'kundnamn'
       Required = True
       Size = 50
+    end
+    object qryLU_OrderFritext: TStringField
+      FieldName = 'Fritext'
+      Origin = 'Fritext'
+      Size = 2000
     end
   end
   object qryGetlastOrderId: TFDQuery
@@ -3780,7 +3852,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C0101020005005C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

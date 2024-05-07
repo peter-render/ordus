@@ -222,6 +222,7 @@ type
     Panel17: TPanel;
     Panel18: TPanel;
     Panel10: TPanel;
+    qryOrderradRevision: TStringField;
     procedure btnDeleteClick(Sender: TObject);
     procedure edtArtikelCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
     procedure wwDBGrid2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);

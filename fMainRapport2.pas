@@ -283,6 +283,11 @@ type
     Label7: TLabel;
     DBEditN2: TDBEditN;
     qryOrderradExtratid: TIntegerField;
+    qryOrderradRevision: TStringField;
+    qryLU_OrderFritext: TStringField;
+    memoFritext: TDBMemo;
+    lblFritext: TLabel;
+    qryOrderradFritext: TStringField;
     procedure FormShow(Sender: TObject);
     procedure edtOrderNrExit(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -466,6 +471,8 @@ begin
                     DBText4.Visible := true;
                     dbgrid.Visible := true;
                     cb.enabled := true;
+                    memoFritext.visible:= True;
+                    lblFritext.visible:= True;
                     dbgrid.setfocus;
                     btnEdit.enabled := true;
                     btnEdit.Default := true;
@@ -993,6 +1000,8 @@ end;
 procedure TfrmOrdusrapport2.edtOrdernrEnter(Sender: TObject);
 begin
 
+  memoFritext.visible:= False;
+  lblFritext.visible:= False;
   dbgrid.Visible := false;
   btnLagersaldo.enabled := false;
   btnEtikett.enabled := false;

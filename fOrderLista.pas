@@ -316,6 +316,7 @@ type
     qryXMLOrderGodsmärke: TStringField;
     qryXMLOrderOrderRadnr: TIntegerField;
     qryXMLOrderPositionnummer: TIntegerField;
+    qryXMLOrderRevision: TStringField;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -527,7 +528,7 @@ begin
 
         Node := rn.AddChild('Part');
         Node.attributes['PartNumber'] := FieldByName('Artikelnummer').AsString;
-        Node.attributes['Revision'] := 'A';
+        Node.attributes['Revision'] := FieldByName('Revision').AsString;
 
         Node := rn.AddChild('SupplierPartNumber');
         Node.Text := FieldByName('Artikelnummer').AsString;

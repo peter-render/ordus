@@ -401,10 +401,6 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
     end
   end
@@ -2212,6 +2208,7 @@
       'a.Beteckning,'
       'a.Artikelnummer,'
       'orad.Antal,'
+      'orad.Revision,'
       'oh.OrdertypId,'
       'orad.Prisperenhet,'
       'oh.fritext,'
@@ -2232,8 +2229,8 @@
       'where oh.id = :OrderId'
       'ORDER BY a.Artikelnummer'
       '')
-    Left = 84
-    Top = 93
+    Left = 88
+    Top = 209
     ParamData = <
       item
         Name = 'ORDERID'
@@ -2340,6 +2337,11 @@
     object qryXMLOrderPositionnummer: TIntegerField
       FieldName = 'Positionnummer'
       Origin = 'Positionnummer'
+    end
+    object qryXMLOrderRevision: TStringField
+      FieldName = 'Revision'
+      Origin = 'Revision'
+      Size = 5
     end
   end
 end

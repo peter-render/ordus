@@ -264,6 +264,13 @@
         DataType = ftString
         ParamType = ptInput
         Size = 255
+      end
+      item
+        Position = 10
+        Name = '@Revision'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 5
       end>
   end
   object sp_KundpersonlistforKund: TFDStoredProc

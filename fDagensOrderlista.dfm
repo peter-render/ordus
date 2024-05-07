@@ -197,6 +197,7 @@
       #9'orad.Ritning1,'
       #9'orad.F'#246'ljesedelId,'
       #9'orad.Totaltid,'
+      'orad.Revision,'
       'a.Notering,'
       'orad.OrderradInfo,'
       ''
@@ -667,6 +668,11 @@
       Origin = 'YtbehandlingIdForslag'
       ReadOnly = True
       Visible = False
+    end
+    object qryOrderradDagensRevision: TStringField
+      FieldName = 'Revision'
+      Origin = 'Revision'
+      Size = 5
     end
   end
   object dsoOrderradDagens: TDataSource
