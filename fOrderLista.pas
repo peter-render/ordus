@@ -317,6 +317,7 @@ type
     qryXMLOrderOrderRadnr: TIntegerField;
     qryXMLOrderPositionnummer: TIntegerField;
     qryXMLOrderRevision: TStringField;
+    Memo1: TMemo;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -1814,7 +1815,7 @@ var
   Param, orderstring, fstring, ExcelFileName: String;
   oRng, ExcelApplication, ExcelWorkbook, ExcelWorksheet: Variant;
   bm: Tbookmark;
-  n,rTyp: Integer;
+  n, rTyp: Integer;
   xmlfilelist: TStringlist;
 
   Outlook: OleVariant;
@@ -1849,9 +1850,16 @@ begin
   begin
     close;
     sql.Clear;
+
     sql := qryExcelExport_backup.sql;
     Param := '(' + copy(orderstring, 1, length(orderstring) - 1) + ')';
+    showmessage(sql.Text);
+    showmessage(Param);
+    memo1.Text:=    qryExcelExport.sql.text;
+    memo1.CopyToClipboard();
+
     qryExcelExport.sql.Add(Param);
+
     open;
     if recordcount = 0 then
       exit;
@@ -2020,7 +2028,7 @@ begin
       chr(13) + chr(10) + 'Mvh' + chr(13) + chr(10) + 'Ängelholms Mekaniska Verkstad';
     Mail.Attachments.Add(xfilename);
 
-    for n:= 0 to xmlfilelist.Count -1 do
+    for n := 0 to xmlfilelist.count - 1 do
       Mail.Attachments.Add(xmlfilelist[n]);
 
     FreeAndNil(xmlfilelist);
