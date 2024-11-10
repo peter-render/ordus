@@ -195,6 +195,7 @@
         Align = alClient
         DataSource = dsoOrderrad
         KeyOptions = []
+        Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgShowFooter, dgFixedEditable]
         ParentShowHint = False
         PopupMenu = PopupMenu1
         ShowHint = True
@@ -211,6 +212,7 @@
         LineColors.ShadowColor = clBlack
         OnCalcCellColors = wwDBGrid1CalcCellColors
         OnColExit = wwDBGrid1CellChanged
+        OnUpdateFooter = wwDBGrid1UpdateFooter
         PadColumnStyle = pcsPadHeader
       end
       object LU_senastePriser: TwwDBLookupCombo
@@ -444,6 +446,13 @@
       #9',oro.PrisPerEnhet OffertPrisPerEnhet'
       #9',oho.Orderdatum Offertdatum'
       ''
+      
+        #9',sum'#214'vrigt1 =(select sum('#214'vrigt1*Antal) from orderrad where Ord' +
+        'erID = :OrderId)'
+      
+        #9',sum'#214'vrigt2 =(select sum('#214'vrigt2*Antal) from orderrad where Ord' +
+        'erID = :OrderId)'
+      ''
       ''
       'from orderrad orad'
       'join orderhuvud oh on oh.id = orad.OrderID'
@@ -467,13 +476,8 @@
       'left join Ytbehandling y on y.id = orad.YtbehandlingId'
       'left join personal per on per.id = orad.AvrapporteradPersonID'
       ''
-      ''
       'where orad.OrderID = :orderId'
-      'order by orad.Radnr'
-      ''
-      '-- 8236'
-      ''
-      '')
+      'order by orad.Radnr')
     Left = 724
     Top = 192
     ParamData = <
@@ -638,6 +642,62 @@
       FieldName = 'SenasteOrdertypId'
       Origin = 'SenasteOrdertypId'
       Visible = False
+    end
+    object qryOrderradsumÖvrigt1: TFMTBCDField
+      AutoGenerateValue = arDefault
+      DefaultExpression = ''
+      FieldName = 'sum'#214'vrigt1'
+      ProviderFlags = []
+      Precision = 38
+      Size = 6
+    end
+    object qryOrderradsumÖvrigt2: TFMTBCDField
+      AutoGenerateValue = arDefault
+      DefaultExpression = ''
+      FieldName = 'sum'#214'vrigt2'
+      ProviderFlags = []
+      Precision = 38
+      Size = 6
+    end
+  end
+  object qryOrderradSum: TFDQuery
+    OnCalcFields = qryOrderradCalcFields
+    Connection = dm.FDConnection1
+    FetchOptions.AssignedValues = [evCache]
+    FetchOptions.Cache = [fiBlobs, fiMeta]
+    SQL.Strings = (
+      ''
+      'Select'
+      
+        #9'sum'#214'vrigt1 =(select sum('#214'vrigt1*Antal) from orderrad where Orde' +
+        'rID = :OrderId)'
+      
+        #9',sum'#214'vrigt2 =(select sum('#214'vrigt2*Antal) from orderrad where Ord' +
+        'erID = :OrderId)'
+      '')
+    Left = 728
+    Top = 272
+    ParamData = <
+      item
+        Name = 'ORDERID'
+        DataType = ftAutoInc
+        ParamType = ptInput
+        Size = 4
+        Value = 8236
+      end>
+    object qryOrderradSumsumÖvrigt1: TFMTBCDField
+      FieldName = 'sum'#214'vrigt1'
+      Origin = '[sum'#214'vrigt1]'
+      ReadOnly = True
+      Precision = 38
+      Size = 6
+    end
+    object qryOrderradSumsumÖvrigt2: TFMTBCDField
+      FieldName = 'sum'#214'vrigt2'
+      Origin = '[sum'#214'vrigt2]'
+      ReadOnly = True
+      Precision = 38
+      Size = 6
     end
   end
 end

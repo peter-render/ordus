@@ -923,6 +923,7 @@ end;
 function TXMLRowType.Get_DeliveryPeriod: TDateTime;
 begin
   result := VarToDateTime(ChildNodes['DeliveryPeriod'].NodeValue);
+
 end;
 
 function TXMLRowType.Get_Each: Integer;

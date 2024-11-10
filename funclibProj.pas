@@ -11,8 +11,8 @@ uses datamodule, messages, sysutils, forms, windows, typinfo,
   FireDAC.Comp.Client, FireDAC.Phys.ODBCBase, FireDAC.Phys.MSSQL,
   FireDAC.VCLUI.Wait, FireDAC.Comp.UI,
   FireDAC.Stan.Param, FireDAC.DatS, FireDAC.DApt.Intf, FireDAC.DApt,
-  FireDAC.Comp.DataSet, system.Variants;
-
+  FireDAC.Comp.DataSet, system.Variants,
+  System.DateUtils;
 procedure ReadOrderfileIntersystem(filename: string);
 procedure ReadOrderfileIntersystemXML(xmlfilename: string);
 function Orderstatusbeteckning(intStatusId: integer): string;
@@ -159,6 +159,7 @@ var
   strBuyerName:string;
   intKundnr: Integer;
   strRevision: string;
+  deldate:Tdatetime;
 
 begin
 
@@ -195,15 +196,17 @@ begin
 
   for i := 0 to TOTALN - 1 do
   begin
-    if Orders420.Order.Rows[i].RowType = 1 then
+    if ((Orders420.Order.Rows[i].RowType = 1) or  (Orders420.Order.Rows[i].RowType = 2)) then
     begin
-      if Orders420.Order.Rows[i].DeliveryPeriod < deliveryDate then
+      deldate := Orders420.Order.Rows[i].DeliveryPeriod;
+
+      if deldate < deliveryDate then
         deliveryDate := Orders420.Order.Rows[i].DeliveryPeriod;
     end;
   end;
 
   if datetostr(deliveryDate) = '9999-12-31' then
-    deliveryDate := strtodate('');
+    deliveryDate :=  today();
 
   // Skapa Ordderhuvud
   // Kolla upp leverantör?
@@ -259,7 +262,8 @@ begin
     strOrderinfo := '';
     IntRadnr := Orders420.Order.Rows[i].RowNumber;
 
-    if Orders420.Order.Rows[i].RowType = 2 then
+//    Prepac har RowType = 2 för nomala orderrader
+    if (Orders420.Order.Rows[i].RowType = 2) and (intKundnr = 1) then
       strArtikelnr := '999999'
     else
       strArtikelnr := Orders420.Order.Rows[i].Part.PartNumber;

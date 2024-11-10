@@ -71,6 +71,11 @@ type
     qryOrderrad÷vrigt1: TCurrencyField;
     qryOrderrad÷vrigt2: TCurrencyField;
     qryOrderradSummaAuto: TCurrencyField;
+    qryOrderradsum÷vrigt1: TFMTBCDField;
+    qryOrderradsum÷vrigt2: TFMTBCDField;
+    qryOrderradSum: TFDQuery;
+    qryOrderradSumsum÷vrigt1: TFMTBCDField;
+    qryOrderradSumsum÷vrigt2: TFMTBCDField;
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Tabort1Click(Sender: TObject);
@@ -82,6 +87,7 @@ type
     procedure wwDBGrid1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
     procedure FormShow(Sender: TObject);
     procedure qryOrderradCalcFields(DataSet: TDataSet);
+    procedure wwDBGrid1UpdateFooter(Sender: TObject);
   private
     { Private declarations }
   public
@@ -149,7 +155,7 @@ end;
 
 procedure TfrmOrderradUpdate.wwDBGrid1CellChanged(Sender: TObject);
 begin
-//
+  //
 end;
 
 procedure TfrmOrderradUpdate.wwDBGrid1MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState;
@@ -252,6 +258,22 @@ begin
   end;
 end;
 
+procedure TfrmOrderradUpdate.wwDBGrid1UpdateFooter(Sender: TObject);
+begin
+
+  with qryOrderradSum do
+  begin
+    close;
+    qryOrderradSum.Parambyname('OrderID').value := qryOrderrad.FieldByName('OrderId').AsInteger;
+    open;
+    wwDBGrid1.ColumnByName('÷vrigt1').FooterValue := FloatToStrF(qryOrderradSumsum÷vrigt1.asFloat, ffFixed, 10, 2);
+    wwDBGrid1.ColumnByName('÷vrigt2').FooterValue := FloatToStrF(qryOrderradSumsum÷vrigt2.asFloat, ffFixed, 10, 2);
+  end;
+  // wwdbgrid1.ColumnByName('Extratid').FooterValue:= FloatToStrF(qryOrderradSumSumExtratid.asFloat,ffFixed , 10, 2);
+  // wwdbgrid1.ColumnByName('TidTotalt').FooterValue:= FloatToStrF(qryOrderradSumSumTotalt.asFloat,ffFixed , 10,2);
+
+end;
+
 procedure TfrmOrderradUpdate.qryOrderradAvrapporteradChange(Sender: TField);
 begin
 
@@ -264,10 +286,10 @@ end;
 
 procedure TfrmOrderradUpdate.qryOrderradCalcFields(DataSet: TDataSet);
 begin
-  if (DataSet.FieldByName('PrisperenhetAuto').AsFloat <> 0) or (DataSet.FieldByName('÷vrigt1').AsFloat <> 0) or
-    (DataSet.FieldByName('÷vrigt2').AsFloat <> 0) then
-    DataSet.FieldByName('SummaAuto').value := DataSet.FieldByName('PrisperenhetAuto').AsFloat +
-      DataSet.FieldByName('÷vrigt1').AsFloat + DataSet.FieldByName('÷vrigt2').AsFloat;
+  if (DataSet.FieldByName('PrisperenhetAuto').asFloat <> 0) or (DataSet.FieldByName('÷vrigt1').asFloat <> 0) or
+    (DataSet.FieldByName('÷vrigt2').asFloat <> 0) then
+    DataSet.FieldByName('SummaAuto').value := DataSet.FieldByName('PrisperenhetAuto').asFloat +
+      DataSet.FieldByName('÷vrigt1').asFloat + DataSet.FieldByName('÷vrigt2').asFloat;
 
 end;
 

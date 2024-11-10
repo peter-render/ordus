@@ -376,15 +376,6 @@
         TabOrder = 1
         Visible = False
       end
-      object Memo1: TMemo
-        Left = 704
-        Top = 116
-        Width = 585
-        Height = 453
-        Lines.Strings = (
-          'Memo1')
-        TabOrder = 2
-      end
     end
     object Panel6: TPanel
       Left = 0
@@ -410,6 +401,10 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
       end
     end
   end

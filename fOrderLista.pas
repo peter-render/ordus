@@ -317,7 +317,6 @@ type
     qryXMLOrderOrderRadnr: TIntegerField;
     qryXMLOrderPositionnummer: TIntegerField;
     qryXMLOrderRevision: TStringField;
-    Memo1: TMemo;
     procedure wwDBGrid1DblClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure ToolButton3Click(Sender: TObject);
@@ -1853,10 +1852,10 @@ begin
 
     sql := qryExcelExport_backup.sql;
     Param := '(' + copy(orderstring, 1, length(orderstring) - 1) + ')';
-    showmessage(sql.Text);
-    showmessage(Param);
-    memo1.Text:=    qryExcelExport.sql.text;
-    memo1.CopyToClipboard();
+//    showmessage(sql.Text);
+//    showmessage(Param);
+//    memo1.Text:=    qryExcelExport.sql.text;
+ //   memo1.CopyToClipboard();
 
     qryExcelExport.sql.Add(Param);
 
