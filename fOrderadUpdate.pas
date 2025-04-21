@@ -76,6 +76,7 @@ type
     qryOrderradSum: TFDQuery;
     qryOrderradSumsum÷vrigt1: TFMTBCDField;
     qryOrderradSumsum÷vrigt2: TFMTBCDField;
+    qryOrderhistoryOrderId: TFDAutoIncField;
     procedure FormActivate(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Tabort1Click(Sender: TObject);

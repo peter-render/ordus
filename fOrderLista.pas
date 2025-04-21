@@ -1139,7 +1139,8 @@ begin
   ordersumma := 0;
 
   Label5.caption := '';
-  wwDBGrid1.ColumnByName('Ordersumma').Visible := false;
+
+//  wwDBGrid1.ColumnByName('Ordersumma').Visible := false;
 
   cbVisaAllaFakturor.Visible := false;
 
@@ -2996,10 +2997,13 @@ end;
 
 procedure TfrmOrderLista.PageControl1Change(Sender: TObject);
 var
-
   raderFinns: Boolean;
+  summa:double;
 
-begin
+  begin
+
+
+
   (*
     stUA: Integer = 4; // Under arbete
     stAR: Integer = 3; // Återrapporterad
@@ -3192,6 +3196,21 @@ begin
     parambyname('@Orderby').value := 'OrderID';
     open;
   end;
+
+  summa := 0;
+  with wwdbgrid1.DataSource.DataSet do
+  begin
+    DisableControls;
+    top;
+    while not eof do
+    begin
+      summa := summa + fieldbyname('Ordersumma').AsFloat;
+      next;
+    end;
+    enableControls;
+  end;
+  wwDBGrid1.ColumnByName('Ordersumma').FooterValue := FloatToStrF(summa, ffCurrency, 10, 2);
+
 
 end;
 
@@ -3411,6 +3430,7 @@ begin
   end;
 
 end;
+
 
 procedure TfrmOrderLista.actArbetsorderPrintExecute(Sender: TObject);
 begin

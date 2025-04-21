@@ -301,6 +301,8 @@
         Top = 5
         Width = 1359
         Height = 796
+        ControlType.Strings = (
+          #196'rPrissatt;CheckBox;1;0')
         PictureMasks.Strings = (
           'Ordersumma'#9'### ### ###0,00'#9'T'#9'F'
           'Lagersaldo'#9'###'#9'T'#9'T')
@@ -324,7 +326,7 @@
           'KalkArbetstidTime'#9'10'#9'Utr'#228'knat'#9#9
           'ArbetstidPlaneradTime'#9'13'#9'Inplanerad'#9#9
           'Ordersumma'#9'14'#9'Ordersumma'#9#9
-          #196'rPrissatt'#9'10'#9#196'rPrissatt'#9#9
+          #196'rPrissatt'#9'10'#9#196'rPrissatt'#9'T'
           'F'#246'rfallodatum'#9'11'#9'F'#246'rfallodatum'#9#9
           'Fakturanummer'#9'20'#9'Fakturanummer'#9#9)
         IniAttributes.Delimiter = ';;'
@@ -345,7 +347,7 @@
         Font.Style = []
         KeyOptions = []
         MultiSelectOptions = [msoShiftSelect]
-        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgColLinesDisableFixed]
+        Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgWordWrap, dgShowFooter, dgColLinesDisableFixed]
         ParentFont = False
         PopupMenu = PopupMenuOrderlista
         ReadOnly = True
@@ -365,6 +367,8 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
+        ExplicitLeft = 4
+        ExplicitTop = 6
       end
       object wwExpandButton1: TwwExpandButton
         Left = 599
@@ -401,10 +405,6 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
       end
     end
   end

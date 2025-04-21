@@ -218,21 +218,22 @@
       object LU_senastePriser: TwwDBLookupCombo
         Left = 596
         Top = 407
-        Width = 325
+        Width = 500
         Height = 21
         DropDownAlignment = taLeftJustify
         Selected.Strings = (
-          'Orderdatum'#9'10'#9'Orderdatum'#9'F'
-          'OrdertypString'#9'1'#9'Typ'#9'F'
+          'Orderdatum'#9'10'#9'Orderdatum'#9'T'
+          'OrdertypString'#9'1'#9'Typ'#9'T'
           'Antal'#9'5'#9'Antal'#9'T'
           'PrisPerEnhet'#9'10'#9'Pris/enhet'#9'T'
-          'Ytbehandling'#9'20'#9'Ytbehandling'#9'F')
+          'Ytbehandling'#9'20'#9'Ytbehandling'#9'T'
+          'OrderId'#9'7'#9'Order-nr'#9'T')
         DataSource = dsoOrderrad
         LookupTable = qryOrderhistory
         LookupField = 'Id'
         Options = [loTitles]
         DropDownCount = 12
-        DropDownWidth = 300
+        DropDownWidth = 380
         ReadOnly = True
         TabOrder = 1
         AutoDropDown = False
@@ -295,6 +296,7 @@
       end>
   end
   object qryOrderhistory: TFDQuery
+    Active = True
     MasterSource = dsoOrderrad
     MasterFields = 'Id'
     DetailFields = 'Id'
@@ -304,7 +306,7 @@
     SQL.Strings = (
       'Select orad.Id ,a2.artikelnummer,y.Beteckning Ytbehandling,'
       'orad2.PrisPerEnhet,o.Orderdatum ,'
-      'orad2.antal,'
+      'orad2.antal,o.Id OrderId,'
       'case when o.OrdertypId= 3 then '#39'O'#39' else '#39#39' end OrdertypString'
       'from '
       'orderrad orad'
@@ -364,19 +366,27 @@
       Origin = 'Ytbehandling'
       Size = 50
     end
+    object qryOrderhistoryOrderId: TFDAutoIncField
+      DisplayLabel = 'Order-nr'
+      DisplayWidth = 7
+      FieldName = 'OrderId'
+      Origin = 'OrderId'
+      ReadOnly = True
+    end
+    object qryOrderhistoryId: TFDAutoIncField
+      DisplayWidth = 10
+      FieldName = 'Id'
+      Origin = 'Id'
+      ProviderFlags = [pfInWhere, pfInKey]
+      ReadOnly = True
+      Visible = False
+    end
     object qryOrderhistoryartikelnummer: TStringField
       FieldName = 'artikelnummer'
       Origin = 'artikelnummer'
       Required = True
       Visible = False
       Size = 30
-    end
-    object qryOrderhistoryId: TFDAutoIncField
-      FieldName = 'Id'
-      Origin = 'Id'
-      ProviderFlags = [pfInWhere, pfInKey]
-      ReadOnly = True
-      Visible = False
     end
   end
   object qryPrisinfo: TFDQuery
@@ -424,6 +434,7 @@
     SQL.Strings = (
       'Select '
       #9'orad.Id,'
+      'oh.Id OrderId,'
       #9'orad.OrderId,'
       #9'orad.Positionnummer,'
       #9'orad.ArtikelId,'
@@ -645,7 +656,6 @@
     end
     object qryOrderradsumÖvrigt1: TFMTBCDField
       AutoGenerateValue = arDefault
-      DefaultExpression = ''
       FieldName = 'sum'#214'vrigt1'
       ProviderFlags = []
       Precision = 38
@@ -653,7 +663,6 @@
     end
     object qryOrderradsumÖvrigt2: TFMTBCDField
       AutoGenerateValue = arDefault
-      DefaultExpression = ''
       FieldName = 'sum'#214'vrigt2'
       ProviderFlags = []
       Precision = 38
