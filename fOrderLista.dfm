@@ -367,8 +367,6 @@
         OnKeyDown = wwDBGrid1KeyDown
         IndicatorIconColor = clBlue
         PadColumnStyle = pcsPadHeader
-        ExplicitLeft = 4
-        ExplicitTop = 6
       end
       object wwExpandButton1: TwwExpandButton
         Left = 599
@@ -402,6 +400,8 @@
       TabWidth = 130
       OnChange = PageControl1Change
       OnDrawTab = PageControl1DrawTab
+      ExplicitLeft = 1
+      ExplicitTop = 44
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True

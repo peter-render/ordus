@@ -11,3 +11,5 @@ __*
 *.xlsx
 *.pdf
 *.bak
+debug/
+release/

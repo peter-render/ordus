@@ -15,8 +15,8 @@ File_12=TSourceModule,'C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms 
 
 [Modules]
 Module0=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\Datamodule.pas
-Module1=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderadUpdate.pas
-Module2=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderLista.pas
+Module1=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderLista.pas
+Module2=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderadUpdate.pas
 Module3=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fTimpris.pas
 Module4=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMaterialpris.pas
 Module5=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderPlanering.pas
@@ -29,12 +29,12 @@ ModuleType=TSourceModule
 FormState=1
 FormOnTop=1
 
-[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderadUpdate.pas]
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderLista.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
-[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderLista.pas]
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderadUpdate.pas]
 ModuleType=TSourceModule
 FormState=1
 FormOnTop=0
@@ -42,12 +42,12 @@ FormOnTop=0
 [C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fTimpris.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
 [C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fMaterialpris.pas]
 ModuleType=TSourceModule
 FormState=1
-FormOnTop=1
+FormOnTop=0
 
 [C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderPlanering.pas]
 ModuleType=TSourceModule
@@ -63,11 +63,11 @@ FormOnTop=0
 FormState=1
 FormOnTop=0
 
-[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fYtbehandling.pas]
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fPersonal.pas]
 FormState=1
 FormOnTop=0
 
-[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fPersonal.pas]
+[C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fYtbehandling.pas]
 FormState=1
 FormOnTop=0
 
@@ -97,9 +97,9 @@ ClientHeight=9267
 DockedToMainForm=1
 BorlandEditorCodeExplorer=BorlandEditorCodeExplorer@EditWindow0
 TopPanelSize=0
-LeftPanelSize=1443
+LeftPanelSize=1453
 LeftPanelClients=PropertyInspector,DockSite3
-LeftPanelData=00000800010100000000561000000000000001A30500000000000001000000003F05000009000000446F636B536974653301000000000B1D00001100000050726F7065727479496E73706563746F72FFFFFFFF
+LeftPanelData=00000800010100000000561000000000000001AD0500000000000001000000003F05000009000000446F636B536974653301000000000B1D00001100000050726F7065727479496E73706563746F72FFFFFFFF
 RightPanelSize=1167
 RightPanelClients=DockSite2,DockSite4
 RightPanelData=000008000101000000005610000000000000018F0400000000000001000000004412000009000000446F636B536974653201000000000B1D000009000000446F636B5369746534FFFFFFFF
@@ -113,9 +113,9 @@ BottomMiddelPanelData=0000080001020200000009000000446F636B5369746530100000004772
 [View0]
 CustomEditViewType=TEditView
 Module=C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderLista.pas
-CursorX=90
-CursorY=1625
-TopLine=1614
+CursorX=70
+CursorY=3215
+TopLine=3209
 LeftCol=1
 Elisions=
 Bookmarks=
@@ -213,7 +213,7 @@ StayOnTop=0
 
 [Breakpoints]
 Count=2
-Breakpoint0='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderLista.pas',3670,'',0,1,'',1,0,0,'',1,'','','',0,''
+Breakpoint0='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\fOrderLista.pas',3671,'',0,1,'',1,0,0,'',1,'','','',0,''
 Breakpoint1='C:\Users\Peter Holzer\Documents\Projekt\AMEK\Ängelholms Mek 2007 - Aktuell version\funclibProj.pas',201,'',0,1,'',1,0,0,'',1,'','','',0,''
 
 [EmbarcaderoWin32Debugger_AddressBreakpoints]
@@ -386,17 +386,17 @@ Docked=1
 State=0
 Left=0
 Top=168
-Width=1443
+Width=1453
 Height=6048
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1443
+ClientWidth=1453
 ClientHeight=6048
 TBDockHeight=7019
-LRDockWidth=1443
+LRDockWidth=1453
 Dockable=1
 StayOnTop=0
-SplitPos=123
+SplitPos=98
 
 [TFileExplorerForm]
 PercentageSizes=1
@@ -656,11 +656,11 @@ Docked=1
 State=0
 Left=0
 Top=0
-Width=1443
+Width=1453
 Height=1124
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1443
+ClientWidth=1453
 ClientHeight=1124
 TBDockHeight=3676
 LRDockWidth=1896
@@ -809,14 +809,14 @@ Docked=1
 State=0
 Left=0
 Top=23
-Width=1443
+Width=1453
 Height=1124
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=1443
+ClientWidth=1453
 ClientHeight=1124
 TBDockHeight=7019
-LRDockWidth=1443
+LRDockWidth=1453
 Dockable=1
 StayOnTop=0
 TabPosition=1

@@ -3210,6 +3210,7 @@ var
     enableControls;
   end;
   wwDBGrid1.ColumnByName('Ordersumma').FooterValue := FloatToStrF(summa, ffCurrency, 10, 2);
+  wwDBGrid1.SetActiveRow(0);
 
 
 end;
