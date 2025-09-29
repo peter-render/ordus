@@ -326,10 +326,10 @@ type
     procedure Fixatur1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnJobblistaClick(Sender: TObject);
-    procedure btnNotiserClick(Sender: TObject);
     procedure dbgridCalcCellColors(Sender: TObject; Field: TField; State: TGridDrawState; Highlight: boolean;
       AFont: TFont; ABrush: TBrush);
     procedure mi_visaritningClick(Sender: TObject);
+    procedure btnNotiserClick(Sender: TObject);
 
   private
     function GetRitningFilename(Artikelnummer: string; kundnamn: string; OrderradId: integer): string;
@@ -348,7 +348,7 @@ implementation
 
 uses fCalc, rEtikett, funclib, fFoljesedel, Datamodule,
   rPallEtikett, rLagerplatsetikett, fNyFoljesedel, fNotering, fKalender,
-  fLagersaldo, fTransport, fKontakter, fjobblista;
+  fLagersaldo, fTransport, fKontakter, fjobblista, fRitningsnotering;
 
 {$R *.DFM}
 
@@ -964,18 +964,6 @@ begin
 
 end;
 
-procedure TfrmOrdusrapport2.btnNotiserClick(Sender: TObject);
-begin
-
-  with TfrmArtikelnotering.Create(application) do
-  begin
-    edit1.Text := qryOrderrad.fieldbyname('Artikelnummer').asString;
-    FDquery1.close;
-    Showmodal;
-
-  end;
-end;
-
 procedure TfrmOrdusrapport2.btnJobblistaClick(Sender: TObject);
 begin
   with TfrmJobblista.Create(application) do
@@ -1138,6 +1126,13 @@ begin
     Open;
     locate('Id', bm, []);
   end;
+
+end;
+
+procedure TfrmOrdusrapport2.btnNotiserClick(Sender: TObject);
+begin
+  with TfrmRitningsnotering.Create(application) do
+    showmodal;
 
 end;
 

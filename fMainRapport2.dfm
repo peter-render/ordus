@@ -42,7 +42,6 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    ExplicitHeight = 560
     DesignSize = (
       142
       678)
@@ -483,7 +482,6 @@
       ParentFont = False
       TabOrder = 2
       OnClick = btnPalettEtikettClick
-      ExplicitTop = 274
     end
     object btnLagerplatsetikett: TButton
       Left = 8
@@ -501,7 +499,6 @@
       ParentFont = False
       TabOrder = 3
       OnClick = btnLagerplatsetikettClick
-      ExplicitTop = 243
     end
     object btnFS: TButton
       Left = 8
@@ -519,7 +516,6 @@
       TabOrder = 1
       TabStop = False
       OnClick = btnFSClick
-      ExplicitTop = 67
     end
     object btnClose: TButton
       Left = 8
@@ -539,7 +535,6 @@
       TabOrder = 0
       TabStop = False
       OnClick = btnCloseClick
-      ExplicitTop = 10
     end
     object btnVisaKalender: TButton
       Left = 8
@@ -558,7 +553,6 @@
       ShowHint = False
       TabOrder = 4
       OnClick = btnVisaKalenderClick
-      ExplicitTop = 98
     end
     object BtnMaterialbestallning: TButton
       Left = 8
@@ -575,7 +569,6 @@
       ParentFont = False
       TabOrder = 5
       OnClick = BtnMaterialbestallningClick
-      ExplicitTop = 129
     end
     object btnTransport: TButton
       Left = 8
@@ -593,7 +586,6 @@
       ParentFont = False
       TabOrder = 6
       OnClick = btnTransportClick
-      ExplicitTop = 304
     end
     object btnJobblista: TButton
       Left = 8
@@ -610,7 +602,6 @@
       ParentFont = False
       TabOrder = 7
       OnClick = btnJobblistaClick
-      ExplicitTop = 160
     end
     object btnNotiser: TButton
       Left = 8
@@ -627,7 +618,6 @@
       ParentFont = False
       TabOrder = 8
       OnClick = btnNotiserClick
-      ExplicitTop = 191
     end
     object DBMemo1: TDBMemo
       Left = 6
@@ -647,7 +637,6 @@
     Panels = <>
     SimplePanel = True
     SizeGrip = False
-    ExplicitTop = 560
   end
   object Panel1: TPanel
     Left = 0
@@ -663,7 +652,6 @@
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitHeight = 560
     object Label10: TLabel
       Left = 228
       Top = 76
@@ -679,8 +667,6 @@
       BevelEdges = []
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitTop = 2
       DesignSize = (
         812
         117)
@@ -1940,8 +1926,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 1
-      ExplicitTop = 97
-      ExplicitHeight = 463
       object Panel5: TPanel
         Left = 2
         Top = 2
@@ -1949,7 +1933,6 @@
         Height = 325
         Align = alClient
         TabOrder = 0
-        ExplicitHeight = 258
         object dbgrid: TwwDBGrid
           Left = 1
           Top = 1
@@ -2021,7 +2004,6 @@
         Font.Style = []
         ParentFont = False
         TabOrder = 1
-        ExplicitTop = 260
         object Bevel2: TBevel
           Left = 102
           Top = 11
@@ -2770,7 +2752,6 @@
       Font.Style = []
       ParentFont = False
       TabOrder = 2
-      ExplicitTop = 66
       DesignSize = (
         812
         31)
@@ -3852,7 +3833,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500640010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

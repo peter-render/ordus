@@ -94,6 +94,7 @@ type
     DBEdit7: TDBEdit;
     FDQuery1PrisPerEnhet: TCurrencyField;
     Button5: TButton;
+    FileOpenDialog1: TFileOpenDialog;
     procedure btnNyClick(Sender: TObject);
     procedure btnAndraClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -110,6 +111,7 @@ type
     procedure cbLagersaldoClick(Sender: TObject);
     procedure btnLagerlistaClick(Sender: TObject);
     procedure btnSparaClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
 
   private
     procedure btnState;
@@ -187,7 +189,6 @@ var
   Mail: Variant;
   rowsfound: Boolean;
   xfilename: String;
-
 
 const
   olMailItem = $00000000;
@@ -286,7 +287,7 @@ begin
 
         with fdQuery1 do
         begin
-          bm:= fdQuery1.Bookmark;
+          bm := fdQuery1.Bookmark;
           DisableControls;
           first;
           while not eof do
@@ -297,7 +298,7 @@ begin
               ExcelWorksheet.cells[row, 2] := FieldByName('Beteckning').AsString;
 
               if FieldByName('Lagerplats').AsString <> '' then
-                ExcelWorksheet.cells[row, 3] := ' '+FieldByName('Lagerplats').AsString;
+                ExcelWorksheet.cells[row, 3] := ' ' + FieldByName('Lagerplats').AsString;
 
               ExcelWorksheet.cells[row, 4] := FieldByName('Lagersaldo').AsFloat;
               ExcelWorksheet.cells[row, 5] := FieldByName('PrisPerEnhet').AsFloat;
@@ -308,7 +309,7 @@ begin
           end;
           gotobookmark(bm);
 
-          ExcelWorksheet.cells[row, 6]:= '=+SUM(F2:F'+ inttostr(row-1)+')';
+          ExcelWorksheet.cells[row, 6] := '=+SUM(F2:F' + inttostr(row - 1) + ')';
 
           ExcelWorksheet.Range['A1', 'F1'].EntireColumn.AutoFit;
           Enablecontrols;
@@ -349,6 +350,30 @@ begin
 
 end;
 
+procedure TfrmArtikel.Button1Click(Sender: TObject);
+begin
+  inherited;
+  with FileOpenDialog1 do
+  begin
+    DefaultFolder := ftgsystemvalue('pdf.folder.ritningar', '');
+    if execute then
+    begin
+      with DBEdit3.DataSource.DataSet do
+      begin
+
+        if State in [dsedit, dsInsert] then
+          DBEdit3.Field.AsString := extractfilename(FileOpenDialog1.FileName)
+        else
+        begin
+          edit;
+          DBEdit3.Field.AsString := extractfilename(FileOpenDialog1.FileName);
+          post;
+        end
+      end;
+    end;
+  end;
+end;
+
 procedure TfrmArtikel.Button2Click(Sender: TObject);
 begin
   // inherited;
@@ -367,7 +392,7 @@ begin
 
     qryArtikelgrupp.Append;
     // qryArtikelgrupp.Fieldbyname('ArtikelId').asInteger := dm.qryArtikelArtikelId.AsInteger;
-   qryArtikelgrupp.Fieldbyname('Antal').asFLoat := 1.0;
+    qryArtikelgrupp.FieldByName('Antal').AsFloat := 1.0;
 
     Showmodal;
 
@@ -409,7 +434,7 @@ begin
     Showmodal;
 
     wwDBLookupCombo1.Enabled := false;
-    qryArtikelgrupp.Edit;
+    qryArtikelgrupp.edit;
 
     if modalresult = mrOK then
     begin
@@ -427,7 +452,7 @@ begin
   if MessageDlg('Vill du ta bort artiklen från artikelgruppen?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
     with qryArtikelgrupp do
     begin
-      Edit;
+      edit;
       FieldByName('Borttagen').AsDateTime := Date;
       post;
       requery(qryArtikelgrupp);

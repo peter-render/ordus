@@ -26,7 +26,8 @@ uses
   fStdRV in 'fStdRV.pas' {frmStdRV},
   fjobblista in 'fjobblista.pas' {frmJobblista},
   fArtikelnotering in 'fArtikelnotering.pas' {frmArtikelnotering},
-  fDagensOrderlista in 'fDagensOrderlista.pas' {frmDagensOrderlista};
+  fDagensOrderlista in 'fDagensOrderlista.pas' {frmDagensOrderlista},
+  fRitningsnotering in 'fRitningsnotering.pas' {frmRitningsnotering};
 
 {$R *.RES}
 
@@ -34,6 +35,7 @@ begin
   Application.Initialize;
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmOrdusrapport2, frmOrdusrapport2);
+  Application.CreateForm(TfrmRitningsnotering, frmRitningsnotering);
   Application.Run;
 
 end.

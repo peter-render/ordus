@@ -73,6 +73,8 @@ uses
   fExtratidRapport in 'fExtratidRapport.pas' {frmExtratidRapport},
   rExtratidrapport in 'rExtratidrapport.pas' {rptExtratidRapport};
 
+//  rExtratidrapport in 'rExtratidrapport.pas' {rptExtratidRapport};
+
 {$R *.RES}
 
 begin
@@ -81,5 +83,8 @@ begin
   Application.CreateForm(TfrmMain, frmMain);
   Application.CreateForm(TfrmOrderLista, frmOrderLista);
   Application.CreateForm(TfrmDagensOrderlista, frmDagensOrderlista);
+  Application.CreateForm(TrptExtratidRapport, rptExtratidRapport);
+  Application.CreateForm(TfrmExtratidRapport, frmExtratidRapport);
+  Application.CreateForm(TrptExtratidRapport, rptExtratidRapport);
   Application.Run;
 end.

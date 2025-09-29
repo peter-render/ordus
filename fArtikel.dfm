@@ -258,12 +258,11 @@
         TabOrder = 4
       end
       object Button1: TButton
-        Left = 362
-        Top = 113
+        Left = 366
+        Top = 114
         Width = 22
         Height = 22
         Caption = '...'
-        Enabled = False
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -13
@@ -271,6 +270,7 @@
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 5
+        OnClick = Button1Click
       end
       object DBEdit4: TDBEdit
         Left = 96
@@ -887,7 +887,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500340010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020005003C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -1029,5 +1029,16 @@
   object wwDataSource1: TwwDataSource
     Left = 468
     Top = 108
+  end
+  object FileOpenDialog1: TFileOpenDialog
+    FavoriteLinks = <>
+    FileTypes = <
+      item
+        DisplayName = '(*.pdf)'
+        FileMask = '*.pdf'
+      end>
+    Options = []
+    Left = 240
+    Top = 498
   end
 end

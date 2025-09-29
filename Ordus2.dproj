@@ -90,6 +90,7 @@
         <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Locale>1033</VerInfo_Locale>
         <VerInfo_Build>2</VerInfo_Build>
         <VerInfo_Release>1</VerInfo_Release>
         <Manifest_File>None</Manifest_File>
@@ -166,7 +167,12 @@
                     <Source Name="MainSource">Ordus2.dpr</Source>
                 </Source>
                 <Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD21\dclfrx21.bpl">File C:\Program Files (x86)\FastReports\LibD21\dclfrx21.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD21\dclfrxDB21.bpl">File C:\Program Files (x86)\FastReports\LibD21\dclfrxDB21.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD21\dclfrxe21.bpl">File C:\Program Files (x86)\FastReports\LibD21\dclfrxe21.bpl not found</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Program Files (x86)\FastReports\LibD21\dclfrxtee21.bpl">File C:\Program Files (x86)\FastReports\LibD21\dclfrxtee21.bpl not found</Excluded_Packages>
                     <Excluded_Packages Name="$(BDSBIN)\dcloffice2k210.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="C:\Users\Public\Documents\Embarcadero\Studio\15.0\Bpl\MinaEgnaKomponenter.bpl">(untitled)</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <ModelSupport>False</ModelSupport>

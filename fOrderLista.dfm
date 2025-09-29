@@ -405,6 +405,10 @@
       object TabSheet1: TTabSheet
         Caption = 'TabSheet1'
         Highlighted = True
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
       end
     end
   end
@@ -1280,8 +1284,6 @@
     EncodersSettings.PDF.ImageSettings.OutputFormat = pifJPEG
     EncodersSettings.PDF.FontSettings.Embedding = efmSubset
     EncodersSettings.PDF.FontSettings.Encoding = fenWinAnsiEncoding
-    EncodersSettings.PDF.LineJoinStyle = ljsMiter
-    EncodersSettings.PDF.LineCapStyle = lcsFlat
     EncodersSettings.XLSX.FileExtension = 'xlsx'
     EncodersSettings.XLSX.FileDescription = 'Microsoft Excel Workbook'
     EncodersSettings.XLSX.Formatting.RowSpacing = 0

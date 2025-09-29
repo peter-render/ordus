@@ -2999,7 +2999,8 @@ procedure TfrmOrderLista.PageControl1Change(Sender: TObject);
 var
   raderFinns: Boolean;
   summa:double;
-
+  pos:Integer;
+  bm:Tbookmark;
   begin
 
 
@@ -3198,8 +3199,11 @@ var
   end;
 
   summa := 0;
+
+  bm:= wwdbgrid1.DataSource.DataSet.Bookmark;
   with wwdbgrid1.DataSource.DataSet do
   begin
+    bm:= Bookmark;
     DisableControls;
     top;
     while not eof do
@@ -3208,10 +3212,10 @@ var
       next;
     end;
     enableControls;
+
   end;
   wwDBGrid1.ColumnByName('Ordersumma').FooterValue := FloatToStrF(summa, ffCurrency, 10, 2);
-  wwDBGrid1.SetActiveRow(0);
-
+  wwdbgrid1.DataSource.DataSet.GotoBookmark(bm);
 
 end;
 
