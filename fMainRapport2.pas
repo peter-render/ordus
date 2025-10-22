@@ -288,7 +288,7 @@ type
     memoFritext: TDBMemo;
     lblFritext: TLabel;
     qryOrderradFritext: TStringField;
-    Button1: TButton;
+    btnRitningsnotis: TButton;
     procedure FormShow(Sender: TObject);
     procedure edtOrderNrExit(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -718,6 +718,7 @@ begin
   btnLagerplatsetikett.enabled := btnEtikett.enabled;
   btnTransport.enabled := btnEtikett.enabled;
 
+  btnRitningsnotis.Enabled:= DataSet.recordcount > 0;
   btnPalettEtikett.enabled := btnEtikett.enabled;
 
 end;
@@ -974,12 +975,14 @@ end;
 
 procedure TfrmOrdusrapport2.btnCancelClick(Sender: TObject);
 begin
-  with TfrmArtikelnotering.Create(application) do
-  begin
-    edit1.Text := qryOrderrad.fieldbyname('Artikelnummer').asString;
-    FDquery1.close;
-    Showmodal;
-  end;
+  qryOrderrad.cancel;
+  DisableEdit(true);
+  dbgrid.enabled := true;
+  edtOrdernr.enabled := true;
+
+  btnEdit.enabled := true;
+  btnClose.enabled := true;
+  btnFSTransport.enabled := true;
 end;
 
 procedure TfrmOrdusrapport2.edtOrdernrEnter(Sender: TObject);

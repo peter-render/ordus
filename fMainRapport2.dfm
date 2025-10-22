@@ -628,13 +628,14 @@
       DataSource = dsoOrderrad
       TabOrder = 9
     end
-    object Button1: TButton
+    object btnRitningsnotis: TButton
       Left = 8
       Top = 265
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
       Caption = '&Ritningsnotiser'
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -683,6 +684,8 @@
       BevelEdges = []
       BevelOuter = bvNone
       TabOrder = 0
+      ExplicitLeft = 2
+      ExplicitTop = -2
       DesignSize = (
         812
         117)
@@ -788,7 +791,7 @@
       end
       object btnKontakter: TButton
         Left = 702
-        Top = 10
+        Top = 15
         Width = 85
         Height = 25
         Anchors = [akTop, akRight]
@@ -1910,10 +1913,8 @@
           Proportional = True
           Transparent = True
           OnClick = Image1Click
-          ExplicitLeft = -11
-          ExplicitTop = -7
-          ExplicitWidth = 183
-          ExplicitHeight = 39
+          ExplicitLeft = -2
+          ExplicitTop = 0
         end
       end
       object memoFritext: TDBMemo
@@ -3849,7 +3850,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
