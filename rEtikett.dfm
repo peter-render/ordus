@@ -19,6 +19,7 @@ object rptEtikett: TrptEtikett
     Top = 67
     Width = 369
     Height = 182
+    ShowingPreview = False
     BeforePrint = ReportBeforePrint
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -58,6 +59,7 @@ object rptEtikett: TrptEtikett
     PrinterSettings.UseCustomPaperCode = True
     PrinterSettings.CustomPaperCode = 0
     PrinterSettings.PrintMetaFile = False
+    PrinterSettings.MemoryLimit = 1000000
     PrinterSettings.PrintQuality = 0
     PrinterSettings.Collate = 0
     PrinterSettings.ColorOption = 0
@@ -68,6 +70,8 @@ object rptEtikett: TrptEtikett
     Zoom = 100
     PrevFormStyle = fsNormal
     PreviewInitialState = wsNormal
+    PreviewWidth = 500
+    PreviewHeight = 500
     PrevInitialZoom = qrZoomToFit
     PreviewDefaultSaveType = stQRP
     PreviewLeft = 0
@@ -78,7 +82,6 @@ object rptEtikett: TrptEtikett
       Width = 361
       Height = 165
       AlignToBottom = False
-      Color = clWhite
       TransparentBand = False
       ForceNewColumn = False
       ForceNewPage = False
@@ -99,6 +102,8 @@ object rptEtikett: TrptEtikett
           66.145833333333330000
           179.916666666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -115,6 +120,7 @@ object rptEtikett: TrptEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRLabel2: TQRLabel
@@ -128,6 +134,8 @@ object rptEtikett: TrptEtikett
           230.187500000000000000
           230.187500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Best'#228'llningsnr:'
@@ -135,6 +143,7 @@ object rptEtikett: TrptEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRLabel4: TQRLabel
@@ -148,6 +157,8 @@ object rptEtikett: TrptEtikett
           357.187500000000000000
           243.416666666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Leveransdatum:'
@@ -155,6 +166,7 @@ object rptEtikett: TrptEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRDBText4: TQRDBText
@@ -168,6 +180,8 @@ object rptEtikett: TrptEtikett
           230.187500000000000000
           238.125000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -184,6 +198,7 @@ object rptEtikett: TrptEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRLabel5: TQRLabel
@@ -197,6 +212,8 @@ object rptEtikett: TrptEtikett
           66.145833333333330000
           166.687500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Mottagare:'
@@ -204,6 +221,7 @@ object rptEtikett: TrptEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRDBText5: TQRDBText
@@ -217,6 +235,8 @@ object rptEtikett: TrptEtikett
           357.187500000000000000
           261.937500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -233,6 +253,7 @@ object rptEtikett: TrptEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRDBText3: TQRDBText
@@ -246,6 +267,8 @@ object rptEtikett: TrptEtikett
           145.520833333333300000
           235.479166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -262,6 +285,7 @@ object rptEtikett: TrptEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 12
       end
       object QRShape1: TQRShape
@@ -275,6 +299,8 @@ object rptEtikett: TrptEtikett
           121.708333333333000000
           735.541666666667000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Pen.Width = 2
         Shape = qrsHorLine
         VertAdjust = 0
@@ -290,6 +316,8 @@ object rptEtikett: TrptEtikett
           293.687500000000000000
           140.229166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Artikelnr:'
@@ -297,6 +325,7 @@ object rptEtikett: TrptEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRDBText2: TQRDBText
@@ -310,6 +339,8 @@ object rptEtikett: TrptEtikett
           293.687500000000000000
           251.354166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -326,6 +357,7 @@ object rptEtikett: TrptEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRShape2: TQRShape
@@ -339,6 +371,8 @@ object rptEtikett: TrptEtikett
           206.375000000000000000
           732.895833333333000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Pen.Width = 2
         Shape = qrsHorLine
         VertAdjust = 0
@@ -354,6 +388,8 @@ object rptEtikett: TrptEtikett
           150.812500000000000000
           190.500000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Godsm'#228'rke:'
@@ -361,6 +397,7 @@ object rptEtikett: TrptEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRLabel1: TQRLabel
@@ -374,6 +411,8 @@ object rptEtikett: TrptEtikett
           230.187500000000000000
           142.875000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Ordus-Id:'
@@ -381,6 +420,7 @@ object rptEtikett: TrptEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRDBText7: TQRDBText
@@ -394,6 +434,8 @@ object rptEtikett: TrptEtikett
           230.187500000000000000
           132.291666666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -410,6 +452,7 @@ object rptEtikett: TrptEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRLabel6: TQRLabel
@@ -423,6 +466,8 @@ object rptEtikett: TrptEtikett
           293.687500000000000000
           92.604166666666670000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Antal:'
@@ -430,6 +475,7 @@ object rptEtikett: TrptEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRDBText6: TQRDBText
@@ -443,6 +489,8 @@ object rptEtikett: TrptEtikett
           293.687500000000000000
           89.958333333333330000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -459,6 +507,7 @@ object rptEtikett: TrptEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 10
       end
     end
@@ -468,7 +517,6 @@ object rptEtikett: TrptEtikett
       Width = 361
       Height = 0
       AlignToBottom = False
-      Color = clWhite
       TransparentBand = False
       ForceNewColumn = False
       ForceNewPage = False

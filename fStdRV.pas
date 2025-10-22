@@ -9,7 +9,7 @@ uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
   DBCtrls, Grids, Wwdbgrid, StdCtrls, ExtCtrls, Wwdbigrd, Mask,
   Wwdbedit, wwdblook, Wwdbspin,
-  Menus, QrExtra, DB, wwdbdatetimepicker, shellapi,
+  Menus, DB, wwdbdatetimepicker, shellapi,
   FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async,

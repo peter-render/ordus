@@ -485,7 +485,7 @@
     end
     object btnLagerplatsetikett: TButton
       Left = 8
-      Top = 297
+      Top = 300
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -609,7 +609,7 @@
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
-      Caption = '&Ritningsnotiser'
+      Caption = '&Ritningsnotiser Lista'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -627,6 +627,22 @@
       DataField = 'Notering'
       DataSource = dsoOrderrad
       TabOrder = 9
+    end
+    object Button1: TButton
+      Left = 8
+      Top = 262
+      Width = 125
+      Height = 25
+      Anchors = [akLeft, akRight]
+      Caption = '&Ritningsnotiser'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Default'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 10
+      OnClick = btnCancelClick
     end
   end
   object StatusBar1: TStatusBar
@@ -3833,7 +3849,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500680010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

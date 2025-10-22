@@ -77,8 +77,8 @@
     PreviewLeft = 0
     PreviewTop = 0
     object TitleBand1: TQRBand
-      Left = 0
-      Top = 0
+      Left = 11
+      Top = 11
       Width = 645
       Height = 718
       AlignToBottom = False

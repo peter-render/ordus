@@ -93,7 +93,6 @@ type
     qryGetStatusDataOmsättningsgrundande: TBooleanField;
     qryGetStatusDataÄrStatus: TBooleanField;
     qryGetStatusDataKräverAdmin: TBooleanField;
-    DBHalfDayPeriodSource1: TDBHalfDayPeriodSource;
     sp: TFDStoredProc;
     qryGetKundnr: TFDQuery;
     qryGetKundnrId: TFDAutoIncField;

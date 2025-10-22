@@ -665,16 +665,6 @@
       Origin = '[Kr'#228'verAdmin]'
     end
   end
-  object DBHalfDayPeriodSource1: TDBHalfDayPeriodSource
-    AutoIncKey = False
-    ResourceMap = <>
-    ReadOnly = False
-    UpdateByQuery = False
-    StartDate = 43475.000000000000000000
-    EndDate = 43489.000000000000000000
-    Left = 656
-    Top = 168
-  end
   object sp: TFDStoredProc
     Connection = FDConnection1
     StoredProcName = 'OrderImport'

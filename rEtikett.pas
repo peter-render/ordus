@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  QRCtrls, QuickRpt, ExtCtrls;
+  QuickRpt, ExtCtrls, QRCtrls;
 
 type
   TrptEtikett = class(TForm)

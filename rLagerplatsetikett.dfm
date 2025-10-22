@@ -19,6 +19,7 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
     Top = 67
     Width = 369
     Height = 182
+    ShowingPreview = False
     BeforePrint = ReportBeforePrint
     DataSet = frmOrdusrapport2.qryEtikett
     Font.Charset = DEFAULT_CHARSET
@@ -59,6 +60,7 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
     PrinterSettings.UseCustomPaperCode = True
     PrinterSettings.CustomPaperCode = 0
     PrinterSettings.PrintMetaFile = False
+    PrinterSettings.MemoryLimit = 1000000
     PrinterSettings.PrintQuality = 0
     PrinterSettings.Collate = 0
     PrinterSettings.ColorOption = 0
@@ -69,6 +71,8 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
     Zoom = 100
     PrevFormStyle = fsNormal
     PreviewInitialState = wsNormal
+    PreviewWidth = 500
+    PreviewHeight = 500
     PrevInitialZoom = qrZoomToFit
     PreviewDefaultSaveType = stQRP
     PreviewLeft = 0
@@ -80,7 +84,6 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
       Height = 173
       AlignToBottom = False
       BeforePrint = PageHeaderBand1BeforePrint
-      Color = clWhite
       TransparentBand = False
       ForceNewColumn = False
       ForceNewPage = False
@@ -101,6 +104,8 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
           179.916666666666700000
           179.916666666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -118,6 +123,7 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRLabel5: TQRLabel
@@ -131,6 +137,8 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
           179.916666666666700000
           92.604166666666670000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Kund:'
@@ -138,6 +146,7 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRLabel3: TQRLabel
@@ -151,6 +160,8 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
           254.000000000000000000
           140.229166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Artikelnr:'
@@ -158,6 +169,7 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRDBText2: TQRDBText
@@ -171,6 +183,8 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
           254.000000000000000000
           251.354166666666700000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -188,6 +202,7 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRShape2: TQRShape
@@ -201,6 +216,8 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
           127.000000000000000000
           825.500000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Pen.Width = 2
         Shape = qrsHorLine
         VertAdjust = 0
@@ -216,6 +233,8 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
           328.083333333333300000
           190.500000000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -233,6 +252,7 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 10
       end
       object QRLabel1: TQRLabel
@@ -246,6 +266,8 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
           60.854166666666670000
           134.937500000000000000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Lager:'
@@ -259,6 +281,7 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 12
       end
       object QRDBText4: TQRDBText
@@ -272,6 +295,8 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
           63.500000000000000000
           216.958333333333300000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taLeftJustify
         AlignToBand = False
         AutoStretch = True
@@ -289,6 +314,7 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
         WrapStyle = BreakOnSpaces
         FullJustify = False
         MaxBreakChars = 0
+        VerticalAlignment = tlTop
         FontSize = 12
       end
       object QRLabel2: TQRLabel
@@ -302,6 +328,8 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
           328.083333333333300000
           185.208333333333300000)
         XLColumn = 0
+        XLNumFormat = nfGeneral
+        ActiveInPreview = False
         Alignment = taRightJustify
         AlignToBand = False
         Caption = 'Beteckning:'
@@ -309,6 +337,7 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
         Transparent = False
         ExportAs = exptText
         WrapStyle = BreakOnSpaces
+        VerticalAlignment = tlTop
         FontSize = 10
       end
     end
@@ -318,7 +347,6 @@ object rptLagerplatsEtikett: TrptLagerplatsEtikett
       Width = 361
       Height = 0
       AlignToBottom = False
-      Color = clWhite
       TransparentBand = False
       ForceNewColumn = False
       ForceNewPage = False

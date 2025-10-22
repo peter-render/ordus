@@ -377,8 +377,6 @@ object frmFoljesedel: TfrmFoljesedel
     EncodersSettings.PDF.ImageSettings.OutputFormat = pifJPEG
     EncodersSettings.PDF.FontSettings.Embedding = efmSubset
     EncodersSettings.PDF.FontSettings.Encoding = fenWinAnsiEncoding
-    EncodersSettings.PDF.LineJoinStyle = ljsMiter
-    EncodersSettings.PDF.LineCapStyle = lcsFlat
     EncodersSettings.XLSX.FileExtension = 'xlsx'
     EncodersSettings.XLSX.FileDescription = 'Microsoft Excel Workbook'
     EncodersSettings.XLSX.Formatting.RowSpacing = 0

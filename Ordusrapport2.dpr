@@ -25,9 +25,9 @@ uses
   fKontaktEdit in 'fKontaktEdit.pas' {frmKontaktEdit},
   fStdRV in 'fStdRV.pas' {frmStdRV},
   fjobblista in 'fjobblista.pas' {frmJobblista},
-  fArtikelnotering in 'fArtikelnotering.pas' {frmArtikelnotering},
   fDagensOrderlista in 'fDagensOrderlista.pas' {frmDagensOrderlista},
-  fRitningsnotering in 'fRitningsnotering.pas' {frmRitningsnotering};
+  fRitningsnotering in 'fRitningsnotering.pas' {frmRitningsnotering},
+  fArtikelnotering in 'fArtikelnotering.pas' {frmArtikelnotering};
 
 {$R *.RES}
 
@@ -36,6 +36,7 @@ begin
   Application.CreateForm(Tdm, dm);
   Application.CreateForm(TfrmOrdusrapport2, frmOrdusrapport2);
   Application.CreateForm(TfrmRitningsnotering, frmRitningsnotering);
+  Application.CreateForm(TfrmArtikelnotering, frmArtikelnotering);
   Application.Run;
 
 end.

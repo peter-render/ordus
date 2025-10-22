@@ -388,6 +388,7 @@ object frmKalender: TfrmKalender
     end
   end
   object qryKalender: TFDQuery
+    Active = True
     Connection = dm.FDConnection1
     SQL.Strings = (
       ''

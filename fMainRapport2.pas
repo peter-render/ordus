@@ -7,7 +7,7 @@ uses
   system.UITypes, Messages, SysUtils, Classes, Graphics, Controls, Forms,
   Dialogs,
   Db, StdCtrls, wwdblook, ExtCtrls, wwdbdatetimepicker, Mask,
-  wwdbedit, Buttons, QuickRpt, QRCtrls, DBCtrls, EditNew, DBCGrids, Grids,
+  wwdbedit, Buttons, QuickRpt, DBCtrls, EditNew, DBCGrids, Grids,
   DBGrids, Wwdbigrd, Wwdbgrid, ComCtrls, Menus, Inifiles, Variants, XPMan,
   FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
@@ -288,6 +288,7 @@ type
     memoFritext: TDBMemo;
     lblFritext: TLabel;
     qryOrderradFritext: TStringField;
+    Button1: TButton;
     procedure FormShow(Sender: TObject);
     procedure edtOrderNrExit(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -973,15 +974,8 @@ end;
 
 procedure TfrmOrdusrapport2.btnCancelClick(Sender: TObject);
 begin
-
-  qryOrderrad.cancel;
-  DisableEdit(true);
-  dbgrid.enabled := true;
-  edtOrdernr.enabled := true;
-
-  btnEdit.enabled := true;
-  btnClose.enabled := true;
-  btnFSTransport.enabled := true;
+    with TfrmArtikelnotering.Create(application) do
+    showmodal;
 
 end;
 
@@ -1131,7 +1125,7 @@ end;
 
 procedure TfrmOrdusrapport2.btnNotiserClick(Sender: TObject);
 begin
-  with TfrmRitningsnotering.Create(application) do
+    with TfrmRitningsnotering.Create(application) do
     showmodal;
 
 end;

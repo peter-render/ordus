@@ -345,13 +345,14 @@ object frmPlanner: TfrmPlanner
           0080880408F8F0F8F80880CCC0000400008874CCC2222C4788887CCCC22226C0
           88887CC822222CC088887C822224642088887C888422C220888877CF8CCCC227
           888887F8F8222208888888776888208888888887777778888888}
-        Version = '3.0.3.0'
+        Version = '3.4.5.0'
         OnItemAnchorClick = PL_ItemAnchorClick
         OnItemMove = PL_ItemMove
         OnItemInsert = PL_ItemInsert
         OnDragOver = PL_DragOver
         OnDragOverItem = PL_DragOverItem
         ItemSource = dbDay3
+        TMSStyle = 0
       end
     end
     object Panel3: TPanel
@@ -795,13 +796,14 @@ object frmPlanner: TfrmPlanner
           0080880408F8F0F8F80880CCC0000400008874CCC2222C4788887CCCC22226C0
           88887CC822222CC088887C822224642088887C888422C220888877CF8CCCC227
           888887F8F8222208888888776888208888888887777778888888}
-        Version = '3.0.3.0'
+        Version = '3.4.5.0'
         OnItemAnchorClick = PL_ItemAnchorClick
         OnItemMove = PL_ItemMove
         OnItemInsert = PL_ItemInsert
         OnDragOver = PL_DragOver
         OnDragOverItem = PL_DragOverItem
         ItemSource = dbday2
+        TMSStyle = 0
       end
     end
     object pnl1: TPanel
@@ -1125,7 +1127,7 @@ object frmPlanner: TfrmPlanner
           0080880408F8F0F8F80880CCC0000400008874CCC2222C4788887CCCC22226C0
           88887CC822222CC088887C822224642088887C888422C220888877CF8CCCC227
           888887F8F8222208888888776888208888888887777778888888}
-        Version = '3.0.3.0'
+        Version = '3.4.5.0'
         OnItemAnchorClick = PL_ItemAnchorClick
         OnItemMove = PL_ItemMove
         OnItemInsert = PL_ItemInsert
@@ -1133,6 +1135,7 @@ object frmPlanner: TfrmPlanner
         OnDragOver = PL_DragOver
         OnDragOverItem = PL_DragOverItem
         ItemSource = dbday1
+        TMSStyle = 0
       end
     end
   end
@@ -1179,6 +1182,7 @@ object frmPlanner: TfrmPlanner
         ResourceIndex = 0
         PositionIndex = -1
         DisplayName = ''
+        Tag = 0
       end>
     StartTimeField = 'Starttid'
     EndTimeField = 'Sluttid'

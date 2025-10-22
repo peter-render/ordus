@@ -4,10 +4,10 @@ interface
 
 uses
   Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  Qrctrls, QuickRpt, StdCtrls, Mask, DBCtrls, Db, ExtCtrls, QRPDFFilt, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  QuickRpt, StdCtrls, Mask, DBCtrls, Db, ExtCtrls, QRPDFFilt, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
   FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, vcl.gtxXport,
-  vcl.gtQRXport, Vcl.Imaging.jpeg, vcl.gtxClasses;
+  vcl.gtQRXport, Vcl.Imaging.jpeg, vcl.gtxClasses, QRCtrls;
 
 type
   TrptFoljesedel = class(TForm)

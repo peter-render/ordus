@@ -24,6 +24,9 @@
         <Projects Include="OrdusArtikel.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="C:\ProgramData\tmssoftware\Planner RSXE7\dbplandXE7.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -95,14 +98,23 @@
     <Target Name="OrdusArtikel:Make">
         <MSBuild Projects="OrdusArtikel.dproj" Targets="Make"/>
     </Target>
+    <Target Name="dbplandXE7">
+        <MSBuild Projects="C:\ProgramData\tmssoftware\Planner RSXE7\dbplandXE7.dproj"/>
+    </Target>
+    <Target Name="dbplandXE7:Clean">
+        <MSBuild Projects="C:\ProgramData\tmssoftware\Planner RSXE7\dbplandXE7.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="dbplandXE7:Make">
+        <MSBuild Projects="C:\ProgramData\tmssoftware\Planner RSXE7\dbplandXE7.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="Ordusrapport2;Ordus2;OrdusKalender;Ordusplan2;MinaEgna;MinaEgnaKomponenter;OrdusArtikel"/>
+        <CallTarget Targets="Ordusrapport2;Ordus2;OrdusKalender;Ordusplan2;MinaEgna;MinaEgnaKomponenter;OrdusArtikel;dbplandXE7"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="Ordusrapport2:Clean;Ordus2:Clean;OrdusKalender:Clean;Ordusplan2:Clean;MinaEgna:Clean;MinaEgnaKomponenter:Clean;OrdusArtikel:Clean"/>
+        <CallTarget Targets="Ordusrapport2:Clean;Ordus2:Clean;OrdusKalender:Clean;Ordusplan2:Clean;MinaEgna:Clean;MinaEgnaKomponenter:Clean;OrdusArtikel:Clean;dbplandXE7:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="Ordusrapport2:Make;Ordus2:Make;OrdusKalender:Make;Ordusplan2:Make;MinaEgna:Make;MinaEgnaKomponenter:Make;OrdusArtikel:Make"/>
+        <CallTarget Targets="Ordusrapport2:Make;Ordus2:Make;OrdusKalender:Make;Ordusplan2:Make;MinaEgna:Make;MinaEgnaKomponenter:Make;OrdusArtikel:Make;dbplandXE7:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
