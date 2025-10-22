@@ -484,8 +484,8 @@
       OnClick = btnPalettEtikettClick
     end
     object btnLagerplatsetikett: TButton
-      Left = 8
-      Top = 300
+      Left = 6
+      Top = 303
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -607,7 +607,7 @@
       Left = 8
       Top = 234
       Width = 125
-      Height = 25
+      Height = 27
       Anchors = [akLeft, akRight]
       Caption = '&Ritningsnotiser Lista'
       Font.Charset = DEFAULT_CHARSET
@@ -630,7 +630,7 @@
     end
     object Button1: TButton
       Left = 8
-      Top = 262
+      Top = 265
       Width = 125
       Height = 25
       Anchors = [akLeft, akRight]
@@ -3849,7 +3849,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500700010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

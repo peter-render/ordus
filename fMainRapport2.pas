@@ -472,8 +472,8 @@ begin
                     DBText4.Visible := true;
                     dbgrid.Visible := true;
                     cb.enabled := true;
-                    memoFritext.visible:= True;
-                    lblFritext.visible:= True;
+                    memoFritext.Visible := true;
+                    lblFritext.Visible := true;
                     dbgrid.setfocus;
                     btnEdit.enabled := true;
                     btnEdit.Default := true;
@@ -974,16 +974,19 @@ end;
 
 procedure TfrmOrdusrapport2.btnCancelClick(Sender: TObject);
 begin
-    with TfrmArtikelnotering.Create(application) do
-    showmodal;
-
+  with TfrmArtikelnotering.Create(application) do
+  begin
+    edit1.Text := qryOrderrad.fieldbyname('Artikelnummer').asString;
+    FDquery1.close;
+    Showmodal;
+  end;
 end;
 
 procedure TfrmOrdusrapport2.edtOrdernrEnter(Sender: TObject);
 begin
 
-  memoFritext.visible:= False;
-  lblFritext.visible:= False;
+  memoFritext.Visible := false;
+  lblFritext.Visible := false;
   dbgrid.Visible := false;
   btnLagersaldo.enabled := false;
   btnEtikett.enabled := false;
@@ -1125,8 +1128,8 @@ end;
 
 procedure TfrmOrdusrapport2.btnNotiserClick(Sender: TObject);
 begin
-    with TfrmRitningsnotering.Create(application) do
-    showmodal;
+  with TfrmRitningsnotering.Create(application) do
+    Showmodal;
 
 end;
 
