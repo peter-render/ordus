@@ -4,7 +4,7 @@ uses
   Forms,
   fMainRapport2 in 'fMainRapport2.pas' {frmOrdusrapport2},
   fCalc in 'fCalc.pas' {frmCalc},
-  rEtikett in 'rEtikett.pas' {rptEtikett},
+  rRitningsnotis in 'rRitningsnotis.pas' {rptRitningsnotis},
   fLagersaldo in 'fLagersaldo.pas' {frmLagersaldo},
   fFoljesedel in 'fFoljesedel.pas' {frmFoljesedel},
   rFoljesedel in 'rFoljesedel.pas' {rptFoljesedel},

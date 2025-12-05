@@ -598,9 +598,6 @@
         <DCCReference Include="fShoworder.pas">
             <Form>frmShowOrder</Form>
         </DCCReference>
-        <DCCReference Include="rEtikett.pas">
-            <Form>rptEtikett</Form>
-        </DCCReference>
         <DCCReference Include="rPallEtikett.pas">
             <Form>rptPallEtikett</Form>
         </DCCReference>
@@ -729,6 +726,10 @@
         </DCCReference>
         <DCCReference Include="rExtratidrapport.pas">
             <Form>rptExtratidRapport</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="rRitningsnotis.pas">
+            <Form>rptRitningsnotis</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <None Include="Ordus2.todo"/>

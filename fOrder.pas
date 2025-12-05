@@ -11,7 +11,7 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Data.Win.ADODB, system.UITypes,
-  Vcl.ImgList;
+  Vcl.ImgList,Inifiles;
 
 type
   TfrmOrder = class(TForm)
@@ -223,6 +223,7 @@ type
     Panel18: TPanel;
     Panel10: TPanel;
     qryOrderradRevision: TStringField;
+    btnUtskriftRitningsnotis: TButton;
     procedure btnDeleteClick(Sender: TObject);
     procedure edtArtikelCloseUp(Sender: TObject; LookupTable, FillTable: TDataSet; modified: Boolean);
     procedure wwDBGrid2MouseDown(Sender: TObject; Button: TMouseButton; Shift: TShiftState; X, Y: Integer);
@@ -266,6 +267,7 @@ type
     procedure wwDBGrid1DragOver(Sender, Source: TObject; X, Y: Integer; State: TDragState; var Accept: Boolean);
     procedure wwDBGrid1DragDrop(Sender, Source: TObject; X, Y: Integer);
     procedure qryOrderradAfterOpen(DataSet: TDataSet);
+    procedure btnUtskriftRitningsnotisClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -279,7 +281,7 @@ var
 implementation
 
 uses fMain, rOrder, fOrderLista, fArbetsorder, rArbetsorder, fArtikel,
-  Datamodule, fArtikeltext, funclib;
+  Datamodule, fArtikeltext, funclib, rRitningsnotis;
 
 {$R *.DFM}
 
@@ -477,6 +479,53 @@ begin
   edtArtikel.enabled := true;
   edtArtikel.setfocus;
   pnlOrderrad.visible := false;
+
+end;
+
+procedure TfrmOrder.btnUtskriftRitningsnotisClick(Sender: TObject);
+var
+  EtikettPrintername: string;
+
+begin
+  with TIniFile.Create(extractfilepath(application.ExeName) + 'Ordus.ini') do
+  begin
+    EtikettPrintername := Readstring('Printer', 'EtikettPrinterName', '');
+    free;
+  end;
+
+  if EtikettPrintername = '' then
+    EtikettPrintername := 'DYMO LabelWriter 450 Turbo';
+
+  if not printerexists(EtikettPrintername) then
+  begin
+    showmessage('Etikettskrivare "' + EtikettPrintername + '" är ej konfiguerad - utskrift avbryts!');
+    exit;
+  end;
+
+  DefaultPrinterName := SetDefaultPrinter(EtikettPrintername);
+//  qryEtikett.Open;
+
+  (*
+    if DefaultPrinterName = '' then
+    with TIniFile.Create('Ordus.ini') do
+    begin
+    DefaultPrinterName := Readstring('Printer', 'DefaultPrinterName2', '');
+    free;
+    end;
+  *)
+
+
+  with TrptRitningsnotis.Create(application) do
+  begin
+    report.print;
+  end;
+
+  // SetDefaultPrinter('LaserJet 1012');
+  SetDefaultPrinter(DefaultPrinterName);
+//  qryEtikett.close;
+
+//  btnEtikett.hint := DefaultPrinterName;
+//  btnEtikett.ShowHint := true;
 
 end;
 

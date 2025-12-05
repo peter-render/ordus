@@ -468,8 +468,8 @@
         <DCCReference Include="fCalc.pas">
             <Form>frmCalc</Form>
         </DCCReference>
-        <DCCReference Include="rEtikett.pas">
-            <Form>rptEtikett</Form>
+        <DCCReference Include="rRitningsnotis.pas">
+            <Form>rptRitningsnotis</Form>
         </DCCReference>
         <DCCReference Include="fLagersaldo.pas">
             <Form>frmLagersaldo</Form>

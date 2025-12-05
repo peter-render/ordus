@@ -331,6 +331,7 @@ type
       AFont: TFont; ABrush: TBrush);
     procedure mi_visaritningClick(Sender: TObject);
     procedure btnNotiserClick(Sender: TObject);
+    procedure btnRitningsnotisClick(Sender: TObject);
 
   private
     function GetRitningFilename(Artikelnummer: string; kundnamn: string; OrderradId: integer): string;
@@ -924,6 +925,18 @@ begin
 
 end;
 
+procedure TfrmOrdusrapport2.btnRitningsnotisClick(Sender: TObject);
+begin
+ with TfrmArtikelnotering.Create(application) do
+  begin
+    edit1.Text := qryOrderrad.fieldbyname('Artikelnummer').asString;
+    FDquery1.close;
+    Showmodal;
+
+  end;
+
+end;
+
 procedure TfrmOrdusrapport2.btnTransportClick(Sender: TObject);
 var
   Orderid, antal, artikelId: integer;
@@ -974,6 +987,8 @@ begin
 end;
 
 procedure TfrmOrdusrapport2.btnCancelClick(Sender: TObject);
+
+
 begin
   qryOrderrad.cancel;
   DisableEdit(true);

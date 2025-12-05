@@ -283,17 +283,17 @@
           322)
         object Label17: TLabel
           Left = 16
-          Top = 71
+          Top = 109
           Width = 61
-          Height = 14
+          Height = 15
           Anchors = [akRight, akBottom]
           Caption = 'Ritningsnotis'
         end
         object DBMemo1: TDBMemo
           Left = 12
-          Top = 91
+          Top = 127
           Width = 163
-          Height = 223
+          Height = 186
           Anchors = [akLeft, akRight, akBottom]
           DataField = 'Notering'
           DataSource = dsoOrderrad
@@ -318,7 +318,7 @@
         end
         object btnDelete: TButton
           Left = 12
-          Top = 36
+          Top = 33
           Width = 113
           Height = 25
           Anchors = [akTop, akRight]
@@ -331,6 +331,22 @@
           ParentFont = False
           TabOrder = 2
           OnClick = btnDeleteClick
+        end
+        object btnUtskriftRitningsnotis: TButton
+          Left = 12
+          Top = 78
+          Width = 165
+          Height = 25
+          Anchors = [akTop, akRight]
+          Caption = 'Skriv ut ritningsnotis'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Default '
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+          OnClick = btnUtskriftRitningsnotisClick
         end
       end
     end
@@ -2411,7 +2427,7 @@
     Left = 376
     Top = 576
     Bitmap = {
-      494C010102000500740010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010102000500780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

@@ -30,7 +30,6 @@ uses
   fYtbehandling in 'fYtbehandling.pas' {frmYtbehandling},
   fTimpris in 'fTimpris.pas' {frmTimpris},
   fShoworder in 'fShoworder.pas' {frmShowOrder},
-  rEtikett in 'rEtikett.pas' {rptEtikett},
   rPallEtikett in 'rPallEtikett.pas' {rptPallEtikett},
   rOffertKalkyl in 'rOffertKalkyl.pas' {rptOffertKalkyl},
   rLagerplatsetikett2 in 'rLagerplatsetikett2.pas' {rptLagerplatsEtikett2},
@@ -71,7 +70,8 @@ uses
   fExcelimportOrder in 'fExcelimportOrder.pas' {frmExcelImportOrder},
   fDagensOrderlista in 'fDagensOrderlista.pas' {frmDagensOrderlista},
   fExtratidRapport in 'fExtratidRapport.pas' {frmExtratidRapport},
-  rExtratidrapport in 'rExtratidrapport.pas' {rptExtratidRapport};
+  rExtratidrapport in 'rExtratidrapport.pas' {rptExtratidRapport},
+  rRitningsnotis in 'rRitningsnotis.pas' {rptRitningsnotis};
 
 //  rExtratidrapport in 'rExtratidrapport.pas' {rptExtratidRapport};
 
@@ -86,5 +86,6 @@ begin
   Application.CreateForm(TrptExtratidRapport, rptExtratidRapport);
   Application.CreateForm(TfrmExtratidRapport, frmExtratidRapport);
   Application.CreateForm(TrptExtratidRapport, rptExtratidRapport);
+  Application.CreateForm(TrptRitningsnotis, rptRitningsnotis);
   Application.Run;
 end.

@@ -643,7 +643,7 @@
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 10
-      OnClick = btnCancelClick
+      OnClick = btnRitningsnotisClick
     end
   end
   object StatusBar1: TStatusBar
@@ -684,8 +684,6 @@
       BevelEdges = []
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitTop = -2
       DesignSize = (
         812
         117)
@@ -3850,7 +3848,7 @@
     Left = 336
     Top = 272
     Bitmap = {
-      494C010102000500780010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C0101020005007C0010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

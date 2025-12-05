@@ -4,8 +4,8 @@
   BorderIcons = []
   BorderStyle = bsNone
   Caption = 'Best'#228'llning'
-  ClientHeight = 545
-  ClientWidth = 1325
+  ClientHeight = 661
+  ClientWidth = 1515
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,18 +26,21 @@
   object Panel2: TPanel
     Left = 0
     Top = 0
-    Width = 1325
-    Height = 545
+    Width = 1515
+    Height = 661
     Align = alClient
     Caption = 'Panel2'
     TabOrder = 0
+    ExplicitWidth = 1325
+    ExplicitHeight = 545
     object Panel3: TPanel
       Left = 1
       Top = 1
-      Width = 1323
+      Width = 1513
       Height = 43
       Align = alTop
       TabOrder = 0
+      ExplicitWidth = 1323
       object Label1: TLabel
         Left = 150
         Top = 6
@@ -152,17 +155,19 @@
     object Panel4: TPanel
       Left = 1
       Top = 44
-      Width = 1323
-      Height = 500
+      Width = 1513
+      Height = 616
       Align = alClient
       BorderWidth = 10
       Caption = 'Panel4'
       TabOrder = 1
+      ExplicitWidth = 1323
+      ExplicitHeight = 500
       object wwDBGrid1: TwwDBGrid
         Left = 11
         Top = 11
-        Width = 1301
-        Height = 478
+        Width = 1491
+        Height = 594
         Margins.Top = 4
         Margins.Bottom = 4
         ControlType.Strings = (
@@ -214,6 +219,8 @@
         OnColExit = wwDBGrid1CellChanged
         OnUpdateFooter = wwDBGrid1UpdateFooter
         PadColumnStyle = pcsPadHeader
+        ExplicitWidth = 1301
+        ExplicitHeight = 478
       end
       object LU_senastePriser: TwwDBLookupCombo
         Left = 596
